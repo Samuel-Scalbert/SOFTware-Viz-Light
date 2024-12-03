@@ -1,0 +1,40 @@
+{% extends "partials/conteneur.html" %}
+{% block body %}
+<div>
+    <div class="titre-block"><h2 style="padding: 5px">{{ data[4] }}</h2></div>
+   <div class="flex-container">
+      {% for attrib,lists_context in data[0].items() %}
+      {% if lists_context|length > 0 %}
+      <div class="contexts">
+         <p class="titre">Contexts «{{ attrib }}»</p>
+         <ul class="software-list" style="padding-left:15px">
+            {% for context in lists_context %}
+            <li>"{{ context | safe  }}"</li>
+            {% endfor %}
+         </ul>
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% if data[1] != None %}
+      <div class="abstract">
+         <p class="titre">abstract</p>
+         {{ " ".join(data[1]) }}
+      </div>
+      {% endif %}
+      <div class="source">
+         <p class="titre">Source</p>
+         {{ data[2] | safe }}
+      </div>
+      <div class="other-software">
+         <p class="titre">Other softwares</p>
+         <ul>
+            {% for hal_id in data[3] %}
+            <li>
+               <a href="{{ url_for('doc_info_wsoftware',doc_id=data[5], software=hal_id) }}">{{ hal_id }}</a>
+            </li>
+            {% endfor %}
+         </ul>
+      </div>
+   </div>
+</div>
+{% endblock %}

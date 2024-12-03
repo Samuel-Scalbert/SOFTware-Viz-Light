@@ -1,0 +1,26 @@
+{% extends "partials/conteneur.html" %}
+{% block body %}
+
+<div class="software_canva_info" style="margin-left: 20px;">
+    <div class="search">
+    <div class="dropdown" id="search-box">
+        <input type="text" id="input-box-software" placeholder="Search for a software..." autocomplete="off">
+    </div>
+        <div id="result-box-software" style="display: none;">
+    </div>
+    </div>
+    <div class="canva_container">
+        <canvas id='software' style=""></canvas>
+    </div>
+    <div id="table_source" class="table_source" style="display: flex;">
+        <div id="sourceContainer"  class="sourceContainer"></div>
+        <div id="structureContainer" class="structureContainer_chart"></div>
+        <div id="authorContainer" class="authorContainer"></div>
+    </div>
+    <script>
+        var dictionaryData = {{ data[0] | tojson | safe }};
+        generateBubbleChart('#software',dictionaryData, {{ data[1] }}, {{ data[2] }}, {{ data[3] }});
+    </script>
+    <div class="{{ data[5] }}" id="software_name"></div>
+</div>
+{% endblock %}
