@@ -23,10 +23,9 @@
 
 ## Presentation of the project
 
-🛑 This application is currently designed to interact with and harvest metadata from HAL linked to the database.
+🛑 This version of SOFTware-Viz is the universal version that works with any PDF files and without the connection to HAL INRIA.
 
-🛑 A lighter version of the application is under development, allowing anyone to create their own application without requiring a connection to HAL.
-
+🛑 If you are using files from HAL you should use the original version [SOFTware-Viz](https://github.com/Samuel-Scalbert/SOFTware-Viz)
 ### DB of PDF
 The process begins with a Database of PDF files. These PDFs are scholarly PDFs that need to be extracted and processed.
 
