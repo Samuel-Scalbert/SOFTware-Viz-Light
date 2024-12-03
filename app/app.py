@@ -34,7 +34,7 @@ def init_db():
 
 init_db()  # Call the init_db function to initialize the db variable
 
-insert_json_db('./app/static/data/json_files/from_xml','./app/static/data/xml_meta', db)
+insert_json_db('./app/static/data/json_files/from_xml','./app/static/data/xml_files', db)
 structure = None
 global data_dashboard
 data_dashboard = None

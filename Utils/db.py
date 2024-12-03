@@ -2,10 +2,31 @@ import os
 import json
 from tqdm import tqdm
 import xml.etree.ElementTree as ET
-import requests
-import time
+import re
 from openpyxl import load_workbook
 from Utils.TEI_to_JSON import transformer_TEI_JSON
+import requests
+
+
+def get_publication_date(doi):
+    url = f'https://api.crossref.org/works/{doi}'
+
+    try:
+        response = requests.get(url)
+
+        if response.status_code == 200:
+            data = response.json()
+            publication_date = data['message'].get('issued', {}).get('date-parts', [])
+            if publication_date:
+                year = publication_date[0][0]
+                return year
+            else:
+                return None
+        else:
+            return None
+
+    except Exception as e:
+        return f"Error: {str(e)}"
 
 def check_or_create_collection(db, collection_name, collection_type='Collection'):
     """
@@ -108,23 +129,9 @@ def insert_json_db(data_path_json,data_path_xml,db):
             file_name, extension = os.path.splitext(file_name)
 
         if file_name in files_list_registered:
+            #pass
             continue
-        url = "https://api.archives-ouvertes.fr/search/"
-        params = {
-            "q": f"halId_id:{file_name}",
-            "rows": 10,
-            "fl": "citationFull_s"
-        }
 
-        response = requests.get(url, params=params)
-        if response.status_code == 200:
-            data = response.json()
-            try:
-                citations = data["response"]["docs"][0]["citationFull_s"]
-            except IndexError:
-                citations = None
-        else:
-            print("Error:", response.status_code)
         with open(file_path, 'r', encoding='utf-8') as xml_file:
             data_json_get_document = {}
             tree = ET.parse(xml_file)
@@ -134,30 +141,62 @@ def insert_json_db(data_path_json,data_path_xml,db):
 
             # DOCUMENT -----------------------------------------------------
 
-            title = tree.find(".//tei:listBibl//tei:titleStmt//tei:title", ns)
+            title = tree.find(".//tei:fileDesc//tei:titleStmt//tei:title", ns)
             title = title.text
 
-            doc_type = tree.findall(".//tei:listBibl//tei:biblFull//tei:profileDesc//tei:textClass//tei:classCode", ns)
-            for tag in doc_type:
-                if tag.attrib.get('n') == 'COMM':
-                    production_date = tree.find(".//tei:listBibl//tei:biblFull//tei:sourceDesc//tei:biblStruct//tei:monogr//tei:meeting//tei:date[@type='start']", ns)
-                    if production_date is not None:
-                        data_json_get_document['date'] = production_date.text[:4]
-                else:
-                    production_date = tree.find(
-                        ".//tei:listBibl//tei:biblFull//tei:sourceDesc//tei:biblStruct//tei:monogr//tei:imprint//tei:date[@type='datePub']",
-                        ns)
-                    if production_date is not None:
-                        data_json_get_document['date'] = production_date.text[:4]
-                    else:
-                        production_date = tree.find(
-                            ".//tei:listBibl//tei:biblFull//tei:editionStmt//tei:edition[@type='current']//tei:date[@type='whenProduced']",
-                            ns)
-                        if production_date is not None:
-                            data_json_get_document['date'] = production_date.text[:4]
-                        else:
-                            print(f'problem : {file_name}')
+            # Initialize the year variables
+            final_year = None
+            year = None
+            year_sub = None
+            year_doi = None
+            year_pub = None
 
+            # Regex pattern to extract a 4-digit year
+            year_pattern = r'\b([12]\d{3})\b'
+
+            # Check DOI for a date first (most reliable)
+            doi_tag = tree.find(".//tei:fileDesc//tei:sourceDesc//tei:biblStruct//tei:idno[@type='DOI']", ns)
+            if doi_tag is not None:
+                year_doi = get_publication_date(doi_tag.text)
+                if year_doi is not None:
+                    final_year = year_doi
+                    data_json_get_document['date'] = final_year
+            else:
+                # If no DOI, check for the submission date
+                sub_tag = tree.find(".//tei:fileDesc//tei:sourceDesc//tei:biblStruct//tei:note[@type='submission']", ns)
+                if sub_tag is not None:
+                    match = re.search(year_pattern, sub_tag.text)
+                    if match:
+                        year_sub = match.group(1)
+                        final_year = year_sub
+                        data_json_get_document['date'] = final_year
+
+                # If no DOI or submission date, check the publication date
+                if final_year is None:
+                    pub_tag = tree.find(".//tei:fileDesc//tei:publicationStmt//tei:date[@type='published']", ns)
+                    if pub_tag is not None:
+                        match = re.search(year_pattern, pub_tag.text)
+                        if match:
+                            if match.group(1) == pub_tag.attrib.get('when')[:4]:
+                                year_pub = match.group(1)
+                                final_year = year_pub
+                                data_json_get_document['date'] = final_year
+
+                # If no year from DOI, submission, or publication, check other sources
+                if final_year is None:
+                    date_tag = tree.findall(
+                        ".//tei:fileDesc//tei:sourceDesc//tei:biblStruct//tei:monogr//tei:imprint//tei:date", ns)
+                    for text in date_tag:
+                        if text.text is not None:
+                            match = re.search(year_pattern, text.text)
+                            if match:
+                                year = match.group(1)
+                                final_year = year
+                                data_json_get_document['date'] = final_year
+                                break  # Stop once a valid date is found
+
+            # Final assignment of the date
+            # data_json_get_document['date'] = final_year
 
             abstract = tree.find(".//{http://www.tei-c.org/ns/1.0}abstract")
             if abstract:
@@ -171,7 +210,6 @@ def insert_json_db(data_path_json,data_path_xml,db):
                     data_json_get_document['abstract'] = ['GROBID' , abstract]
 
             data_json_get_document['file_hal_id'] = file_name
-            data_json_get_document['citation'] = citations
             data_json_get_document['title'] = title
 
             document_document = documents_collection.createDocument(data_json_get_document)
