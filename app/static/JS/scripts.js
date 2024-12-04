@@ -152,7 +152,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 document.addEventListener('click', function(event) {
     // Selectors to exclude
     const selectors = [
-        '.structure',
         '.mention_search_doc_id',
         '.dropbtn',
     ];
@@ -180,12 +179,6 @@ document.addEventListener('click', function(event) {
         const elements_search_soft = document.querySelector('.search');
         const elements_search_soft_table = elements_search_soft.querySelector('#result-box');
         elements_search_soft_table.style.display = 'none';
-
-        // Reset structure color only if click is outside excluded elements
-        const structure_reset = document.querySelectorAll('.structure');
-        structure_reset.forEach(stru => {
-            stru.style.color = 'black'; // Reset color
-        });
     }
 });
 
