@@ -17,51 +17,6 @@ def disambiguate_software(software):
     response = desambiguate_from_software(software)
     return response
 
-# API endpoint to retrieve line chart data for software mentions over the years
-@app.route('/api/line_chart')
-def line_chart_data():
-    # Define the years for which data will be retrieved
-    years = ["2019", "2020", "2021", "2022", "2023"]
-    # Initialize a results dictionary with zero counts for each year
-    results = {year: {"used": 0, "created": 0, "shared": 0} for year in years}
-    # Initialize empty lists to store the counts for used, created, and shared mentions
-    dataset_used = []
-    dataset_shared = []
-    dataset_created = []
-
-    # Iterate over each year and run a query to retrieve counts of different attributes
-    for year in years:
-        query = f'''
-                LET attributeCounts = (
-                    FOR edge IN edge_doc_to_software
-                        LET document_id = DOCUMENT(edge._from)
-                        FILTER document_id.date == "{year}"
-                        LET software_mention = DOCUMENT(edge._to)
-                        LET usedScore = software_mention.mentionContextAttributes.used.score
-                        LET createdScore = software_mention.mentionContextAttributes.created.score
-                        LET sharedScore = software_mention.mentionContextAttributes.shared.score
-                        LET maxScore = MAX([usedScore, createdScore, sharedScore])
-                        FOR attr IN ['used', 'created', 'shared']
-                            LET score = software_mention.mentionContextAttributes[attr].score
-                            FILTER score == maxScore
-                            COLLECT attribute = attr WITH COUNT INTO count
-                            RETURN {{
-                                'attribute': attribute,
-                                count: count
-                            }}
-                )
-
-                RETURN attributeCounts
-                '''
-        # Execute the query and store the results
-        response = db.AQLQuery(query, rawResults=True)
-        dataset_used.append(response[0][0]['count'])
-        dataset_shared.append(response[0][1]['count'])
-        dataset_created.append(response[0][2]['count'])
-    # Return the datasets as a list
-    return [dataset_used, dataset_shared, dataset_created]
-
-
 # API endpoint to retrieve line chart data for a specific structure over the years
 @app.route('/api/line_chart/<struct>')
 def line_chart_data_struc(struct):
