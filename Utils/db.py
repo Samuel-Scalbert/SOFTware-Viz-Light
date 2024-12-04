@@ -86,7 +86,6 @@ def insert_json_db(data_path_json,data_path_xml,db):
     data_json_files = os.listdir(data_path_json)
     data_xml_list = os.listdir(data_path_xml)
     files_list_registered = db.AQLQuery('FOR hal_id in documents RETURN hal_id.file_hal_id', rawResults=True)
-    dict_registered = {}
     dict_edge_author = {}
 
     for data_file_xml in tqdm(data_xml_list):
@@ -96,10 +95,10 @@ def insert_json_db(data_path_json,data_path_xml,db):
             file_name, extension = os.path.splitext(file_name)
 
         if file_name in files_list_registered:
-            #pass
-            continue
+            pass
+            #continue
 
-        with open(file_path, 'r', encoding='utf-8') as xml_file:
+        with (open(file_path, 'r', encoding='utf-8') as xml_file):
             data_json_get_document = {}
             tree = ET.parse(xml_file)
             root = tree.getroot()
@@ -162,8 +161,7 @@ def insert_json_db(data_path_json,data_path_xml,db):
                                 data_json_get_document['date'] = final_year
                                 break  # Stop once a valid date is found
 
-            # Final assignment of the date
-            # data_json_get_document['date'] = final_year
+            # ABSTRACT -----------------------------------------------------
 
             abstract = tree.find(".//{http://www.tei-c.org/ns/1.0}abstract")
             if abstract:
@@ -251,18 +249,18 @@ def insert_json_db(data_path_json,data_path_xml,db):
                         author_name[name.tag.split('}')[1]] = name.text
 
                 # Construct a unique identifier for the author based on their name
-                author_full_name = f"{author_name.get('forename', '').strip()} {author_name.get('surname', '').strip()}".strip()
-
-                # Skip authors with no valid names
-                if not author_full_name:
-                    continue
+                author_forename = f"{author_name.get('forename', '').strip()}"
+                author_surname = f"{author_name.get('surname', '').strip()}"
 
                 # Check if author is already registered
-                if author_full_name in dict_registered:
-                    registered = True
-                    author_document_id = dict_registered[author_full_name]
-                else:
+                result = db.AQLQuery(
+                    f'FOR auth IN authors FILTER auth.name.surname == "{author_surname}" FILTER auth.name.forename == "{author_forename}" RETURN auth._id',
+                    rawResults=True)
+
+                if not result:
                     registered = False
+                else:
+                    registered = True
 
                 # Extract author's role
                 try:
@@ -282,7 +280,7 @@ def insert_json_db(data_path_json,data_path_xml,db):
                 }]
 
                 # If not registered, create a new author document
-                if not registered:
+                if registered:
                     author['name'] = author_name
                     author['documents'] = author_documents
 
@@ -290,7 +288,6 @@ def insert_json_db(data_path_json,data_path_xml,db):
                     document_author.save()
 
                     # Register the author by their name
-                    dict_registered[author_full_name] = document_author._id
                     author_document_id = document_author._id
 
                     # Create edge between document and author
