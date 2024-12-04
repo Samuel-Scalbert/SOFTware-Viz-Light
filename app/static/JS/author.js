@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
             if (input.length) {
                 // Filter the authors based on the input
                 result = Author_list.filter((author) => {
+                    console.log(author);
                     // author[0] is the name and author[1] is the ID
                     return author[0].toLowerCase().includes(input.toLowerCase());
                 });
@@ -112,7 +113,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
                     affi_card += `<p>${affi.struc.name}</p>`;
                 }
 
-                affi_card += `<p>AureHAL ID: <a href='https://aurehal.archives-ouvertes.fr/structure/read/id/${affi.struc.id_haureal}'>${affi.struc.id_haureal}</a></p>`;
+                // affi_card += `<p>AureHAL ID: <a href='https://aurehal.archives-ouvertes.fr/structure/read/id/${affi.struc.id_haureal}'>${affi.struc.id_haureal}</a></p>`;
 
                 affiList += `<li>${affi_card}</li>`;  // Add the affi_card to the list
             });
@@ -127,7 +128,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
                     // Assuming auth_info is an object, format it for display
                     authorCard.innerHTML = `
                         <h2>${auth_info[0].author.name.surname} ${auth_info[0].author.name.forename} </h2>
-                        <p>Hal ID: ${auth_info[0].author.id.halauthorid}</p>
+                        <p>Arrango Key: ${auth_info[0].author._key}</p>
                         <p>Documents: ${documentsList}</p>
                     `;
 

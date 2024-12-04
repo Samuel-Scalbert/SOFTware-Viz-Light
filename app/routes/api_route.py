@@ -180,16 +180,16 @@ def links_id_from_struc(struc):
     response = db.AQLQuery(query, rawResults=True, batchSize=3000)
     return list(response)
 
-@app.route('/api/author/<author_halauthorid>')
-def author_info(author_halauthorid):
-    data = author_info_from_id(author_halauthorid)
+@app.route('/api/author/<author_key>')
+def author_info(author_key):
+    data = author_info_from_id(author_key)
     return jsonify(data[0:])
 
 @app.route('/api/author/list_authors')
 def list_authors():
     query = f'''
         FOR aut IN authors
-            RETURN DISTINCT [CONCAT(aut.name.surname, " ", aut.name.forename),aut.id.halauthorid]
+            RETURN DISTINCT [CONCAT(aut.name.surname, " ", aut.name.forename),aut._key]
         '''
     # Execute the query and return the response as a list
     data = db.AQLQuery(query, rawResults=True, batchSize=2000)
