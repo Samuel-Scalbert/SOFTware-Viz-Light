@@ -21,7 +21,6 @@ def doc_software(file_id,software,db):
             abstract.remove('GROBID')
     except KeyError:
         abstract = 'No abstract'
-    citation = (file_meta[0]['citation'])
     max_attribute = None
 
     query = f"""
@@ -70,7 +69,7 @@ def doc_software(file_id,software,db):
             abstract = None
     except AttributeError:
         abstract = None
-    data = [dic_context, abstract, citation,software_title,list_other_articles,list_other_softwares]
+    data = [dic_context, abstract, "null",software_title,list_other_articles,list_other_softwares]
 
     return data
 
@@ -96,7 +95,7 @@ def doc_info_from_id(file_id,db):
             abstract.remove('GROBID')
     except KeyError:
         abstract = 'No abstract'
-    citation = (file_meta[0]['citation'])
+    print(file_meta)
     max_attribute = None
 
     query = f"""
@@ -145,6 +144,6 @@ def doc_info_from_id(file_id,db):
         abstract = None
     title = db.AQLQuery(f"LET doc = DOCUMENT('{file_meta_id}') RETURN doc.title", rawResults=True)
     title = title[0]
-    data = [dic_context, abstract, citation, list_other_softwares, title,file_id]
+    data = [dic_context, abstract, "null", list_other_softwares, title,file_id]
 
     return data
