@@ -95,8 +95,8 @@ def insert_json_db(data_path_json,data_path_xml,db):
             file_name, extension = os.path.splitext(file_name)
 
         if file_name in files_list_registered:
-            pass
-            #continue
+            #pass
+            continue
 
         with (open(file_path, 'r', encoding='utf-8') as xml_file):
             data_json_get_document = {}
@@ -250,17 +250,14 @@ def insert_json_db(data_path_json,data_path_xml,db):
 
                 # Construct a unique identifier for the author based on their name
                 author_forename = f"{author_name.get('forename', '').strip()}"
+                author_forename = author_forename.replace('"',"")
                 author_surname = f"{author_name.get('surname', '').strip()}"
+                author_surname = author_surname.replace('"',"")
 
                 # Check if author is already registered
-                result = db.AQLQuery(
+                registered = db.AQLQuery(
                     f'FOR auth IN authors FILTER auth.name.surname == "{author_surname}" FILTER auth.name.forename == "{author_forename}" RETURN auth._id',
                     rawResults=True)
-
-                if not result:
-                    registered = False
-                else:
-                    registered = True
 
                 # Extract author's role
                 try:
@@ -280,7 +277,7 @@ def insert_json_db(data_path_json,data_path_xml,db):
                 }]
 
                 # If not registered, create a new author document
-                if registered:
+                if len(registered) == 0:
                     author['name'] = author_name
                     author['documents'] = author_documents
 
@@ -301,18 +298,17 @@ def insert_json_db(data_path_json,data_path_xml,db):
                     # AQL query to append documents to the existing author
                     aql_query = f'''
                         FOR doc IN authors
-                            FILTER doc._id == '{author_document_id}'
+                            FILTER doc._id == '{registered[0]}'
                             UPDATE doc WITH {{ 
                                 documents: APPEND(doc.documents, {author_documents}, true)
                             }} IN authors
                     '''
                     # Execute the AQL query
                     result = db.AQLQuery(aql_query, rawResults=True)
-
                     # Create edge between document and author
                     edge_doc_auth = doc_auth_edge.createEdge()
                     edge_doc_auth['_from'] = document_document._id
-                    edge_doc_auth['_to'] = author_document_id
+                    edge_doc_auth['_to'] = registered[0]
                     edge_doc_auth.save()
 
                 # STRUCT -----------------------------------------------------
@@ -325,9 +321,12 @@ def insert_json_db(data_path_json,data_path_xml,db):
                         list_org = affiliation.findall("{http://www.tei-c.org/ns/1.0}orgName")
                         for elm in list_org:
                             # ['department', 'institution', 'laboratory']
+                            if not elm.attrib:
+                                continue
                             if elm.attrib['type'] in ['institution', 'laboratory']:
                                 structure_name = elm.text
                                 structure_type = elm.attrib['type']
+                                structure_name = structure_name.replace('"','')
                                 result = db.AQLQuery(
                                     f'FOR struc IN structures FILTER struc.name == "{structure_name}" RETURN struc._id',
                                     rawResults=True)

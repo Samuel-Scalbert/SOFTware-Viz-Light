@@ -14,142 +14,6 @@ function affi_type(str) {
     return typeMap[str] || str;
 }
 
-function generateBubbleChart(selector, dictionnary_data_raw, minyear, maxyear, maxoccu) {
-    var labels = [];
-    let xdatamin = minyear - 1;
-    let xdatamax = maxyear + 1;
-    let ydatamin = 0;
-    let ydatamax = maxoccu + 2;
-
-    const chartConfig = {
-        type: 'bubble',
-        data: {
-            datasets: dictionnary_data_raw,
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    suggestedMin: ydatamin,
-                    suggestedMax: ydatamax,
-                    ticks: {
-                        display: true,
-                        font: { size: 25 },
-                    },
-                    title: {
-                        display: false,
-                        text: 'Nb of occurences',
-                        font: { size: 25 }
-                    }
-                },
-                x: {
-                    suggestedMin: xdatamin,
-                    suggestedMax: xdatamax,
-                    ticks: {
-                        display: true,
-                        font: { size: 25 },
-                        callback: function(value, index, values) {
-                            return Math.floor(value);  // Only show whole numbers (years)
-                        },
-                        stepSize: 1
-                    },
-                    title: {
-                        display: false,
-                        text: 'Year',
-                        font: { size: 25 }
-                    }
-                }
-            },
-            events: ['mouseout'], // Remove 'click' from here
-            plugins: {
-                legend: {
-                    position: 'top',
-                    labels: {
-                        font: {
-                            size: function(size) { return 25; }
-                        },
-                        filter: function(item, chart) {
-                            return !item.text.includes('label');
-                        }
-                    }
-                },
-                datalabels: {
-                    anchor: function(context) {
-                        var value = context.dataset.data[context.dataIndex];
-                        return value.v < 20 ? 'end' : 'center';
-                    },
-                    align: function(context) {
-                        var value = context.dataset.data[context.dataIndex];
-                        return value.v < 20 ? 'end' : 'center';
-                    },
-                    color: 'black',
-                    font: {
-                        weight: 'bold',
-                        size: 25,
-                    },
-                    formatter: function(value) {
-                        var display = value.display_custom;
-                        if (display) {
-                            return display == 'on' ? Math.round(value.v) : null;
-                        }
-                        else return Math.round(value.v);
-                    },
-                    offset: 1,
-                    padding: 0
-                },
-                tooltip: { enabled: false }
-            },
-
-            // Core options
-            layout: {
-                padding: 30
-            },
-            elements: {
-                point: {
-                    radius: function(context) {
-                        var value = context.dataset.data[context.dataIndex];
-                        var size = context.chart.width;
-                        var base = Math.abs(value.v) / 15;
-                        return (size / 24) * base ;
-                    }
-                }
-            },
-            // Disable animations
-            animation: {
-                duration: 0
-            },
-            hover: {
-                animationDuration: 0
-            },
-            responsiveAnimationDuration: 0
-        }
-    };
-
-    const ctx = document.querySelector(selector);
-    const chart = new Chart(ctx.getContext('2d'), chartConfig);
-
-    ctx.onclick = (evt) => {
-      const points = chart.getElementsAtEventForMode(
-        evt,
-        'nearest',
-        { intersect: true },
-        true
-      );
-      if (points.length) {
-          const firstPoint = points[0]
-          const datasetPoint = firstPoint.datasetIndex;
-          const dataPoint = firstPoint.index;
-          if (chart.data.datasets[datasetPoint].data[dataPoint].label)
-          {
-              const software = document.getElementById("software_name")
-              showSources(chart.data.datasets[datasetPoint].data[dataPoint].label, software.getAttribute("class"));
-              showStructures(chart.data.datasets[datasetPoint].data[dataPoint].label, software.getAttribute("class"));
-              showAuthors(chart.data.datasets[datasetPoint].data[dataPoint].label);
-          }
-      }
-    };
-}
-
 async function showStructures(hal_id_list, software) {
     const uniqueStructures = new Set();
     let softwareName;
@@ -338,30 +202,32 @@ function generateCircleChart(selector, value1, value2, value3) {
         },
         options: {
             responsive: true,
+            animation: {
+                animateScale: true, // This enables scaling animation on initial load
+                animateRotate: true, // This animates rotation if desired
+                duration: 1000, // Adjust the duration of the animation (1 second)
+                easing: 'easeOutQuart', // Smooth easing for animation
+            },
             plugins: {
                 tooltip: {
-                    enabled: true, // Disables tooltips
+                    enabled: true, // Enable tooltips
                 },
                 legend: {
-                    display: true, // Hides the legend
+                    display: true, // Display the legend
                 },
                 datalabels: {
-                    display: false // Hides data labels
+                    display: false, // Disable data labels
                 }
             },
-            animation: {
-                animateScale: true, // Enables scaling animation
-            },
             layout: {
-                padding: 20 // Adds padding around the chart
+                padding: 20 // Add padding around the chart
             },
             elements: {
                 arc: {
-                    borderWidth: 1 // Sets the border width of each slice
+                    borderWidth: 1 // Set border width of each pie slice
                 }
             },
         },
-
         plugins: [{
             beforeDraw: function(chart) {
                 const width = chart.width;
@@ -377,7 +243,10 @@ function generateCircleChart(selector, value1, value2, value3) {
     };
 
     const ctx = document.querySelector(selector);
+    if (!ctx) {
+        console.error("Canvas element not found!");
+        return;
+    }
 
-    circleChart = new Chart(ctx.getContext('2d'), chartConfig);
-
+    new Chart(ctx.getContext('2d'), chartConfig);
 }

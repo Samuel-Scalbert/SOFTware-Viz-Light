@@ -3,12 +3,11 @@
 <head>
   <link rel="stylesheet" id="styles" href="{{ url_for('static', filename='/css/styles.css') }}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-  <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/logo_ico_white.jpg') }}">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/logo_ico_black.png') }}">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="{{ url_for('static', filename='./JS/plugin_datalabels.js') }}"></script>
   <script src="{{ url_for('static', filename='./JS/scripts.js') }}"></script>
   <script src="{{ url_for('static', filename='./JS/charts.js') }}"></script>
-  <script src="{{ url_for('static', filename='./JS/chart_line.js') }}"></script>
   <script src="{{ url_for('static', filename='./JS/disambiguate.js') }}"></script>
   <script src="{{ url_for('static', filename='./JS/author.js') }}"></script>
   <script src="{{ url_for('static', filename='./JS/software.js') }}"></script>
@@ -39,10 +38,6 @@
                 <a href="{{ url_for("software_mentions", software="Pl@ntNet") }}">
                     <span class="material-symbols-outlined">search</span>
                     <h3>Software (Pl@ntNet)</h3>
-                </a>
-                <a href="{{ url_for("software_structure_mentions",software="Pl@ntNet",structure="struct-409262")}}">
-                    <span class="material-symbols-outlined">search</span>
-                    <h3>Software (Pl@ntNet/ADVANSE)</h3>
                 </a>
                 <a href="{{url_for("author")}}">
                     <span class="material-symbols-outlined">search</span>
