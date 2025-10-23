@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', async (event) => {
         const titleNoDup = document.getElementById("nb-sofwnodup");
         const titleDup = document.getElementById("nb-sofwdup");
         const loadingIndicator = document.getElementById('loading');
-        console.log(loadingIndicator)
 
         const availableSoftware_sliced = availableSoftware.slice(0, 100);
 

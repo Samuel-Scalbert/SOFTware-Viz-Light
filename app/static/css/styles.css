@@ -100,6 +100,12 @@ body{
     width:100%;
 }
 
+.info_doc{
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
 .source, .all-sources, .other-software {
     box-sizing: border-box;
     flex: 250px;
@@ -932,7 +938,7 @@ main .analyse{ /* Style Grid du block Main */
     gap: 40px;
 }
 
-.doc_stat{
+.doc_abstract, .doc_affi, .doc_author,.doc_soft,.doc_stat{
     border: 2px solid transparent;
     box-shadow: 0 3px 4px #00000029;
     font-family: "Poppins", sans-serif;
@@ -957,6 +963,14 @@ main .analyse{ /* Style Grid du block Main */
 .doc_stat h1{
     background-size: 50px;
     position: sticky;
+    top: 0;
+    width: auto;
+    z-index: 1;
+    margin-bottom: 10px;
+}
+
+.doc_abstract h1, .doc_affi h1, .doc_author h1, doc_soft h1{
+    background-size: 50px;
     top: 0;
     width: auto;
     z-index: 1;
