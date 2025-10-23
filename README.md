@@ -21,93 +21,83 @@
 
 ![Capture d’écran du 2024-06-03 16-39-41](https://github.com/Samuel-Scalbert/SOFTware-Viz/assets/32683708/6be2a593-0508-4e52-a7cb-2cf28b768f00)
 
-## Presentation of the project
+## Présentation du projet
 
-🛑 This version of SOFTware-Viz is the universal version that works with any PDF files and without the connection to HAL INRIA.
+🛑 Cette version de SOFTware-Viz est la version universelle qui fonctionne avec tous les fichiers PDF et sans connexion à HAL INRIA.
 
-🛑 If you are using files from HAL you should use the original version [SOFTware-Viz](https://github.com/Samuel-Scalbert/SOFTware-Viz)
-### DB of PDF
-The process begins with a Database of PDF files. These PDFs are scholarly PDFs that need to be extracted and processed.
+🛑 Si vous utilisez des fichiers de HAL, vous devez utiliser la version originale [SOFTware-Viz](https://github.com/Samuel-Scalbert/SOFTware-Viz).
+
+### Base de données de PDF
+Le processus commence avec une base de données de fichiers **PDF** académiques qui doivent être extraits et traités.
 
 ### GROBID
-The PDFs are sent to GROBID, a tool used to extract structured data (like bibliographic information) from scholarly PDFs. GROBID processes the PDFs and outputs XML files. This is a crucial step in extracting machine-readable information from the documents.
+Les fichiers **PDF** sont envoyés à **GROBID**, un outil permettant d’extraire des données structurées (comme des informations bibliographiques) à partir de **PDF** académiques. **GROBID** génère en sortie des fichiers **XML**, rendant l’information lisible par machine.
 
 ### SOFTCITE
-After GROBID, the extracted data (likely enriched or supplemented data) is passed to SOFTCITE, which generates JSON outputs. SOFTCITE analyzes citations, software mentions, or related information in the PDF files like references.
+Après **GROBID**, les données extraites sont transmises à **SOFTCITE**, qui génère des fichiers **JSON**. **SOFTCITE** analyse les citations, les mentions de logiciels ou d’autres informations de référence présentes dans les **PDF**.
 
 ### SOFTware-Sync
-The extracted data (XML and JSON) is then passed to SOFTware-Sync, which is a tool that synchronizes the data into one single XML.
+Les fichiers **XML** et **JSON** extraits sont ensuite traités par **SOFTware-Sync**, un outil qui synchronise ces données dans un fichier **XML** unique.
 
 ### SOFTware-Viz
-SOFTware-Viz is responsible for visualizing the processed data. It likely takes the synchronized data from SOFTware-Sync and transforms it into visual outputs or dashboards.
+**SOFTware-Viz** est chargé de la visualisation des données traitées. Il prend les données synchronisées par **SOFTware-Sync** et les transforme en **tableaux de bord** ou autres représentations graphiques.
 
 ### ArangoDB
-The processed data is stored in ArangoDB, a multi-model NoSQL database, to manage both structured data. This database serves as the main storage for the extracted information/mentions.
+Les données traitées sont stockées dans **ArangoDB**, une base de données **NoSQL multi-modèle**, permettant la gestion des données structurées. Elle sert de stockage principal pour les informations et mentions extraites.
 
 ### Flask
-Flask is a web framework used for developing web applications. Flask interacts with both SOFTware-Viz (for visualizations) and ArangoDB (for retrieving data).
+**Flask** est un framework web utilisé pour développer des applications web. Il interagit avec **SOFTware-Viz** (pour la visualisation) et **ArangoDB** (pour la récupération des données).
 
 ---
-##  Installation
 
-<h4>From <code>source</code></h4>
+## Installation
 
-> 1. Clone the  repository:
->
-> ```console
-> git clone ../
-> ```
->
-> 2. Change to the project directory:
-> ```console
-> cd ./SOFTware-viz
-> ```
->
-> 3. Create a virtualenv:
-> ```console
-> python -m venv env
-> ```
->
-> 4. Install docker image
-> ```console
-> docker pull arangodb/arangodb:3.11.6
-> ```
->
-> 5. Launch docker container
-> ```console
-> docker run -p 8529:8529 -e ARANGO_NO_AUTH=1 arangodb/arangodb:3.11.6
-> ```
->
-> 6. Create the database "SOF-viz"
->```
-> go to the port http://localhost:8529/ and create mannualy the database named "SOF-viz"
->```
->
-> 7. Launch the virtualenv
-> ```console
-> source env/bin/activate
-> ```
->
-> 8. Install the dependencies:
-> ```console
-> pip install -r requirement.txt
-> ```
-> 
-> 9. Launch the app
-> ```console
-> python run.py
-> ```
->
-###  Usage
+#### Depuis `la source`
 
-<h4>From <code>source</code></h4>
+* Clonez le dépôt :<br>
+```console
+git clone ../
+```
+* Accédez au répertoire du projet :<br>
+```console
+cd ./SOFTware-viz
+```
+* Créez un environnement virtuel :<br>
+```console
+python -m venv env
+```
+* Installez l’image **Docker** :<br>
+```console
+docker pull arangodb/arangodb:3.11.6
+```
+* Lancez un conteneur **Docker** :<br>
+```console
+docker run -p 8529:8529 -e ARANGO_NO_AUTH=1 arangodb/arangodb:3.11.6
+```
+* Activez l’environnement virtuel :<br>
+```console
+source env/bin/activate
+```
+* Installez les dépendances :<br>
+```console
+pip install -r requirement.txt
+```
+* Insérez les fichiers XML dans le dossier ./app/static/data/xml_files et les json dans app/static/data/json_files :<br>
 
-> Run  using the command below (the database will create itself only on the first launch):
-> ```console
-> python run.py
-> ```
+🛑Il y a déjà des fichiers de test dans les dossiers (vous pouvez les supprimer pour essayer l'application pour votre corpus)
 
+* Lancez l’application :    
+```console
+python run.py
+```
 ---
-##  License
 
-This project is protected under the [SELECT-A-LICENSE](https://choosealicense.com/licenses) License. For more details, refer to the [LICENSE](https://choosealicense.com/licenses/) file.
+## Utilisation
+
+#### Depuis `la source`
+
+Exécutez l’application avec la commande suivante (**la base de données se créera automatiquement lors du premier lancement**) :
+
+```
+python run.py
+```
