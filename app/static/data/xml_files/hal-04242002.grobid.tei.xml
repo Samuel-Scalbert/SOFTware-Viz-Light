@@ -1,0 +1,795 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">On the Correspondence between Compositionality and Imitation in Emergent Neural Communication</title>
+				<funder ref="#_ZBGSJVc">
+					<orgName type="full">Agence Nationale de la Recherche</orgName>
+					<orgName type="abbreviated">ANR</orgName>
+				</funder>
+				<funder>
+					<orgName type="full">GENCI</orgName>
+				</funder>
+				<funder>
+					<orgName type="full">French government</orgName>
+				</funder>
+				<funder ref="#_nJMYDNd">
+					<orgName type="full">) European Research Council</orgName>
+				</funder>
+				<funder ref="#_adjesNn">
+					<orgName type="full">MSR-Inria joint lab</orgName>
+				</funder>
+				<funder ref="#_UHVjpbQ">
+					<orgName type="full">TGCC-GENCI</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Emily</forename><surname>Cheng</surname></persName>
+							<email>emilyshana.cheng@upf.edu</email>
+						</author>
+						<author>
+							<persName><forename type="first">Mathieu</forename><surname>Rita</surname></persName>
+							<email>mathieu.rita@inria.fr</email>
+						</author>
+						<author>
+							<persName><forename type="first">Thierry</forename><surname>Poibeau</surname></persName>
+							<email>thierry.poibeau@ens.psl.eu</email>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="institution">UPF</orgName>
+								<address>
+									<settlement>Barcelona</settlement>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<orgName type="institution">INRIA</orgName>
+								<address>
+									<settlement>Paris</settlement>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff2">
+								<orgName type="institution" key="instit1">CNRS</orgName>
+								<orgName type="institution" key="instit2">ENS-PSL</orgName>
+								<address>
+									<settlement>Paris</settlement>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff3">
+								<orgName type="institution" key="instit1">CNRS</orgName>
+								<orgName type="institution" key="instit2">École</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff4">
+								<orgName type="institution">Normale Supérieure</orgName>
+							</affiliation>
+						</author>
+						<title level="a" type="main">On the Correspondence between Compositionality and Imitation in Emergent Neural Communication</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">9EDB35F858AE538A5B06ED5D734A404B</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:13+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Compositionality is a hallmark of human language that not only enables linguistic generalization, but also potentially facilitates acquisition. When simulating language emergence with neural networks, compositionality has been shown to improve communication performance; however, its impact on imitation learning has yet to be investigated. Our work explores the link between compositionality and imitation in a Lewis game played by deep neural agents. Our contributions are twofold: first, we show that the learning algorithm used to imitate is crucial: supervised learning tends to produce more average languages, while reinforcement learning introduces a selection pressure toward more compositional languages. Second, our study reveals that compositional languages are easier to imitate, which may induce the pressure toward compositional languages in RL imitation settings.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>Compositionality, a key feature of human language, makes it possible to derive the meaning of a complex expression from the combination of its constituents <ref type="bibr" target="#b23">(Szabo, 2020)</ref>. It has been suggested that more compositional languages are easier to acquire for both humans and artificial agents <ref type="bibr" target="#b19">(Raviv et al., 2021;</ref><ref type="bibr" target="#b17">Li and Bowling, 2019;</ref><ref type="bibr" target="#b20">Ren et al., 2020;</ref><ref type="bibr" target="#b3">Chaabouni et al., 2020)</ref>. Therefore, to better understand the factors underlying language transmission, it is crucial to understand the relationship between ease-of-acquisition and compositionality.</p><p>We study the link between compositionality and ease-of-acquisition in the context of emergent communication. In this setting, two deep artificial agents with asymmetric information, a Sender and a Receiver, must develop communication from scratch in order to succeed at a cooperative game <ref type="bibr" target="#b7">(Havrylov and Titov, 2017;</ref><ref type="bibr" target="#b15">Lazaridou et al., 2017;</ref><ref type="bibr" target="#b14">Lazaridou and Baroni, 2020)</ref>. We will refer to this mode of language learning, in which agents develop language via feedback from mutual interaction, as communication-based learning.</p><p>Several studies have linked compositionality to ease-of-acquisition in communication-based learning. <ref type="bibr" target="#b3">Chaabouni et al., 2020</ref> show compositionality predicts efficient linguistic transmission from Senders to new Receivers. Conversely, Li and Bowling, 2019 re-pair a Sender periodically with new Receivers, and show this ease-of-teaching pressure improves compositionality.</p><p>Communication-based learning is not the only possibility for language learning, however. Humans also crucially acquire language through imitation-based learning, in which they learn by observing other humans' language use <ref type="bibr" target="#b13">(Kymissis and Poulson, 1990)</ref>. <ref type="bibr" target="#b20">Ren et al., 2020 and</ref><ref type="bibr" target="#b3">Chaabouni et al., 2020</ref> employ imitation learning, where in the first study, agents undergo a supervised imitation stage before communication-based learning, and where in the second, agents alternate between communication-based learning and imitating the best Sender. However, the dynamics of imitation are not the focus in either study. For such an important vehicle of language acquisition, imitationbased learning thus remains under-explored in the emergent communication literature.</p><p>We extend these lines of inquiry to systematically investigate compositionality in imitationbased learning. <ref type="foot" target="#foot_0">1</ref> Our contributions are as follows:</p><p>(1) We show that imitation can automatically select for compositional languages under a reinforcement learning objective; and (2) that this is likely due to ease-of-learning of compositional languages.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">Setup</head><p>We study imitation in the context of referential communication games <ref type="bibr" target="#b16">(Lewis, 1969)</ref>. In this setting, a Sender agent observes an object x and transmits a message m to a second Receiver agent. Using this message, the Receiver performs an action for which both agents receive a reward. Over the course of the game, agents converge to a referential system (x, m), which we refer to as an emergent language.</p><p>Measuring Compositionality Evaluating compositionality in emergent languages is not straightforward given their grammars are a-priori unknown. Therefore, we quantify compositionality using topographic similarity (topsim) <ref type="bibr" target="#b11">(Kirby and Brighton, 2006)</ref>, a grammar-agnostic metric widely applied to emergent languages in the literature. Topsim is defined as the Spearman correlation ρ between Euclidean distances in the input space and Levenstein distances in the message space-that is, it captures the intuition that nearby inputs should be described with similar messages. While we consider other compositionality metrics such as positional disentanglement <ref type="bibr" target="#b3">(Chaabouni et al., 2020)</ref>, we focus on topsim due to its high correlation with generalization accuracy (ρ = 0.83) <ref type="bibr">(Rita et al., 2022b)</ref>. See appendix A.3 for extended experiments on compositionality metrics and generalization.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Imitation Task</head><p>To investigate whether compositional languages are selected for in imitation, we posit an imitation task where one new Imitator Sender or Receiver simultaneously imitates several Expert Senders or Receivers with varying topsims. Both Sender and Receiver agents are parameterized by single-layer GRUs <ref type="bibr" target="#b5">(Cho et al., 2014)</ref> that are deterministic after training (see appendix B for implementation).<ref type="foot" target="#foot_1">2</ref> While we explore imitation for both agents, we focus on Sender imitation in the main text, and extend to Receiver imitation in appendix E. A minimal example of imitation learning with only one Expert Sender-Receiver pair is shown in fig. <ref type="figure" target="#fig_4">1</ref>.</p><p>The Sender imitation task is as follows: given a set of k Expert Senders, we train an identical, newly initialized Sender on the Experts' inputs and outputs (x, m). That is, for each round of training, all k Experts as well as the Imitator Sender receive input x and output m (1) • • • m (k) and m I , respectively. The Imitator is then tasked to minimize the difference between their output and a uniform mixture of the k Expert outputs. Dataset Data in the imitation task consists of inputs and outputs of pairs of Expert agents trained to convergence on a communication game-in our case, the two-agent reconstruction task of <ref type="bibr" target="#b12">Kottur et al. (2017)</ref>. To generate the Experts, we pre-train N = 30 Sender-Receiver pairs on this reconstruction task to high validation accuracy (0.99 ± 0.01) (task and training details in appendix A).</p><p>Expert training produces the following data: 1) inputs x; 2) messages m corresponding to Expert Senders' encodings of x; and 3) outputs x, the Expert Receivers' reconstructions of x given m.</p><p>Each input x denotes an object in an "attributevalue world", where the object has n att attributes, and each attribute takes n val possible values. We represent x by a concatenation of n att one-hot vectors, each of dimension n val . On the other hand, messages m are discrete sequences of fixed length L, consisting of symbols taken from a vocabulary V . We set n att = 6, n val = 10, |V | = 10, and L = 10, corresponding to a relatively large attribute-value setting in the literature (Table <ref type="table" target="#tab_1">1</ref> of <ref type="bibr" target="#b6">Galke et al. (2022)</ref>).</p><p>We split the input data (n = 10 6 ) into a training set and two holdout sets. Similar to <ref type="bibr" target="#b3">Chaabouni et al. (2020)</ref>, we define two types of holdouts: a zero-shot generalization set (n = 354294), where one value is held-out during training, and an indistribution generalization set (n = 531441). The training set, on which we both train and validate, represents 1% of in-distribution data (n = 5315). These data splits are used in Expert training and are 12433 inherited by the imitation task (see appendix B.2 for details on generating the data split).</p><p>Imitation learning algorithms While imitation is classically implemented as supervised learning, we test two imitation learning procedures: 1) supervised learning (SV) with respect to the cross-entropy loss between Imitator and Expert outputs; and 2) reinforcement learning with the RE-INFORCE algorithm (RF) <ref type="bibr" target="#b24">(Williams, 1992)</ref>, using per-symbol accuracy as a reward. When using RE-INFORCE, we additionally include an entropy regularization term weighted by λ to encourage exploration, and subtract a running mean baseline from the reward to improve training stability <ref type="bibr" target="#b25">(Williams and Peng, 1991)</ref>. See appendix D for loss functions and B.2 for detailed hyperparameter settings.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Evaluation</head><p>To evaluate properties of imitation learning, we identify three descriptors of interest: validation accuracy, ease-of-imitation, and selection of compositional languages.</p><p>Accuracy We evaluate imitation performance between an Imitator and Expert by the average persymbol accuracy between their messages given an input. When using REINFORCE, training accuracy is computed using the Imitators' sampled output while validation accuracy is computed using the Imitators' argmax-ed output.</p><p>Ease-of-imitation We evaluate ease-of-imitation of a language two ways. First, imitation sample complexity (T ): the number of epochs needed to reach 99% validation accuracy, and second, imitation speed-of-learning (SOL I ): the area under the validation accuracy curve, cut-off at t epochs chosen by visual inspection of convergence.</p><p>Selection of compositional languages Sender imitation consists of learning one-to-one input-tomessage mappings from a sea of one-to-many Expert mappings. Then, the Imitator's language will consist of a mixture of Expert languages, where the mixture weights reveal the extent of selection.</p><p>In this mixture, we proxy the Imitator's learned weight for an Expert as the proportion of messages in the training set for which Imitator accuracy on the Expert message is the highest. Note that the coefficients may not add to one: if the highest Expert accuracy for a message does not exceed chance (10%), we consider the message unmatched.</p><p>To quantify selection, we use the intuition that selection corresponds jointly to peakedness and asymmetry in the learned distribution over Expert languages sorted by topsim. We evaluate peakedness using the Shannon entropy and asymmetry using Fisher's moment coefficient of skew of Expert weights. Formally, let there be k Experts, where Experts are sorted in ascending order of topsim (Expert i=1 is the least and i=k is the most compositional, respectively). The Imitator learns a mixture of the Expert languages with weights W := (w i ) 1≤i≤k (normalized). Given W , we evaluate peakedness with:</p><formula xml:id="formula_0">H(W ) = - k i=1 w i log(w i ).</formula><p>(1)</p><p>To quantify asymmetry of expert weights, we estimate the Fisher's moment coefficient of skew:</p><formula xml:id="formula_1">μ(W ) = 1 k k i=1 w i -µ σ 3 , (<label>2</label></formula><formula xml:id="formula_2">)</formula><p>where µ is the mean and σ is the standard deviation of W . A skew of 0 implies perfect symmetry, positive skew corresponds to a right-tailed distribution, and negative skew corresponds to a left-tailed distribution. Intuitively, the more negative the skew of the Expert weights, the more weight lies on the right side of the distribution, hence the greater "compositional selection effect".</p><p>We proxy selection, then, by a negative skew (more weight assigned to high-topsim Experts) and low entropy (peakedness) in the Expert weight distribution.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Imitation and Selection of Compositionality</head><p>We present results for imitation on mixtures of k = 2-5 Expert Senders. First, we generate 30 Expert languages from the referential task, initially considering Expert distributions corresponding to evenly-spaced percentiles of topsim, including the minimum and maximum (0.26, 0.43). For example, when k = 3, we take the lowest, 50 th percentile, and highest-topsim languages. All results are aggregated over 5 random seeds after 2000 training epochs.</p><p>We find that (1) whether Imitators prefer compositional Experts depends crucially on the learning algorithm: imitation by reinforcement results in marked compositional selection compared to supervision; and (2) compositional selection also depends on variance of expert topsims, λ entropy regularization coefficient, and number of Experts.  The distribution of learned Expert weights in fig. <ref type="figure" target="#fig_0">2</ref>, as well as imitation validation accuracy curves in fig. C.2, evidence that in imitation by supervision, the empirical mixture is closer to uniform than when imitating by reinforcement. Otherwise, when optimizing using reinforcement, the Imitator selects more compositional languages.</p><p>The shape of the Expert weight distribution is tempered by the entropy regularization coefficient λ: smaller λ results in greater compositional selec-tion (that is, lower entropy and more negative skew) of the weight distribution (fig. <ref type="figure" target="#fig_1">3</ref>). At the limit, imitation by supervision results in the highest entropy and the skew that is closest to zero. We then test the effect of Expert topsim distribution asymmetry on the learned weights. To do so, for each k &gt; 2, we generate 10 Expert topsim distributions with varying skew, following the procedure outlined in appendix D.2 (when k = 2, skew is mechanically 0). We find that for both REINFORCE and supervision, holding k equal, the skew and entropy of the learned Expert weight distribution are robust (i.e., not correlated) to the skew of the underlying Expert topsim distribution (fig. D.2). This is desirable when imitating by reinforcement and undesirable when imitating by supervision: for example, consider Expert topsim distributions [low high high] (skew&lt; 0) and [low low high] (skew&gt; 0). In both cases, REINFORCE will select a high-topsim Expert, and supervision will weight all Experts equally, that is, supervision is unable to de-select poor topsims.</p><p>Using all Expert topsim distributions generated so far (those where topsim ranks are evenly spaced, and those exhibiting varying skews), we investigate the effect of topsim distribution spread, quantified by standard deviation, on the learned weights. In fig. <ref type="figure" target="#fig_2">4</ref>, we note a significant negative effect of Expert topsim standard deviation on the degree of compositional selection. That is, the more disperse the Expert topsims, the more the Imitator can differentiate between and select compositional Experts (shown by a more negative skew in learned Expert weights). Though this correlation is highly statistically significant for both REINFORCE and supervision, the effect is ∼ 8x greater for REIN-FORCE, demonstrating that the spread between expert compositionalities plays a more important role in the degree of selection by reinforcement.</p><p>Finally, selection is less salient as the number of Experts increases, seen by the increasing entropies and skews of Expert weights <ref type="bibr">(figs. 3 and D.3</ref>). Results for k &gt; 3 may be found in appendix D.</p><p>Understanding why REINFORCE selects for compositional languages The different results between the optimization algorithms correspond to inherent differences in learning objective. Successful imitation minimizes the Kullback-Leibler divergence between the Imitator π I and the Expert policies π E ; supervision is classically known to minimize the forward KL divergence D KL (π E ||π I ), while reinforcement minimizes the reverse KL divergence D KL (π I ||π E ) with respect to π I . That is, imitation by supervision is mean-fitting while imitation by reinforcement is mode-fitting-the former learns a uniform mixture of Expert languages (see appendix D.4 for proof), and the latter selects the best Expert language.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Speed-of-Imitation May Explain Compositional Selection</head><p>Thus far, we have seen that imitation by reinforcement selects compositional languages. This is likely because higher topsim languages are easier to imitate. We establish a positive and statistically significant relationship between topsim and ease-ofimitation, expanding the explorations in Ren et al. We evaluate ease-of-imitation using k = 1, after t = 500 (SV) and 2000 epochs (RF), where t is chosen based on validation accuracy convergence. Correlations between topsims of 30 Expert languages and Imitator performance (averaged over three random seeds) are shown in table 1. We find that for both imitation by supervision and reinforcement, topsim is (1) significantly negatively correlated to imitation sample complexity T ; (2) significantly positively correlated to speed-of-imitation SOL.</p><p>Moreover, correlations between topsim and easeof-imitation are stronger than those between Expert validation accuracy and ease-of-imitation (table C.1). This suggests that the positive relationship between compositionality and ease-ofimitation is not due to a confound of high validation accuracy.  <ref type="bibr">Receiver=R)</ref>. Unless otherwise stated, all correlations are significant using α = 1e-2. *(α = 0.05)</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">Discussion</head><p>Having (1) demonstrated a selection of compositional languages in imitation by reinforcement; (2) established a significant correlation between topsim and ease-of-imitation; we offer the following explanation for compositional selection: mode-seeking behavior in reinforcement learning exploits easeof-learning of compositional languages, resulting in a selection of compositionality.</p><p>While both imitation and ease-of-learning of compositional languages have been instrumentalized in population training, they are engineered in a top-down way: in <ref type="bibr" target="#b4">Chaabouni et al. (2022)</ref>, agents imitate the best-accuracy agent, who is algorithmically designated as the teacher; in <ref type="bibr" target="#b20">Ren et al. (2020)</ref>, imitation is stopped early to temporally select compositional features. <ref type="foot" target="#foot_2">3</ref> Our work, using basic RL principles, proposes an alternative mechanism that selects compositional languages while requiring minimal engineering and assumptions.</p><p>Selection by RL imitation, using the same easeof-learning argument, applies to not only compositionality but also potentially to other traits, e.g., language entropy or message length. That is, RL imitation naturally promotes any learnability advantage among candidate languages without manual intervention, while agnostic to the signaling system. This may then be leveraged alongside communication-based learning in population-based emergent communication, where imitation would persist easy-to-learn linguistic features.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Limitations</head><p>There are several limitations to our work.</p><p>First, although we choose the attribute-value dataset due to its high degree of interpretability and control, we acknowledge that its simplicity limits the impact of our findings. Though imitation by reinforcement is a data-agnostic mechanism, we have yet to explore how it behaves in more complex settings, such as using naturalistic image inputs or embodied communication. We defer to <ref type="bibr" target="#b4">Chaabouni et al. (2022)</ref>; <ref type="bibr" target="#b6">Galke et al. (2022)</ref> for further discussion on scaling up communication settings.</p><p>A second limitation of our results is that we do not explore how imitation-based learning scales to k &gt; 5 Experts. In particular, our hyperparameter regime handles up to around k = 5 Experts-very preliminary analyses on k ≥ 10 Experts suggest a need to also scale up hyperparameters such as agent size and communication channel capacity.</p><p>When training agents to imitate, one must therefore consider feasibility of the learning problem-for example, as a function of the imitation network topology, communication channel size, agent size, etc-in order for training to converge.</p><p>Finally, although our work is inspired by imitation learning in humans, the extent to which simulations explain human linguistic phenomena is not clear. We intend for our work to only serve as a testbed to understand communication from a theoretical perspective.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A Expert Training</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A.1 Reconstruction Task</head><p>In the reconstruction task, a Sender observes an object with several attributes, encoding it in a message to the Receiver, and the Receiver decodes this message to reconstruct the object. Formally, 1. The Sender network receives a vector input x and constructs a message m of fixed length L.</p><p>Each symbol is taken from the vocabulary</p><formula xml:id="formula_3">V = {s 1 , s 2 , • • • , s |V | }.</formula><p>2. The Receiver network receives m and outputs x, a reconstruction of x.</p><p>3. Agents are successful if x = x.</p><p>Optimization In the reconstruction task, the cross-entropy loss is computed between x and x, and backpropagated directly to the Receiver. The same loss is propagated to the Sender via REIN-FORCE. When training with REINFORCE, we also employ an entropy regularization coefficient λ and subtract a running mean baseline from the reward to improve training stability.</p><p>Let the Sender policy be π S and the Receiver be π R . Let x i ∈ {0, 1} n val refer to the one-hot vector in x indexed by i, which corresponds to one attribute. Then, the Receiver's supervised loss L R is as follows:</p><formula xml:id="formula_4">L R (m, x) = 1 n att natt i=1 CE(x i , π R (m) i ). (3)</formula><p>Let the Sender reward at time t be r t = -L R (π S (x), x), and let µ t be a running mean of r t . Then, the Sender's REINFORCE policy loss L S at time t is as follows:</p><formula xml:id="formula_5">L S (x) = (-r t -µ t ) log π S (x) -λH(π S (x)).<label>(4)</label></formula><p>Finally, loss is optimized by Adam's default parameters (β = 0.9, 0.999), with a learning rate of 0.005.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A.2 Experimental Details</head><p>We train 30 Expert pairs on the reconstruction task over 1000 epochs. Expert pairs converge to high validation accuracy and generalize to the indistribution set well (statistics in table A.2).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A.3 Expert Compositionality Distributions</head><p>We considered using topsim, positional disentanglement (posdis) <ref type="bibr" target="#b3">(Chaabouni et al., 2020)</ref>, bagof-symbols disentanglement (bosdis) <ref type="bibr" target="#b3">(Chaabouni et al., 2020)</ref>, and context independence (ci) <ref type="bibr" target="#b2">(Bogin et al., 2018)</ref> for our experiments (see fig. A.1 for distributions). However, as a fundamental reason we care about compositionality is due to its link to linguistic generalization, we focus on topsim, which we found has the highest correlation with generalization accuracy on the reconstruction task (table A.1).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Topographic similarity and generalization</head><p>Similar to Rita et al. (2022a); <ref type="bibr" target="#b0">Auersperger and Pecina (2022)</ref> and in contrast to <ref type="bibr" target="#b3">Chaabouni et al. (2020)</ref>; <ref type="bibr" target="#b9">Kharitonov and Baroni (2020)</ref>, we find that correlations between topsim and both indistribution and zero-shot generalization on the reconstruction task are high, and highly significant (α = 1e-2): Spearman's ρ = 0.83 and Pearson's R 2 = 0.81 for in-distribution generalization, and ρ = 0.81, R 2 = 0.78 for zero-shot generalization. This correlation is stronger than that between generalization and validation accuracy, where ρ = 0.75 for in-distribution generalization and ρ = 0.73 for zero-shot generalization (α = 1e-2). Furthermore, the correlation between topsim and validation accuracy is only ρ = 0.57 (α = 1e-2) suggesting that the relationship between generalization and compositionality is not explained by high validation accuracy. <ref type="foot" target="#foot_3">4</ref> Our results support the stance in <ref type="bibr" target="#b0">Auersperger and Pecina (2022)</ref>  The Sender is a single-layer GRU <ref type="bibr" target="#b5">(Cho et al., 2014)</ref> containing a fully-connected (FC) layer that maps the input x to its first hidden state (dim=128). A symbol is then generated by applying an FC layer to its hidden state, and sampling from a categorical distribution parameterized by the output. We include LayerNorm <ref type="bibr" target="#b1">(Ba et al., 2016)</ref> after the hidden state to improve training stability. Then, the next input to the GRU is the previous output, which is sampled during training and argmax-ed during evaluation. This input is fed through an embedding module (dim=128), which then gets fed into the GRU. The first input is the [SOS] token, and the Sender is unrolled for L = 10 timesteps to output symbols comprising a message. Only in imitation training, when unrolling the Imitator Sender, we take the Expert Sender's previous output to be the Imitator's next input so that the Imitator learns an autoregressive model of the Expert language.</p><p>The Receiver has a similar architecture to the Sender. It consists of an FC symbol-embedding layer, a GRU with LayerNorm (hidden dim=128), and an FC output head. The first hidden state is initialized to all zeros, then the FC-embedded symbols of the Sender message are sequentially fed into the GRU for L = 10 timesteps. We pass the GRU's final output through a final FC layer and compute the Receiver's distribution over objects on the result, which we interpret as a concatenation of n att probability vectors each of length n val .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B.2 Hyperparameter settings</head><p>Hyperparameters tested may be found in table B.1. These hold for all experiments unless explicitly stated otherwise.</p><p>Dataset splits Of the n = n n val att = 10 6 datapoints in the entire dataset, the in-distribution set has size 10 6 * (0.9) 6 = 531441, and we randomly sample 1% to be the training set, (n = 5315), and   </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B.3 Implementation Details</head><p>Experiments were implemented using PyTorch and the EGG toolkit <ref type="bibr" target="#b10">(Kharitonov et al., 2021)</ref>. They were carried out on a high-performance cluster equipped with NVIDIA GPUs. The number of GPU-hours to run all experiments is estimated to be between 50 and 100.</p><p>C Supplementary Material: Ease-of-Imitation</p><p>In the compositionality vs. ease-of-imitation experiments, we train newly initialized Imitator pairs on each Expert pair over 500 epochs for supervision and 2000 epochs for reinforcement, aggregating over 3 random seeds. The number of training epochs is chosen by visual inspection of validation accuracy convergence. We note that, when imitating by both reinforcement and supervision, there is no initial increase in topsim followed by a convergence to Expert topsim (fig. C.1), contrary to what is observed in <ref type="bibr" target="#b20">(Ren et al., 2020)</ref>.</p><p>For imitation by reinforcement, we use an entropy coefficient of λ = 0.1 for both Sender and Receiver. Comparing SOL and T for both Sender and Receiver to other compositionality metrics (table C.1), we see that topsim is generally most correlated with sample complexity and speed-oflearning. For the opposite reason, we did not move ahead with, e.g., experiments on positional disentanglement.   In the imitation task, we test both direct supervision and REINFORCE. Importantly, when doing a forward pass for the Sender during training, we feed it the Expert symbol from the previous timestep as input so that the Sender learns an autoregressive model of language. Hence, define the Imitator policy π I j as in appendix D.4. In the direct supervision setting, for the Sender producing a distribution over messages π I given x and a given Expert i producing message m (i) , where m j is the j th symbol of m (i) , the overall loss for a uniform mixture of k Expert Senders is the following cross-entropy loss:</p><formula xml:id="formula_6">L I SV (x) = k i=1 L j=1 CE m (i) j , π I j .</formula><p>(5)</p><p>In the REINFORCE setting, we use accuracy persymbol as a reward for the Sender, with entropy regularization and mean baseline. <ref type="foot" target="#foot_4">5</ref> For Expert i, this corresponds to a reward r (i) of  </p><formula xml:id="formula_7">T S T R SOL I S SOL I R ρ R 2 ρ R 2 ρ R 2 ρ R 2 SV topsim -</formula><formula xml:id="formula_8">r (i) = 1 L L j=1 Acc m (i) j , π I j (6)</formula><p>and a policy loss of</p><formula xml:id="formula_9">L I,(i) RF (x) = (-r (i) -µ t ) log π I (x) -λH(π I (x)),<label>(7)</label></formula><p>per Expert, which is averaged over Experts to produce the mixture-policy loss. This is optimized by Adam with a learning rate of 0.005.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>D.2 Sampling Sender Expert Distributions</head><p>To test the effect of the shape (skew, standard deviation) of the Expert topsims on imitation, we define a set of 10 distributions for each setting of k &gt; 2 Experts, noting that when k = 2, the skew is mechanically equal to 0.</p><p>For interpretability, we hold the endpoints of the distributions equal at the minimum and maximum possible topsims (0.26, 0.43) for all distributions and values of k. Then, we sample the median M of the 10 distributions evenly from 0.26 to 0.43. Then, we fill the other k -3 points to create a uniform distribution with mean M. If the median is less than the average topsim, then the left endpoint of this uniform distribution is the minimum topsim. Otherwise, it is the maximum topsim. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>D.4 Learning a uniform mixture of policies</head><p>Claim A Sender that imitates a uniform mixture of k Expert Senders will output a uniform mixture of the k Expert languages.</p><p>Proof Let π (1) • • • π (k) be k Expert Senders and let π I be the Imitator Sender. For each position in a message, agents produce a probability distribution over all possible symbols in V . Recall that the Expert Senders are deterministic at evaluation time.</p><p>Given an input x, we write m (i) j as the value of the j th position in the message m (i) produced by Expert i.</p><p>For the Imitator Sender, we write</p><formula xml:id="formula_10">π I j := π I m (i) j-1 ; x ∈ [0, 1]</formula><p>|V | as the probability distribution over possible symbols in position j of a message produced by the Imitator agent, given the previous output symbol</p><formula xml:id="formula_11">m (i) j-1 of Expert i. The k th index of π I j , or π I j [k],</formula><p>gives the Imitator agent's probability of symbol k at position j in the message.</p><p>The ideal Imitator π I * minimizes the crossentropy objective between its messages and that of a uniform mixture of k Expert Senders. Formally,</p><formula xml:id="formula_12">π I * = min π I k i=1 L j=1 CE m (i) j , π I j = min π I k i=1 L j=1 -log π I j [m (i) j ] = max π I k i=1 L j=1 log π I j [m (i) j ] = max π I k i=1 L j=1 π I j [m (i) j ] subj. to k∈V π I j [k] = 1. whose unique solution is π I j [m (i) j ] = π I j [m (l) j ] ∀j ∈ N L , ∀i ̸ = l ∈ N k , i.e. a uniform distribution over Expert languages. 2 E Receiver imitation E.1 Setup</formula><p>The Receiver imitation task is as follows: given a set of k Expert Receivers and their corresponding Senders, we train an identical, newly initialized Receiver on the Experts' inputs and outputs (m, x). That is, for each round of training, all k Experts as well as the Imitator Receiver receive input m, or the output of Expert Sender given x, and output x(1) • • • x(k) and xI , respectively. Imitators are then tasked to minimize the difference between their output and a uniform mixture of the k Expert outputs.</p><p>The architecture for the Receiver agent may be found in B.1.</p><p>Optimization Similar to in Sender imitation, we test a supervised learning and a reinforcement imitation learning setting. For supervised learning, the Receiver imitation loss is equal to the crossentropy loss between its output and the Expert Receiver's output given the same corresponding Expert Sender's message m. Then, the loss over the entire mixture is the average cross-entropy loss per Receiver, aggregated across Expert Receivers.</p><p>For REINFORCE, the Receiver reward is similar to the Sender reward-analogous to the per-symbol accuracy, it is the per-attribute accuracy. We compute the corresponding policy loss (using a mean baseline per Expert and λ defined in table B.1), and average over all Experts to get the overall policy loss for the Receiver.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>E.2 Imitation and Selection of Compositionality</head><p>With the large communication channel size typical of emergent communication games, we can expect little Expert message collision. Then, in this setting, Receiver imitation consists of learning a many-toone mapping of messages to outputs, obviating a real need for selection if the goal is to maximize eventual communication accuracy. Indeed, we find that Imitator Receivers learn to be multilingual, achieving high validation accuracy on all Experts, and especially in the supervised setting.  We do note, however, greater differentiation in validation accuracy, as well as speed-of-learning, between Experts of varying compositionality when using reinforcement compared to supervision, and again influenced by the entropy coefficient λ (figs. E.1 to E.3).</p><p>How one operationalizes Receiver imitation then depends on one's goal: for example, if the goal is to maximize communication accuracy in a population of communicating agents, then we want to have "tolerant" Receivers, and imitation by supervision allows the Receiver to achieve the highest validation accuracy on all languages. However, if we want to bottleneck the compositionality of the language in the population, we want to have more "selective" Receivers, and imitation by reinforcement may be more appropriate.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>E.3 Speed-of-Imitation May Explain Compositional Selection</head><p>Results for the Sender also hold for the Receiver; see section 4 for the analogous comments. </p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: Sender Imitator's learned weights (±1 std.) on k = 2 (top) and k = 3 (bottom) Expert languages whose topsims range evenly from 0.26 to 0.43. The left two columns correspond to imitation by reinforcement (RF). As the entropy coefficient λ increases (left to middle), the weights are more uniform, and are most uniform in the supervised setting (right). Refer to fig. 3 for skews and entropies of the distributions.</figDesc><graphic coords="4,70.86,123.22,199.57,172.96" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: Entropy (left) and skew (right) (±1 std.) of learned Expert weights by a Sender Imitator for k = 2 and 3 Experts. Expert languages' topsims range evenly from 0.26 to 0.43. Both entropy and skew increase to the entropy of a uniform distribution, skew of a symmetric distribution (= 0), respectively as exploration (λ) increases, attaining maxima in supervision (SV).</figDesc><graphic coords="4,73.41,425.70,213.18,106.59" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 4 :</head><label>4</label><figDesc>Figure 4: The skew of learned Expert Sender weights vs. the standard deviation of the Expert topsim (±1 std.) for RF (left) and SV (right) for k = 2-5 Experts. Expert weight skew and Expert topsim standard deviation are highly and significantly correlated (α = 1e-6), and the linear effect m is much (6x) higher for RF than for SV.</figDesc><graphic coords="4,308.70,133.68,213.17,83.95" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head></head><label></label><figDesc>(2020); Li and Bowling (2019); Chaabouni et al. (2020) (see appendix C for experimental details).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure A. 1 :</head><label>1</label><figDesc>Figure A.1: Distribution of 30 Expert compositionalities after 1000 epochs of training on the reconstruction task. Compositionalities are estimated on the entire validation set. According to both D'Agostino K 2 and Shapiro-Wilk non-normality tests, we cannot reject the null hypothesis that all four compositionality metrics follow a normal distribution (α = 1e -3).delegate the rest to the generalization set (n = 526126). Finally, the zero-shot generalization set consists of inputs where one attribute assumes the held-out value, and other attributes take on seen values (n = 354294).</figDesc><graphic coords="9,306.14,227.46,204.10,153.08" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Figure C. 1 :</head><label>1</label><figDesc>Figure C.1: Evolution of topsim of an Imitator Sender when being trained separately via REINFORCE (RF) and supervision (SV) on Expert topsims (ρ) of 0.26, 0.36, 0.43, corresponding to low, average, and high values in the distribution of Expert topsims.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head>Figure</head><label></label><figDesc>Figure C.2: For k = 2 (top left), k = 3 (top right), k = 4 (bottom left) and k = 5 (bottom right) Experts, validation accuracy curves of the Imitator Sender on Expert messages over 2000 epochs of imitation training. For each setting of k, reinforcement is shown on the left and supervision on the right. Note (1) the greater dispersion of validation accuracy when training by reinforcement compared to be supervision; (2) higher "selection", or validation accuracy, on the best topsim Expert in reinforcement compared to supervision; (3) lower validation accuracy on the poorest topsim Expert in RF compared to SV.</figDesc><graphic coords="10,87.56,176.96,204.10,102.05" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><head>Figure D. 1 :</head><label>1</label><figDesc>Figure D.1: Imitator's learned weights on k = 4 (top row) and k = 5 (bottom row) languages, where the topsim of Expert languages ranges uniformly from 0.26 to 0.43. From left to middle, as the entropy regularization coefficient λ increases, the distribution appears more uniform. At the limit, the weight distribution appears most uniform when the Imitator is trained by supervision (right column). Refer to fig. D.3 for the skews and entropies of the distributions.</figDesc><graphic coords="10,70.86,440.47,217.71,157.23" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_10"><head></head><label></label><figDesc>Figure D.2: In Sender imitation, the shape of the learned Expert weights is independent of the shape of the Expert topsim skew for both reinforcement (RF) and supervision (SV). Shape of the Expert weight distribution is quantified by [Entropy, Skew], and we plot[Entropy, Skew]  x Skew for the learned Expert weights against the Expert topsim skew for k = 3, 4, 5, and for both RF and SV (omitting k = 2 because skew is artificially 0-the plot would look like a vertical line). Robustness is seen in the lack of a significant positive or negative trend in the data for all numbers of Experts tested.</figDesc><graphic coords="11,301.97,302.39,213.18,81.77" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_11"><head>Figure D. 3 :</head><label>3</label><figDesc>Figure D.3: The entropy (left) and skew (right) (±1 standard deviation) of learned Expert weights by a Sender Imitator for k = 4 and 5 Experts. Values attain maxima in the supervision setting (SV).</figDesc><graphic coords="11,70.86,555.03,213.18,106.59" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_12"><head>Figure E. 1 :</head><label>1</label><figDesc>Figure E.1: For the Receiver imitation, the entropy (left) and skew (right) (±1 standard deviation) of learned Expert weights for k = 2-5 Experts. We plot one row per Expert for legibility as the entropy ranges are quite different for different values of k. Values generally increase as exploration (λ) increases, attaining maxima in the supervision setting (SV).</figDesc><graphic coords="13,70.86,292.79,204.11,371.60" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_13"><head>Figure E. 2 :</head><label>2</label><figDesc>Figure E.2: Receiver Imitator's validation accuracies per-Expert on k = 2-5 (top to bottom) languages, where the topsim of Expert languages ranges evenly from 0.26 to 0.43. Imitation by supervision results in the highest and most uniform validation accuracies, and increasing the entropy coefficient λ in imitation by reinforcement increases the uniformity of validation accuracies. The y-axis is cut below at 0.4 for legibility.</figDesc><graphic coords="13,306.14,70.84,213.18,246.34" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_14"><head>Figure E. 3 :</head><label>3</label><figDesc>Figure E.3: For k = 2 (top left), k = 3 (top right), k = 4 (bottom left) and k = 5 (bottom right) Experts, validation accuracy curves of the Imitator Receiver on Expert messages over 7000 epochs of imitation training. For each setting of k, reinforcement is shown on the left and supervision on the right. Note (1) the greater dispersion of validation accuracy when training by reinforcement compared to be supervision; (2) lower validation accuracy on the poorest topsim Expert in RF compared to SV.</figDesc><graphic coords="14,87.56,386.07,204.10,102.05" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 1 :</head><label>1</label><figDesc>Spearman ρ and Pearson's R between Expert topsim and Imitator learning speed (Sender=S,</figDesc><table><row><cell>T S -0.65 -0.80 0.65 T R SOL I S R 2 -0.66 -0.80 0.65 SV ρ</cell><cell>SOL I R 0.75 0.76</cell></row><row><cell cols="2">-0.66 -0.60 0.45 R 2 -0.66 -0.68 0.41* 0.63 0.59 RF ρ</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table B</head><label>B</label><figDesc></figDesc><table><row><cell>.1: From top to bottom: the communication channel, optimization, architectural, and experimental hyperparameters, respectively. All hyperparameters per-tain to both Sender and Receiver unless otherwise stated. The number of training epochs (bottom section) is se-lected based on visual inspection of convergence of validation accuracy curves.</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1" xml:id="foot_0"><p>...for artificial agents. We do not test theories of human imitation learning.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2" xml:id="foot_1"><p>Experiments are implemented using EGG<ref type="bibr" target="#b10">(Kharitonov et al., 2021)</ref>. Code may be found at https://github.com/chengemily/EGG/tree/imitation.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3" xml:id="foot_2"><p>We did not succeed in replicating results in<ref type="bibr" target="#b20">Ren et al. (2020)</ref> (see appendix C).</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="4" xml:id="foot_3"><p>We do not report the Pearson R 2 for Expert validation accuracy as the its distribution violates normality assumptions according to a Shapiro-Wilk non-normality test (α = 1e-3)).</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="5" xml:id="foot_4"><p>We also tried REINFORCE using negative cross-entropy loss as a reward, but found training to be unstable.</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>Acknowledgements</head><p>We would like to greatly thank <rs type="person">Marco Baroni</rs> for feedback on experiments and manuscript; <rs type="person">Paul Michel</rs> and <rs type="person">Rahma Chaabouni</rs> for early feedback on research direction; the three anonymous reviewers, <rs type="person">Jeanne Bruneau-Bongard</rs>, <rs type="person">Roberto Dessi</rs>, <rs type="person">Victor Chomel</rs>, <rs type="person">Lucas Weber</rs> and members of <rs type="institution">COLT UPF</rs> for comments on the manuscript. M.R. also would like to thank <rs type="person">Olivier Pietquin</rs>, <rs type="person">Emmanuel Dupoux</rs> and <rs type="person">Florian Strub</rs>.</p><p>This work was funded in part by the <rs type="funder">French government</rs> under management of <rs type="funder">Agence Nationale de la Recherche</rs> as part of the "<rs type="programName">Investissements d'avenir" program</rs>, reference <rs type="grantNumber">ANR-19-P3IA-0001</rs> (<rs type="projectName">PRAIRIE 3IA Institute</rs>), and by the <rs type="projectName">ALiEN (Autonomous Linguistic Emergence in Neural Networks</rs><rs type="funder">) European Research Council</rs> project no. <rs type="grantNumber">101019291</rs>. Experiments were conducted using HPC resources from <rs type="funder">TGCC-GENCI</rs> (grant <rs type="grantNumber">2022-AD011013547</rs>). M.R. was supported by the <rs type="funder">MSR-Inria joint lab</rs> and granted access to the HPC resources of IDRIS under the allocation <rs type="grantNumber">2021-AD011012278</rs> made by <rs type="funder">GENCI</rs>.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funded-project" xml:id="_ZBGSJVc">
+					<idno type="grant-number">ANR-19-P3IA-0001</idno>
+					<orgName type="project" subtype="full">PRAIRIE 3IA Institute</orgName>
+					<orgName type="program" subtype="full">Investissements d&apos;avenir&quot; program</orgName>
+				</org>
+				<org type="funded-project" xml:id="_nJMYDNd">
+					<idno type="grant-number">101019291</idno>
+					<orgName type="project" subtype="full">ALiEN (Autonomous Linguistic Emergence in Neural Networks</orgName>
+				</org>
+				<org type="funding" xml:id="_UHVjpbQ">
+					<idno type="grant-number">2022-AD011013547</idno>
+				</org>
+				<org type="funding" xml:id="_adjesNn">
+					<idno type="grant-number">2021-AD011012278</idno>
+				</org>
+			</listOrg>
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Ethics Statement</head><p>Because our work uses synthetic data, it has little immediate ethical impact. However, our work may enable large populations of communicating agents down the line, which could have a range of civilian or military purposes. B3. Did you discuss if your use of existing artifact(s) was consistent with their intended use, provided that it was specified? For the artifacts you create, do you specify intended use and whether that is compatible with the original access conditions (in particular, derivatives of data accessed for research purposes should not be used outside of research contexts)? Section B B4. Did you discuss the steps taken to check whether the data that was collected / used contains any information that names or uniquely identifies individual people or offensive content, and the steps taken to protect / anonymize it? Not applicable. Left blank.</p><p>B5. Did you provide documentation of the artifacts, e.g., coverage of domains, languages, and linguistic phenomena, demographic groups represented, etc.? Not applicable. Left blank.</p><p>B6. Did you report relevant statistics like the number of examples, details of train / test / dev splits, etc. for the data that you used / created? Even for commonly-used benchmark datasets, include the number of examples in train / validation / test splits, as these provide necessary context for a reader to understand experimental results. For example, small differences in accuracy on large test sets may be significant, while on small test sets they may not be. Appendix C Did you run computational experiments?</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>All sections</head><p>C1. Did you report the number of parameters in the models used, the total computational budget (e.g., GPU hours), and computing infrastructure used? Section B</p><p>The Responsible NLP Checklist used at ACL 2023 is adopted from NAACL 2022, with the addition of a question on AI writing assistance.</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Defending compositionality in emergent languages</title>
+		<author>
+			<persName><forename type="first">Michal</forename><surname>Auersperger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pavel</forename><surname>Pecina</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2022.naacl-srw.35</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2022 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies: Student Research Workshop</title>
+		<meeting>the 2022 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies: Student Research Workshop<address><addrLine>Hybrid; Seattle, Washington + Online</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2022">2022</date>
+			<biblScope unit="page" from="285" to="291" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<title level="m" type="main">Layer normalization</title>
+		<author>
+			<persName><forename type="first">Jimmy</forename><surname>Lei Ba</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jamie</forename><surname>Ryan Kiros</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Geoffrey</forename><forename type="middle">E</forename><surname>Hinton</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/ARXIV.1607.06450</idno>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title level="m" type="main">Emergence of communication in an interactive world with consistent speakers</title>
+		<author>
+			<persName><forename type="first">Ben</forename><surname>Bogin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mor</forename><surname>Geva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Berant</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<publisher>CoRR</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Compositionality and generalization in emergent languages</title>
+		<author>
+			<persName><forename type="first">Rahma</forename><surname>Chaabouni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eugene</forename><surname>Kharitonov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Diane</forename><surname>Bouchacourt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emmanuel</forename><surname>Dupoux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marco</forename><surname>Baroni</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2020.acl-main.407</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics</title>
+		<meeting>the 58th Annual Meeting of the Association for Computational Linguistics</meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="4427" to="4442" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Emergent communication at scale</title>
+		<author>
+			<persName><forename type="first">Rahma</forename><surname>Chaabouni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Florian</forename><surname>Strub</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Florent</forename><surname>Altché</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eugene</forename><surname>Tarassov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Corentin</forename><surname>Tallec</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elnaz</forename><surname>Davoodi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kory</forename><forename type="middle">Wallace</forename><surname>Mathewson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Olivier</forename><surname>Tieleman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Angeliki</forename><surname>Lazaridou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bilal</forename><surname>Piot</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Learning Representations</title>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">On the properties of neural machine translation: Encoder-decoder approaches</title>
+		<author>
+			<persName><forename type="first">Kyunghyun</forename><surname>Cho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bart</forename><surname>Van Merriënboer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dzmitry</forename><surname>Bahdanau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yoshua</forename><surname>Bengio</surname></persName>
+		</author>
+		<idno type="DOI">10.3115/v1/W14-4012</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of SSST-8, Eighth Workshop on Syntax, Semantics and Structure in Statistical Translation</title>
+		<meeting>SSST-8, Eighth Workshop on Syntax, Semantics and Structure in Statistical Translation<address><addrLine>Doha, Qatar</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="103" to="111" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<title level="m" type="main">Emergent communication for understanding human language evolution: What&apos;s missing?</title>
+		<author>
+			<persName><forename type="first">Lukas</forename><surname>Galke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yoav</forename><surname>Ram</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Limor</forename><surname>Raviv</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/ARXIV.2204.10590</idno>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Emergence of language with multi-agent games: Learning to communicate with sequences of symbols</title>
+		<author>
+			<persName><forename type="first">Serhii</forename><surname>Havrylov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ivan</forename><surname>Titov</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Advances in Neural Information Processing Systems</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Curran</forename><surname>Associates</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Inc</forename></persName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Emergent language generalization and acquisition speed are not tied to compositionality</title>
+		<author>
+			<persName><forename type="first">Eugene</forename><surname>Kharitonov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marco</forename><surname>Baroni</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2020.blackboxnlp-1.2</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Third BlackboxNLP Workshop on Analyzing and Interpreting Neural Networks for NLP</title>
+		<meeting>the Third BlackboxNLP Workshop on Analyzing and Interpreting Neural Networks for NLP</meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="11" to="15" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<author>
+			<persName><forename type="first">Eugene</forename><surname>Kharitonov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Roberto</forename><surname>Dessì</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rahma</forename><surname>Chaabouni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Diane</forename><surname>Bouchacourt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marco</forename><surname>Baroni</surname></persName>
+		</author>
+		<ptr target="https://github.com/facebookresearch/EGG" />
+		<title level="m">EGG: a toolkit for research on Emergence of lanGuage in Games</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Understanding linguistic evolution by visualizing the emergence of topographic mappings</title>
+		<author>
+			<persName><forename type="first">Simon</forename><surname>Kirby</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Henry</forename><surname>Brighton</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Artifical Life</title>
+		<imprint>
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<title level="m" type="main">Natural language does not emerge &apos;naturally&apos; in multi-agent dialog</title>
+		<author>
+			<persName><forename type="first">Satwik</forename><surname>Kottur</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">F</forename><surname>José</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stefan</forename><surname>Moura</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dhruv</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Batra</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">The history of imitation in learning theory: the language acquisition process</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Kymissis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C L</forename><surname>Poulson</surname></persName>
+		</author>
+		<idno type="DOI">10.1901/jeab.1990.54-113</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of the Experimental Analysis of Behavior</title>
+		<imprint>
+			<biblScope unit="volume">54</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="113" to="127" />
+			<date type="published" when="1990">1990</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<title level="m" type="main">Emergent multi-agent communication in the deep learning era</title>
+		<author>
+			<persName><forename type="first">Angeliki</forename><surname>Lazaridou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marco</forename><surname>Baroni</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Multi-agent cooperation and the emergence of (natural) language</title>
+		<author>
+			<persName><forename type="first">Angeliki</forename><surname>Lazaridou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Peysakhovich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marco</forename><surname>Baroni</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Learning Representations</title>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<title level="m" type="main">Convention: A Philosophical Study</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Kellogg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lewis</forename></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1969">1969</date>
+			<publisher>Wiley-Blackwell</publisher>
+			<pubPlace>Cambridge, MA, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Ease-ofteaching and language structure from emergent communication</title>
+		<author>
+			<persName><forename type="first">Fushan</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Bowling</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Advances in Neural Information Processing Systems</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Curran</forename><surname>Associates</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Inc</forename></persName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">What makes a language easy to learn? a preregistered study on how systematic structure and community size affect language learnability</title>
+		<author>
+			<persName><forename type="first">Limor</forename><surname>Raviv</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marianne</forename><surname>De Heer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Antje</forename><surname>Kloots</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Meyer</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.cognition.2021.104620</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Cognition</title>
+		<imprint>
+			<biblScope unit="volume">210</biblScope>
+			<biblScope unit="page">104620</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Compositional languages emerge in a neural iterated learning model</title>
+		<author>
+			<persName><forename type="first">Yi</forename><surname>Ren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shangmin</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthieu</forename><surname>Labeau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shay</forename><forename type="middle">B</forename><surname>Cohen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Simon</forename><surname>Kirby</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Learning Representations</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">On the role of population heterogeneity in emergent communication</title>
+		<author>
+			<persName><forename type="first">Florian</forename><surname>Mathieu Rita</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jean-Bastien</forename><surname>Strub</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Olivier</forename><surname>Grill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emmanuel</forename><surname>Pietquin</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Dupoux</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Learning Representations</title>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Emergent communication: Generalization and overfitting in lewis games</title>
+		<author>
+			<persName><forename type="first">Corentin</forename><surname>Mathieu Rita</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Tallec</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jean-Bastien</forename><surname>Michel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Olivier</forename><surname>Grill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emmanuel</forename><surname>Pietquin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Florian</forename><surname>Dupoux</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Strub</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Advances in Neural Information Processing Systems</title>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Compositionality</title>
+		<author>
+			<persName><forename type="first">Gendler</forename><surname>Zoltan</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Szabo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">The Stanford Encyclopedia of Philosophy</title>
+		<editor>
+			<persName><forename type="first">Edward</forename><forename type="middle">N</forename><surname>Zalta</surname></persName>
+		</editor>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+		<respStmt>
+			<orgName>Metaphysics Research Lab, Stanford University</orgName>
+		</respStmt>
+	</monogr>
+	<note>Fall 2020 edition</note>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Simple statistical gradientfollowing algorithms for connectionist reinforcement learning</title>
+		<author>
+			<persName><forename type="first">Ronald</forename><forename type="middle">J</forename><surname>Williams</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/BF00992696</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Mach. Learn</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">3-4</biblScope>
+			<biblScope unit="page" from="229" to="256" />
+			<date type="published" when="1992">1992</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Function optimization using connectionist reinforcement learning algorithms</title>
+		<author>
+			<persName><forename type="first">Ronald</forename><forename type="middle">J</forename><surname>Williams</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jing</forename><surname>Peng</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/09540099108946587</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Connection Science</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="241" to="268" />
+			<date type="published" when="1991">1991</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title/>
+	</analytic>
+	<monogr>
+		<title level="j">C</title>
+		<imprint>
+			<biblScope unit="issue">2</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">D</forename></persName>
+		</author>
+		<imprint/>
+	</monogr>
+	<note>1. Did you report the full text of instructions given to participants, including e.g., screenshots, disclaimers of any risks to participants or annotators, etc.? No response. D2. Did you report information about how you recruited (e.g., crowdsourcing platform, students) and paid participants, and discuss if such payment is adequate given the participants&apos; demographic (e.g., country of residence)? No response. D3. Did you discuss whether and how consent was obtained from people whose data you&apos;re using/curating? For example, if you collected data via crowdsourcing, did your instructions to crowdworkers explain how the data would be used? No response. D4. Was the data collection protocol approved (or determined exempt) by an ethics review board? No response. D5. Did you report the basic demographic and geographic characteristics of the annotator population that is the source of the data? No response.</note>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">VersionClimber: version upgrades without tears</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Christophe</forename><surname>Pradal</surname></persName>
+							<email>christophe.pradal@cirad.fr</email>
+						</author>
+						<author>
+							<persName><forename type="first">Sarah</forename><surname>Cohen</surname></persName>
+							<email>cohen@lri.fr</email>
+						</author>
+						<author>
+							<persName><forename type="first">Patrick</forename><surname>Valduriez</surname></persName>
+							<email>patrick.valduriez@inria.fr</email>
+						</author>
+						<author>
+							<persName><forename type="first">Dennis</forename><surname>Shasha</surname></persName>
+							<email>shasha@cs.nyu.edu</email>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="department">CIRAD and Inria</orgName>
+								<orgName type="laboratory">UMR AGAP</orgName>
+								<orgName type="institution">Univ. Montpellier</orgName>
+								<address>
+									<settlement>Montpellier</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<orgName type="laboratory">Boulakia LRI CNRS 8623</orgName>
+								<address>
+									<settlement>Paris Sud</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff2">
+								<orgName type="department">Inria and LIRMM</orgName>
+								<orgName type="institution">Univ. Montpellier</orgName>
+								<address>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff3">
+								<orgName type="department">Courant Institute</orgName>
+								<orgName type="institution">New York University</orgName>
+								<address>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff4">
+								<orgName type="institution">Inria and LIRMM</orgName>
+								<address>
+									<settlement>Montpellier</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">VersionClimber: version upgrades without tears</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">4EA37C162417BED95067A2E65DF9BF12</idno>
+					<idno type="DOI">10.1109/MCSE.2019.2921898</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:13+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Software Engineering</term>
+					<term>Versioning</term>
+					<term>conda</term>
+					<term>software deployment</term>
+					<term>I. INTRODUCTION</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>VersionClimber is an automated system to help update the package and data infrastructure of a software application based on priorities that the user has indicated (e.g. I care more about having a recent version of this package than that one). The system does a systematic and heuristically efficient exploration (using bounded upward compatibility) of a version search space in a sandbox environment (Virtual Env or conda env), finally delivering a lexicographically maximum configuration based on the user-specified priority order. It works for Linux and Mac OS on the cloud.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>II. LASER INTERFEROMETER GRAVITATIONAL-WAVE OBSERVATORY (LIGO) CASE STUDY</head><p>Our first example is a data science pipeline used in physics and developed in Python to analyse LIGO data. A reproducible pipeline built on a Jupyter Notebook exists to analyze gravitational waves data. The notebook uses the following packages: Python, NumPy, SciPy, Jupyter Notebook, H5Py and also plotting libraries such as Matplotlib and SeaBorn. While all these libraries are quite standard, the Notebook depends on Python 2 and fails with Python 3.</p><p>Let us say that another physics group wanted to update those packages to their latest versions to use them for a new application of gravitational interferometry. VersionClimber allows such a group to specify the package order in descending order of priority (of which ones they most want to bring up to date) and the versions of each package to be considered and finds the most up-to-date configuration that works based on the versions the user would like to consider for each package. We now present a step by step tutorial for how to do this.</p><p>A. Updating the LIGO software using VersionClimber First, install conda: create a conda environment cise with VersionClimber installed in it, and activate it: conda create --name cise -c versionclimber versionclimber -y conda activate cise Then, to reproduce the LIGO analysis pipeline, create a directory containing a configuration file named config.yaml available at https://github.com/VersionClimber/VersionClimber/blob/master/example/tuto ligo/config.yaml. VersionClimber uses this declarative configuration file to indicate which packages have to be tested and their priority order. p r e : g i t c l o n e h t t p s : / / g i t h u b . com / p r a d a l / l i g o -b i n d e r . g i t l i g o p a c k a g e s :</p><p>- The YAML file is divided into four sections, namely pre, packages, run, and post:</p><p>• pre (Optional): A set of commands to execute before running VersionClimber. Here, we will clone from github the repository ligo-binder that contains a notebook index.ipynb which will be run on each potential configuration of packageversions. • packages: A package is declared using a set of meta-information such as:</p><p>-name is the name of the package.</p><p>-vcs is the type of version control system the package use (i.e. git or svn for source packages or pypi and conda for binary packages). -url is the address where the package will be cloned or checkout. (This information is needed only for source packages.) -cmd is the command to build the package.</p><p>-conda is an optional argument to indicate if the package is managed by conda (True) or pip (False).VersionClimber supports only these two package managers because they support package installation across multiple platforms in user space (i.e., without administrator privileges). -recipe is the local path where the conda recipe is defined. This optional parameter is defined when building executables from source. -channels is a list of priority channels to consider when installing with conda.</p><p>-hierarchy is a way to describe the search space for a package, i.e. the set of versions to consider. The possible values are major, minor, patch and commits (default). For example, in the case of "hierarchy:patch", VersionClimber will consider the set of versions consisting of the last commit of each patch. By contrast "hierarchy:minor" means that VersionClimber will consider only the latest commit of the latest patch of each minor version. The larger the search space the more work, but potentially also the slightly more up-to-date configuration that will come out. -supply indicates a list of consecutive versions of a package that are backward compatible in the sense that every version in the list supplies the same functions with the same signatures (i.e. same API). So, for example, saying "supply: minor" means that all versions of a package that share the same major and minor version designations provide exactly the same functions with the same signatures and the same semantics. They are said to be "supplyconstant." When semantic versioning doesn't apply, then this will require user knowledge. If that knowledge is not available, then the user can set this parameter to demand: X where X is the same value as given as a parameter to hierarchy. That will slow things down (perhaps by a lot) but may result in a more recent version of this package.</p><p>The "anchor" of a supply-constant sequence of versions is the first member of the sequence, because that version provides the same services as the others and demands the least. demand: By contrast, the line "demand:X" (e.g., demand: major) means that all versions that have the same X (in this example, major) designation are backward compatible and all those versions require (i.e., "demand") the same function-signatures from other packages. They are said to be "demand-constant". The "anchor" of a demand-constant sequence of versions is the last member of the sequence, because that version provides the most services of any in the sequence without demanding more. We formalize these notions in the next subsection.</p><p>• run: the command to test the different packages together to know if a configuration is valid. In this example, the Jupyter Notebook is executed and its return status indicate if the packages at a given version are compatible (success) or not (failure). A user may include other commands that execute a test suite or a script. • post (Optional): a command run at the end of the process, when VersionClimber has found the up-to-date package combination. Here, we export the conda environment into a file to be able to recreate it on another computer. Other options are possible, e.g., build a Docker image. To run VersionClimber in the directory containing the config.yaml file, just use the command:</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>vclimb -a</head><p>The number of potential combinations for the LIGO application is very large: 53,212,287,744. The number of anchors (see next subsection) to explore is much smaller, but remains quite large: 45,208,800. The versions of each package and the number of configuration can be obtained by running the following command:</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>vclimb --version</head><p>The optimal working configuration is found after testing 9 configurations in 1050s. (Working in this case means simply "not crashing", but in our next example, we show how to integrate user-written tests to indicate what working means.) ---C o n f i g u r a t i o n 1 s c i p y : 1 . 2 . 0 , numpy : 1 . 1 6 . 0 , h5py : 2 . 9 . 0 , s e a b o r n : 0 . 9 . B. Supply-constant and Demand-constant -the building blocks of VersionClimber Definition: The supply set of a package-version P.v, denoted supplyset(P.v) is the set of function-signatures that P.v supports. Definition: A consecutive series of versions P.vbottom ... P.vtop is supply monotonic (commonly known as backward compatible) if the supplyset(P.v1) is a subset of supplyset(P.v2) for all v1, v2 such that vbottom ≤ v1 ≤ v2 ≤ vtop. That is, the supply set is monotonically increasing and every function preserves its semantics once it is included in some version. Definition: The demand set of P.v, denoted demandset(P.v), are the external functions called by P.v in the application. Each function is uniquely defined by the package it comes from and the types of its arguments and the type of its return value. Definition: A consecutive series of versions are demand monotonic if the demandset(P.v1) is a subset of demandset(P.v2) for all v1, v2 such that vbottom ≤ v1 ≤ v2 ≤ vtop. That is, the demand set is monotonically increasing. Definition: A well-formed mini-series is supply monotonic and demand monotonic. Definition: A demand-constant mini-series Pi.vbottom ... Pi.vtop is well-formed and has the additional property that demandset(Pi.vtop) = demandset(Pi.vbotom). That is, the demand set doesn't change. Definition: A supply-constant mini-series Pi.vbottom ... Pi.vtop is well-formed and has the additional property that supplyset(P.vbottom) = supplyset(P.vtop).</p><p>Note that in a semantic versioning setting, patch versions within the same major-minor release are often supply-constant. Also note that a single version is always demand-constant and supply-constant. Pragmatically speaking, that means the user can always choose to try every version of a package.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>III. MULTI-LINGUAL CASE STUDY: PHENOMENAL</head><p>Our second example uses packages from multiple languages (i.e. C++ and Python) to process biological image data and extract three-dimensional structural information to infer genotype to phenotype relationship.</p><p>A Python library, named Phenomenal, has been developed and depends on a set of widely used libraries for scientific visualisation and image processing such as VTK and OpenCV. While these libraries have Python interfaces, they are implemented in C++ for efficiency. However, they are known to be difficult to install due to binary conflicts and pairwise dependencies.</p><p>In addition, Phenomenal relies on some code that is not available on any public conda channel. For each configuration, we will rebuild the local packages. Then, to test the status of each configuraion, rather than executing a notebook, we will run the full test suite. That is what "working" will mean in this case.</p><p>Phenomenal depends on Python packages such as Python, NumPy, SciPy, MatPlotLib, NetworkX, Pandas, Scikit-Learn, Scikit-Image, and OpenCV and VTK. It depends also on utilities such as nose, coverage or openalea.deploy.</p><p>The complete example is available at https://github.com/VersionClimber/CiSE multilanguage. The user might create the Phenomenal configuration as follows: There are a total of 28,669,893,502,228,070,400 possible configurations. Alternatively, a simple heuristic to find the optimal configuration is to test the configurations in a lexicographically descending order, based on the priorities of the packages. That would require testing 5963 configurations requiring over 10 days. We stopped the process after testing 730 configurations over 30 hours. VersionClimber by contrast found the optimal solution in 8 hours and 48 minutes after testing 78 configurations. </p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head></head><label></label><figDesc>n d a i n s t a l l -y h i e r a r c h y : p a t c h s n d a i n s t a l l -y h i e r a r c h y : p a t c h s u p p l y : m i n o r name : s e a b o r n v c s : c o n d a cmd : c o n d a i n s t a l l -y h i e r a r c h y : p a t c h s u p p l y : m i n o r n d a i n s t a l l -y h i e r a r c h y : p a t c h s u p p l y : m i n o r name : n o t e b o o k v c s : c o n d a cmd : c o n d a i n s t a l l -y h i e r a r c h y : p a t c h s u p p l y : m i n o r name : n b c o n v e r t v c s : c o n d a cmd : c o n d a i n s t a l l -y h i e r a r c h y : p a t c h s u p p l y : m i n o r name : m a t p l o t l i b v c s : c o n d a cmd : c o n d a i n s t a l l -y h i e r a r c h y : p a t c h s n d a i n s t a l l -y h i e r a r c h y : p a t c h s u p p l y : m a j o r r u n : j u p y t e r n b c o n v e r t --E x e c u t e P r e p r o c e s s o r . t i m e o u t =60 --t o n o t e b o o k --e x e c u t e l i g o / i n d e x . i p y n b p o s t : c o n d a env e x p o r t &gt; e n v i r o n m e n t . yml</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head></head><label></label><figDesc>0 , n o t e b o o k : 5 . 7 . 0 , n b c o n v e r t : 5 . 4 . 0 , m a t p l o t l i b : 3 . 0 . 2 , p y t h o n : 3 . 7 . 3 FAILURE ---C o n f i g u r a t i o n 9 s c i p y : 1 . 2 . 1 , numpy : 1 . 1 6 . 3 , h5py : 2 . 9 . 0 , s e a b o r n : 0 . 9 . 0 , n o t e b o o k : 5 . 7 . 8 , n b c o n v e r t : 5 . 4 . 1 , m a t p l o t l i b : 2 . 2 . 3 , p y t h o n : 2 . 7 . 1 6 Run c o n d a i n s t a l l -y s c i p y = 1 . 2 . 1 numpy = 1 . 1 6 . 3 h5py = 2 . 9 . 0 s e a b o r n = 0 . 9 . 0 n o t e b o o k = 5 . 7 . 8 n b c o n v e r t = 5 . 4 . 1 m a t p l o t l i b = 2 . 2 . 3 p y t h o n = 2 . 7 . 1 6 i n 2 6 . 5 9 5 1 6 1 s j u p y t e r n b c o n v e r t --E x e c u t e P r e p r o c e s s o r . t i m e o u t =60 --t o n o t e b o o k --e x e c u t e l i g o / i n d e x . i p y n b C o n f i g u r a t i o n e x e c u t i o n i n 1</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>p a c k</head><label></label><figDesc>a g e s : name : o p e n a l e a . d e p l o y v c s : g i t u r l : h t t p s : / / g i t h u b . com / o p e n a l e a / d e p l o y . g i t b u i l d c m d : c o n d a b u i l d cmd : c o n d a i n s t a l l -y --use-l o c a l c o n d a : T r u e r e c i p e : r e c i p e s / d e p l o y h i e r a r c h y : p a t c h s u p p l y : m i n o r name : o p e n a l e a . p h e n o m e n a l v c s : g i t u r l : h t t p s : / / g i t h u b . com / o p e n a l e a / p h e n o m e n a l . g i t b u i l d c m d : c o n d a b u i l d cmd : c o n d a i n s t a l l -y --use-l o c a l c o n d a : T r u e r e c i p e : r e c i p e s / p h e n o m e n a l h i e r a r c h y : p a t c h s u p p l y : m i n o r name : n o s e v c s : c o n d a cmd : c o n d a i n s t a l l -y h i e r a r c h y : p a t c h s u p p l y : m i n o r name : c o v e r a g e v c s : c o n d a cmd : c o n d a i n s t a l l -y h i e r a r c h y : p a t c h s u p p l y : m i n o r name : p a n d a s v c s : c o n d a cmd : c o n d a i n s t a l l -y h i e r a r c h y : p a t c h s n d a i n s t a l l -y h i e r a r c h y : p a t c h s u p p l y : m i n o r name : o p e n c v v c s : c o n d a cmd : c o n d a i n s t a l l -y h i e r a r c h y : p a t c h s u p p l y : m i n o r name : n e t w o r k x v c s : c o n d a cmd : c o n d a i n s t a l l -y h i e r a r c h y : p a t c h s u p p l y : m i n o r name : s c i k i t -image v c s : c o n d a cmd : c o n d a i n s t a l l -y h i e r a r c h y : p a t c h s u p p l y : m i n o r name : s c i k i t -l e a r n v c s : c o n d a cmd : c o n d a i n s t a l l -y h i e r a r c h y : p a t c h b u i l d : number : 0 p r e s e r v e e g g d i r : T r u e s t r i n g : p h e n o m e n a l s c r i p t : p y t h o n s e t u p . py i n s t a l l --s i n g l e -v e r s i o n -e x t e r n a l l y -managed --r e c o r d r e c o r d . t x t r e q u i r e m e n t s : b u i l d : p y t h o n s e t u p t o o l s o p e n a l e a . d e p l o y c y t h o n numpy r u n : p y t h o n numpy numba c y t h o n o p e n a l e a . d e p l o y s c i p y s c i k i t -image s c i k i t -l e a r n n e t w o r k x o p e n c v m a t p l o t l i b v t k -pywin32 [ win ] n o s e c o v e r a g e s p h i n x</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head></head><label></label><figDesc>The result is o p e n a l e a . d e p l o y =v2 . 1 . 1 o p e n a l e a . p h e n o m e n a l =v1 . 6 . 1 n o s e = 1 . 3 . 7 c o v e r a g e = 4 . 5 . 3 p a n d a s = 0 . 2 4 . 2 v t k = 8 . 2 . 0 o p e n c v = 4 . 1 . 0 n e t w o r k x = 2 . 2 s c i k i t -image = 0 . 1 4 . 2 s c i k i t -l e a r n = 0 . 2 0 . 3 s c i p y = 1 . 2 . 1 c y t h o n = 0 . 2 9 . 7 numba = 0 . 4 3 . 1 numpy = 1 . 1 5 . 4 m a t p l o t l i b = 2 . 2 . 3 p y t h o n = 2 . 7 . 1 6</figDesc></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>IV. SUMMARY</head><p>VersionClimber helps developers upgrade their systems by choosing configurations efficiently and then testing them automatically. These configurations may consist of source packages as well as binary ones and may be implemented using multiple languages. VersionClimber has been tested on both Linux and Mac OSX, though the software is also deployable on Windows. VersionClimber uses the package managers pip and conda, because of their support for multiple platforms and their ability to load packages into user space.</p><p>VersionClimber is open source and is available at https://github.com/VersionClimber/VersionClimber with the documentation available here: https://versionclimber.readthedocs.io</p></div>
+			</div>			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>All the packages are installed from conda using the default channel. Only two packages, namely openalea.deploy and openalea.phenomenal are built from source. The source code is retrieved from github. For each tagged version, a conda package is built then installed with the other dependencies.</p><p>Because this example requires re-compilation, the user must create a conda "recipe". The recipe is the part of the requirements following "build-cmd:" and lists the names of the packages under test. The particular package-versions are taken from those installed from conda. In the example below, pandas version 0.23.4, numba 0.41.0 etc.</p><p>An example of an openalea.phenomenal recipe is the following. The $version notation causes VersionClimber to specify the version of the openalea.phenomenal package to conda. One should use this for any package that is recompiled for each configuration as we describe in more detail in the documentation. </p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">Continuous integration: improving software quality and reducing risk</title>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">M</forename><surname>Duvall</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Matyas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Glover</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+			<publisher>Pearson Education</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<author>
+			<persName><forename type="first">C</forename><surname>Larman</surname></persName>
+		</author>
+		<title level="m">Agile and iterative development: a manager&apos;s guide</title>
+		<imprint>
+			<publisher>Addison-Wesley Professional</publisher>
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Apt-pbo: solving the software dependency problem using pseudo-boolean optimization</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Trezentos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Lynce</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">L</forename><surname>Oliveira</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the IEEE/ACM international conference on Automated software engineering</title>
+		<meeting>the IEEE/ACM international conference on Automated software engineering</meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="427" to="436" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

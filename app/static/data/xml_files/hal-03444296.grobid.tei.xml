@@ -1,0 +1,1577 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Identification of isolated or mixed strains from long reads: a challenge met on Streptococcus thermophilus using a MinION sequencer</title>
+				<funder>
+					<orgName type="full">INRIA</orgName>
+				</funder>
+				<funder ref="#_MR9FrBu">
+					<orgName type="full">unknown</orgName>
+				</funder>
+				<funder>
+					<orgName type="full">INRAE-INRIA</orgName>
+				</funder>
+				<funder ref="#_N3vAuaR">
+					<orgName type="full">French Bioinformatics Institute national</orgName>
+				</funder>
+				<funder>
+					<orgName type="full">France Génomique</orgName>
+				</funder>
+				<funder ref="#_ZDds6gS">
+					<orgName type="full">Agence Nationale de la Recherche</orgName>
+					<orgName type="abbreviated">ANR</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2021-11-23">23 November 2021</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Grégoire</forename><surname>Siekaniec</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">INRIA</orgName>
+								<address>
+									<addrLine>Campus de Beaulieu</addrLine>
+									<postCode>35042</postCode>
+									<settlement>Rennes cedex, Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department" key="dep1">INRAE</orgName>
+								<orgName type="department" key="dep2">Institut Agro</orgName>
+								<orgName type="institution">STLO</orgName>
+								<address>
+									<postCode>F-35000</postCode>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Emeline</forename><surname>Roux</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">INRIA</orgName>
+								<address>
+									<addrLine>Campus de Beaulieu</addrLine>
+									<postCode>35042</postCode>
+									<settlement>Rennes cedex, Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="laboratory">CALBINOTOX (Composés ALimentaire BIofonctionnalités et risques NeuTOXiques)</orgName>
+								<orgName type="institution">Université de Lorraine</orgName>
+								<address>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Téo</forename><surname>Lemane</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">INRIA</orgName>
+								<address>
+									<addrLine>Campus de Beaulieu</addrLine>
+									<postCode>35042</postCode>
+									<settlement>Rennes cedex, Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Eric</forename><surname>Guédon</surname></persName>
+							<email>eric.guedon@inrae.fr</email>
+							<affiliation key="aff1">
+								<orgName type="department" key="dep1">INRAE</orgName>
+								<orgName type="department" key="dep2">Institut Agro</orgName>
+								<orgName type="institution">STLO</orgName>
+								<address>
+									<postCode>F-35000</postCode>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Jacques</forename><surname>Nicolas</surname></persName>
+							<email>jacques.nicolas@inria.fr</email>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">INRIA</orgName>
+								<address>
+									<addrLine>Campus de Beaulieu</addrLine>
+									<postCode>35042</postCode>
+									<settlement>Rennes cedex, Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Identification of isolated or mixed strains from long reads: a challenge met on Streptococcus thermophilus using a MinION sequencer</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2021-11-23">23 November 2021</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">F532CEF015F7FED81AB8A31ED0596E26</idno>
+					<idno type="DOI">10.1099/mgen.0.000654</idno>
+					<note type="submission">Received 15 February 2021; Accepted 16 July 2021;</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:14+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>bacterial strain identification</term>
+					<term>long read</term>
+					<term>MinION</term>
+					<term>strain classification</term>
+					<term>Streptococcus thermophilus</term>
+					<term>bloom filters ANI, average nucleotide identity</term>
+					<term>ASP, answer set programming</term>
+					<term>HMW, high molecular weight</term>
+					<term>LCA, lowest common ancestor</term>
+					<term>MCC, matthews correlation coefficient</term>
+					<term>MICFAM, microScope gene families</term>
+					<term>NGS, next generation sequencing</term>
+					<term>ONT, Oxford Nanopore Technologies</term>
+					<term>ORI, Oxford Nanopore reads identification</term>
+					<term>SD, standard deviation</term>
+					<term>WGS, whole genome sequencing. Streptococcus</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>This study aimed to provide efficient recognition of bacterial strains on personal computers from MinION (Nanopore) long read data. Thanks to the fall in sequencing costs, the identification of bacteria can now proceed by whole genome sequencing. MinION is a fast, but highly error-prone sequencing device and it is a challenge to successfully identify the strain content of unknown simple or complex microbial samples. It is heavily constrained by memory management and fast access to the read and genome fragments. Our strategy involves three steps: indexing of known genomic sequences for a given or several bacterial species; a request process to assign a read to a strain by matching it to the closest reference genomes; and a final step looking for a minimum set of strains that best explains the observed reads. We have applied our method, called ORI, on 77 strains of Streptococcus thermophilus. We worked on several genomic distances and obtained a detailed classification of the strains, together with a criterion that allows merging of what we termed 'sibling' strains, only separated by a few mutations. Overall, isolated strains can be safely recognized from MinION data. For mixtures of several non-sibling strains, results depend on strain abundance.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>The ORI code (Oxford Nanopore Reads Identification) is available at https:// github. com/ gsiekaniec/ ORI. All sequencing data used in our experiments (raw Nanopore fastq reads) can be downloaded on the Genouest server (https:// data-access. cesgo. org/ index. php/ s/ lApWiOf1BFYUpQV).</p><p>The interactive ITOL tree of S. thermophilus species is available at: https:// itol. embl. de/ tree/ 1312 5413 4671 3115 97925585, and the complete list of associated 'maximal biclusters' (subset of S. thermophilus strains and subset of associated specific genes) is available on https:// github. com/ gsiekaniec/ GeneTree.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>InTRoDuCTIon</head><p>For industrial, agri-food and clinically relevant bacteria, rapid identification at the fine level of strains is necessary and remains a great challenge. This is clear in the field of health (e.g. differentiating the non-pathogenic Escherichia coli strain MG1655 from enterohemorrhagic strain 278F2 <ref type="bibr" target="#b0">[1]</ref>). It is also necessary in many other fields such as ecology, where adaptation to a given niche often leads to the emergence of new strains <ref type="bibr" target="#b1">[2]</ref>, or in food processes, such as fermentation <ref type="bibr" target="#b2">[3]</ref>. Moreover, for newly isolated strains or species, looking for the closest known organism can yield important information for its functional characterization.</p><p>The development of next generation sequencing (NGS) technologies in the last two decades has revolutionized the characterization of microbial communities, without prior bacterial culturing. For instance, Illumina platforms that produce short reads (up to 300 bp) are now widely used for bacterial community taxonomic profiling <ref type="bibr" target="#b3">[4]</ref><ref type="bibr" target="#b4">[5]</ref><ref type="bibr" target="#b5">[6]</ref> and de novo bacterial genome assembly <ref type="bibr" target="#b6">[7,</ref><ref type="bibr" target="#b7">8]</ref>. The overlapping reads produced are assembled into larger sequences that are mapped on sequence databases. However, read length makes these processes challenging, due to repetitive elements larger than reads, and this leads to fragmented assemblies. Third-generation sequencing technologies such as PacBio or Oxford Nanopore Technologies (ONT), producing read lengths reaching tens of kilobases or even more, can overcome this issue <ref type="bibr" target="#b8">[9]</ref> but are error-prone. The best assemblers to date are hybrid, using both short and long reads <ref type="bibr" target="#b9">[10]</ref>.</p><p>Here we consider the issue of identification from long reads only, without prior assembly of these reads. Currently, identification from long reads hardly goes down to a level finer than genus or species <ref type="bibr" target="#b10">[11]</ref>. Problems include the proximity of strains within a species, the prevalence of certain species in complex samples that can blur the recognition process, and databases thatare far from cover all microbial diversity. Therefore, there is still a gap between the promises of whole genome sequencing (WGS) for microbial identification, notably at the finer-grained taxonomic levels, and its large application in demanding operational contexts <ref type="bibr" target="#b11">[12]</ref>. Among the possible obstacles to its diffusion is the very rapid advance in technology, which makes it difficult to produce stable identification software. While programs are becoming mature for work on short reads, the landscape is still very dynamic and uncertain for long reads.</p><p>Commonly used identification software can be broadly divided into two categories, the sequence alignment and the k-mers-based approaches. Sequence alignment, largely popularized by the program blast and its numerous variants <ref type="bibr" target="#b12">[13]</ref>, consists in optimally matching a read sequence with a fragment of a genomic sequence (representative software are MEGAN <ref type="bibr" target="#b13">[14]</ref>, MG-RAST <ref type="bibr" target="#b14">[15]</ref>, PanPhlAn <ref type="bibr" target="#b15">[16]</ref>, Centrifuge <ref type="bibr" target="#b16">[17]</ref> and Kaiju <ref type="bibr" target="#b17">[18]</ref>). To reduce their practical complexity, these algorithms are often limited to high-scoring alignments and loose sensitivity. Over the last few years, research effort has focused on simplified representations of genomes and reads, which has led to a significant improvement in comparison performance. The principle is to split genomic sequences into overlapping k-mers, short strings of fixed size (typically 30 nt). It is possible to store them compactly in an index for all known genomes and retrieve their presence very efficiently in sequenced reads in order to assign each read to its closest genomes. This powerful approach is followed by major current identification tools such as Kraken <ref type="bibr" target="#b18">[19]</ref>, Kraken 2 <ref type="bibr" target="#b19">[20]</ref>, CLARK <ref type="bibr" target="#b20">[21]</ref>, StrainSeeker <ref type="bibr" target="#b21">[22]</ref> and Opal <ref type="bibr" target="#b22">[23]</ref>.</p><p>The majority of these tools use short reads because they have been available for a long time and with good accuracy. Unfortunately, they generally lack long-range genomic information to resolve differences at the strain level <ref type="bibr" target="#b23">[24]</ref>. Paired-end reads, comprising short sequences at the end of a fragment separated with a variable gap, provide slightly more information since they can be extended to larger reads by trying to bridge the gap using other reads <ref type="bibr" target="#b24">[25]</ref>, but the process may introduce errors and these reads seem to have been used mainly for assembly and comparison purposes <ref type="bibr" target="#b25">[26]</ref>. Relatively few identification software programs accept long reads. The most popular is Kraken and its more recent version Kraken 2 <ref type="bibr" target="#b19">[20]</ref>, since it is easy to instal, robust and fast. This software is based on the decomposition of genomes into k-mers and uses a very efficient storage structure. Some k-mers are specific to a unique species and some are linked to the lowest common ancestor (LCA) in terms of genus or family of all species where they occur. Thus, reads are classified at various levels of this hierarchy depending on their k-mer content. Kraken 2 rarely allows assigning a read at a level below the species because it uses a compression process (minimizers) that reduces the differences between genomes. Minimizers represent a sequence by a smaller included one, and serve to save space and time by retaining only part of the information, although they introduce a certain number of false positives during the identification process <ref type="bibr" target="#b26">[27]</ref>. StrainSeeker <ref type="bibr" target="#b21">[22]</ref> is a tool with a more restricted vocation, but which is of interest for strain identification from short reads. It uses a database of k-mer lists organized along a guide tree of bacteria (userprovided) where each leaf corresponds to a strain-specific set of k-mers. It is compatible with long reads, although we do</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Impact Statement</head><p>This paper describes a new efficient method and the associated software for bacterial strain identification from few long read sequencing data without prior assembly. Very few identification software programs have been designed for long read data, a source that offers more information for the discrimination of strains at the cost of a higher error rate. Our work improves the state of the art by combining sensitivity and robustness, based on an efficient data index and exact optimization for parsimonious explanation of result strains. We have validated the entire process from sample sequencing to sample identification on a species whose strains are difficult to distinguish, Sreptococcus thermophilus. It is possible to address any set of bacterial species by changing the index, thanks to a compiler accepting any set of genomic sequences. Our tool can therefore be useful to all microbiologists wishing to control the presence or absence of certain strains possibly mixed within a sample. We chose to focus on data from the Oxford Nanopore MinION device since its low cost and real-time sequencing capacities are well suited for testing in any laboratory or even on site. As all programs can be freely downloaded from our sites, and the databases can be configured for the species of interest of each laboratory, we hope this tool will have considerable impact. not know of any application using it in this context. It was designed primarily for the identification of isolates but can handle mixtures of a few strains. Another tool, Centrifuge <ref type="bibr" target="#b16">[17]</ref>, follows a read alignment approach and is at the core of the species identification workflow in the platform EPI2ME (ONT). Unfortunately, its index size can become very large if it has to include strain-level genomes. Metamaps <ref type="bibr" target="#b27">[28]</ref>, specifically developed for the analysis of metagenomic datasets, also uses alignments to identify species/strains, is designed for long reads and, according to its authors <ref type="bibr" target="#b27">[28]</ref>, seems more precise than Centrifuge. However, the current version is not simple to instal and lacks robustness (users may suffer from 'core dump' errors).</p><p>This paper describes the use of long read sequencing technologies for the identification of bacteria at the strain level. We chose Streptococcus thermophilus as a model species given its importance in the food industry and the health sectors as a dairy starter and a probiotic <ref type="bibr" target="#b28">[29]</ref> and because it encompasses closely related strains (see Text S1, available in the online version of this paper) with a low genomic diversity <ref type="bibr" target="#b29">[30,</ref><ref type="bibr" target="#b30">31]</ref>.</p><p>We have developed a new strain identification method called ORI (Oxford Nanopore Reads Identification) and compared it to Kraken 2 and StrainSeeker. This approach dedicated to long reads has a technical background similar to Kraken, but differs in its goal to recognize at the strain level. The software for ORI can be found and downloaded from the following site: https:// github. com/ gsiekaniec/ ORI. This work demonstrates that despite their significant error rate, the length of reads from MinION (ONT) allows fine-scale taxonomic assignment, even with mixtures and with closely related strains such as those from S. thermophilus. ORI can be easily adapted to other genera or species.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>mETHoDS</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Bacterial strains, growth conditions and DnA extraction</head><p>A set of 46 genomes of S. thermophilus (Table <ref type="table" target="#tab_0">S1</ref>) from public databases and 31 strains (  <ref type="table" target="#tab_1">S2</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Filtering the raw reads</head><p>The fastq files generated by MinION sequencing were demultiplexed and adapter-trimmed using qcat (https:// github. com/ nanoporetech/ qcat; version 1.1.0). MinION reads have a high error rate, in particular in homopolymers. In our sequencing data, basecalled with version 4.4.1 of Guppy in high-accuracy mode, the error rate was around 5 %, including around 3 % insertions/deletions. A selection step of best reads was performed in order to limit their global sequence error rate: each read must have an average quality of at least 9 and a length greater than 2000 bp (see details in Table <ref type="table" target="#tab_0">1</ref>). All data (raw Nanopore fastq reads and associated assembled genomes) can be downloaded on the Genouest server (see 'Data summary' section).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Creating a pan-genomic index for the sequence characterization of species</head><p>To compare reads and genomes efficiently, they were cut into small fragments of fixed size, called k-mers, which are the basic unit of comparison. However, given the high error rate of MinION sequences, we replaced k-mers with a more sensitive pattern, the spaced seeds <ref type="bibr" target="#b33">[34]</ref>, which introduce don't care positions in k-mers that accept substitution errors <ref type="bibr" target="#b34">[35]</ref>. Although genomes do not have this error rate problem, they have been indexed like the reads in order to make the two types of sequences comparable. We used a spaced seed pattern of size 15, 111111001111111, where 1 denotes a perfect nucleotide match and 0 a don't care position. This means that the genomes and reads are cut into fragments (k-mers) of size 15, which are compared on the basis of the positions set to 1 in the pattern. This pattern was selected for optimal classification of the reads of JIM8332, using the iedera software <ref type="bibr" target="#b35">[36,</ref><ref type="bibr" target="#b36">37]</ref> on all the spaced seed patterns of size in the range [9 : 21] (see Fig. <ref type="figure" target="#fig_0">S1</ref>). The matching positions form a word called qgram. The index containing all these qgrams was built as follows: for each strain, its reference genome was cut into k-mers on which the spaced seed pattern was applied, which yielded qgrams. Each qgram was then inserted into a compact probabilistic data structure of fixed size (about 5×10 8 bits) based on Bloom filters <ref type="bibr" target="#b37">[38,</ref><ref type="bibr" target="#b38">39]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Data and index used for other methods</head><p>In our experiments, we adjusted the index choices for Kraken 2 and StrainSeeker in order to compare the results fairly. The genome databases were exactly the same for the three methods. StrainSeeker requires another input, a classification tree on the whole set of genomes guiding the identification process. This tree was generated on the MicroScope platform (see next section) in our experiments.</p><p>For Kraken 2 (version 2.0.9-beta), we used the default k-mer length of 35 and minimizer length 32. For the StrainSeeker (version 1.5) index, we used a k-mer length 16.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Comparing strains</head><p>Several measures were used to estimate the similarity between two genomes, the average identity between nucleotides (ANI) in their shared coding regions (at least 70 % of identity and 70 % coverage of the shorter gene), and two other distances taking the whole genome into account, Jaccard and Hamming distances. We used FastANI (ManyToMany mode) to estimate the ANI distance <ref type="bibr" target="#b39">[40]</ref>. The Jaccard distance was computed on sets of qgrams (see Equation <ref type="formula">S1</ref>). The Hamming distance H was computed based on the proportion of positions that differ between the Bloom filters of the two genomes (i.e. a Bloom filter is a vector of 0/1 and the Hamming distance is the number of positions with two different values in the vector divided by the vector length) (see Equation <ref type="formula">S1</ref>).</p><p>The MicroScope platform <ref type="bibr" target="#b40">[41]</ref> (https:// mage. genoscope. cns. fr; access date May 2020, v3.14.0) was used to annotate the genome of the 77 S. thermophilus strains, to generate a strain classification tree and to compute the pangenome. Briefly, MicroScope uses the AMIGene software to predict proteincoding genes <ref type="bibr" target="#b41">[42]</ref> and combines the results of several tools to assign molecular functions <ref type="bibr" target="#b40">[41]</ref>. A strain classification tree is computed using the neighbour-joining algorithm with pairwise genome distances obtained from Mash software <ref type="bibr" target="#b42">[43]</ref>. Three sets of genes corresponding to the core, variable and strain-specific genes were downloaded from the pangenome computed by MicroScope. It is based on MICFAM gene families, which are computed using a single linkage clustering algorithm of homologous genes sharing an amino acid alignment coverage and identity above 80 %. After standardizing the gene names of the pangenome families for all strains, we created a strain × gene matrix (see Fig. <ref type="figure" target="#fig_0">1</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Clustering strains by gene content</head><p>In addition to the strain tree produced by MicroScope, we produced a biclustering of strains and genes, using formal concept analysis <ref type="bibr" target="#b43">[44]</ref>. Once biclusters are determined, they are added to nodes of the strain classification tree, showing how close the strains are with respect to their gene content. The root of the tree contains the core genome genes and the leaves contain the genes specific to this leaf (strain). Note that some nodes may stay unlabelled because they cannot be characterized in terms of a subset of genes. In our example, this is the case for Node2 since any characterization of it would also cover Strain3 (Fig. <ref type="figure" target="#fig_0">1</ref>). Conversely, {Strain3, Strain4} is not present in the tree although it can be uniquely characterized by the presence of Gene5. The tree can be displayed using an online tool for the presentation of annotated phylogenetic trees called iTOL <ref type="bibr" target="#b44">[45]</ref> and biclusters can be recovered through popups associated with each node.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Experimentation design</head><p>To test our method and compare it to Kraken 2 <ref type="bibr" target="#b19">[20]</ref> and StrainSeeker <ref type="bibr" target="#b21">[22]</ref>, 180 strain identification experiments were performed (see Table <ref type="table" target="#tab_3">S3</ref>). They were based on the construction of various sets of reads extracted from the MinION sequencing data by random draws performed uniformly across the filtered sequenced reads. The distribution of read lengths in the sets had the following characteristics: median 6436 bp, mean 8842 bp, standard deviation 7861 bp, for a value in the range [2000-189 000]. Each identification result for a fixed set of parameter values is an average that has been calculated on five different sets of strains randomly selected from the whole set of possible strains. The parameters were the number of reads (1000, 4000 or 16 000 reads), the number of strains to be identified (four or six strains), the proximity of the strains (distant, moderately close or close strains) and finally the distribution of strain abundances in the experiments (uniform distribution or distribution with dominant and subdominant strains). The set of experiments has been split into two parts to present the results, 90 with a uniform distribution and 90 with low-abundance strains. For close proximity experiments each strain was required to be very close to at least one other strain but could be distant from the others (see Table <ref type="table" target="#tab_6">S4</ref>).</p><p>The percentage of subdominant strains was 12.5 % of the reads for each of the two strains in mixtures of four strains and respectively 6.25, 3.12 and 3.12 % for three strains in mixtures of six strains. For the validation of identification methods, we used the sum of Hamming distances between each predicted strain and the closest real, target one in the sample. We also calculated the Matthews correlation coefficient (MCC) to measure the precision/sensitivity trade-off of the method (see Equation S2).</p><p>Similar to Kraken 2, StrainSeeker does not always identify a single target but proposes a group of strains as an identification result. To take this behaviour into account, we counted in this calculation one true positive for each correct strain and one false positive for each incorrect strain. As a correlation coefficient, MCC ranges from 1 for a perfect prediction to -1 for complete disagreement between the observation and reality and 0 indicates no relationship. It is balanced with what we called an ambiguity ratio, which was calculated as the ratio of the number of predicted to number of actual strains.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RESuLTS</head><p>We first describe the new method we propose for the identification of strains, then the identification results themselves, which are compared to those obtained by two other methods, Kraken 2 and StrainSeeker.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>oRI, a new method for the identification of bacterial strains from long reads</head><p>We propose a new method and software, ORI, based on indexing fragments of a set of known bacterial genomes in a compact data structure. ORI is therefore in line with the principles of a method such as Kraken, although it differs in many ways. The first step (index creation in Fig. <ref type="figure" target="#fig_1">2</ref>) takes as input the sequences of known genomes and builds a data index based on a hierarchical structure of Bloom filters <ref type="bibr" target="#b37">[38,</ref><ref type="bibr" target="#b38">39]</ref>, each one being of fixed size (5×10 8 bits). They code for the presence in each genome of small fragments of fixed size, called qgrams, which are similar to k-mers but allow for mismatched characters at some positions. There is an optional but recommended operation during this step, the merging of very closely related strains (distance below a given threshold) in a single pangenome (see sections below). The second step (Query part in Fig. <ref type="figure" target="#fig_1">2</ref>) takes as input the sequenced reads of an unknown sample and consists of filtering (for length and quality), qgram extraction, and finally querying against the index. It results in a large score matrix crossing known genomes and reads, estimating for each read its probability of originating from a given genome and thus for the genome to be present in the sample. The last step is the identification process itself, which takes as input the genome × read matrix and looks for a minimal set of strains that best explain the reads in the observed sample (see below for more details).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Compact pan-genomic indexes of bacterial sequences</head><p>In all our experiments, two indexes were produced. The first index has been built with all S. thermophilus genomes (77 strains) plus two strains from other species/order, S. macedonicus and L. delbrueckii subsp. bulgaricus, for a total size of 23.4 Mb. Note that we have excluded plasmids in the current version since plasmids are considered part of the mobilome (horizontal transfer) and not specific of a strain. The second index was designed for experiments where very closely related isolates (such as mutant strains or variants that are indistinguishable) were merged under a single strain identifier (we call such strains 'sibling' strains, see section below). This has been achieved by merging all Bloom filters from closely related strains. This index had a similar size of 22.7 Mb. Both index sizes were comparable to the index of Kraken 2 (18.1 Mb for exactly the same strains), and much smaller than StrainSeeker's index (2.1 Gb). </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Affiliation of minIon reads to strain genomes by index queries</head><p>Once an index has been created, our method identifies the bacteria present in a sample by querying the index with the sample reads. As with genomes, each MinION read is cut into k-mers on which a spaced seed is applied, which provides the qgrams of the read. The index is then requested using all these qgrams. A minimum number of qgrams from a read (half of them; parameter --threshold=0.5 in ORI) must be found in a strain genome before it can be retained for identification purposes. This threshold allows efficient filtering of reads that concern the species of interest. It takes full advantage of the length of the reads and allows in particular to remove contaminants, which would be difficult on short reads <ref type="bibr" target="#b45">[46]</ref>. The output of a request is a list for each read of possible strains, weighted by their number of qgrams, summarized in a read × strain matrix.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Identification of one or several strains in samples</head><p>Starting from a set X of reference bacterial strains and a sequenced sample, the goal of identification is to find a subset of X that best explains the observed reads. We say that a read is explained by a strain if this strain is a possible answer to the read query in the index, i.e. it matches with a number of qgrams in the read greater than the threshold (50 %).</p><p>From a theoretical point of view, this issue may be seen as a set cover optimization problem: find a minimal subset to fully explain the reads, a difficult problem that can be solved if the number of operational taxonomic units in the sample is of moderate size (see Text S2).</p><p>We followed a declarative problem solving approach called Answer Set Programming (ASP) for this <ref type="bibr" target="#b46">[47]</ref>. A quick preprocessing step was applied beforehand to filter reads and strains that provided little information: (1) the reads found in too many strains were not taken into account during the identification (by default, if a read can be affiliated to 18 strains or more, they are assumed to be part of the core genome of the species) and (2) only the best strains (12 by default, parameter --nbchoices) were taken into account for each remaining read, according to the proportion of qgrams matching them in the read.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>measuring the proximity between strains</head><p>To evaluate the difficulty of identification and assess its accuracy, it is necessary to measure the proximity of genomes. This has been achieved at the coarse level of genes and at the finer level of genomic content.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>The gene level</head><p>We have computed the complete list of maximal biclusters (see section Comparing and clustering strains in the Methods) comprising a subset of S. thermophilus strains and a subset of associated specific genes (available on https:// github. com/ gsiekaniec/ GeneTree). Genes specific to the set of strains under each node of the strain classification tree produced by MicroScope are available in an interactive version of this tree via clickable links for each node (see https:// itol. embl. de/ tree/ 1312 5413 4671 3115 97925585). All the maximal biclusters cannot be represented by a node of the tree because they follow a different topology. It is already possible to perceive in this tree that some strains are very close if not identical and differ only by few unknown genes.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>The genomic fragment level</head><p>The proximity between genomes is usually measured with the ANI distance. Our genome index offers other ways to evaluate this proximity. We have produced a slightly more precise Jaccard distance matrix using spaced seeds. Fig. <ref type="figure" target="#fig_2">3</ref> shows an extract of this matrix for 28 strains in the form of a heatmap (eight strains from public genome database and 20 strains from the CIRM-BIA collection). The complete heatmap, containing the 77 S. thermophilus strains, can be found in Fig. <ref type="figure" target="#fig_1">S2</ref>. Two genomes, one from S. macedonicus and the other from L. delbrueckii subsp. bulgaricus, have been added as an external group. As expected, strains of different species or order are easily distinguished. The group of six CIRM-BIA strains at the bottom left of the heatmap that is distant from other strains clearly forms a new subgroup comprising strains that were mostly isolated from traditional Italian dairy products.</p><p>We measured the coherence of Jaccard and ANI distance with respect to the Mash distance used by MicroScope on our strain set. The observed Pearson correlation is very good (r=0.967, P=1e-04 for ANI, and r=0.987, P=1e-04 for Jaccard distance). As expected, Jaccard is slightly better than ANI distance (ANI only compares orthologous genes).</p><p>In our work, it is more efficient to compute the Hamming distance between the Bloom filters rather than the Jaccard distance (see sections Comparing and Clustering strains in the Methods). We checked that this distance corresponded to the Jaccard distance for strain comparison. There was indeed a very good correlation between the two distances (r=0.99, P=1e-04). Using quadratic regression, we obtained the equation H=3.81e -03 (J 2 +J)between Hamming H and Jaccard J distance values (see Fig. <ref type="figure" target="#fig_2">S3</ref>). For small values (J0.15), a linear relationship fitted the values very well: H=4.26e -03 J.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Sibling strains: a threshold to establish two isolates as indistinguishable</head><p>To improve detection accuracy, we grouped closely related strains into groups called 'sibling strains' . Identification results depend on their definition, which involves some threshold τ for the maximum distance between the genome of sibling strains, much lower than that between species. Fortunately, we have shown that the choice of the distance used seems not to be crucial for this task.</p><p>In the remainder, we will compare results without or with clustering. The first results are obtained with a Hamming distance threshold of 0 (τ = 0 ), and the second results are those that regroup all isolates based on a Hamming distance less than τ = 2e -4 (0.05 for Jaccard). This default threshold has been determined empirically for S. thermophilus by trying different threshold values and looking for a minimum value for which the identification error rate remains low on isolated strains. Below this distance, the sequencer error level prevents reliable affiliation of reads. ORI produces a graph that shows the distribution of distances between strains and helps to select a reasonable maximum distance threshold, which leads to grouping of a limited number of strains with close genomes. Clusters of sibling strains were formed as follows:</p><p>(1) a graph is created whose vertices are the strains and edges connect those less than τ away from each other; (2) maximum cliques of this graph are computed and intersecting cliques are merged; and (3) Bloom filters of the genomes belonging to these cliques are merged, corresponding to the pangenome of the sibling strains (see index creation in Fig. <ref type="figure" target="#fig_1">2</ref> and Table <ref type="table">S5</ref>, Fig. <ref type="figure" target="#fig_1">S2</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Identification results</head><p>We present in this section the results of ORI in various contexts and compare them on the same database with the leading method Kraken 2 <ref type="bibr" target="#b19">[20]</ref> and the program dedicated to strain identification, StrainSeeker <ref type="bibr" target="#b21">[22]</ref>. As an indication, we have provided tables showing the precision of identification of S. thermophilus strains in all 180 experiments (see Table <ref type="table">S6</ref>) and the precision of identification of the subdominant S. thermophilus strains (see Table <ref type="table">S7</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Identification of isolated strains: ORI is the most robust method</head><p>The first test was to identify a single strain, S. thermophilus JIM 8232, from a moderate quantity of MinION reads (4000), randomly selected among all reads sequenced for this strain (around 200 000 reads). This strain is quite distant from the others (see Fig. <ref type="figure" target="#fig_2">3</ref>): it is not closely related to any other known strain. Almost all reads were retained by the three tested methods. For Kraken 2, 50.10 % of reads were classified as JIM 8232, 26.56 % of reads were classified as S. thermophilus (it stops at the species level) and the rest had an incorrect strain classification. For ORI, 99.7 % of reads were classified as JIM 8232, the rest being unclassified. For StrainSeeker, JIM 8232 was recognized as the sole strain of the sample (100 % of JIM 8232). Although StrainSeeker was developed specifically for Illumina reads, it provided excellent results with ONT reads on this test.</p><p>A second test concerned S. thermophilus CIRM-BIA67, which is much more difficult to identify than JIM 8232  because of its proximity to other strains (see Fig. <ref type="figure" target="#fig_2">3</ref>). In particular, CIRM-BIA67 and CIRM-BIA65 are sibling strains. The differences stem mainly from a contraction in CIRM-BIA67 of two tandem repeats from a 13.5 kb fraction of the genome. Table <ref type="table" target="#tab_2">2</ref> shows detailed results for an increasing number of reads.</p><p>Kraken 2 assigned most of the reads to the species S. thermophilus and less than 2 % to strain CIRM-BIA67. Strain-Seeker recognized the species level (a large group of strains that cannot be distinguished) for 100 reads, found a perfect result for 1000 reads, and then a decreasing proportion of CIRM-BIA67 for more reads. It is thus very sensitive to the number of reads. ORI identification is almost perfect in each case, with identification of the correct CIRM-BIA67 strain up to 1000 reads and the sibling strain CIRM-BIA65 with more reads. For all methods, the error level of reads introduces limitations in the identification of closely related strains. For ORI, this can be corrected by merging them (see Identification of strain mixtures after merging).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Identification of strain mixtures: ORI needs at least 500 reads for each strain</head><p>We ran the 90 experiments containing a uniform number of reads for each strain (see Experimental design in Methods).</p><p>Fig. <ref type="figure">5</ref>. Identification of subdominant strains in a mixture of S. thermophilus strains using various numbers of reads. The Hamming distance between observed and expected strains, on the y-axis, has been multiplied by 10 000 (in blue for ORI, orange for StrainSeeker and green for Kraken 2). Matthews correlation coefficient (MCC) values are given on the first line just above the x-axis at the bottom of the diagrams, followed by the ambiguity ratio (number of strains identified/number of strains present).</p><p>The diagrams in Fig. <ref type="figure" target="#fig_3">4</ref> display boxplots for the sum of the Hamming distances showing how close the predicted strains are from real ones. Below each boxplot, two numbers are given, MCC and the Ambiguity ratio. The MCC, which measures the adequacy of the binary decision on the presence/ absence of strains, shows the balance between specificity and sensitivity. The ambiguity ratio is necessary because Kraken 2 and StrainSeeker propose ambiguous answers with more strains than actually exist, and it tends to artificially increase the MCC, whereas ORI tries to minimize the number of predicted strains.</p><p>We computed the Hamming distance, the MCC and the ambiguity measures over all experiments (global identification, Fig. <ref type="figure" target="#fig_3">4a</ref>), then detailed the results along three parameters: the number of strains, the number of reads and the proximity of the strains (Fig. <ref type="figure" target="#fig_3">4b-d</ref>). Overall, identification results are very good for ORI (Fig. <ref type="figure" target="#fig_3">4a</ref>), from the point of view of both mean and standard deviation, showing the robustness of the method. StrainSeeker also gives good results and has the best MCC but is penalized by the production of multiple solutions and wider variations than ORI. Kraken 2 is clearly less well adapted to the recognition of strains.</p><p>Fig. <ref type="figure" target="#fig_3">4b</ref> shows the effect of increasing the number of strains in the mixture. Results are very similar for four or six strains.</p><p>For Fig. <ref type="figure" target="#fig_3">4c</ref>, different amounts of read data were used. No difference was observed for Kraken 2, using 1000, 4000 or 16 000 reads. By contrast, ORI seems to be sensitive to read number: the more data, the better strain identification with regard to MCC and ambiguity ratio. For StrainSeeker, using a large number of reads clearly leads to a drop in accuracy and results are optimal with 4000 reads.</p><p>Finally, the resolution power of methods was measured for mixtures containing increasingly close target strains (increasing the difficulty of identification). Fig. <ref type="figure" target="#fig_3">4(d)</ref> shows that Kraken 2 is sensitive to this parameter and provides poor results for a mixture of closely related strains. With ORI and StrainSeeker, which are more sensitive, the effect is not marked but ORI shows a slight degradation of MCC and the ambiguity ratio. This behaviour, due to the existence of S. thermophilus genomes with high proximity, motivated the introduction of a merging procedure prior to strain identification (see next section).</p><p>We end with the most difficult context, the identification of subdominant strains in a mixture of four or six strains (Fig. <ref type="figure">5</ref>). The mixture of four strains contains two dominant strains (representing respectively 50 and 25 % of the total reads each) and two subdominant strains (12.5 % of the reads each), while the mixture of six strains contains three dominant strains (50/25/12.5 % respectively) and three As previously observed in Fig. <ref type="figure">5</ref>, the main issues for ORI come from very closet related isolates. We have tested the impact of preprocessing the data by merging them as one strain type. The results obtained with this new merged index were compared to the previous results (Tables <ref type="table" target="#tab_3">3</ref> and<ref type="table" target="#tab_6">4</ref>).</p><p>Overall, merging leads to almost perfect identification results, with a Hamming distance that decreases with respect to the version of ORI without merging and it is mostly null, except for experiments with an insufficient number of reads. The MCC increases with the number of available reads, and is close to 1 on average, showing that ORI with merge combines high accuracy with high sensitivity. Note that it is possible to get a null average distance and a MCC less than 1; this points to perfect accuracy but loss of sensitivity: strains are identified but some are lacking.</p><p>The method is more robust in the sense that the variations in parameter values have less influence on the results.</p><p>The identification of subdominant strains is shown in Table <ref type="table" target="#tab_6">4</ref> (full results can be found in Tables <ref type="table">S8</ref> and<ref type="table">S9</ref>). The results are clearly better with merging for samples of 4000 reads; in our experiments, merging sibling strains allowed us to achieve strain identification from as few as 250 reads. For experiments with 1000 reads, which need a recognition from 125 reads or fewer, the method is limited and the gain is smaller.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DISCuSSIon</head><p>In this work, we have compared three methods that have a common methodological basis. They split genomes and reads into small fragments that are inserted in an index, a very compact and efficient data structure for making comparisons. However, ORI seems to be better than Kraken 2 in terms of identifying bacterial strains. StrainSeeker behaves correctly with parameters carefully tuned. It has been designed for short reads of high quality and it will return poor results either if there are too few or too many reads. Moreover, StrainSeeker does not scale to a large number of genomes, and its index requires 100 times more memory than the other methods. ORI features three major choices adapted to strain-level identification from long read noisy data. A first one is to replace k-mers by qgrams, which tolerate a few substitution errors, and is particularly useful given the higher error level of ONT sequencing. Note that it is effective for relatively short k-mers since indel errors are not taken into account. Another important difference relates to the choice of the tradeoff to be made between the sensitivity and the computational cost of the method. Kraken 2 is an excellent choice for large-scale species recognition, based on the use of minimizers. This choice leads to a relative loss of sensitivity which does not allow it to recognize closely related strains. ORI uses a first identification step for each read, utilizing the fact that all the k-mers in a long read must belong to a single species. A last difference is that ORI uses an exact optimization step in order to select a minimum number of species/strains that explain most of the reads. This is a unique point of ORI that increases its robustness (very few false positive) and also reduces the list of identified strains, which can be very useful for subsequent analysis of the results.</p><p>There is a need to achieve ID resolution of a group of highly similar isolates <ref type="bibr" target="#b47">[48]</ref>, rather than the exact isolate itself. Clinically it is useful for identifying outbreak strains, which is a major use of MinION sequencing (error-prone Nanopore reads). In a recent paper <ref type="bibr" target="#b48">[49]</ref> the authors worked on almost 2000 samples of Streptococcus agalactiae, characterized by different degrees of virulence and preferred host. However, even if the microbiologists are demanding regarding the distinction of strains, they only distinguish a few dozen different types at most. Stopping strain distinction at the individual isolate level is of little practical value. Another recent application of clustering close strains is in the inference of antibiotic resistance and susceptibility <ref type="bibr" target="#b49">[50]</ref>. We have presented two versions of ORI, one including a preprocessing step merging in a single pangenome the sequences of known isolates that appear to be very similar. Our results showed that the version that merges seems the most appropriate with regard to the high error rate of current ONT sequencing technology. The identification results are robust and the biologist may conduct additional investigations to discriminate the strain among a limited number of possibilities. Considering these sibling strains in the iTOL tree, they are annotated mostly by specific genes of unknown function, contrary to other strains (e.g. S. thermophilus JIM 8232). Two unknown genes labelled differently could nevertheless be related and sibling strains, and therefore could usefully point to groups with a compact pangenome, analysable in fine detail, valuable knowledge for strain selection. An interesting perspective would be to check that merging allows us to distinguish strains for important phenotypic traits such as antimicrobial resistance profiles <ref type="bibr" target="#b50">[51]</ref>.</p><p>Another important parameter is the number of reads to be used for identification. We proposed a set of 4000 reads to be sufficient for a mixture and 500 reads for an isolate, something that helps in fast identification of the content of a sample. In fact, it seems that a good information/noise ratio is needed in practice: either the number of reads is insufficient to detect the accessory genome, or it is too high and noisy reads tend to introduce ghost recognitions. We still need to work on this aspect so that ORI does not decrease its identification quality when the number of reads increases. As identification requires a good information/ noise ratio, one way to improve it is to pre-filter the reads and strains in order to obtain the fewest erroneous and most strainspecific reads.</p><p>We end this section with a few perspectives that could help extend this work.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Rapid identification at low cost</head><p>In our experiments, DNA has been extracted by a kit specific for long reads, using the ONT flow cell R9.4 for sequencing. Such DNA extraction requires long passage times through the column by gravity (6-8 h, depending on the strain) and is relatively expensive, including all costs. In practice, it is crucial to decrease costs and time as much as possible while maintaining ORI's good performance. Using a DNA extraction kit designed for short reads would lead to fragments three times shorter but save time and money (4 h extraction, 5 € per sample). A good compromise could be a rapid extraction with magnetic beads (e.g. MagAttract HMW from Qiagen). For the library sequencing kit, we used a rapid barcoding sequencing kit, which reduces size by a factor of 3 and time by a factor of 20 (15 min) compared to the classic SQK-LSK109 kit. Once loaded</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Fig. 1 .</head><label>1</label><figDesc>Fig. 1. Biclusters in a strain × gene matrix and associated labelling of nodes in a classification tree.</figDesc><graphic coords="4,85.03,68.03,425.21,133.10" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Fig. 2 .</head><label>2</label><figDesc>Fig. 2. Overview of the ORI method in three steps: (1) genome indexing, (2) query the index from filtered reads, and (3) identification of strains.</figDesc><graphic coords="6,85.06,68.03,425.16,569.52" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Fig. 3 .</head><label>3</label><figDesc>Fig. 3. Heatmap of the Jaccard distance for 28 S. thermophilus strains + S. macedonicus ACA-DC 198 + L. delbrueckii subsp. bulgaricus ATCC 11842.</figDesc><graphic coords="8,85.04,68.03,425.20,320.52" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Fig. 4 .</head><label>4</label><figDesc>Fig. 4. Identification results on a balanced mix of S. thermophilus strains. The Hamming distance between observed and expected strains, on the y-axis, has been multiplied by 10 000 (in blue for ORI, orange for StrainSeeker and green for Kraken 2). Stars represent mean values. Matthews correlation coefficient (MCC) values are given on the first line just above the x-axis at the bottom of the diagrams, followed by the ambiguity ratio (number of strains identified/number of strains present).</figDesc><graphic coords="9,85.04,376.40,425.20,291.40" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="10,85.04,68.03,425.20,271.73" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 .</head><label>1</label><figDesc>Average percentage error rate in the S. thermophilus sequences (calculated from an alignment of the reads against the reference genomes performed with Minimap2)The filters retain only sequences with a quality greater than 9 and a size greater than 2000 bp.</figDesc><table><row><cell>Errors</cell><cell>Mismatches</cell><cell>Deletions</cell><cell>Insertions</cell><cell>Total</cell></row><row><cell>All sequences</cell><cell>1.50 %</cell><cell>2.16 %</cell><cell>1.40 %</cell><cell>5.06 %</cell></row><row><cell>With filters</cell><cell>1.44 %</cell><cell>2.08 %</cell><cell>1.37 %</cell><cell>4.89 %</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table S2</head><label>S2</label><figDesc></figDesc><table><row><cell>The 31 S. thermophilus strains and S. macedonicus PA were</cell></row><row><cell>precultured anaerobically in LM17 medium (M17 medium</cell></row><row><cell>supplemented with 2 %, w/v, lactose) [32] initially inoculated</cell></row><row><cell>at 1 % (v/v), and incubated at 42 °C for 9 h. LM17 medium</cell></row><row><cell>was further inoculated at 1 % (v/v) with the LM17 preculture</cell></row><row><cell>and grown overnight at 42 °C. L. delbrueckii subsp. bulgaricus</cell></row><row><cell>ATCC 11842 was grown in MRS medium [33] under the</cell></row><row><cell>same conditions. To avoid excessive fragmentation, DNA</cell></row><row><cell>extraction was performed using the Genomic-tip 100/G from</cell></row><row><cell>Qiagen, according to the manufacturer's protocol with slight</cell></row><row><cell>modifications. Briefly, lysozyme, proteinase K and RNAse</cell></row><row><cell>A quantities were doubled and lysis incubation times were</cell></row><row><cell>increased to 1.5 h. After DNA elution from the column, DNA</cell></row><row><cell>was precipitated with isopropanol and spooled using a glass</cell></row><row><cell>rod. It was immediately transferred in a clean microcentrifuge</cell></row><row><cell>Eppendorf tube containing 200 μL EB buffer from Qiagen</cell></row><row><cell>(10 mM Tris-Cl, pH 8.5) and allowed to dissolve overnight at</cell></row><row><cell>4 °C. Finally, DNA integrity and size (&gt;10 kb) were assessed by</cell></row><row><cell>electrophoresis on an agarose gel (0.7 %, w/v, TBE 0.5×, migra-</cell></row><row><cell>tion under 100 V). DNA purity was estimated by Nanodrop</cell></row><row><cell>measurements (ND-1000 Spectrophotometer). DNA quan-</cell></row><row><cell>tification was done using a 1× dsDNA high-sensitivity assay</cell></row><row><cell>kit on a QUBIT 4 Fluorometer (Thermo Fisher Scientific).</cell></row><row><cell>minIon library preparation and sequencing</cell></row><row><cell>Libraries were prepared for MinION (ONT) sequencing</cell></row><row><cell>according to the manufacturer's protocol 'Rapid Barcoding</cell></row><row><cell>Sequencing (SQK-RBK004)' (version RBK_9054_v2_revF_23</cell></row><row><cell>Jan2018), starting with 400 ng of</cell></row><row><cell>) from the collection of the</cell></row><row><cell>CIRM-BIA resource centre were used in this study. Strepto-</cell></row><row><cell>coccus macedonicus PA (CIRM-BIA2314) and Lactobacillus</cell></row><row><cell>delbrueckii subsp. bulgaricus ATCC 11842 (CIRM-BIA658)</cell></row><row><cell>from the CIRM-BIA collection were added as controls</cell></row><row><cell>(different species/genus).</cell></row></table><note><p>DNA per S. thermophilus strain, using the 12 barcodes to multiplex 12 strains at each sequencing experiment. No additional purification step on AMPure beads XP was performed. Barcoded DNAs were pooled together. Finally, a flow cell (R9.4.1, FLO-MIN106D) was loaded with 200-500 ng of the library and run for 48 h, generating around 7-9 Gbp of sequencing data. The MinKNOW software (version release 19.05.0) was used to monitor the run and generate the fast5 files. Fastq files were obtained after basecalling with Guppy (version 4.4.1, default parameters) in high-accuracy mode. DNA of the 31 CIRM-BIA strains has previously been sequenced with NGS Illumina technology. Illumina and Nanopore data allowed us to fully and correctly assemble their genomes, using the Unicycler hybrid assembler (version 0.4.7) [10]. Complete annotated genomes have been made available on the NCBI database (accession numbers listed in Table</p></note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 2 .</head><label>2</label><figDesc>Identification of reads from S. thermophilus strain CIRM-BIA67 from various numbers of reads</figDesc><table><row><cell>Method</cell><cell>100 reads</cell><cell>1000 reads</cell><cell>10 000 reads</cell><cell>20 000 reads</cell></row><row><cell>Kraken 2</cell><cell>C67 2 %</cell><cell>C67 1.70 %</cell><cell>C67 1.31 %</cell><cell>C67 1.23 %</cell></row><row><cell>StrainSeeker</cell><cell>One group of many indistinguishable strains (C67</cell><cell>C67 100 %</cell><cell>C67 13.13 %</cell><cell>C67 2.2 %</cell></row><row><cell></cell><cell>and 66 other strains) 100%</cell><cell></cell><cell>+4 groups (other strains)</cell><cell>+C65 1.86%</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell>+22 other strains</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell>+2 groups</cell></row><row><cell>ORI</cell><cell>C67 100 %</cell><cell>C67 100 %</cell><cell>C65 100 %</cell><cell>C65 100 %</cell></row><row><cell cols="2">C67, CIRM-BIA67; C65, CIRM-BIA65.</cell><cell></cell><cell></cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 3 .</head><label>3</label><figDesc>S. thermophilus strain identification by ORI, with and without merge index, in a balanced mixture of four or six strains more or less genetically close, by using 1000, 4000 or 16 000 sequencing reads Best results are in bold type. Values of Hamming distance (0=perfect identification); MCC: Matthews correlation coefficient (1=perfect correlation); Ambiguity: number of strains identified/number of strains present.</figDesc><table><row><cell></cell><cell cols="3">(a) Global identification results (mean over all 90 experiments):</cell><cell></cell></row><row><cell>Method</cell><cell>ORI</cell><cell>ORI_merge</cell><cell></cell><cell></cell></row><row><cell>Distance</cell><cell>0.52</cell><cell>0.41</cell><cell></cell><cell></cell></row><row><cell>(MCC/Ambiguity)</cell><cell>0.66/0.63</cell><cell>0.92/0.91</cell><cell></cell><cell></cell></row><row><cell></cell><cell cols="4">(b) Heterogeneity, mean results (variable number of strains mixed):</cell></row><row><cell>Method</cell><cell>ORI</cell><cell></cell><cell>ORI_merge</cell><cell></cell></row><row><cell>Number of strains</cell><cell>4</cell><cell>6</cell><cell>4</cell><cell>6</cell></row><row><cell>Distance</cell><cell>0.73</cell><cell>0.31</cell><cell>0.53</cell><cell>0.29</cell></row><row><cell>(MCC/Ambiguity)</cell><cell>0.70/0.65</cell><cell>0.65/0.56</cell><cell>0.94/0.93</cell><cell>0.96/0.96</cell></row><row><cell></cell><cell>(c)</cell><cell></cell><cell></cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head>Data quantity, mean results (variable number of .fastq reads):</head><label></label><figDesc></figDesc><table><row><cell>Method</cell><cell></cell><cell>ORI</cell><cell></cell><cell></cell><cell>ORI_merge</cell><cell></cell></row><row><cell>Number of reads</cell><cell>1000</cell><cell>4000</cell><cell>16 000</cell><cell>1000</cell><cell>4000</cell><cell>16 000</cell></row><row><cell>Distance</cell><cell>0.17</cell><cell>0.8</cell><cell>0.6</cell><cell>0</cell><cell>0.43</cell><cell>0.8</cell></row><row><cell>(MCC/Ambiguity)</cell><cell>0.55/0.44</cell><cell>0.64/0.64</cell><cell>0.78/0.80</cell><cell>0.86/0.77</cell><cell>0.93/0.92</cell><cell>0.98/1.05</cell></row><row><cell>(d)</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_5"><head>Resolution power, mean results (variable proximity between strains within the mixture):</head><label></label><figDesc></figDesc><table><row><cell>Method</cell><cell></cell><cell>ORI</cell><cell></cell><cell></cell><cell>ORI_merge</cell><cell></cell></row><row><cell>Proximity</cell><cell>Distant</cell><cell>Medium</cell><cell>Close</cell><cell>Distant</cell><cell>Medium</cell><cell>Close</cell></row><row><cell>Distance</cell><cell>0.10</cell><cell>1.17</cell><cell>0.30</cell><cell>0</cell><cell>0.90</cell><cell>0.33</cell></row><row><cell>(MCC/Ambiguity)</cell><cell>0.75/0.73</cell><cell>0.61/0.68</cell><cell>0.6/0.47</cell><cell>0.93/0.89</cell><cell>0.87/0.85</cell><cell>0.97/1</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_6"><head>Table 4 .</head><label>4</label><figDesc>Subdominant S. thermophilus strain identification by ORI, without/with merge, in a mixture of four or six strains, by using 1000, 4000 or 16 000</figDesc><table><row><cell cols="3">subdominant strains (6.25 %/3.125/3.125 % respectively).</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell cols="3">Of note is that Kraken 2 behaves better in this situation,</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell cols="3">reducing the difference compared to ORI and especially</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell cols="3">StrainSeeker. ORI continues to perform well for strains with</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell cols="3">at least 500 reads but its results are degraded below this. For</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell cols="3">StrainSeeker, the number of reads used for identification is</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell cols="3">crucial: it works well with 4000 reads (even better than ORI)</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell cols="3">but works surprisingly poorly with 16 000 reads.</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Nanopore sequencing reads</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell cols="7">Best results are in bold type. Values of Hamming distance: in all experiments, minimum value is 0 (perfect identification); MCC: Matthews correlation</cell></row><row><cell cols="6">coefficient (1=perfect correlation); Ambiguity ratio: number of strains identified/number of strains present; sd: standard deviation</cell><cell></cell></row><row><cell>No. of strains</cell><cell></cell><cell>4 (ORI/ORI_merge)</cell><cell></cell><cell></cell><cell>6 (ORI/ORI_merge)</cell><cell></cell></row><row><cell>Number of reads</cell><cell>1000</cell><cell>4000</cell><cell>16 000</cell><cell>1000</cell><cell>4000</cell><cell>16 000</cell></row><row><cell>Distance</cell><cell>19.8/19.8</cell><cell>9.9/0</cell><cell>0/0</cell><cell>30.3/15.4</cell><cell>26.7/0</cell><cell>0/0</cell></row><row><cell>MCC</cell><cell>0.28/0.38</cell><cell>0.42/0.78</cell><cell>0.57/0.9</cell><cell>0.22/0.38</cell><cell>0.34/0.65</cell><cell>0.63/0.8</cell></row><row><cell>Ambiguity</cell><cell>0.4/0.4</cell><cell>0.5/0.8</cell><cell>0.7/1</cell><cell>0.2/0.33</cell><cell>0.2/0.47</cell><cell>0.53/0.67</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_7"><head>Identification of strain mixtures after merging highly similar strains: best results for ORI</head><label></label><figDesc></figDesc><table /></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>Acknowledgements</head><p>All data were processed on the Genouest bioinformatics platform (https://www. genouest. org/). LABGeM (<rs type="institution">CEA/Genoscope</rs> and <rs type="institution">CNRS</rs> UMR8030), the <rs type="institution">France Génomique</rs> and <rs type="institution">French Bioinformatics Institute</rs> national infrastructures are acknowledged for support within the MicroScope annotation platform [41]. We thank in particular <rs type="person">David Vallenet</rs>, scientific manager of the MicroScope platform, who provided us with text to describe its functioning. We also thank <rs type="institution">Genoscope</rs> (<rs type="person">Corinne Cruaud</rs>, <rs type="person">Stefan Engelen</rs> and <rs type="person">Jean-Marc Aury</rs>) and <rs type="affiliation">CNRS</rs> <rs type="person">I2BC</rs> (<rs type="person">Delphine Naquin</rs>, <rs type="person">Erwin Van Dijk</rs> and <rs type="person">Yan Jaszczyszyn</rs>) for their generous support for training in the use of the MinION and associated bioinformatics tools. Finally, the reviewers greatly helped to improve the first manuscript.</p></div>
+			</div>
+			<div type="funding">
+<div><p>thermophilus strains have been provided by the <rs type="institution">International Centre for Microbial Resources -Food-Associated Bacteria (CIRM-BIA)</rs>, <rs type="institution">STLO UMR 1253 INRAE-Agrocampus, France</rs> (https:// www6. inrae. fr/ cirm_ eng/ Food-Associated-Bacteria). All sequence data were annotated by the MicroScope Platform (1). New genome accession numbers are listed in Table S2.</p></div>
+			</div>
+			<div type="funding">
+<div><head>Funding information</head><p>This research was funded by a PhD grant from an <rs type="funder">INRAE-INRIA</rs> consortium agreement (G. Siekaniec) and an <rs type="funder">INRIA</rs> delegation position (E. Roux). The <rs type="funder">France Génomique</rs> and <rs type="funder">French Bioinformatics Institute national</rs> infrastructures are funded as part of the <rs type="programName">Investissement d'Avenir programme</rs> managed by <rs type="funder">Agence Nationale pour la Recherche</rs>, contracts <rs type="grantNumber">ANR-10-INBS-09</rs> and <rs type="grantNumber">ANR-11-INBS-0013</rs>.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_N3vAuaR">
+					<orgName type="program" subtype="full">Investissement d&apos;Avenir programme</orgName>
+				</org>
+				<org type="funding" xml:id="_ZDds6gS">
+					<idno type="grant-number">ANR-10-INBS-09</idno>
+				</org>
+				<org type="funding" xml:id="_MR9FrBu">
+					<idno type="grant-number">ANR-11-INBS-0013</idno>
+				</org>
+			</listOrg>
+
+			<div type="availability">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>data files. Nine supplementary tables, two supplementary text and three supplementary figures are available with the online version of this article.</p><p>000654</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>with 12 samples, the flow cell produced about 3 million reads (9 Gb of sequences) after 48 h of run. In fact, less than 10 min of sequencing is sufficient to produce the 4000 reads necessary for strain identification. Furthermore, ONT suggest the low-cost, low-throughput Flongle flow cell that could be an interesting alternative for producing the required data in about 30 min. Overall, from sample collection (e.g. a fermented food product) to sequence files, for one sample containing four strains, requires less than 6 h (for a total cost of maximum 200 €, using Flongle). Then, depending on the processor used, identification could be achieved within 1 h.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Quantification of strains in a mixture</head><p>We plan to estimate strain abundances in ORI by using an expectation-maximization (EM) algorithm similar to the one used in Centrifuge <ref type="bibr" target="#b16">[17]</ref>. Users already have access to indicative abundance values in conjunction with strain classification to help interpret the identification results. For instance, consider a sample that contains 16 000 reads of six S. thermophilus strains equitably distributed and making two clusters of sibling strains: A={CIRM-BIA18, CIRM-BIA32} and B={CIRM-BIA2101, CIRM-BIA23, CIRM-BIA65 and CIRM-BIA67}. Thus, the sample comprises 1/3 of A and 2/3 of B. For this sample ORI found 25 % of A, 72 % of B and 3 % of a third cluster C={CIRM-BIA1116, CIRM-BIA1122, CIRM-BIA16, CIRM-BIA29, CNRZ1066, CS8, EPS, S9} (MCC=0.807). Since the abundance of C is quite low and it is quite close to cluster B (see Fig. <ref type="figure">3</ref>), it is reasonable to assume that the reads originated in fact from B. By increasing the merging threshold τ, B and C would indeed be merged, leading to perfect identification.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Towards a generalization to other species and genera?</head><p>The index can be tailored to any set of bacterial genomes by modifying the genome index, as explained on the website. We tested our method on Streptococcus pyogenes (around 200 genomes in NCBI; some closely related and mostly different by their phage content). A known S. pyogenes emm75 strain of our collection was correctly identified by ORI. We also used 1600 complete genomes to create a specific E. coli index. Reads were from a piglet gut microbiota. This gave promising results in about 5 h: all the reference strains identified were also from a piglet gut microbiota. The next challenge is to test ORI on a larger number of species in order to fit users' study species. As a first step, we plan to increase our database to the whole order Lactobacillales. We aim at keeping good accuracy and sensitivity for identification at the strain level while staying efficient with respect to memory and computation time. This will require some modifications in the means of requesting the index which, currently, remains the most time-consuming part.</p><p>Author contributions Conceptualization, J.N.; methodology, G.S., J.N. and T.L.; software, G.S. and T.L.; validation, G.S.; resources, E.R.; data curation, G.S. and E.R.; writing-original draft preparation, J.N., G.S. and E.R.; writingreview and editing, J.N., E.R., G.S. and E.G.; supervision, J.N., E.R. and E.G.; project administration, J.N.; funding acquisition, J.N. and E.G. All authors have read and agreed to the published version of the manuscript.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Conflicts of interest</head><p>The authors declare that there are no conflicts of interest.</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Pathogenic and non-pathogenic Escherichia coli colonization and host inflammatory response in a defined microbiota mouse model</title>
+		<author>
+			<persName><forename type="first">Z</forename><forename type="middle">R</forename><surname>Stromberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Van Goor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gaj</forename><surname>Redweik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wymore</forename><surname>Brand</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">J</forename><surname>Wannemuehler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">J</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Dis Model Mech</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page">11</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Genome-scale genotype-phenotype matching of two Lactococcus lactis isolates from plants identifies mechanisms of adaptation to the plant niche</title>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">J</forename><surname>Siezen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mjc</forename><surname>Starrenburg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Boekhorst</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Renckens</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Molenaar</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Appl Environ Microbiol</title>
+		<imprint>
+			<biblScope unit="volume">74</biblScope>
+			<biblScope unit="page" from="424" to="436" />
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">First insight into the probiotic properties of ten Streptococcus thermophilus strains based on in vitro conditions</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Qi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Zhao</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Curr Microbiol</title>
+		<imprint>
+			<biblScope unit="volume">77</biblScope>
+			<biblScope unit="page" from="343" to="352" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">DAIRYdb: a manually curated reference database for improved taxonomy annotation of 16S rRNA gene sequences from dairy products</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Meola</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Rifa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Shani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Delbès</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Berthoud</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Genomics</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page">560</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">An integrated metagenome catalog reveals new insights into the murine gut microbiome</title>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">R</forename><surname>Lesker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">C</forename><surname>Durairaj</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ejc</forename><surname>Gálvez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Lagkouvardos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">F</forename><surname>Baines</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Cell Rep</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="page" from="2909" to="2922" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">A comprehensive non-redundant gene catalog reveals extensive within-community intraspecies diversity in the human vagina</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">T</forename><surname>France</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Crabtree</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">B</forename><surname>Holm</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">S</forename><surname>Humphrys</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Commun</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page">940</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Metagenomic approaches in microbial ecology: an update on whole-genome and marker gene sequencing analyses</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">E</forename><surname>Pérez-Cobas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Gomez-Valero</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Buchrieser</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Microb Genom</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Shotgun metagenomics, from sampling to analysis</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Quince</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">W</forename><surname>Walker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">T</forename><surname>Simpson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">J</forename><surname>Loman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Segata</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Biotechnol</title>
+		<imprint>
+			<biblScope unit="volume">35</biblScope>
+			<biblScope unit="page" from="833" to="844" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Assembly methods for nanopore-based metagenomic sequencing: a comparative study</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Latorre-Pérez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Villalba-Bermell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Pascual</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Vilanova</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Sci Rep</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page">13588</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Unicycler: Resolving bacterial genome assemblies from short and long sequencing reads</title>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">R</forename><surname>Wick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">M</forename><surname>Judd</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">L</forename><surname>Gorrie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">E</forename><surname>Holt</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLOS Comput Biol</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page" from="1" to="22" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Computational methods for strain-level microbial detection in colony and metagenome sequencing data</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Anyansi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">J</forename><surname>Straub</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">L</forename><surname>Manson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">M</forename><surname>Earl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Abeel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Front Microbiol</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page">1925</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">From Theory to Practice: Translating Whole-Genome Sequencing (WGS) into the Clinic</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Balloux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><forename type="middle">B</forename><surname>Brynildsrud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">L</forename><surname>Van</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">P</forename><surname>Shaw</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Chen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Trends in Microbiology</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="page" from="1035" to="1048" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Alignment tools</title>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">B</forename><surname>Singh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Fundamentals of Bioinformatics and Computational Biology</title>
+		<meeting><address><addrLine>Cham</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer International Publishing</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="159" to="170" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">MEGAN analysis of metagenomic data</title>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">H</forename><surname>Daniel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">A</forename><surname>Alexander</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ji</forename><forename type="middle">Q</forename><surname>Stephan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">S</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Res</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page" from="377" to="386" />
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">The mg-rast metagenomics database and portal in 2015</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Wilke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Bischof</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Gerlach</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Glass</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Harrison</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">44</biblScope>
+			<biblScope unit="page">4</biblScope>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Strain-level microbial epidemiology and population genomics from shotgun metagenomics</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Scholz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">V</forename><surname>Ward</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Pasolli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Tolio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Zolfo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Methods</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page" from="435" to="438" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Centrifuge: Rapid and sensitive classification of metagenomic sequences</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Song</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">P</forename><surname>Breitwieser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">L</forename><surname>Salzberg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Res</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="page" from="1721" to="1729" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Fast and sensitive taxonomic classification for metagenomics with Kaiju</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Menzel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">L</forename><surname>Ng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Krogh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Commun</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page" from="1" to="9" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Kraken: ultrafast metagenomic sequence classification using exact alignments</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">E</forename><surname>Wood</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">L</forename><surname>Salzberg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biol</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page">46</biblScope>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Improved metagenomic analysis with Kraken 2</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">E</forename><surname>Wood</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Langmead</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biol</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page">257</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">CLARK: Fast and accurate classification of metagenomic and genomic sequences using discriminative k-mers</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Ounit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Wanamaker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">J</forename><surname>Close</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Lonardi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Genomics</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page">236</biblScope>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Strainseeker: Fast identification of bacterial strains from raw sequencing reads using user-provided guide trees</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Roosaare</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Vaher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Kaplinski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Möls</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Andreson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PeerJ</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page">e3353</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Assessing taxonomic metagenome profilers with OPAL</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Meyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bremges</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Belmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Janssen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">C</forename><surname>Mchardy</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biol</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page">51</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Long reads: their purpose and place</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">O</forename><surname>Pollard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Gurdasani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">J</forename><surname>Mentzer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Porter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">S</forename><surname>Sandhu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Hum Mol Genet</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="R234" to="241" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Konnector v2.0: Pseudo-long reads from paired-end sequencing data</title>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">P</forename><surname>Vandervalk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Xue</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Raghavan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Chu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Med Genomics</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">inStrain profiles population microdiversity from metagenomic data and sensitively detects shared microbial strains</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">R</forename><surname>Olm</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Crits-Christoph</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Bouma-Gregson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">A</forename><surname>Firek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">J</forename><surname>Morowitz</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Biotechnol</title>
+		<imprint>
+			<biblScope unit="volume">39</biblScope>
+			<biblScope unit="page" from="727" to="736" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Reducing storage requirements for biological sequence comparison</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Roberts</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Hayes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">R</forename><surname>Hunt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Mount</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Yorke</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page" from="3363" to="3369" />
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Strain-level metagenomic assignment and compositional estimation for long reads with MetaMaps</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">T</forename><surname>Dilthey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Jain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Koren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">M</forename><surname>Phillippy</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Commun</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page">3066</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Streptococcus thermophilus: To survive, or not to survive the gastrointestinal tract, that is the question!</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Martinović</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Cocuzzi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Arioli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Mora</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nutrients</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page">2175</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Comparative genomics of Streptococcus thermophilus support important traits concerning the evolution, biology and technological properties of the species</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Alexandraki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Kazou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Blom</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Pot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Papadimitriou</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Front Microbiol</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page">2916</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">A large scale in vitro screening of Streptococcus thermophilus strains revealed strains with a high anti-inflammatory potential</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Junjua</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Kechaou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Chain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">A</forename><surname>Awussi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Roussel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">LWT</title>
+		<imprint>
+			<biblScope unit="volume">70</biblScope>
+			<biblScope unit="page" from="78" to="87" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Improved medium for lactic Streptococci and their bacteriophages</title>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">E</forename><surname>Terzaghi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">E</forename><surname>Sandine</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Appl Microbiol</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="page" from="807" to="813" />
+			<date type="published" when="1975">1975</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">A medium for the cultivation of Lactobacilli</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">C</forename><surname>De Man</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Rogosa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">E</forename><surname>Sharpe</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Appl Bacteriol</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page" from="130" to="135" />
+			<date type="published" when="1960">1960</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Fast alignment-free sequence comparison using spaced-word frequencies</title>
+		<author>
+			<persName><forename type="first">C-A</forename><surname>Leimeister</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Boden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Horwege</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Lindner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Morgenstern</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="page" from="1991" to="1999" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Spaced seeds improve k-mer-based metagenomic classification</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Břinda</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Sykulski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Kucherov</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">31</biblScope>
+			<biblScope unit="page" from="3584" to="3592" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">A unifying framework for seed sensitivity and its application to subset seeds</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Kucherov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Noé</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Roytberg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Bioinform Comput Biol</title>
+		<imprint>
+			<biblScope unit="page">21</biblScope>
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Best hits of 11110110111: Model-free selection and parameter-free sensitivity calculation of spaced seeds</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Noé</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Algorithms Mol Biol</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page">1</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Bloofi: Multidimensional Bloom filters</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Crainiceanu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Lemire</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Information Systems</title>
+		<imprint>
+			<biblScope unit="volume">54</biblScope>
+			<biblScope unit="page" from="311" to="324" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Improved representation of sequence bloom trees</title>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">S</forename><surname>Harris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Medvedev</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="page" from="721" to="727" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">High throughput ANI analysis of 90K prokaryotic genomes reveals clear species boundaries</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Jain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rodriguez-R</forename><surname>Lm</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">M</forename><surname>Phillippy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">T</forename><surname>Konstantinidis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Aluru</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Commun</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page">5114</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Microscope: An integrated platform for the annotation and exploration of microbial gene functions through genomic, pangenomic and metabolic comparative analysis</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Vallenet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Calteau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Dubois</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Amours</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bazin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">48</biblScope>
+			<biblScope unit="page" from="579" to="589" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">AMIGene: Annotation of MIcrobial Genes</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Bocs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Cruveiller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Vallenet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Nuel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Médigue</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Research</title>
+		<imprint>
+			<biblScope unit="volume">31</biblScope>
+			<biblScope unit="page" from="3723" to="3726" />
+			<date type="published" when="2003">2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Mash: fast genome and metagenome distance estimation using MinHash</title>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">D</forename><surname>Ondov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">J</forename><surname>Treangen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Melsted</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">B</forename><surname>Mallonee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">H</forename><surname>Bergman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biol</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page">132</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Introduction to formal concept analysis and its applications in information retrieval and related fields</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">I</forename><surname>Ignatov</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Russian Summer School in Information Retrieval</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="42" to="141" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Interactive Tree Of Life (iTOL) v4: recent updates and new developments</title>
+		<author>
+			<persName><forename type="first">I</forename><surname>Letunic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Bork</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">47</biblScope>
+			<biblScope unit="page" from="256" to="259" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">The use of taxon-specific reference databases compromises metagenomic classification</title>
+		<author>
+			<persName><forename type="first">V</forename><forename type="middle">R</forename><surname>Marcelino</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">C</forename><surname>Holmes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">C</forename><surname>Sorrell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Genomics</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="page" from="1" to="5" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Answer set solving in practice</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Gebser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Kaminski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Kaufmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Schaub</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Synth Lect Artif Intell Mach Learn</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page" from="1" to="238" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Diversity within species: interpreting strains in microbiomes</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Van Rossum</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Ferretti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><forename type="middle">M</forename><surname>Maistrenko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Bork</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Rev Microbiol</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page" from="491" to="506" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">Pan-gwas of streptococcus agalactiae highlights lineage-specific genes associated with virulence and niche adaptation</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Gori</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><forename type="middle">B</forename><surname>Harrison</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Mlia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Nishihara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Chan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">mBio</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page" from="728" to="748" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">Rapid inference of antibiotic resistance and susceptibility by genomic neighbour typing</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Břinda</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Callendrello</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">C</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">R</forename><surname>Macfadden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Charalampous</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Microbiol</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page" from="455" to="464" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">Minion Nanopore sequencing identifies the position and structure of bacterial antibiotic resistance determinants in a multidrug-resistant strain of enteroaggregative Escherichia coli</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">R</forename><surname>Greig</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">J</forename><surname>Dallman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">L</forename><surname>Hopkins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Jenkins</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Microb Genom</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page">e000213</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

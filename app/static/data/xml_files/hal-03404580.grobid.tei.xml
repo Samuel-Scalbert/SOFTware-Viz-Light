@@ -1,0 +1,1376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Covid-on-the-Web: Exploring the COVID-19 Scientific Literature through Visualization of Linked Data from Entity and Argument Mining</title>
+				<funder>
+					<orgName type="full">Inserm</orgName>
+				</funder>
+				<funder ref="#_ANyC6Um">
+					<orgName type="full">Agence Nationale de la Recherche</orgName>
+					<orgName type="abbreviated">ANR</orgName>
+				</funder>
+				<funder ref="#_GAEUNSV">
+					<orgName type="full">unknown</orgName>
+				</funder>
+				<funder ref="#_JB6G5mX">
+					<orgName type="full">Inria</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author role="corresp">
+							<persName><forename type="first">Aline</forename><surname>Menin</surname></persName>
+							<email>aline.menin@inria.fr</email>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Franck</forename><surname>Michel</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Fabien</forename><surname>Gandon</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Raphaël</forename><surname>Gazzotti</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Elena</forename><surname>Cabrio</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Olivier</forename><surname>Corby</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Alain</forename><surname>Giboin</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Santiago</forename><surname>Marro</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Tobias</forename><surname>Mayer</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Serena</forename><surname>Villata</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Marco</forename><surname>Winckler</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 7271)</orgName>
+								<orgName type="institution" key="instit1">University Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<region>I3S</region>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Covid-on-the-Web: Exploring the COVID-19 Scientific Literature through Visualization of Linked Data from Entity and Argument Mining</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">853C5085F291009086BF3779AE482652</idno>
+					<idno type="DOI">10.1162/qss_a_00164</idno>
+					<note type="submission">Submitted on 26 Oct 2021</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:13+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>COVID-19</term>
+					<term>argument mining</term>
+					<term>visualization</term>
+					<term>entity linking</term>
+					<term>linked data</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>published or not. The documents may come from teaching and research institutions in France or abroad, or from public or private research centers.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>The COVID-19 pandemics motivated the scientific community from numerous fields of research to contribute in a common effort to study, understand and fight the severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2). Several datasets covering the publications about COVID-19 and related coronaviruses and diseases have been compiled to support the scientific community. Particularly, we focus on the COVID-19 Open Research Dataset (CORD-19) <ref type="bibr" target="#b27">(Wang et al., 2020)</ref>, which gathers over 500,000 scholarly articles, including over 200,000 with full text. This deluge of ever-increasing publications in such a short time frame suggests that it is impossible for any researcher to examine every publication and extract relevant information from it without appropriate support. To help researchers to find publications of interests, we employ information visualization techniques to explore the dataset and identify relationships among publications that indicate those that are worthy of further examination.</p><p>In collaboration with biomedical researchers from the French Institute of Medical Research (Inserm) 1 and the French National Cancer Institute (INCa) 2 , we created the Covid-on-the-Web project, which gathers expertise from various research fields (i.e., semantic web, natural language processing, and visualization) to assist the exploration of the COVID-19 scientific literature. Through a series of interviews with our prospect users, we could identify a set of meaningful use case scenarios, such as determining the right amount of certain substances in the patients' organism using baseline information collected from scientific articles, analyzing clinical trials to make evidence-based decisions, studying of the relationship between coronaviruses and other diseases (e.g., cancer), identifying the types of cancers that are likely to occur in COVID-19 victims, among others. Whilst some scenarios require exploring the relationship between components (e.g., cancer and coronavirus), others require representing trends (e.g., probability of cancer in COVID-19 victims) and analyzing specific attributes (e.g., details about metabolic changes caused by . Furthermore, the analysis of co-authorship is relevant to health research as it allows to assess collaboration trends and identify leading investigators and organizations <ref type="bibr" target="#b9">(Fonseca et al., 2016)</ref>. In this paper, we focus on using visualization to assist the resolution of user queries based on the relationship between components and co-authorship networks, which allow to answer user queries such as "where are researches in a particular topic being performed?".</p><p>We present two contributions of the Covid-on-the-Web project to the exploration of COVID-19 scientific literature. The first contribution refers to the Covid-on-the-Web RDF dataset, a linked version of the CORD-19 corpus, enriched via entity linking and argument mining. Currently, the Covid-on-the-Web RDF dataset includes and enriches over 100,000 full-text scholarly articles from the 47 th version of the CORD-19 corpus, which corresponds to 1.3 billion RDF triples describing the articles' metadata, an argumentation and a named entities (NE) knowledge graph. The second contribution correspond to LDViz 3 , a visualization tool that enables the exploration of the COVID-19 scientific literature from different perspectives, such as co-authorship, named entities co-occurrence and the relationship between claims and evidences within publications. We demonstrate the potential of LDViz to support the exploration of customizable SPARQL result sets extracted from the Covid-on-the-Web dataset to assist the resolution of different domain-related tasks.</p><p>Although there have been previous contributions in exploring the CORD-19 corpus through entity linking approaches (e.g., <ref type="bibr" target="#b21">Oniani et al., 2020;</ref><ref type="bibr" target="#b23">Reese et al., 2021)</ref>, to the best of our knowledge, the Covid-on-the-Web dataset is the first to integrate NEs, arguments and PICO components into a single, coherent whole. Furthermore, we propose an unified pipeline (Figure <ref type="figure">1</ref>) that facilitates the extraction and visualization of information from the CORD-19 corpus by continuously producing and publishing an enriched linked data 3 Link for an illustration video of LDViz: https://youtu.be/Cn_IWQ7yVvE knowledge graph. Also, our visualization approach differs from previous solutions to explore the COVID-19 scientific literature (e.g., <ref type="bibr" target="#b10">Hope et al., 2020;</ref><ref type="bibr" target="#b26">Verspoor et al., 2020)</ref>, by supporting the exploration of meaningful subsets of data suitable to users' needs through the definition of custom SPARQL SELECT queries and via multiple, complementary visualization techniques; and by allowing the user to trace back their exploratory path, which help them to understand how they have arrived to a certain outcome.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Figure 1</head><p>Overview of the Covid-on-the-Web project: pipeline, resources, services and applications.</p><p>The remaining of this paper is organized as follows. Section 2 presents previous data mining and visualization approaches to explore the CORD-19 corpus. Section 3 describes the extraction pipeline to process the CORD-19 corpus and generate the RDF dataset and presents the characteristics of the dataset and the available services to exploit it. Section 4 describes LDViz, which usage and exploration potentials are demonstrated through use case scenarios in Section 5. Section 6 discusses future applications and potential impact of the dataset. Finally, section 7 concludes this paper.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">Related Work</head><p>Since March of 2020, when the CORD-19 corpus was first released, we have seen multiple efforts towards its analysis and mining through different tools and for various purposes. We have seen initiatives ranging from ad-hoc data releases to the repurposing of large existing projects. Thus, in this section, we will present previous works related to the exploration of the CORD-19 dataset in terms of data enrichment and visualization.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Data Enrichment</head><p>Entity linking is usually the first approach for processing or enriching a dataset, which we can observe in several initiatives throughout the literature, such as: the CORD-19-on-FHIR <ref type="bibr" target="#b21">(Oniani et al., 2020)</ref> project, which transforms the CORD-19 corpus in RDF following the HL7-FHIR interchange format and annotates articles with concepts related to conditions, medications and procedures; the KG-COVID-19 <ref type="bibr" target="#b23">(Reese et al., 2021)</ref> project, which seeks the lightweight construction of KGs for COVID-19 drug repurposing efforts; and the CKG-COVID-19 <ref type="bibr" target="#b11">(Ilievski et al., 2020)</ref> project, which seeks the discovery of drug repurposing hypothesis through link prediction.</p><p>These solutions restrict processing to title and abstract, while we process the full text of the articles with Entity-fishing, thus providing a high number of NEs linked to Wikidata concepts. Furthermore, these solutions are mostly focused on biomedical ontologies, resulting in NEs strongly related to genes, proteins, drugs, diseases, phenotypes and publications, while we extend the scope of ontologies to include DBpedia and Wikidata, resulting in named entities that go beyond the biological domain to extend the scope of analysis. Furthermore, we integrate argumentation structures and named entities in a coherent dataset.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Visualization Approaches</head><p>The Covid19-PubAnnotation<ref type="foot" target="#foot_2">4</ref> repository gathers text annotations regarding the CORD-19 corpus and other COVID-19 datasets. The annotations are recovered from multiple sources and aligned to the canonical text that is taken from PubMed and PMC archives, which link annotations to each other. Furthermore, the platform provides simple visualization that allows one to view the annotations directly on the text and further explore them through interaction.</p><p>The SciSight <ref type="bibr" target="#b10">(Hope et al., 2020)</ref>  The COVID-SEE (Scientific Evidence Explorer for COVID-19) interface <ref type="bibr" target="#b26">(Verspoor et al., 2020)</ref> enables the visual exploration of documents from the CORD-19 corpus through three different views: a sankey diagram displays the relationship between PICO concepts and allows to retrieve the documents where these relations occur; a topic view shows the representative topics of the selected documents and their distribution according to certain coherence measures; and a word cloud view displays the representative concepts of a document.</p><p>The SemViz <ref type="bibr" target="#b25">(Tu et al., 2020)</ref> interface uses semantic visualization to explore the publications within the CORD-19 and other COVID-19 datasets. It provides three visualization techniques: a tag cloud gives an overall view of the most important concepts within the data; a heat map represents a pairwise relationship between selected entities in the article abstracts and journal names; and a data table is used to represent indexed document data, such as sentences of biomedical relations and corresponding PubMed URLs that link to the full article. <ref type="bibr" target="#b24">Sukla et al., 2021</ref> propose a visualization interface that allows the user to explore a set of publications from the CORD-19 corpus retrieved via textual querying. It displays the list of articles related to the query, which corresponding named entities can be further explored through a tag cloud chart and a co-occurrence map. <ref type="bibr" target="#b2">Bras et al., 2020</ref> combine advanced data modeling of large corpora, information mapping, and trend analysis to provide a browsing and search interface for discovering topics and research resources within the CORD-19 dataset. The system provides a cluster visualization displaying all resources in the dataset, where the user can select a resource to explore its related topics, descriptions, trend analysis, and documents.</p><p>The CovidExplorer <ref type="bibr" target="#b0">(Ambavi et al., 2020</ref>) is a multi-faceted AI-based search and visualization engine that integrates search and recommendation, statistics, and social media discussions to support the exploration of scientific articles from the CORD-19 dataset. It comprises a query interface that supports keyword-based search of authors, papers (title), and full-text papers; and a named entity recognition system which computes indicators of first mention of entities, popular co-mentioned entities, and year-wise distribution of mention frequencies. These indicators are visualized through a timeline chart and a sankey diagram, which shows the co-occurrence of entities within publications.</p><p>The system provides yet a spatio-temporal visualization of tweets regarding COVID-19.</p><p>Although we find several visualization tools to support either the exploration of linked data in general or the COVID-19 scientific literature, as the ones presented above, most of them support the exploration of raw data (i.e. the RDF graph, OWL or RDF Schema), which is interesting for certain tasks such as exploring relevant concepts of an application domain via ontology representation, inspecting RDF Graphs, and analyzing instances based on their types/classes. Thus, we propose a flexible tool to enable users to define meaningful datasets via SPARQL SELECT queries applied to any SPARQL endpoint (illustrated here via the Covid-on-the-Web dataset), so that they can explore multiple aspects of RDF datasets and the LOD Cloud. It also allows users to perform exploratory searches using various complementary visualization techniques instantiated on demand according to the task at hand, instead of a single visualization technique that represents the whole dataset, restraining the analysis to a single view to the data. Our approach is also based on a visualization concept that enables users to track their exploratory path to help them to understand how they arrived to a certain outcome and to allow them to explore alternative hypotheses generated on the fly through different exploratory paths. Furthermore, the visualization together with the additional extractions (i.e. named entities, arguments, etc) we perform in the Covid-on-the-Web dataset, enables a deep and semantic-aware exploration of the topics and claims of the COVID scientific corpus by leveraging the combination of semantic processing and exploratory search.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">The "Covid-on-the-Web" Dataset</head><p>In this section, we describe the Covid-on-the-Web dataset which we produced from processing and analyzing the CORD-19 corpus. The dataset cohesively integrates the results of two mining processes: (1) a named entities (NE) extraction and linking that define the links between the CORD-19 articles and major public datasets of the Web of Data, and (2) an extraction of argumentative components discovered in the articles. These are both represented as RDF knowledge graphs described hereafter.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">The CORD-19 Named Entities Knowledge Graph</head><p>The CORD-19 Named Entities Knowledge Graph (CORD19-NEKG) represents NEs identified and disambiguated in the articles of the CORD-19 corpus using three tools: DBpedia Spotlight <ref type="bibr" target="#b7">(Daiber et al., 2013)</ref> to disambiguate NEs against DBpedia entities; the Entity-fishing 5 tool to disabiguate NEs against Wikidata entities; and NCBO BioPortal Annotator <ref type="bibr" target="#b12">(Jonquet et al., 2009)</ref> to disambiguate NEs against entities found in BioPortal's ontologies.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Figure 2</head><p>Extract of the Covid-on-the-Web RDF graph. Image adapted from an illustration generated with LD-VOWL <ref type="bibr" target="#b14">(Lohmann et al., 2016)</ref> (see http:// vowl.visualdataweb.org/ v2/ for a description of the graphical primitives and color scheme).</p><p>CORD19-NEKG uses common, well-adopted terminological resources to represent articles and NEs in RDF. We use DCMI 6 , FaBiO 7 , the Bibliographic Ontology 8 , FOAF 9 , and Schema.org 10 to represent article metadata such as the title, authors and DOI, and the Web Annotation Vocabulary 11 and Provenance Ontology 12 to represent and trace the recognized entities. These include the text segment recognized as the NE, the location of the segment within the article's text, the resource URI (e.g., from Wikidata) linked to the NE, and the part of the article wherein the NE was recognized (i.e., title, abstract, or body). Figure <ref type="figure">2</ref> presents an extract of the RDF model, which full description together with examples is available in the project's Github repository. 13</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">The CORD-19 Argumentative Knowledge Graph</head><p>The ACTA (Argumentative Clinical Trial Analysis) <ref type="bibr" target="#b15">(Mayer et al., 2019)</ref> tool was originally designed to help clinicians make decisions in evidence-based medicine by automatically extracting argumentative components and PICO elements 14 from clinical trials. Through multiple NLP steps, ACTA retrieves the argumentative components in the trial and its PICO elements, classifies the components into claim (concluding statement) and evidence (observation or measurement), and infers the relationship between the components (i.e., support or attack). For instance, "a new treatment is considered more effective than existing treatments (claim), as attested by the measure of certain biological 6 https://www.dublincore.org/specifications/dublin-core/dcmi-terms/ 7 https://sparontologies.github.io/fabio/current/fabio.html markers within the tested population (evidence)".</p><p>The models used in ACTA are trained with SciBert, a language model for scientific text, that has been shown to work on texts from different application domains <ref type="bibr" target="#b1">(Beltagy et al., 2019)</ref>. While the content of articles might differ from clinical trials, the structure of the abstracts is similar, including elements such as background, methods, results, and conclusions. Thus, since arguments can be extracted from abstracts not necessarily dealing with clinical trials and PICO elements detection can be generalized to every biomedical article, we re-purposed ACTA to also annotate the articles from the CORD-19 corpus.</p><p>Thus, we analyzed every abstract and translated the result into RDF to create the CORD-19 Argumentative Knowledge Graph (CORD19-AKG), which represent the argumentative components through the Argument Model Ontology (AMO) 15 , the SIOC Argumentation Module (SIOCA) 16 and the Argument Interchange Format 17 . Further, the PICO elements are described as annotations of the argumentative components in a similar way to the NEs and disambiguated against UMLS concepts and semantic types.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">Publishing and Querying Covid-on-the-Web Dataset</head><p>The Covid-on-the-Web dataset has a DOI and can be downloaded from Zenodo 18 . It can also be queried through our public SPARQL endpoint 19 . The RDF dataset embeds detailed metadata describing licensing, authorship, provenance, interlinking, and access information, and the vocabularies used. 20 Additional information regarding reproducibility and sustainability have been detailed and discussed in Michel et al., 2020.     15  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Linked Data Visualizer</head><p>The Linked Data Visualizer is a generic visualization tool for the Semantic Web of Linked Data. It enables the exploration of custom subsets of linked datasets defined via SPARQL queries. Figure <ref type="figure" target="#fig_2">3</ref> provides an overview of the LDViz architecture. It comprises a querying management interface, where users can manage predefined queries, by viewing, editing and visualizing their results, as well as cloning them to create new queries. The interface contains a query editing form, where the user can type their own queries. Upon submitting a query, the obtained results undergo a transformation process, which output data corresponds to the expected format for the visualization. The user can then explore the resulting data using the MGExplorer visualization framework. In this section, we describe the operational mode of LDViz with particular focus to the querying management and the visualization interfaces. We further demonstrate the versatility of LDViz to explore the Covid-on-the-Web dataset through a set of use case scenarios presented in Section 5.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Query Management Interface</head><p>The query management interface (Figure <ref type="figure" target="#fig_3">4</ref>) allows users to create and edit their own SPARQL queries. In Figure <ref type="figure" target="#fig_3">4a</ref>, we can see the menu that lists and allows managing predefined queries, while Figure <ref type="figure" target="#fig_3">4b</ref>-e depicts the interface areas enabling the edition and customization of queries. This interface also enables the preview and exporting of a query's results (see Figure <ref type="figure" target="#fig_3">4f</ref>). These can be visualized via the MGExplorer graphic library and/or exported as JSON files containing either the results in the SPARQL JSON format or the transformed results used as input of the visualization. The user can type the query in a text area, which can include customizable parameters specified through HTML forms, such as the publication date. Upon submitting a query, the results are processed by a transformation engine that converts the SPARQL JSON format into the JSON format expected by the graphic library.</p><p>The transformation engine is generic enough to support the exploration of different variables of the dataset. This flexibility allows to explore graphs with different topology (e.g., with nodes featuring publications, authors, named entities, etc.). In the context of LDViz, this is made possible by using a SPARQL query that requires at least three variables: ?s and ?o, which describe the nodes (e.g., authors or named entities) related by a particular document identified by a variable ?p. An alternative to ?s, ?o is the variable ?author which contains a list of authors. In addition to these variables, the system allows three other reserved variables that serve to describe the edges (?p) of the output graph visualization: ?type, ?label, and ?date. The variable ?type can be used to type the edges of the output graph (e.g., by publication type). Due to human's perceptual and cognitive limits towards visualizations, only a certain number of graphic elements can be drawn on the screen. Thus, we allow the variable ?type to be bound to only four different values describing the edges. When it is bound to more than four distinct values in the SPARQL query result, the system automatically determines the three more relevant ones based on the number of bindings and classifies the remaining values as "Other". The ?label variable allows to provide a description of edges in natural language (e.g., the value of rdfs:label properties describing resources). Finally, the ?date variable is used to provide a visual representation of the distribution of edges over time (e.g., publication year). When dealing with a new dataset, researchers often have to debug and test multiple 288 queries to discover the contents of the dataset. For the purpose of easing the customization of queries and the use of the interface by the domain expert, we provide query templates that allow one to interactively define the value of certain parameters, such as publication period and named entities of interest (see Listing 1 for an example).</p><p>A Graph Style Sheet language (GSS) serves to transform the default node-link diagrammatic representation through the declarative specification of visibility, layout and styling rules applied to its nodes and arcs <ref type="bibr" target="#b22">(Pietriga, 2006)</ref>. Based on this concept, we associate each query to a GSS that the user can edit (see Figure <ref type="figure" target="#fig_3">4e</ref>) to customize the resulting node-link diagram (see Listings 2 and 3 for an example). Further to modifying the colors and shape of nodes and edges, we enable, through the GSS, the linking of external services to the visualization interface as a way of extending the analysis. For instance, the Corese engine <ref type="bibr" target="#b6">(Corby et al., 2012)</ref> is a RDF processor that enables among others the production of new knowledge through inference rules. Thus, one could include this service on the GSS, which would allow the exploration of the visualized resources through the Corese engine. Further, we can use this feature to support on-the-fly exploration of argumentative graphs of publications identified throughout the visual exploration process by including the ACTA service (see Subsection 5.5 for more details).</p><p>Although we demonstrate the usage of the querying and visualization interfaces for exploring the Covid-on-the-Web dataset, LDViz can be used to query and visualize data from any SPARQL endpoint. The querying form contains a field where the user enters the endpoint URL, and the only requirement is that the query returns values for the above-listed predefined set of variables. Hence, what we propose with LDViz is a generic visualization tool for the Semantic Web of Linked Data.</p><p>As for any visualization, user queries must be translated to a query language that recovers the necessary data from the database to solve the exploratory task. In this paper, the user queries were identified during interviews with users from INCa and Inserm and translated into SPARQL queries by data scientists. Thus, the query management interface intends to help expert users (developers and data scientists) to create suitable SPARQL queries for exploring the dataset. However, expert users such as biomedical researchers do not need to know SPARQL for visualizing and interacting with the results of queries. Indeed, they may benefit of a public vitrine 21 simply by selecting a predefined query to explore the results with MGExplorer without having to deal with SPARQL expressions (Figure <ref type="figure" target="#fig_4">5</ref>). The visibility of the predefined queries in the vitrine is settled when queries are created at the query management interface. In the next section, we describe how users can interact with the data resulting of those queries by means of an information visualization interface.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Visualization Interface</head><p>As mentioned earlier, LDViz uses the MGExplorer (Multidimensional Graph Explorer) <ref type="bibr" target="#b17">(Menin, Cava, et al., 2021)</ref> graphic library to support the visual exploration of the Covid-on-the-Web dataset. More than a collection of charts, MGExplorer is a visualization tool based on the concept of chained views, which supports the exploration of multidimensional network data, while keeping provenance information to enable further study of users' reasoning based on their interactions with the system. The visual exploration process in MGExplorer consists of two phases, described as follows:</p><p>1. the overview phase, which consists of visualizing the network defined by the SPARQL query results through a node-link diagram (see description below). This visualization allows the user to get an overall understanding of the clusters within the data; and 2. the exploratory phase, where the user can further explore items of interest by selecting them directly on the visualizations, which subsets the data to be explored via a new suitable visualization technique.</p><p>The generic aspect of MGExplorer enables the combination of multiple visualizations to support (1) the comparison of two or more different subsets of data through a particular perspective provided by a particular visualization, and (2) the comparison of different perspectives of the same subset of data using multiple, complementary visualization techniques. Particularly, we currently support data exploration through six views summarized in Table <ref type="table">1</ref> and described as follows:</p><p>• The node-link diagram shows a set of nodes, which represent data items (e.g., authors), and their relationships represented through line segments connecting them.</p><p>In MGExplorer, this visualization technique provide an overview of the relationships within items of the input data. In our use case scenarios (Section 5), the relationships are defined by scientific publications, either to reveal co-authorship networks or co-occurrence of named entities.  <ref type="bibr" target="#b17">(Menin, Cava, et al., 2021)</ref>.</p><p>• The ClusterVis technique <ref type="bibr" target="#b4">(Cava et al., 2017)</ref> enables the inspection of clusters and data attributes (e.g., publication type) within the subset of items (e.g., authors or named entities). The visualization has a multi-ring layout, where the innermost ring is formed by dots representing data items, and the remaining rings display the data attributes, which can be customized and reordered by the user. The items in the innermost ring that belong to the same sub-cluster are connected via curved lines, which one can highlight by hovering over the items. The remaining rings are formed by bars where height and color encode different data attributes (e.g., the height encodes count and the color encodes the types of publications of a specific author).</p><p>• The IRIS technique represents the pairwise relationships between an item of interest (e.g., an author) and the remaining items in a particular subset of data, which relationship is described by data attributes (e.g., publication count and type) <ref type="bibr" target="#b5">(Cava et al., 2014)</ref>. This technique is inspired by the eye's iris, which can only focus on a certain amount of information at the time, i.e., what is visible within our field of view. The selected item is represented in the IRIS as a circle at the center of the view, surrounded by its related items, which are displayed in a way that the ones in the field of view (gray area) are larger than the ones outside this zone, easing information extraction. The user can place any item in the field of view by clicking on it, switching the focus of the IRIS. In order to represent data attributes describing those pairwise relationships, we use the height and color of a bar placed in between the item of interest and each of its related items.</p><p>• The GlyphMatrix technique <ref type="bibr" target="#b3">(Cava &amp; Freitas, 2013)</ref> features a matrix where rows and columns represent data items (e.g., authors or named entities), and the intersection cell between each pair of items contains a glyph encoding the data attributes describing that relationship. The default glyph is based on a radar chart, where each axis displays the count of a different data attribute (e.g., publication type). The technique supports sorting of rows and columns to facilitate information extraction, and hovering over cell to make the glyph larger and more visible through a tooltip feature. This visualization technique could be seen as a combo of the ClusterVis and IRIS by displaying the relationship between an item of interest and other items in a pairwise manner, as well as the relationships within the remaining items in the group.</p><p>• The Bar chart technique shows the distribution of publications according to a given variable. In our case study, the x-axis encodes temporal information, while the y-axis encodes the counting of publications. The data is displayed as a single bar per time-period or multiple colored bars to represent categorical information of attributes.</p><p>• The Listing technique lists the items that form the relationship between two or more nodes in the graph. In our case study, it displays the list of publications co-authored by two or more authors or the publications where two or more named entities co-occur, according to subset of data being explored. Each item of the list contains a link to a descriptive web page of the publication, where the user can obtain more information about it. Furthermore, if enabled by the GSS, each item contains a context menu to enable further exploration using an external service (e.g., ACTA). </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Table 1</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Classification of visualization techniques available in</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">Use Case Scenarios</head><p>In this section we illustrate the usage of COVID LDViz to explore the Covid-on-the-Web dataset. The goal is to demonstrate what kind of data one can explore using this interface and how the data processing between the query management and the visualization interfaces support a multi-perspective exploration of the dataset.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Scenario 1. Clusters Visualization</head><p>Based on the premise that COVID-19 has increased the collaboration between researchers from diverse disciplines around the world <ref type="bibr" target="#b20">(Naujokaitytė, 2021)</ref>, a biomedical researcher from INCa was interested on searching for information about existing collaborations on the theme of the relationship between COVID-19 and cancer (or more generally between COVID-19 and other diseases) in order to analyze the nature of these collaborations, their impact and their evolution. In this scenario, we illustrate how LDViz could assist this analysis by exploring co-authorship networks.</p><p>We use a subset of data describing the co-authorship network within publications related to coronavirus families retrieved with the query presented in Listing 1, which resulted in 4,238 RDF triples corresponding to publications having the word "coronavirus" in the title. These results were then transformed into a graph with 879 nodes (authors) and 4,053 edges (connections between authors). Figure <ref type="figure" target="#fig_7">7</ref> depicts the exploratory path that we follow during this scenario, which illustrates how one can explore clusters of co-authors and related information to their co-publications. As mentioned earlier, the MGExplorer visualization interface self-starts with an overview of co-authorship clusters through the node-link diagram and the history tree of the exploratory process, which is progressively completed based on the user's interactions.</p><p>In the node-link diagram, we identify a dense sub-graph related to the author Yuen, Kwok-Yung (Figure <ref type="figure" target="#fig_7">7a</ref>), who will be our author of interest for this exploration. We hover over the node representing the author, where we observe that they have 47 co-authors, with whom five scholarly articles have been published. Subsequently, we right-click on the node to activate a context menu that allows subsetting the data and explore it with another visualization technique. We choose the ClusterViz view, where we can explore the different clusters within the subset of co-authors selected in the node-link (Figure <ref type="figure" target="#fig_7">7c</ref>). For two different clusters, we subset the data by hovering over a particular author and display the list of publications which they co-authored together (Figure <ref type="figure" target="#fig_7">7d-e</ref>). Finally, we could compare the contributions made within those clusters and the complete list of publications co-authored by our author of interest (Figure <ref type="figure" target="#fig_7">7f</ref>), to understand the impact of these co-authorship relationships in terms of number and quality of publications they have together. Listing 1: SPARQL query used in Use Case Scenarios 1 and 4 to retrieve the co-authorship network within publications about "coronavirus" between 2015 and 2021. The generic structure of LDViz allows the construction of graphs with different topologies. The user can choose the variables that correspond to the nodes and the connection between them (e.g., in the previous scenario, nodes correspond to a variable that describes the authors' names and the edges correspond to a variable that describe the documents they co-authored). Together with biomedical researchers, we have identified the task "to identify the articles that mention both a type of cancer and a virus of the corona family" as being relevant for their analyses. Thus, in this scenario, we illustrate how we can use the LDViz to solve this domain-related task. Using the query presented in Listing 3, we retrieve the RDF triples that correspond to the pattern ?s → ?p → ?o, where ?s and ?o are, respectively, named entities related to (i.e., equal to, subclass of, or instance of) "cancer" and "coronavirus" named entities, and ?p refers to the publications that contain these named entities on their text body. The relationships are determined by publications, however, unlike the Scenario 1, this query modifies the topology of the graph to represent the relationships between named entities instead of co-authors.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Scenario 2. Customizing the Graph Topology</head><p>{" node ": { " fst ": {" color ": " green "} , " snd ": {" color ": " orange "} } , " services ": [{" label ": " ACTA " , " url ": " http : / / 1 3 4 . 5 9 . 1 3 4 . 2 3 4 : 8 0 8 1 / analyseddocs ? search ="} , {" label ": " Browser Corese " , " url ": " http :// corese . inria . fr / srv / service / covid ? uri ="}]} Listing 3: SPARQL query used in Use Case Scenarios 2 and 5 to retrieve the co-occurrence network within publications of named entities related to cancer and coronavirus.</p><p>Figure <ref type="figure" target="#fig_8">8</ref> depicts the exploratory path followed in this scenario to solve the above-described domain-related task. We explore a dataset that contains 452 RDF triples, which results in a graph with 94 nodes and 169 edges. Since in this dataset, we deal with two types of nodes, i.e., either related to "cancer" or "coronavirus", we use the GSS feature (see Listing 2) to color these different types of nodes accordingly (i.e., green encodes cancer and orange encodes coronavirus), easing the visual identification of the relationship between the cancer-and coronavirus-related nodes directly in the node-link diagram (Figure <ref type="figure" target="#fig_8">8a</ref>). Due to the nature of the data, we can easily spot a large sub-graph originating from the SARS-CoV-2 named entity, which is associated to 62 types of cancer through 232 publications. We further explore the subset of data within this sub-graph by clicking-right on the node representing SARS-CoV-2 and choosing the IRIS visualization, which displays the relationships of this named entity with the different types of cancer in a pairwise manner (Figure <ref type="figure" target="#fig_8">8b</ref>). We could observe via the longest bar in the IRIS that SARS-CoV-2 mostly co-occurs with "cancer" in 41 publications (Figure <ref type="figure" target="#fig_8">8c</ref>), which types are not specified. Further, we observe that the second most recurrent co-occurrence of SARS-CoV-2 is with "head and neck cancer", for which we observe the existence of 23 publications (Figure <ref type="figure" target="#fig_8">8d</ref>). The Listing view displays the publications together with links to their descriptive pages in the Covid-on-the-Web dataset, where the user can have more information about each document<ref type="foot" target="#foot_3">22</ref> . The previous exploration scenarios allow the user to see the relationship between co-authors or named entities, which can be characterized by the number of related publications. Thus, this scenario illustrates how we can use the LDViz to explore custom data attributes of a co-authorship network within coronavirus-related publications. In particular, we will use a dataset that describes publications through the research topic retrieved with the query presented in Listing 4. In the context of the Covid-on-the-Web dataset, this information originate from the schema:about property, which refers to a set of named entities that can be used to describe the research topic of the publication. The resulting dataset has 1,265 RDF triples, which were transformed in a graph with 356 nodes (authors) and 1,262 edges (co-publications). From the resulting data, the system identified the values "sequence alignment", "reverse transcriptase", and "transfection" as the most relevant research topics to describe the publications within the data and classified the remaining under the "other" category.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3">Scenario 3. Exploring Data Attributes</head><p>Figure <ref type="figure" target="#fig_9">9</ref> depicts the exploratory path of this scenario. We inspect the clusters of co-authorship within the associations of different authors through the ClusterViz visualization. We can observe, for instance, that the researcher Collisson, Ellen (Figure <ref type="figure" target="#fig_9">9a</ref>) has publications about different topics (i.e., sequence alignment and other) within different clusters of co-authorship, while the publications co-authored by Chu, Chen-Chung (Figure <ref type="figure" target="#fig_9">9b</ref>) refer to the "other" category of topics and are distributed throughout different clusters of co-authorship. Finally, we observe that the publication co-authored by Bocheneck, Gregor (Figure <ref type="figure" target="#fig_9">9c</ref>), for instance, refers to the topic of "reverse transcriptase".</p><p>select ? p ( group_concat ( distinct ? name ; separator = ' --') as ? author )</p><p>( sample (? d ) as ? date ) ( sample (? t ) as ? label )</p><p>( sample (? label ) as ? type ) where { select * where { ? p dct : title ? t ; dct : issued ? d ; dce : creator ? name .</p><p>filter contains (? t , " coronavirus ") graph &lt; http :// ns . inria . fr / covid19 / graph / entityfishing &gt; { ? a1 a oa : Annotation ; schema : about ? p ; oa : hasBody ? uri . } ? uri rdfs : label ? subject .</p><p>FILTER ( langMatches ( lang (? subject ) , " EN " ) )</p><p>} limit 10000 } group by ? p</p><p>Listing 4: SPARQL query used in Use Case Scenario 3 to retrieve the co-authorship network within publications about "coronavirus" described by research subject.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.4">Scenario 4. Exploring the Temporal Aspect of Relationships</head><p>Studying the evolution over time of co-authors relationships or named entities co-occurrence could help understand when a collaboration between authors were stronger or when certain research topics were of higher interest, which information could be further explained with context, e.g., nowadays the research around the coronavirus topic is stronger than ever due to the COVID-19 pandemics. Thus, in this scenario, we illustrate how one can use the LDViz interface to explore the temporal aspects of relationships, particularly co-authorship within publications related to coronaviruses (see Listing 1).</p><p>Figure <ref type="figure" target="#fig_10">10</ref> depicts the exploratory path used in this scenario. Similar to Scenario 1, we use the node-link diagram to identify the author with the most co-authors, i.e., Yuen, Kwok-Yung (hereafter called author A) with 47 co-authors associated through five publications (Figure <ref type="figure" target="#fig_10">10a</ref>). We further explore the relationship between author A and their co-authors through the GlyphMatrix visualization, which shows the types and number of co-publications between author A and every other co-author, as well as the co-publications among author A's co-authors. By ordering rows and columns by the number of co-publications, we can observe in the GlyphMatrix, that author A's most recurrent co-author is Lau, Susanna (herafter called author B) (Figure <ref type="figure" target="#fig_10">10b</ref>), with whom they have 4 publications. Thus, to verify when these collaborations happened, we explore the temporal distribution of co-publications between those authors by subsetting the data in the GlyphMatrix visualization and exploring it on the Histogram technique (Figure <ref type="figure" target="#fig_10">10c</ref>). We observe that they had collaborations in 2015 and 2016. When comparing to the totality of co-publications related to author A (Figure <ref type="figure" target="#fig_10">10d</ref>), we observe that four out of five publications are co-authored by author B which could indicate a strong collaboration between those authors in co-publications related to the coronavirus topic. We can also observe that this collaboration appear to have ended five years ago, since the dataset contains publications from 2015 to 2021. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.5">Scenario 5. Exploring Argumentation Graphs with the ACTA Interface</head><p>As mentioned earlier, the GSS feature allows the user to include external services in LDViz, such as a service that enable a further exploration of the resources currently being visualized with the LDViz interface. In this scenario, we explore the subset of data used in Scenario 2 (i.e., set of publications where named entities related to "cancer" and "coronavirus" co-occur) to illustrate how one can use the ACTA interface to visualize the argumentative graph of a certain publication identified during the exploratory process. As one can see in Listing 2, the GSS form associate to the query contains an object called "services" that provides the redirection information for the ACTA interface (i.e., a call to "http://134.59.134.234:8081/analyseddocs?search="). The documents used in the Covid-on-the-Web dataset often originate from the PubMed archive<ref type="foot" target="#foot_4">23</ref> , where each document has an unique identifier. Thus, upon the selection of a document, the LDViz system launches the ACTA service by redirecting the user to the given URL, while providing the document identifier as parameter.</p><p>Figure <ref type="figure" target="#fig_11">11</ref> depicts the exploratory path used in Scenario 5. As for Scenario 2, we identify the larger sub-graph in the node-link diagram, which is the one connecting to the node that corresponds to the named entity "SARS-Cov-2" (Figure <ref type="figure" target="#fig_11">11a</ref>). Using the Histogram, we display the 232 publications where this named entity occurs (Figure <ref type="figure" target="#fig_11">11b</ref>).</p><p>Subsequently, we can choose any of the listed publications for which we would like to visualize the argumentative graph using ACTA. We right-click on the publication of interest and choose the "ACTA" option on the context menu that appears. This action redirects the user to the ACTA interface, which retrieves the selected document from the PubMed server, analyzes it, and display the resulting argumentative graph with the relationships between claims and evidences, and PICO elements (Figure <ref type="figure" target="#fig_11">11c</ref>). One can also inspect these elements using the textual information (Figure <ref type="figure" target="#fig_11">11d</ref>), where we can choose to highlight the argumentative sentences or the PICO elements. Alternatively, one can query the CORD19-AKG 24 dataset to explore claims and evidences graph related to one or more publications directly on LDViz by using a SPARQL query where ?s and ?o correspond to claims and evidences, while the ?p variable correspond to the publication(s) where they were identified.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">Discussion</head><p>The Covid-on-the-Web project integrates knowledge from diverse research areas Although a first level of evaluation is shown by translating the user queries to SPARQL queries to visual data in LDViz, which shows that our dataset and visualization services support the resolution of users queries, user evaluations are essential to validate the usability and utility of a visualization. However, evaluating LDViz (as well as any visualization) is not a trivial task since it has been designed to support exploratory tasks, which are the hardest ones to replicate in an experiment <ref type="bibr" target="#b8">(Ellis &amp; Dix, 2006)</ref> service 30 to combine data from different SPARQL endpoints using federated queries.</p><p>Typically, in an exploratory visualization, the user has no defined goal and is looking for no particular outcome <ref type="bibr" target="#b13">(Leng, 2011)</ref>. Although, in the context of the LDViz, the user does have an initial query and would, therefore, have an exploratory goal in mind, throughout the exploratory process one can make new discoveries that might not be directly related to the initial query but that could be equally interesting. A strong aspect of the LDViz interface, and in particular, the MGExplorer visualization tool, is the ability to record and visualize provenance information. Currently, this information is restricted to the subsets of data and the visualizations used during the analysis. Thus, we also intend to increase the variety of provenance information we record, considering the several interactions used during the exploration (e.g., clicks, hovering, data sorting, etc) that might be relevant to understanding users' reasoning, as well as to include a feature that allows users to make annotations throughout the process regarding the historic items. Future work also includes the analysis of the resulting provenance data. For instance, we could analyze the resulting data to identify the most common usages of the system (standard choices of visualizations and instantiating order) according to different types of tasks, which could be used to introduce the system to new users, suggest some well-known workflows of analysis, and to improve overall user experience. Furthermore, we could validate these usage patterns through user-based evaluations involving experts in the application domain, who would evaluate whether and at which level the common detected workflows respond to their needs and how it could be improved, i.e., which alternative exploratory path one would follow to solve specific user queries.</p><p>For the purpose of extending the range of resources and services of the Covid-on-the-Web project and, thus, extend and improve the supported types of analyses, future work includes integrating new visualization services, such as ARViz <ref type="bibr" target="#b16">(Menin, Cadorel, et al., 2021)</ref>, which allows the visual exploration of association rules describing patterns of co-occurring names entities within publications through three complementary Future works include evaluating our resources and services with participation of expert users in the biomedical domain in terms of usability and suitability to solve the domain-related tasks; developing of a querying feature that allows to dynamically import data into the exploratory process from external datasets, aiming to enrich the ongoing analysis and explore on-the-fly hypotheses; studying provenance information aiming on improving user experience and the visualization's effectiveness; and integrating new visualization services to extend the support for different domain-related tasks.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head></head><label></label><figDesc>tool enables exploratory search of COVID-19 scientific literature and supports browsing through networks of biomedical concepts and research groups. It automatically extracts textual and co-authorship network information from publications, which are then explored through multiple views: a collocation explorer based on a non-ribbon chord diagram is used to represent the association between terms co-occurring in the same sentence; the relationship between patient characteristics and interventions (P and I from PICO elements) can be explored through two coordinated bar charts, which also display the temporal distribution of publications related to those criteria through a time series chart; and a network diagram represents the relationship between groups of co-authors defined either by social (shared authors) or topical affinity.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>8</head><label></label><figDesc>http://bibliontology.com/specification.html 9 http://xmlns.com/foaf/spec/ 10 https://schema.org/ 11 https://www.w3.org/TR/annotation-vocab/ 12 https://www.w3.org/TR/prov-o/ 13 https://github.com/Wimmics/covidontheweb 14 PICO is a framework to answer health-care questions in evidence-based practice that comprises patients/population (P), intervention (I), control/comparison (C) and outcome (O).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 3</head><label>3</label><figDesc>Figure 3 Linked Data Visualizer architecture overview. (a) Query Management Interface. (b) Transformation engine. (c) Visualization Interface supported by MGExplorer visualization tool.</figDesc><graphic coords="14,72.00,421.45,468.01,80.59" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 4</head><label>4</label><figDesc>Figure 4 Query Management Interface. (a) The listing of predefined queries and associated actions. (b) The querying area features: (c) query title and SPARQL endpoint, (d) custom parameters form, and (e) a query editing area. (f) The graph style sheet editing area. (g) The visualization and exporting of results.</figDesc><graphic coords="16,72.00,196.13,468.02,424.10" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure 5</head><label>5</label><figDesc>Figure 5Public vitrine of </figDesc><graphic coords="18,72.00,124.40,468.02,271.33" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Figure 6</head><label>6</label><figDesc>Figure 6 Overview of MGExplorer. (a) The node-link diagram provides an overview of the dataset. (b) Filtering operations enable further exploration of items/subsets of interest through different visualization techniques. (c) A history panel records users' actions throughout the exploration process. Image retrieved from<ref type="bibr" target="#b17">(Menin, Cava, et al., 2021)</ref>.</figDesc><graphic coords="20,72.00,196.13,468.02,166.66" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head></head><label></label><figDesc>MGExplorer according to the type of analysis they provide. a self-contained element, which includes a visualization technique and supports subsetting operations, enabling further exploration of subsets of data through different views. The views can be dragged, allowing the user to rearrange the visualization space in meaningful ways to the ongoing analysis. They are connected via line segments, which reveal their dependencies and enable tracing back the exploration path, thus preserving provenance information. Upon submitting a SPARQL query in the query management interface, the data goes through a transformation process, and MGExplorer self-starts with the overview phase. The node-link diagram and a History panel (Figure 6-C) are visible during the whole exploration. The history panel displays the exploration path in a hierarchical format to indicate the dependencies between views, and supports quick recover of the multiple analytical paths that emerge from a particular view. The history panel allows the user to clean the visualization space while focusing on what is relevant to the ongoing analysis by hiding currently displayed visualizations and/or showing any of the previous visualizations.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head>Figure 7</head><label>7</label><figDesc>Figure 7 Exploratory path of Scenario 1. (a) We use the NodeEdge diagram to identify an author of interest for exploration. (b) The ClusterVis reveals the sub-clusters within the set of co-authors and their co-publications. (c)-(e) The views depict the publications produced within each sub-cluster. (e) The total publications of the author of interest. (f) The history shows which charts were opened, their order and inner dependencies.</figDesc><graphic coords="24,72.00,220.03,468.03,231.68" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><head>Figure 8</head><label>8</label><figDesc>Figure 8 Exploratory path of Scenario 2. (a) In the node-link diagram we see the connection between types of cancer (green) and viruses from the coronavirus family (orange). (b) The IRIS shows relationship between SARS-CoV-2 and different types of cancer in a pairwise manner. (c) The list of publications related to SARS-CoV-2 and cancer in general, and (d) head and neck cancer.</figDesc><graphic coords="25,72.00,514.34,468.01,184.94" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_9"><head>Figure 9</head><label>9</label><figDesc>Figure 9 Exploratory path of Scenario 3. (a) -(c) The ClusterViz visualizations depicts the clusters of different authors, where we see their collaborations in different research topics (blue encodes "sequence alignment", green encodes "reverse transcriptase", and orange encode other subjects).</figDesc><graphic coords="28,72.00,279.14,468.00,166.64" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_10"><head>Figure 10</head><label>10</label><figDesc>Figure 10 Exploratory path of Scenario 4. (a) We identify on the NodeEdge diagram the author of interest. (b) In the GlyphMatrix, we identify their most recurrent co-author at the top-left cells, and we (c) explore the temporal distribution of their co-publications using the Histogram, which we compare with (d) the temporal distribution of publications co-authored by the author of interest.</figDesc><graphic coords="31,72.00,220.04,468.00,312.00" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_11"><head>Figure 11</head><label>11</label><figDesc>Figure 11The exploratory path of Scenario 5. In the LDViz interface we (a) find a node of interest, and (b) explore its related publications through the Papers List view. We right-click on a document and explore it using the ACTA interface, where we can (c) visualize the argumentative graph and (d) explore where the claims, evidence and PICO elements appear in the document's abstract.</figDesc><graphic coords="32,72.00,220.03,468.00,156.46" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_12"><head></head><label></label><figDesc>(i.e., semantic web, NLP, and visualization) to assist researchers, particularly in the biomedical field, to explore the COVID-19 scientific literature. For this purpose, we created a linked data version of the CORD-19 dataset and enriched it via entity linking and argument mining. To the best of our knowledge, the Covid-on-the-Web dataset is the first public knowledge graph on the Web integrating publication metadata, named entities, arguments and PICO elements into a single, coherent whole. The openness aspect of our dataset and code should enable contributors to advance the current state of knowledge on this disease. Further, we believe the Covid-on-the-Web dataset could serve as a foundation for Semantic Web applications and benchmarking algorithms.Moreover, we proposed a set of visualization interfaces to assist the exploration of the Covid-on-the-Web dataset from different perspectives, enabling the resolution of various domain-related questions. In this paper, we have particularly focused on the LDViz visualization tool, which supports the visual exploration of subsets of data defined by SPARQL queries. The tool is based on the MGExplorer visualization framework, which proposes a collection of charts linked together through a chained visualization approach that allows us to keep track of the exploration path, assisting the understanding of the sensemaking process. This visualization aims to help users understand the relationships within the results, e.g., users can run a query to visualize a co-authorship network; then use IRIS and ClusterVis to understand who is working together and on which research topics. An interesting aspect of our approach is that one can change the graph topology to explore relationships between different kinds of items. For instance, the user could execute a query that looks for papers mentioning the COVID-19 and diverse types of cancer, as illustrated in the Use Case Scenario 2 (see Subsection 5.2). Another strong aspect of LDViz relies on the possibility of exploring the relationships within any subset of data originating from any SPARQL endpoint thanks to the data transformation engine that adapts the query's results to the data format required by the visualization.Additionally to our partners from Inserm and INCa institutes, the resources and services proposed in the Covid-on-the-Web project have aroused the interest of other institutions such as Antibes and Nice Hospital. Particularly, we have shown in this paper that our approach supports the different types of analyses evoked by domain users: the analysis of clinical trials to make evidence-based decisions, which we support via argumentative graphs; the study of the relationship between coronaviruses and other diseases, such as cancer, which we provide through co-occurrence networks that assist their search for scientific articles on the topic; and the identification of researchers, institutions, or countries working on the topic via co-authorship network analysis.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_13"><head></head><label></label><figDesc>The user could yet be interested in exploring the same data through different visualization techniques, which could provide them with a different perspective to the data and would create an alternative exploratory path to solve the same query. In this context, since visualization can help to recall, revisit, and reproduce the sensemaking process through visual representations of provenance data, MGExplorer visually represent the dependencies between views through line segments and uses the history panel to display exploratory actions hierarchically, keeping parenting and visualization information such as data and technique used. The interactive aspect of the history panel allows the user to trace back their exploratory path, while allowing them to start an alternative exploratory path from a given point in history. Future work includes implementing a querying support for alternative datasets through a mechanism of follow-up queries, which allows users to launch a new query based on an item or subset of items of interest identified in a view, bringing together complementary data from external datasets to enrich the analysis.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_14"><head></head><label></label><figDesc>visualization techniques: a scatter plot, a chord diagram and an association graph 31 . The tool currently works separately with a pre-treated subset of data extracted from the Covid-on-the-Web dataset. However, the association mining algorithm can process any RDF dataset, which results could be then explored with ARViz. Thus, future work includes the integration of this visualization interface in the LDViz tool, where the user could analyze and explore meaningful data defined via SPARQL queries, similarly to what is done with the MGExplorer, resulting on a completely integrated tool for extracting and exploring knowledge from scientific literature through various perspectives.7 ConclusionIn this paper, we presented the dataset and software resources provided by the Covid-on-the-Web project, with particular focus on the visualization services proposed to support the exploration of the COVID-19 scientific literature. Based on the needs of biomedical researchers, partners of the project, we designed and published a linked data knowledge graph describing the named entities mentioned in the articles of the CORD-19 corpus and the argumentative graphs they include. The knowledge graph generation pipeline has been published to allow the scientific community to reuse, enrich and adapt both the dataset and the pipeline in meaningful ways to assist users needs.Furthermore, we described and demonstrated the usage of LDViz, a visualization interface dedicated to the exploration of linked data, which is based on a SPARQL querying interface and the MGExplorer interface, a generic visualization framework designed to explore multidimensional graph data. We have shown the potential of this interface to explore different perspectives to the Covid-on-the-Web dataset, supporting the resolution of diverse domain-related tasks.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="6,72.00,309.78,468.00,172.91" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head></head><label></label><figDesc>http://purl.org/spar/amo/ 16 http://rdfs.org/sioc/argument# 17 http://www.arg.dundee.ac.uk/aif#</figDesc><table /><note><p><p><p>18 </p>Dataset DOI: 10.5281/zenodo.4247134. Download page: https://doi.org/10.5281/zenodo.4247134</p>19 SPARQL Enpoint https://covidontheweb.inria.fr/sparql 20 http://ns.inria.fr/covid19/covidontheweb-1-2</p></note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head></head><label></label><figDesc>. Furthermore, the value of LDViz can only be assessed when used by professionals on the application domain (e.g., biomedical researchers), who are difficult to recruit since they are not necessarily available to take part in experiments. Future work includes implementing user-based evaluations to investigate the usability of LDViz tool for exploring linked datasets in general, and in particular its suitability for analyzing the COVID-19 scientific literature and assisting the resolution of domain-related tasks.The generic aspects of our tools allow us to later on apply the resources to a wider set of use case scenarios, which possibility have been evoked by our biomedical partners, who would like to perform similar analyses over issues other than the COVID-19. In fact, the LDViz interface has been applied to two other publication datasets (i.e., HAL open archive 25 and the Microsoft Academic Knowledge Graph 26 , for which a set of predefined queries are available at http://covid19.i3s.unice.fr:8080/hal). The genericity of our approach enables the exploration of data from any SPARQL endpoint, such as DBpedia 27 , from which we explored the ontology and RDF Schema information, as well as a co-starring relationship using movies information 28 . The tool also has a generic service that enables the querying and visualization of any SPARQL endpoint, which URL can embed a SPARQL query and the URL of a SPARQL endpoint 29 , to directly visualize the resulting data. Furthermore, from a linked data perspective, one can use the Corese SPARQL</figDesc><table><row><cell>25 https://data.archives-ouvertes.fr/doc/sparql</cell></row><row><cell>26 https://makg.org/sparql</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1" xml:id="foot_0"><p>https://www.inserm.fr/</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2" xml:id="foot_1"><p>https://www.e-cancer.fr/</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="4" xml:id="foot_2"><p>https://covid19.pubannotation.org/</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="22" xml:id="foot_3"><p>Example of document descriptive page in the Covid-on-the-Web dataset: https://covidontheweb.inria.fr/describe/?url=http: //ns.inria.fr/covid19/28ecacb70247f4fb6a4923a99d0905153c23f88a</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="23" xml:id="foot_4"><p>https://pubmed.ncbi.nlm.nih.gov/</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="27" xml:id="foot_5"><p>http://fr.dbpedia.org/sparql</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="28" xml:id="foot_6"><p>Available at http://covid19.i3s.unice.fr:8080/ldviz</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" xml:id="foot_7"><p>The authors have no competing interests regarding this work.</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>Acknowledgments</head><p>This work is partly funded by the <rs type="funder">French government labelled</rs> <rs type="programName">PIA program</rs> under its <rs type="projectName">IDEX UCAJEDI</rs> project (<rs type="grantNumber">ANR-15-IDEX-0001</rs>) and the <rs type="projectName">3IA Côte d'Azur</rs> (<rs type="grantNumber">19-P3IA-0002</rs>) as well as the <rs type="projectName">CovidOnTheWeb</rs> project funded by <rs type="funder">Inria</rs>. We gratefully acknowledge the contributions of <rs type="person">Valentin Ah-Kane</rs> and <rs type="person">Mathieu Simon</rs> and our research partners of <rs type="funder">Inserm</rs> and INCa institutions. We also acknowledge the contribution of <rs type="person">Carla Freitas</rs> and <rs type="person">Ricardo Cava</rs> for the initial work on the MGExplorer framework.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funded-project" xml:id="_ANyC6Um">
+					<idno type="grant-number">ANR-15-IDEX-0001</idno>
+					<orgName type="project" subtype="full">IDEX UCAJEDI</orgName>
+					<orgName type="program" subtype="full">PIA program</orgName>
+				</org>
+				<org type="funded-project" xml:id="_GAEUNSV">
+					<idno type="grant-number">19-P3IA-0002</idno>
+					<orgName type="project" subtype="full">3IA Côte d&apos;Azur</orgName>
+				</org>
+				<org type="funded-project" xml:id="_JB6G5mX">
+					<orgName type="project" subtype="full">CovidOnTheWeb</orgName>
+				</org>
+			</listOrg>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Covidexplorer: A multi-faceted ai-based search and visualization engine for covid-19 information</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Ambavi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Vaishnaw</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">U</forename><surname>Vyas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Tiwari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Singh</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3340531.3417428</idno>
+		<ptr target="https://doi.org/10.1145/3340531.3417428" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 29th ACM International Conference on Information &amp; Knowledge Management</title>
+		<meeting>the 29th ACM International Conference on Information &amp; Knowledge Management</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="3365" to="3368" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">SciBERT: Pretrained Language Model for Scientific Text</title>
+		<author>
+			<persName><forename type="first">I</forename><surname>Beltagy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Lo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Cohan</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1903.10676</idno>
+	</analytic>
+	<monogr>
+		<title level="m">EMNLP</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">L</forename><surname>Bras</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Gharavi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">A</forename><surname>Robb</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">F</forename><surname>Vidal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Padilla</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">J</forename><surname>Chantler</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2005.06380</idno>
+		<title level="m">Visualising covid-19 research</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Glyphs in matrix representation of graphs for displaying soccer games results</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Cava</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">D S</forename><surname>Freitas</surname></persName>
+		</author>
+		<ptr target="http://workshop.sportvis.com/papers/cavaSoccerMatches.pdf" />
+	</analytic>
+	<monogr>
+		<title level="m">The 1st Workshop on Sports Data Visualization</title>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page">15</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Clustervis: Visualizing nodes attributes in multivariate graphs</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Cava</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">M D S</forename><surname>Freitas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Winckler</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3019612.3019684</idno>
+		<ptr target="https://doi.org/10.1145/3019612.3019684" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Symposium on Applied Computing</title>
+		<meeting>the Symposium on Applied Computing</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="174" to="179" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Inside-in search: An alternative for performing ancillary search tasks on the web</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Cava</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">M</forename><surname>Freitas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Barboni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Palanque</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Winckler</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/LAWeb.2014.21</idno>
+		<ptr target="https://doi.org/10.1109/LAWeb.2014" />
+	</analytic>
+	<monogr>
+		<title level="m">9th Latin American Web Congress</title>
+		<imprint>
+			<date type="published" when="2014">2014. 2014</date>
+			<biblScope unit="page" from="91" to="99" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">KGRAM Versatile Data Graphs Querying and Inference Engine</title>
+		<author>
+			<persName><forename type="first">O</forename><surname>Corby</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Gaignard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Faron-Zucker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Montagnat</surname></persName>
+		</author>
+		<idno type="DOI">10.5555/2457524.2457672</idno>
+		<ptr target="https://dl.acm.org/doi/10.5555/2457524.2457672" />
+	</analytic>
+	<monogr>
+		<title level="m">Proc. IEEE/WIC/ACM International Conference on Web Intelligence</title>
+		<meeting>IEEE/WIC/ACM International Conference on Web Intelligence</meeting>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Improving efficiency and accuracy in multilingual entity extraction</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Daiber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Jakob</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Hokamp</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">N</forename><surname>Mendes</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2506182.2506198</idno>
+		<ptr target="https://doi.org/10.1145/2506182.2506198" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 9th International Conference on Semantic Systems</title>
+		<meeting>the 9th International Conference on Semantic Systems</meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="121" to="124" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">An Explorative Analysis of User Evaluation Studies in Information Visualisation</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Ellis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Dix</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1168149.1168152</idno>
+		<ptr target="https://doi.org/10.1145/1168149.1168152" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2006 AVI Workshop on BEyond Time and Errors: Novel Evaluation Methods for Information Visualization</title>
+		<meeting>the 2006 AVI Workshop on BEyond Time and Errors: Novel Evaluation Methods for Information Visualization</meeting>
+		<imprint>
+			<date type="published" when="2006">2006</date>
+			<biblScope unit="page" from="1" to="7" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Co-authorship network analysis in health research: Method and potential use</title>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">D P F E</forename><surname>Fonseca</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">B</forename><surname>Sampaio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">V</forename><surname>De Araújo Fonseca</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Zicker</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/s12961-016-0104-5</idno>
+		<ptr target="https://health-policy-systems.biomedcentral.com/articles/10.1186/s12961-016-0104-5" />
+	</analytic>
+	<monogr>
+		<title level="j">Health Research Policy and Systems</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="10" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<title level="m" type="main">SciSight: Combining faceted navigation and research group detection for COVID-19 exploratory scientific search</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Hope</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Portenoy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Vasan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Borchardt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Horvitz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">S</forename><surname>Weld</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Hearst</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>West</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2005.12668</idno>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">KGTK: A Toolkit for Large Knowledge Graph Manipulation and Analysis</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Ilievski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Garijo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Chalupsky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">T</forename><surname>Divvala</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Yao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Rogers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Singh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Schwabe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Szekely</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-030-62466-8_18</idno>
+		<ptr target="https://doi.org/10.1007/978-3-030-62466-8_18" />
+	</analytic>
+	<monogr>
+		<title level="m">The Semantic Web -ISWC</title>
+		<imprint>
+			<date type="published" when="2020">2020. 2020</date>
+			<biblScope unit="page" from="278" to="293" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">The open biomedical annotator</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Jonquet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">H</forename><surname>Shah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Musen</surname></persName>
+		</author>
+		<ptr target="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3041576/" />
+	</analytic>
+	<monogr>
+		<title level="m">Summit on translational bioinformatics</title>
+		<imprint>
+			<date type="published" when="2009">2009. 2009</date>
+			<biblScope unit="page">56</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title level="m" type="main">Handbook of research on computational science and engineering: Theory and practice</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Leng</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<publisher>IGI Global</publisher>
+			<biblScope unit="volume">2</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Visualizing ontologies with VOWL</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Lohmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Negru</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Haag</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Ertl</surname></persName>
+		</author>
+		<idno type="DOI">10.3233/SW-150200</idno>
+		<ptr target="https://doi.org/10.3233/SW-150200" />
+	</analytic>
+	<monogr>
+		<title level="j">Semantic Web</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="399" to="419" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">ACTA a tool for argumentative clinical trial analysis</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Mayer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Cabrio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Villata</surname></persName>
+		</author>
+		<idno type="DOI">10.24963/ijcai.2019/953</idno>
+		<ptr target="https://doi.org/10.24963/ijcai.2019/953" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 28th International Joint Conference on Artificial Intelligence (IJCAI)</title>
+		<meeting>the 28th International Joint Conference on Artificial Intelligence (IJCAI)</meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="6551" to="6553" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">ARViz: Interactive Visualization of Association Rules for RDF Data Exploration</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Menin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Cadorel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Tettamanzi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Giboin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Gandon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Winckler</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">25th International Conference Information Visualisation</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Towards a Visual Approach for Representing Analytical Provenance in Exploration Processes</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Menin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Cava</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">M D S</forename><surname>Freitas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Corby</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Winckler</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">25th International Conference Information Visualisation</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<title level="m" type="main">Covid-on-the-Web: Knowledge Graph and Services to Advance COVID-19 Research</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Michel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Gandon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Ah-Kane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bobasheva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Cabrio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Corby</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Gazzotti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Giboin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Marro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Mayer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Simon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Villata</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Winckler</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">Z</forename><surname>Pan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Tamma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Amato</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Janowicz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-030-62466-8_19</idno>
+		<ptr target="https://doi.org/10.1007/978-3-030-62466-8_19" />
+		<title level="m">The Semantic Web -ISWC 2020</title>
+		<editor>
+			<persName><forename type="first">A</forename><surname>Fu</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">O</forename><surname>Polleres</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">L</forename><surname>Seneviratne</surname></persName>
+		</editor>
+		<editor>
+			<persName><surname>Kagal</surname></persName>
+		</editor>
+		<imprint>
+			<publisher>Springer International Publishing</publisher>
+			<biblScope unit="page" from="294" to="310" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<title level="m" type="main">COVID-19 triggered unprecedented collaboration in research</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Naujokaitytė</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2021-07-06">2021. 6 July 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Constructing co-occurrence network embeddings to assist association extraction for covid-19 and other coronavirus infectious diseases</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Oniani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Shen</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/jamia/ocaa117</idno>
+		<ptr target="https://doi.org/10.1093/jamia/ocaa117" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of the American Medical Informatics Association</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page" from="1259" to="1267" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Semantic web data visualization with graph style sheets</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Pietriga</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1148493.1148532</idno>
+		<ptr target="https://doi.org/10.1145/1148493.1148532" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2006 ACM symposium on Software visualization</title>
+		<meeting>the 2006 ACM symposium on Software visualization</meeting>
+		<imprint>
+			<date type="published" when="2006">2006</date>
+			<biblScope unit="page" from="177" to="178" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">KG-COVID-19: a framework to produce customized knowledge graphs for COVID-19 response</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">T</forename><surname>Reese</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Unni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">J</forename><surname>Callahan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Cappelletti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Ravanmehr</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Carbon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">A</forename><surname>Shefchek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">M</forename><surname>Good</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">P</forename><surname>Balhoff</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Fontana</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.patter.2020.100155</idno>
+		<ptr target="https://doi.org/10.1016/j.patter.2020.100155" />
+	</analytic>
+	<monogr>
+		<title level="j">Patterns</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">100155</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Concept Driven Search and Visualization System for Exploring Scientific Repositories</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Sukla</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Naskar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Goel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Sangwan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Rai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Shakir</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Verma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Dasgupta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Dey</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3430984.3430991</idno>
+		<ptr target="https://doi.org/10.1145/3430984.3430991" />
+	</analytic>
+	<monogr>
+		<title level="m">8th acm ikdd cods and 26th comad</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="395" to="399" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<title level="m" type="main">Exploration and discovery of the COVID-19 literature through semantic visualization</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Tu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Verhagen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Cochran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Pustejovsky</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2007.01800</idno>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<title level="m" type="main">COVID-SEE: Scientific Evidence Explorer for COVID-19 related research</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Verspoor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Šuster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Otmakhova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mendis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Zhai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Fang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">H</forename><surname>Lau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Baldwin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">J</forename><surname>Yepes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Martinez</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2008.07880</idno>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<title level="m" type="main">CORD-19: The Covid-19 Open Research Dataset</title>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">L</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Lo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Chandrasekhar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Reas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Eide</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Funk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">M</forename><surname>Kinney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Merrill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Mooney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">A</forename><surname>Murdick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Rishi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Sheehan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Shen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Stilson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">D</forename><surname>Wade</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Wilhelm</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">.</forename><forename type="middle">.</forename><surname>Kohlmeier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename></persName>
+		</author>
+		<idno>ArXiv, abs/2004.10706</idno>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<title level="m">Contributor Roles Taxonomy Project -CRediT</title>
+		<imprint/>
+	</monogr>
+	<note>Author contributions</note>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<monogr>
+		<title level="m" type="main">Conceptualization, Investigation, Methodology, Software, Writingoriginal draft</title>
+		<author>
+			<persName><forename type="first">Aline</forename><surname>Menin</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+	<note>Writing -review &amp; editing</note>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<monogr>
+		<author>
+			<persName><forename type="first">Franck</forename><surname>Michel</surname></persName>
+		</author>
+		<title level="m">Data Curation, Investigation, Resources, Software, Writing -review &amp; editing Fabien Gandon: Funding Acquisition, Writing -review &amp; editing Raphael Gazzotti: Resources, Writing -review &amp; editing Elena Cabrio: Supervision Olivier Corby: Software Alain Giboin: Investigation, Methodology, Writing -review &amp; editing Santiago Marro: Resources Tobias Mayer: Resources Serena Villata: Supervision Marco Winckler: Conceptualization, Writing -original draft, Writing -review &amp; editing, Supervision, Methodology, Formal analysis</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

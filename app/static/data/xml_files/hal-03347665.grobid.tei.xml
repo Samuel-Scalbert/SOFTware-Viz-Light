@@ -1,0 +1,1856 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">AskoR, a R Package for Easy RNA-Seq Data Analysis †</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2021-07-09">9 July 2021</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Susete</forename><surname>Alv-Carvalho</surname></persName>
+							<idno type="ORCID">0000-0001-8848-4190</idno>
+						</author>
+						<author>
+							<persName><forename type="first">Kév</forename><surname>Gazengel</surname></persName>
+							<idno type="ORCID">0000-0002-6472-4839</idno>
+						</author>
+						<author>
+							<persName><forename type="first">Anthony</forename><surname>Bretaudeau</surname></persName>
+							<idno type="ORCID">0000-0003-0914-2470</idno>
+						</author>
+						<author>
+							<persName><forename type="first">Stéphanie</forename><surname>Robin</surname></persName>
+							<idno type="ORCID">0000-0001-7379-9173</idno>
+						</author>
+						<author>
+							<persName><forename type="first">Stéphanie</forename><surname>Daval</surname></persName>
+							<idno type="ORCID">0000-0001-8848-4190</idno>
+						</author>
+						<author role="corresp">
+							<persName><forename type="first">Fabrice</forename><surname>Legeai</surname></persName>
+							<email>fabrice.legeai@inrae.fr</email>
+							<idno type="ORCID">0000-0002-6472-4839</idno>
+						</author>
+						<author>
+							<affiliation>
+								<orgName>1 IGEPP, INRAE, Institut Agro, Univ Rennes, </orgName>
+								<address><addrLine>35000, Rennes, France 35000, Rennes, France</addrLine></address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation>
+								<orgName> 2 Univ Rennes, Inria, CNRS, IRISA,</orgName>
+							</affiliation>
+						</author>
+						<title level="a" type="main">AskoR, a R Package for Easy RNA-Seq Data Analysis †</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2021-07-09">9 July 2021</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">26B251D291D845396A37DFD5F3D02757</idno>
+					<idno type="DOI">10.3390/IECE-10646</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:13+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>BioInformatics Platform for Agroecosystems Arthropods</term>
+					<term>RNA-Seq</term>
+					<term>differential expression</term>
+					<term>clustering</term>
+					<term>Gene Ontology enrichment</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>For facilitating the process of transcriptomics data, and to guarantee the reproducibility of our analyses, we developed AskoR, which is a R library for performing a suite of statistical analysis and graphical output from gene expression data obtained by sequencing (RNA-Seq). From raw counts, it makes it possible to filter and normalize the data, to check the consistency of the samples, and to carry out differential expression tests, GO terms enrichments, and clusters of co-expression, with a large number of figures in the output. AskoR can be downloaded and used in your favorite R environment or directly accessible through a Galaxy portal like the one which is hosted by the BioInformatics Platform for the Agroecosystems Arthropods (BIPAA).</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.">Introduction</head><p>The BioInformatics Platform for the Agroecosystems Arthopods (BIPAA) is a bioinformatics platform from the French Research Institute for Agriculture, Food and Environment <ref type="bibr">(INRAE)</ref>. It is dedicated to support genomics and post-genomics programs developed on insects associated with agroecosystems, and assists cooperation and coordination of multiple communities working on arthopod genomics. The Information System has been created more than 10 years ago to support the International Aphid Genomics Consortium (IAGC), in order to annotate and curate the pea aphid genome <ref type="bibr" target="#b0">[1]</ref>, and has been continuously improved and extended until the recent achievement of the genomes of phylloxera (Daktulosphaira vitifoliae) <ref type="bibr" target="#b1">[2]</ref>, various parasitoid wasps (Hyposoter didymator, Campoletis sonorensis <ref type="bibr" target="#b2">[3]</ref>, Cotesia congregata <ref type="bibr" target="#b3">[4]</ref>, Aphidius ervi and Lysiphlebus fabarum <ref type="bibr" target="#b4">[5]</ref>) or Spodoptera frugiperda <ref type="bibr" target="#b5">[6]</ref>. Consequently, BIPAA is the home of several public reference databases including AphidBase, LepidoDB and ParWaspDB, each hosting multiple insect genomes. Altogether, 38 genomes are currently available online, and its infrastructure has evolved to support the load of numerous new genomes and to facilitate browsing and navigating. For each species, a collection of web applications allows users to explore reference genomes or transcriptome assemblies and annotations (e.g. genome browser, gene reports), to compare genomics regions (synteny viewer), to analyze these data with multiple tools (e.g. alignment of various sequences, annotation, SNP prediction etc.) through a dedicated Galaxy server <ref type="bibr" target="#b6">[7]</ref> or specific web applications (e.g. a blast form), or to correct or add information by curating the genome annotations within Apollo <ref type="bibr" target="#b7">[8]</ref>).</p><p>RNA-Seq studies are now affordable and widely used in many laboratories. In insect science, this method is still currently use for studying phenomena, such as the molecular responses of whole insects, organs, and tissues to different biotic or abiotic stresses, including exposure to insecticides, infection with microbes, or feeding on different hosts, and improving our knowledge of gene expression changes associated with immunity, detoxification, chemoreception, or reproduction <ref type="bibr" target="#b8">[9]</ref><ref type="bibr" target="#b9">[10]</ref><ref type="bibr" target="#b10">[11]</ref><ref type="bibr" target="#b11">[12]</ref><ref type="bibr" target="#b12">[13]</ref><ref type="bibr" target="#b13">[14]</ref><ref type="bibr" target="#b14">[15]</ref>. Many statistical methods have been developed, so far, for analyzing RNA-Seq data from raw counts and to identify differentially expressed genes (DEGs) <ref type="bibr" target="#b15">[16]</ref><ref type="bibr" target="#b16">[17]</ref><ref type="bibr" target="#b17">[18]</ref>, search for enrichment of functions in genelists <ref type="bibr" target="#b18">[19,</ref><ref type="bibr" target="#b19">20]</ref>, create Venn diagrams <ref type="bibr" target="#b20">[21]</ref>, or for searching for clusters of co-expressed genes <ref type="bibr" target="#b21">[22,</ref><ref type="bibr" target="#b22">23]</ref>. Many of these analysis tools require programming skills in R or paid software subscriptions, such as OmicsBox <ref type="bibr" target="#b23">[24]</ref> or CLC Workbenches <ref type="bibr" target="#b24">[25]</ref>, making it difficult for many researchers to implement reproducible workflows. On the other hand, some reproducible workflows have been designed <ref type="bibr" target="#b25">[26]</ref> for managing RNA-Seq data from the mapping on a reference annotation (genome or transcriptome) but these workflows do not include a full set of supplementary analysis for statistically and graphically exploring data by classification or enrichment.</p><p>Additionally, DEGs can often be integrated with other data types to improve the robustness of studies, such as QTL analysis, orthology studies, epigenomic landscapes, and proteomics or metabolomic studies. Thereupon, the semantic web technology (consisting in data modeling in structured format such as the Ressource Description Framework (RDF) allowing its querying with the SPARQL language), gives the opportunity to link various information from various sources into graphs of data. Moreover, we are developing AskOmics <ref type="bibr" target="#b26">[27,</ref><ref type="bibr" target="#b27">28]</ref> which provides a web interface to upload and integrate heterogeneous data files (GFF, BED, and tabulated formats) into RDF and a visual SPARQL query builder software to allow the experts to compose and execute expressive and semantically-rich queries.</p><p>Here, we report AskoR, a R pipeline for the analysis of gene expression data with a simple and reproducible script. It includes several steps (data filtering, normalization, sample validation, differential expression analysis, Gene Ontology enrichment and coexpression) and produces numerous files directly uploadable into an AskOmics instance in order to be linked with other data.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.">Materials and Methods</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1.">Installation and deployment</head><p>AskoR can be directly installed from the git repository (https://github.com/askomics/ askoR). An AskoR Docker image, including a preconfigured RStudio instance, is maintained on GitHub (https://github.com/genouest/docker-galaxy-rstudio-askor). This image can be used in a Galaxy server as an interactive tool, allowing to use the preconfigured RStudio-AskoR environment directly from the Galaxy web interface. Instructions on configuring a Galaxy server to make use of this image are available on the GitHub repository.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2.">AskoR implementation, usage and dependencies</head><p>AskoR is a R package, it consists in a R library, which has to be loaded in a script. A user guide is available at the web site. As a template or example, we are providing a R script running sequentially each function which can be adapted to the needs of the user. AskoR has many parameters and flags (for example method of normalization, p-values or CPM thresholds) with default values which can be modified before or during the process. A complete list of parameters is available on the wiki. Because AskoR takes advantages of various R packages, it has many dependencies which have to be installed locally on the user R environment, or already available in the docker environment. The main dependencies are edgeR, limma, ggfortify, ggplot2, topGO, UpSetR and coseq.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3.">Differential expression analysis</head><p>After a filtering step where the genes with low counts were excluded from further analyses (i.e. keeping genes with CPM values higher than a threshold for a minimal number of samples). AskoR uses the calcNormFactors function of the edgeR library <ref type="bibr" target="#b15">[16]</ref>, for scaling the data among all libraries and removing the effects of outliers. The default method of this normalization procedure uses a trimmed mean of M-values (TMM) between each pair of samples, but can be changed by the users to Relative Log expression (RLE) or upperquartile. Next, AskoR applies the Cox-Reid profile-adjusted likelihood method of edgeR for estimating the dispersion then a generalized linear model (GLM) for testing the differential expression, the latter is based on a "quasi likelihood F-test" qlf, but can be changed to the likelihood Ratio Test LRT with the glm parameter.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.4.">Venn and Upset diagrams</head><p>For the automatic production of Venn and Upset diagrams with VennDiagram and UpSetR R packages, we use two parameters indicating which gene-list has to be involved in the graphs. The first parameter compaVD or upset_list (for Venn or Upset diagrams respectively) allows to choose which contrasts will be included in the comparisons (multiple graphs can be produced). The second parameter VD or upset_type allows to select for each contrast the subset of DEGs to compare (up, down or both).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.5.">GO-term Enrichment</head><p>By default, for each gene list, the Gene-Ontology enrichment is evaluated using a Fisher test adjusted by the Benjamini-Hochberg (BH) method with the weight01 algorithm against the complete list of GO assigned genes given by the user. All statistical tests (fisher, ks, t, globaltest, sum or ks.ties) and/or algorithms (classic, elim, weight, weight01, lea or parentchild) supported by TopGO <ref type="bibr" target="#b28">[29]</ref> can be selected with the parameters GO_stats and GO_algo respectively.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.6.">Clustering</head><p>The clustering of expression profiles is handled with the coseq R package <ref type="bibr" target="#b21">[22]</ref>. However, the methods can be chosen with the coseq_model parameter as well as the transformation with coseq_transformation and the range of cluster numbers to be evaluated for identifying the best K value coseq_ClustersNb.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.7.">Graphics</head><p>The graphs allowing the representation of clusters and enrichments are produced with the R package ggplot2, ComplexHeatmap, and circlize allowing the visualization of the intersections of DEG lists between contrasts produced using the VennDiagram and UpSetR R packages.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.8.">Production of tabular files for AskOmics</head><p>In a so-called "AskoTables" directory, AskoR produces files which could be imported directly into AskOmics. Some are directly derived from the input file, describing 3 entities : 1) Condition : a group of samples with corresponding characteristics (tissue, stress, development stage, etc...); 2) Context : a group of conditions which are compared within a contrast; 3) Contrast : the comparison of 2 contexts.</p><p>In addition, AskoR provides for each contrast a tabular file, with all the tested genes in lines with the AskOmics compliant columns : Test_id (a unique id for a test), mea-sured_in@Contrast (the name of the contrast), is@gene (the name of the gene), FC (foldchange) and logFC, PValue and FDR (p-value and adjusted p-value of the test), Expression and Significance. Furthermore AskoR supplies a summarized table including all the genes (and annotation) and their significativity at each contrast.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.">Results</head><p>AskoR requires only a few tabular files including standard raw counts of reads for each gene, descriptions of samples, including biological and technical replicates, and a list of contrasts between the different treatments and conditions. The structure of the table describing the contrasts is rather simple as it includes a line for each condition and each contrast reported to a column containing "+" or "-" for the condition to be compared and 0 for the others. Additionally, the users can provide a gene ontology assignation file for performing the GO enrichment step, and a list of complementary annotations which will be transferred to the final tabular files.</p><p>To expedite analysis and improve false discovery rate, genes with low CPM values should be removed prior to performing the differential expression analysis, which would be unlikely to be detected as differentially expressed anyhow. The user can adjust several parameters, such as threshold_cpm and replicate_cpm, and visualize the results in density graphs to determine whether the low expressed genes have been successfully removed.</p><p>From the matrix of CPM, AskoR produces Multi-dimensional Scaling (MDS) plot, displaying the coordinates of the samples on 3 axes, a heatmap of the correlation between the samples (with dendograms) and with their respective conditions encoded by a color, and a correlogram (Fig. <ref type="figure" target="#fig_0">1A</ref>). This result provides an overview of the samples and allows for the identification of outliers or inconsistencies in biological or technical replicates.</p><p>The normalization and differential expression analyses are performed with the popular edgeR package <ref type="bibr" target="#b15">[16]</ref>, including the functions calcNormFactors for the normalization, estimateGLMCommonDisp, estimateGLMTrendedDisp, estimateGLMTrendedDisp or estimateDisp for the estimation of the dispersion and glmFit and glmLRT or glmQLFit, and glmQLFTest for the DE tests with the Generalized Linear Models (GLM). With a set of default parameters which can be changed by the users, such as the normalization and dispersion methods (normal_method, glm_disp), GLM (glm) or multi-test correction (p_adj_method), the AskoR pipeline performs the adequate functions.</p><p>For each contrast, a file is created to report the results of the tests in a format readable by AskOmics to facilitate the integration of the results. It also compiles and summarizes all the results of the tests for a batch of contrasts into a single tabular file. It generates as well numerous graphical outputs such as volcano plots, mean-difference plots and heatmaps of top list of the DEGs.</p><p>Venn and Upset diagrams allow users to identify common DEGs shared between multiple contrasts. While Venn diagrams allow to compare up to 4 lists, Upset allows users to make comparisons among more constrats (Fig. <ref type="figure" target="#fig_0">1B</ref>). However, when making many contrasts, a complete graph including all gene-lists may be unreadable or meaningless, then with only two parameters (VD and compaVD or upset_list and upset_type) the user can select precisely the lists of genes to be displayed in the graphs. If gene ontology terms are provided, AskoR can perform enrichment analysis in lists of DEGs annotated and produce a table <ref type="table">(Table 1</ref>) with a statistical test from TopGO R package <ref type="bibr" target="#b28">[29]</ref> and dedicated figure (Fig. <ref type="figure" target="#fig_1">2</ref>).</p><p>It is also often useful to group genes that show a similar expression in several conditions (expression profile), to identify co-regulated genes and to characterize genes with no function having similar expression to candidate genes. AskoR performs a clustering with the Coseq R package <ref type="bibr" target="#b21">[22]</ref> that uses two classification algorithms (kmeans, and gaussian mixture) with respective transformations, tests for the best number of clusters (K), and produces statistics and graphics helping to check the quality and robustness of the chosen model. Additionally, AskoR outputs several graphs (Fig. <ref type="figure" target="#fig_2">3</ref>) to display the expression profiles for each contrast, and search for GO enrichment in each cluster.</p><p>Table <ref type="table">1</ref>. Gene-Ontology terms for a contrast, each GO term from the 3 categories (molecular function, biological process or cellular component) is reported in the table. The Annotated column indicates the number of genes assigned to the term in the complete gene set. The Significant column shows the number of genes assigned to the term in the tested list while the Expected column gives the expected value, the Ratio value corresponds to the Significant column divided by Expected column, the statisticTest displays the adjusted p-value of the test, and GO_cat is the GO category of the term ("CC" for cellular component, "BP" for biological process, and "MF" for molecular function).   </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.">Discussion</head><p>AskoR is highly customizable, and includes many parameters with default values modifiable according to the needs of the analysis. Thus, it is straightforward to run an analysis with a single file and a set of data. The results of the analyses are then stored in multiple files under a named directory. Then, any set of results obtained with a particular set of parameters can be stored, compared and reproduced.</p><p>AskoR is working as a standalone library and no web interface has been developed yet (with R Shiny for instance). Nevertheless, it can be run as a single script and easily modified directly on any laptop or server or integrate directly in workflows for an improved reproducibility. Furthermore, the docker image of AskoR can be integrated directly as an interactive environment in a Galaxy instance. As a result, with the help of the online documentation, it is straighforward to explore transcriptomics data and produce publishable figures. Consequently, AskoR has already been used for various analysis <ref type="bibr" target="#b11">[12,</ref><ref type="bibr" target="#b29">[30]</ref><ref type="bibr" target="#b30">[31]</ref><ref type="bibr" target="#b31">[32]</ref>.</p><p>Additionally, AskoR prepares output files following the AskOmics requirements. Within this tool, complex and expressive queries can be generated via a graphical interface in order to extract the most interesting genes by combining several lists of genes by a logical operator (e.g. DEGs from one or more particular contrast or cluster). For instance, it is possible to extract genes over-expressed in a condition at some selected time-points but or under-expressed (or not differentially expressed) at other time points. Furthermore, DEGs can be supplemented with other data such as genome locations, assignation to metabolic networks, miRNA targets, or epigenomics landscapes to promote selection of candidate genes.</p><p>AskoR is open-source available online at a git repository, where anyone can contribute, push an issue or ask for a specific request. For example, we are adding functions to create graphical representation combining the expression levels and the of a set of genes list defined by a user.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 .</head><label>1</label><figDesc>Figure 1. A. Correlogram plot generated by AskoR to describe sample correlations. Each cell represents a pairwise comparison and each correlation coefficient is represented by an ellipse whose 'diameter', direction, and color depict the accordance for that pair of samples. Highly correlated samples are depicted as thin blue ellipses, while poorly correlated samples are depicted as red ellipses with wide diameters. B. Intersections of DEGs lists between contrasts. DEGs lists in each contrast and their size are shown in the horizontal histograms. The lines connected by dots represent the intersection between these lists. The vertical histograms represent the number of DEGs in each intersection. Colors (green/red) represents UP-and DOWN-regulated DEGs.</figDesc><graphic coords="4,171.93,497.80,382.68,170.69" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 .</head><label>2</label><figDesc>Figure 2. Plot of GO enrichment for one contrast. Each line displays a significant term grouped by GO category, the position of the dot refers to the significance of the test and the size of the circle corresponds to the number of observed genes in the tested list which are assigned to that terms.</figDesc><graphic coords="5,235.71,430.68,255.12,255.12" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 3 .</head><label>3</label><figDesc>Figure 3. Gene clustering based on expression profiles. A. Heatmap of scaled expression. Each line represents a condition and each column a gene. The color indicates the scaled expression. The genes are grouped in clusters. The condition are ordered by the user or grouped by correlation (with a dendogram). B. Boxplots of scaled expression by clusters</figDesc><graphic coords="6,179.02,95.49,368.50,245.67" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>GO.ID Term Annotated Significant Expected statisticTest Ratio GO_cat</head><label></label><figDesc></figDesc><table><row><cell>GO:0022627 cytosolic small ribosomal subunit</cell><cell>21</cell><cell>13 4.75</cell><cell>0.00012</cell><cell>2.73684210526316 CC</cell></row><row><cell>GO:0004812 aminoacyl-tRNA ligase activity</cell><cell>51</cell><cell>24 11.8</cell><cell>0.00014</cell><cell>2.03389830508475 MF</cell></row><row><cell>GO:0005840 ribosome</cell><cell>193</cell><cell>79 43.63</cell><cell>0.00016</cell><cell>1.81068072427229 CC</cell></row><row><cell>GO:0042273 ribosomal large subunit biogenesis</cell><cell>28</cell><cell>21 6.29</cell><cell>0.00017</cell><cell>3.33863275039746 BP</cell></row><row><cell>GO:0030687 preribosome, large subunit precursor</cell><cell>10</cell><cell>8 2.26</cell><cell>0.00019</cell><cell>3.53982300884956 CC</cell></row><row><cell>GO:0000460 maturation of 5.8S rRNA</cell><cell>10</cell><cell>8 2.25</cell><cell>0.00019</cell><cell>3.55555555555556 BP</cell></row><row><cell>GO:0005929 cilium</cell><cell>89</cell><cell>36 20.12</cell><cell>0.00024</cell><cell>1.78926441351889 CC</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" xml:id="foot_0"><p>Proceedings 2021, 1, 0. https://doi.org/10.3390/IECE-10646 https://www.mdpi.com/journal/proceedings Proceedings 2021, 1, 0</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" xml:id="foot_1"><p>Author Contributions: Conceptualization, S.D. and F.L.; software development S.A-C, K.G., S.M. and F.L.; application, tests and validation, S.A-C, K.G. and S.R., deployment, A.B.</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>Acknowledgments:</head><p>We are thankful to the GenOuest platform for the Galaxy environment, to <rs type="person">Emmanuelle Becker</rs> and <rs type="person">Fanny Casse</rs> for clustering and enrichment graphs, to <rs type="person">Andréa Rau</rs> for the help while implanting the coseq package and to <rs type="person">Régine Delourme</rs>, <rs type="person">Jean-Philippe Vernadet</rs>, <rs type="person">Jérémy Gauthier</rs>, <rs type="person">Florence Prunier</rs>, <rs type="person">Ambre-Aurore Josselin</rs>, <rs type="person">Mélanie Huguet</rs> for testing and helping us to design the tool, and to <rs type="person">Olivier Dameron</rs> and <rs type="person">Anne Siegel</rs> for the discussion around Askomics</p></div>
+			</div>
+			
+			<div type="funding">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Funding: The internship of Sylvin Masanelli has been granted by the Santé des Plantes et Environnement (SPE) department of INRAE</head></div>
+			</div>
+
+
+			<div type="availability">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Data Availability Statement:</head><p>AskoR is available at https://github.com/askomics/askoR the docker image for being deploying Askomics in a Galaxy instance is available at https://github.com/ genouest/docker-galaxy-rstudio-askor</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Conflicts of Interest:</head><p>The authors declare no conflict of interest</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">AphidBase: a centralized bioinformatic resource for annotation of the pea aphid genome</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Legeai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Shigenobu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">P</forename><surname>Gauthier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Colbourne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Rispe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Collin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Richards</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">C C</forename><surname>Wilson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Murphy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Tagu</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/j.1365-2583.2009.00930.x</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Insect Molecular Biology</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="5" to="12" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">The genome sequence of the grape phylloxera provides insights into the evolution, adaptation, and invasion routes of an iconic pest</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Rispe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Legeai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">D</forename><surname>Nabity</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Fernández</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">K</forename><surname>Arora</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Baa-Puyoulet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">R</forename><surname>Banfill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Bao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Barberà</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Bouallègue</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bretaudeau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Brisson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Calevro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Capy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Catrice</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Chertemps</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Couture</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Delière</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">E</forename><surname>Douglas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Dufault-Thompson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Escuer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Feng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Forneck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Gabaldón</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Guigó</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Hilliou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Hinojosa-Alvarez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Min Hsiao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Hudaverdian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Jacquin-Joly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">B</forename><surname>James</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Johnston</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Joubard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">L</forename><surname>Goff</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">L</forename><surname>Trionnaire</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Librado</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Lombaert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Ling Lu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Maïbèche</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Makni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Marcet-Houben</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Martínez-Torres</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Meslin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Montagné</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">A</forename><surname>Moran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Papura</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Parisot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Rahbé</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">R</forename><surname>Lopes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ripoll-Cladellas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Robin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Roques</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Roux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Rozas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Sánchez-Gracia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">F</forename><surname>Sánchez-Herrero</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Santesmasses</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Scatoni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">F</forename><surname>Serre</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Tang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Tian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">A</forename><surname>Umina</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Van Munster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Vincent-Monégat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wemmer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">C C</forename><surname>Wilson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Delmotte</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Tagu</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/s12915-020-00820-5</idno>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Biology</title>
+		<imprint>
+			<biblScope unit="page">18</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Genomic architecture of endogenous ichnoviruses reveals distinct evolutionary pathways leading to virus domestication in parasitic wasps</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Legeai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">F</forename><surname>Santos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Robin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bretaudeau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">B</forename><surname>Dikow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Lemaitre</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Jouan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ravallec</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Drezen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Tagu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Baudat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Gyapay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">A</forename><surname>Webb</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">G</forename><surname>Brady</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">N</forename><surname>Volkoff</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/s12915-020-00822-3</idno>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Biology</title>
+		<imprint>
+			<biblScope unit="page">18</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Chromosomal scale assembly of parasitic wasp genome reveals symbiotic virus colonization</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Gauthier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Boulain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">J F A</forename><surname>Van Vugt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Baudry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Persyn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Aury</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Noel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bretaudeau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Legeai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Warris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Chebbi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Dubreuil</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Duvic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Kremer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Gayral</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Musset</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Josse</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Bigot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Bressac</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Moreau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Periquet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Harry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Montagné</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Boulogne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Sabeti-Azad</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Maïbèche</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Chertemps</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Hilliou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Siaussat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Amselem</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Luyten</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Capdevielle-Dulac</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Labadie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">L</forename><surname>Merlin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Barbe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">G</forename><surname>De Boer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Marbouty</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">L</forename><surname>Cônsoli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Dupas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Hua-Van</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">L</forename><surname>Goff</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bézier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Jacquin-Joly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">B</forename><surname>Whitfield</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">E M</forename><surname>Vet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">M</forename><surname>Smid</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Kaiser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Koszul</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Huguet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">A</forename><surname>Herniou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Drezen</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s42003-020-01623-8</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Communications Biology</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Functional insights from the GC-poor genomes of two aphid parasitoids, Aphidius ervi and Lysiphlebus fabarum</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">B</forename><surname>Dennis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">I</forename><surname>Ballesteros</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Robin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Schrader</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Bast</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Berghöfer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">W</forename><surname>Beukeboom</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Belghazi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bretaudeau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Buellesbach</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Cash</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Colinet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Dumas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Errbii</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Falabella</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">L</forename><surname>Gatti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Geuverink</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">D</forename><surname>Gibson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Hertaeg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Hartmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Jacquin-Joly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Lammers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">I</forename><surname>Lavandero</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Lindenbaum</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Massardier-Galata</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Meslin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Montagné</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Pak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Poirié</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Salvia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">R</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Tagu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Tares</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Vogel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Schwander</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">C</forename><surname>Simon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">C</forename><surname>Figueroa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Vorburger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Legeai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Gadau</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/s12864-020-6764-0</idno>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Genomics</title>
+		<imprint>
+			<biblScope unit="page">21</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Adaptation by copy number variation increases insecticide resistance in the fall armyworm</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Gimenez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Abdelgaffar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">L</forename><surname>Goff</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Hilliou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">A</forename><surname>Blanco</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Hänniger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bretaudeau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Legeai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Nègre</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">L</forename><surname>Jurat-Fuentes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>; D'alençon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Nam</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s42003-020-01382-6</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Communications Biology</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">The Galaxy platform for accessible, reproducible and collaborative biomedical analyses: 2018 update</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Afgan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Baker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Batut</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Van Den Beek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Bouvier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Čech</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Chilton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Clements</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Coraor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">A</forename><surname>Grüning</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Guerler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Hillman-Jackson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Hiltemann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Jalili</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Rasche</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Soranzo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Goecks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Taylor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Nekrutenko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Blankenberg</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/nar/gky379</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Research</title>
+		<imprint>
+			<biblScope unit="volume">46</biblScope>
+			<biblScope unit="page" from="537" to="W544" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Democratizing genome annotation</title>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">A</forename><surname>Dunn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">R</forename><surname>Unni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Diesh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Munoz-Torres</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">L</forename><surname>Harris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Yao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Rasche</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">H</forename><surname>Holmes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">G</forename><surname>Elsik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">E</forename><surname>Lewis</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Apollo</surname></persName>
+		</author>
+		<idno type="DOI">10.1371/journal.pcbi.1006790</idno>
+	</analytic>
+	<monogr>
+		<title level="j">PLOS Computational Biology</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page">1006790</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Differential Expression of Candidate Salivary Effector Genes in Pea Aphid Biotypes With Distinct Host Plant Specificity</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Boulain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Legeai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Jaquiéry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Guy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Morlière</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">C</forename><surname>Simon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Sugio</surname></persName>
+		</author>
+		<idno type="DOI">10.3389/fpls.2019.01301</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Frontiers in Plant Science</title>
+		<imprint>
+			<biblScope unit="page">10</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Characterization and expression profiling of microRNAs in response to plant feeding in two host-plant strains of the lepidopteran pest Spodoptera frugiperda</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Moné</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Nhim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Gimenez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Legeai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Seninet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Parrinello</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Nègre</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>; D'alençon</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/s12864-018-5119-6</idno>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Genomics</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Deciphering the molecular mechanisms of mother-to-egg immune protection in the mealworm beetle Tenebrio molitor</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Tetreau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Dhinaut</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Galinier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Audant-Lacour</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">N</forename><surname>Voisin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Arafah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Chogne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Hilliou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bordes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Sabarly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Chan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">L</forename><surname>Walet-Balieu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Vaudry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Duval</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Bulet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Coustau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Moret</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Gourbal</surname></persName>
+		</author>
+		<idno type="DOI">10.1371/journal.ppat.1008935</idno>
+	</analytic>
+	<monogr>
+		<title level="j">PLOS Pathogens</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page">1008935</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">RNA interference identifies domesticated viral genes involved in assembly and trafficking of virus-derived particles in ichneumonid wasps</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Lorenzi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ravallec</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Eychenne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Jouan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Robin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Darboux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Legeai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">S</forename><surname>Gosselin-Grenet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Sicard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Stoltz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">N</forename><surname>Volkoff</surname></persName>
+		</author>
+		<idno type="DOI">10.1371/journal.ppat.1008210</idno>
+	</analytic>
+	<monogr>
+		<title level="j">PLOS Pathogens</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page">1008210</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Antennal Transcriptome Analysis and Identification of Candidate Chemosensory Genes of the Harlequin Ladybird Beetle, Harmonia axyridis (Pallas) (Coleoptera: Coccinellidae)</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Rondoni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Roman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Meslin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Montagné</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Conti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Jacquin-Joly</surname></persName>
+		</author>
+		<idno type="DOI">10.3390/insects12030209</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Insects</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page">209</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Sublethal Exposure Effects of the Neonicotinoid Clothianidin Strongly Modify the Brain Transcriptome and Proteome in the Male Moth Agrotis ipsilon</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Meslin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Bozzolan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Braman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Chardonnet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Pionneau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">C</forename><surname>François</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Severac</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Gadenne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Anton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Maibèche</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Jacquin-Joly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Siaussat</surname></persName>
+		</author>
+		<idno type="DOI">10.3390/insects12020152</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Insects</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page">152</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Antennal transcriptome sequencing and identification of candidate chemoreceptor proteins from an invasive pest, the American palm weevil, Rhynchophorus palmarum</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Gonzalez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Johny</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">B</forename><surname>Walker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Guan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mfarrej</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Jakše</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Montagné</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Jacquin-Joly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">A</forename><surname>Alqarni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Al-Saleh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Pain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Antony</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41598-021-87348-y</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Scientific Reports</title>
+		<imprint>
+			<biblScope unit="page">11</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">edgeR: a Bioconductor package for differential expression analysis of digital gene expression data</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">D</forename><surname>Robinson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">J</forename><surname>Mccarthy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">K</forename><surname>Smyth</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/bioinformatics/btp616</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="page" from="139" to="140" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">I</forename><surname>Love</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Huber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Anders</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/s13059-014-0550-8</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biology</title>
+		<imprint>
+			<biblScope unit="page">15</biblScope>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">A survey of best practices for RNA-seq data analysis</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Conesa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Madrigal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Tarazona</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Gomez-Cabrero</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Cervera</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mcpherson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">W</forename><surname>Szcześniak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">J</forename><surname>Gaffney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">L</forename><surname>Elo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mortazavi</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/s13059-016-0881-8</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biology</title>
+		<imprint>
+			<biblScope unit="page">17</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Methods for interpreting lists of affected genes obtained in a DNA microarray experiment</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Hedegaard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Arce</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Bicciato</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bonnet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Buitenhuis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Collado-Romero</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">N</forename><surname>Conley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Sancristobal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Ferrari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">J</forename><surname>Garrido</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Groenen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Hornshøj</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Hulsegge</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Á</forename><surname>Jiménez-Marín</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Kommadath</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Lagarrigue</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Leunissen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Liaubet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">B</forename><surname>Neerincx</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Nie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Van Der Poel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Prickett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ramirez-Boo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Rebel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Robert-Granié</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Skarman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Smits</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Sørensen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Tosser-Klopp</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Watson</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/1753-6561-3-s4-s5</idno>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Proceedings</title>
+		<imprint>
+			<biblScope unit="page">3</biblScope>
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Gene set enrichment analysis: A knowledge-based approach for interpreting genome-wide expression profiles</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Subramanian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Tamayo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><forename type="middle">K</forename><surname>Mootha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mukherjee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">L</forename><surname>Ebert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Gillette</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Paulovich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">L</forename><surname>Pomeroy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">R</forename><surname>Golub</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">S</forename><surname>Lander</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">P</forename><surname>Mesirov</surname></persName>
+		</author>
+		<idno type="DOI">10.1073/pnas.0506580102</idno>
+		<ptr target=":10.1073/pnas.0506580102" />
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the National Academy of Sciences</title>
+		<imprint>
+			<biblScope unit="volume">102</biblScope>
+			<biblScope unit="page" from="15545" to="15550" />
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">UpSetR: an R package for the visualization of intersecting sets and their properties</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">R</forename><surname>Conway</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Lex</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Gehlenborg</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/bioinformatics/btx364</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page" from="2938" to="2940" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Clustering transformed compositional data using K-means, with applications in gene expression and bicycle sharing system data</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Godichon-Baggioni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Maugis-Rabusseau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Rau</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/02664763.2018.1454894</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Applied Statistics</title>
+		<imprint>
+			<biblScope unit="volume">46</biblScope>
+			<biblScope unit="page" from="47" to="65" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Cluster analysis on high dimensional RNA-seq data with applications to cancer research -An evaluation study</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Vidman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Källberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Rydén</surname></persName>
+		</author>
+		<idno type="DOI">10.1371/journal.pone.0219102</idno>
+	</analytic>
+	<monogr>
+		<title level="j">PLOS ONE</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page">219102</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title/>
+		<ptr target="https://www.biobam.com/omicsboxOmicsBox-BioinformaticsMadeEasy" />
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title/>
+		<ptr target="https://digitalinsights.qiagen" />
+	</analytic>
+	<monogr>
+		<title level="j">CLC Genomics Workbench</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="issue">0</biblScope>
+		</imprint>
+		<respStmt>
+			<orgName>QIAGEN</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">The nf-core framework for community-curated bioinformatics pipelines</title>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">A</forename><surname>Ewels</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Peltzer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Fillinger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Patel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Alneberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Wilm</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">U</forename><surname>Garcia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">D</forename><surname>Tommaso</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Nahnsen</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41587-020-0439-x</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Biotechnology</title>
+		<imprint>
+			<biblScope unit="volume">38</biblScope>
+			<biblScope unit="page" from="276" to="278" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Askomics</surname></persName>
+		</author>
+		<ptr target="https://askomics.org/" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">a user-friendly interface to Semantic Web technologies for integrating local datasets with reference resources</title>
+		<author>
+			<persName><forename type="first">X</forename><surname>Garnier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bretaudeau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Legeai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Siegel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Dameron</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of JOBIM 2019</title>
+		<meeting>JOBIM 2019</meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">topGO: Enrichment Analysis for Gene Ontology</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Alexa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Rahnenfuhrer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">R package version</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="issue">40</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Nitrogen supply and host-plant genotype modulate the transcriptomic profile of Plasmodiophora brassicae</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Gazengel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Aigu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Lariagon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Humeau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Gravot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">J</forename><surname>Manzanares-Dauleux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Daval</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Frontiers in Microbiology</title>
+		<imprint/>
+	</monogr>
+	<note>in press</note>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Comparative transcriptome analysis at the onset of speciation in a mimetic butterfly, the Ithomiini Melinaea marsaeus</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Prunier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Persyn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Legeai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mcclure</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Meslin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Robin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Alves-Carvalho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mohammad</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Blugeon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Jacquin-Joly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Montagné</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Elias</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Gauthier</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Evolutionary Biology</title>
+		<imprint/>
+	</monogr>
+	<note>submitted</note>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Soil microbiota influences clubroot disease by modulating Plasmodiophora brassicae and Brassica napus transcriptomes</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Daval</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Gazengel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Belcour</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Linglin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Guillerm-Erckelboudt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Sarniguet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">J</forename><surname>Manzanares-Dauleux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Lebreton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Mougel</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/1751-7915.13634</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Microbial Biotechnology</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page" from="1648" to="1672" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

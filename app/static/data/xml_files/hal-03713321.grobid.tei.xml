@@ -1,0 +1,3164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Spodoptera littoralis genome mining brings insights on the dynamic of expansion of gustatory receptors in polyphagous noctuidae</title>
+				<funder>
+					<orgName type="full">INRAE (France)</orgName>
+				</funder>
+				<funder ref="#_HBBkZ2K #_NvfDzJ7">
+					<orgName type="full">unknown</orgName>
+				</funder>
+				<funder ref="#_68AHFZH #_KDD9nah">
+					<orgName type="full">Agence Nationale de la Recherche</orgName>
+					<orgName type="abbreviated">ANR</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Camille</forename><surname>Meslin</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Institut d&apos;Ecologie et des Sciences de l&apos;Environnement de Paris (iEES</orgName>
+								<orgName type="laboratory" key="lab1">INRAE</orgName>
+								<orgName type="laboratory" key="lab2">IRD</orgName>
+								<orgName type="institution" key="instit1">Sorbonne Universit e</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">UPEC</orgName>
+								<orgName type="institution" key="instit4">Universit e de Paris-Paris)</orgName>
+								<address>
+									<postCode>78026</postCode>
+									<settlement>Versailles</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Pauline</forename><surname>Mainet</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Institut d&apos;Ecologie et des Sciences de l&apos;Environnement de Paris (iEES</orgName>
+								<orgName type="laboratory" key="lab1">INRAE</orgName>
+								<orgName type="laboratory" key="lab2">IRD</orgName>
+								<orgName type="institution" key="instit1">Sorbonne Universit e</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">UPEC</orgName>
+								<orgName type="institution" key="instit4">Universit e de Paris-Paris)</orgName>
+								<address>
+									<postCode>78026</postCode>
+									<settlement>Versailles</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Nicolas</forename><surname>Montagn</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Institut d&apos;Ecologie et des Sciences de l&apos;Environnement de Paris (iEES</orgName>
+								<orgName type="laboratory" key="lab1">INRAE</orgName>
+								<orgName type="laboratory" key="lab2">IRD</orgName>
+								<orgName type="institution" key="instit1">Sorbonne Universit e</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">UPEC</orgName>
+								<orgName type="institution" key="instit4">Universit e de Paris-Paris)</orgName>
+								<address>
+									<postCode>78026</postCode>
+									<settlement>Versailles</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">St</forename><surname>Ephanie Robin</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="laboratory" key="lab1">INRAE</orgName>
+								<orgName type="laboratory" key="lab2">UMR Institut de G en etique</orgName>
+								<orgName type="laboratory" key="lab3">Environnement et Protection des Plantes (IGEPP)</orgName>
+								<orgName type="laboratory" key="lab4">BioInformatics Platform for Agroecosystems Arthropods (BIPAA)</orgName>
+								<address>
+									<addrLine>Campus Beaulieu</addrLine>
+									<postCode>35042</postCode>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="department">GenOuest Core Facility</orgName>
+								<orgName type="laboratory">IRISA</orgName>
+								<orgName type="institution">INRIA</orgName>
+								<address>
+									<addrLine>Campus de Beaulieu</addrLine>
+									<postCode>5042</postCode>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Fabrice</forename><surname>Legeai</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="laboratory" key="lab1">INRAE</orgName>
+								<orgName type="laboratory" key="lab2">UMR Institut de G en etique</orgName>
+								<orgName type="laboratory" key="lab3">Environnement et Protection des Plantes (IGEPP)</orgName>
+								<orgName type="laboratory" key="lab4">BioInformatics Platform for Agroecosystems Arthropods (BIPAA)</orgName>
+								<address>
+									<addrLine>Campus Beaulieu</addrLine>
+									<postCode>35042</postCode>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="department">GenOuest Core Facility</orgName>
+								<orgName type="laboratory">IRISA</orgName>
+								<orgName type="institution">INRIA</orgName>
+								<address>
+									<addrLine>Campus de Beaulieu</addrLine>
+									<postCode>5042</postCode>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Anthony</forename><surname>Bretaudeau</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="laboratory" key="lab1">INRAE</orgName>
+								<orgName type="laboratory" key="lab2">UMR Institut de G en etique</orgName>
+								<orgName type="laboratory" key="lab3">Environnement et Protection des Plantes (IGEPP)</orgName>
+								<orgName type="laboratory" key="lab4">BioInformatics Platform for Agroecosystems Arthropods (BIPAA)</orgName>
+								<address>
+									<addrLine>Campus Beaulieu</addrLine>
+									<postCode>35042</postCode>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="department">GenOuest Core Facility</orgName>
+								<orgName type="laboratory">IRISA</orgName>
+								<orgName type="institution">INRIA</orgName>
+								<address>
+									<addrLine>Campus de Beaulieu</addrLine>
+									<postCode>5042</postCode>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">J</forename><forename type="middle">Spencer</forename><surname>Johnston</surname></persName>
+							<affiliation key="aff3">
+								<orgName type="department">Department of Entomology</orgName>
+								<orgName type="institution">Texas A&amp;M University</orgName>
+								<address>
+									<postCode>77843</postCode>
+									<settlement>College Station</settlement>
+									<region>TX</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Fotini</forename><surname>Koutroumpa</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Institut d&apos;Ecologie et des Sciences de l&apos;Environnement de Paris (iEES</orgName>
+								<orgName type="laboratory" key="lab1">INRAE</orgName>
+								<orgName type="laboratory" key="lab2">IRD</orgName>
+								<orgName type="institution" key="instit1">Sorbonne Universit e</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">UPEC</orgName>
+								<orgName type="institution" key="instit4">Universit e de Paris-Paris)</orgName>
+								<address>
+									<postCode>78026</postCode>
+									<settlement>Versailles</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Emma</forename><surname>Persyn</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Institut d&apos;Ecologie et des Sciences de l&apos;Environnement de Paris (iEES</orgName>
+								<orgName type="laboratory" key="lab1">INRAE</orgName>
+								<orgName type="laboratory" key="lab2">IRD</orgName>
+								<orgName type="institution" key="instit1">Sorbonne Universit e</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">UPEC</orgName>
+								<orgName type="institution" key="instit4">Universit e de Paris-Paris)</orgName>
+								<address>
+									<postCode>78026</postCode>
+									<settlement>Versailles</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff4">
+								<orgName type="laboratory">CIRAD</orgName>
+								<orgName type="institution">UMR PVBMT R eunion</orgName>
+								<address>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Christelle</forename><surname>Monsempe</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Institut d&apos;Ecologie et des Sciences de l&apos;Environnement de Paris (iEES</orgName>
+								<orgName type="laboratory" key="lab1">INRAE</orgName>
+								<orgName type="laboratory" key="lab2">IRD</orgName>
+								<orgName type="institution" key="instit1">Sorbonne Universit e</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">UPEC</orgName>
+								<orgName type="institution" key="instit4">Universit e de Paris-Paris)</orgName>
+								<address>
+									<postCode>78026</postCode>
+									<settlement>Versailles</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Marie-Christine</forename><surname>Franc¸ois</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Institut d&apos;Ecologie et des Sciences de l&apos;Environnement de Paris (iEES</orgName>
+								<orgName type="laboratory" key="lab1">INRAE</orgName>
+								<orgName type="laboratory" key="lab2">IRD</orgName>
+								<orgName type="institution" key="instit1">Sorbonne Universit e</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">UPEC</orgName>
+								<orgName type="institution" key="instit4">Universit e de Paris-Paris)</orgName>
+								<address>
+									<postCode>78026</postCode>
+									<settlement>Versailles</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author role="corresp">
+							<persName><forename type="first">Emmanuelle</forename><surname>Jacquin-Joly</surname></persName>
+							<email>emmanuelle.joly@inrae.fr</email>
+							<affiliation key="aff0">
+								<orgName type="department">Institut d&apos;Ecologie et des Sciences de l&apos;Environnement de Paris (iEES</orgName>
+								<orgName type="laboratory" key="lab1">INRAE</orgName>
+								<orgName type="laboratory" key="lab2">IRD</orgName>
+								<orgName type="institution" key="instit1">Sorbonne Universit e</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">UPEC</orgName>
+								<orgName type="institution" key="instit4">Universit e de Paris-Paris)</orgName>
+								<address>
+									<postCode>78026</postCode>
+									<settlement>Versailles</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><surname>Inrae</surname></persName>
+						</author>
+						<author>
+							<affiliation key="aff5">
+								<orgName type="department">Infectiologie et Sant e Publique (ISP)</orgName>
+								<orgName type="institution" key="instit1">INRAE</orgName>
+								<orgName type="institution" key="instit2">Universit e Tours</orgName>
+								<address>
+									<postCode>37380</postCode>
+									<settlement>Nouzilly</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff6">
+								<orgName type="department">Institut d&apos;Ecologie et des Sciences de l&apos;Environnement de Paris (iEES</orgName>
+								<orgName type="laboratory">IRD</orgName>
+								<orgName type="institution" key="instit1">Sorbonne Universit e</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">UPEC</orgName>
+								<orgName type="institution" key="instit4">Universit e de Paris-Paris)</orgName>
+								<address>
+									<postCode>78026</postCode>
+									<settlement>Versailles</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff7">
+								<orgName type="institution">Institut National de Recherche pour l&apos;Agriculture</orgName>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Spodoptera littoralis genome mining brings insights on the dynamic of expansion of gustatory receptors in polyphagous noctuidae</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">14BC3D9DE55A43E0805B21BEFFB05F55</idno>
+					<note type="submission">Received: April 01, 2022. Accepted: May 17, 2022</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:14+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Spodoptera littoralis</term>
+					<term>gustatory receptors</term>
+					<term>transposable elements</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>The bitter taste, triggered via gustatory receptors, serves as an important natural defense against the ingestion of poisonous foods in animals, and the increased host breadth is usually linked to an increase in the number of gustatory receptor genes. This has been especially observed in polyphagous insect species, such as noctuid species from the Spodoptera genus. However, the dynamic and physical mechanisms leading to these gene expansions and the evolutionary pressures behind them remain elusive. Among major drivers of genome dynamics are the transposable elements but, surprisingly, their potential role in insect gustatory receptor expansion has not been considered yet. In this work, we hypothesized that transposable elements and possibly positive selection would be involved in the highly dynamic evolution of gustatory receptor in Spodoptera spp. We first sequenced de novo the full 465 Mb genome of S. littoralis, and manually annotated the main chemosensory genes, including a large repertoire of 373 gustatory receptor genes (including 19 pseudogenes). We also improved the completeness of S. frugiperda and S. litura gustatory receptor gene repertoires. Then, we annotated transposable elements and revealed that a particular category of class I retrotransposons, the SINE transposons, was significantly enriched in the vicinity of gustatory receptor gene clusters, suggesting a transposon-mediated mechanism for the formation of these clusters. Selection pressure analyses indicated that positive selection within the gustatory receptor gene family is cryptic, only 7 receptors being identified as positively selected. Altogether, our data provide a new good quality Spodoptera genome, pinpoint interesting gustatory receptor candidates for further functional studies and bring valuable genomic information on the mechanisms of gustatory receptor expansions in polyphagous insect species.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Introduction</head><p>Animals rely heavily on their sense of taste to discriminate between harmful poisonous foods, usually through the detection of bitter compounds, and beneficial sustenance. Interestingly, narrowness of food diets in animals is usually linked to a decreased number of gustatory receptors (GRs), in both mammals such as the blood-feeder bats <ref type="bibr" target="#b31">(Hong and Zhao 2014)</ref>, and in insects such as the body louse <ref type="bibr" target="#b37">(Kirkness et al. 2010</ref>)-an obligate ectoparasite of human-the fig wasp Ceratosolen solmsi <ref type="bibr" target="#b77">(Xiao et al. 2013</ref>)-specialized on Ficus-and many Lepidoptera specialist feeders, although mammals and insect GRs are unrelated. Reversely, the increased host breadth is usually linked to GR gene expansions. This has been especially observed in polyphagous insects, including omnivorous species such as the American cockroach Periplaneta americana <ref type="bibr" target="#b43">(Li et al. 2018)</ref> and herbivorous species such as noctuid species <ref type="bibr" target="#b78">(Xu et al. 2016;</ref><ref type="bibr" target="#b11">Cheng et al. 2017;</ref><ref type="bibr" target="#b21">Gouin et al. 2017)</ref>.</p><p>In polyphagous noctuids, the sequencing of the genomes of Spodoptera frugiperda and Spodoptera litura revealed GR repertoires of 231 and 237 genes <ref type="bibr" target="#b11">(Cheng et al. 2017;</ref><ref type="bibr" target="#b21">Gouin et al. 2017)</ref>, respectively, more than twice as much compared with other monophagous and oligophagous Lepidoptera species (Bombyx mori: 69 genes, Heliconius melpomene: 73 genes) (The International Silkworm Genome Consortium 2008; The Heliconius Genome Consortium 2012; <ref type="bibr" target="#b8">Briscoe et al. 2013;</ref><ref type="bibr" target="#b26">Guo et al. 2017)</ref>, suggesting that the number of GRs has greatly increased during evolution in polyphagous Lepidoptera via gene tandem duplication. The genomic architecture of the GR family is thus well known in these species and, together with previous studies, it supports the evidence that the family evolved under a birth-and-death model as well as under different selective pressures depending on the clade considered <ref type="bibr" target="#b48">(Nei and Rooney 2005;</ref><ref type="bibr" target="#b8">Briscoe et al. 2013;</ref><ref type="bibr" target="#b1">Almeida et al. 2014;</ref><ref type="bibr" target="#b71">Suzuki et al. 2018)</ref>. Most of these GRs belong to clades grouping the so-called "bitter" receptors, but in fact the function of the majority of these GRs remains enigmatic. Although the bitter GR class exhibits the most dynamic evolution, the mechanisms leading to GR expansions and the evolutionary pressures behind them remain elusive. Among major drivers of genome dynamics are the transposable elements (TEs). TEs are very diverse and are distributed along genomes in a nonrandom way. Similar or identical TEs can induce chromosomal rearrangements such as deletions, insertions, and even duplications, features that are frequent in multigene families such as GRs. Surprisingly, their potential role in insect GR expansion has not been considered yet.</p><p>In order to study GR evolution and the potential role of TEs in GR expansion in more detail, we sequenced an additional genome of a Spodoptera species: Spodoptera littoralis. So far, only 38 GRs were identified <ref type="bibr" target="#b55">(Poivet et al. 2013;</ref><ref type="bibr" target="#b73">Walker et al. 2019;</ref><ref type="bibr" target="#b39">Koutroumpa et al. 2021)</ref> in S. littoralis whereas several hundreds of GRs were annotated in its counterparts S. litura and S. frugiperda. To investigate this singularity, we report here the sequencing of the S. littoralis genome, its full assembly, functional automatic annotation and expert annotation of the main chemosensory gene families, namely soluble carrier proteins [odorant-binding proteins (OBPs) and chemosensory proteins (CSPs)] <ref type="bibr" target="#b51">(Pelosi et al. 2018)</ref> and the 3 major families of insect chemosensory receptors [odorant receptors (ORs); ionotropic receptors (IRs), and GRs] <ref type="bibr" target="#b58">(Robertson 2019)</ref>. With a particular focus on gustation, we also reannotated GRs in S. litura and S. frugiperda. Then, we analyzed the evolutionary history of GRs, by looking at the enrichment for TEs in the vicinity of GRs and by analyzing selective pressures acting on the different GR clades.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Materials and methods</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Estimation of S. littoralis genome size</head><p>The genome size of S. littoralis was estimated using flow cytometry. Genome size estimates were produced as described before <ref type="bibr" target="#b32">(Johnston et al. 2019)</ref>. In brief, the head of a S. littoralis adult male along with the head of a female Drosophila virilis standard (1C ¼ 328 Mbp; 1C ¼ amount of DNA in the gamete of homogametic sex) <ref type="bibr" target="#b22">(Greilhuber et al. 2005)</ref> were placed into 1 ml of Galbrath buffer in a 2-ml Kontes Dounce and ground with 15 strokes of the A pestle. The released nuclei were filtered through a 40-lM nylon filter and stained with 25 lg/ml propidium iodide for 2 h in the dark at 4 C. The average red fluorescence of the 2C nuclei was scored with a Partec C flow cytometer emitting at 514 nm. The 1C genome size of S. littoralis was estimated as (average red florescence of the 2C S. littoralis peak)/(average fluorescence of the 2C D. virilis peak) Â328 Mbp.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Spodoptera littoralis genome sequencing and assembly</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Biological material and genomic DNA extraction</head><p>Whole genomic DNA was extracted from 2 male larvae obtained after 2 generations resulting from a single pair of S. littoralis originating from an inbred laboratory colony maintained in INRAE Versailles since 2000s on a semiartificial diet <ref type="bibr" target="#b54">(Poitout and Bues 1974)</ref> at 246 2 C and 65 6 5% relative humidity under 16:8 h light:dark photoperiod. The sex of individuals was verified by checking for presence of testis. The gut was removed and DNA extraction was performed from whole, late-stage larvae using Qiagen Genomic-tip 500/G (Qiagen Inc., Chatsworth, CA, USA). A total of 30 mg of genomic DNA were obtained.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Sequencing</head><p>Different types of libraries were generated for 2 sequencing technologies: Illumina and PacBio. For Illumina sequencing, 5 libraries were prepared and constructed according to the Illumina manufacturer's protocol (1 library of 170, 1 of 250, and 3 of 500 bp). Illumina sequencing was performed at the BGI-tech facilities (Shenzen, China) on a HiSeq2500 machine. Around 68 Gb were obtained, representing 144Â of the estimated genome size (470 Mb) (Supplementary Data 1). The raw reads were filtered at BGI to remove adapter sequences, contaminations, and lowquality reads and the quality of all raw reads was assessed using FASTQC (Andrews S, http://www.bioinformatics.babraham.ac. uk/projects/fastqc/). PacBio sequencing was performed at GenoScreen (Lille, France) by the SMRT sequencing technology on 9 SMRTcell RSII, generating 2 846 820 reads. Around 16 Gb were obtained, representing 34Â of the estimated genome size (Supplementary Data 1). High-quality sequences were obtained by generating circular consensus sequencing.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Genome assembly</head><p>A first assembly was done using Platanus (v1.2.1) <ref type="bibr" target="#b34">(Kajitani et al. 2014)</ref> with Illumina data. A second assembly was obtained by doing scaffolding with SSPACE-LR (modified) <ref type="bibr" target="#b4">(Boetzer and Pirovano 2014)</ref> using PacBio data and gap filling using GapCloser <ref type="bibr" target="#b3">(Boetzer and Pirovano 2012)</ref>. These second assembly was evaluated using Benchmarking Universal Single-Copy Orthologue (BUSCO v5.2.2) <ref type="bibr" target="#b64">(Simão et al. 2015)</ref> with a reference set of 5,286 genes conserved in Lepidoptera.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Structural and functional genome annotation</head><p>Structural automatic genome annotation was done with BRAKER (v1.11) <ref type="bibr" target="#b30">(Hoff et al. 2016</ref>) using all RNAseq data described in Supplementary Data 1. RNAseq libraries were sequenced from different larvae and adult tissues from males and females including the proboscis, palps, legs, and ovipositor and sequenced by Illumina (Supplementary Data 1) <ref type="bibr" target="#b55">(Poivet et al. 2013;</ref><ref type="bibr" target="#b73">Walker et al. 2019;</ref><ref type="bibr" target="#b39">Koutroumpa et al. 2021)</ref>. Reads were trimmed using Trimmomatic (v0.36) <ref type="bibr" target="#b5">(Bolger et al. 2014)</ref> with the following parameters: ILLUMINACLIP: TruSeq2-PE.fa: 2:30:10, LEADING: 3, TRAILING: 3, SLIDINGWINDOW: 4:15, MINLEN: 36. Trimmed reads were mapped on the genome assembly using STAR (v.5.2a) <ref type="bibr" target="#b17">(Dobin et al. 2013)</ref> with the default parameters except for the following parameters: outFilterMultimapNmax ¼ 5, outFilterMismatchNmax ¼ 3, alignIntronMin ¼ 10, alignIntronMax ¼ 50,000, and alignMates GapMax ¼ 50,000. As done for the genome assembly, gene annotation was evaluated using BUSCO v5.2.2 with a reference set of 5,286 proteins conserved in Lepidoptera. Putative functions of predicted proteins were assigned using blastp (v2.6.0) against GenBank NR</p><formula xml:id="formula_0">(nonredundant GenBank CDS translations þ PDB þ SwissProt þ PIR þ PRF)</formula><p>release 2017 September, and interproscan v5.13-52.0 against Interpro. Associated GO terms were collected from blast NR and interproscan results with blast2GO (v2.5).</p><p>B. mori, H. melpomene, and Danaus plexippus) <ref type="bibr" target="#b83">(Zhan et al. 2011;</ref><ref type="bibr" target="#b8">Briscoe et al. 2013;</ref><ref type="bibr" target="#b11">Cheng et al. 2017;</ref><ref type="bibr" target="#b21">Gouin et al. 2017;</ref><ref type="bibr" target="#b26">Guo et al. 2017)</ref>. For all annotations in S. frugiperda genome, we use the "corn" strain as reference <ref type="bibr" target="#b21">(Gouin et al. 2017)</ref>. For each type of gene family, the set of known amino acid sequences and the genome sequence of S. littoralis were uploaded on the BIPAA galaxy platform to run the following annotation workflow. First, known amino acid sequences were used to search for S. littoralis scaffolds potentially containing genes of interest using tblastn <ref type="bibr" target="#b9">(Camacho et al. 2009</ref>). All S. littoralis scaffolds with significant blast hits (evalue &lt;0.001) were retrieved to generate a subset of the genome. Amino acid sequences were then aligned to this subset of the genome using Scipio <ref type="bibr" target="#b36">(Keller et al. 2008)</ref> and Exonerate <ref type="bibr" target="#b66">(Slater et al. 2005)</ref> to define intron/exon boundaries and to create gene models. Outputs from Scipio and Exonerate were then visualized on a Apollo browser <ref type="bibr" target="#b41">(Lee et al. 2013</ref>) available on the BIPAA platform. All gene models generated have been manually validated or corrected via Apollo. Based on homology with other lepidopteran sequences and on RNAseq data available for S. littoralis <ref type="bibr" target="#b55">(Poivet et al. 2013;</ref><ref type="bibr" target="#b73">Walker et al. 2019;</ref><ref type="bibr" target="#b39">Koutroumpa et al. 2021)</ref>, matching halves were joined when located on different scaffolds. The classification of deduced proteins and their integrity were verified using blastp against the nonredundant (NR) GenBank database. When genes were suspected to be split on different scaffolds, protein sequences were merged for further analyses. A previous transcriptomic work identified 38 OBP genes in S. litura <ref type="bibr" target="#b23">(Gu et al. 2015)</ref>. This number being low compared with the repertoire of other lepidopteran species, S. litura OBPs were also annotated in the recent genome <ref type="bibr" target="#b11">(Cheng et al. 2017)</ref>. For OBPs and CSPs, SignalP-5.0 (Almagro <ref type="bibr" target="#b0">Armenteros et al. 2019</ref>) was used to determine the presence or absence of a signal peptide. Hereafter, the abbreviations Slit, Slitu, and Sfru (for S. littoralis, S. litura, and S. frugiperda, respectively) are used before gene names to clarify the species.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Iterative annotation and reannotation of GRs</head><p>The initial annotation of GR genes was carried out the same way as for the other genes involved in chemoreception with 1 modification: at the end of the manual curation, all the newly identified amino acid GR sequences were added to the query set of known GR sequences to perform a new cycle of annotation. This iterative strategy was used for S. littoralis as well as for S. litura and S. frugiperda and was performed until no new GR sequence was identified.</p><p>At the end of the annotation, all GR amino acid sequences were aligned for each species individually using MAFFT v7.0 <ref type="bibr" target="#b35">(Katoh and Standley 2013)</ref> in order to identify and filter allelic sequences and to verify the presence of the conserved GR domain (TYhhhhhQF in the transmembrane domain 7) <ref type="bibr" target="#b7">(Brand et al. 2018</ref>) (Supplementary Data 2). Alleles were considered as such when they shared at least 90% identity with other annotated sequences. Between alleles, only the longest sequence was retained for further analysis. Pseudogenes were identified as partial sequences containing one or multiple stop codons. Genes were considered complete when both following conditions were met: (1) a start and a stop codon were identified and (2) a sequence length &gt;350 amino acids. Spodoptera littoralis gene names were attributed based on orthology relationships with S. frugiperda when possible. Spodoptera frugiperda newly identified genes compared with the previous publications were numbered starting from SfruGR232. Spodoptera litura newly identified gene names were numbered starting from SlituGR240.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Annotation and enrichment analysis of TEs around chemosensory receptor genes in Spodoptera species</head><p>The annotation of TEs in S. littoralis genome was performed using REPET (Galaxy Lite v2.5). The TEdenovo pipeline <ref type="bibr" target="#b19">(Flutre et al. 2011)</ref> was used to identify consensus sequences representative of each type of repetitive elements. Only contigs of a length &gt;10 kb were used as input for the pipeline. Consensus sequences were built only if at least 3 similar copies were detected in the genome. The TEannot pipeline <ref type="bibr" target="#b56">(Quesneville et al. 2005)</ref> was then used to annotate all repetitive elements in the genome using the library of TE consensus and to build an NR library in which redundant consensus were eliminated (length !98%, identity !95%). The NR library of TEs was finally used to perform the S. littoralis genome annotation with the TEannot pipeline.</p><p>The tool Locus Overlap Analysis (LOLA) within the R package Bioconductor <ref type="bibr" target="#b62">(Sheffield and Bock 2016)</ref> was used to test for enrichment of TEs within the genomic regions containing chemosensory receptor genes (ORs and GRs) in both S. littoralis and S. frugiperda. To run LOLA with data from S. littoralis, 3 types of datasets were created. The first dataset, the query set, contained genomic regions of 10 kb around each chemosensory receptor gene. Since these genes were mostly organized in clusters within the genome, regions with overlap were combined leading to the creation of 114 chemosensory regions for the GRs and 63 regions for the ORs. The second dataset, the region universe, contained all genic regions from the genome. The region universe was created by retrieving the gene coordinates from the Official Gene Set from both genome (OGS3.0 for S. littoralis, OGS2.2 for S. frugiperda), and expanding to 10 kb around each gene. Similarly to the GR regions, regions with overlap were combined. This led to the creation of 14,072 genic regions for S. littoralis and 11,053 genic regions for S. frugiperda. The last dataset, the reference dataset, contained the coordinates of TEs previously identified by the REPET analysis. The enrichment in TE content within the chemosensory regions and the control regions were then compared using LOLA using a Fisher's Exact Test with false discovery rate correction (q-value) to assess the significance of overlap in each pairwise comparison. The same method was used using S. frugiperda TEs, previously annotated using the same tool REPET <ref type="bibr" target="#b21">(Gouin et al. 2017)</ref>, as well as chemosensory receptor reannotations from the present work and led to the creation of 191 chemosensory regions for the GRs and 88 regions for the ORs.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Evolutionary analyses</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Phylogenetic tree reconstructions</head><p>Chemosensory-related protein trees were constructed for OBPs, CSPs, ORs, IRs, and GRs. For GRs, the phylogeny was built using GR amino acid sequences from different Lepidoptera species with various diets. In order to take into account the whole repertoire of GRs in our analysis, only species in which the GRs were annotated following whole-genome sequencing were considered. The dataset contained GRs from polyphagous (S. littoralis, S. litura, and S. frugiperda), oligophagous (H. melpomene-73 GRs, Manduca sexta-45 GRs) and monophagous species (B. mori-72 GRs). The multiple sequence alignment of all GR amino acid sequences (expect short partial sequences) was performed with ClustalO <ref type="bibr" target="#b63">(Sievers et al. 2011</ref>) and the phylogeny was reconstructed using PhyML 3.0 <ref type="bibr" target="#b25">(Guindon and Gascuel 2003)</ref> (http://www.atgc-montpel lier.fr/phyml/) with the automatic selection of the best substitution model by SMS <ref type="bibr" target="#b42">(Lefort et al. 2017)</ref>. The CO 2 and sugar receptor clades were used to root the tree. The resulting phylogenetic tree was edited using FigTree v1.  <ref type="bibr" target="#b35">(Katoh and Standley 2013)</ref>. The reconstruction of the phylogenetic trees was carried out the same way as for the GRs, and the OR tree was rooted with the Orco clade.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Tree reconciliation</head><p>Estimates of gains and losses of GR genes across the Noctuidae were inferred using the reconciliation methods implemented in Notung v2.6 <ref type="bibr" target="#b68">(Stolzer et al. 2012;</ref><ref type="bibr" target="#b15">Darby et al. 2016</ref>). The species tree was generated using TimeTree.org <ref type="bibr" target="#b40">(Kumar et al. 2017</ref>) and the gene tree was the reconstructed phylogeny of the GRs generated by PhyML.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Evolutionary pressures</head><p>The codeml software of the package PAML was used to infer selective pressures <ref type="bibr" target="#b79">(Yang 2007)</ref>. Because of the high divergence between GRs across the phylogeny, selective pressures were inferred on 13 subtrees extracted from the GR phylogeny in order to minimize the ratio of synonymous substitutions. For each subtree, an alignment of the protein sequences was performed using MAFFT, converted to codon alignment using PAL2NAL <ref type="bibr" target="#b70">(Suyama et al. 2006)</ref>, and a phylogenetic tree was reconstructed based on the protein sequence alignment. Sequences introducing large gaps in the alignment were removed in order to compute codeml on the largest alignment possible. To estimate the selective pressures acting on the evolution of the lepidopteran GR genes, the "m0 model" from codeml of the PAML package was computed on the 13 subtrees to estimate the global x (ratio of nonsynonymous substitutions dN/ratio of synonymous substitutions dS) <ref type="bibr" target="#b81">(Yang et al. 2000)</ref>. The x value reflects the mode of evolution, with x &gt; 1 indicating positive selection, x &lt; 1 indicating purifying selection, and x ¼ 1 indicating neutral evolution. To further infer positive selection, 2 comparisons between evolutionary models were conducted. First, the comparison between M8 and M8a models can detect positive selection acting on sites, i.e. columns of the alignment <ref type="bibr" target="#b72">(Swanson et al. 2003;</ref><ref type="bibr" target="#b76">Wong et al. 2004</ref>). This comparison was conducted only when the global x calculated from the m0 model was &gt;0.3. The second comparison between branch-site model A and its neutral counterpart can detect positive selection acting on particular sites on a specific lineage <ref type="bibr" target="#b84">(Zhang et al. 2005)</ref>, a method reported to be more powerful than other comparisons implemented in PAML to detect episodic positive selection <ref type="bibr" target="#b80">(Yang and Dos Reis 2011)</ref>. Here, we tested all the terminal branches of the trees for which both the global x was elevated and the comparison between models M8 and M8a statistically significant. Since many branches were tested for each tree, a correction for multiple testing to control for false discovery rate was applied: the q-value (q-value R package version 2.22.0; <ref type="bibr" target="#b69">Storey et al. 2021</ref>).</p><p>In the case of a statistically significant q-value (&lt;0.05), positively selected sites were inspected for possible artifacts due to partial sequences or misalignment.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Putative functional assignation</head><p>In order to assign putative functions to several candidate SlitGRs, both their phylogenetic position and theoretical 3D structure were analyzed. For the theoretical structures, the AlphaFold algorithm <ref type="bibr" target="#b33">(Jumper et al. 2021</ref>) was used to model candidate SlitGRs as well as their B. mori ortholog GRs with known function: BmorGR9 and BmorGR66. Structures were then compared between orthologs using the MatchMaker tool of Chimera and the root mean square deviation (RMSD) computed using the same tool <ref type="bibr" target="#b53">(Pettersen et al. 2004</ref>). Docking of D-fructose was performed on both BmorGR9 and SlitGR9 using the Webina webserver (https:// durrantlab.pitt.edu/webina/) <ref type="bibr" target="#b38">(Kochnev et al. 2020)</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Results and discussion</head><p>Genome assembly and automatic annotation of the S. littoralis genome</p><p>The first assembly of S. littoralis (v1.0), obtained with short Illumina reads, contained 123,499 scaffolds with a N50 of 18 kb and an assembly total size around 470 Mb. The second assembly (v2.0), obtained with a combination of both short Illumina and long PacBio reads, contained 28,891 scaffolds, with a N50 of 64 kb and an assembly total size around 465 Mb (Table <ref type="table" target="#tab_1">1</ref>). The genome size of S. littoralis was in good correlation with flow cytometry evaluation (470 Mb). The BUSCO analysis revealed that the second assembly contained more than 97% of complete BUSCO genes, with more than 95% of them being present in single-copy (Table <ref type="table" target="#tab_2">2</ref>). This second assembly was then used as the final assembly in all the following analyses. A total of 35,801 genes were predicted using BRAKER (OGS3.0_20171108). The number of genes annotated in lepidopteran genomes is usually much lower (around 15,000 genes in general). This unusual number is probably due to duplicates, as revealed by the BUSCO analysis (10% duplicated annotated genes). However, almost 97% of BUSCO proteins were complete, with more than 86% being present in single-copy (Table <ref type="table" target="#tab_2">2</ref>). These data show that the S. littoralis genome assembly is of good quality, thus allowing for accurate comparison with other Spodoptera genomes.</p><p>OBP, CSP, OR, and IR chemosensory gene repertoires were of comparable size among Spodoptera spp.</p><p>To have a full view of the S. littoralis chemosensory gene repertoires, we manually curated all the major chemosensory-related gene families, including soluble carrier proteins (OBPs and CSPs), proposed to facilitate chemical transfer to chemosensory receptors <ref type="bibr" target="#b51">(Pelosi et al. 2018)</ref>, and the membrane bound receptors (ORs: 7 transmembrane receptors expressed in the membrane of olfactory sensory neurons; GRs: 7 transmembrane receptors hosted by taste neurons; and IRs: 3 transmembrane proteins sensing acids and amines).</p><p>The genome of S. littoralis contained 23 CSP genes, all of them encoding full-length sequences with a signal peptide. This number of genes is similar to the 22 CSP genes annotated in S. frugiperda <ref type="bibr" target="#b21">(Gouin et al. 2017</ref>) and the 23 CSP genes annotated in S. litura <ref type="bibr" target="#b11">(Cheng et al. 2017</ref>). Among all these sequences, 16 CSP genes are 1:1 orthologs between the 3 Spodoptera species included in the tree while 11 CSP genes are 1:1 orthologs with BmorCSPs </p><formula xml:id="formula_1">(from B. mori),</formula><p>showing the high level of conservation in this gene family (Supplementary Fig. <ref type="figure" target="#fig_0">1</ref> and Data 3). We also annotated 51 OBP genes in S. littoralis. Among these genes, 48 were complete and 47 possessed a signal peptide (Supplementary Data 3). The phylogenetic tree revealed a clade enriched in Spodoptera OBPs (9 SlitOBPs, 9 SlituOBPs, and 10 SfruOBPs) (Supplementary Fig. <ref type="figure">2</ref>). This expansion probably arose from recent tandem duplications at the base of this group as most of the genes of the expansion are organized in synteny in the 3 species (Supplementary Fig. <ref type="figure" target="#fig_3">3</ref>).</p><p>We annotated 44 IR genes in the S. littoralis genome, 43 of which encoding a full-length sequence with various sizes containing 547-948 amino acids (Supplementary Data 3). In addition to the 2 conserved coreceptors IR8a and IR25a <ref type="bibr" target="#b13">(Croset et al. 2010)</ref>, we identified 18 candidate antennal IRs putatively involved in odorant detection, 23 divergent IRs putatively involved in taste, and 12 ionotropic glutamate receptors (iGluRs). The total IR number was similar to the 44 IR genes annotated in S. litura <ref type="bibr" target="#b87">(Zhu et al. 2018)</ref> and the 43 IR genes annotated in S. frugiperda <ref type="bibr" target="#b21">(Gouin et al. 2017</ref>). Among all these sequences, 43 IR genes are 1:1 orthologs between the 3 Spodoptera species (IR100g was missing in S. frugiperda). The phylogenetic tree revealed a clade containing divergent IRs and 2 lineage expansions were observed (IR7d and IR100), likely attributed to gene duplications <ref type="bibr" target="#b87">(Zhu et al. 2018)</ref>. The number of divergent IRs was much higher in Spodoptera species (S. littoralis: 26, S. litura: 26, S. frugiperda: 25) than in H. melpomene (16) and B. mori (6). By contrast, phylogenetic analysis (Supplementary Fig. <ref type="figure" target="#fig_4">4</ref>) reveals that S. littoralis antennal IRs retained a single copy within each orthologous group.</p><p>We annotated 73 OR genes in the S. littoralis genome scattered among 61 scaffolds (Supplementary Data 2), including the obligatory coreceptor ORco. The number of OR genes in the S. littoralis repertoire was similar to the repertoire of closely related species (69 in S. frugiperda, 73 in S. litura) and other Lepidoptera (64 in D. plexippus, 73 in M. sexta). The phylogenetic tree of ORs is presented in Supplementary Fig. <ref type="figure">5</ref>.</p><p>Altogether, our annotations revealed that OBP, CSP, OR, and IR repertoires were of comparable size among the Spodoptera spp. investigated.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A highly dynamic evolution of the GR multigene family in Spodoptera species</head><p>Newly obtained genomes of polyphagous noctuidae species such as H. armigera <ref type="bibr" target="#b50">(Pearce et al. 2017)</ref>, S. litura <ref type="bibr" target="#b11">(Cheng et al. 2017)</ref>, S. frugiperda <ref type="bibr" target="#b21">(Gouin et al. 2017)</ref>, and Agrotis ipsilon <ref type="bibr" target="#b74">(Wang et al. 2021)</ref> revealed an important expansion of GRs in these species, suggesting an adaptation mechanism to polyphagy. Here, using these known GR protein sequences and an iterative annotation process, we annotated an even larger repertoire of GRs in the S. littoralis genome. In view of these data, we searched for possible missing GRs in the S. frugiperda and S. litura genomes to complete their GR repertoires (Table <ref type="table" target="#tab_3">3</ref>). We annotated a total of 376 GR genes scattered on 110 scaffolds in the genome of S. littoralis, and reannotated 417 GRs on 196 scaffolds in the S. frugiperda genome and 293 GRs on 30 scaffolds in S. litura (Supplementary Data 4). When omitting pseudogenes and alleles, the final repertoires of GRs are composed of 325 genes in S. littoralis, 278 GRs in S. frugiperda, and 280 GRs in S. litura. Our GR analysis not only revealed that the full repertoire of S. littoralis GRs is in fact much bigger than previously reported, but also that the GR numbers in S. litura and S. frugiperda have been under evaluated (although the presence of some alleles may over evaluate these numbers). Among these sequences, several were indeed allelic version of previously annotated genes but several new genes were also identified (Table <ref type="table" target="#tab_3">3</ref>). Among these genes, the percentage of complete genes varied between species, from only 41% in S. frugiperda compared with 79% in S. litura while the percentage of complete GRs in S. littoralis was intermediate (73%). The percentage of allelic sequences were also highly variable, probably depending on the heterozygosity level of each considered genome and quality of the assembly (Supplementary Data 5). Indeed, the highest number of alleles was reached in S. frugiperda, a genome with a high level of heterozygosity <ref type="bibr" target="#b21">(Gouin et al. 2017)</ref>, while alleles were less frequent in the 2 other Spodoptera genomes considered. Multiple partial genes were also part of these repertoires, many of them being located at the boundaries of scaffolds. For the partial genes annotated in the middle of scaffolds, several explanations are possible: either because of misassembly in the region, or because the tools used to annotate failed to identify some exons or even because these partial sequences could be in fact pseudogenes. As previously shown, multiple clusters of GRs were also found in the S. littoralis genome. The 2 main clusters were found on scaffolds 1,414 and 878 that contained each 27 GR genes. The phylogeny reconstructed using the GR sequences from the 3 Spodoptera species as well as those from B. mori (BmorGRs) and H. melpomene (HmelGRs) showed that a few Spodoptera GRs clustered with candidate CO 2 , sucrose and fructose receptors, while the majority of the Spodoptera GRs were part of the so-called bitter receptor clades. Among the candidate bitter receptor clades, 11 clades were enriched in Spodoptera genes (numbered from A to K in Fig. <ref type="figure" target="#fig_0">1</ref>) and encompassed the majority of the 3 Spodoptera GR repertoires (Table <ref type="table" target="#tab_4">4</ref>). When belonging to the same phylogenetic clade, GRs from the same species tend to be located on the same scaffold, supporting the theory of the expansion of these genes by tandem duplications and few gene losses. For the subsequent analysis, only complete and partial genes were considered while pseudogenes were discarded. Four S. littoralis GRs with only 1 exon were identified, clustered on scaffold 67 and belonging to the same phylogenetic clade (Fig. <ref type="figure" target="#fig_0">1</ref>). Interestingly, this clade was very conserved with a 1:1 orthology relationship between the 3 Spodoptera species, the SlituGRs and SfruGRs being also monoexonic. All these monoexonic genes are orthologs with BmorGR53, a single exon gene that is highly expressed at the larval stage but not in the adult <ref type="bibr" target="#b26">(Guo et al. 2017)</ref>. BmorGR53 is able to detect the bitter tastant and feeding deterrent coumarine. It is then likely that these 4 single exon GRs play an important role in host-plant recognition in Spodoptera species as well.</p><p>The GR phylogeny served as a basis for the reconciliation of the gene-and species-tree in order to estimate gene gains and losses. The Notung analysis revealed that the ancestral repertoire of GRs of Noctuidae species contained 58 genes (Fig. <ref type="figure">2</ref>). Given the numbers of GRs annotated in Spodoptera species, it is not surprising that the highest gene gains occurred in the ancestor of Spodoptera species (296 gene gains). However, even for species with a smaller repertoire of genes such as B. mori (70 GRs) and H. melpomene (73 GRs), the turnover of genes compared with the ancestors is high (33 and 41 gene gains, 25 and 26 gene losses, respectively).  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Annotation of TEs, enrichment analysis, and selection pressure</head><p>To get more insights about the mechanisms that led to the formation of massive genomic clusters of GR genes, we looked at (1) whether TEs could be involved and (2) the selective pressures acting on GR genes. TEs have been shown to be involved in countless mechanisms of evolution in insects, such as insecticide resistance, the evolution of regulatory networks, immunity, climate adaptation <ref type="bibr" target="#b10">(Chen and Li 2007;</ref><ref type="bibr" target="#b57">Rebollo et al. 2012;</ref><ref type="bibr" target="#b82">You et al. 2013;</ref><ref type="bibr" target="#b12">Chuong et al. 2017;</ref><ref type="bibr" target="#b6">Bourque et al. 2018;</ref><ref type="bibr" target="#b65">Singh et al. 2020;</ref><ref type="bibr" target="#b49">Parisot et al. 2021)</ref>, and some of them have even been domesticated as genes <ref type="bibr" target="#b45">(Maumus et al. 2015)</ref>. Gene families involved in these traits have been shown to be enriched in TEs and gene family expansions have been correlated with TE content, for instance in termites <ref type="bibr" target="#b27">(Harrison et al. 2018)</ref>. Interestingly, enrichment in TEs has not been reported for insect GR gene clusters so far. While annotating GRs in the S. littoralis genome, we noticed the frequent co-occurrence of TEs on the same scaffolds. We thus annotated TEs in the S. littoralis genome and calculated their enrichment in the vicinity of GR genes. We also carried out the same enrichment analysis in S. frugiperda genomes, as TE annotation in this last species has been done using the same REPET pipeline as in our study. The de novo constructed library contained 1,089 consensus sequences of TEs and was used to annotate the S. littoralis genome. The repeat coverage for the S. littoralis genome was 30.22%, representing 140 Mb, which is similar to that of S. frugiperda (29.10%), S. litura (31.8%), and S. exigua (33.12%) <ref type="bibr" target="#b11">(Cheng et al. 2017;</ref><ref type="bibr" target="#b21">Gouin et al. 2017;</ref><ref type="bibr" target="#b86">Zhang, Zhang, Yang, et al. 2019)</ref>. The relative contribution of the different classes of repetitive elements revealed that class I elements were more represented than class II elements (66.96% vs 20.83%), a classical feature of insect genomes <ref type="bibr" target="#b45">(Maumus et al. 2015)</ref> (Fig. <ref type="figure" target="#fig_3">3</ref> and Table <ref type="table" target="#tab_6">5</ref>). However, the repartition and proportions between the different classes differed between these species. The class I SINE was the most represented in S. frugiperda (12.52%) <ref type="bibr" target="#b21">(Gouin et al. 2017)</ref> while the class I LINE elements were the most represented in both S. litura and S. exigua, although with a lower proportion of all repeated elements (27.73% and 14.81%, respectively). Remarkably, the proportion of LINE elements identified in the S. littoralis genome was the highest reported so far in arthropods <ref type="bibr" target="#b52">(Petersen et al. 2019)</ref>, accounting for 52.18% of all repetitive elements. In 2 subspecies of the Asian gypsy moth Lymantria dispar, the accumulation of this particular class of TEs was found to be responsible for their large genome size <ref type="bibr" target="#b28">(Hebert et al. 2019)</ref>, a phenomenon also observed in other insect species <ref type="bibr" target="#b45">(Maumus et al. 2015)</ref>. The accumulation of the same elements in the S. littoralis genome could explain its larger size compared with its Spodoptera counterparts (465 Mb vs $400Mb for S. frugiperda, 438 Mb for S. litura, 408-448 Mb for S. exigua). The second most represented was DNA transposons, class II TIR elements, representing 11.04% of all TEs (Fig. <ref type="figure" target="#fig_3">3</ref> and Table <ref type="table" target="#tab_6">5</ref>).</p><p>The enrichment of TEs in the vicinity of GR gene clusters was tested in both S. littoralis and S. frugiperda, and we found that a particular category of class I retrotransposons, a SINE transposon, was significantly enriched in the vicinity of the GRs in the S. littoralis genome (q-value ¼ 0.038), suggesting a transposonmediated mechanism for the formation of GR clusters (Supplementary Data 6). SINE elements are typically small (80-500 bp) and originate from accidental retrotransposition of various polymerase III transcripts. These elements are nonautonomous, therefore their involvement in the dynamic of the GR multigene family may be related to their potential to induce genome rearrangements via unequal crossing over, hence potential drivers of duplication, as previously shown in other insect species. Given their prevalence in the S. littoralis genome, the potential role of these TEs in the GR family dynamic is probably just one of their numerous functions. The same enrichment analysis performed for the OR loci showed no significant enrichment in both S. littoralis and S. frugiperda (Supplementary Data 6). The involvement of TEs in the expansion of chemosensory gene families is not restricted to S. littoralis and GRs, as similar results were also found in ant genomes for ORs <ref type="bibr" target="#b61">(Schrader et al. 2014;</ref><ref type="bibr" target="#b47">McKenzie and Kronauer 2018)</ref>, suggesting that TEs are major players in the evolution of insect genomes and in species adaptation <ref type="bibr" target="#b45">(Maumus et al. 2015;</ref><ref type="bibr" target="#b20">Gilbert et al. 2021)</ref>.</p><p>Several  The percentages represent the proportion of Spodoptera genes to the total number of GRs annotated in the 3 Spodoptera species (complete þ partial genes indicated in Table <ref type="table" target="#tab_3">3</ref>). Fig. <ref type="figure">2</ref>. GR gain and loss estimates across lepidopterans. The gene tree of GRs generated using PhyML was reconciled with the species-tree using Notung <ref type="bibr" target="#b68">(Stolzer et al. 2012)</ref>   <ref type="bibr" target="#b29">(Hickner et al. 2016;</ref><ref type="bibr" target="#b16">Diaz et al. 2018</ref>). In the pea aphid, signatures of selection have been identified in chemosensory genes, including GRs and ORs, which may be implicated in the divergence of pea aphid host races. We thus analyzed selective pressures focusing on 13 clades of interest in the Spodoptera GR phylogeny: the potential clade of CO 2 receptors, the potential clade of sugar receptors and the 11 expended lineages within the so-called bitter receptor clades. For all 13 clades, we observed low global x values ranging from 0.01 to 0.42, with the highest observed for candidate bitter receptor clades. The comparison between models M8 and M8a was statistically significant for clades C, F, and J, indicating a signal of positive selection. Branch-site models on terminal branches of the associated trees were then tested on these clades. For clade J, no GR was revealed as evolving under positive selection. However, for clades C and F, 2 and 5 GRs were identified as positively selected, respectively (Table <ref type="table" target="#tab_7">6</ref>). Within these GR sequences, very few positively selected sites were identified for each gene (between 0 and 3; Supplementary Data 7). This finding is coherent with previous studies showing the same pattern of evolutionary rates <ref type="bibr" target="#b18">(Engsontia et al. 2014;</ref><ref type="bibr" target="#b71">Suzuki et al. 2018)</ref>, especially in S. frugiperda <ref type="bibr" target="#b21">(Gouin et al. 2017)</ref> (3 GRs under positive selection when comparing 2 host strains). Taken together, all positive selection analyses indicate that positive selection within the GR gene family is cryptic and may not play an important role in shaping the evolution of Spodoptera GRs. Anyhow, the few positively selected GRs may be interesting candidates for further functional studies.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Putative functional assignation of candidate SlitGRs</head><p>The complexity of the evolution of the bitter GRs is reflected by their complex functioning. Indeed, in contrast with the relatively simple OR/Orco association that is the basis for olfaction, the molecular basis for gustation is marked by several characteristics that were recently identified in D. melanogaster. First, some GRs  have to be coexpressed within the same neuron in order to be able to respond to a stimulus. Second, it seems that GR-GR inhibition can modulate neuron responses. The challenge in the next few years will be to characterize both the response spectra and precise expression patterns of GRs of interest. However, those GRs of interest need to be selected. The present work provides us with some valuable candidates such as the single exon GRs for which the function is known in B. mori. Also, it seems that individual GRs can play an important role in the ecology of a species. Among examples are BmorGR9, which binds D-fructose without the need of any other GR <ref type="bibr" target="#b59">(Sato et al. 2011;</ref><ref type="bibr" target="#b44">Mang et al. 2016)</ref>, and BmorGR66, whose silencing confers to the monophagous B. mori larva the ability to feed from different food sources <ref type="bibr" target="#b85">(Zhang, Zhang, Niu, et al. 2019)</ref>. We identified their S. littoralis orthologs as SlitGR9 and SlitGR15, respectively. We predicted their 3D structures using AlphaFold and compared them with the AlphaFold predicted structures of B. mori orthologues. Globally, all the predicted structures obtained reasonable pLDDT scores, especially in the extracellular domain where the putative binding pocket may be located, with higher confidence for SlitGR9 and BmorGR9 than for BmorGR66 and SlitGR15 (Supplementary Data 8). The RMSD computed between the atoms of the 3D structures of BmorGR9 and SlitGR9 ranged from 0.0427 to 26.5 A ˚(global RMSD: 7.804) (Fig. <ref type="figure" target="#fig_4">4a</ref>). While disordered regions, that are difficult to predict, such as the N-terminal end or the loop between transmembrane domains 4 and 5 differ, both structures are strikingly similar, suggesting that SlitGR9 is likely a D-fructose receptor in S. littoralis. Additionally, docking experiments on each structure revealed that their binding pockets are located in the same region of the receptor (Fig. <ref type="figure" target="#fig_4">4b</ref>). The ligand of BmorGR66 is not known, however, this receptor is responsible for the feeding difference of B. mori for mulberry leaves <ref type="bibr" target="#b85">(Zhang, Zhang, Niu, et al. 2019)</ref>. Its ortholog SlitGR15 is a key candidate for functional studies to test if this GR has an impact on the feeding preference in S. littoralis as well. When comparing both full structures, the RMSD was 3.431 A ˚(Fig. <ref type="figure" target="#fig_4">4c</ref>). Interestingly, the main differences between both structures were visible in the extracellular domains of the proteins, suggesting that the binding pockets may differ as well.</p><p>Apart from these particular GRs, the neuronal coding of taste via more than 200 genes in species like Spodoptera moths is not known. But are all these GRs at play in effective taste sense? In fact, comparison of GR gene repertoires with transcript  repertoires showed that a small proportion of the gene repertoire is actually expressed in the canonical gustatory tissues of Spodoptera spp., as can be seen in S. littoralis and S. litura <ref type="bibr" target="#b11">(Cheng et al. 2017;</ref><ref type="bibr" target="#b73">Walker et al. 2019;</ref><ref type="bibr" target="#b39">Koutroumpa et al. 2021</ref>). In addition, GR expression levels-especially that of bitter receptors-are rather low. Whether the genome acts as a "reservoir" for a multitude of GR genes to be selectively expressed in accordance with the evolution of food preference remains to be investigated. In that view, the identification of regulatory genomic regions and transcription factors in the vicinity of GR regions that may be at play in GR expression choice would help understanding if and how GRs evolved according to polyphagy.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Fig. 1 .</head><label>1</label><figDesc>Fig. 1. Phylogeny of lepidopteran GRs. The dataset included amino acid sequences from S. littoralis (Noctuoidea, red), S. litura (Noctuoidea, green), S. frugiperda (Noctuoidea, orange), B. mori (Bombycoidea, blue), and H. melpomene (Papilionoidea, cyan). Sequences were aligned using ClustalO and the phylogenetic tree was reconstructed using PHYML. CO 2 receptor candidates as well as sugar receptor candidates are indicated in purple and yellow, respectively. All the other GRs are part of the bitter receptor clades. The star indicates the clade of single-exon GRs. The clade containing putative CO 2 and sugar receptors was used to root the tree. Bootstrap values are indicated for the main clades. The scale bar represents 0.5 amino acid substitutions per site. 6 | G3, 2022, Vol. 00, No. 0 wnloaded from https://academic.oup.com/g3journal/advance-article/doi/10.1093/g3journal/jkac131/6598846 by INRAE Institut National de Recherche pour l'Agriculture, l'Alimentation et l'Environnement user on 04 July 202</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head></head><label></label><figDesc>studies have shown the importance of positive selection in the evolution of multigene families, especially in chemosensory genes such as ORs and GRs (McBride et al. 2007; Smadja</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Fig. 3 .</head><label>3</label><figDesc>Fig. 3. Repartition and size of repeat content in S. littoralis genome. Repetitive elements account for 30.22% of S. littoralis genome. Class I elements are more abundant than class II. The class I LINE elements represent more than half of all repetitive elements.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Fig. 4 .</head><label>4</label><figDesc>Fig.4. Comparison of 3D structures of BmorGR9 and BmorGR66 with their respective orthologs, SlitGR9 and SlitGR15. Three-dimensional structures were predicted using AlphaFold2<ref type="bibr" target="#b33">(Jumper et al. 2021)</ref>. a, c) BmorGR9/SlitGR9 and BmorGR66/SlitGR15 were aligned using matchmaker. The RMSD value computed between both structures is represented here on the BmorGR9 and BmorGR66 structures, respectively, in a red (high RMSD) to blue palette (low RMSD). b) Docking of D-fructose in BmorGR9 (green) and in SlitGR9 (pink). In (a-c), structures are represented oriented with their extracellular domain at the top and the intracellular domain at the bottom. C. Meslin et al. | 9 wnloaded from https://academic.oup.com/g3journal/advance-article/doi/10.1093/g3journal/jkac131/6598846 by INRAE Institut National de Recherche pour l'Agriculture, l'Alimentation et l'Environnement user on 04 July 202</figDesc><graphic coords="9,83.57,260.79,434.11,180.74" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head></head><label></label><figDesc>4.2 (https://github.com/rambaut/fig C. Meslin et al. | 3 wnloaded from https://academic.oup.com/g3journal/advance-article/doi/10.1093/g3journal/jkac131/6598846 by INRAE Institut National de Recherche pour l'Agriculture, l'Alimentation et l'Environnement user on 04 July 202 tree) and Inkscape 0.92 (https://inkscape.org/fr/). Branch supports were estimated using the approximate likelihood-ratio test (Anisimova and Gascuel 2006) implemented at http://www.atgcmontpellier.fr/phyml/. For other gene families, sequences from various Lepidoptera species were retrieved and aligned with S. littoralis sequences using MAFFT</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 1 .</head><label>1</label><figDesc>Statistics of the S. littoralis genome assemblies. G3, 2022, Vol. 00, No. 0 wnloaded from https://academic.oup.com/g3journal/advance-article/doi/10.1093/g3journal/jkac131/6598846 by INRAE Institut National de Recherche pour l'Agriculture, l'Alimentation et l'Environnement user on 04 July 202</figDesc><table><row><cell></cell><cell>Slit genome v1.0</cell><cell>Slit genome v2.0</cell></row><row><cell>Number of scaffolds</cell><cell>123,499</cell><cell>28,891</cell></row><row><cell>Total size of scaffolds</cell><cell>470 Mb</cell><cell>465 Mb</cell></row><row><cell>Longest scaffold</cell><cell>236 kb</cell><cell>816 kb</cell></row><row><cell>N50 scaffold length</cell><cell>18 kb</cell><cell>64 kb</cell></row><row><cell>scaffold %N</cell><cell>0.41</cell><cell>0.92</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 2 .</head><label>2</label><figDesc>BUSCO statistics on S. littoralis genome and annotation. Meslin et al. | 5 wnloaded from https://academic.oup.com/g3journal/advance-article/doi/10.1093/g3journal/jkac131/6598846 by INRAE Institut National de Recherche pour l'Agriculture, l'Alimentation et l'Environnement user on 04 July 202</figDesc><table><row><cell>Slit genome v2.0</cell><cell>Annotation BRAKER OGS3.0</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 3 .</head><label>3</label><figDesc>GR repertoires of Spodoptera species.</figDesc><table><row><cell></cell><cell>Spodoptera littoralis</cell><cell>Spodoptera frugiperda</cell><cell>Spodoptera litura</cell></row><row><cell>Number of GR previously anno-</cell><cell>38</cell><cell>231</cell><cell>237</cell></row><row><cell>tated</cell><cell></cell><cell></cell><cell></cell></row><row><cell>Complete genes</cell><cell>275 (73%)</cell><cell>172 (41%)</cell><cell>231 (79%)</cell></row><row><cell>Partial genes</cell><cell>50 (13%)</cell><cell>106 (25%)</cell><cell>49 (17%)</cell></row><row><cell>Pseudogenes</cell><cell>19 (5%)</cell><cell>22 (5%)</cell><cell>7 (2%)</cell></row><row><cell>Alleles</cell><cell>29 (8%)</cell><cell>117 (28%)</cell><cell>6 (2%)</cell></row><row><cell>Total in this work</cell><cell>373</cell><cell>417</cell><cell>293</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head>Table 4 .</head><label>4</label><figDesc>Number of Spodoptera putative bitter receptors by expansion clade.</figDesc><table><row><cell>Clade</cell><cell>Spodoptera littoralis</cell><cell>Spodoptera frugiperda</cell><cell>Spodoptera litura</cell></row><row><cell>A</cell><cell>2 0</cell><cell>1 5</cell><cell>1 4</cell></row><row><cell>B</cell><cell>6 5</cell><cell>4 2</cell><cell>4 4</cell></row><row><cell>C</cell><cell>4 0</cell><cell>4 0</cell><cell>3 3</cell></row><row><cell>D</cell><cell>9 7</cell><cell>7 4</cell><cell>8 9</cell></row><row><cell>E</cell><cell>7</cell><cell>3</cell><cell>4</cell></row><row><cell>F</cell><cell>1 2</cell><cell>1 0</cell><cell>1 1</cell></row><row><cell>G</cell><cell>1 0</cell><cell>8</cell><cell>1 0</cell></row><row><cell>H</cell><cell>1 6</cell><cell>1 1</cell><cell>1 6</cell></row><row><cell>I</cell><cell>7</cell><cell>8</cell><cell>7</cell></row><row><cell>J</cell><cell>1 6</cell><cell>2 1</cell><cell>1 8</cell></row><row><cell>K</cell><cell>4</cell><cell>6</cell><cell>5</cell></row><row><cell>Total</cell><cell>294 (90.5%)</cell><cell>238 (86.9%)</cell><cell>251 (89,6%)</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_5"><head></head><label></label><figDesc>to estimate gene gains and losses. Numbers in boxes represent the size of GR repertoire for extant species as well as ancestors at the nodes of the species tree. Gene gains are indicated in red while gene losses are indicated in green. The expansion that occurred in the ancestor of Spodoptera species is indicated in red on a black background.C.Meslin et  al. | 7 wnloaded from https://academic.oup.com/g3journal/advance-article/doi/10.1093/g3journal/jkac131/6598846 by INRAE Institut National de Recherche pour l'Agriculture, l'Alimentation et l'Environnement user on 04 July 202 et al. 2009). Positively selected chemoreceptors may be linked to adaptation in Drosophila species</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_6"><head>Table 5 .</head><label>5</label><figDesc>Repartition of repetitive elements in S. littoralis genome based on the classification established by Wicker et al. (2007). G3, 2022, Vol. 00, No. 0 wnloaded from https://academic.oup.com/g3journal/advance-article/doi/10.1093/g3journal/jkac131/6598846 by INRAE Institut National de Recherche pour l'Agriculture, l'Alimentation et l'Environnement user on 04 July 202</figDesc><table><row><cell>TE category</cell><cell>% of coverage of all repetitive elements</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_7"><head>Table 6 .</head><label>6</label><figDesc>Selective pressure analysis.</figDesc><table><row><cell>Clade</cell><cell>No. of sequences</cell><cell>x M0 (d N /d S )</cell><cell>P-value (M8 vs M8a)</cell><cell>Branch-site</cell></row><row><cell>A</cell><cell>45</cell><cell>0.34109</cell><cell>NS</cell><cell>/</cell></row><row><cell>B</cell><cell>133</cell><cell>0.34146</cell><cell>NS</cell><cell>/</cell></row><row><cell>C</cell><cell>86</cell><cell>0.34386</cell><cell>0.044804*</cell><cell>Slit_GR217, Slitu_GR155</cell></row><row><cell>D</cell><cell>218</cell><cell>0.29174</cell><cell>/</cell><cell></cell></row><row><cell>E</cell><cell>14</cell><cell>0.18639</cell><cell>/</cell><cell>/</cell></row><row><cell>F</cell><cell>33</cell><cell>0.41616</cell><cell>0.000504**</cell><cell>Sfru_GR44, Sfru_GR49,</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell>Slit_GR44</cell></row><row><cell>G</cell><cell>28</cell><cell>0.36571</cell><cell>NS</cell><cell>/</cell></row><row><cell>H</cell><cell>38</cell><cell>0.31933</cell><cell>NS</cell><cell>/</cell></row><row><cell>I</cell><cell>16</cell><cell>0.22375</cell><cell>/</cell><cell>/</cell></row><row><cell>J</cell><cell>38</cell><cell>0.42257</cell><cell>0.005319**</cell><cell>NS</cell></row><row><cell>K</cell><cell>11</cell><cell>0.17393</cell><cell>/</cell><cell>/</cell></row><row><cell>Sugar</cell><cell>27</cell><cell>0.05662</cell><cell>/</cell><cell>/</cell></row><row><cell>CO 2</cell><cell>11</cell><cell>0.01074</cell><cell>/</cell><cell>/</cell></row></table><note><p>NS, non-significant; /, not calculated. * p-value &lt;0.05. ** p-value &lt;0.01.</p></note></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>Acknowledgments</head><p>The S. littoralis genome has been sequenced in the framework of the i5K initiative (http://i5k.github.io/) and the InsectGenomes project at INRAE leaded by <rs type="person">Denis Tagu</rs> (<rs type="affiliation">IGEPP, France</rs>).</p></div>
+			</div>
+			<div type="funding">
+<div><head>Funding</head><p>This work has been funded by <rs type="funder">INRAE (France)</rs>, the <rs type="funder">French National Research Agency</rs> (<rs type="grantNumber">ANR-16-CE21-0002-01</rs> and <rs type="grantNumber">ANR-16-CE02-0003</rs>) and by the <rs type="funder">European Union</rs>'s <rs type="programName">Horizon 2020 research and innovation program</rs> under the <rs type="grantName">Marie Skłodowska-Curie</rs> grant agreement no. <rs type="grantNumber">764840</rs> for the <rs type="projectName">ITN</rs> <rs type="projectName">IGNITE</rs> project.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_68AHFZH">
+					<idno type="grant-number">ANR-16-CE21-0002-01</idno>
+				</org>
+				<org type="funding" xml:id="_KDD9nah">
+					<idno type="grant-number">ANR-16-CE02-0003</idno>
+					<orgName type="grant-name">Marie Skłodowska-Curie</orgName>
+					<orgName type="program" subtype="full">Horizon 2020 research and innovation program</orgName>
+				</org>
+				<org type="funded-project" xml:id="_HBBkZ2K">
+					<idno type="grant-number">764840</idno>
+					<orgName type="project" subtype="full">ITN</orgName>
+				</org>
+				<org type="funded-project" xml:id="_NvfDzJ7">
+					<orgName type="project" subtype="full">IGNITE</orgName>
+				</org>
+			</listOrg>
+
+			<div type="availability">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Data availability</head><p>The assembled genome of S. littoralis as well as the genomic data of Spodoptera litura (v1.0) <ref type="bibr" target="#b11">(Cheng et al. 2017</ref>) and S. frugiperda (Corn variant, v3.1) <ref type="bibr" target="#b21">(Gouin et al. 2017</ref>) are all publicly available on the BIPAA platform (https://bipaa.genouest.org). In addition, S. litura (bioProject PRJNA344815) and S. littoralis genome are available on NCBI (JALJOW000000000). Files and code for the LOLA analysis are available at dataINRAE (https://data.inrae.fr/dataverse/slit-toralis_genome).</p><p>Supplemental material is available at G3 online.</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Conflicts of interest</head><p>None declared.</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">SignalP 5.0 improves signal peptide predictions using deep neural networks</title>
+		<author>
+			<persName><forename type="first">Almagro</forename><surname>Armenteros</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">J</forename><surname>Tsirigos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">D</forename><surname>Sønderby</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">K</forename><surname>Petersen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">N</forename><surname>Winther</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Brunak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Von Heijne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Nielsen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Biotechnol</title>
+		<imprint>
+			<biblScope unit="volume">37</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="420" to="423" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Family size evolution in Drosophila chemosensory gene families: a comparative analysis with a critical appraisal of methods</title>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">C</forename><surname>Almeida</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Sa ´nchez-Gracia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">L</forename><surname>Campos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Rozas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biol Evol</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page" from="1669" to="1682" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Approximate likelihood-ratio test for branches: a fast, accurate, and powerful alternative</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Anisimova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Gascuel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Syst Biol</title>
+		<imprint>
+			<biblScope unit="volume">55</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="539" to="552" />
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Toward almost closed genomes with GapFiller</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Boetzer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Pirovano</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biol</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page">R56</biblScope>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">SSPACE-LongRead: scaffolding bacterial draft genomes using long read sequence information</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Boetzer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Pirovano</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page">211</biblScope>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Trimmomatic: a flexible trimmer for Illumina sequence data</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">M</forename><surname>Bolger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Lohse</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Usadel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="issue">15</biblScope>
+			<biblScope unit="page" from="2114" to="2120" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Ten things you should know about transposable elements</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Bourque</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">H</forename><surname>Burns</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Gehring</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Gorbunova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Seluanov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Hammell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Imbeault</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Izsva ´k</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">L</forename><surname>Levin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">S</forename><surname>Macfarlan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biol</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">199</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">The origin of the odorant receptor gene family in insects</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Brand</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">M</forename><surname>Robertson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Pothula</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">E</forename><surname>Klingeman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">L</forename><surname>Jurat-Fuentes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">R</forename><surname>Johnson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">eLife</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page">e38340</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Female behaviour drives expression and evolution of gustatory receptors in butterflies</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">D</forename><surname>Briscoe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Macias-Muñoz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">M</forename><surname>Kozak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">R</forename><surname>Walters</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Yuan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">A</forename><surname>Jamie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">H</forename><surname>Martin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">K</forename><surname>Dasmahapatra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">C</forename><surname>Ferguson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Mallet</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLoS Genet</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page">1003620</biblScope>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">BLASTþ: architecture and applications</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Camacho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Coulouris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Avagyan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Papadopoulos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Bealer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">L</forename><surname>Madden</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page">421</biblScope>
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Transposable elements are enriched within or in close proximity to xenobiotic-metabolizing cytochrome P450 genes</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Li</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Evol Biol</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page" from="1" to="13" />
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Genomic adaptation to polyphagy and insecticides in a major East Asian noctuid pest</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Cheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">V</forename><surname>Chilukuri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Yamamoto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Feng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Guo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Ecol Evol</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="issue">11</biblScope>
+			<biblScope unit="page" from="1747" to="1756" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Regulatory activities of transposable elements: from conflicts to benefits</title>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">B</forename><surname>Chuong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">C</forename><surname>Elde</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Feschotte</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Rev Genet</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="71" to="86" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Ancient protostome origin of chemosensory ionotropic glutamate receptors and the evolution of insect taste and olfaction</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Croset</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Rytz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">F</forename><surname>Cummins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Budd</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Brawand</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Kaessmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">J</forename><surname>Gibson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Benton</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLoS Genet</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page">1001064</biblScope>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">A molecular and neuronal basis for amino acid sensing in the Drosophila larva</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Croset</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Schleyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">R</forename><surname>Arguello</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Gerber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Benton</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/srep34871</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Sci Rep</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Xenolog classification</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">A</forename><surname>Darby</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Stolzer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">J</forename><surname>Ropp</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Barker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Durand</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page">686</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Positive selection at sites of chemosensory genes is associated with the recent divergence and local ecological adaptation in cactophilic Drosophila</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Diaz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">W</forename><surname>Allan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">M</forename><surname>Matzkin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Evol Biol</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page">144</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">STAR: ultrafast universal RNA-seq aligner</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Dobin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">A</forename><surname>Davis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Schlesinger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Drenkow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Zaleski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Jha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Batut</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Chaisson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">R</forename><surname>Gingeras</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="15" to="21" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Molecular evolution of the odorant and gustatory receptor genes in lepidopteran insects: implications for their adaptation and speciation</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Engsontia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">U</forename><surname>Sangket</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Chotigeat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Satasook</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Mol Evol</title>
+		<imprint>
+			<biblScope unit="volume">79</biblScope>
+			<biblScope unit="issue">1-2</biblScope>
+			<biblScope unit="page" from="21" to="39" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Considering transposable element diversification in de novo annotation approaches</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Flutre</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Duprat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Feuillet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Quesneville</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLoS One</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">16526</biblScope>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Transposable elements and the evolution of insects</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Gilbert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Peccoud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Cordaux</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annu Rev Entomol</title>
+		<imprint>
+			<biblScope unit="volume">66</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="355" to="372" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Two genomes of highly polyphagous lepidopteran pests (Spodoptera frugiperda, Noctuidae) with different host-plant ranges</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Gouin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bretaudeau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Nam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Gimenez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J-M</forename><surname>Aury</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Duvic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Hilliou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Durand</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Montagn E N</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Darboux</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Sci Rep</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">11816</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">The origin, evolution and proposed stabilization of the terms &apos;genome size&apos; and &apos;Cvalue&apos; to describe nuclear DNA contents</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Greilhuber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Dole Zel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Lysa ´k</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">D</forename><surname>Bennett</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Ann Bot</title>
+		<imprint>
+			<biblScope unit="volume">95</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="255" to="260" />
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Identification and comparative expression analysis of odorant binding protein genes in the tobacco cutworm Spodoptera litura</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">H</forename><surname>Gu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">J</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">H</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><forename type="middle">C</forename><surname>Li</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Sci Rep</title>
+		<imprint>
+			<biblScope unit="volume">515</biblScope>
+			<biblScope unit="page">10</biblScope>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title/>
+		<idno type="DOI">10.1093/g3journal/jkac131/6598846</idno>
+		<ptr target="https://academic.oup.com/g3journal/advance-article/doi/10.1093/g3journal/jkac131/6598846" />
+	</analytic>
+	<monogr>
+		<title level="j">G</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="issue">0</biblScope>
+			<date type="published" when="2022-07-04">2022. 04 July 202</date>
+		</imprint>
+		<respStmt>
+			<orgName>INRAE Institut National de Recherche pour l&apos;Agriculture</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">A simple, fast, and accurate algorithm to estimate large phylogenies by maximum likelihood</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Guindon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Gascuel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Syst Biol</title>
+		<imprint>
+			<biblScope unit="volume">52</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="696" to="704" />
+			<date type="published" when="2003">2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Expression map of a complete set of gustatory receptor genes in chemosensory organs of Bombyx mori</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Cheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Taniai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Asaoka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Kadono-Okuda</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Insect Biochem Mol Biol</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="1351" to="1362" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Hemimetabolous genomes reveal molecular basis of termite eusociality</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">C</forename><surname>Harrison</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Jongepier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">M</forename><surname>Robertson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Arning</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Bitard-Feildel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Chao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">P</forename><surname>Childers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Dinh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Doddapaneni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Dugan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Ecol Evol</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="557" to="566" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Expansion of LINEs and species-specific DNA repeats drives genome expansion in Asian Gypsy Moths</title>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">O</forename><surname>Hebert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Freschi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Blackburn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Dewar</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Sci Rep</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page" from="1" to="10" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">The making of a pest: insights from the evolution of chemosensory receptor families in a pestiferous and invasive fly, Drosophila suzukii</title>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">V</forename><surname>Hickner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">L</forename><surname>Rivaldi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">M</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Siddappaji</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">J</forename><surname>Raster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Syed</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Genomics</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page">648</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">BRAKER1: unsupervised RNA-Seq-based genome annotation with GeneMark-ET and AUGUSTUS: table 1</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">J</forename><surname>Hoff</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Lange</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Lomsadze</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Borodovsky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Stanke</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="767" to="769" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Vampire bats exhibit evolutionary reduction of bitter taste receptor genes common to other bats</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Hong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Zhao</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proc R Soc B Biol Sci</title>
+		<imprint>
+			<biblScope unit="volume">281</biblScope>
+			<biblScope unit="page">20141079</biblScope>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Genome size estimation and quantitative cytogenetics in insects</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">S</forename><surname>Johnston</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bernardini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">E</forename><surname>Hjelmen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Methods Mol Biol</title>
+		<imprint>
+			<biblScope unit="volume">1858</biblScope>
+			<biblScope unit="page" from="15" to="26" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Highly accurate protein structure prediction with AlphaFold</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Jumper</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Evans</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Pritzel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Green</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Figurnov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Ronneberger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Tunyasuvunakool</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Bates</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Potapenko</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">596</biblScope>
+			<biblScope unit="issue">7873</biblScope>
+			<biblScope unit="page" from="583" to="589" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Efficient de novo assembly of highly heterozygous genomes from wholegenome shotgun short reads</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Kajitani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Toshimoto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Noguchi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Toyoda</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Ogura</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Okuno</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Yabana</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Harada</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Nagayasu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Maruyama</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Res</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page" from="1384" to="1395" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">MAFFT Multiple Sequence Alignment Software Version 7: improvements in performance and usability</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Katoh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">M</forename><surname>Standley</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol Biol Evol</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="772" to="780" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Scipio: using protein sequences to determine the precise exon/intron structures of genes and their orthologs in closely related species</title>
+		<author>
+			<persName><forename type="first">O</forename><surname>Keller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Odronitz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Stanke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Kollmar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Waack</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page">278</biblScope>
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Genome sequences of the human body louse and its primary endosymbiont provide insights into the permanent parasitic lifestyle</title>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">F</forename><surname>Kirkness</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">J</forename><surname>Haas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Sun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">R</forename><surname>Braig</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Perotti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Clark</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">H</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">M</forename><surname>Robertson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">C</forename><surname>Kennedy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Elhaik</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proc Natl Acad Sci U S A</title>
+		<imprint>
+			<biblScope unit="volume">107</biblScope>
+			<biblScope unit="issue">27</biblScope>
+			<biblScope unit="page" from="12168" to="12173" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Webina: an opensource library and web app that runs AutoDock Vina entirely in the web browser</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Kochnev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Hellemann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">C</forename><surname>Cassidy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">D</forename><surname>Durrant</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="issue">16</biblScope>
+			<biblScope unit="page" from="4513" to="4515" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Description of chemosensory genes in unexplored tissues of the moth Spodoptera littoralis</title>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">A</forename><surname>Koutroumpa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Monsempes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M-C</forename><surname>Franc¸ois</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Severac</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Montagn E N, Meslin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacquin-</forename><surname>Joly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename></persName>
+		</author>
+		<idno type="DOI">10.3389/fevo.2021.678277</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Front Ecol Evol</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">TimeTree: a resource for timelines, timetrees, and divergence times</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Stecher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Suleski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">B</forename><surname>Hedges</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol Biol Evol</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page" from="1812" to="1819" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Web Apollo: a webbased genomic annotation editing platform</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">A</forename><surname>Helt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">T</forename><surname>Reese</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">C</forename><surname>Munoz-Torres</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">P</forename><surname>Childers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">M</forename><surname>Buels</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Stein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">H</forename><surname>Holmes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">G</forename><surname>Elsik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">E</forename><surname>Lewis</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biol</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page">R93</biblScope>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">SMS: smart model selection in PhyML</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Lefort</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J-E</forename><surname>Longueville</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Gascuel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol Biol Evol</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="issue">9</biblScope>
+			<biblScope unit="page" from="2422" to="2424" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">The genomic and functional landscapes of developmental plasticity in the American cockroach</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Jia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Yuan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Ren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Cui</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Cao</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Commun</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">1008</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Expression of the fructose receptor BmGr9 and its involvement in the promotion of feeding, suggested by its co-expression with neuropeptide F1 in Bombyx mori</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Mang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Shu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Tanaka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Nagata</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Takada</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Endo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kikuta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Tabunoki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Iwabuchi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Sato</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Insect Biochem Mol Biol</title>
+		<imprint>
+			<biblScope unit="volume">75</biblScope>
+			<biblScope unit="page" from="58" to="69" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Impact of transposable elements on insect genomes and biology</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Maumus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">S</forename><surname>Fiston-Lavier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Quesneville</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Curr Opin Insect Sci</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page" from="30" to="36" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Five Drosophila genomes reveal nonneutral evolution and the signature of host specialization in the chemoreceptor superfamily</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">S</forename><surname>Mcbride</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">R</forename><surname>Arguello</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O'</forename><surname>Meara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">C</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genetics</title>
+		<imprint>
+			<biblScope unit="volume">177</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="1395" to="1416" />
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">The genomic architecture and molecular evolution of ant odorant receptors</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">K</forename><surname>Mckenzie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Djc</forename><surname>Kronauer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Res</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="issue">11</biblScope>
+			<biblScope unit="page" from="1757" to="1765" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">Concerted and birth-and-death evolution of multigene families</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Nei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">P</forename><surname>Rooney</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annu Rev Genet</title>
+		<imprint>
+			<biblScope unit="volume">39</biblScope>
+			<biblScope unit="page" from="121" to="152" />
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">The transposable element-rich genome of the cereal pest Sitophilus oryzae</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Parisot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Vargas-Cha ´vez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Goubert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Baa-Puyoulet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Balmand</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Beranger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Blanc</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bonnamour</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Boulesteix</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Burlet</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Biol</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">241</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">Genomic innovations, transcriptional plasticity and gene loss underlying the evolution and divergence of two highly polyphagous and invasive Helicoverpa pest species</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">L</forename><surname>Pearce</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">F</forename><surname>Clarke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">D</forename><surname>East</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Elfekih</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Khj</forename><surname>Gordon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">S</forename><surname>Jermiin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mcgaughran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">G</forename><surname>Oakeshott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Papanikolaou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><forename type="middle">P</forename><surname>Perera</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/s12915-017-0402-6</idno>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Biol</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">Beyond chemoreception: diverse tasks of soluble olfactory proteins in insects</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Pelosi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Iovinella</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">R</forename><surname>Dani</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Biol Rev Camb Philos Soc</title>
+		<imprint>
+			<biblScope unit="volume">93</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="184" to="200" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">Diversity and evolution of the transposable element repertoire in arthropods with particular reference to insects</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Petersen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Armis En</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">A</forename><surname>Gibbs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Hering</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Khila</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Mayer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Stephen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Niehuis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Misof</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/s12862-018-1324-9</idno>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Evol Biol</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page">11</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<analytic>
+		<title level="a" type="main">UCSF Chimera-a visualization system for exploratory research and analysis</title>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">F</forename><surname>Pettersen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">D</forename><surname>Goddard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">C</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">S</forename><surname>Couch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">M</forename><surname>Greenblatt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">C</forename><surname>Meng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">E</forename><surname>Ferrin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Comput Chem</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="issue">13</biblScope>
+			<biblScope unit="page" from="1605" to="1612" />
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">Rearing of the larvae of twenty-eight species of Noctuidae and two species of Arctiidae, Lepidoptera, on a simple artificial diet differences in rearing according to the species</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Poitout</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Bues</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Ann Zool Ecol Anim</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page" from="431" to="441" />
+			<date type="published" when="1974">1974</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<analytic>
+		<title level="a" type="main">A comparison of the olfactory gene repertoires of adults and Larvae in the Noctuid Moth Spodoptera littoralis</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Poivet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Gallot</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Montagn E N</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Glaser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Legeai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacquin-</forename><surname>Joly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLoS One</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page">60263</biblScope>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">Combined evidence annotation of transposable elements in genome sequences</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Quesneville</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">M</forename><surname>Bergman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Andrieu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Autard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Nouaud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ashburner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Anxolabehere</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLoS Comp Biol</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page">e22</biblScope>
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<analytic>
+		<title level="a" type="main">Transposable elements: an abundant and natural source of regulatory sequences for host genes</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Rebollo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">T</forename><surname>Romanish</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">L</forename><surname>Mager</surname></persName>
+		</author>
+		<idno type="DOI">10.1146/annurev-genet-110711&amp;hx2013;155621</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Annu Rev Genet</title>
+		<imprint>
+			<biblScope unit="volume">46</biblScope>
+			<biblScope unit="page" from="21" to="42" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<analytic>
+		<title level="a" type="main">Molecular evolution of the major arthropod chemoreceptor gene families</title>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">M</forename><surname>Robertson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annu Rev Entomol</title>
+		<imprint>
+			<biblScope unit="volume">64</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="227" to="242" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<analytic>
+		<title level="a" type="main">Sugar-regulated cation channel formed by an insect gustatory receptor</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Sato</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Tanaka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Touhara</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proc Natl Acad Sci U S A</title>
+		<imprint>
+			<biblScope unit="volume">108</biblScope>
+			<biblScope unit="issue">28</biblScope>
+			<biblScope unit="page" from="11680" to="11685" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<monogr>
+		<author>
+			<persName><forename type="first">C</forename><surname>Meslin</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/g3journal/jkac131/6598846</idno>
+		<ptr target="https://academic.oup.com/g3journal/advance-article/doi/10.1093/g3journal/jkac131/6598846" />
+		<title level="m">11 wnloaded from</title>
+		<imprint>
+			<date>04 July 202</date>
+		</imprint>
+		<respStmt>
+			<orgName>INRAE Institut National de Recherche pour l&apos;Agriculture</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<analytic>
+		<title level="a" type="main">Transposable element islands facilitate adaptation to novel environments in an invasive species</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Schrader</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">W</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Ence</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Zimin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Klein</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Commun</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page" from="1" to="10" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<analytic>
+		<title level="a" type="main">LOLA: enrichment analysis for genomic region sets and regulatory elements in R and Bioconductor</title>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">C</forename><surname>Sheffield</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Bock</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="587" to="589" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<analytic>
+		<title level="a" type="main">Fast, scalable generation of high-quality protein multiple sequence alignments using Clustal Omega</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Sievers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Wilm</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Dineen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">J</forename><surname>Gibson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Karplus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Lopez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Mcwilliam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Remmert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">So</forename><surname>¨ding</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol Syst Biol</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page">539</biblScope>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<analytic>
+		<title level="a" type="main">BUSCO: assessing genome assembly and annotation completeness with single-copy orthologs</title>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">A</forename><surname>Simão</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">M</forename><surname>Waterhouse</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Ioannidis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">V</forename><surname>Kriventseva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">M</forename><surname>Zdobnov</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">31</biblScope>
+			<biblScope unit="issue">19</biblScope>
+			<biblScope unit="page" from="3210" to="3212" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b65">
+	<analytic>
+		<title level="a" type="main">The genetic architecture of a host shift: an adaptive walk protected an aphid and its endosymbiont from plant chemical defenses</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">S</forename><surname>Singh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">J</forename><surname>Troczka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Duarte</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Balabanidou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Trissi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carabajal</forename><surname>Paladino</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">Z</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Zimmer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">T</forename><surname>Papapostolou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">M</forename><surname>Randall</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Sci Adv</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="issue">19</biblScope>
+			<biblScope unit="page">1070</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b66">
+	<analytic>
+		<title level="a" type="main">Automated generation of heuristics for biological sequence comparison</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Slater</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Birney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Box</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Waterman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page">31</biblScope>
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b67">
+	<analytic>
+		<title level="a" type="main">Large gene family expansions and adaptive evolution for odorant and gustatory receptors in the pea aphid, Acyrthosiphon pisum</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Smadja</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Shi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">K</forename><surname>Butlin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">M</forename><surname>Robertson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol Biol Evol</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="issue">9</biblScope>
+			<biblScope unit="page" from="2073" to="2086" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b68">
+	<analytic>
+		<title level="a" type="main">Inferring duplications, losses, transfers and incomplete lineage sorting with nonbinary species trees</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Stolzer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Lai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Sathaye</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Vernot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Durand</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="issue">18</biblScope>
+			<biblScope unit="page" from="409" to="415" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b69">
+	<analytic>
+		<title level="a" type="main">qvalue: q-Value Estimation for False Discovery Rate Control</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Storey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bass</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Dabney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Robinson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">R package version</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="issue">22</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b70">
+	<analytic>
+		<title level="a" type="main">PAL2NAL: robust conversion of protein sequence alignments into the corresponding codon alignments</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Suyama</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Torrents</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Bork</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="page" from="609" to="W612" />
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+	<note>Web Server Issue</note>
+</biblStruct>
+
+<biblStruct xml:id="b71">
+	<analytic>
+		<title level="a" type="main">Evolution of gustatory receptor gene family provides insights into adaptation to diverse host plants in nymphalid butterflies</title>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">C</forename><surname>Suzuki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Ozaki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Makino</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Uchiyama</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Yajima</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Kawata</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biol Evol</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="1351" to="1362" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b72">
+	<analytic>
+		<title level="a" type="main">;487:94-98. The International Silkworm Genome Consortium. The genome of a lepidopteran model insect, the silkworm Bombyx mori</title>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">J</forename><surname>Swanson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Nielsen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Yang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Insect Biochem Mol Biol</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1036" to="1045" />
+			<date type="published" when="2003">2003. 2012. 2008</date>
+		</imprint>
+	</monogr>
+	<note>Mol Biol Evol</note>
+</biblStruct>
+
+<biblStruct xml:id="b73">
+	<analytic>
+		<title level="a" type="main">Transcriptome analysis of gene families involved in chemosensory function in Spodoptera littoralis (Lepidoptera: Noctuidae)</title>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">B</forename><surname>Walker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Roy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Anderson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Schlyter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">S</forename><surname>Hansson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">C</forename><surname>Larsson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Genomics</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">428</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b74">
+	<analytic>
+		<title level="a" type="main">The genome of the black cutworm Agrotis ipsilon</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Fang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Cao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Cui</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Qian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Zhan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Insect Biochem Mol Biol</title>
+		<imprint>
+			<biblScope unit="volume">139</biblScope>
+			<biblScope unit="page">103665</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b75">
+	<analytic>
+		<title level="a" type="main">A unified classification system for eukaryotic transposable elements</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Wicker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Sabot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Hua-Van</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">L</forename><surname>Bennetzen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Capy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Chalhoub</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Flavell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Leroy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Morgante</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Panaud</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Rev Genet</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">12</biblScope>
+			<biblScope unit="page" from="973" to="982" />
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b76">
+	<analytic>
+		<title level="a" type="main">Accuracy and power of statistical methods for detecting adaptive evolution in protein coding sequences and for identifying positively selected sites</title>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">S</forename><surname>Wong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Goldman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Nielsen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genetics</title>
+		<imprint>
+			<biblScope unit="volume">168</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="1041" to="1051" />
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b77">
+	<analytic>
+		<title level="a" type="main">Obligate mutualism within a host drives the extreme specialization of a fig wasp genome</title>
+		<author>
+			<persName><forename type="first">J-H</forename><surname>Xiao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Yue</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L-Y</forename><surname>Jia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X-H</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L-H</forename><surname>Niu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B-F</forename><surname>Sun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S-M</forename><surname>He</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Li</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biol</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">12</biblScope>
+			<biblScope unit="page">R141</biblScope>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b78">
+	<analytic>
+		<title level="a" type="main">Expansion of a bitter taste receptor family in a polyphagous insect herbivore</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Papanicolaou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H-J</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anderson</forename><forename type="middle">A</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Sci Rep</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page">23666</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b79">
+	<analytic>
+		<title level="a" type="main">PAML 4: phylogenetic analysis by maximum likelihood</title>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Yang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol Biol Evol</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page" from="1586" to="1591" />
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b80">
+	<analytic>
+		<title level="a" type="main">Statistical properties of the branch-site test of positive selection</title>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dos</forename><surname>Reis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol Biol Evol</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="1217" to="1228" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b81">
+	<analytic>
+		<title level="a" type="main">Maximum-likelihood analysis of molecular adaptation in abalone sperm lysin reveals variable selective pressures among lineages and sites</title>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">J</forename><surname>Swanson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><forename type="middle">D</forename><surname>Vacquier</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol Biol Evol</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="issue">10</biblScope>
+			<biblScope unit="page" from="1446" to="1455" />
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b82">
+	<analytic>
+		<title level="a" type="main">A heterozygous moth genome provides insights into herbivory and detoxification</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>You</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Yue</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>He</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Xie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Zhan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">W</forename><surname>Baxter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Vasseur</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">M</forename><surname>Gurr</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Genet</title>
+		<imprint>
+			<biblScope unit="volume">45</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="220" to="225" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b83">
+	<analytic>
+		<title level="a" type="main">The monarch butterfly genome yields insights into long-distance migration</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Zhan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Merlin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">L</forename><surname>Boore</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Reppert</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Cell</title>
+		<imprint>
+			<biblScope unit="volume">147</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="1171" to="1185" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b84">
+	<analytic>
+		<title level="a" type="main">Evaluation of an improved branch-site likelihood method for detecting positive selection at the molecular level</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Nielsen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Yang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol Biol Evol</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="issue">12</biblScope>
+			<biblScope unit="page" from="2472" to="2479" />
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b85">
+	<analytic>
+		<title level="a" type="main">A determining factor for insect feeding preference in the silkworm, Bombyx mori</title>
+		<author>
+			<persName><forename type="first">Z-J</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S-S</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B-L</forename><surname>Niu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ji</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D-F</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X-J</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M-W</forename><surname>Bai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Palli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">R</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C-Z</forename><surname>Tan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A-J</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLoS Biol</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page">3000162</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b86">
+	<analytic>
+		<title level="a" type="main">A chromosome-level genome assembly for the beet armyworm (Spodoptera exigua) using PacBio and Hi-C sequencing</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Wu</surname></persName>
+		</author>
+		<idno type="DOI">10.1101/2019.12.26.889121</idno>
+	</analytic>
+	<monogr>
+		<title level="j">bioRxiv</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="issue">26</biblScope>
+			<biblScope unit="page">889121</biblScope>
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b87">
+	<analytic>
+		<title level="a" type="main">Genome-based identification and analysis of ionotropic receptors in Spodoptera litura</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">Y</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><forename type="middle">W</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><forename type="middle">M</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">Y</forename><surname>Liu</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/g3journal/jkac131/6598846</idno>
+		<ptr target="https://academic.oup.com/g3journal/advance-article/doi/10.1093/g3journal/jkac131/6598846" />
+	</analytic>
+	<monogr>
+		<title level="j">Communicating editor: A. Sethuraman</title>
+		<imprint>
+			<biblScope unit="volume">105</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<date type="published" when="2018">2018. 2022. 04 July 202</date>
+		</imprint>
+		<respStmt>
+			<orgName>INRAE Institut National de Recherche pour l&apos;Agriculture</orgName>
+		</respStmt>
+	</monogr>
+	<note>Sci Nat</note>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

@@ -1,0 +1,2757 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="fr">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Peptimapper: proteogenomics workflow for the expert annotation of eukaryotic genomes</title>
+				<funder>
+					<orgName type="full">Conseil Régional de Bretagne</orgName>
+				</funder>
+				<funder>
+					<orgName type="full">Biogenouest, Infrastructures en Biologie Santé et Agronomie (IBiSA)</orgName>
+				</funder>
+				<funder ref="#_JQVAqK2">
+					<orgName type="full">Agence Nationale de la Recherche</orgName>
+					<orgName type="abbreviated">ANR</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Laetitia</forename><surname>Guillot</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">travail)</orgName>
+								<orgName type="laboratory">EHESP</orgName>
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">Inserm</orgName>
+								<orgName type="institution" key="instit3">Irset (Institut de recherche en santé</orgName>
+								<address>
+									<addrLine>environnement et, UMR_S 1085</addrLine>
+									<postCode>F-35042</postCode>
+									<settlement>Rennes cedex</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department">Protim</orgName>
+								<orgName type="institution">Univ Rennes</orgName>
+								<address>
+									<postCode>F-35042</postCode>
+									<settlement>Rennes cedex</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="department">travail)</orgName>
+								<orgName type="laboratory">EHESP</orgName>
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">Inserm</orgName>
+								<orgName type="institution" key="instit3">Irset (Institut de recherche en santé</orgName>
+								<address>
+									<addrLine>environnement et, UMR_S 1085</addrLine>
+									<postCode>F-35042</postCode>
+									<settlement>Rennes cedex</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff8">
+								<orgName type="department">Protim</orgName>
+								<orgName type="institution">Univ Rennes</orgName>
+								<address>
+									<postCode>F-35042</postCode>
+									<settlement>Rennes cedex</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Ludovic</forename><surname>Delage</surname></persName>
+							<affiliation key="aff3">
+								<orgName type="department">Integrative Biology of Marine Models</orgName>
+								<orgName type="laboratory">UMR 8227</orgName>
+								<orgName type="institution" key="instit1">Sorbonne Université</orgName>
+								<orgName type="institution" key="instit2">UPMC</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<addrLine>Biological Station, CS 90074</addrLine>
+									<postCode>F-29688</postCode>
+									<settlement>Roscoff</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Alain</forename><surname>Viari</surname></persName>
+							<affiliation key="aff4">
+								<orgName type="institution">INRIA Grenoble-Rhône-Alpes</orgName>
+								<address>
+									<postCode>F-38330</postCode>
+									<settlement>Montbonnot-Saint-Martin</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Yves</forename><surname>Vandenbrouck</surname></persName>
+							<affiliation key="aff5">
+								<orgName type="institution" key="instit1">University Grenoble Alpes</orgName>
+								<orgName type="institution" key="instit2">CEA</orgName>
+								<orgName type="institution" key="instit3">InsermBGE</orgName>
+								<address>
+									<addrLine>BIG</addrLine>
+									<postCode>38000</postCode>
+									<settlement>Grenoble</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Emmanuelle</forename><surname>Com</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">travail)</orgName>
+								<orgName type="laboratory">EHESP</orgName>
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">Inserm</orgName>
+								<orgName type="institution" key="instit3">Irset (Institut de recherche en santé</orgName>
+								<address>
+									<addrLine>environnement et, UMR_S 1085</addrLine>
+									<postCode>F-35042</postCode>
+									<settlement>Rennes cedex</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department">Protim</orgName>
+								<orgName type="institution">Univ Rennes</orgName>
+								<address>
+									<postCode>F-35042</postCode>
+									<settlement>Rennes cedex</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="department">travail)</orgName>
+								<orgName type="laboratory">EHESP</orgName>
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">Inserm</orgName>
+								<orgName type="institution" key="instit3">Irset (Institut de recherche en santé</orgName>
+								<address>
+									<addrLine>environnement et, UMR_S 1085</addrLine>
+									<postCode>F-35042</postCode>
+									<settlement>Rennes cedex</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff8">
+								<orgName type="department">Protim</orgName>
+								<orgName type="institution">Univ Rennes</orgName>
+								<address>
+									<postCode>F-35042</postCode>
+									<settlement>Rennes cedex</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Andrés</forename><forename type="middle">A</forename><surname>Ritter</surname></persName>
+							<affiliation key="aff3">
+								<orgName type="department">Integrative Biology of Marine Models</orgName>
+								<orgName type="laboratory">UMR 8227</orgName>
+								<orgName type="institution" key="instit1">Sorbonne Université</orgName>
+								<orgName type="institution" key="instit2">UPMC</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<addrLine>Biological Station, CS 90074</addrLine>
+									<postCode>F-29688</postCode>
+									<settlement>Roscoff</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Régis</forename><surname>Lavigne</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">travail)</orgName>
+								<orgName type="laboratory">EHESP</orgName>
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">Inserm</orgName>
+								<orgName type="institution" key="instit3">Irset (Institut de recherche en santé</orgName>
+								<address>
+									<addrLine>environnement et, UMR_S 1085</addrLine>
+									<postCode>F-35042</postCode>
+									<settlement>Rennes cedex</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department">Protim</orgName>
+								<orgName type="institution">Univ Rennes</orgName>
+								<address>
+									<postCode>F-35042</postCode>
+									<settlement>Rennes cedex</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="department">travail)</orgName>
+								<orgName type="laboratory">EHESP</orgName>
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">Inserm</orgName>
+								<orgName type="institution" key="instit3">Irset (Institut de recherche en santé</orgName>
+								<address>
+									<addrLine>environnement et, UMR_S 1085</addrLine>
+									<postCode>F-35042</postCode>
+									<settlement>Rennes cedex</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff8">
+								<orgName type="department">Protim</orgName>
+								<orgName type="institution">Univ Rennes</orgName>
+								<address>
+									<postCode>F-35042</postCode>
+									<settlement>Rennes cedex</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Dominique</forename><surname>Marie</surname></persName>
+							<affiliation key="aff3">
+								<orgName type="department">Integrative Biology of Marine Models</orgName>
+								<orgName type="laboratory">UMR 8227</orgName>
+								<orgName type="institution" key="instit1">Sorbonne Université</orgName>
+								<orgName type="institution" key="instit2">UPMC</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<addrLine>Biological Station, CS 90074</addrLine>
+									<postCode>F-29688</postCode>
+									<settlement>Roscoff</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Pierre</forename><surname>Peterlongo</surname></persName>
+							<affiliation key="aff7">
+								<orgName type="institution" key="instit1">University Rennes</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">IRISA</orgName>
+								<address>
+									<postCode>F-35042</postCode>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Philippe</forename><surname>Potin</surname></persName>
+							<affiliation key="aff3">
+								<orgName type="department">Integrative Biology of Marine Models</orgName>
+								<orgName type="laboratory">UMR 8227</orgName>
+								<orgName type="institution" key="instit1">Sorbonne Université</orgName>
+								<orgName type="institution" key="instit2">UPMC</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<addrLine>Biological Station, CS 90074</addrLine>
+									<postCode>F-29688</postCode>
+									<settlement>Roscoff</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author role="corresp">
+							<persName><forename type="first">Charles</forename><surname>Pineau</surname></persName>
+							<email>charles.pineau@inserm.fr</email>
+							<affiliation key="aff0">
+								<orgName type="department">travail)</orgName>
+								<orgName type="laboratory">EHESP</orgName>
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">Inserm</orgName>
+								<orgName type="institution" key="instit3">Irset (Institut de recherche en santé</orgName>
+								<address>
+									<addrLine>environnement et, UMR_S 1085</addrLine>
+									<postCode>F-35042</postCode>
+									<settlement>Rennes cedex</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department">Protim</orgName>
+								<orgName type="institution">Univ Rennes</orgName>
+								<address>
+									<postCode>F-35042</postCode>
+									<settlement>Rennes cedex</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="department">travail)</orgName>
+								<orgName type="laboratory">EHESP</orgName>
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">Inserm</orgName>
+								<orgName type="institution" key="instit3">Irset (Institut de recherche en santé</orgName>
+								<address>
+									<addrLine>environnement et, UMR_S 1085</addrLine>
+									<postCode>F-35042</postCode>
+									<settlement>Rennes cedex</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff8">
+								<orgName type="department">Protim</orgName>
+								<orgName type="institution">Univ Rennes</orgName>
+								<address>
+									<postCode>F-35042</postCode>
+									<settlement>Rennes cedex</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff6">
+								<orgName type="department">Institut de Biologie Paris-Seine</orgName>
+								<orgName type="laboratory">Laboratory of Computational and Quantitative Biology</orgName>
+								<orgName type="institution" key="instit1">Sorbonne Université</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<address>
+									<postCode>F-75005</postCode>
+									<settlement>Paris</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Peptimapper: proteogenomics workflow for the expert annotation of eukaryotic genomes</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">BD09F9CA8398D8C4F458EE82DEA9D624</idno>
+					<idno type="DOI">10.1186/s12864-019-5431-9</idno>
+					<note type="submission">Submitted on 20 Jan 2019 Received: 26 February 2018 Accepted: 3 January 2019</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:15+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Bioinformatics</term>
+					<term>Genome annotation</term>
+					<term>Peptide sequence tag</term>
+					<term>Proteogenomics</term>
+					<term>Proteomics</term>
+					<term>Tandem mass spectrometry</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>à la diffusion de documents scientifiques de niveau recherche, publiés ou non, émanant des établissements d'enseignement et de recherche français ou étrangers, des laboratoires publics ou privés.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="fr">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Background</head><p>Proteomics and genomics data combined with bioinformatics tools, known as proteogenomics <ref type="bibr" target="#b0">[1]</ref><ref type="bibr" target="#b1">[2]</ref><ref type="bibr" target="#b2">[3]</ref>, is a valuable strategy to improve genome annotation <ref type="bibr" target="#b3">[4]</ref><ref type="bibr" target="#b4">[5]</ref><ref type="bibr" target="#b5">[6]</ref>. Proteomics methods and applications have been reviewed by Nesvizhskii <ref type="bibr" target="#b6">[7]</ref> and more recently by Menschaert &amp; Fenyö and by Ruggles and collaborators <ref type="bibr" target="#b7">[8,</ref><ref type="bibr" target="#b8">9]</ref>. Proteomics data provides direct access to amino-acid sequences that can be mapped onto translated genomic sequences <ref type="bibr" target="#b9">[10,</ref><ref type="bibr" target="#b10">11]</ref>. The combined use of experimental proteomics data and genomic sequences is a powerful way to: i) confirm gene-model predictions, ii) correct possible intron/exon boundary errors or wrong start/stop codons, and iii) find new CDSs that have not been computationally predicted by machine learningbased approaches or homology searches. Many studies have demonstrated the use proteomics datasets to provide protein-level evidence of gene expression and refine gene models <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b11">12]</ref>. This approach has been successfully applied to many organisms, such as Anopheles gambiae <ref type="bibr" target="#b12">[13]</ref>, Rattus norvegicus <ref type="bibr" target="#b13">[14,</ref><ref type="bibr" target="#b14">15]</ref>, and Homo sapiens <ref type="bibr" target="#b15">[16]</ref>, as well as plants <ref type="bibr" target="#b16">[17]</ref><ref type="bibr" target="#b17">[18]</ref><ref type="bibr" target="#b18">[19]</ref>. Many microbial genomes, usually lacking high quality annotation, can also benefit from proteogenomics strategies to improve gene prediction <ref type="bibr" target="#b19">[20]</ref><ref type="bibr" target="#b20">[21]</ref><ref type="bibr" target="#b21">[22]</ref><ref type="bibr" target="#b22">[23]</ref><ref type="bibr" target="#b23">[24]</ref>. Finally, proteogenomics can also significantly influence the study of non-model organisms <ref type="bibr" target="#b24">[25]</ref>.</p><p>Here we developed an easy to use, suitable, and efficient proteogenomics workflow, Peptimapper (Fig. <ref type="figure">1a</ref>), to complete eukaryotic genome annotation. It automatically generates de novo short amino-acid sequences (i.e., peptide sequence tags, PSTs) from experimental proteomics data, maps these to the six-frame translation of genomics DNA sequences, and highlights potentially translated regions, which could be exons or genes. Our workflow makes it possible to not only improve genome annotation by confirming or correcting gene models or finding new CDSs, but also to complete classical database-driven proteomics identification, by generating a list of gene-matched translated proteins using these short de novo amino-acid sequences.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Design and implementation</head><p>Our proteogenomics workflow (Fig. <ref type="figure">1a</ref>), Peptimapper, is composed of a series of scripts we developed for a project called Ectoline. The scripts are partially based on the PepLine software <ref type="bibr" target="#b17">[18]</ref>, which were tested and some modified. The workflow consists of modular components and can therefore be used for any eukaryotic genome, following modification to accommodate its Fig. <ref type="figure">1</ref> a Project workflow: Samples corresponding to various stages of the life cycle (sporophyte, gametophyte, and gametes) and sub-cellular compartments of Ectocarpus sp. were prepared for MS analysis. PSTs were generated from the MS/MS data, mapped against the genome, and clustered. We classified each cluster according to their genomic annotation (whether one hit overlapped with or included at least one CDS of an identified protein) and the number of typical spectra and verified whether all hits were included in a CDS or not. The location of clusters of interest were written into GFF files to be integrated into a Genome viewer. The results of cluster qualification and visualization along the contig allowed us to select clusters for experimental characterization. b Illustration of PSTs obtained from an MS/MS spectrum. MS/MS spectra are composed of ions resulting from the fragmentation of peptides at their peptide bonds during tandem mass spectrometry analysis. The generated fragment ions differ in mass corresponding to their adjacent amino-acid masses within the peptide sequence. A PST is a partial element of information deduced from an MS/MS spectrum, defined as a small sequence of several probable adjacent amino acids from the original peptide and the masses of the flanking N-and C-terminal fragment ions of this small sequence properties. We developed Peptimapper using the genome of Ectocarpus sp., a key reference genome for both the brown algal lineage and stramenopiles. For each biological sample, we generated the MS/MS spectra file in Mascot Generic File (MGF) format using conventional proteomics software (i.e., Mascot Distiller, Proteome Dis-coverer™, etc.). We used the "sequence tagging" approach <ref type="bibr" target="#b9">[10]</ref>, in which a PST is defined by a small sequence tag (usually three or four amino acids) and the two flanking (N-and C-terminal) masses (Fig. <ref type="figure">1b</ref>).</p><p>The bioinformatics steps are shown in Fig. <ref type="figure">2</ref>. PSTs were generated de novo from the MS/MS spectra information of the MGF. After testing several PSTs generation tools (see Step 1: From MGF files to PSTs), we decided to adapt an existing tool: PepNovo + 3.1 beta <ref type="bibr" target="#b25">[26]</ref> (LXRunPepNovo). PSTs were then mapped on the six-frame translations of the genome sequence, resulting in a list of hits. A hit is defined as the location of a PST on the genome sequence. Finally, closely located hits were clustered to identify regions potentially associated with genes or, at least exons. This was achieved by testing (see Step 2: PST mapping and clustering below) and bundling three modules of the PepLine software (PMTrans, PMMatch, PMClust) into one script: LXPepMatch.</p><p>By cross-checking results using a classical database-driven proteomics approach, we tested and optimized step 1 and step 2 modules by varying settings according to known Ectocarpus sp. genome features (downloaded from ORCAE, a public database: http:// bioinformatics.psb.ugent.be/orcae/overview/Ectsi) and using as input a subset of reference spectra (see MS/MS reference datasets building). The workflow construction is detailed below (see section Workflow construction: step-by-step).</p><p>The last step consisted of classifying clusters generated in step 2, according to their annotation and confidence level using the script we developed for this purpose: LXQualify. Clusters on the genome were visualized by implementing another specific script, LXClust2Gff. It wrote cluster locations generated by LXPepMatch into GFF files for further integration into a genome viewer (i.e., Artemis (Sanger Institute, England) <ref type="bibr" target="#b26">[27]</ref>). Results were validated by manually comparing various clusters of interest with EST and RNA-Seq data (see workflow building step by step, step 3 section, below).</p><p>From biological samples to MS/MS spectra files (MGF files)</p><p>We extracted various subcellular samples (cell walls, cytoplasm, nuclei, membranes) from various life cycle stages of Ectocarpus sp. strains (gametophyte, gamete) using specific protocols (see Additional file 1) to provide deep coverage of the proteome. Enriched extracts were then separated by SDS-PAGE onto 12% precast GeBa-Gels (Gene Bio-Application Ltd., Kfar Hanagide, Israel) and stained with EZBlue gel staining reagent (Sigma-Aldrich, Saint-Quentin Fallavier, France), according to the manufacturer's instructions. Gel lanes were cut into 20 bands which were subjected to trypsin digestion, as previously described <ref type="bibr" target="#b27">[28]</ref>. Tryptic peptides were analyzed using a nanoflow high-performance liquid chromatography (HPLC) system (LC Packings Ultimate 3000, Thermo Fisher Scientific, Courtaboeuf, France) connected to a hybrid LTQ-Orbitrap XL™ spectrometer (Thermo Fisher Scientific) equipped with a nanoelectrospray ion source (New Objective, Woburn, Massachusetts, USA), as previously described <ref type="bibr" target="#b28">[29]</ref>. The mass spectrometer was operated in the data-dependent mode by automatic switching between full-survey scan MS and consecutive MS/MS acquisition. Survey full scan MS spectra (mass range 400-2000) were acquired in the Orbitrap section of the instrument with a resolution of r = 60,000 at 400 m/z; ion injection times were calculated for each spectrum to allow the accumulation of 10 6 ions in the Orbitrap. The seven most intense peptide ions in each survey scan with an intensity above 2000 were sequentially isolated and fragmented in the linear ion trap by collision-induced dissociation. For Orbitrap measurements, an external calibration was used before each injection series to ensure an overall error mass accuracy below 5 ppm for the detected peptides. MS data were Fig. <ref type="figure">2</ref> Steps of the bioinformatics workflow saved in RAW file format (Thermo Fisher Scientific) using XCalibur 2.0.7 with tune 2.4. For each sample, MS/MS spectra, grouped into an MGF file, were generated by Proteome Discoverer™ 1.2 software. The mass spectrometry proteomics data have been deposited to the ProteomeXchange Consortium via the PRIDE <ref type="bibr" target="#b29">[30]</ref> partner repository with the dataset identifier PXD010618.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Building the MS/MS reference dataset</head><p>For each step of Peptimapper, we developed specific tools or used or adapted existing tools. We built three reference datasets for their assessment. These were obtained by a classical database-driven proteomics approach. Peptides were identified using Proteome Dis-coverer™ 1.2 software supported by the Mascot search engine (Mascot server v2.2.07; http://www.matrixscience.com), using its decoy strategy. This software matches each MS/MS experimental spectrum (RAW file) against a database comprising all theoretical MS/MS spectra calculated for every possible peptide from an in silico digestion of Ectocarpus sp. gene model proteins (downloaded from ORCAE, https://bioinformatics.psb.ugent.be/gdb/ ectocarpus/, Ectsi_prot, 2010, 16,533 sequences). Mass tolerance was set to 10 ppm and 0.5 Da for MS and MS/ MS, respectively. Enzyme selectivity was set to full trypsin, with one missed cleavage allowed. The allowed protein modifications were set to carbamidomethylation of cysteines and variable oxidation of methionine. Proteome Discoverer™ identification results allowed us to manually create reference MGF files composed of MS/MS spectra, selected according to the False Discovery Rate (FDR) calculated in Proteome Discoverer™ and the reliability of the protein identification. MGF files were separated into three reference datasets according to the confidence level of the identifications: the "green" reference dataset (high quality spectra) containing all MS/MS spectra corresponding to identified proteins with at least three peptides and a FDR (computed as described above by the Mascot search engine) &lt; 1%; the "orange" reference dataset (medium quality spectra) containing all MS/MS spectra with proteins identified by one peptide or more, and a FDR &gt; 1% and &lt; 5% and; the "red" reference dataset (low quality spectra) containing all MS/MS spectra without any protein identification and a FDR &gt; 5%.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Workflow construction: step-by-step</head><p>Step 1: From MGF files to PSTs</p><p>The first step (Fig. <ref type="figure">2</ref>) consisted of PST generation. We considered three bioinformatics tools for this step: 1) PepNovo + 3.1 <ref type="bibr" target="#b25">[26]</ref>, 2) Peaks <ref type="bibr" target="#b30">[31]</ref>, and 3) Taggor, which is a module of PepLine <ref type="bibr" target="#b17">[18]</ref>. Taggor, initially developed for QTOF mass spectrometer data treatment, was adapted to account for mass tolerance parameters when using an ion trap spectrometer. We tested tool performance using a subset of the green dataset: 10 high quality MS/MS spectra provided by proteome Discov-erer™, exporting the spectra of the two best peptides from each of the five top scoring proteins (see Additional file 2) into a MGF file. This file was used as input for each of the three bioinformatics tools. We then selected the one that generated the most PSTs identical to peptide sequences identified by Proteome Discoverer™ for the same spectra.</p><p>Step 2: PSTs mapping and clustering</p><p>The second step consisted of successive genome translation, PST mapping, and hits clustering. We separately tested PMMatch and PMClust scripts, which were then grouped together into LXPepMatch (Fig. <ref type="figure">2</ref>). We first generated PSTs from the three previously defined reference datasets (see Additional file 2). For PST mapping, we adapted PMMatch, which is a module of PepLine <ref type="bibr" target="#b17">[18]</ref> designed to locate PSTs on complete genome sequences, by adding an option to specify an absolute mass tolerance. It was set to 0.5 Da for our test case. We defined the PST length (i.e., optimal number of amino acids) and compared the results with those for which one or no amino acid modifications were allowed, by mapping PSTs of each reference spectra dataset against the Ectocarpus sp. gene model proteins (downloaded from ORCAE, Ectsi_prot, 2010) (Fig. <ref type="figure" target="#fig_0">3a</ref>). Proteins matched by PSTs were compared to the expected proteins identified by conventional database spectral identification, using the same spectra and same protein sequence database (Ectsi_prot, 2010) with Proteome Dis-coverer™ 1.2 software. A hit (the location of a PST on the genome sequence) was considered to be valid if it matched the expected protein. We considered proteins matched by at least two valid hits and corresponding to expected proteins to be true-positives ("true_pos"). We defined "nref" as the number of expected proteins and "nfound" as the number of proteins matched by PMMatch. Sensitivity was defined as the percent of expected proteins matched (true_pos/nref ) and selectivity the percent of expected proteins among all proteins matched using our workflow (true_pos/nfound). We computed these metrics for each reference dataset by varying tag lengths from 3 to 5.</p><p>For hit clustering, we only used the green reference dataset to test the program PMClust, another module of PepLine. We optimized this step by selecting the maximal distance between two consecutive hits to be grouped in a cluster, taking into account the mean length of CDSs, exons, introns, genes, and intergenic regions of the Ectocarpus sp. genome. We defined the minimum number of hits (MINHIT) and minimum number of peptides (MINPEP) a cluster could contain to improve the results. Clusters were mapped to the 1591 annotated contigs (GFF3 files downloaded from ORCAE, Ectsi_gff3, 2011) and classified into three categories, according to their mRNA locations: IN when clusters were located inside an mRNA feature, OUT when clusters were located outside of an mRNA feature, and CROSS when clusters were located across an mRNA feature (Fig. <ref type="figure" target="#fig_0">3b</ref>).</p><p>We performed the first test by analyzing their distribution into each category for various values of MINHIT and MINPEP, with the aim of obtaining the maximum number of IN clusters. In the second test, we compared proteins that matched IN and CROSS clusters to the expected proteins identified by conventional database spectral identification, using the same spectra and protein sequence database (Ectsi_prot, 2010) with Proteome Discoverer™ 1.2 software (Fig. <ref type="figure" target="#fig_0">3c</ref>). We considered proteins matched by an IN or CROSS cluster and corresponding to an expected protein to be true-positives ("true_pos"). All IN and CROSS clusters corresponded to found proteins ("nfound"), whereas all expected proteins corresponded to proteins identified by the databasedriven approach ("nref"). We calculated the sensitivity ("true_pos"/"nref"), which is the percent of expected proteins matched by an IN or CROSS cluster among all expected proteins, and the selectivity, which is the percent of expected proteins among all proteins found by IN or CROSS clusters (Fig. <ref type="figure" target="#fig_0">3c</ref>). We computed these metrics using the green reference dataset for various values of MINHIT and MINPEP.</p><p>Step 3: Annotation and visualization of cluster results</p><p>In the third step (Fig. <ref type="figure">2</ref>), we developed a specific script, LXQualify, allowing the annotation of clusters with three labels. The first was "UNANNOTATED" or "ANNO-TATED", if no hits or at least one hit was included in a CDS of a protein-coding gene, respectively. The second was "DUBIOUS", "POSSIBLE", or "SURE", to assign a confidence degree to each cluster according to the number of typical spectra (i.e., specific to the cluster) and the number of hits. A cluster was "DUBIOUS" if it contained zero or one typical spectrum; "POSSIBLE" if it contained two or more typical spectra, but less than three different peptides, and "SURE" if it contained two or more typical spectra and three or more different peptides. The third was "OK" or "CHECK", if all the hits were included in an annotated CDS or at least one hit did not match with the annotated CDS, respectively. Labeled clusters were listed in a tabular output file.</p><p>We developed a specific script, LXClust2Gff, to convert PMClust output to GFF files for visualization. Artemis (Sanger Institute, England) <ref type="bibr" target="#b26">[27]</ref> was used as the genome sequence viewer to conveniently assess our results. Some clusters of interest were validated by comparison with transcriptomics data and RT-PCR experiments. Transcriptomic data (ESTs and RNA-Seq coverage) were downloaded from the ORCAE public database of the Ectocarpus sp. genome. These data were previously published with research articles <ref type="bibr" target="#b31">[32,</ref><ref type="bibr" target="#b32">33]</ref>. For RT-PCR experiments, approximately 100 mg wet weight of frozen samples of Ectocarpus sp.. Ec 32 were quickly ground in liquid nitrogen for RNA extraction. Total RNA was prepared as described previously <ref type="bibr" target="#b33">[34]</ref>. RNA quantity and quality were verified using a NanoDrop ND-1000 spectrophotometer (NanoDrop products, Thermo Fisher Scientific) and by electrophoresis on agarose gels. cDNAs were produced from 1 μg total RNA using the ImProm-II™ Reverse Transcription System (Promega, Charbonnières-les-Bains, France). PCR experiments were carried out with a thermocycler machine using a standard GoTaq® DNA Polymerase Protocol (Promega). The annealing temperature of the specific primers for cluster validation were between 58 and 60 °C. PCR products were separated and purified on agarose gels. The DNA was subsequently sequenced using the BigDye® Terminator v3.1 Cycle Sequencing Kit and a 3130 Genetic Analyzer (Applied Biosystems, Foster City, California, USA).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Results</head><p>We designed and built our proteogenomics tool using the brown alga E. sp. as our test case. The Ectocarpus sp. (formerly included in E. sp., <ref type="bibr" target="#b34">[35]</ref>) has become a model organism for brown algal biology because of its amenable features for morpho-genetic, life-cycle, and genetic studies. Publication of the Ectocarpus sp. genome in 2010 propelled brown algal research into the genomic era and several post-genomic tools have been subsequently developed using this species to explore diverse aspects of brown algal biology, including its life cycle, development, metabolic processes, and interactions with the environment <ref type="bibr" target="#b31">[32,</ref><ref type="bibr" target="#b35">36]</ref>. Resources for Ectocarpus sp. now include two genetic maps <ref type="bibr" target="#b36">[37,</ref><ref type="bibr" target="#b37">38]</ref>, gene mapping techniques, microarrays <ref type="bibr" target="#b38">[39,</ref><ref type="bibr" target="#b39">40]</ref>, transcriptomic data <ref type="bibr" target="#b40">[41,</ref><ref type="bibr" target="#b41">42]</ref>, proteomic techniques <ref type="bibr" target="#b42">[43,</ref><ref type="bibr" target="#b43">44]</ref>, and bioinformatics tools for the prediction of peptide addressing <ref type="bibr" target="#b44">[45]</ref> and metabolic reconstruction <ref type="bibr" target="#b45">[46]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Workflow: settings and test results</head><p>We optimized our proteogenomics approach (Fig. <ref type="figure">1a</ref>) using the three reference datasets. It required fine-tuning for the type and quality of the MS data and adaptation to the characteristics of the Ectocarpus sp. genome. The initial genome V1 annotation retrieved 16,256 protein-coding sequences, among which 6655 had no EST support and 5819 concerned specific brown algal genes encoding proteins with no known function <ref type="bibr" target="#b31">[32]</ref>. Moreover, the high number of introns per gene (an average of seven), the extended 3'UTR regions, with an average length of 845 bp, and short intergenic regions often hampered accurate gene prediction.</p><p>Step 1: From MS/MS spectra to PSTs</p><p>We selected the best from among three programs (i.e., Taggor, Peaks, PepNovo+) to generate PSTs from MS/MS spectra. Taggor had difficulties distinguishing doubly charged ions from singly charged ions, leading to sequence errors. This tool also required a preliminary deconvolution step. We thus discarded it and focused on Peaks and PepNovo+. Ten high quality experimental spectra identified by Proteome Discoverer™ 1.2 software (see Additional file 2) were manually selected for use as reference sequences (Table <ref type="table" target="#tab_0">1</ref>) to cross-reference PST sequences generated by each program we tested.</p><p>Peaks generated PSTs of variable, generally long sequence-tag length (at least six amino acids) that could potentially lead to errors. Indeed, Peaks generated only four correct sequences (Table <ref type="table" target="#tab_0">1</ref>). The errors generated by Peaks are also explained by the mass tolerance accuracy parameter. For example, the amino-acid mass of "DD" is 230.05 Da and that of "ET" is 230.09 Da. The reference sequence tag to generate was "GVSEET", whereas Peaks wrongly proposed "GVSEDD". PepNovo+, raised two concerns. First, it did not take into account the H 2 O molecule plus the single charge acquisitions during the fragmentation process, resulting in errors in the mass of Mn NTer. Second, it did not take the peptide charge into consideration. Nevertheless, after correcting for these problems, PepNovo + appeared to be the best choice. Indeed, it returned 8 of the 10 reference sequences (Table <ref type="table" target="#tab_0">1</ref>). PepNovo + was set to two allowed amino-acid modifications, cysteine carbamidomethylation and methionine oxidation (C + 57 and M + 16, respectively). The maximal tag number generated per spectra was set to 10.</p><p>Step 2. From PSTs to hit clusters PST mapping was performed using the PMMatch program. The results of three PST files generated by Pep-Novo + from the green, orange, and red reference spectra datasets (see Additional file 2) were used as input. We then compared protein encoding genes matched by PSTs to the expected proteins identified by Proteome Discov-erer™ from the same spectra dataset, using the same Ectocarpus sp. protein database (ORCAE, Ectsi_prot, 2010) as that used by PMMatch (Fig. <ref type="figure" target="#fig_0">3a</ref>). Sensitivity and selectivity were calculated for each dataset. Sensitivity measures the proportion of positive IDs that were  correctly identified among all expected proteins and selectivity the proportion of positive IDs that were correctly identified among all matched proteins. The results of each reference dataset are reported in Fig. <ref type="figure" target="#fig_2">4</ref> for three different sequence tag lengths (i.e., 3, 4, or 5 amino acids) for a minimum of one or two hits per protein (MINHIT) with one or no amino acid modifications allowed.</p><p>We observed poorer selectivity and slightly better sensitivity for the high and medium quality spectra with MINHIT = 1 (Fig. <ref type="figure" target="#fig_2">4a</ref>) than with MINHIT = 2 (Fig. <ref type="figure" target="#fig_2">4b</ref>). MINHIT = 2 resulted in poorer sensitivity for noisy spectra. Thus, optimal parameters depend on spectra quality. Selectivity increased with PST length, regardless of the quality of the spectra, with a slight unfavorable influence on sensitivity, particularly for spectra of medium and poor quality. Thresholds of MINHIT &gt; 1 and a tag sequence length = 5 amino acids allowed us to focus on spectra of relatively good quality. We thus reduced the number of results to be validated from our preliminary study. Sensitivity and selectivity were higher when MIN-HIT = 2 and one amino acid modification was allowed, regardless of the quality of the spectra (Fig. <ref type="figure" target="#fig_2">4c</ref>). We thus set allowed amino-acid modifications to one for PST mapping.</p><p>We performed further tests on the cluster results to set the optimal minimum hits per protein parameter (MINHIT). We compared proteins matched by clusters to the expected proteins identified by conventional database spectral identification using Proteome Discoverer™ 1.2 software and the same spectra and protein database as above (ORCAE, Ectsi_prot, 2010) (Fig. <ref type="figure" target="#fig_0">3c</ref>). We generated PSTs from only the green reference dataset, running PMMatch on the Ectocarpus sp. genome sequence (ORCAE, Ectsi_genome_V2_cleaned.tfa) translated by PMTrans. We clustered hits with the aim of uncovering regions potentially associated with genes or, at least, exons. The maximal distance between two consecutive hits in a cluster was correlated with E. sp. genome features to improve cluster results. The statistical distribution was established for each, starting from the E. sp. GFF3 files (ORCAE, Ectsi_gff3, 2011; Ectsi_gen-ome_V2_cleaned.tfa): CDS (median of 137 nt), exons (median of 143 nt), introns (median of 531 nt), gene (median of 4772 nt), and intergenic regions (median of 2529 nt). We observed relatively short CDS and introns and short intergenic regions, with a median that was only four times larger than that of introns. Thus, there was a risk of confusing introns and intergenic regions. We thus fixed the maximal distance between hits to 5000 nt, thus minimizing the risk to merge two proteins while covering 99.6% of introns. Each cluster was annotated to fall into one of three categories, "IN", "OUT", or "CROSS", according to Ectocarpus sp. mRNA locations (Fig. <ref type="figure" target="#fig_0">3b</ref>), to further set the minimal number of hits (MINHIT), and validated peptides (MINPEP) required to form a cluster. First, we assessed the proportion of clusters falling into each category and the best result, i.e., 90% of the clusters obtained were "IN" with a minimum of three hits and two peptides (Fig. <ref type="figure">5a</ref>). Second, we compared the number of proteins predicted by the "IN" and "CROSS" clusters to the expected number of proteins (i.e., identified with Proteome Discoverer™ using the same reference spectra) for different values of MINHIT and MINPEP (Fig. <ref type="figure">5b</ref>). We obtained satisfactory sensitivity and selectivity scores of 83 and 82%, respectively, with a minimum of three hits and two peptides. Last, we ran PMClust with the following parameters: MINHIT at three hits, MINPEP at two peptides, and the maximal distance between two hits to form a cluster of 5000 nucleotides.</p><p>Final workflow: validation on all samples of Ectocarpus sp.</p><p>We produced a PST file from each biological sample using LX_RunPepNovo. PSTs were mapped on the six-frame translations of the Ectocarpus sp. genome (ORCAE, Ectsi_genome_V2_cleaned.tfa) using the LXPepMatch program with the optimized parameters described above, thus generating 20-hit lists that were pooled to obtain only one file per sample. We used various strains to isolate biological samples of Ectocarpus sp.. We thus needed to avoid mistakes linked to small genetic differences due to polymorphisms. Before clustering, we merged hits files of each strain: Ec32 (soluble, membrane, and cell wall fractions), Ec594 (gametophyte and nuclei fractions), and Ec410 (gamete fraction). We generated clusters from each hits file, i.e., Ec32, Ec594, and Ec410, with the optimized parameters described above, using GFF3 files (ORCAE, Ectsi_gff3_Jun2013).</p><p>The resulting list contained 2107 unique clusters (see Additional file 3), combining all strains, that included 272 unannotated and 1832 annotated clusters. We further analyzed a subset of these clusters. We annotated clusters to fall into one of three grades to assign a degree of confidence to each, based on the number of typical spectra (i.e., specific to the cluster) and the number of hits, as described above. Thirteen percent of clusters were unannotated and 87% annotated (Fig. <ref type="figure">6a</ref>). We focused on SURE or POSSIBLE and OK or CHECK clusters (see implementation step 3).</p><p>We validated our workflow by focusing on distinct case-results. i) We studied clusters annotated as SURE and CHECK to correct mispredicted genes or correct the ATG start codon. We found 472 clusters annotated as SURE and CHECK (Fig. <ref type="figure">6b</ref>). Among these, two were retained for further experimental validation. ii) We only focused on the 45 unannotated clusters labeled SURE (Fig. <ref type="figure">6c</ref>) to find new CDSs. Among these, two were further analyzed.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Correction of mispredicted genes or ATG start codons</head><p>The first cluster, named "cluster A", was present on sctg_326 between 105,788 and 106,978 (Fig. <ref type="figure">7a</ref>). It was "ANNOTATED_SURE_CHECK" and only identified in Ec32 samples. This cluster was positioned downstream of the predicted gene model Esi0326_0032, annotated as a dihydrolipoamide acetyltransferase. A blastX search (on the ORCAE website, http://bioinformatics.psb.ugent.be/blast/ moderated/?project=orcae_Ectsi, Ectsi_genome11x) against all portions of the Esi0326_0032 gene followed by the DNA sequence of cluster "A" identified a full-length protein for the dihydrolipoamide acetyltransferase component of the pyruvate/2-oxoglutarate dehydrogenase complex. This was also corroborated by two ESTs: AAA12YO13, AAB11YA05 (ORCAE, Ectsi_ESTs_cleaned) matching this region (Fig. <ref type="figure">7b</ref>). Our results showed that the prediction of the last exon of the Esi0326_0032 gene model appeared to be false. Consequently, we selected this cluster as a candidate for correction of a mispredicted gene. We designed primer pairs to amplify portions based on the sequences of the PSTs for validation (Fig. <ref type="figure">7c</ref>), as public databases suggested that the "A" cluster was expressed in vivo by E. sp.. PCR products of the expected size of 244 bp were obtained (Fig. <ref type="figure">7d</ref>) and sequencing confirmed the presence of the expected nucleotide sequences (data not shown).</p><p>The second cluster, named "cluster B" was present on sctg_39 between 759,682 and 762,422 (Fig. <ref type="figure">8a</ref>). It was "ANNOTATED_SURE_CHECK" and only identified in Ec32 samples. Most (191 "hit in") of the total hits (257  "tot hit") were present in the predicted sequence of an Ectocarpus sp. gene corresponding to Esi0039_0135 (Fig. <ref type="figure">8b</ref>). These 191 hits corresponded to five peptides located in the region of the predicted Esi0039_0135 protein-coding gene ("cds in"). Another peptide, "TYI-MIKPDGVQR", partially covered the Esi0039_0135 sequence ("cds cross"). The predicted start codon of the Esi0039_0135 protein-coded gene is included in this peptide sequence and further analysis of the ESTs showed that the true start codon of this gene may likely be upstream of the predicted one (Fig. <ref type="figure">8c</ref>). Indeed, these two potential start codons are very close (separated by five amino acids) emphasizing the benefit of a proteomic approach for true start codon assignment. The identification of the PST sequence TYIMIKPDGVQR in the MS/MS data led us to propose a new position for the ATG start codon of the Esi0039_0135 gene. Nevertheless, we cannot exclude that the two ATG codons may be alternatively used in vivo to produce different translation products of this nucleoside diphosphate kinase.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>New CDS discovery</head><p>"Cluster C", was mapped against sctg_8 from position 419,782 to position 422,806 (Fig. <ref type="figure" target="#fig_5">9a</ref>) with four peptides (Fig. <ref type="figure" target="#fig_5">9b</ref>). It was "UNANNOTATED_SURE_CHECK" and observed in the three datasets. An MS-Blast search <ref type="bibr" target="#b46">[47]</ref> (http://genetics.bwh.harvard.edu/msblast/), using PST sequences included in this cluster, revealed similarity with ribosomal protein L22 (RPL22) from other species. In addition, cross-analysis with Ectocarpus sp. transcriptomic data available from the ORCAE website (http:// bioinformatics.psb.ugent.be/blast/moderated/?projec-t=orcae_Ectsi) showed that a complete cDNA sequence (ACA17YE21) was present in cluster "C". This sequence appears to be a good candidate for a new protein coding gene as no coding gene has yet been predicted in this region (Fig. <ref type="figure" target="#fig_5">9a</ref>). We designed primer pairs to amplify portions based on the PST sequences (Fig. <ref type="figure" target="#fig_5">9c</ref>) for validation, as transcriptomic data in public databases suggested that the "C" cluster is likely to be expressed in vivo in E. sp.. PCR products of the expected size of 248 bp were obtained (Fig. <ref type="figure" target="#fig_5">9d</ref>) and sequencing confirmed the presence of the expected nucleotide sequences (data not shown).</p><p>The last cluster, named "cluster D", was present on sctg_203 between 20,569 and 25,604 (Fig. <ref type="figure" target="#fig_6">10a</ref>). It was observed in two datasets (Ec32 and Ec594) and is present on LG02 of the genetic map <ref type="bibr" target="#b37">[38]</ref> (Fig. <ref type="figure" target="#fig_6">10b</ref>). We also selected it for validation by RT-PCR analysis (Fig. <ref type="figure" target="#fig_6">10d</ref>). We designed PCR primers based on the coding sequences of the most distant PSTs identified for this cluster (VVLPTWELR and IADFVGIETTPEIIEK). In addition, four ESTs were found to cover the entire length of the cluster. Amplification of Ectocarpus sp. cDNAs led to an expected product of 692 bp absent from the RNA amplification negative control, confirming the translation of this new gene product (Fig. <ref type="figure" target="#fig_6">10d</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Peptimapper workflow distribution</head><p>Our proteogenomics workflow, Peptimapper, is composed of four scripts from the Ectoline github project: LXRunPepNovo, LXPepMatch, LXQualify, and LXClust 2Gff (Fig. <ref type="figure">2</ref>; see command line arguments and output file descriptions into Additional file 4). PMMatch, used by LXPepMatch, was adapted from the Pepline suite (version 2.0.1) to fit our workflow. LXRunPepNovo is a new version of PepNovo + (version 3.1 beta), adapted for our data. This version contains sources and pre-compiled binaries for Linux and MacOS platforms. Ectoline project is distributed under the GPL or CECILL license.</p><p>The text of both licenses is attached (and should remain attached) to this distribution and is available at https:// github.com/laeticlo/Ectoline.</p><p>We built a Docker image, called peptimapper (see dockerfile into Additional file 5), to allow easier distribution and interoperability of Ectoline scripts. Anyone can retrieve this image from a public repository and run it as a package without any specific configuration or installation requirements. This package contains all workflow components (Fig. <ref type="figure">2</ref>), along with dependencies and running environment. We use two different cloud-based public registry services for storing and distributing our Docker image: the Docker Hub (https:// hub.docker.com/r/dockerprotim/peptimapper/) and Bio ShaDock <ref type="bibr" target="#b47">[48]</ref>, a public curated and bioinformaticsfocused repository (https://docker-ui.genouest.org/app/ #/container/dockerprotim/peptimapper). In the context of this project, every computational tool for each step of the overall workflow was integrated and deployed on our own Galaxy server https://galaxy.protim.eu, using this Docker image (see Additional file 5). Our workflow  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Discussion</head><p>Most sequence-centric proteogenomics available pipelines are based on the generation of customized protein databases from genome, exome, or RNA sequencing to, e.g. reannotate genes, predict splice isoforms or discover novel proteins, using classical database-driven methods <ref type="bibr" target="#b6">[7]</ref><ref type="bibr" target="#b7">[8]</ref><ref type="bibr" target="#b8">[9]</ref>. These methods are based on a direct comparison between experimental MS/MS spectra and theoretical MS/MS spectra generated from in silico digestion of these customized protein databases. A major advantage of such approaches is the specificity of the databases, including variations such as single amino acid variants (SAAVs) and alternative splice junctions. However, one of their weaknesses is the size of these databases, larger than those used in conventional proteomic searches and containing only known proteins. Consequently, it requires iterative search strategies and a specific FDR calculation to be sensitive enough to avoid false positive identifications <ref type="bibr" target="#b6">[7]</ref>. Peptimapper overcomes this statistical drawback by first partially interpreting MS experimental spectra before mapping them onto the translated genome. Other similar pipelines currently exist that map MS-based proteomics data onto genomic coordinates as the Proteogenomic Mapping Tool <ref type="bibr" target="#b50">[51]</ref>, proteoAnnotator <ref type="bibr" target="#b51">[52]</ref>, PGMiner <ref type="bibr" target="#b52">[53]</ref>, Protk (https://github.com/iracooke/ protk), IggyPep <ref type="bibr" target="#b53">[54]</ref>, or PepLine <ref type="bibr" target="#b17">[18]</ref> (Table <ref type="table" target="#tab_1">2</ref>). However, for most of these pipelines, peptides are derived from database-driven methods, except for IggyPep and PepLine that also use de novo Peptide Sequence Tags (PSTs) obtained from partial interpretation of mass spectrometry data. Unfortunately, PepLine and IggyPep are neither maintained nor available anymore. Another crucial step mentioned into the review by A. Nesvizhskii <ref type="bibr" target="#b6">[7]</ref> is the confidence degree for results. Validation and cura\tion steps are not always integrated into existing proteogenomics pipelines. Peptimapper provides results annotated with quality criteria (e.g. minimal number of typical spectra by cluster) and visualizable through a genome browser for manual inspection purposes.</p><p>The high number of data processing steps that compose a proteogenomics analysis do not make the strategy  <ref type="table" target="#tab_1">2</ref>, are implemented for proteogenomics analysis and well used for many projects <ref type="bibr" target="#b54">[55]</ref><ref type="bibr" target="#b55">[56]</ref><ref type="bibr" target="#b56">[57]</ref><ref type="bibr" target="#b57">[58]</ref><ref type="bibr" target="#b58">[59]</ref>. Interestingly, through a Galaxy framework, Peptimapper is the only pipeline today that uses a complementary de novo approach that has been also proved to be efficient in finding new genes and in the discovery of refinement of intron/exon boundaries.</p><p>According to the important criteria we mentioned above a comparison of available pipelines is presented Table <ref type="table" target="#tab_1">2</ref> based on these functionalities, i.e., database-driven for peptide identification or de novo peptide interpretation, then mapping onto the translated genomic sequence; pipeline interface; user-friendly for biologists; results curation; results visualization. By re-using and improving PepLine former modules, our pipeline extends the process by providing the users with new functionalities, thus meeting the important criteria and being as complete as possible: i) It is compatible with ion trap mass spectrometry data; ii) it allows quality annotation of results and their visualization through a genome browser; and iii) it makes the workflow easily accessible through the Galaxy framework <ref type="bibr" target="#b48">[49,</ref><ref type="bibr" target="#b49">50]</ref>.</p><p>Annotation of the Ectocarpus sp. genome has become remarkably more accurate through the application of extensive RNA sequencing approaches and new informatics tools <ref type="bibr" target="#b59">[60]</ref>. Similarly, the EctoGEM metabolic network has been considered to complement annotations within the Ectocarpus sp. genome database to support the understanding of metabolic networks in this organism <ref type="bibr" target="#b45">[46]</ref>. The problems caused by many features of the Ectocarpus sp. genome (high number of introns per gene, extended 3'UTR, short intergenic regions) can be alleviated by accurate annotation through the use of the proteogenomics approach developed in this study.</p><p>RT-PCR experiments combined with transcriptomic data (available on ORCAE website) allowed us to confirm the predictions, validate two new genes (RPL22, AST), and correct one gene model (Dihydrolipoamide acetyltransferase), all corresponding to clusters obtained by our combined approach of proteomics and bioinformatics. Crossing the data generated by our bioinformatics workflow for another cluster (cluster B) with transcriptomic data allowed us to identify an alternative ATG start codon of a gene encoding a nucleoside diphosphate kinase. This finding suggests that there may be two alternative ATGs for this gene. Such a result shows that direct mapping of MS/MS data to genomic information provides a valuable approach to complement automatic annotation.</p><p>The methodological development focused on: i) workflow development and the optimization of parameters to apply it to all our 'sub-proteome' MS/MS datasets and ii) the search for the best qualifying criteria to sort clusters according to specific aims (e.g., re-annotation, identification of small ORFs in the 3'UTR, etc.).</p><p>Parameter adjustment is based both on MS/MS spectra and genomic features. Fine-tuning appears to be an important step and configuration workflow settings are now available for organisms with gene characteristics similar to those of our test case. Here, we only focused on a few results. Indeed, many other identified clusters should be of potential biological interest. Sixteen additional clusters are currently under investigation in our laboratory by combining proteomics with new developments in transcriptomics <ref type="bibr" target="#b59">[60]</ref>: nine potential new protein-coding genes are yet to be confirmed, and seven exonic models and one ATG model may need correcting (Table <ref type="table" target="#tab_3">3</ref>; Additional file 6).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Future studies</head><p>Recently, extensive RNA-seq data were used to improve 11,108 existing gene models and identify 2030 new Ectocarpus sp. protein-coding genes <ref type="bibr" target="#b59">[60]</ref>. New data available in public databases has advanced functional annotation associated with protein-coding genes. To date, 61% of genes now have a functional assignment, compared to 34% in the V1 annotation <ref type="bibr" target="#b59">[60]</ref> we used in our workflow. We are now applying our workflow, tailored for this organism, using the most recent Ectocarpus sp. genome annotation (http://bioinformatics.psb.ugent.be/orcae/overview/EctsiV2). In the future, we will analyze short ORFs, focusing on small clusters corresponding to gene models ≤ 150 nucleotides. In such a study, the proteogenomics approach is a clear asset to confirm whether some small transcripts are translated.</p><p>We also successfully tested Peptimapper using MS data produced by a mass spectrometer of the latest generation (i.e., Q Exactive™ HF, ThermoFisher Scientific), currently used to analyze another organism (i.e., Homo sapiens) and other MS data analysis software (i.e., Mascot Distiller V2.6; software supported by a more recent version of the Mascot server v2.5.1; http:// www.matrixscience.com) to create MGF. This shows that Peptimapper is fully adaptable to the most recent MS instruments and MS analysis software and is relevant to study other eukaryotic organisms.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Conclusions</head><p>In addition to improving annotation of the Ectocarpus sp. genome and gaining new knowledge about its proteome, our objective was to provide an accessible, efficient, and flexible tool to the annotation community that is easily configurable according to the species of interest. Thus, genome sequence and GFF3 files must be available for the organism of interest to display genome features. The workflow is available as a Docker image or interfaced with our Galaxy platform (see Additional file 5), enabling web access to users with non-programming experience to easily run it in a transparent and reproducible way. </p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Fig. 3 a</head><label>3</label><figDesc>Fig.3a Mapping step testing method. Predicted proteins matched by PSTs were compared to the expected proteins, identified by conventional database spectral identifications, using the same spectra and protein sequences database (ORCAE). b Definition of the cluster exon-mapping categories according to their mRNA locations (Ectocarpus sp. GFF3 files, ORCAE): IN when clusters were located inside an mRNA feature, OUT when clusters were located outside an mRNA feature, and CROSS when clusters were located across an mRNA feature. c Clustering step testing method. We only used the green dataset. The number of predicted proteins (matched by IN and CROSS clusters) was compared to that of expected proteins identified with Proteome Discoverer™ using the Ectocarpus sp. database (ORCAE)</figDesc><graphic coords="6,63.84,94.85,467.66,253.59" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head></head><label></label><figDesc>Peaks and PepNovo+, using Proteome Discoverer ™ peptide identifications as the expected sequencesThe Peaks and Pepnovo + results are shown in the first and the last columns, with the Proteome Discoverer ™ identifications in between as reference sequences. We ran Peaks, PepNovo+, and Proteome Discoverer ™ on the top 10 high-quality selected spectra. Each spectrum corresponds to one row in the table. Sequences shown in bold are the correct sequences, thus four for Peaks and eight for PepNovo+</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Fig. 4</head><label>4</label><figDesc>Fig. 4 Sensitivity and selectivity were calculated for each dataset. Sensitivity measures the proportion of positives that are correctly identified by clusters and selectivity is the proportion of positives that are correctly identified among all proteins matched by clusters. a Selectivity and sensitivity for each reference dataset with MINHIT = 1. b Selectivity and sensitivity for each reference dataset with MINHIT = 2. c Selectivity and sensitivity for each reference dataset with MINHIT = 2 and one amino acid modification allowed</figDesc><graphic coords="10,155.68,94.85,283.87,586.83" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Fig. 5 aFig. 6 a</head><label>56</label><figDesc>Fig. 5 a Percentage of clusters qualified as IN, OUT, or CROSS with respect to predicted gene locations from Ectocarpus sp. GFF3 files (ORCAE). b The number of proteins (matched by IN and CROSS clusters) relative to the number of expected proteins (identified with Proteome Discoverer™) allowed the calculation of sensitivity and selectivity. Sensitivity measures the proportion of positives that are correctly identified by IN or CROSS clusters. Selectivity corresponds to the proportion of positives that are correctly identified among all proteins matched by IN or CROSS clusters</figDesc><graphic coords="11,63.84,94.85,467.66,145.42" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Fig. 7 aFig. 8 a</head><label>78</label><figDesc>Fig. 7 a Artemis view of cluster "A" for validation. Ectocarpus sp. genes close to these clusters are represented by linear exons colored in yellow. Another representation of the same exons is shown in light blue along the six reading frames (+ 1, + 2, + 3 above and -1, -2, -3 below). The cluster is indicated by black bold rectangles around the small rectangles of the PSTs. b Data for cluster "A". c Experimental validation conditions. d RT-PCR validation: agarose gel electrophoresis of RT-PCR products (lane 1), RNA-PCR negative controls (lane 2), and DNA size marker (lane 3) for PST cluster "A"</figDesc><graphic coords="12,63.84,94.85,467.66,228.19" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Fig. 9 a</head><label>9</label><figDesc>Fig. 9 a Artemis view of cluster "C" for validation. Ectocarpus sp. genes close to these clusters are represented by linear exons colored in yellow. Another representation of the same exons is shown in light blue along the six reading frames (+ 1, + 2, + 3 above and -1, -2, -3 below). The cluster is indicated by black bold rectangles around the small rectangles of the PSTs. b Data for cluster "C". c Experimental validation conditions. d RT-PCR validation: agarose gel electrophoresis of RT-PCR products (lane 1), RNA-PCR negative controls (lane 2), and DNA size marker (lane 3) for PST cluster "C"</figDesc><graphic coords="13,63.84,410.23,467.66,262.83" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Fig. 10 a</head><label>10</label><figDesc>Fig. 10 a ARTEMIS view of cluster "D" for validation. Ectocarpus sp. genes close to these clusters are represented by linear exons colored in yellow. Another representation of the same exons is shown in light blue along the six reading frames (+ 1, + 2, + 3 above and -1, -2, -3 below). The cluster is indicated by black bold rectangles around the small rectangles of the PSTs. b Cluster "D" data. c Experimental validation conditions. d RT-PCR and EST validation: agarose gel electrophoresis of RT-PCR products (lane 1), RNA-PCR negative controls (lane 2), and DNA size marker (lane 3) for PST cluster "D"</figDesc><graphic coords="14,63.84,94.85,467.66,315.10" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head></head><label></label><figDesc>MGF: Mascot Generic File; MS: Mass spectrometry; NES: Nuclear export signal; NF: Nuclear proteome fraction; NLS: Nuclear localization signal; PCR: Polymerase chain reaction; PST: Peptide sequence tag; RAM: Random access memory; SAAV: Single amino acid variant; SP: Secretory pathway</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="3,63.84,308.30,467.66,314.76" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="4,63.84,595.28,467.66,117.75" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1</head><label>1</label><figDesc>Comparison of tag quality between</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 2</head><label>2</label><figDesc>Eukaryotic proteogenomics pipelines and Galaxy workflows</figDesc><table><row><cell>Name</cell><cell>Pipeline</cell><cell>Database-</cell><cell>de novo</cell><cell>User-</cell><cell>Results</cell><cell>Results</cell><cell>Description</cell><cell>Revelance</cell></row><row><cell></cell><cell>Interface</cell><cell>driven for</cell><cell>peptide</cell><cell>friendly</cell><cell>curation</cell><cell>visuali-</cell><cell></cell><cell></cell></row><row><cell></cell><cell></cell><cell>peptide</cell><cell>inter-</cell><cell>for</cell><cell></cell><cell>zation</cell><cell></cell><cell></cell></row><row><cell></cell><cell></cell><cell>identifi-</cell><cell>pretation</cell><cell>biologists</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell></cell><cell>cation</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Peptimapper</cell><cell>Command</cell><cell>-</cell><cell>√</cell><cell>√</cell><cell>√</cell><cell>√</cell><cell>Peptide Sequence Tags (PSTs) obtained from</cell><cell>Improves genome</cell></row><row><cell>(released in 2018)</cell><cell>line, Docker</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>partial interpretation of ion trap mass spectra are</cell><cell>annotation</cell></row><row><cell></cell><cell>image,</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>mapped onto the six-frame translation of gen-</cell><cell></cell></row><row><cell></cell><cell>Galaxy tools</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>omic sequences giving hits. Hits are then clus-</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>tered to detect potential coding regions. Clusters</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>are evaluated and further compared to existing</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>gene predictions. Clusters are available as GFF file</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>to be uploaded into a genome viewer. https://</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>galaxy.protim.eu https://hub.docker.com/r/dock-</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>erprotim/peptimapper/ or https://docker-ui.gen-</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>ouest.org/app/#/container/dockerprotim/pepti-</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>mapper https://github.com/laeticlo/Ectoline</cell><cell></cell></row><row><cell>IPAW (2018) [61]</cell><cell>Command</cell><cell>√</cell><cell>-</cell><cell>-</cell><cell>√</cell><cell>-</cell><cell>This is an Integrated Proteomics Analysis</cell><cell>Identification of</cell></row><row><cell></cell><cell>line</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Workflow: i) Peptide spectra are searched in two</cell><cell>Pseudogenes,</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>different databases in parallel: VarDB filtered by</cell><cell>lncRNAs, nsSNPs</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>class-specific FDR for SAAV peptides and 6FT of</cell><cell>and somatic</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>the human genome filtered by peptides pI. ii)</cell><cell>mutations</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>SAAV candidates are curated by SpectrumAI and</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>potential novel proteins are blasted onto public</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>databases. ii) Curated results are validated by dif-</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>ferent controls. https://github.com/yafeng/</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>proteogenomics_python</cell><cell></cell></row><row><cell>JUMPg (2016) [62]</cell><cell>Command</cell><cell>√</cell><cell>-</cell><cell>-</cell><cell>√</cell><cell>√</cell><cell>This pipeline includes multiple customized</cell><cell>Improves genome</cell></row><row><cell></cell><cell>line</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>databases construction, tag-based database</cell><cell>annotation</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>search, peptide-spectrum match filtering, ans</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>data visualization. https://github.com/gatechatl/</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>JUMPg/</cell><cell></cell></row><row><cell>PGMiner (2016) [63]</cell><cell>Command</cell><cell>√</cell><cell>-</cell><cell>-</cell><cell>√</cell><cell>√</cell><cell>This workflow allows acquisition of mass</cell><cell>Improves genome</cell></row><row><cell></cell><cell>line</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>spectrometric data, peptide identification against</cell><cell>annotation</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>preprocessed sequence databases, assignment of</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>statistical confidence to identified peptides, and</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>mapping confident peptides to gene models.</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>https://github.com/olalonde/pgtools</cell><cell></cell></row><row><cell>PROTEO-FORMER</cell><cell>Command</cell><cell>√</cell><cell>-</cell><cell>√</cell><cell>√</cell><cell>√</cell><cell>RIBO-seq NGS data are processed to delineates</cell><cell>Identification of</cell></row><row><cell>(2015) [64]</cell><cell>line, Virtual</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>proteoforms. RIBO-seq-derived sequences are</cell><cell>novel translation</cell></row><row><cell></cell><cell>machine,</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>then translated and mapped to a public data-</cell><cell>products</cell></row><row><cell></cell><cell>Galaxy tools</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>base, creating a custom search database for pep-</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>tides to MS/MS matching.</cell><cell></cell></row><row><cell>PGTools (2015) [65]</cell><cell>Command</cell><cell>√</cell><cell>-</cell><cell>-</cell><cell>√</cell><cell>√</cell><cell>The software is divided into 2 phases: Phase 1</cell><cell>Improves genome</cell></row><row><cell></cell><cell>line</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>contains 8 modules to analyse MS/MS data using</cell><cell>annotation</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>known proteins databases. Phase 2 contains 5</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>modules and 7 customized databases that allow</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>MS/MS data to be analysed against the genome.</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>That software includes applications, libraries,</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>customized databases and visualization tools.</cell><cell></cell></row><row><cell cols="2">NextSearch (2015) [66] Command</cell><cell>-</cell><cell>-</cell><cell>-</cell><cell>√</cell><cell>√</cell><cell>Nucleotide EXon-graph Transcriptome Search</cell><cell>Improves genome</cell></row><row><cell></cell><cell>line</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>identifies peptides by directly searching the nu-</cell><cell>annotation</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>cleotide exon graph against tandem mass spec-</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>tra. NextSearch outputs which are the proteome-</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>genome/transcriptome mapping that can be vi-</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>sualized using public tools.</cell><cell></cell></row><row><cell>ProteoAnnotator (2014)</cell><cell>Command</cell><cell>√</cell><cell>-</cell><cell>√</cell><cell>√</cell><cell>√</cell><cell>MS spectrum are queried by one or several</cell><cell>Improves genome</cell></row><row><cell>[52]</cell><cell>line, Stand</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>proteomics databases search engines (MASCOT,</cell><cell>annotation</cell></row><row><cell></cell><cell>alone</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>OMSSA, X!Tandem or MSGF+) and results are</cell><cell></cell></row><row><cell></cell><cell>application</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>converted into GFF adding genome coordinates</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>and statistical confidence values. It exports</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>mzIdentML files.</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>http://www.proteoannotator.org</cell><cell></cell></row><row><cell>Peppy (2013) [67]</cell><cell>Command</cell><cell>√</cell><cell>-</cell><cell>N/A</cell><cell>√</cell><cell>-</cell><cell>This workflow generates a peptide database</cell><cell>Improves genome</cell></row><row><cell></cell><cell>line, Stand</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>from a genome, tracks peptide loci, matches</cell><cell>annotation</cell></row><row><cell></cell><cell>alone</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>peptides to MS/MS spectra and assigns FDR</cell><cell></cell></row><row><cell></cell><cell>application</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>confidence values to those matches.</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>http://geneffects.com/peppy</cell><cell></cell></row><row><cell cols="2">Protk (released in 2012) Command</cell><cell>√</cell><cell>-</cell><cell>√</cell><cell>-</cell><cell>√</cell><cell>It is a suite of tools for proteomics providing the</cell><cell>Improves genome</cell></row><row><cell></cell><cell>line, Galaxy</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>following analysis tasks: (i) MS/MS data search</cell><cell>annotation</cell></row><row><cell></cell><cell>tools</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>with X!Tandem, Mascot, OMSSA and MS-GF+; (ii)</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>peptide and protein inference with Peptide</cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 2</head><label>2</label><figDesc>Eukaryotic proteogenomics pipelines and Galaxy workflows (Continued)</figDesc><table><row><cell>Name</cell><cell>Pipeline</cell><cell>Database-</cell><cell>de novo</cell><cell>User-</cell><cell>Results</cell><cell>Results</cell><cell>Description</cell><cell>Revelance</cell></row><row><cell></cell><cell>Interface</cell><cell>driven for</cell><cell>peptide</cell><cell>friendly</cell><cell>curation</cell><cell>visuali-</cell><cell></cell><cell></cell></row><row><cell></cell><cell></cell><cell>peptide</cell><cell>inter-</cell><cell>for</cell><cell></cell><cell>zation</cell><cell></cell><cell></cell></row><row><cell></cell><cell></cell><cell>identifi-</cell><cell>pretation</cell><cell>biologists</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell></cell><cell>cation</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Prophet, iProphet and Protein Prophet; (iii) con-</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>version of pepXML or protXML to tabular format,</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>and (iv) mapping of peptides to genomic coordi-</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>nates https://github.com/iracooke/protk</cell><cell></cell></row><row><cell>IggyPep (2010) [54]</cell><cell>Web</cell><cell>√</cell><cell>√</cell><cell>N/A</cell><cell>-</cell><cell>-</cell><cell>The pipeline is based on a database system with</cell><cell>Improves genome</cell></row><row><cell></cell><cell>interface</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>advanced indexing and querying strategy, which</cell><cell>annotation</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>holds the translated genome in all six reading</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>frames. It can be queried with de novo</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>sequences or partial peptide sequence tags</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>(PSTs). It determines the ORF amino acid</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>comprising these tags and compiles a fasta-</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>formated sequence file for a database-driven</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>search. www.iggypep.org (No more accessible)</cell><cell></cell></row><row><cell>PepLine (2008) [18]</cell><cell>Command</cell><cell>-</cell><cell>√</cell><cell>N/A</cell><cell>√</cell><cell>-</cell><cell>Peptide Sequence Tags (PSTs) obtained from</cell><cell>Improves genome</cell></row><row><cell></cell><cell>line</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>partial interpretation of QTOF mass spectra are</cell><cell>annotation</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>mapped onto the six-frame translation of gen-</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>omic sequences giving hits. Hits are then clus-</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>tered to detect potential coding regions.</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>www.grenoble.prabi.fr/protehome/software/</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>pepline (no more accessible)</cell><cell></cell></row><row><cell>Workflows for</cell><cell cols="2">Galaxy tools √</cell><cell>-</cell><cell>√</cell><cell>√</cell><cell>√</cell><cell>Galaxy Integrated Omics (GIO) provides</cell><cell>Improves genome</cell></row><row><cell>Proteomics Informed</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>workflows for 4 common use cases: i) a standard</cell><cell>annotation</cell></row><row><cell>by Transcriptomics</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>search against a reference proteome; ii) PIT</cell><cell></cell></row><row><cell>(2015) [57]</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>protein identification without a reference</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>genome; iii) PIT protein identification using a</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>genome guide; iiii) and PIT genome annotation.</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>http://gio.sbcs.qmul.ac.uk</cell><cell></cell></row><row><cell>Workflows for</cell><cell cols="2">Galaxy tools √</cell><cell>-</cell><cell>√</cell><cell>√</cell><cell>√</cell><cell>These modular workflows incorporating both</cell><cell>Improves genome</cell></row><row><cell>proteogenomics</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>established and customized software tools that</cell><cell>annotation</cell></row><row><cell>studies using Galaxy-P</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>improve depth and quality of proteogenomic</cell><cell></cell></row><row><cell>(2014-2018) [55, 56, 58,</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>results. http://galaxyp.org</cell><cell></cell></row><row><cell>59]</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 3</head><label>3</label><figDesc>Additional clusters currently under investigationIdentification of the clusters was obtained by Blast analysis. The contig and genetic map data correspond to the Ectocarpus sp. v1 genome annotation, showing supercontigs (sctg) and linkage groups (LG), respectively. Strain refers to the Ectocarpus sp. strain that was the origin of the protein samples. Action refers to the proposed correction of the current gene annotation according to the newly incorporated RNA data in the browser (RNA sequencing and ESTs) see Additional file 6</figDesc><table><row><cell>Cluster</cell><cell>Contig</cell><cell cols="2">Strand From</cell><cell>To</cell><cell>Strain Tot</cell><cell>RNA data</cell><cell>Genetic</cell><cell>Action</cell><cell>Identification</cell></row><row><cell>ID</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>pep</cell><cell></cell><cell>map</cell><cell></cell></row><row><cell>113</cell><cell cols="2">sctg_117 D</cell><cell cols="3">265421 281797 EC494 10</cell><cell>ESTs</cell><cell>LGUn</cell><cell>probable new gene</cell><cell>Esi0117_0046 similar sequence</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>+RNAseq</cell><cell></cell><cell></cell></row><row><cell>179</cell><cell cols="2">sctg_136 D</cell><cell cols="3">16590 18641 EC494 3</cell><cell>ESTs</cell><cell>LG16</cell><cell>Esi0136_0001 model</cell><cell>Ferredoxin</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>+RNAseq</cell><cell></cell><cell>correction</cell></row><row><cell>750</cell><cell cols="2">sctg_346 D</cell><cell cols="3">52096 53724 EC494 3</cell><cell>RNAseq</cell><cell>LG15</cell><cell>Esi0346_0010 model</cell><cell>Esi0003_0041 similar sequence</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>correction</cell></row><row><cell>1034</cell><cell>sctg_6</cell><cell>D</cell><cell cols="3">824608 831877 EC494 3</cell><cell>RNAseq</cell><cell>LG04</cell><cell>Esi0006_0137 model</cell><cell>Conserved unknown protein</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>correction</cell></row><row><cell>1056</cell><cell cols="2">sctg_62 D</cell><cell cols="3">30800 38368 EC494 9</cell><cell>RNAseq</cell><cell>LG16</cell><cell>Esi0062_0006 model</cell><cell>Hypothetical protein</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>correction</cell></row><row><cell>1072</cell><cell cols="2">sctg_634 D</cell><cell cols="3">21444 27984 EC494 3</cell><cell>ESTs</cell><cell>LGUn</cell><cell>probable new gene</cell><cell>none</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>+RNAseq</cell><cell></cell><cell></cell></row><row><cell>1154</cell><cell cols="2">sctg_77 D</cell><cell cols="3">414499 420533 EC494 3</cell><cell>No data</cell><cell>LGUn</cell><cell>probable new gene</cell><cell>none</cell></row><row><cell>120</cell><cell cols="2">sctg_123 R</cell><cell cols="3">77652 82101 Ec32 4</cell><cell>RNAseq</cell><cell>LG08</cell><cell>probable new gene</cell><cell>none</cell></row><row><cell>220</cell><cell cols="2">sctg_150 D</cell><cell cols="3">399071 404913 Ec32 3</cell><cell>No data</cell><cell>LG11</cell><cell>probable new gene</cell><cell>none</cell></row><row><cell>777</cell><cell cols="2">sctg_43 R</cell><cell cols="3">146476 147692 Ec32 3</cell><cell>RNAseq</cell><cell>LG03</cell><cell>Esi0043_0035 model</cell><cell>Catalase</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>correction</cell></row><row><cell>822</cell><cell cols="2">sctg_48 R</cell><cell cols="3">267223 267911 Ec32 5</cell><cell>RNAseq</cell><cell>LG23</cell><cell>Esi0048_0051 model</cell><cell>Hypothetical protein</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>correction</cell></row><row><cell>492</cell><cell cols="2">sctg_253 D</cell><cell cols="3">215846 216917 Ec32 3</cell><cell>RNAseq</cell><cell>LGUn</cell><cell>probable new gene</cell><cell>none</cell></row><row><cell>567</cell><cell cols="2">sctg_291 R</cell><cell cols="3">60813 65620 Ec32 3</cell><cell>RNAseq</cell><cell>LG03</cell><cell>Esi0291_0011 model</cell><cell>mTERF domain-containing</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>correction</cell><cell>protein</cell></row><row><cell>618</cell><cell cols="2">sctg_310 D</cell><cell cols="3">63974 71773 Ec32 3</cell><cell>RNAseq</cell><cell>LGUn</cell><cell>probable new gene</cell><cell>none</cell></row><row><cell>697</cell><cell cols="2">sctg_365 R</cell><cell cols="3">137829 143627 Ec32 3</cell><cell>RNAseq</cell><cell>LGUn</cell><cell>probable new gene</cell><cell>none</cell></row><row><cell>218</cell><cell cols="2">sctg_87 R</cell><cell cols="3">471174 478804 Ec410 3</cell><cell>No data</cell><cell>LG26</cell><cell>probable new gene</cell><cell>Retrotransposon integrase-like</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>protein</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" xml:id="foot_0"><p>Available Eukaryotic Proteogenomics pipelines are listed in https://omictools.com/proteogenomics-category. We only selected software types "pipeline/workflow" or "Toolkit/Suite" for comparison to our pipeline. Proteogenomics Galaxy workflows<ref type="bibr" target="#b48">[49,</ref><ref type="bibr" target="#b49">50]</ref> are added at the end of the table</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>Acknowledgements</head><p>We are grateful to <rs type="person">Laurence Dartevelle</rs> and <rs type="person">Susana Coelho</rs> for the production of unialgal Ec 32, Ec 410 and mutant oro of Ectocarpus. <rs type="person">Rachel Lefevre</rs> who participates to the elaboration of the protocols to obtain soluble, membrane and cell wall proteins. We thank the <rs type="institution">GenOuest bioinformatics facility</rs>, in particular <rs type="person">Anthony Bretaudeau</rs> and <rs type="person">Cyril Monjeaud</rs> for helping with Peptimapper Galaxy integration.</p></div>
+			</div>
+			<div type="funding">
+<div><head>Funding</head><p>This work was supported by the <rs type="funder">French National Research Agency</rs> via the investment expenditure programme <rs type="projectName">IDEALG</rs> (<rs type="grantNumber">ANR-10-BTBR-04-02</rs>). This work was conducted at the PROTIM core facility (https://www.protim.eu) and supported by grants from <rs type="funder">Biogenouest, Infrastructures en Biologie Santé et Agronomie (IBiSA)</rs> and <rs type="funder">Conseil Régional de Bretagne</rs> awarded to C.P.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funded-project" xml:id="_JQVAqK2">
+					<idno type="grant-number">ANR-10-BTBR-04-02</idno>
+					<orgName type="project" subtype="full">IDEALG</orgName>
+				</org>
+			</listOrg>
+
+			<div type="availability">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Availability and requirements</head><p>Project name: Ectoline Project home page: https://github.com/laeticlo/Ectoline Operating system(s): this distribution contains sources and pre-compiled binaries for Linux, and MacOSX platform Licence: GPL license or under the CECILL licence Ectoline Docker image name: peptimapper Docker hub repository: http://hub.docker.com/r/dockerprotim/peptimapper/ Docker bioshadock repository: https://docker-ui.genouest.org/app/#/container/dockerprotim/peptimapper Galaxy platform: https://galaxy.protim.eu/ Availability of data and materials The datasets used and/or analysed during the current study are available from the corresponding author on reasonable request.</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Additional files</head><p>Authors' contributions AR and DM: prepared E. sp. protein sub-proteome fractions. LD: performed RT-PCR experiments, bioinformatic cluster validation and predictions of protein localization and wrote the manuscript. PPotin: participated in the research design, data analysis and manuscript editing. LG: designed and performed bioinformatics workflow optimization and adaptation, analysis, integration into Galaxy and Docker developpement and wrote the manuscript. AV and YV: performed workflow pepLine optimization and adaptation and manuscript editing. PPeterlongo: performed PepNovo+ adaptation. EC and RL: performed proteomics MS analyses and manuscript editing. CP designed and coordinated the research and wrote the manuscript. All authors have read and approved the final manuscript.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Ethics approval and consent to participate Not applicable</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Consent for publication Not applicable</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Competing interests</head><p>The authors declare that they have no competing interests.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Publisher's Note</head><p>Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Proteogenomics</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Pandey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">A</forename><surname>Pevzner</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proteomics</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">23-24</biblScope>
+			<biblScope unit="page" from="2631" to="2632" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Mass spectrometry at the interface of proteomics and genomics</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Krug</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Nahnsen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Macek</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol BioSyst</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="284" to="291" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Proteogenomic mapping as a complementary method to perform genome annotation</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">D</forename><surname>Jaffe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">C</forename><surname>Berg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">M</forename><surname>Church</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proteomics</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="59" to="77" />
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Reannotation of genomes by means of proteomics data</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Armengaud</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Methods Enzymol</title>
+		<imprint>
+			<biblScope unit="volume">585</biblScope>
+			<biblScope unit="page" from="201" to="216" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Proteogenomic methods to improve genome annotation</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">K</forename><surname>Datta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">K</forename><surname>Madugundu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Gowda</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Methods Mol Biol</title>
+		<imprint>
+			<biblScope unit="volume">1410</biblScope>
+			<biblScope unit="page" from="77" to="89" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Mass spectrometry allows direct identification of proteins in large genomes</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Kuster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Mortensen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">S</forename><surname>Andersen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mann</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proteomics</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="641" to="650" />
+			<date type="published" when="2001">2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Proteogenomics: concepts, applications and computational strategies</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">I</forename><surname>Nesvizhskii</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Methods</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="issue">11</biblScope>
+			<biblScope unit="page" from="1114" to="1125" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Proteogenomics from a bioinformatics angle: a growing field</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Menschaert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Fenyo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mass Spectrom Rev</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="584" to="599" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Methods, tools and current perspectives in proteogenomics</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">V</forename><surname>Ruggles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Krug</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">R</forename><surname>Clauser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">H</forename><surname>Payne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Fenyo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">R</forename><surname>Mani</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol Cell Proteomics</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="959" to="981" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Error-tolerant identification of peptides in sequence databases by peptide sequence tags</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Wilm</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Anal Chem</title>
+		<imprint>
+			<biblScope unit="volume">66</biblScope>
+			<biblScope unit="issue">24</biblScope>
+			<biblScope unit="page" from="4390" to="4399" />
+			<date type="published" when="1994">1994</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Mining genomes: correlating tandem mass spectra of modified and unmodified peptides to sequences in nucleotide databases</title>
+		<author>
+			<persName><surname>Yates Jr 3rd</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">K</forename><surname>Eng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">L</forename><surname>Mccormack</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Anal Chem</title>
+		<imprint>
+			<biblScope unit="volume">67</biblScope>
+			<biblScope unit="issue">18</biblScope>
+			<biblScope unit="page" from="3202" to="3210" />
+			<date type="published" when="1995">1995</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Gene model detection using mass spectrometry</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Nanduri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">L</forename><surname>Lawrence</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Bridges</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">C</forename><surname>Burgess</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Methods Mol Biol</title>
+		<imprint>
+			<biblScope unit="volume">604</biblScope>
+			<biblScope unit="page" from="137" to="144" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Genome annotation of Anopheles gambiae using mass spectrometryderived data</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">E</forename><surname>Kalume</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Peri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Reddy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zhong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Okulate</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Pandey</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Genomics</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page">128</biblScope>
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Integrated transcriptomicproteomic analysis using a proteogenomic workflow refines rat genome annotation</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">K</forename><surname>Yadav</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Jia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Mulvenna</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Dash</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol Cell Proteomics</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="329" to="339" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Forty-four novel protein-coding loci discovered using a proteomics informed by transcriptomics (PIT) approach in rat male germ cells</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Chocu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Evrard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Lavigne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">D</forename><surname>Rolland</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Aubry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Jegou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Chalmel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Pineau</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Biol Reprod</title>
+		<imprint>
+			<biblScope unit="volume">91</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page">123</biblScope>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Improving GENCODE reference gene annotation using a high-stringency proteogenomics workflow</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">C</forename><surname>Wright</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Mudge</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Weisser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">P</forename><surname>Barzine</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Gonzalez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Brazma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">S</forename><surname>Choudhary</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Harrow</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Commun</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page">11778</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Plant proteogenomics: from protein extraction to improved gene predictions</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Chapman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Castellana</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Apffel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Ghan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">R</forename><surname>Cramer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Bellgard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">A</forename><surname>Haynes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Van</forename><surname>Sluyter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">C</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Methods Mol Biol</title>
+		<imprint>
+			<biblScope unit="volume">1002</biblScope>
+			<biblScope unit="page" from="267" to="294" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">PepLine: a software pipeline for high-throughput direct mapping of tandem mass spectrometry data on genomic sequences</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ferro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Tardif</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Reguer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Cahuzac</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Bruley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Vermat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Nugues</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Vigouroux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Vandenbrouck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Garin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Proteome Res</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="1873" to="1883" />
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Discovery and revision of Arabidopsis genes by proteogenomics</title>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">E</forename><surname>Castellana</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">H</forename><surname>Payne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Shen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Stanke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Bafna</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">P</forename><surname>Briggs</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proc Natl Acad Sci U S A</title>
+		<imprint>
+			<biblScope unit="volume">105</biblScope>
+			<biblScope unit="issue">52</biblScope>
+			<biblScope unit="page" from="21034" to="21038" />
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Proteogenomic analysis of mycobacterium smegmatis using high resolution mass spectrometry</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">G</forename><surname>Potgieter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">C</forename><surname>Nakedi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Ambler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">J</forename><surname>Nel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Garnett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">C</forename><surname>Soares</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Mulder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Blackburn</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Front Microbiol</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page">427</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Proteogenomics for environmental microbiology</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Armengaud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">M</forename><surname>Hartmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Bland</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proteomics</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="issue">18-19</biblScope>
+			<biblScope unit="page" from="2731" to="2742" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Alliance of proteomics and genomics to unravel the specificities of Sahara bacterium Deinococcus deserti</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>De Groot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Dulermo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Ortet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Blanchard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Guerin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Fernandez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Vacherie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Dossat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Jolivet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Siguier</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLoS Genet</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page">1000434</biblScope>
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Identification of new protein coding sequences and signal peptidase cleavage sites of helicobacter pylori strain 26695 by proteogenomics</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">A</forename><surname>Muller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Findeiss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">R</forename><surname>Pernitzsch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">K</forename><surname>Wissenbach</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">F</forename><surname>Stadler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">L</forename><surname>Hofacker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Von Bergen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kalkhof</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Proteome</title>
+		<imprint>
+			<biblScope unit="volume">86</biblScope>
+			<biblScope unit="page" from="27" to="42" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Proteogenomic analysis of bacteria and archaea: a 46 organism case study</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Venter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">D</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">H</forename><surname>Payne</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLoS One</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="issue">11</biblScope>
+			<biblScope unit="page">27587</biblScope>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Nonmodel organisms, a species endangered by proteogenomics</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Armengaud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Trapp</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Pible</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Geffard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Chaumot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">M</forename><surname>Hartmann</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Proteome</title>
+		<imprint>
+			<biblScope unit="volume">105</biblScope>
+			<biblScope unit="page" from="5" to="18" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">PepNovo: de novo peptide sequencing via probabilistic network modeling</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Frank</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Pevzner</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Anal Chem</title>
+		<imprint>
+			<biblScope unit="volume">77</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="964" to="973" />
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Artemis: an integrated platform for visualization and analysis of high-throughput sequence-based experimental data</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Carver</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">R</forename><surname>Harris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Berriman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Parkhill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Mcquillan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="464" to="469" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Quantitative proteomic isotope-coded protein label (ICPL) analysis reveals alteration of several functional processes in the glioblastoma</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Com</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Clavreul</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Lagarrigue</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Michalak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Menei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Pineau</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Proteome</title>
+		<imprint>
+			<biblScope unit="volume">75</biblScope>
+			<biblScope unit="issue">13</biblScope>
+			<biblScope unit="page" from="3898" to="3913" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Direct iterative protein profiling (DIPP) -an innovative method for large-scale protein detection applied to budding yeast mitosis</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Lavigne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Becker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Evrard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Lardenois</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Primig</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Pineau</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol Cell Proteomics</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="111" to="012682" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">update of the PRIDE database and its related tools</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Vizcaino</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Csordas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Del-Toro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Dianes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Griss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Lavidas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Mayer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Perez-Riverol</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Reisinger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Ternent</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">44</biblScope>
+			<biblScope unit="issue">D1</biblScope>
+			<biblScope unit="page" from="447" to="456" />
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Lookup peaks: a hybrid of de novo sequencing and database search for protein identification by tandem mass spectrometry</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Bern</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Cai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Goldberg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Anal Chem</title>
+		<imprint>
+			<biblScope unit="volume">79</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="1393" to="1400" />
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">The Ectocarpus genome and the independent evolution of multicellularity in brown algae</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Cock</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Sterck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Rouze</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Scornet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">E</forename><surname>Allen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Amoutzias</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Anthouard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Artiguenave</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Aury</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">H</forename><surname>Badger</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">465</biblScope>
+			<biblScope unit="page" from="617" to="621" />
+			<date type="published" when="2010">2010. 7298</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Uncovering the genetic basis for early isogamete differentiation: a case study of Ectocarpus siliculosus</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">P</forename><surname>Lipinska</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D'</forename><surname>Hondt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Van Damme</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">J</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">De</forename><surname>Clerck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Genomics</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page">909</biblScope>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Towards deciphering dynamic changes and evolutionary mechanisms involved in the adaptation to low salinities in Ectocarpus (brown algae)</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Dittami</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Gravot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Goulitquer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Rousvoal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">F</forename><surname>Peters</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bouchereau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Boyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Tonon</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Plant J</title>
+		<imprint>
+			<biblScope unit="volume">71</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="366" to="377" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Proposal of Ectocarpus siliculosus (Ectocarpales, Phaeophyceae) as a model organism for brown algal genetics and genomics</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">F</forename><surname>Peters</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marie</forename><forename type="middle">D</forename><surname>Scornet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Kloareg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Cock</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Phycol</title>
+		<imprint>
+			<biblScope unit="volume">40</biblScope>
+			<biblScope unit="page" from="1079" to="1088" />
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">The Ectocarpus genome sequence: insights into brown algal biology and the evolutionary diversity of the eukaryotes</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Cock</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Coelho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Brownlee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">R</forename><surname>Taylor</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">New Phytol</title>
+		<imprint>
+			<biblScope unit="volume">188</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="4" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">High-density genetic map and identification of QTLs for responses to temperature and salinity stresses in the model brown alga Ectocarpus</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Avia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Coelho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">J</forename><surname>Montecinos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Cormier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Lerck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mauger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Faugeron</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Valero</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Cock</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Boudry</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Sci Rep</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page">43241</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">A sequence-tagged genetic map for the brown alga Ectocarpus siliculosus provides large-scale assembly of the genome sequence</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Heesch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">Y</forename><surname>Cho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">F</forename><surname>Peters</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Le</forename><surname>Corguille</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Falentin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Boutet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Coedel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Jubin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Samson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Corre</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">New Phytol</title>
+		<imprint>
+			<biblScope unit="volume">188</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="42" to="51" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">OUROBOROS is a master regulator of the gametophyte to sporophyte life cycle transition in the brown alga Ectocarpus</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Coelho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Godfroy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Arun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Le</forename><surname>Corguille</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Peters</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">F</forename><surname>Cock</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proc Natl Acad Sci U S A</title>
+		<imprint>
+			<biblScope unit="volume">108</biblScope>
+			<biblScope unit="issue">28</biblScope>
+			<biblScope unit="page" from="11518" to="11523" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Global expression analysis of the brown alga Ectocarpus siliculosus (Phaeophyceae) reveals large-scale reprogramming of the transcriptome in response to abiotic stress</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Dittami</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Scornet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">L</forename><surname>Petit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Segurens</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Da</forename><surname>Silva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Corre</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Dondrup</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Glatting</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">H</forename><surname>Konig</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Sterck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biol</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page">66</biblScope>
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">A haploid system of sex determination in the brown alga Ectocarpus sp</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ahmed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Cock</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Pessia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Luthringer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Cormier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Robuchon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Sterck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">F</forename><surname>Peters</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Dittami</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Corre</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Curr Biol</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="issue">17</biblScope>
+			<biblScope unit="page" from="1945" to="1957" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Development of PCR-based markers to determine the sex of kelps</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">P</forename><surname>Lipinska</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ahmed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">F</forename><surname>Peters</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Faugeron</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Cock</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Coelho</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLoS One</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="issue">10</biblScope>
+			<biblScope unit="page">140535</biblScope>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Two-dimensional gel electrophoresis analysis of brown algal protein extracts(1)</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Contreras</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ritter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Dennett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Boehmwald</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Guitton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Pineau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Moenne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Potin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Correa</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Phycol</title>
+		<imprint>
+			<biblScope unit="volume">44</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="1315" to="1321" />
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Copper stress proteomics highlights local adaptation of two strains of the model brown alga Ectocarpus siliculosus</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ritter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ubertini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Romac</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Gaillard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Delage</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Cock</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Tonon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Correa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Potin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proteomics</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="issue">11</biblScope>
+			<biblScope unit="page" from="2074" to="2088" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">HECTAR: a method to predict subcellular targeting in heterokonts</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Gschloessl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Guermeur</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Cock</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page">393</biblScope>
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">The genome-scale metabolic network of Ectocarpus siliculosus (EctoGEM): a resource to study brown algal physiology and beyond</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Prigent</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Collet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Dittami</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Delage</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ethis</forename><surname>De Corny</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Dameron</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Eveillard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Thiele</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Cambefort</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Boyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Plant J</title>
+		<imprint>
+			<biblScope unit="volume">80</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="367" to="381" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Charting the proteomes of organisms with unsequenced genomes by MALDI-quadrupole time-of-flight mass spectrometry and BLAST homology searching</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Shevchenko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Sunyaev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Loboda</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Shevchenko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Bork</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Ens</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">G</forename><surname>Standing</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Anal Chem</title>
+		<imprint>
+			<biblScope unit="volume">73</biblScope>
+			<biblScope unit="issue">9</biblScope>
+			<biblScope unit="page" from="1917" to="1926" />
+			<date type="published" when="2001">2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">BioShaDock: a community driven bioinformatics shared Docker-based tools registry</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Moreews</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Sallou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Menager</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Le</forename><surname>Bras</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Monjeaud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Blanchet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Collin</forename><forename type="middle">O</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">F1000Res</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page">1443</biblScope>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">Galaxy: a comprehensive approach for supporting accessible, reproducible, and transparent computational research in the life sciences</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Goecks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Nekrutenko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Taylor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Galaxy</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biol</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page">86</biblScope>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">The Galaxy platform for accessible, reproducible and collaborative biomedical analyses: 2018 update</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Afgan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Baker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Batut</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Van Den Beek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Bouvier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Cech</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Chilton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Clements</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Coraor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">A</forename><surname>Gruning</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">46</biblScope>
+			<biblScope unit="issue">W1</biblScope>
+			<biblScope unit="page" from="537" to="544" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">The proteogenomic mapping tool</title>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">S</forename><surname>Sanders</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Bridges</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">M</forename><surname>Malone</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><forename type="middle">S</forename><surname>Dandass</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">M</forename><surname>Mccarthy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Nanduri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">L</forename><surname>Lawrence</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">C</forename><surname>Burgess</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page">115</biblScope>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">ProteoAnnotator--open source proteogenomics annotation software supporting PSI standards</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Ghali</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Krishna</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Perkins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Collins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Xia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wastling</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">R</forename><surname>Jones</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proteomics</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">23-24</biblScope>
+			<biblScope unit="page" from="2731" to="2741" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">PGMiner reloaded, fully automated proteogenomic annotation tool linking genomes to proteomes</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Has</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">A</forename><surname>Lashin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">V</forename><surname>Kochetov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Allmer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Integr Bioinform</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page">293</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<analytic>
+		<title level="a" type="main">A hybrid, de novo based, genomewide database search approach applied to the sea urchin neuropeptidome</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Menschaert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">T</forename><surname>Vandekerckhove</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Baggerman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Landuyt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">V</forename><surname>Sweedler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Schoofs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Luyten</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Van Criekinge</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Proteome Res</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="990" to="996" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">Flexible and accessible workflows for improved proteogenomic analysis using the Galaxy framework</title>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">D</forename><surname>Jagtap</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">E</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Onsongo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">W</forename><surname>Sadler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Murray</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">M</forename><surname>Shenykman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Bandhakavi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">M</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">J</forename><surname>Griffin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Proteome Res</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="issue">12</biblScope>
+			<biblScope unit="page" from="5898" to="5908" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<analytic>
+		<title level="a" type="main">Using Galaxy-P to leverage RNA-Seq for the discovery of novel protein variations</title>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">M</forename><surname>Sheynkman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">E</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">D</forename><surname>Jagtap</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">R</forename><surname>Shortreed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Onsongo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">L</forename><surname>Frey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">J</forename><surname>Griffin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">M</forename><surname>Smith</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Genomics</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page">703</biblScope>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">Galaxy integrated omics: web-based standards-compliant workflows for proteomics informed by transcriptomics</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Fan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Saha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Barker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">J</forename><surname>Heesom</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Ghali</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">R</forename><surname>Jones</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">A</forename><surname>Matthews</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Bessant</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol Cell Proteomics</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">11</biblScope>
+			<biblScope unit="page" from="3087" to="3093" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<analytic>
+		<title level="a" type="main">Bridging the chromosome-centric and biology/diseasedriven human proteome projects: accessible and automated tools for interpreting the biological and pathological impact of protein sequence variants detected via proteogenomics</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Sajulga</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mehta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">E</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">R</forename><surname>Guerrero</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">C</forename><surname>Ryan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Karchin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">D</forename><surname>Jagtap</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">J</forename><surname>Griffin</surname></persName>
+		</author>
+		<idno type="DOI">10.1021/acs.jproteome.8b00404</idno>
+		<ptr target="https://doi.org/10.1021/acs.jproteome.8b00404" />
+	</analytic>
+	<monogr>
+		<title level="j">J Proteome Res</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<analytic>
+		<title level="a" type="main">An accessible proteogenomics informatics resource for cancer researchers</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">C</forename><surname>Chambers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">D</forename><surname>Jagtap</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">E</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Mcgowan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Onsongo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">R</forename><surname>Guerrero</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Barsnes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Vaudel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Martens</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Cancer Res</title>
+		<imprint>
+			<biblScope unit="volume">77</biblScope>
+			<biblScope unit="issue">21</biblScope>
+			<biblScope unit="page" from="43" to="46" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<analytic>
+		<title level="a" type="main">Re-annotation, improved large-scale assembly and establishment of a catalogue of noncoding loci for the genome of the model brown alga Ectocarpus</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Cormier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Avia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Sterck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Derrien</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Wucher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Andres</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Monsoor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Godfroy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Lipinska</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">M</forename><surname>Perrineau</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">New Phytol</title>
+		<imprint>
+			<biblScope unit="volume">214</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="219" to="232" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<analytic>
+		<title level="a" type="main">Discovery of coding regions in the human genome by integrated proteogenomics analysis workflow</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">M</forename><surname>Orre</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">J</forename><surname>Johansson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Huss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Boekel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Vesterlund</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Fernandez-Woodbridge</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rmm</forename><surname>Branca</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lehtio</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Commun</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">903</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<analytic>
+		<title level="a" type="main">JUMPg: an integrative proteogenomics pipeline identifying unannotated proteins in human brain and Cancer cells</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">H</forename><surname>Cho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">I</forename><surname>Shaw</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Bai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">G</forename><surname>Beach</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Wu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Proteome Res</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page" from="2309" to="2320" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<analytic>
+		<title level="a" type="main">PGMiner reloaded, fully automated proteogenomic annotation tool linking genomes to proteomes</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Has</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">A</forename><surname>Lashin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Kochetov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Allmer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Integr Bioinform</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="16" to="23" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<analytic>
+		<title level="a" type="main">PROTEOFORMER: deep proteome coverage through ribosome profiling and MS integration</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Crappe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Ndah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Koch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Steyaert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Gawron</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">De</forename><surname>Keulenaer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">De</forename><surname>Meester</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">De</forename><surname>Meyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Van Criekinge</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Van Damme</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">43</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page">e29</biblScope>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<analytic>
+		<title level="a" type="main">PGTools: a software suite for proteogenomic data analysis and visualization</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">H</forename><surname>Nagaraj</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Waddell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">K</forename><surname>Madugundu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Wood</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Jones</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">A</forename><surname>Mandyam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Nones</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">V</forename><surname>Pearson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Grimmond</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Proteome Res</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="2255" to="2266" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b65">
+	<analytic>
+		<title level="a" type="main">NextSearch: a search engine for mass spectrometry data against a compact nucleotide exon graph</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Park</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Paek</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Proteome Res</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page" from="2784" to="2791" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b66">
+	<analytic>
+		<title level="a" type="main">Peppy: proteogenomic search software</title>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">A</forename><surname>Risk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">J</forename><surname>Spitzer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">C</forename><surname>Giddings</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Proteome Res</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="3019" to="3025" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

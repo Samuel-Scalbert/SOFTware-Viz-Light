@@ -1,0 +1,1239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">decOM: similarity-based microbial source tracking of ancient oral samples using k-mer-based methods</title>
+				<funder ref="#_JW6NvDK #_Qxb9rHd">
+					<orgName type="full">unknown</orgName>
+				</funder>
+				<funder ref="#_AY5kuxX">
+					<orgName type="full">ANR Transipedia, Inception</orgName>
+				</funder>
+				<funder ref="#_hPYXxWS">
+					<orgName type="full">Agence Nationale de la Recherche</orgName>
+					<orgName type="abbreviated">ANR</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Camila</forename><surname>Duitama González</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Department of Computational Biology</orgName>
+								<orgName type="laboratory">Sequence Bioinformatics</orgName>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department">Institut Pasteur</orgName>
+								<orgName type="institution" key="instit1">Université Paris Cité</orgName>
+								<orgName type="institution" key="instit2">Sorbonne Université</orgName>
+								<address>
+									<postCode>F-75015</postCode>
+									<settlement>Paris</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Riccardo</forename><surname>Vicedomini</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Department of Computational Biology</orgName>
+								<orgName type="laboratory">Sequence Bioinformatics</orgName>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department">Institut Pasteur</orgName>
+								<orgName type="institution" key="instit1">Université Paris Cité</orgName>
+								<orgName type="institution" key="instit2">Sorbonne Université</orgName>
+								<address>
+									<postCode>F-75015</postCode>
+									<settlement>Paris</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="institution" key="instit1">Université de Rennes</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">IRISA</orgName>
+								<address>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Téo</forename><surname>Lemane</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="institution" key="instit1">Université de Rennes</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">IRISA</orgName>
+								<address>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Nicolas</forename><surname>Rascovan</surname></persName>
+							<affiliation key="aff3">
+								<orgName type="department">Institut Pasteur</orgName>
+								<orgName type="laboratory">UMR 2000</orgName>
+								<orgName type="institution" key="instit1">Université de Paris Cité</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<address>
+									<addrLine>Microbial Paleogenomics Unit</addrLine>
+									<postCode>F-75015</postCode>
+									<settlement>Paris</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Hugues</forename><surname>Richard</surname></persName>
+							<affiliation key="aff4">
+								<orgName type="department">Bioinformatics unit (MF1)</orgName>
+								<orgName type="institution">Robert Koch Institute</orgName>
+								<address>
+									<addrLine>Nordufer, 20</addrLine>
+									<postCode>13353</postCode>
+									<settlement>Berlin</settlement>
+									<country key="DE">Germany</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Rayan</forename><surname>Chikhi</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Department of Computational Biology</orgName>
+								<orgName type="laboratory">Sequence Bioinformatics</orgName>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department">Institut Pasteur</orgName>
+								<orgName type="institution" key="instit1">Université Paris Cité</orgName>
+								<orgName type="institution" key="instit2">Sorbonne Université</orgName>
+								<address>
+									<postCode>F-75015</postCode>
+									<settlement>Paris</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">decOM: similarity-based microbial source tracking of ancient oral samples using k-mer-based methods</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">853BC09F11BE41803E8D8B2723EBF4F0</idno>
+					<idno type="DOI">10.1186/s40168-023-01670-3</idno>
+					<note type="submission">Received: 12 August 2022 Accepted: 13 September 2023</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:12+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Ancient metagenomics</term>
+					<term>Microbial source tracking</term>
+					<term>k-mer matrix</term>
+					<term>Paleogenomics</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Background The analysis of ancient oral metagenomes from archaeological human and animal samples is largely confounded by contaminant DNA sequences from modern and environmental sources. Existing methods for Microbial Source Tracking (MST) estimate the proportions of environmental sources, but do not perform well on ancient metagenomes. We developed a novel method called decOM for Microbial Source Tracking and classification of ancient and modern metagenomic samples using k-mer matrices.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Results</head><p>We analysed a collection of 360 ancient oral, modern oral, sediment/soil and skin metagenomes, using stratified five-fold cross-validation. decOM estimates the contributions of these source environments in ancient oral metagenomic samples with high accuracy, outperforming two state-of-the-art methods for source tracking, FEAST and mSourceTracker.</p><p>Conclusions decOM is a high-accuracy microbial source tracking method, suitable for ancient oral metagenomic data sets. The decOM method is generic and could also be adapted for MST of other ancient and modern types of metagenomes. We anticipate that decOM will be a valuable tool for MST of ancient metagenomic studies.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Background</head><p>Ancient metagenomics is the study of multi-species genomic data from samples that have degraded over relatively long time periods <ref type="bibr" target="#b0">[1]</ref>. Analysing ancient DNA (aDNA) is particularly challenging due to deterioration and contamination with environmental and modern contaminant DNA sequences. Deterioration refers to DNA damage, which in genetic material from fossil records usually comes in the form of depurination, nick formation and cytosine deamination <ref type="bibr" target="#b1">[2]</ref>. Contamination refers to genetic material (ancient or modern) that does not derive from the sample of interest <ref type="bibr" target="#b2">[3]</ref>. It can come from the microbes that are present in decaying tissue, from the soil or sediment where the samples were taken, or be an unintended consequence of manipulation during and after excavation <ref type="bibr" target="#b3">[4,</ref><ref type="bibr" target="#b4">5]</ref>. Despite following well-established standards and precautions to prevent modern DNA contamination and reduce the proportion of environmental microbial taxa <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b5">6]</ref>, a certain level of unwanted genetic material in the samples is unavoidable <ref type="bibr" target="#b3">[4]</ref>. Under these circumstances, contamination assessment of aDNA samples is crucial not only to avoid misleading results after downstream analysis, but also to decide which samples are worth to be further sequenced <ref type="bibr" target="#b6">[7]</ref>.</p><p>The task of Microbial Source Tracking (MST) is to quantify the proportion of different microbial environments (sources) in a target microbial community (sink) <ref type="bibr" target="#b7">[8]</ref>. MST enables quantification of contamination <ref type="bibr" target="#b8">[9]</ref> in metagenomic sequencing data and to predict the metadata class of a given microbial sample. That is to say, if a researcher has sequenced their ancient metagenomic sample (sink) and collected a set of sources from environments where the sample might originate, an MST software estimates the contribution of each source to the sink and optionally reports a proportion for unknown sources. For example, if the user has sequenced sink X which is a sample composed of source environments A, B and C, MST should output percentages for the contribution made by source environments A, B and C (and an optional Unknown) that sum up to 100%.</p><p>Two of the most widely used methods today for MST in metagenomic data are metagenomic-SourceTracker (mSourceTracker) <ref type="bibr" target="#b9">[10]</ref> and FEAST <ref type="bibr" target="#b7">[8]</ref>, which depend on previously annotated data using taxonomic abundance profiles. mSourceTracker is a metagenomic extension of the popular SourceTracker <ref type="bibr" target="#b8">[9]</ref>, a method that estimates contamination proportions using a mixture model of taxonomic profiles via Gibbs sampling. It is known that the sensitivity of SourceTracker can be improved through parameter adjustments <ref type="bibr" target="#b10">[11]</ref>; however, more rigorous evaluations are still needed to fully understand the effect of adjusting multiple parameters and hyperparameters on its performance <ref type="bibr" target="#b11">[12]</ref>. FEAST, released 8 years after SourceTracker, uses an expectation-maximisation approach that reduced the running time of SourceTracker by a factor of 30 or more. It has been reported to require parameter tuning to achieve optimal performance <ref type="bibr" target="#b12">[13]</ref>, which is a resource-intensive procedure when handling large data sets.</p><p>FEAST and mSourceTracker require a reference database which is necessary to build the taxonomy-based clustering tables that both methods use as input. Indeed, in both cases, metagenomic data must be grouped into bins or clusters of sequences sharing the same taxonomic classification, an information that is not only highly dependent on the database used, but also highly biased by the limited proportion of the microbial diversity that has been already sequenced and taxonomically annotated <ref type="bibr" target="#b13">[14]</ref>.</p><p>Finally, these taxonomy-based clustering tables can also lead to misleading results depending on the sequence similarity metric and the threshold used to define them <ref type="bibr" target="#b14">[15]</ref>. To our knowledge, there are no reported referencefree methods for contamination assessment that use MST for large-scale metagenomic analyses <ref type="bibr" target="#b12">[13]</ref>. In this work, we seek to move away from database-dependent methods and use unsupervised approaches exploiting read-level sequence composition and the wealth of information contained in metagenomes that were previously sequenced.</p><p>Over the past years and with the decrease of sequencing costs, large databases of metagenomic collections from all sorts of environments have become available <ref type="bibr" target="#b15">[16]</ref><ref type="bibr" target="#b16">[17]</ref><ref type="bibr" target="#b17">[18]</ref>. These metagenomic raw reads collectively require petabases of storage, which prohibits their reanalysis by most labs. This prompted the development of efficient methods for exploring the sequence information contained in these collections, via searching substrings of length k (k-mers) <ref type="bibr" target="#b18">[19]</ref>. Such methods build an index of all k-mers and their counts over a collection of samples in the form of a k-mer matrix, where each cell of the matrix represents the abundance (or presence/ absence) of a k-mer in a sample. Such matrices are a concise representation of genomic data that deals more efficiently with sequencing errors and genetic variation <ref type="bibr" target="#b18">[19]</ref>. Tools such as kmtricks <ref type="bibr" target="#b19">[20]</ref> allow the rapid construction of k-mer matrices from massive collections of sequencing data sets.</p><p>In this study we developed a novel reference-free and k-mer-based method called decOM to perform MST and environmental type prediction of a given microbial sample. decOM was evaluated in a collection of ancient oral metagenomes with variable contamination levels. Our results show that decOM outperforms two of the most commonly used MST methods in the multi-class classification task of finding the most abundant source environment in a sink. We tested our methodology on a collection of 360 metagenomic data sets of ancient oral samples and its possible contaminants, in an external validation set of 254 ancient oral samples and on a simulated ancient calculus metagenome.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Implementation</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Evaluation setting</head><p>Dental calculus or tartar is mineralized dental plaque that contains remnants of microorganisms located in the oral cavity <ref type="bibr" target="#b2">[3]</ref>, and has been established over the past few years as one of the richest sources of aDNA in the archaeological record <ref type="bibr" target="#b20">[21]</ref>. Ancient dental calculus is a great source of biomolecules (including genetic material) that originate from the host, microbes, food and the environment <ref type="bibr" target="#b5">[6]</ref>. Dental calculus is an important reservoir of ancient human oral microbiomes, and it offers a unique possibility to examine the links between human health, diet, lifestyle and the environment throughout the course of human evolution <ref type="bibr" target="#b21">[22]</ref>. Due to the proven relevance of aOral samples isolated from calculus in the field of ancient paleogenomics, we decided to perform our evaluations on a collection of aOral metagenomic samples and their possible sources of contamination.</p><p>The microbial composition of a given aOral sample isolated from dental calculus has been modelled in previous studies as a mixture of DNA originating from dental plaque, skin bacteria, soil and other sources <ref type="bibr" target="#b22">[23,</ref><ref type="bibr" target="#b23">24]</ref>. For this reason, we gathered 360 metagenomic data sets of diverse environment types: ancient oral (aOral), sediment/soil, skin, or modern oral (mOral) (Fig. <ref type="figure">1</ref>). We used this collection of real metagenomic data to model the contribution of possible contaminants coming from sediment/soil and skin sources in a group of aOral samples. In addition, we included a set of mOral samples to assess whether our method can tell apart modern and ancient oral environments.</p><p>The run accession codes for every aOral sample were retrieved from AncientMetagenomeDir <ref type="bibr" target="#b0">[1]</ref> (v20.12: Ancient City of Nessebar), a community-curated collection of annotated ancient metagenomic sample lists and standardised metadata. Samples other than aOral were selected either because they had been used by competing MST methods or because they were labelled as aforementioned classes in well-known metagenomic databases such as curatedMetagenomicData <ref type="bibr" target="#b24">[25]</ref>, the HumanMetagenomeDB <ref type="bibr" target="#b25">[26]</ref> or MGnify <ref type="bibr" target="#b26">[27]</ref>.</p><p>We rely on the metadata of each metagenomic sample to assign a true label (i.e. environment type); however, there is no ground truth as to what is the true proportion of aOral, mOral, sediment/soil or skin content in any of them. Several variables accessible through the metadata of each run accession are plotted in the Supplementary File (Figs. <ref type="bibr">1, 2, 3 and 4)</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Input data</head><p>Both mSourceTracker and FEAST require taxonomybased clustering tables as input. We built these tables using Kaiju <ref type="bibr" target="#b27">[28]</ref> and the reference database NCBI BLAST nr+euk (2021-02-24 release), a non-redundant protein database of bacteria, archaea, viruses, fungi, and microbial eukaryotes (information to download it in Supplementary File, Section 1). To exclude the possibility that the lower performance of competing methods was due to the poor quality of the input taxonomic profiles, we repeated the analyses using KrakenUniq (see Supplementary File Section 2). Also in this case, decOM improves over FEAST and mSourceTracker. Moreover, the latter two provide worse results compared to using Kaiju (see ROC and AUC plots in Supplementary Fig. <ref type="figure">10</ref> and<ref type="figure">11</ref>, respectively).</p><p>On the other hand, decOM takes as input a binary k-mer matrix of distinct k-mers across a collection of metagenomic samples. We used kmtricks (v1.1.1) to Fig. <ref type="figure">1</ref> Geographical location of samples coloured by environmental type. Labels for each sample were retrieved from their metadata. The final collection of metagenomic samples included 116 ( 32.2% ) aOral, 81 skin ( 22.5% ), 79 sediment or soil ( 21.9% ) and 84 mOral ( 23.3% ) samples build a presence/absence k-mer matrix from the 360 metagenomic samples in the collection. In order to find patterns that helped us distinguish between samples from different source environments, we kept only k-mers that were present in at least 3 samples in the collection. The k-mer size in kmtricks was set to 31. We removed all k-mers seen only once in a sample, which were likely to be sequencing errors. The rest of the parameters of kmtricks were set by default.</p><p>The complete k-mer matrix contains around 9 billion k-mers, represented by 700 disjoint sets of k-mers called partitions. Omitting some technical aspects <ref type="bibr" target="#b28">[29]</ref> for clarity, partitions can be seen as a random subset of the rows of the k-mer matrix, created to avoid loading the entire matrix in memory <ref type="bibr" target="#b19">[20]</ref>. It has been independently shown that partitions enable accurate comparisons between samples <ref type="bibr" target="#b29">[30]</ref>. In this work, we configure kmtricks to only construct a single partition out of the 700, i.e. we consider only a subset of around 14 million k-mers ( 0.1% of total) for subsequent analysis. We also tested with 7 partitions (Figs. 13 and 14 in Supplementary File), and while it improves results marginally, the marked performance improvement when using only 1 partition justifies keeping this regime.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Mathematical formulation</head><p>We consider a binary k-mer matrix M (as output by kmtricks) that indicates the presence/absence of each k-mer found across several metagenomic data sets, with N number of unique samples (columns) and K number of unique k-mers (rows). Each sample j is represented by a column vector m (j) = (m 1j , m 2j , m 3j , ..., m Kj ) where m i,j corresponds to the presence/absence of k-mer i in sample j. We will use the terminology of sink and sources to respectively denote the sample we want to evaluate the composition of, and the set of samples used as a database.</p><p>Consider that the matrix M contains jointly all sources and potential sinks. Let a sample s (where s ∈ {1, 2, . . . , N } ) be a sink and m (s) be its col- umn vector. A source is a collection of L &gt; 0 col- umn vectors used to build a matrix of sources M s of dimensions K × (L -1) . Each column vector in the sources matrix M s has an associated label that comes from a finite ordered set of environments (classes) C = {c 1 , c 2 , c 3 , ..., c n } determined by the user. In our case, |C| = 4 , as C = {aOral, mOral, skin, sediment/soil} . The vector of labels for each sample in the sources of length L -1 is represented by ℓ = (ℓ 1 , ℓ 2 , ℓ 3 , ..., ℓ L-1 ) , and each entry of the vector can only take one of the values from C as in a multi-class classification problem. The vector of categorical labels ℓ can be fur- ther encoded as a highly sparse one-hot binary matrix H of size (L -1) × |C| where:</p><p>Making an analogy with bins (source environments) and balls (k-mers present in a certain source environment), we are interested in counting the number of balls that fall into each bin. The core idea of decOM is that if a k-mer is present in the sink represented by the vector m (s) and in the source vector m (j) with environ- ment label ℓ j , then a ball is added to the bin with label ℓ j . We then compare the sink vector m (s) against every source vector until all sources are exhausted. The output of this comparison is the vector w of length |C|, where every entry corresponds to the total number of balls in a certain bin, that is, the contribution of each source environment to the sink s.</p><p>Counting k-mers of sinks in sources amounts to performing the following matrix vector operation:</p><p>In order to produce proportions instead of raw counts, we estimate the percentage based on the total number of balls counted per bin (of all known sources). Such proportions correspond to every element in the vector p = �w 1 , w 2 , w 3 ..., w |C| � when multiplied by a sca- lar, as seen in the following operation:</p><p>To analyse a new metagenomic sample, one needs only to compute a presence/absence vector of k-mers for this sample using kmtricks, then this new sink is compared against the pre-computed collection of sources. decOM incorporates a kmtricks module so that the user can give as input a simple FASTQ/FASTA file of their sink of interest, rather than a presence/ absence vector. Figure <ref type="figure">2</ref> provides a graphical representation of our pipeline.</p><p>Finally, we are working to include the contribution of an unknown source by characterising it as the number of k-mers that are present in the sink and absent in all of the sources.</p><p>decOM was implemented in Python 3.6 as a conda package and the installation instructions are available in a GitHub repository <ref type="bibr" target="#b30">[31]</ref>.</p><p>(1)</p><formula xml:id="formula_0">H i,j = 1 if ℓ i = c j 0 otherwise (2) w = m (s) ⊺ • M s • H (3) p ′ = p |C| i=1 p i</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Microbial Source Tracking evaluated in four different experimental settings</head><p>We perform a metagenomic Microbial Source Tracking to benchmark decOM, mSourceTracker, and FEAST, which all rely on an input matrix. For mSourceTracker and FEAST the input matrix corresponds to a taxonomy-based clustering table, whereas decOM takes as input a binary k-mer matrix across metagenomic data sets.</p><p>Consider the set X = {m (1) , m (2) , m (3) , ...m (N ) } , where X contains all the column vectors of the aforementioned k-mer matrix. Let A = {m (s) } be a set of sink vectors, and B = {X \ m (s) } a set of sources. In order to esti- mate the proportion of source environments in each data set in our collection, we run our method in a leaveone-out fashion, i.e. every run of our method uses one different sample as sink and leaves the rest of the samples as sources. One run of this experimental setup is described by Algorithm 1.</p><p>Algorithm 1 Pseudocode of our method used to estimate proportions of sources in sink s Additionally, we Fig. <ref type="figure">2</ref> Graphical representation of decOM. Our method preprocesses an input k-mer matrix of aOral metagenomic samples and its possible contaminants, divides it into sinks and sources and then estimates and outputs the proportions of each source environment in the sink. The core idea in the classification step is that if a k-mer is present in the sink s represented by the vector m (s) , and in the source vector m (j) with environment label l j , then a ball is added to the bin with label l j (Ex: K-mer AAACG is present in the input sink S and in source S1 labelled as skin, S5 labelled as aOral and S7 labelled as mOral; hence, one ball is added to the bin of skin, aOral and mOral respectively). After every entry in the sink vector is compared against every entry of every vector in the sources, decOM outputs the estimated environment proportions and the hard label assigned to the sink s is that of the environment with the highest contribution performed a 5-fold cross-validation experiment by splitting the collection of metagenomic samples into 5 stratified folds with non-overlapping groups. The groups were defined by the BioProject from which each data set originated. A BioProject is a collection of biological data related to a single initiative originating from a single organisation or from a consortium <ref type="bibr" target="#b31">[32]</ref>. The folds were made trying to preserve the percentage of samples for each class, given the constraint that the same group (BioProject) will not appear in two different folds. The idea behind this additional group stratification is to account for the possible bias that might appear when classifying a sink that is very similar to a set of sources simply because they come from the same BioProject and not because there is an underlying sequence similarity between the samples.</p><p>For the leave-one-out and cross-validation experiments, we evaluated all methods using the receiver operating characteristic (ROC) and precision-recall curves, and a hard label was set using as threshold the environment class with the highest contribution to the sink. Performance metrics used were accuracy, precision, recall and F1-score as they are implemented in scikit-learn <ref type="bibr" target="#b32">[33]</ref>. Because the framework of evaluation was a multi-class classification task, the performance metrics reported here were estimated for each label and then averaged across classes. Definitions for each performance metric used are specified in Section 5 of the Supplementary File.</p><p>We also tested decOM on a validation set of 254 aOral samples, none of which belonged to the collection of 360 samples we used to construct the k-mer matrix. For this experiment, the aforementioned matrix is used as sources, whereas the 254 external aOral samples are used as sinks. Because all samples belong to the same class, precision and F1-score are not well-defined, whereas recall and accuracy are equivalent (see Section 5 in Supplementary File), which is why performance is measured using recall only. Finally, we tested decOM and its competitors on an uncontaminated simulated ancient oral data set and presented the estimated proportions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Results</head><p>We created decOM as reference-free and open-source Microbial Source Tracking method that is adapted to ancient metagenomic experiments. Our method takes as input a set of source vectors in the form of a presence/absence k-mer matrix (built from a collection of metagenomic data sets ready for the user to download), and one or more FASTA/FASTQ files to be used as sinks. It outputs a set of proportions (percentages) and a predicted metadata class per sink.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>decOM robustly predicts metagenome sample labels Leave-one-out experiment</head><p>We compared the performance of decOM with FEAST <ref type="bibr" target="#b7">[8]</ref> and mSourceTracker <ref type="bibr" target="#b8">[9]</ref> based on their ability to correctly predict the environmental type of a sample, defined as the highest proportion among the four possible sample types (ancient oral, model oral, skin, soil). For all methods, we used the same collection of 360 metagenomic experiments as sources.</p><p>All methods output a set of proportions for each sample. We ran them in a leave-one-out fashion (one sample was used as sink, and the rest were left out as sources). In order to perform a multi-class classification task, we mapped the set of continuous proportions into a hard label, by simply assigning a label to the sample corresponding to the environmental type with the largest proportion among all the predicted sources. The performance metrics presented were calculated using the hard labels.</p><p>Table <ref type="table" target="#tab_0">1</ref> shows that decOM outperforms both mSourceTracker (+3% accuracy, +8% precision, +3% recall, +5% F1 score) and FEAST (+19% accuracy, +37% precision, +12% recall, +33% F1 score) in the multi-class classification task of predicting source environment with the largest contribution in a sink, when such contribution is estimated using a MST framework. Precision-recall and ROC curves are shown in the Supplementary File (see Figs. <ref type="figure">10</ref> and<ref type="figure">11</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Cross-validation</head><p>To further validate that decOM does not solely rely on closely related samples for its predictions, we performed a 5-fold cross-validation experiment by dividing the collection into 5 stratified folds with nonoverlapping BioProjects. This constraint means that a sink is classified without any other samples from the same BioProject in the sources. This data stratification is relevant because it controls for the possible bias that might come from classifying a sink that is similar to the sources simply because they come from the same sequencing initiative and not because there is some underlying biological similarity between the samples (see Fig. <ref type="figure">12</ref> in Supplementary File for visualisation of the data splitting).</p><p>decOM outperforms mSourceTracker and FEAST in each of the five sink/sources folds for performance metrics such as accuracy, precision, recall and F1 score (see Fig. <ref type="figure">3</ref>) and when metrics are averaged across groups (see Table <ref type="table" target="#tab_1">2</ref> in Supplementary File). The performance estimates dropped with respect to the leaveone-out MST, which is expected since cross-validation results give a less biased estimate of the model (see also Tables <ref type="table" target="#tab_0">1</ref> and<ref type="table" target="#tab_1">2</ref> in Supplementary File).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Validation set</head><p>We evaluated decOM in an external validation set with 254 aOral samples that were present in the Ancient-MetagenomeDir <ref type="bibr" target="#b0">[1]</ref> but were not part of the matrix of sources previously described. Samples in the validation set belonged to 6 different BioProjects and ranged from 100 to 14,800 years old. Furthermore they were isolated from 12 different countries in mostly 2 continents. For more information regarding the metadata of the samples in the validation data set, see Supplementary Figs. <ref type="figure">5</ref> and<ref type="figure">6</ref>.</p><p>Here also decOM outperforms mSourceTracker and FEAST by classifying most of the samples as aOral. See Table <ref type="table" target="#tab_1">2</ref> for results in the validations set of only aOral samples.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Simulated data set</head><p>As a final experiment, we tested each of the methods on a simulated ancient dental calculus metagenome generated by other authors <ref type="bibr" target="#b33">[34]</ref>. A mock oral microbial community is created using representative genomes of microbes found in the human oral microbiome, further processed to appear similar to an ancient metagenomic sample. As in the validation set, we estimated the source environment contribution of the aOral, mOral, skin and sediment/soil microbial communities by using the samples from the 360 collection as sources. Results for all methods are in Fig. <ref type="figure">4</ref>. Given that the synthetic metagenome comes from an uncontaminated mock oral microbial community that has been adapted to appear similar to an ancient calculus sample the expected content is to be 100% oral, decOM provides the highest estimation of oral contribution (ancient or modern), followed by mSource-Tracker and lastly by FEAST. We encountered reproducibility problems for FEAST that are further explained in the Supplementary Fig. <ref type="figure">7</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Running times</head><p>We measured the running time for decOM and mSource-Tracker using 250 GB of memory and 10 cores. FEAST did not allow for multithreading. We estimated the time it takes to produce an input matrix for each of the methods (whether it is a taxonomy-based clustering table or k-mer matrix of sources). We also estimated the time it takes to analyse a new sample by splitting the process in Fig. <ref type="figure">3</ref> Bioproject stratified 5-fold cross-validation performance of every method. The performance from every fold was evaluated using accuracy, precision, recall and F1-score two steps: the time it takes to produce a new vector to represent the sample, and the time it takes to perform MST. For the two previously mentioned steps, the average running time was estimated on the 254 samples from the validation set. The consolidated running times can be seen in Table <ref type="table">3</ref>. decOM is considerably faster than the two other methods for creating a source matrix as we selected one partition of the large k-mer matrix produced by kmtricks and offered the pre-computed matrix in a Zenodo file for users to implement in their analyses. When producing a new vector, since decOM relies on kmtricks, it is also considerably faster than FEAST and mSourceTracker. However, our evaluation of the time here was based on Kaiju's running times. Optimising the creation of taxonomy-based clustering tables using faster alignment-free methods could improve time performance, potentially at the expense of results quality. Finally, all methods show comparable running times when performing the MST step.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Ancient oral metagenomic samples come from various environments (multi-source)</head><p>After predicting the metadata class of each of the 360 samples in the collection, we also plotted the source proportions according to the estimation done by decOM, mSourceTracker and FEAST (Fig. <ref type="figure">5</ref>). The proportion bar plots for mSource-Tracker and decOM are visibly more similar to each other than to FEAST, which seems to output more variable results.</p><p>According to the estimation done by decOM, there are 4 main predicted groups in the collection with distinct source composition as seen in Fig. <ref type="figure">5a</ref>: there is a group of samples that have a higher sediment/soil content, another class of samples with a higher skin content Fig. <ref type="figure">4</ref> MST on a simulated ancient dental calculus metagenome. Bar plots for the source environment proportion estimation obtained after evaluating each method using as sources all the samples from the 360 metagenomic collection, and using as sink a synthetic ancient oral data set. The expected content of this synthetic sample is 100% oral Table <ref type="table">3</ref> Running times of MST. Wall-clock time was measured in different parts of the pipeline: Time to build the input matrix, time to produce a new vector from an input FASTQ file and time to perform the MST of one sample. Except for the process named "Build source matrix", the average time was estimated on the results from the validation set. MST done by FEAST does not allow for multithreading and was run using 2GB of memory and 1 core, whereas mSourceTracker cannot split one sink into multiple jobs, so 1 core and 250 GB of memory were allocated for each sink. Every other process was run using 250 GB of memory and 10 cores. Results for decOM are presented in bold and with a considerable presence of mOral k-mers, a third group that corresponds to the aOral samples and that also share a part of the mOral content. Finally, there is a fourth group of samples in which the contribution of the mOral sequences is considerably higher; however, these samples also have some k-mers in common with the skin and aOral metagenomic samples. Both decOM and mSourceTracker find a certain level of skin contamination on mOral samples, as seen in Fig. <ref type="figure">5a</ref> and<ref type="figure">b</ref> respectively. We further investigated the issue by plotting a PCA on the k-mer matrix of sources (see Supplementary Fig. <ref type="figure">18</ref>) and saw that effectively some of the mOral samples appear close to the skin samples. This might be the reason why there was some skin contamination in the mOral samples to begin with.</p><p>In additional analyses (see Figure in Supplementary File 15), we divided the samples after decOM's MST estimation into two categories: samples that come mostly from one source environment (mono-source) or samples that come from several environments (multi-source). In addition to the hard label assigned by decOM, we further categorised the classification of each sample, qualifying the upper quartile ( &gt; 75% ) of each class as mostly mono-source sam- ples, and the first and second quartile ( &lt; 75% ) as samples of diverse origins (more contaminated). According to this threshold, there are 78 mono-source samples ( 22% of the total collection). These are samples whose recovered label corresponds to the label predicted by decOM, and which are not as contaminated by other sources. A collection of low-contaminated and mono-source samples as this could be used as a high-quality multi-class data set of aOral ( 36% ), mOral ( 27% ), sediment/soil ( 24% ) and skin ( 13% ) for benchmarking with a relatively low imbalance (see Fig. <ref type="figure">16</ref> in Supplementary File). Interestingly, 91% of the samples we call mono-source are also correctly predicted by mSourceTracker and 78% are correctly predicted by FEAST (Fig. <ref type="figure">17</ref> in Supplementary File). Nearly a quarter of the aOral samples in the collection have contamination Fig. <ref type="figure">5</ref> Bar plots of the source environment contribution on each sink after the leave-one-out experiment as estimated by decOM, mSourceTracker and FEAST. Samples in a are first sorted by true label and then sorted by ascending order of the proportion value for such label. Sample order in the x axis for b and c is sorted according to the order from a levels that are low enough to have them categorised as mono-source, while the remainder of the ancient oral samples, as expected, have varying levels of contamination.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Discussion</head><p>We have proposed and evaluated decOM as a tool predict the metadata class of a given metagenomic sample by using a Microbial Source Tracking framework, in order to help paleogeneticists better assess the source content of their ancient samples. Because it was built using a Microbial Source Tracking framework, it can also help determine the composition of any other microbial community (not necessarily ancient or of oral origin), which is a common question in microbiome studies. Let us clarify that our goal is not to define an ancient oral microbial community per se, but to give the user an indication on the quality of their sample in terms of ancient genetic material. We leave for immediate future work the extensions of decOM to other MST tasks, which could be readily done by creating a k-mer matrix of metagenomic samples of interest with their associated labels and estimating the source proportions using decOM.</p><p>The utility of decOM was established on a collection of aOral metagenomic samples and their possible contamination sources, in a leave-one-out set up experiment where every sample was compared against all others. To control for an overly optimistic performance, we performed a stratified 5-fold cross-validation experiment making sure all the samples from the same BioProject belonged to the same fold. Finally, decOM was tested on an external validation data set of 254 aOral samples that were not part of initial collection of metagenomic aOral samples and metagenomes of other contaminants and in a simulated ancient calculus metagenome. We acknowledge that our method would classify the synthetic sample tested on this paper as an mOral sample instead of aOral despite having predicted the largest proportion of aOral source contribution when compared to mSourceTracker or FEAST. However, considering decOM has already proven to be useful on real data, we leave further tuning of the method on synthetic data to be part of the upcoming work. In almost every setting, decOM outperformed two of the most widely used techniques in the field of MST in the multi-class classification task of predicting the label of a metagenomic samples as the source environment with the highest proportion.</p><p>Ideally, we would test decOM on a collection of ancient oral samples with known proportions for each source environment; unfortunately, to our knowledge, such a data set does not exist. The task of creating a synthetic data set with such characteristics poses additional challenges regarding how to avoid overlapping species (originating genomes) between each source environment and would ultimately not be a good representation of a real sample. For this reason, we focused on the evaluation of each method by using the metadata class prediction of a hard label rather than by confirming the proportion predictions were the most accurate.</p><p>It could be argued that the lower performance of mSourceTracker and FEAST compared to decOM in the multi-class classification task described in this study was due to limitations of the input taxonomybased clustering table given to the methods. Better results might be achieved by using a larger database or a tool other than Kaiju to estimate taxonomic abundances. To evaluate this, we conducted an additional experiment in which we constructed another taxonomy-based clustering table with KrakenUniq <ref type="bibr" target="#b34">[35]</ref> (see Supplementary File, Section 2). Results in this paper are shown only for the taxonomic abundance profile based on Kaiju, which can also be replicated using public data sets and which, in any case, yielded the best results for the competing methods. The results for the taxonomic abundance profile constructed with KrakenUniq are shown in the Supplementary File information (see Figs. <ref type="figure">10</ref> and<ref type="figure">11</ref>).</p><p>An important hyperparameter of our model is the size of the input k-mer matrix M s . We explored the effect of using multiple partitions on the performance metrics for the single-and 5-fold cross-validation experiment, but to speed up computations and reduce the memory required, we decided to use only one partition ( 0.1% of the total k-mer found by kmtricks). Remarkably, the performance of decOM is still better than that of competing methods (see Figs. <ref type="figure">13</ref> and<ref type="figure">14</ref>, Tables <ref type="table" target="#tab_0">1</ref> and<ref type="table" target="#tab_1">2</ref> in the Supplementary File). In the future, it would be interesting to study the impact on the classification performance of varying the hyperparameters for the construction of the k-mers matrix, such as the size of the k-mers, minimum recurrence or minimum abundance.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Conclusions</head><p>We propose a novel and reference-free method to perform Microbial Source Tracking and predict the metadata class of a given (meta)genomic sample. We tested our method on a collection of real metagenomic data sets of aOral origin and its possible contaminants and provided an estimation of the contribution of each source environment on each sample. We anticipate that the incorporation of decOM into paleogenomic analyses will prevent erroneous results and help identify contaminated metagenomic samples and ensure their validity.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="3,64.17,419.89,466.94,278.30" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="5,72.35,124.19,451.10,290.42" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="8,130.11,88.57,335.06,243.38" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="9,64.17,88.56,466.94,332.66" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1</head><label>1</label><figDesc>Environment type prediction performance of decOM, FEAST and mSourceTracker. Accuracy, precision, recall and F1-score were estimated as an average accross all classes in a leave-one-out-fashion. The results for decOM are presented in bold</figDesc><table><row><cell>Method</cell><cell>Accuracy</cell><cell>Precision</cell><cell>Recall</cell><cell>F1-score</cell></row><row><cell>decOM</cell><cell>0.8703</cell><cell>0.9184</cell><cell>0.8703</cell><cell>0.8753</cell></row><row><cell>FEAST</cell><cell>0.6816</cell><cell>0.5516</cell><cell>0.7452</cell><cell>0.5479</cell></row><row><cell>mSourceTracker</cell><cell>0.8388</cell><cell>0.8388</cell><cell>0.8388</cell><cell>0.8289</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 2</head><label>2</label><figDesc>Performance of decOM in the aOral validation set. As only one class is present in the validation data set (aOral), performance is measured using precision for this highly imbalanced setting</figDesc><table><row><cell>Method</cell><cell>Recall</cell></row><row><cell>decOM</cell><cell>0.8654</cell></row><row><cell>FEAST</cell><cell>0.6692</cell></row><row><cell>metaSourceTracker</cell><cell>0.6346</cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="funding">
+<div><head>Funding</head><p>R.C was supported by <rs type="funder">ANR Transipedia, Inception</rs> and <rs type="grantName">PRAIRIE grants</rs> (<rs type="grantNumber">PIA/ ANR16-CONV-0005</rs>, <rs type="grantNumber">ANR-18-CE45-0020</rs>, <rs type="grantNumber">ANR-19-P3IA-0001</rs>). This method is part of a project that has received funding from the <rs type="funder">European Union</rs>'s <rs type="programName">Horizon 2020 research and innovation programme</rs> under the <rs type="grantName">Marie Skłodowska-Curie</rs> grant agreement No <rs type="grantNumber">956229</rs>.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_AY5kuxX">
+					<idno type="grant-number">PIA/ ANR16-CONV-0005</idno>
+					<orgName type="grant-name">PRAIRIE grants</orgName>
+				</org>
+				<org type="funding" xml:id="_JW6NvDK">
+					<idno type="grant-number">ANR-18-CE45-0020</idno>
+				</org>
+				<org type="funding" xml:id="_hPYXxWS">
+					<idno type="grant-number">ANR-19-P3IA-0001</idno>
+					<orgName type="grant-name">Marie Skłodowska-Curie</orgName>
+					<orgName type="program" subtype="full">Horizon 2020 research and innovation programme</orgName>
+				</org>
+				<org type="funding" xml:id="_Qxb9rHd">
+					<idno type="grant-number">956229</idno>
+				</org>
+			</listOrg>
+
+			<div type="availability">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Availability of data and materials</head><p>The data sets analysed during the current study are available in the repository for decOM <ref type="bibr" target="#b30">[31]</ref>. Additional information on the version of the software used, as well as explanation on how to access the run accessions codes for the sources and validation set, is present in the Supplementary File.</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Supplementary Information</head><p>The online version contains supplementary material available at https:// doi. org/ 10. 1186/ s40168-023-01670-3.</p><p>Additional file 1. Supplementary File. Supplementary File (PDF) with supplementary figures and tables cited throughout the text.</p><p>Authors' contributions N.R. contributed with the problem proposal and the revision of the manuscript. C.D.G. performed the experiments, developed the graphics and wrote the method code. T.L. contributed with improvements in the auxiliary code to the method. R.V., H.R. and R.C. provided scientific and technical supervision. All authors reviewed the manuscript.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Declarations</head><p>Ethics approval and consent to participate Not applicable.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Consent for publication</head><p>Not applicable.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Competing interests</head><p>The authors declare no competing interests.</p><p>• fast, convenient online submission • thorough peer review by experienced researchers in your field</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>• rapid publication on acceptance</head><p>• support for research data, including large and complex data types • gold Open Access which fosters wider collaboration and increased citations maximum visibility for your research: over 100M website views per year</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>•</head><p>At BMC, research is always in progress.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Learn more biomedcentral.com/submissions</head><p>Ready to submit your research Ready to submit your research ? Choose BMC and benefit from:</p><p>? Choose BMC and benefit from:</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Publisher's Note</head><p>Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Community-curated and standardised metadata of published ancient metagenomic samples with AncientMetagenomeDir</title>
+		<author>
+			<persName><forename type="first">Jaf</forename><surname>Yates</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">A</forename><surname>Valtueña</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Å</forename><forename type="middle">J</forename><surname>Vågene</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Cribdon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">M</forename><surname>Velsko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Borry</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Sci Data</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="8" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Complete mitochondrial genome sequence of a Middle Pleistocene cave bear reconstructed from ultrashort DNA fragments</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Dabney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Knapp</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Glocke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">T</forename><surname>Gansauge</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Weihmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Nickel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proc Natl Acad Sci</title>
+		<imprint>
+			<biblScope unit="volume">110</biblScope>
+			<biblScope unit="issue">39</biblScope>
+			<biblScope unit="page" from="15758" to="15763" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Ancient metagenomic studies: considerations for the wider scientific community</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Der Sarkissian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">M</forename><surname>Velsko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">K</forename><surname>Fotakis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Å</forename><forename type="middle">J</forename><surname>Vågene</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Hübner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fellows</forename><surname>Yates</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Msystems</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="1315" to="1321" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Present-Day DNA Contamination in Ancient DNA Datasets</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Peyrégne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Prüfer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioessays</title>
+		<imprint>
+			<biblScope unit="volume">42</biblScope>
+			<biblScope unit="issue">9</biblScope>
+			<biblScope unit="page">2000081</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Effectiveness of decontamination protocols when analyzing ancient DNA preserved in dental calculus</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">G</forename><surname>Farrer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">L</forename><surname>Wright</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Skelly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Eisenhofer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Dobney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">S</forename><surname>Weyrich</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Sci Rep</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="14" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">A robust framework for microbial archaeology</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Warinner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Herbig</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fellows</forename><surname>Yates</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Weiß</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">L</forename><surname>Burbano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">A</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Ann Rev Genomics Hum Genet</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page" from="321" to="356" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">AuthentiCT: a model of ancient DNA damage to estimate the proportion of present-day DNA contamination</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Peyrégne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">M</forename><surname>Peter</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biol</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="16" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">FEAST: fast expectation-maximization for microbial source tracking</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Shenhav</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Thompson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">A</forename><surname>Joseph</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Briscoe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Furman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Bogumil</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Methods</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page" from="627" to="632" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Bayesian community-wide culture-independent microbial source tracking</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Knights</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Kuczynski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">S</forename><surname>Charlson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zaneveld</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">C</forename><surname>Mozer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">G</forename><surname>Collman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Methods</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">9</biblScope>
+			<biblScope unit="page" from="761" to="763" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Meta-SourceTracker: application of Bayesian source tracking to shotgun metagenomics</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">J</forename><surname>Mcghee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Rawson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">A</forename><surname>Bailey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Fernandez-Guerra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Sisk-Hackworth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kelley</forename><surname>St</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PeerJ</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page">8783</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Into the deep: evaluation of SourceTracker for assessment of faecal contamination of coastal waters</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Henry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Schang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Coutts</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Kolotelo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Prosser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Crosbie</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Water Res</title>
+		<imprint>
+			<biblScope unit="volume">93</biblScope>
+			<biblScope unit="page" from="242" to="253" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Source tracking of antibiotic resistance genes in the environment-Challenges, progress, and prospects</title>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">G</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Yin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Zhang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Water Res</title>
+		<imprint>
+			<biblScope unit="volume">185</biblScope>
+			<biblScope unit="page">116127</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Microbial source tracking using metagenomics and other new technologies</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Raza</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">J</forename><surname>Sadowsky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Unno</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Microbiol</title>
+		<imprint>
+			<biblScope unit="volume">59</biblScope>
+			<biblScope unit="page" from="259" to="269" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Using QIIME to analyze 16S rRNA gene sequences from microbial communities</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Kuczynski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Stombaugh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">A</forename><surname>Walters</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>González</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">G</forename><surname>Caporaso</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Knight</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Curr Protoc Bioinforma</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="10" to="17" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">A perspective on 16S rRNA operational taxonomic unit clustering using sequence similarity</title>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">P</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Warnow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Pop</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>White</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">NPJ Biofilms Microbiomes</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="8" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">The metagenomics and metadesign of the subways and urban biomes (metasub) international consortium inaugural meeting report</title>
+		<author>
+			<persName><forename type="first">The</forename><surname>Metasub</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">International</forename><surname>Consortium</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Microbiome</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">24</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Collaboration INSD. The sequence read archive</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Leinonen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Sugawara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Shumway</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">39</biblScope>
+			<biblScope unit="issue">suppl-1</biblScope>
+			<biblScope unit="page" from="19" to="21" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">The European Bioinformatics Institute in 2018: tools, infrastructure and training</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">E</forename><surname>Cook</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Lopez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Stroe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Cochrane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Brooksbank</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Birney</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">47</biblScope>
+			<biblScope unit="issue">D1</biblScope>
+			<biblScope unit="page" from="15" to="22" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Data structures based on k-mers for querying large collections of sequencing data sets</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Marchet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Boucher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">J</forename><surname>Puglisi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Medvedev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Salson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Chikhi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Res</title>
+		<imprint>
+			<biblScope unit="volume">31</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="12" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Kmtricks: efficient and flexible construction of bloom filters for large sequencing data collections</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Lemane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Medvedev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Chikhi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Peterlongo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinform Adv</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">29</biblScope>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">The efficacy of whole human genome capture on ancient dental calculus and dentin</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">A</forename><surname>Ziesemer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Ramos-Madrigal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">E</forename><surname>Mann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">W</forename><surname>Brandt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Sankaranarayanan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">T</forename><surname>Ozga</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Am J Phys Anthropol</title>
+		<imprint>
+			<biblScope unit="volume">168</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="496" to="509" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">A new era in palaeomicrobiology: prospects for ancient dental calculus as a long-term record of the human oral microbiome</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Warinner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Speller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">J</forename><surname>Collins</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Philos Trans R Soc B Biol Sci</title>
+		<imprint>
+			<biblScope unit="volume">370</biblScope>
+			<biblScope unit="issue">1660</biblScope>
+			<biblScope unit="page">20130376</biblScope>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Pathogens and host immunity in the ancient human oral cavity</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Warinner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jfm</forename><surname>Rodrigues</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Vyas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Trachsel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Shved</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Grossmann</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Genet</title>
+		<imprint>
+			<biblScope unit="volume">46</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="336" to="344" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Intrinsic challenges in ancient microbiome reconstruction using 16S rRNA gene amplification</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">A</forename><surname>Ziesemer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">E</forename><surname>Mann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Sankaranarayanan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Schroeder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">T</forename><surname>Ozga</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">W</forename><surname>Brandt</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Sci Rep</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="20" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Accessible, curated metagenomic data through ExperimentHub</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Pasolli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Schiffer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Manghi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Renson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Obenchain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">T</forename><surname>Truong</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/nmeth.4468</idno>
+		<ptr target="https://doi.org/10.1038/nmeth.4468" />
+	</analytic>
+	<monogr>
+		<title level="j">Nat Methods</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">11</biblScope>
+			<biblScope unit="page" from="1023" to="1024" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">HumanMetagenomeDB: a public repository of curated and standardized metadata for human metagenomes</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">C</forename><surname>Kasmanas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bartholomäus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">B</forename><surname>Corrêa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Tal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Jehmlich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Herberth</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">49</biblScope>
+			<biblScope unit="issue">D1</biblScope>
+			<biblScope unit="page" from="743" to="750" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">MGnify: the microbiome analysis resource in 2020</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">L</forename><surname>Mitchell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Almeida</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Beracochea</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Boland</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Burgin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Cochrane</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">48</biblScope>
+			<biblScope unit="issue">D1</biblScope>
+			<biblScope unit="page" from="570" to="578" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Fast and sensitive taxonomic classification for metagenomics with Kaiju</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Menzel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">L</forename><surname>Ng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Krogh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Commun</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="9" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">DSK: k-mer counting with very low memory usage</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Rizk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Lavenier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Chikhi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="652" to="653" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Lightweight compositional analysis of metagenomes with FracMinHash and minimum metagenome covers</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Irber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">T</forename><surname>Brooks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Reiter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pierce-Ward</forename><surname>Nt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">R</forename><surname>Hera</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Koslicki</surname></persName>
+		</author>
+		<idno type="DOI">10.1101/2022.01.11.475838</idno>
+		<ptr target="https://doi.org/10.1101/2022.01.11.475838" />
+	</analytic>
+	<monogr>
+		<title level="j">bioRxiv</title>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Duitama</forename><surname>González</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Decom</surname></persName>
+		</author>
+		<ptr target="https://github.com/CamilaDuitama/decOM" />
+		<imprint>
+			<date type="published" when="2022-05-17">2022. 17 May 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<monogr>
+		<title level="m" type="main">Bioproject FAQ</title>
+		<ptr target="https://www.ncbi.nlm.nih.gov/bioproject/docs/faq/#what-is-a-bioproject" />
+		<imprint>
+			<date type="published" when="2018-05-17">2018. 17 May 2022</date>
+			<publisher>U.S. National Library of Medicine</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Scikit-learn: Machine Learning in Python</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Pedregosa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Varoquaux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Gramfort</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Michel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Thirion</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Grisel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Mach Learn Res</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page" from="2825" to="2830" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<title level="m" type="main">Do I have something in my teeth? Quat Int: The trouble with genetic analyses of diet from archaeological dental calculus</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">E</forename><surname>Mann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jaf</forename><surname>Yates</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Fagernäs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">M</forename><surname>Austin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">A</forename><surname>Nelson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">A</forename><surname>Hofman</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">KrakenUniq: confident and fast metagenomics classification using unique k-mer counts</title>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">P</forename><surname>Breitwieser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Baker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">L</forename><surname>Salzberg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biol</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="10" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

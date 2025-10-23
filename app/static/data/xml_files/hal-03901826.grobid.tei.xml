@@ -1,0 +1,1432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Shennong: a Python toolbox for audio speech features extraction</title>
+				<funder ref="#_YzXM5tE #_Dp94DMe">
+					<orgName type="full">unknown</orgName>
+				</funder>
+				<funder ref="#_KcvZEvM">
+					<orgName type="full">Inria</orgName>
+				</funder>
+				<funder ref="#_ZKKUXDq #_Z97dFUH">
+					<orgName type="full">Agence Nationale de la Recherche</orgName>
+					<orgName type="abbreviated">ANR</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2021-12-10">10 Dec 2021</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author role="corresp">
+							<persName><forename type="first">Mathieu</forename><surname>Bernard</surname></persName>
+							<email>mathieu.a.bernard@inria.fr</email>
+							<affiliation key="aff1">
+								<orgName type="laboratory">EHESS</orgName>
+								<orgName type="institution" key="instit1">ENS</orgName>
+								<orgName type="institution" key="instit2">PSL Research University</orgName>
+								<orgName type="institution" key="instit3">CNRS and Inria</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Maxime</forename><surname>Poli</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="laboratory">EHESS</orgName>
+								<orgName type="institution" key="instit1">ENS</orgName>
+								<orgName type="institution" key="instit2">PSL Research University</orgName>
+								<orgName type="institution" key="instit3">CNRS and Inria</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Julien</forename><surname>Karadayi</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="laboratory">EHESS</orgName>
+								<orgName type="institution" key="instit1">ENS</orgName>
+								<orgName type="institution" key="instit2">PSL Research University</orgName>
+								<orgName type="institution" key="instit3">CNRS and Inria</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Emmanuel</forename><surname>Dupoux</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="laboratory">EHESS</orgName>
+								<orgName type="institution" key="instit1">ENS</orgName>
+								<orgName type="institution" key="instit2">PSL Research University</orgName>
+								<orgName type="institution" key="instit3">CNRS and Inria</orgName>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="institution">Facebook AI Research</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="institution">Mathieu Bernard -Inria</orgName>
+								<address>
+									<addrLine>2 rue Simone Iff</addrLine>
+									<postCode>75012</postCode>
+									<settlement>Paris</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Shennong: a Python toolbox for audio speech features extraction</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2021-12-10">10 Dec 2021</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">6EAB5B3C585B146372A46B2AB13D75AB</idno>
+					<idno type="arXiv">arXiv:2112.05555v1[cs.CL]</idno>
+					<note type="submission">Received: date / Accepted: date</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:14+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Speech processing</term>
+					<term>Features extraction</term>
+					<term>Pitch estimation</term>
+					<term>Software</term>
+					<term>Python</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>We introduce Shennong, a Python toolbox and command-line utility for speech features extraction. It implements a wide range of well-established state of art algorithms including spectro-temporal filters such as Mel-Frequency Cepstral Filterbanks or Predictive Linear Filters, pre-trained neural networks, pitch estimators as well as speaker normalization methods and post-processing algorithms. Shennong is an open source, easy-to-use, reliable and extensible framework. The use of Python makes the integration to others speech modeling and machine learning tools easy. It aims to replace or complement several heterogeneous software, such as Kaldi or Praat. After describing the Shennong software architecture, its core components and implemented algorithms, this paper illustrates its use on three applications: a comparison of speech features performances on a phones discrimination task, an analysis of a Vocal Tract Length Normalization model as a function of the speech duration used for training and a comparison of pitch estimation algorithms under various noise conditions.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>Automatic processing of speech is at the heart of a wide range of applications: speech to text <ref type="bibr" target="#b1">[2]</ref>, speaker identification <ref type="bibr" target="#b40">[41]</ref>, emotion recognition <ref type="bibr" target="#b20">[21]</ref> or speaker di-arization <ref type="bibr" target="#b32">[33,</ref><ref type="bibr" target="#b33">34]</ref>. It is also applied to a variety of contexts such as multilingual models <ref type="bibr" target="#b11">[12,</ref><ref type="bibr" target="#b39">40]</ref>, low-resource languages <ref type="bibr" target="#b7">[8,</ref><ref type="bibr" target="#b8">9]</ref>, pathological speech <ref type="bibr" target="#b24">[25,</ref><ref type="bibr" target="#b31">32]</ref> or, more recently, end-to-end deep learning models <ref type="bibr" target="#b34">[35,</ref><ref type="bibr" target="#b43">44]</ref>. All of those applications rely on some representation or features of the speech signal, i.e. a transformation of the raw audio signal which carries informative and/or discriminative information, usually in the time-frequency domain, that can further be processed and analyzed. As so, features extraction is the first step of most speech processing pipelines.</p><p>A lot of speech features extraction softwares have been proposed over time, with a huge number of implementations in different programming languages. Among them, some tools gained a wide audience. Kaldi <ref type="bibr" target="#b30">[31]</ref> is an Automatic Speech Recognition toolkit that covers every aspect of this topic, from language modeling to decoding and features extraction. Written in C++, it supports a collection of state of the art recipes as Bash scripts. Whereas it is very reliable and efficient, it is hard to use and to embed in third party tools for non-technical users. Praat <ref type="bibr" target="#b3">[4]</ref> is another popular software used for speech analysis in phonetics, particularly for speech annotation. It can be used from a graphical user interface or from a custom scripting language. It includes basic spectro-temporal analysis, such as spectrogram, cochleogram and pitch analysis. OpenSMILE <ref type="bibr" target="#b10">[11]</ref> is another features extraction package. Designed for real time processing, it focuses on audio signal but is generic enough to be used for visual or physiological signals as well. Usable from command-line of from wrapper in various programming languages, it's generic approach make it hard to use and configure. Finally, Surfboard <ref type="bibr" target="#b21">[22]</ref> is a Python toolbox dedicated to speech features extraction. It is oriented toward medical applications and implements numbers of specialized mark-ers. Both OpenSMILE and Surfboard are very suitable tools but they lack of general purpose features such as speaker normalization, and they do not propose fine grained parameters as offered by Kaldi.</p><p>The main objective of the Shennong toolbox is to provide reference implementations of speech features extraction algorithms in an easy-to-use and reliable framework. The use of Python makes it easy to integrate Shennong with modern machine learning tools such as scikit-learn <ref type="bibr" target="#b26">[27]</ref>, Pytorch <ref type="bibr" target="#b25">[26]</ref> and Tensorflow <ref type="bibr" target="#b0">[1]</ref>. Another design goal for Shennong is that it can be used both by casual users, with provided pre-configured pipelines, and power users, being entirely customizable and easily extensible. Finally, by distributing such a tool to the community, our objective is also to reduce the use of heterogeneous features extraction implementations used in the literature, and therefore improving replicability and comparability of studies.</p><p>This paper is structured as follows. Section 2 describes the speech processing algorithms available in Shennong and the architecture of the toolbox, from lowlevel components to high-level user interfaces. It also introduces simple usage examples. Section 3 exposes three applications. First, the features extraction algorithms implemented in Shennong are compared on a phoneme discrimination task. An analysis of Vocal Track Length Normalization models quality as a function of speech duration used for training is then proposed. The final experiment compares three pitch estimation algorithms under different noisy conditions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">The Shennong toolbox</head><p>Shennong 1 is a Python toolbox for easy-to-use, reliable and reproducible speech features extraction. The package is distributed as open-source software 2 under a GPL3 licence. It is available for Linux and MacOS systems, as well as a Docker image <ref type="bibr" target="#b17">[18]</ref>, which can be deployed on Windows. It can be used as a Python library and being integrated in third-party applications, or used directly from the command line and called from bash scripts. The code follows high quality standards in terms of software development, testing and documentation. It's modular design makes it easily extensible. The continuous development of Shennong leads to successive versions being released. This paper is based on the version 1.0.</p><p>1 Shennong is named after the so-called Chinese Emperor that popularized the tea according to Chinese Mythology. This is a reference to Kaldi, a speech recognition toolkit on which Shennong is built, and a legendary Ethiopian goatherd who discovered the coffee plant.</p><p>2 https://github.com/bootphon/shennong</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Framing</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Spectrogram</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Mel Scale</head><p>Mel Filterbanks PLP Rasta filters <ref type="bibr" target="#b9">[10]</ref> MFCC Bottleneck <ref type="bibr" target="#b39">[40]</ref> Pitch <ref type="bibr" target="#b19">[20,</ref><ref type="bibr" target="#b30">31]</ref> Pitch postprocessing Universal Background Model</p><p>Vocal Tract Length Normalization Fig. <ref type="figure">1</ref>: Features extraction algorithms hierarchy, from speech signal to usable features (blocks in full lines) with intermediate or optional steps (blocks in dashed lines). When no reference is present, the blocks are implemented after Kaldi <ref type="bibr" target="#b30">[31]</ref>. The available parameters for each block are detailed in Table <ref type="table">1</ref>. Post-processing algorithms, such as Delta and Cepstral Mean Variance Normalization, are not represented in this diagram (see text for details).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Implemented algorithms</head><p>The algorithms available in Shennong are presented in Figure <ref type="figure">1</ref>. Most of them are implemented after Kaldi <ref type="bibr" target="#b30">[31]</ref>, using the pykaldi Python wrapper <ref type="bibr" target="#b4">[5]</ref>. The algorithms are provided with all the parameters given by original implementations and default values suitable for most cases, as detailed in Table <ref type="table">1</ref>. All the implemented algorithms have been carefully and extensively tested so as to replicate original implementations. The remaining of this section introduces those algorithms, for which a comparison is provided in Section 3.1.</p><p>Spectro-temporal representations are widely used methods based on short-term spectral analysis. In Shennong they include Spectrogram, Mel-Filterbanks, Mel-Frequency Cepstrum Coefficients (MFCC) and Perceptual Linear Predictive filters (PLP). Starting from raw speech, the signal is first split into overlapping frames, on which the power spectrum is computed. The power spectrum, along with signal energy, and optionally expressed in the log domain, is used to generate the Spectrogram features. The Mel Filterbanks are then obtained by applying a mel scale to the power spectrum. Finally MFCC and PLP are obtained with further processing in the cepstral domain. Rasta filters are optionnal bandpass filters that can be applied to PLP features <ref type="bibr" target="#b14">[15,</ref><ref type="bibr" target="#b15">16,</ref><ref type="bibr" target="#b16">17]</ref>, so as to make them more robust to linear spectral distortions due to the communication channel.</p><p>Vocal Track Length Normalization (VTLN) <ref type="bibr" target="#b18">[19,</ref><ref type="bibr" target="#b29">30]</ref> is a normalization technique used to reduce inter-speaker variability. It can be applied to Mel based representations, namely Mel Filterbanks, MFCC and PLP features. It consists of a model based estimation of speakerspecific linear transforms of the power spectrum that scale the mel filters center frequencies and bandwidths. It requires an Universal Background Model to be trained in order to estimates a VTLN warp coefficient per speaker, that is applied to features for normalization. The training is unsupervised and does not requires any annotation or phonetic transcription. The effectiveness of VTLN is demonstrated on Section 3.1 and a study on the amount of data required to train a VTLN model is provided in Section 3.2.</p><p>The Bottleneck features <ref type="bibr" target="#b11">[12,</ref><ref type="bibr" target="#b39">40]</ref> relies on convolutional neural networks pre-trained for phones recognition. Three networks are available: monophone and triphone states, both trained on US English from the Fisher dataset <ref type="bibr" target="#b5">[6]</ref>, and a multilingual triphone states network trained on 17 languages from the Babel dataset <ref type="bibr" target="#b13">[14]</ref>.</p><p>Shennong also implements two algorithms for pitch estimation. The first one from Kaldi <ref type="bibr" target="#b12">[13]</ref> is based on normalized a cross-correlation of the input signal and outputs for each frame a pitch estimate along with a probability of voicing. The second algorithm is Convolutional REpresentation for Pitch Estimation (CREPE) <ref type="bibr" target="#b19">[20]</ref> and is based on a convolutional neural network pretrained on music datasets <ref type="bibr" target="#b19">[20,</ref><ref type="bibr" target="#b22">23]</ref>. The CREPE algorithm is made fully compatible with the Kaldi one by turning the maximum of the network activation matrix into a probability of voicing and by interpolating pitch for frames with low confidence. Finally, a postprocessing step, common to both algorithms, normalizes the pitch estimates, convert them to log domain and extract their first-order derivative. A comparison of those algorithms is proposed Section 3.3.</p><p>Finally Shennong also provides post-processors that normalize or add information on extracted features. Delta computes the n th order derivative of any raw features. Voice Activity Detection (VAD) is a simple energy based method that makes binary decisions, without any notion of continuity, that can be used to filter out silences. Cepstral Mean Variance Normalization (CMVN) normalizes features to a zero mean and unitary variance. It can be applied on a per-frame, perutterance or per-speaker basis.  The Features class is the output returned by processing algorithms. It stores three attributes: a data array, a time array and some properties. Data is a numpy array of shape [m, n] with m being the number of frames on the temporal axis and n being the features dimension, usually along the frequency axis. The time array stores the timestamps of each frame either as a single value corresponding to the center time of each frame, with a shape [m, 1], or as a pair of onset/offset times with a shape [m, 2]. Several Features instances sharing the same time values can be concatenated over the frequency axis, so as to obtain composite data within the same array, e.g. MFCC and pitch. Finally, the properties record details of the extraction pipeline such as the name of the input audio file and processing parameters values.</p><p>The Features class is designed to store a single matrix corresponding to a single Audio. Several Features are usually grouped into a FeaturesCollection, for instance to easily manage a whole dataset represented as a Utterances. This class indexes Features by name and allows to save and load features to/from various file formats (Table <ref type="table" target="#tab_2">2</ref>). The pickle format is the native Python one, it is very fast in both writing and reading times and should be the preferred format for little to medium dataset. The h5features format <ref type="bibr" target="#b35">[36]</ref> is specifically designed to handle very large datasets as it allows partial writing and reading of data larger than RAM. The formats numpy, matlab and kaldi propose compatibility layers to those respective tools. Finally the csv format stores features into plain text CSV files, one file per Features in the collection, along with the features properties in JSON format.</p><p>The features extraction algorithms are abstracted by the Processor class (see Figure <ref type="figure">1</ref>). Therefore all algorithms implemented in Shennong expose an homogeneous interface to the user: the parameters are specified in the constructor and a process() method takes Audio or Features as input and returns Features. A generic method process all() is also provided to compute features from a whole Utterances in a single call, using parallel jobs and returning a FeaturesCollection.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">High-level extraction pipeline</head><p>The modular design described above allows the creation of arbitrary pipelines involving multiple steps, such as raw features extraction, pitch estimation and normalization. In order to simplify the use of such complex pipelines, Shennong exposes a high-level interface made of three steps, which can be used from Python using the pipeline module or from command line using the speech-features program.</p><p>The first step is to define a list of utterances on which to apply the pipeline, as a list of audio files, with optional utterances name, speaker identification and onset/offset times. The second step is to configure the extraction pipeline by selecting the extraction algorithms to use. This step generates a configuration with default parameters, which can further be edited by the user. The third and last step is to apply the configured pipeline on the defined utterances. Two use cases are illustrated in Fig. <ref type="figure">2</ref>: the use of the low-level API to extract MFCCs on a single file (Fig. <ref type="figure">2a</ref>) and the use of a high-level pipeline to extract both MFCCs and pitch on three utterances from two speakers, from the Python API (Fig. <ref type="figure">2b</ref>) and command line (Fig. <ref type="figure">2c</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Applications</head><p>This section demonstrates the use of Shennong for experimental purpose. Three applications are introduced: a comparison a features extraction algorithms on a phones discrimination task, an analysis of the VTLN model performance as a function of speech duration used for training and a comparison of pitch estimation algorithms on various noise conditions. The code to replicate those experiments is distributed with Shennong<ref type="foot" target="#foot_0">3</ref> .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Phones discrimination task</head><p>This section details a phones discrimination experiment used as a proxy to compare the features algorithms available in Shennong. It reproduces the track 1 of the Zero Speech Challenge 2015 <ref type="bibr" target="#b41">[42]</ref> using the same datasets and evaluation.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1.1">Methods</head><p>The datasets are composed of selected segments from two free, open access and annotated speech corpora, the Buckeye Corpus <ref type="bibr" target="#b27">[28]</ref> (American English, 12 speakers, 10h34m44s) and the NCHLT Speech Corpus <ref type="bibr" target="#b6">[7]</ref> (Xitsonga, 24 speakers, 4h24h37s). The gold phonemes transcriptions have been obtained from a forced alignment using Kaldi.</p><p>The evaluation of phone discriminability uses a minimal pair ABX task, a psychophysically inspired algorithm that only requires a notion of distance between the representations of speech segments <ref type="bibr" target="#b36">[37,</ref><ref type="bibr" target="#b37">38,</ref><ref type="bibr" target="#b38">39]</ref>. The ABX discriminalbility, for example, between [apa] and [aba], is defined as the probability that the representations of A and X are more similar than representations of B and X, over all triplets of tokens such that A and X are tokens of [aba] and B a token of [apa]. The discriminability is evaluated within speakers, where A, B and X are uttered by the same speaker, and across speakers, such that X is uttered by a different speaker than A and B. The global ABX phone discriminability score aggregates over the entire set of minimal triphone pairs such as ([aba], [apa]) to be found in the dataset. The metric used for ABX evaluation is the Dynamic Time Wrapping divergence using the cosine distance as underlying frame-level metric.</p><p>The following features extraction algorithms are considered: spectrogram, filterbank, MFCC, PLP, RASTA-PLP and multilingual bottleneck network. All the algorithms are used with default arguments. Each algorithm is declined in three pipeline configurations. The raw features alone are first considered, noted as raw in Table <ref type="table" target="#tab_3">3</ref>, and of dimension n. Then the concatenation of the raw features with their first and second order derivatives, along with pitch estimates, are used and noted +∆/F 0, giving a dimension 3n + 3. The cross-correlation pitch estimation algorithm from Kaldi Fig. <ref type="figure">2</ref>: Examples of use of Shennong. In (2a) MFCC are extracted and saved from an input audio file. The features have 13 dimensions, which is the default number of Mel coefficients. In (2b) and (2c) a pipeline is used for MFCC and pitch extraction on three utterances from two speakers, the two scripts in Python and bash being strictly equivalent and giving the same result. For each utterance, the extracted features have 16 dimensions: 13 for MFCC and 3 for pitch estimates. is used, it outputs three channels: probability of voicing, normalized log pitch and raw pitch derivative. Finally CMVN is applied on a per-speaker basis on the +∆/F 0 configuration, giving a zero mean and unitary variance on each channel independently, and is noted as +CM V N . Furthermore a VTLN model is trained on 10 minutes of speech per speaker for each of the two cor-pora and is applied to spectrogram, filterbank, MFCC and PLP, for each of the three pipeline configurations.  network largely outperforms the spectro-temporal algorithms in every configuration. This is expected as the bottleneck model is trained for phone discrimination. Among the spectro-temporal algorithms, the filterbank model performs very well and reachs the best score on 7 over 8 configurations. This result is to be underlined as it beats MFCC, which is by far the most used algorithm in the literature, in all the configurations excepted on English across speakers with VTLN.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1.2">Results</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Experimental results are presented in</head><p>Now considering the impact of raw, +∆/F 0 and +CM N V pipelines for the different algorithms, it is demonstrated that adding pitch, deltas and CMVN to raw features is beneficial for both MFCC, PLP and Rasta-PLP is all configurations, excepted for the bottleneck algorithm. Spectrogram and filterbank algorithms benefit from pitch and deltas as well but, with the exception of the Xitsonga across speakers configuration, the addition of CMVN degrades the ABX score. Rasta filtering on PLP gives different results across languages: it degrades the score on English but improve them on Xitsonga.</p><p>Finally considering the use of VTLN, it improves both MFCC and PLP scores by about 4% on the across speakers context, whereas filterbank gain about 1%. No or little improvement is attested within speakers for all the algorithms. This is expected in this context because ABX scores are computed on a single speaker.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">VTLN model training</head><p>This section explores the influence of the amount of speech duration used for VTLN training on the resulting VTLN coefficients and phones discriminability scores.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2.1">Methods</head><p>The same segment of the Buckeye English corpus as in Section 3.1 is used. It is composed of 10h34m44s of speech balanced across 12 speakers. In order to train several VTLN models on variable speech duration, this corpus is split in sub-corpora containing a given speech duration per speaker. The considered durations are 5s, 10s, 20s, 30s, 60s and up to 600s by steps of 60s. The subcorpora are built without overlap: the first block of fixed duration for each speaker are joined together, then for the second blocks, etc. This gives a total of 1010 corpora, from 479 for 5s per speaker to 2 for 600s per speaker, following a power law. For each of those corpora, a VTLN model is trained using the default parameters and VTLN coefficients are extracted.</p><p>Then MFCC features are extracted from those corpora, using default parameters, and normalized with their associated VTLN coefficients. MFCC features are declined over the 3 pipeline configurations raw, +∆/F 0 and +CM V N , as detailed in Section 3.1. ABX discriminability score is then computed across speakers as before. To mitigate the computational cost, a maximum </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2.2">Results</head><p>Figure <ref type="figure">3</ref> shows the evolution of the VTLN coefficients for different speakers, in function of the amount of speech per speaker used for training. With 300s per speaker, or 1h of speech in total, the coefficient are largely con-verged and remain overall stable when more data is added for training. This demonstrates that training a VTLN does not require a large amount of data, thus reducing the computational needs and training time. Moreover the differentiation comes very early: with 30s of speech per speaker only, the VTLN coefficients are already clustered.</p><p>Figure <ref type="figure">4</ref> shows the ABX error rate obtained on MFCC features without VTLN normalization and with VTLN computed using different speech durations per speaker. First considering the scores obtained without VTLN and with VTLN trained on the whole dataset, results match those displayed in Table <ref type="table" target="#tab_3">3</ref>: in raw configuration the scores go from 27.2% to 23.4%, from 26.4% to 22.7% for +∆/F 0 and from 24.0% to 20.0% for +CM V N . The 3 configurations follow the same tendency and rapidly converge to a nearly optimal score, starting with 60s of speech per speaker for VTLN training. Consolidating from results on Figure <ref type="figure">3</ref>, it is shown here that the VTLN coefficients do not need to have fully converged to yield a close to optimal normalization.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">Pitch estimation</head><p>This section compares pitch estimation algorithms on speech, under various noise conditions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3.1">Methods</head><p>The Keele Pitch Database <ref type="bibr" target="#b28">[29]</ref> is used for evaluation. It consists of approximately 6 minutes of clean speech with pitch estimates, separated in 10 phonetically balanced sentences by five male and five female speakers. The pitch is estimated from the autocorrelation of a laryngograph signal using frames of 25.6 ms with a 10 ms overlap. As noise robustness is key to applications with real world data, the KEELE dataset has been corrupted by additive noise at 7 signal to noise ratios (SNR) ranging from -15 dB to 15 dB. Two noises are considered: white Gaussian noise and babble noise, which consist in a recording of a restaurant ambiance.</p><p>The Kaldi and CREPE pitch estimators from Shennong (see Section 2.1) are compared with two other popular models: the Praat algorithm <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b3">4]</ref>, which uses an auto-correlation method, and the YAAPT algorithm <ref type="bibr" target="#b42">[43]</ref> based on a combination of time and frequency domain processing using normalized cross-correlation. To match the gold pitch estimates from the KEELE dataset, the Kaldi, CREPE and YAAPT algorithms are parametrized to use frames of 25.6ms with a 10ms overlap. The Praat algorithm does not support frames parametrization so  Finally an important amount of frames is estimated as unvoiced on clean speech: only 50.3 % of the KEELE gold estimates are valid pitches. Other values correspond to an absence of voiced speech or a corrupted laryngograph signal. The algorithms as well estimate some frames as unvoiced. This is detected by a pitch estimate at 0 for Praat and YAAPT models, or by a low confidence for Kaldi and CREPE. To avoid estimation biases, the union of all the frames classified as unvoiced within the KEELE dataset and by the 4 algorithms on clean speech are removed from the evaluation. This leads to 36.3 % of the total number of frames being conserved for the evaluations at different SNR. The behavior of the four studied algorithms differs for frames classified as unvoiced: Kaldi and CREPE always give a positive pitch estimate but associated to a low confidence, whereas Praat and YAAPT estimates a pitch at 0. As such, when frames are estimated unvoiced on noisy conditions for Praat and YAAPT, they are evaluated against non-zero ground truth.</p><p>Two performance measures are considered. The Gross Error Ratio (GER) is the proportion of pitch estimates that differ from more than 5 % from the ground truth. The Mean Absolute Error (MAE) is the mean of the absolute error between the pitch estimates and the ground truth. Thus, given a speech signal with n frames, x ∈ R n its ground truth and x ∈ R n its pitch estimates for each frame, the GER and MAE metrics are expressed as follows:</p><formula xml:id="formula_0">M AE(x, x) = 1 n n i=1 |x i -x i |,<label>(1)</label></formula><formula xml:id="formula_1">GER(x, x) = 100 n n i=1 1 |xi-xi|&gt;0.05xi ,<label>(2)</label></formula><p>where 1 p(.) is 1 when the predicate p(.) is true and 0 otherwise.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3.2">Results</head><p>Figure <ref type="figure" target="#fig_3">5</ref> shows the evaluation error obtained for the four algorithms and the two noises at the considered SNR, for both MAE and GER metrics. Considering first the errors obtained on Gaussian noise (Figures <ref type="figure" target="#fig_3">5a</ref> and<ref type="figure" target="#fig_3">5b</ref>), MAE and GER follow similar patterns for all the algorithms. When there is no or little noise, all models obtain a low error which is stable across speakers. The Praat algorithm is the first one to have degraded performances, starting at 10 dB, where CREPE and YAAPT starts at 5 dB. The Kaldi algorithms is particularly strong against this noise, with a stable error up to -5 dB. CREPE and YAAPT have similar errors across SNR, with CREPE being more robust to noise up to -5 dB and YAAPT below -5 dB. When considering the effect of additive babble noise (Figures <ref type="figure" target="#fig_3">5c</ref> and<ref type="figure" target="#fig_3">5d</ref>), the algorithms performance starts to decrease at 10 dB. Across the SNR range, Kaldi and CREPE performances are very close and give the lowest errors. CREPE is more reliable with a lowest GER, excepted at -15 dB where Kaldi performs better. YAAPT and primarily Praat do not perform well on babbbke noise and have high errors rates and standard deviations. Overall, Kaldi, CREPE and YAAPT perform better on Gaussian noise than babble noise, YAAPT being the most sensitive to the latter. Praat is the only algorithm to have an increase of performance on babble noise. Finally, both CREPE and Kaldi appears to being more reliable estimators than Praat and YAAPT, with Kaldi being more robust to Gaussian noise and CREPE to babble noise.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Discussion</head><p>This paper introduced Shennong, an open source Python package for speech features extraction. The toolbox covers a wide range of well-established state of the art algorithms, most of them being implemented after Kaldi. The software architecture and components of Shennong focuses on ease-of-use, reliability and extensibility. It covers different use cases: few commands are sufficient to configure and apply a complex extraction pipeline, but power-users can benefit from the Python API to hand-tune any part of the pipeline or to integrate Shennong in their own projects.</p><p>Three experiments on features comparison using Shennong are provided, showing that the package is mature enough to be used as a research tool. The first experiment demonstrates that, counter-intuitively, mel filterbanks perform better that the popular MFCC on a phones discrimination task. It also showed that VTLN speaker normalization reduces the error rates up to 5 %. The second experiment analyzed the amount of speech required to train a VTLN model and demonstrates than 5 to 10 minutes of signal per speaker are enough to reach near-optimal performances. Finally the last experiment compared pitch estimation algorithms under various noise conditions and demonstrated than the two algorithms provided with Shennong are more robust to noise than YAAPT and Praat algorithms, commonly used in phonology.</p><p>The development of Shennong is not over as more features extraction algorithms are planned to be added, such as Voice Activity Detection and Contrastive Predictive Coding <ref type="bibr" target="#b23">[24]</ref>. Because Shennong is free software with open sources, it's future will be impacted by the users needs and requests. We hope the Shennong's community of users and contributors will grow as its visibility increase.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>4 # 7 # 10 # 1 from shennong import pipeline 2 3 # 4 # 7 # 9 ( 13 # 1 # 2 # 5 # 10 #</head><label>4710134791312510</label><figDesc>load the input WAV file 5 audio = Audio.load('test.wav') 6 extract MFCCs with default parameters 8 mfcc = MfccProcessor().process(audio) 9 save the features as a numpy .npz file FeaturesCollection({'mfcc': mfcc}).save('mfcc.npz') (a) MFCC extraction in Python, using the low-level API. generate a pipeline configuration with MFCC and pitch from Kaldi (user can then edit parameters in config) 5 config = pipeline.get_default_config('mfcc', with_pitch='kaldi') 6 defines three utterances from two speakers 8 utterances = [ 'utterance1', '/path/to/wav1.wav', 'speaker1'), 10 ('utterance2', '/path/to/wav2.wav', 'speaker1'), 11 ('utterance3', '/path/to/wav3.wav', 'speaker2')] 12 apply the configured pipeline on the utterances, run on 3 CPU cores 14 # and save the extracted features to a numpy format 15 pipeline.extract_features(config, utterances, njobs=3).save('features.npz') (b) MFCC and pitch extraction in Python, using an extraction pipeline. generate a pipeline configuration with MFCC and pitch from Kaldi (user can then edit parameters in config.yaml) 3 speech-features config mfcc --pitch kaldi -o config.yaml 4 defines three utterances from two speakers 6 echo "utterance1 /path/to/wav1.wav speaker1" &gt; utterances.txt 7 echo "utterance2 /path/to/wav2.wav speaker1" &gt;&gt; utterances.txt 8 echo "utterance3 /path/to/wav3.wav speaker2" &gt;&gt; utterances.txt 9 apply the configured pipeline on the utterances, run on 3 CPU cores 11 # and save the extracted features to a numpy format 12 speech-features extract --njobs 3 config.yaml utterances.txt features.npz (c) MFCC and pitch extraction from command line, using an extraction pipeline.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Fig. 3 :Fig. 4 :</head><label>34</label><figDesc>Fig. 3: Average VTLN coefficients for different speakers according to the speech duration per speaker used for VTLN training. The lines correspond to coefficients of 7 representative speakers out of 12. The shaded areas are standard deviations.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head></head><label></label><figDesc>Babble noise, Gross Error Rate</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Fig. 5 :</head><label>5</label><figDesc>Fig.5: Pitch estimation error for the Kaldi, CREPE, Praat and YAAPT algorithms using Mean Absolute Error and Gross Error Rate on the KEELE dataset. White Gaussian noise or babble noise is added at various signal to noise ratios. Lines are mean errors over all the 10 speakers and shaded areas are standard deviations.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 2 :</head><label>2</label><figDesc>File formats supported by Shennong for reading and writing a FeaturesCollection. The read/write times and file size have been obtained on MFCC features computed on the Buckeye English Corpus<ref type="bibr" target="#b27">[28]</ref> (40 speakers, about 38 hours of speech in 254 files) using a Linux machine with a Intel Xeon CPU, 16 GB RAM and a SSD hard drive.2.2 Low-level software architectureShennong is built on few low-level components, namely Python classes, that user can use to configure and run a features extraction pipeline.The Audio class is the interface with raw audio data and is the input of all pipelines implemented in Shennong. It is used to load audio files as numpy arrays, resample and manipulate them. It supports multiple audio file formats such as WAV or FLAC. The Utterances class provides a high-level view of speech fragments as it handles a collection of Audio instances, each one with an attached identifier, speaker information and optional onset and offset times.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 3 .</head><label>3</label><figDesc>First considering the overall scores, the bottleneck neural</figDesc><table><row><cell></cell><cell></cell><cell></cell><cell cols="2">Within speakers</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell cols="2">Across speakers</cell><cell></cell><cell></cell></row><row><cell>Algorithm</cell><cell></cell><cell cols="2">without VTLN</cell><cell></cell><cell>with VTLN</cell><cell></cell><cell></cell><cell cols="2">without VTLN</cell><cell></cell><cell>with VTLN</cell><cell></cell></row><row><cell></cell><cell>raw</cell><cell cols="2">+∆/F0 +CMNV</cell><cell>raw</cell><cell cols="2">+∆/F0 +CMNV</cell><cell>raw</cell><cell cols="2">+∆/F0 +CMNV</cell><cell>raw</cell><cell cols="2">+∆/F0 +CMNV</cell></row><row><cell>Spectrogram</cell><cell>16.7</cell><cell>15.2</cell><cell>20.2</cell><cell>-</cell><cell>-</cell><cell>-</cell><cell>30.3</cell><cell>27.9</cell><cell>29.7</cell><cell>-</cell><cell>-</cell><cell>-</cell></row><row><cell>Filterbank</cell><cell>12.8</cell><cell>11.6</cell><cell>18.2</cell><cell>12.6</cell><cell>11.4</cell><cell>18.1</cell><cell>24.9</cell><cell>22.1</cell><cell>26.5</cell><cell>23.2</cell><cell>20.7</cell><cell>25.4</cell></row><row><cell>MFCC</cell><cell>13.0</cell><cell>12.5</cell><cell>12.4</cell><cell>12.8</cell><cell>12.3</cell><cell>12.0</cell><cell>27.2</cell><cell>26.4</cell><cell>24.0</cell><cell>23.4</cell><cell>22.7</cell><cell>20.0</cell></row><row><cell>PLP</cell><cell>12.5</cell><cell>12.4</cell><cell>11.9</cell><cell>12.5</cell><cell>12.4</cell><cell>11.9</cell><cell>28.0</cell><cell>26.6</cell><cell>23.8</cell><cell>24.7</cell><cell>23.5</cell><cell>19.7</cell></row><row><cell>Rasta-PLP</cell><cell>14.3</cell><cell>14.2</cell><cell>12.5</cell><cell>14.2</cell><cell>14.1</cell><cell>12.5</cell><cell>28.5</cell><cell>26.8</cell><cell>25.3</cell><cell>24.6</cell><cell>23.6</cell><cell>21.3</cell></row><row><cell>Bottleneck</cell><cell>8.5</cell><cell>8.5</cell><cell>8.6</cell><cell>-</cell><cell>-</cell><cell>-</cell><cell>12.5</cell><cell>12.5</cell><cell>12.5</cell><cell>-</cell><cell>-</cell><cell>-</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell cols="4">(a) ABX scores for English</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell cols="2">Within speakers</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell cols="2">Across speakers</cell><cell></cell><cell></cell></row><row><cell>Algorithm</cell><cell></cell><cell cols="2">without VTLN</cell><cell></cell><cell>with VTLN</cell><cell></cell><cell></cell><cell cols="2">without VTLN</cell><cell></cell><cell>with VTLN</cell><cell></cell></row><row><cell></cell><cell>raw</cell><cell cols="2">+∆/F0 +CMNV</cell><cell>raw</cell><cell cols="2">+∆/F0 +CMNV</cell><cell>raw</cell><cell cols="2">+∆/F0 +CMNV</cell><cell>raw</cell><cell cols="2">+∆/F0 +CMNV</cell></row><row><cell>Spectrogram</cell><cell>19.2</cell><cell>16.8</cell><cell>19.2</cell><cell>-</cell><cell>-</cell><cell>-</cell><cell>34.6</cell><cell>32.0</cell><cell>26.5</cell><cell>-</cell><cell>-</cell><cell>-</cell></row><row><cell>Filterbank</cell><cell>13.8</cell><cell>11.7</cell><cell>15.2</cell><cell>13.6</cell><cell>11.4</cell><cell>15.2</cell><cell>28.1</cell><cell>25.1</cell><cell>21.5</cell><cell>26.9</cell><cell>24.0</cell><cell>20.7</cell></row><row><cell>MFCC</cell><cell>17.1</cell><cell>16.2</cell><cell>14.6</cell><cell>17.5</cell><cell>16.5</cell><cell>14.6</cell><cell>33.6</cell><cell>32.8</cell><cell>26.0</cell><cell>31.4</cell><cell>30.6</cell><cell>22.7</cell></row><row><cell>PLP</cell><cell>16.2</cell><cell>14.6</cell><cell>14.0</cell><cell>16.2</cell><cell>14.7</cell><cell>14.2</cell><cell>33.5</cell><cell>31.2</cell><cell>26.2</cell><cell>31.7</cell><cell>29.5</cell><cell>22.2</cell></row><row><cell>Rasta-PLP</cell><cell>13.7</cell><cell>12.5</cell><cell>12.3</cell><cell>13.5</cell><cell>12.2</cell><cell>12.0</cell><cell>27.9</cell><cell>25.2</cell><cell>23.9</cell><cell>25.0</cell><cell>22.8</cell><cell>21.7</cell></row><row><cell>Bottleneck</cell><cell>6.9</cell><cell>7.0</cell><cell>7.3</cell><cell>-</cell><cell>-</cell><cell>-</cell><cell>9.5</cell><cell>9.6</cell><cell>9.6</cell><cell>-</cell><cell>-</cell><cell>-</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell cols="4">(b) ABX scores for Xitsonga</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head>Table 3 :</head><label>3</label><figDesc>Comparison of features extraction algorithms on a phones discrimination task, within and across speakers, with and without VTLN, for English and Xitsonga datasets. Scores are ABX error rates in % (random score is 50%). The raw configuration is based on raw features alone. The +∆/F0 adds first/second order derivatives and Kaldi pitch estimates. The +CMVN adds a CMVN normalization by speaker on top of +∆/F0. VTLN is not available for spectrogram and bottleneck features. Best scores for each configuration are in bold font.</figDesc><table /></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3" xml:id="foot_0"><p>https://github.com/bootphon/shennong/tree/v1.0/ examples</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><p>Acknowledgements This work is founded by <rs type="funder">Inria</rs> (Grant <rs type="grantNumber">ADT-193</rs>), the <rs type="funder">Agence Nationale de la Recherche</rs> (<rs type="grantNumber">ANR-17-EURE-0017 Frontcog</rs>, <rs type="grantNumber">ANR-10-IDEX-0001-02 PSL</rs>, <rs type="grantNumber">ANR-19-P3IA-0001</rs> <rs type="projectName">PRAIRIE 3IA Institute</rs>), <rs type="funder">CIFAR</rs> (<rs type="projectName">Learning in Minds and Brains</rs>) and <rs type="programName">Facebook AI Research</rs> (<rs type="grantName">Research Grant</rs>).</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_KcvZEvM">
+					<idno type="grant-number">ADT-193</idno>
+				</org>
+				<org type="funding" xml:id="_ZKKUXDq">
+					<idno type="grant-number">ANR-17-EURE-0017 Frontcog</idno>
+				</org>
+				<org type="funding" xml:id="_YzXM5tE">
+					<idno type="grant-number">ANR-10-IDEX-0001-02 PSL</idno>
+				</org>
+				<org type="funded-project" xml:id="_Z97dFUH">
+					<idno type="grant-number">ANR-19-P3IA-0001</idno>
+					<orgName type="project" subtype="full">PRAIRIE 3IA Institute</orgName>
+				</org>
+				<org type="funded-project" xml:id="_Dp94DMe">
+					<orgName type="grant-name">Research Grant</orgName>
+					<orgName type="project" subtype="full">Learning in Minds and Brains</orgName>
+					<orgName type="program" subtype="full">Facebook AI Research</orgName>
+				</org>
+			</listOrg>
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Conflict of interest</head><p>The authors declare that they have no conflict of interest.</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Tensorflow: A system for large-scale machine learning</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Abadi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Barham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Davis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Dean</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Devin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ghemawat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Irving</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Isard</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">12th {USENIX} symposium on operating systems design and implementation ({OSDI} 16)</title>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="265" to="283" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Automatic speech recognition and speech variability: A review</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Benzeghiba</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>De Mori</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Deroo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Dupont</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Erbes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Jouvet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Fissore</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Laface</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mertins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Ris</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Speech communication</title>
+		<imprint>
+			<biblScope unit="volume">49</biblScope>
+			<biblScope unit="issue">10-11</biblScope>
+			<biblScope unit="page" from="763" to="786" />
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Accurate short-term analysis of the fundamental frequency and the harmonics-to-noise ratio of a sampled sound</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Boersma</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the Institute of Phonetic Sciences</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page" from="97" to="110" />
+			<date type="published" when="1993">1993</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Praat, a system for doing phonetics by computer</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Boersma</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Glot International</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="issue">9/10</biblScope>
+			<biblScope unit="page" from="341" to="345" />
+			<date type="published" when="2001">2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Pykaldi: A python wrapper for kaldi</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Can</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><forename type="middle">R</forename><surname>Martinez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Papadopoulos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">S</forename><surname>Narayanan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Acoustics, Speech and Signal Processing (ICASSP)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+	<note>IEEE International Conference on</note>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">The fisher corpus: a resource for the next generations of speech-to-text</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Cieri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Miller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Walker</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">LREC</title>
+		<imprint>
+			<date type="published" when="2004">2004</date>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page" from="69" to="71" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">A smartphone-based asr data collection tool for underresourced languages</title>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">J</forename><surname>De Vries</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">H</forename><surname>Davel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Badenhorst</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">D</forename><surname>Basson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>De Wet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Barnard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>De Waal</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Speech communication</title>
+		<imprint>
+			<biblScope unit="volume">56</biblScope>
+			<biblScope unit="page" from="119" to="131" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">The zero resource speech challenge</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Dunbar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><forename type="middle">N</forename><surname>Cao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Benjumea</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Karadayi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Bernard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Besacier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Anguera</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Dupoux</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2017 IEEE Automatic Speech Recognition and Understanding Workshop (ASRU)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2017">2017. 2017</date>
+			<biblScope unit="page" from="323" to="330" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<author>
+			<persName><forename type="first">E</forename><surname>Dunbar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Karadayi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Bernard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><forename type="middle">N</forename><surname>Cao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Algayres</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Ondel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Besacier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Sakti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Dupoux</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2010.05967</idno>
+		<title level="m">The zero resource speech challenge 2020: Discovering discrete subword and word units</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<monogr>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">P W</forename><surname>Ellis</surname></persName>
+		</author>
+		<ptr target="http://www.ee.columbia.edu/~dpwe/resources/matlab/rastamat.Onlinewebre-source" />
+		<title level="m">PLP and RASTA (and MFCC, and inversion) in Matlab</title>
+		<imprint>
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Opensmile: the munich versatile and fast open-source audio feature extractor</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Eyben</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Wöllmer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Schuller</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 18th ACM international conference on Multimedia</title>
+		<meeting>the 18th ACM international conference on Multimedia</meeting>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="1459" to="1462" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Multilingually trained bottleneck features in spoken language recognition</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Fer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Matějka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Grézl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Plchot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Veselỳ</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">H</forename><surname>Černockỳ</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computer Speech &amp; Language</title>
+		<imprint>
+			<biblScope unit="volume">46</biblScope>
+			<biblScope unit="page" from="252" to="267" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">A pitch extraction algorithm tuned for automatic speech recognition</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Ghahremani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Babaali</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Povey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Riedhammer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Trmal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Khudanpur</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2014 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</title>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="2494" to="2498" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">The babel program and low resource speech technology</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Harper</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. of ASRU</title>
+		<meeting>of ASRU</meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page">2013</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Perceptual linear predictive (plp) analysis of speech</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Hermansky</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">the Journal of the Acoustical Society of America</title>
+		<imprint>
+			<biblScope unit="volume">87</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="1738" to="1752" />
+			<date type="published" when="1990">1990</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Rasta processing of speech</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Hermansky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Morgan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE transactions on speech and audio processing</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="578" to="589" />
+			<date type="published" when="1994">1994</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Rastaplp speech analysis</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Hermansky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Morgan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bayya</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Kohn</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. IEEE Int&apos;l Conf. Acoustics, Speech and Signal Processing</title>
+		<meeting>IEEE Int&apos;l Conf. Acoustics, Speech and Signal essing</meeting>
+		<imprint>
+			<date type="published" when="1991">1991</date>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="121" to="124" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Guidock: using docker containers with a common graphics user interface to address the reproducibility of research</title>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">H</forename><surname>Hung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Kristiyanto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">B</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">Y</forename><surname>Yeung</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PloS one</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page">152686</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Using vtln for broadcast news transcription</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Umesh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Gales</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Hain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Woodland</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Eighth International Conference on Spoken Language Processing</title>
+		<imprint>
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Crepe: A convolutional representation for pitch estimation</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">W</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Salamon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">P</forename><surname>Bello</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2018 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="161" to="165" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Emotion recognition from speech: a review</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">G</forename><surname>Koolagudi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">S</forename><surname>Rao</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">International journal of speech technology</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="99" to="117" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title level="m" type="main">Surfboard: Audio feature extraction for modern machine learning</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Lenain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Weston</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Shivkumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Fristed</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">pyin: A fundamental frequency estimator using probabilistic threshold distributions</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mauch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Dixon</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2014 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="659" to="663" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<monogr>
+		<title level="m" type="main">Representation learning with contrastive predictive coding</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">V D</forename><surname>Oord</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Vinyals</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1807.03748</idno>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Automatic detection of parkinson&apos;s disease in running speech spoken in three different languages</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Orozco-Arroyave</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Hönig</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Arias-Londoño</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Vargas-Bonilla</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Daqrouq</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Skodda</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Rusz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Nöth</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The Journal of the Acoustical Society of America</title>
+		<imprint>
+			<biblScope unit="volume">139</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="481" to="500" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<title level="m" type="main">Pytorch: An imperative style, high-performance deep learning library</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Paszke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Gross</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Massa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Lerer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Bradbury</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Chanan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Killeen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Gimelshein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Antiga</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1912.01703</idno>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Scikit-learn: Machine learning in python</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Pedregosa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Varoquaux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Gramfort</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Michel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Thirion</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Grisel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Blondel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Prettenhofer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Weiss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Dubourg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">the Journal of machine Learning research</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page" from="2825" to="2830" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Pitt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Dilley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kiesling</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Raymond</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Hume</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Fosler-Lussier</surname></persName>
+		</author>
+		<title level="m">Buckeye corpus of conversational speech (2nd release)</title>
+		<meeting><address><addrLine>Columbus, OH</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+		</imprint>
+		<respStmt>
+			<orgName>Department of Psychology, Ohio State University</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">A pitch extraction reference database</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Plante</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Meyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Ainsworth</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">EUROSPEECH-1995</title>
+		<imprint>
+			<date type="published" when="1995">1995</date>
+			<biblScope unit="page" from="837" to="840" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<author>
+			<persName><forename type="first">D</forename><surname>Povey</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Notes for affine transform-based vtln</title>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">The kaldi speech recognition toolkit</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Povey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ghoshal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Boulianne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Burget</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Glembek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Goel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Hannemann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Motlicek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Qian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Schwarz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Silovsky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Stemmer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Vesely</surname></persName>
+		</author>
+		<idno>CFP11SRW-USB</idno>
+	</analytic>
+	<monogr>
+		<title level="m">IEEE 2011 Workshop on Automatic Speech Recognition and Understanding</title>
+		<title level="s">IEEE Catalog</title>
+		<imprint>
+			<publisher>IEEE Signal Processing Society</publisher>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<monogr>
+		<author>
+			<persName><forename type="first">R</forename><surname>Riad</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Titeux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Lemoine</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Montillot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">H</forename><surname>Bagnou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><forename type="middle">N</forename><surname>Cao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Dupoux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">C</forename><surname>Bachoud-Lévi</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2006.05365</idno>
+		<title level="m">Vocal markers from sustained phonation in huntington&apos;s disease</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<author>
+			<persName><forename type="first">N</forename><surname>Ryant</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Church</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Cieri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Cristia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Du</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ganapathy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Liberman</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1906.07839</idno>
+		<title level="m">The second dihard diarization challenge: Dataset, task, and baselines</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<author>
+			<persName><forename type="first">N</forename><surname>Ryant</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Singh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Krishnamohan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Varma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Church</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Cieri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Du</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ganapathy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Liberman</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2012.01477</idno>
+		<title level="m">The third dihard diarization challenge</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<author>
+			<persName><forename type="first">A</forename><surname>Saeed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Grangier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Zeghidour</surname></persName>
+		</author>
+		<title level="m">Contrastive learning of general-purpose audio representations</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<monogr>
+		<author>
+			<persName><forename type="first">T</forename><surname>Schatz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Bernard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Thiollière</surname></persName>
+		</author>
+		<ptr target="https://github.com/bootphon/h5features/releases/tag/v1.3.3.Software" />
+		<title level="m">h5features: efficient storage of large features data</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Early phonetic learning without phonetic categories: Insights from large-scale simulations on realistic input</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Schatz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">H</forename><surname>Feldman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Goldwater</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><forename type="middle">N</forename><surname>Cao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Dupoux</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the National Academy of Sciences</title>
+		<imprint>
+			<biblScope unit="volume">118</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Evaluating speech features with the minimal-pair abx task: Analysis of the classical mfc/plp pipeline</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Schatz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Peddinti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Bach</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Jansen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Hermansky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Dupoux</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">INTERSPEECH 2013: 14th Annual Conference of the International Speech Communication Association</title>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="1" to="5" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Evaluating speech features with the minimal-pair abx task (ii): Resistance to noise</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Schatz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Peddinti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><forename type="middle">N</forename><surname>Cao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Bach</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Hermansky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Dupoux</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Fifteenth Annual Conference of the International Speech Communication Association</title>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">But/phonexia bottleneck feature extractor</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Silnova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Matejka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Glembek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Plchot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Novotnỳ</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Grezl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Schwarz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Burget</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Cernockỳ</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Odyssey</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="283" to="287" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Speaker identification features extraction methods: A systematic review</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">S</forename><surname>Tirumala</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">R</forename><surname>Shahamiri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">S</forename><surname>Garhwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Wang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Expert Systems with Applications</title>
+		<imprint>
+			<biblScope unit="volume">90</biblScope>
+			<biblScope unit="page" from="250" to="271" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">The zero resource speech challenge 2015</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Versteegh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Thiollière</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Schatz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><forename type="middle">N</forename><surname>Cao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Anguera</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Jansen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Dupoux</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">INTERSPEECH-2015</title>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">A spectral/temporal method for robust fundamental frequency tracking</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">A</forename><surname>Zahorian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Hu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The Journal of the Acoustical Society of America</title>
+		<imprint>
+			<biblScope unit="volume">123</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="4559" to="4571" />
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<monogr>
+		<author>
+			<persName><forename type="first">N</forename><surname>Zeghidour</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Usunier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Synnaeve</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Collobert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Dupoux</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1806.07098</idno>
+		<title level="m">End-to-end speech recognition from the raw waveform</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

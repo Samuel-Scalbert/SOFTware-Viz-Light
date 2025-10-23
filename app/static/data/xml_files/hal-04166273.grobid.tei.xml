@@ -1,0 +1,1341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">MTG-Link: leveraging barcode information from linked-reads to assemble specific loci</title>
+				<funder ref="#_sPahTck">
+					<orgName type="full">Agence Nationale de la Recherche</orgName>
+					<orgName type="abbreviated">ANR</orgName>
+				</funder>
+				<funder ref="#_Ecp3vCk">
+					<orgName type="full">European Union</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Anne</forename><surname>Guichard</surname></persName>
+							<email>anne.guichard@irisa.fr</email>
+							<idno type="ORCID">0000-0002-5438-739X</idno>
+						</author>
+						<author>
+							<persName><forename type="first">Fabrice</forename><surname>Legeai</surname></persName>
+							<idno type="ORCID">0000-0002-5438-739X</idno>
+						</author>
+						<author>
+							<persName><forename type="first">Denis</forename><surname>Tagu</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Claire</forename><surname>Lemaitre</surname></persName>
+							<email>claire.lemaitre@inria.fr</email>
+						</author>
+						<author>
+							<affiliation>
+								<orgName>1 IGEPP, INRAE, Institut Agro, Univ Rennes, </orgName>
+								<address><addrLine>35653 Le Rheu, France 35000 Rennes, France</addrLine></address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation>
+								<orgName> 2 Univ Rennes, Inria, CNRS, IRISA,</orgName>
+							</affiliation>
+						</author>
+						<title level="a" type="main">MTG-Link: leveraging barcode information from linked-reads to assemble specific loci</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">824686A16CA86354AF724A1EF8B69018</idno>
+					<idno type="DOI">10.1186/s12859-023-05395-w</idno>
+					<note type="submission">Received: 30 September 2022 Accepted: 21 June 2023</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:12+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Local assembly</term>
+					<term>Gap-filling</term>
+					<term>Linked-reads</term>
+					<term>Barcode</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Background: Local assembly with short and long reads has proven to be very useful in many applications: reconstruction of the sequence of a locus of interest, gap-filling in draft assemblies, as well as alternative allele reconstruction of large Structural Variants. Whereas linked-read technologies have a great potential to assemble specific loci as they provide long-range information while maintaining the power and accuracy of short-read sequencing, there is a lack of local assembly tools for linked-read data.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Results:</head><p>We present MTG-Link, a novel local assembly tool dedicated to linked-reads. The originality of the method lies in its read subsampling step which takes advantage of the barcode information contained in linked-reads mapped in flanking regions. We validated our approach on several datasets from different linked-read technologies. We show that MTG-Link is able to assemble successfully large sequences, up to dozens of Kb. We also demonstrate that the read subsampling step of MTG-Link considerably improves the local assembly of specific loci compared to other existing short-read local assembly tools. Furthermore, MTG-Link was able to fully characterize large insertion variants and deletion breakpoints in a human genome and to reconstruct dark regions in clinically-relevant human genes. It also improved the contiguity of a 1.3 Mb locus of biological interest in several individual genomes of the mimetic butterfly Heliconius numata.</p><p>Conclusions: MTG-Link is an efficient local assembly tool designed for different linkedread sequencing technologies. MTG-</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Background</head><p>Local assembly consists in reconstructing a sequence of interest from a sample of sequencing reads without having to assemble the entire genome, which is time and labor intensive. This is particularly useful when studying a locus of interest, e.g. including regions linked to a phenotype, or including patterns of positive selection, clusters of rapidly evolving genes or genes involved in a relevant biochemical pathway <ref type="bibr" target="#b0">[1]</ref><ref type="bibr" target="#b1">[2]</ref><ref type="bibr" target="#b2">[3]</ref>. Reconstructing the full locus sequence or haplotypes in a given individual or sample is particularly relevant in presence of structural polymorphism at the given locus. The Supergene P locus of the mimetic butterfly Heliconius numata illustrates this perfectly, since this 1.3 Mb locus-controlling the wing color pattern-hosts 3 polymorphic inversions <ref type="bibr" target="#b3">[4,</ref><ref type="bibr" target="#b4">5]</ref>. The Immunoglobulin V-D-J genes in vertebrate species are also an example of loci where their full sequence reconstruction is required for studying the remarkable diversity of the immunity cell receptors that is generated by a complex recombination mechanism <ref type="bibr" target="#b5">[6]</ref>. Another application of local assembly is the characterization of sequences not present in the reference genome, either because they are unresolved sequences or gaps in the reference assembly (problem referred to as gap-filling in draft assemblies) or because they correspond to structural polymorphisms, such as novel insertions in re-sequenced individuals or reference-specific deletions. In such contexts, limiting the assembly to specific genomic loci has many benefits. First, it drastically reduces the computational resources and running time compared to a full de novo genome assembly. Second, it can also result in more accurate or more contiguous assemblies as it may be less impacted by genome-wide repeats.</p><p>Hence, it is important to develop methods that perform local assembly of specific loci. Here, we define local assembly as the de novo assembly of a specific region of the genome using the sequencing reads coming from whole genome shotgun sequencing. Local assembly differs from targeted or reference-guided assembly. In targeted assembly, a sequence already known, typically from a closely related species, is used to recruit reads of interest by mapping or to guide the assembly. We can for instance mention aTRAM <ref type="bibr" target="#b6">[7,</ref><ref type="bibr" target="#b7">8]</ref>, TASR <ref type="bibr" target="#b8">[9]</ref>, SRAssembler <ref type="bibr" target="#b9">[10]</ref> for short-read data, SLAG <ref type="bibr" target="#b10">[11]</ref> for long-read data and AquilaSV <ref type="bibr" target="#b11">[12]</ref> for linked-read data, as targeted assembly tools. On the contrary, in local assembly, the sequence to be assembled is not already known, nor is a closely related sequence, and an approximation of its length is also unknown. The only known information is its location on a genome and therefore its left and right flanking sequences. Most local assembly tools were designed for gap-filling a draft assembly; among others one can cite GapCloser from the SOAPdenovo suite <ref type="bibr" target="#b12">[13]</ref>, Sealer from the ABYSS suite <ref type="bibr" target="#b13">[14]</ref>, GAPPadder <ref type="bibr" target="#b14">[15]</ref> for short-read data and LR_gapcloser <ref type="bibr" target="#b15">[16]</ref>, TGS-Gapcloser <ref type="bibr" target="#b16">[17]</ref> and DENTIST <ref type="bibr" target="#b17">[18]</ref> for long-read data.</p><p>Local assembly algorithms and performances depend on the sequencing technology used. Indeed, long-read data are better suited than short-reads to any de novo assembly problem. But long-read sequencing technologies, such as Pacific Biosciences and Oxford Nanopore, suffer from higher costs and may not be affordable for population re-sequencing studies. Short Illumina reads are still massively used for re-sequencing studies, but their short read size makes them ill suited for de novo assembly tasks. Linked-read technologies provide the long-range information, that is crucially missing in short reads. With these technologies, all short reads that have been sequenced from the same long DNA molecule (around 30-70 Kb) are tagged with a specific molecular barcode. Several linked-read technologies have been developed and commercialized, including the one from the 10× Chromium Genomics company, which initially popularized this technology <ref type="bibr" target="#b18">[19]</ref>, but also Single Tube Long Fragment Read (stLFR) <ref type="bibr" target="#b19">[20]</ref>, TELL-Seq <ref type="bibr" target="#b20">[21]</ref> and Haplotagging <ref type="bibr" target="#b21">[22]</ref>. Even if 10× Chromium Genomics company recently stopped producing such data, large volumes of data were produced using this technology and the three other more recent technologies are now routinely used. Low-cost, low-input and high-accuracy linked-read technologies have many applications: de novo genome assembly <ref type="bibr" target="#b22">[23]</ref>, haplotype identification <ref type="bibr" target="#b18">[19]</ref>, genome scaffolding <ref type="bibr" target="#b23">[24]</ref><ref type="bibr" target="#b24">[25]</ref><ref type="bibr" target="#b25">[26]</ref> and structural variant calling <ref type="bibr" target="#b11">[12,</ref><ref type="bibr" target="#b26">[27]</ref><ref type="bibr" target="#b27">[28]</ref><ref type="bibr" target="#b28">[29]</ref><ref type="bibr" target="#b29">[30]</ref>.</p><p>Concerning the assembly of specific loci, there is to our knowledge only one tool for linked-read data, AquilaSV <ref type="bibr" target="#b11">[12]</ref>, but it is primarily a Structural Variant caller that performs targeted or reference-guided assembly. In AquilaSV, only the reads mapped to a reference sequence of the target locus are used to obtain a phased diploid assembly of the locus, therefore it is unable to assemble large sequences absent from the reference genome. In the case of local assembly, where a reference sequence for the locus to be assembled is not required, there is thus currently no tool that uses the long-range information of the linked-read data, although several such tools have been developed for short-read data. Short-read local assembly tools can be classified in two categories, depending on whether they use the whole set of reads for the assembly graph traversal or whether they rely on a first step of read recruitment. MindTheGap <ref type="bibr" target="#b30">[31]</ref> and Sealer <ref type="bibr" target="#b13">[14]</ref> belong to the first category; all reads are indexed in a de Bruijn graph which is then traversed locally. On the opposite, GAPPadder <ref type="bibr" target="#b14">[15]</ref>, GapCloser <ref type="bibr" target="#b12">[13]</ref> and GapFiller <ref type="bibr" target="#b31">[32]</ref> recruit first a subset of reads based on mate anchoring of paired-end or mate-pair reads. GapCloser and GapFiller operate in an iterative manner, repeating the steps of recruitment and assembly until the gap is filled. The former tools using the whole read set have difficulty assembling repeat-rich sequences while the latter are limited in the gap size by the distance range between read mates. As a matter of fact, GAPPadder performs better with longer distance mate-pairs than with short-distance read pairs. Consequently, linked-read data that provide long-distance information, up to 30-70 Kb, are a promising source of data to improve local assembly results, as it can help identifying among the whole set of reads the ones that originate from the locus of interest.</p><p>Here, we present MTG-Link, a local assembly tool dedicated to linked-reads. The main feature of MTG-Link is that it takes advantage of the linked-read barcode information to get a subsample of reads of interest for the local assembly of each sequence. We demonstrate that linked-reads long-range information can substantially improve local assembly results on several linked-read datasets of large eukaryote genomes. We also show that it can be used for various local assembly use cases, such as gap-filling between scaffolds, characterization of clinically-relevant regions or reconstruction of Structural Variant alternative sequences.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Implementation</head><p>MTG-Link performs local assemblies of specific loci, using linked-read data. For all use cases (specific locus assembly, intra-scaffold and inter-scaffold gap-fillings, as well as alternative allele reconstruction of large Structural Variants), the locus of interest is defined by two coordinates on a reference genome, indicating its left and right flanking sequences, and the sequence in-between to be assembled is referred to as the target sequence. Here, the reference genome corresponds to our genomic coordinate reference, regardless of its assembly quality or proximity to the re-sequenced individual.</p><p>The input of MTG-Link is a set of linked-reads, the target flanking sequences and coordinates in GFA format (genome graph format, with the flanking sequences identified as "segment" elements (S lines) and the targets identified as "gap" elements (G lines)) and an indexed BAM file obtained after mapping the linked-reads onto the reference genome. It outputs the set of assembled target sequences in Fasta format, as well as an assembly graph file in GFA format, complementing the input GFA file with the obtained assembled sequences.</p><p>In MTG-Link, each target sequence is processed independently in a three-steps process: (i) read subsampling using the barcode information of the linked-read dataset, (ii) local assembly by de Bruijn graph traversal and (iii) qualitative evaluation of the obtained assembled sequence. A schematic overview of the MTG-Link pipeline is shown in Fig. <ref type="figure" target="#fig_0">1</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Read subsampling</head><p>The purpose of the read subsampling step is to extract the linked-reads whose barcode is observed in flanking regions surrounding the target sequence (Fig. <ref type="figure" target="#fig_0">1a</ref>).</p><p>First, a barcode list is computed from the reads mapped on both flanking sequences. This selection is performed based on two user-defined parameters, the flanking region size and the minimum number of occurrences in these regions for a barcode to be retained (-flank and -occ options). Then, the whole read file is searched for reads having the selected barcodes. In order to perform these two tasks efficiently given the large file sizes, we rely on the LRez toolkit <ref type="bibr" target="#b32">[33]</ref> for barcode-based indexing and query of linked-read files. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Local assembly</head><p>In a second step, the target is reconstructed with the set of selected reads, by searching one or more assembly paths between its left and right flanking sequences (Fig. <ref type="figure" target="#fig_0">1b</ref>).</p><p>The local assembly is performed with the fill module of the software MindTheGap <ref type="bibr" target="#b30">[31]</ref>, which is based on a de Bruijn graph data structure to represent the set of input reads. Basically, starting from a k-mer START , it performs a breadth-first traversal of the de Bruijn graph, until the k-mer STOP is found or exploration limits are reached. It then enumerates all possible sequence paths between both k-mers. Notably, barcode information is not used in this step, and if several sequence paths exist in the graph, the algorithm does not seek to output two phased diploid sequences. In this case, all sequence paths are compared pairwisely and MindTheGap outputs a subset of representative sequences such that all sequences differ by more than 10% identity.</p><p>The choice of the input START and STOP k-mers is crucial for a successful traversal of the de Bruijn graph. Instead of extracting them from the reference genome sequence, which may diverge from the re-sequenced individual, the reads mapping at the corresponding coordinates are investigated to identify the most represented k-mers in the reads, ensuring these two kmers are actually existing nodes in the de Bruijn graph. In MindTheGap, as in any de Bruijn graph based assembler, two parameters have major impacts on the quality of the assembly: the k-mer size (-k) and the k-mer abundance threshold for including a k-mer in the graph (solid k-mer threshold -a). These parameters are usually set in accordance with the expected sequencing depth. In the case of MTG-link, the latter may vary depending on the efficiency of the barcode-based subsampling step. Hence for higher sensitivity, MTG-Link automatically tests different values for these two parameters until an assembled sequence is found.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Qualitative evaluation and iterative assembly</head><p>For an evaluation purpose, the target sequence can be extended at both sides, such that the sequence to be assembled should overlap parts of the flanking sequences. The assembled sequences of these overlapping regions are useful to infer the quality of the whole assembled sequence, helping filtering out putative erroneous sequences. The evaluation is based on the alignment of these assembled sequences to their respective genome sequences, using Nucmer <ref type="bibr" target="#b33">[34]</ref> (Fig. <ref type="figure" target="#fig_0">1c</ref>). Only target's assembled sequences with good extension alignments (more than 90% identity on more than 90% of the extension reference sequences) are returned. Otherwise, a new iteration of the local assembly step is performed with lower de Bruijn graph parameters.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Implementation and availability</head><p>We provide an implementation of this method named MTG-Link, freely available at https:// github. com/ anne-gcd/ MTG-Link under the GNU Affero GPL licence. MTG-Link is also available as a Bioconda package. MTG-Link is written in Python 3. The main steps are implemented in a modular way, allowing the user to start or re-run the program from previous intermediate results. As an example, the first step (read subsampling step) is not to be repeated if we want to perform the local assembly on the same input files but with different assembly parameters values. In order to speed up the process, the data handling and analysis are set up in a multi-threaded manner, thus allowing multiple target sequences to be processed simultaneously. Additional Python scripts for converting input and output files to the desirable formats are provided. Results shown here were obtained with release version v2.4.1. All experiments were performed on a cluster node equipped with 250 GB of RAM using 8 threads, on a 2.3 GHz CPU.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Materials</head><p>Linked-read datasets stLFR Homo sapiens dataset MTG-Link was applied on a human dataset obtained from the individual HG002 with the stLFR technology, from the Genome In A Bottle resources <ref type="bibr" target="#b19">[20]</ref> (FTP links are given in Additional file 1: Section S1.1). After the removal of the PCR duplicates, this dataset is composed of approx. 1.5 billion 100 bp Illumina reads, with an effective read depth of 47X. We considered the assembly GRCh37 (hg19 version) as the human reference genome.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>10× Genomics Heliconius numata datasets</head><p>MTG-Link was also applied on linked-read datasets obtained from 12 individual genomes of the butterfly Heliconius numata, with the 10× Chromium Genomics technology (BioProject PRJNA676017) <ref type="bibr" target="#b4">[5]</ref>. The number of reads in each dataset is approx. 110 million, with an effective coverage ranging from 20× to 47× . For each individual, we used as reference genomes their draft genome assemblies obtained with the Supernova assembler <ref type="bibr" target="#b22">[23]</ref> and available under the same BioProject ID. Experiments on randomly selected loci were performed on individual 37 (read depth of 40×).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Evaluation on randomly selected loci</head><p>To evaluate the accuracy of MTG-Link, we performed experiments where the target sequence to be assembled was a sequence already present in the reference genome at a locus randomly sampled. In such cases, the true sequence to be assembled is known but it is not used by the assemblers. It is only used to compute quality metrics by comparing it to the assembler's output. Four target sizes were tested (1, 5, 10 and 20 Kb) on 63 and 57 randomly selected loci respectively for the human stLFR dataset and the butterfly 10× Genomics dataset (individual 37). MTG-Link was applied on all of these targets, testing different flanking region sizes (5, 10 and 15 Kb).</p><p>Assembled sequences were aligned to their reference sequence using Blastn <ref type="bibr" target="#b34">[35]</ref>. The assembled sequences having more than 90% identity and coverage with the reference sequence were labelled as "successful", otherwise they were considered as "erroneous". The "no assembly" represented those for which no solution was returned. The success rate was then measured as the number of "successful" assemblies over the total number of target sequences that must be reconstructed. The assembly accuracy of the method was assessed as the number of "successful" assemblies over the number of assembled sequences ("successful" and "erroneous").</p><p>We compared MTG-Link to several short-read local assemblers. MindTheGap <ref type="bibr" target="#b30">[31]</ref>, ABYSS-Sealer <ref type="bibr" target="#b13">[14]</ref> and GAPPadder <ref type="bibr" target="#b14">[15]</ref> were tested using the same evaluation protocol (command lines are given in Additional file 1: Section S1.2).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Real use case: characterization of dark regions in clinically-relevant human genes</head><p>MTG-Link was applied on the reconstruction of dark regions in clinically-relevant human genes, using the stLFR Homo sapiens dataset. At this end, all dark regions listed by Ebbert et al. <ref type="bibr" target="#b35">[36]</ref> and enclosed within the locations of 10 genes with known disease associations (ARX, NEB, TBX1, RPGR, HBA2, CR1, SMN1, SMN2, HSPA1A, HSPA1B), extracted from the GRCh37 annotation (hg19), were retrieved. This resulted in a set of 87 dark regions, of size between 21 bp and 8,043 bp, with a median and average size of 236 and 1,150 bp respectively. This set of dark regions was split into two types: 7 "dark by depth" regions and 80 "dark by mapping quality" regions. MTG-Link was applied on these two sets of regions with the HG002 stLFR sequencing dataset with default parameters. Results were evaluated with the same evaluation protocol as for randomly selected loci.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Real use case: reconstruction of Structural Variant alternative sequences</head><p>MTG-Link was used to reconstruct the alternative sequences of large Structural Variants using the stLFR Homo sapiens dataset. From the gold standard SV callset of Genome In A Bottle obtained on the HG002 individual <ref type="bibr" target="#b36">[37]</ref>, we selected two sets of variants: one with deletions and one with insertions.</p><p>For the deletion set, we selected all deletion calls of size between 1 and 5 Kb, with a homozygous for the alternative allele (1/1) genotype and annotated as "SIMPLEDEL". This resulted in a set of 121 deletion calls. For each deletion call, we attempted to reconstruct its breakpoint sequence by giving to MTG-Link as target locus coordinates the positions of the deleted segment on the reference genome expanded by 50 bp on each side. The expected size of the breakpoint sequence to be assembled was therefore 100 bp.</p><p>For the insertion set, we selected all insertion calls that were larger than 250 bp and annotated as "novel insertion" in the Delage et al. study <ref type="bibr" target="#b37">[38]</ref>. This resulted in a set of 151 insertion calls, ranging in insertion size from 250 bp to 27,920 bp, and consisting of 104 insertions with a homozygous genotype and 47 insertions with a heterozygous genotype in HG002. The repeated nature of the context of the insertion site was retrieved from the Delage et al. study <ref type="bibr" target="#b37">[38]</ref>. As the reported position of the insertion site may be imprecise, we attempted to reconstruct the insertion sequence by including 50 bp on either side of the insertion site. As the insertion sequences are known for this dataset <ref type="bibr" target="#b36">[37]</ref>, we were able to assess the accuracy of MTG-Link assembled sequences with the same evaluation protocol as for randomly selected loci.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Real use case: inter-scaffold gap-filling of a locus of interest</head><p>We also applied MTG-Link to improve the contiguity of the Supergene P locus (1.3 Mbp) of the butterfly H. numata of 8 among 12 re-sequenced individuals <ref type="bibr" target="#b4">[5]</ref>. Indeed, the Supergene P locus was previously reconstructed as a single scaffold for only four individual genomes, while the sequence of the locus was fragmented into several scaffolds (58 gaps in total) for the other 8 individuals. For these latter, we started by ordering the large scaffolds identified as belonging to the locus (BLAST comparisons with the related species Heliconius melpomene, personal communication from Paul Jay <ref type="bibr" target="#b4">[5]</ref>) using the number of their common barcodes calculated by LRez <ref type="bibr" target="#b32">[33]</ref>. In a second step, we performed gap-filling on the 58 candidate pairs with MTG-Link.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Results</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Assessing MTG-Link results on evaluation datasets</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Assembly of randomly selected loci</head><p>MTG-Link was first applied on several evaluation datasets, composed of real linked-read data (an stLFR H. sapiens dataset and a 10× Genomics H. numata dataset) and randomly selected loci for which the sequence to assemble is known, to precisely estimate its success rate and assembly accuracy. The results obtained with MTG-Link for several target size (1, 5, 10 and 20 Kb) are presented in Fig. <ref type="figure" target="#fig_1">2</ref>.</p><p>For small targets (1 Kb), MTG-Link returns an assembly for most targets with a good accuracy. Notably, for the human dataset, 87.3% of the 1 Kb targets are successfully assembled (success rate) and MTG-Link did not return any incorrect assemblies (e.g. with more than 10% of sequence or size divergence with the reference sequence), giving an assembly accuracy of 100%. Assembled sequences are highly similar to their target sequence in the reference genome with an average of 99.8% identity. However, success rate and assembly accuracy metrics decrease as the target size increases. The success rate falls below 50% for 10 Kb and 20 Kb targets. The assembly accuracy remains high for 5 Kb and 10 Kb targets (89.1% and 88.2% resp.), but drops to 50% for the largest target size (20 Kb) (top part of Fig. <ref type="figure" target="#fig_1">2</ref>). When using a more (95%) or less (85%) stringent percentage identity threshold to consider an assembled sequence as accurate, assembly metrics remain almost unchanged (Additional file 1: Table <ref type="table">S1</ref>).</p><p>A similar trend is observed for the 10× Genomics H. numata dataset, but with a smaller decrease in performance with the target size, as the success rate remains high for 1 to 10 Kb targets (70.2% for all three sizes combined, bottom part of Fig. <ref type="figure" target="#fig_1">2</ref>).</p><p>Analyzing the successful assemblies, we can observe that they were obtained with different k-mer sizes (-k) depending on the target size (Fig. <ref type="figure">3</ref>). We recall that MTG-Link automatically tests several k-mer sizes in decreasing order, and stops when a good quality assembly is obtained. We can see in Fig. <ref type="figure">3</ref> that most 1 to 5 Kb targets are successfully assembled at the first assembly attempts, e.g. for -k equals 61 or 51. As the target size increases, the assemblies are obtained with smaller -k values, meaning that assembly with larger -k values failed.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Barcode-based subsampling analysis</head><p>The main feature of MTG-Link is its read subsampling step based on the barcode information of the linked-reads. For all the combined target sizes of the stLFR H. sapiens dataset, 855 barcodes were selected on average from the target flanking regions, resulting on average to 111,905 reads given as input for the de novo assembly. The number of selected barcodes is quite variable between the targets, with for instance a standard deviation of 407 barcodes for the 63 10Kb targets (Fig. <ref type="figure">4A</ref>). However, the number of selected barcodes seems not to be directly linked to the assembly success as the missing and erroneous assemblies do not show either much less or much more selected barcodes (Fig. <ref type="figure">4A</ref>). Similarly, the distributions of number of selected reads are similar between the three assembly result status, as also shown by the high correlation between the number of selected barcodes and the number of reads extracted from this selection (Additional file 1: Fig. <ref type="figure" target="#fig_0">S1</ref>).</p><p>In MTG-Link, the main parameter governing the barcode selection is the size of considered flanking regions (parameter -flank). Indeed, when increasing this parameter, the number of selected barcodes increases but it does not impact substantially the assembly performances (Fig. <ref type="figure">4A,</ref><ref type="figure">B</ref>; see also Additional file 1: Fig. <ref type="figure" target="#fig_1">S2</ref>). In other words, even if we select more barcodes to increase the size of the subsampled read sets, the success rate and the assembly accuracy do not increase. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Comparison with other approaches</head><p>To our knowledge, no other reference-free local assembly tool using linked-read data has been developed. Therefore, MTG-Link was compared to short-read local assemblers that can not take advantage of the barcode information of the linked-reads. This comparison is therefore meant to highlight the added value of this type of data. MTG-Link was first compared to MindTheGap <ref type="bibr" target="#b30">[31]</ref>, as this is the tool used in the local assembly step of our method, thus enabling to evaluate the benefit of the read subsampling step. MTG-Link was also compared to the most recent short-read local assemblers: ABYSS-Sealer <ref type="bibr" target="#b13">[14]</ref> and GAPPadder <ref type="bibr" target="#b14">[15]</ref>. However, we did not manage to make GAPPadder work on our datasets as it is no longer maintained, so we will present only the results obtained with ABYSS-Sealer.</p><p>For all target sizes, MTG-Link outputs more successful assemblies with a better assembly accuracy than the two short-read local assemblers MindTheGap and ABYSS-Sealer (Fig. <ref type="figure" target="#fig_1">2</ref>). On the stLFR H. sapiens dataset, for all target sizes combined, MTG-Link shows a success rate of 54.4%, much better than the success rates of 5.2% and 12.3% for MindTheGap and ABYSS-Sealer respectively. Besides, the differences tend to increase with the target size. In particular, no target over 10 Kb could be assembled by any of the two short-read local assemblers MindTheGap and ABYSS-Sealer. Therefore, MTG-Link outperforms these two tools. Similar results were obtained for the 10× Genomics H. numata dataset (see also Additional file 1: Table <ref type="table">S1</ref> for results with varying sequence similarity thresholds).</p><p>The computational performances (speed and memory usage) of MTG-Link are of the same order of magnitude of those of the short-read local assemblers MindTheGap and ABYSS-Sealer (Additional file 1: Tables <ref type="table">S2</ref> and<ref type="table">S3</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Application of MTG-Link to the characterization of dark regions in clinically-relevant human genes</head><p>Some regions in the human genome, referred to as dark regions, remain inaccessible to standard short-read sequencing technologies, either due to insufficient sequencing depth ("dark by depth" regions with ≤ 5 aligned reads) or to low mapping quality ("dark by mapping quality" regions with ≥90% of aligned reads having a mapping quality (MAPQ) &lt;10) <ref type="bibr" target="#b35">[36]</ref>. In the Ebbert et al. study <ref type="bibr" target="#b35">[36]</ref>, they highlighted ten human genes that may be relevant to human health and disease and that contain such dark regions (7 "dark by depth" and 80 "dark by mapping quality"). We tested here if MTG-Link could help in characterizing these sequences that are inaccessible by standard short-read sequencing.</p><p>MTG-Link returns an assembled sequence for 4 regions out of the 7 "dark by depth" regions (57.1%), with an assembly accuracy of 100%. All assembled regions have a size of less than 100bp. This shows that at least some of these regions are sufficiently sequenced with the stLFR technology and can be recovered through local assembly.</p><p>On the "dark by mapping quality" region set, MTG-Link has a success rate of 72.5% and an assembly accuracy of 100%. Considering only the regions smaller than 5 Kb, we obtain very good results with a success rate of 79.2%. These "dark by mapping quality" regions arise principally from duplicated genomic regions. These results show that by exploiting their less repeated flanking regions and the long-range information in linkedreads, MTG-Link is able to characterize these sequences, contrary to standard shortread mapping approaches.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Application of MTG-Link to the reconstruction of Structural Variant alternative sequences</head><p>We applied MTG-Link to reconstruct the alternative sequences of known large Structural Variants, namely insertions and deletions, in human HG002. From the gold standard SV callset provided by the Genome In A Bottle consortium on the HG002 individual <ref type="bibr" target="#b36">[37]</ref>, we selected a subset of 121 deletion calls of size between 1 and 5 Kb and all novel insertion calls that were larger than 250 bp (N=151).</p><p>For deletions, the sequence of the alternative allele is simply the adjacency of both sequences at each side of the deleted sequence in the reference genome. We tried to reconstruct these breakpoint sequences by defining the target loci as the deletion segments extended by 50 bp on either side, resulting in 100 bp breakpoint sequences to be assembled. Among the 121 deletions, MTG-Link reports an assembled sequence for 109 (90%), all of which of size much smaller than the deletion size and close to the expected breakpoint size of 100 pb (median size of 100 bp and maximal size of 116 bp). These assemblies represent a validation of these deletion calls by confirming the absence of the deleted sequence at these loci in the HG002 individual.</p><p>On the contrary, for insertions, the characterization of the alternative alleles is a more difficult task. They are much larger sequences to assemble as they are the whole inserted sequences and, in the case here of novel insertions, they are sequences absent from the reference genome. All insertion sequences are resolved in this dataset, as they were called mainly with long-read sequencing data. Therefore, we were able to evaluate the assembled sequences obtained by MTG-Link and assess the sensitivity and accuracy of the method with respect to various insertion features (size, genotype, repeat context of insertion site). The results for the 151 insertions are presented in Fig. <ref type="figure">5</ref>. MTG-Link has a success rate of 45.7% and an assembly accuracy of 82.1%. We observe that, in addition to the size of the sequence (&gt; 5 Kb), the assembly performance of MTG-Link is directly related to the presence of repeated elements around the insertion site as well as to the insertion genotype. Indeed, the expected read depth of the inserted sequence for Fig. <ref type="figure">5</ref> Results of MTG-Link on the reconstruction of human insertion variants. MTG-Link was run on 151 insertion calls with the stLFR H. sapiens dataset. The results are categorized by the insertion size, the variant genotype in individual HG002 (0/1 and 1/1 for heterozygous and homozygous insertions resp.) and the repeated nature of the genomic context of the insertion site the heterozygous variants is half the genome-wide read depth and makes the de novo assembly more difficult. At least one of these three factors is reported in 86.6% of the non-assembled insertions and 100% of the erroneously assembled insertions. Considering only the homozygous insertions smaller than 5 Kb (N= 74 insertions), MTG-Link obtains very good results with a success rate of 68.9% and an accuracy of 98.1%.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Application of MTG-Link to improve the contiguity of the Supergene P locus in H. numata individuals</head><p>We applied MTG-Link on inter-scaffold gaps to improve the contiguity of the Supergene P locus of the butterfly H. numata in eight individuals. For each of these eight individuals, we attempted to fill the gaps between the scaffolds using MTG-Link. We succeeded in reducing the number of scaffolds in the Supergene P locus for all H. numata individuals. For two of them (individuals 28 and 30), the Supergene P locus was reconstructed as a single scaffold in one step of gap-filling. For the others, the assembly was still fragmented and we performed additional steps of extra contigs recruitment. We retrieved additional small scaffolds that shared at least 50 barcodes with the initial set of scaffolds. Finally, we succeeded in filling 45 out of the 58 initial gaps with MTG-Link (Additional file 1: Table <ref type="table">S4</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Discussion and conclusion</head><p>We provide a novel tool for local assembly that is dedicated to linked-read sequencing data. We validated this tool on several datasets, composed of real linked-read data and randomly selected loci for which the sequence to assemble is known, to precisely estimate its success rate and assembly accuracy. The results described above show that our method can be applied on different organisms, as well as on different linked-read sequencing technologies, to obtain better assemblies than with other existing local assemblers. The results presented here were obtained with the two linked-read technologies that are the most represented in terms of datasets in public repositories, namely 10× Chromium Genomics and stLFR technologies. But, our method is also compatible with Tell-Seq and Haplotagging technologies. Several parameters in MTG-Link, such as the flanking region size or the minimal number of occurrences of a barcode in flanking regions for a barcode to be selected, allow our tool to adapt to technology specificities such as the density of barcodes or the size of the long molecules. Another feature that may differ between these technologies and may impact the assembly success is the sequencing biases with respect to GC content, as it has already been observed that some high GC content regions have poor or no coverage in linked-read data <ref type="bibr" target="#b20">[21,</ref><ref type="bibr" target="#b38">39]</ref>. Finally, with Haplotagging datasets, the assembly success will likely depend on the level of sequence diversity in the dataset, since this technology allows the simultaneous sequencing of many individuals but each at very low coverage.</p><p>To our knowledge, this is the first local assembly tool dedicated to linked-read data that does not need a reference sequence to guide the assembly. We have therefore compared our tool MTG-Link to generic short-read local assembly tools that could not use the long-range information given by each read barcode. In particular, we compared MTG-Link to MindTheGap, which is one of the component of the MTG-Link pipeline. As both rely on the same assembly algorithm, we could assess the benefit of the main feature of MTG-Link: its barcode-based read subsampling step prior to local assembly. The much better results obtained by MTG-Link compared to using solely MindTheGap demonstrate that the long-range information contained in linked-reads allows improving substantially local assembly qualities. Contrary to MindTheGap which builds its de Bruin graph with the whole read set, the read subsampling step of MTG-Link allows the enrichment of reads originating from the target locus in the read set used for the assembly. By discarding a large fraction of reads originating from other regions of the genome, we reduce the noise and complexity in the assembly graph, thus making the search for the target sequence path easier and achievable in a reasonable time.</p><p>Our results show that MTG-Link is able to assemble successfully large sequences, up to dozens of Kb. As expected, we observed that the smaller the target sequence the better the results. Actually, the risk of the read subsampling approach is to decrease the read depth on some parts of the target sequence and to disconnect the assembly graph, and this risk increases with the size of the target. This is illustrated by the observed relationship between the successful k-mer value used for the assembly and the target size (Fig. <ref type="figure">3</ref>). The larger the target size, the more the assembly fails with large k-mer values. De Bruijn graph traversal is known to be easier and to give more accurate paths with large k-mer values, as long as the read depth is sufficient for the graph to be connected. Hence, these results show that the read depth may be insufficient on some parts of the longer targets, probably in the middle where the distance to the flanking sequences is the greatest. Indeed, barcode-based read recruitment is limited by the size of the long DNA molecules obtained during the linked-read library preparation. As a matter of fact, increasing the flanking region size did not improve the results, since barcodes of interest are more likely to be found near the target sequence than far away. The target size limit is thus likely to depend on the size distribution of the long DNA molecules. Here, for molecules of average size around 55 Kb (around 70 Kb and 40 Kb for the stLFR H. sapiens and the 10× Genomics H. numata datasets respectively), MTG-link was still able to successfully assemble around 20% of the 20 Kb target sequences. Decreasing the k-mer value still allows the assembly of some of the larger targets and Fig. <ref type="figure">3</ref> shows that there is not a single k-mer size that outperforms the others for any target size; hence the importance of testing several k-mer sizes to optimize assembly results. This is performed automatically and efficiently in MTG-Link thanks to the last step of the pipeline, the qualitative evaluation of each obtained assembled sequence.</p><p>The second feature impacting the performances of MTG-Link is typical to any de novo assembly tool: it is the presence of repeats in or around the target sequence. This is particularly illustrated when comparing the results obtained for the assembly of insertion variants in the human HG002 individual, whether the insertion site is located in a repeated region or not (Fig. <ref type="figure">5</ref>). Notably, this repeated feature impacts both the success rate and the accuracy of the method. As a matter of fact, among the non-assembled 10 Kb targets of the randomly selected loci of the human dataset, 30% were actually assembled successfully by MTG-Link but returned among other possible solutions. These multiple solutions have at least 10% divergence between them, and the multiple nature of the solutions reflects the repetitive nature of the region to be assembled. As it is not possible to select the correct assembly among all the multiple solutions, MTG-Link does not return any of them by default. Concerning the assembly accuracy, we observed that many erroneous assemblies showed high sequence similarities with the reference sequence, but were incomplete. In several cases, we observed the presence of direct repeats in the reference sequence, generating a cycle in the de Bruijn graph whose sequence (between repeat copies) is lost in the assembly. This may explain why some targets are erroneously assembled with MTG-Link and why the accuracy decreases with the target size since the likelihood of harbouring at least two repeat copies increases with the size of the sequence.</p><p>Even if some targets are particularly difficult to assemble, we proved the usefulness of MTG-Link in three biological applications, namely to validate and sequence-resolve Structural Variant calls, to reconstruct some repetitive regions in clinically-relevant genes and to improve the contiguity of a locus split into several scaffolds in an initial assembly. Large insertion variants are one of the most difficult structural variant types to discover and fully characterize in re-sequencing datasets <ref type="bibr" target="#b39">[40]</ref>, because the alternative allele, the inserted sequence, is most often not contained in read mapping results. In particular, many short-read SV callers can predict insertion site locations on the reference genome but are not able to resolve the whole inserted sequence <ref type="bibr" target="#b37">[38]</ref>. Our results show that MTG-Link could be combined to short-read SV callers to improve their characterization of insertion variant calls. Similarly, for other SV types, we have shown that MTG-Link can be used for the local assembly of deletion breakpoints. This experiment on deletions is a proof of concept also for other SV types, such as inversions and translocations, since their breakpoint sequences are defined similarly to deletion breakpoints, e.g. by a sequence adjacency between two sequences that are already present in the reference genome. MTG-Link could therefore be used as a post-processing tool after SV calling, helping to validate SV calls or to filter out false positive calls. The third presented application can be referred to as gap-filling in a draft assembly composed of several contigs or scaffolds. Linked-read data have been massively produced to generate draft genome or haplotype assemblies. As for the Supergene P locus in H. numata, this is quite frequent that some loci of interest have already been identified in the studied organism and we showed that MTG-Link is a useful tool to help analyze and characterize these loci in several individuals.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Fig. 1</head><label>1</label><figDesc>Fig. 1 Overview of the MTG-Link pipeline. a Linked-reads whose barcode is observed in flanking regions surrounding the target sequence are extracted, and constitute the read subsample used in the local assembly step. b The local assembly is performed on an extended target, from the k-mer START (left) to the k-mer STOP (right), using the subsample of linked-reads obtained in a. c A quality score is assigned to the assembled sequence according to its alignment against the target flanking sequences. Only the assembled sequences with good quality scores are returned. Otherwise, a new assembly iteration is performed with lower de Bruijn graph parameters</figDesc><graphic coords="4,127.54,412.78,340.20,234.84" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Fig. 2</head><label>2</label><figDesc>Fig. 2 Comparison of assembly results for several local assembly tools and several target sizes. Results are shown for the stLFR H. sapiens dataset (top) and for the 10× Genomics H. numata dataset (bottom). MTG-Link, MindTheGap and ABYSS-Sealer were applied on four sets with different target sizes (1, 5, 10 and 20 Kb), each composed of 63 and 57 randomly selected loci resp. for the H. sapiens and the H. numata datasets</figDesc><graphic coords="9,127.54,88.58,340.20,432.96" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Fig. 3 Fig. 4</head><label>34</label><figDesc>Fig. 3 Proportion of k-mer sizes used by MTG-Link to assemble the successful assemblies depending on the target size. MTG-Link was run on the stLFR H. sapiens dataset with the parameter -k ranging from 61 to 21 with intervals of 10</figDesc><graphic coords="10,170.08,88.58,255.12,197.16" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="12,127.54,434.50,340.20,243.48" type="bitmap" /></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>Acknowledgements</head><p>We acknowledge the <rs type="institution">GenOuest bioinformatics core facility</rs> (https:// www. genou est. org) for providing the computing infrastructure. We warmly thank <rs type="person">Mathieu Joron</rs> and <rs type="person">Paul Jay</rs> for sharing their data and results on H. numata Supergene locus.</p></div>
+			</div>
+			<div type="funding">
+<div><head>Funding</head><p>This project has received funding from the <rs type="funder">European Union</rs>'s <rs type="programName">Horizon 2020 research and innovation program</rs> under the <rs type="grantName">Marie Skłodowska-Curie</rs> grant agreement No <rs type="grantNumber">764840</rs>, and from the <rs type="funder">French ANR</rs> <rs type="grantNumber">ANR-18-CE02-0019 Supergene</rs> grant. A CC-BY public copyright license (https:// creat iveco mmons. org/ licen ses/ by/4. 0/) has been applied by the authors to the present document, in accordance with the grant's open access conditions.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_Ecp3vCk">
+					<idno type="grant-number">764840</idno>
+					<orgName type="grant-name">Marie Skłodowska-Curie</orgName>
+					<orgName type="program" subtype="full">Horizon 2020 research and innovation program</orgName>
+				</org>
+				<org type="funding" xml:id="_sPahTck">
+					<idno type="grant-number">ANR-18-CE02-0019 Supergene</idno>
+				</org>
+			</listOrg>
+
+			<div type="availability">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Link source code is available at https:// github. com/ anne-gcd/</p></div>
+			</div>
+
+
+			<div type="availability">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Availability of data and materials</head><p>The source code of MTG-Link is available at https:// github. com/ anne-gcd/ MTG-Link under the GNU Affero GPL licence. MTG-Link is also available as a Bioconda package. Project name: MTG-Link. Project home page: https:// github. com/ anne-gcd/ MTG-Link. Operating system(s): Platform independent. Programming language: Python. Other requirements: Biopython 1.79, Gfapy 1.2.0, Mummer 3.23, Pathos 0.2.8, Pysam 0.19.1, Regex, LRez 2.2.3 or higher, MindTheGap 2.2.3 or higher. License: GNU Affero GPL licence. Any restrictions to use by non-academics: licence needed</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Abbreviations</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>GFA</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Supplementary Information</head><p>The online version contains supplementary material available at https:// doi. org/ 10. 1186/ s12859-023-05395-w.</p><p>Additional file 1. Additional information, figures and tables.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Author contributions</head><p>All authors designed the method and the validation protocol. AG implemented the method. AG, CL and FL performed the analyses. CL supervised the project. CL and DT wrote the grant applications. All authors read and approved the final manuscript.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Declarations</head><p>Ethics approval and consent to participate Not applicable.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Consent for publication</head><p>Not applicable.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Competing interests</head><p>The authors declare that they have no competing interests.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Publisher's Note</head><p>Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">The unusual s locus of Leavenworthia is composed of two sets of paralogous loci</title>
+		<author>
+			<persName><forename type="first">S-C</forename><surname>Chantha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">C</forename><surname>Herman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Castric</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Vekemans</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Marande</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">J</forename><surname>Schoen</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/nph.14764</idno>
+		<ptr target="https://doi.org/10.1111/nph.14764" />
+	</analytic>
+	<monogr>
+		<title level="j">New Phytol</title>
+		<imprint>
+			<biblScope unit="volume">216</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="1247" to="1255" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Size and content of the sex-determining region of the Y chromosome in dioecious Mercurialis annua, a plant with homomorphic sex chromosomes</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Veltsos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Cossard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Beaudoing</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Beydon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">S</forename><surname>Bianchi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Roux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">C</forename><surname>González-Martínez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">R</forename><surname>Pannell</surname></persName>
+		</author>
+		<idno type="DOI">10.3390/genes9060277</idno>
+		<ptr target="https://doi.org/10.3390/genes9060277" />
+	</analytic>
+	<monogr>
+		<title level="j">Genes</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page">277</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">A large genomic insertion containing a duplicated follistatin gene is linked to the pea aphid male wing dimorphism</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">D</forename><surname>Bickel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">J</forename><surname>Parker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><forename type="middle">S</forename><surname>Ziabari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">N</forename><surname>Vellichirammal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J-C</forename><surname>Simon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">L</forename><surname>Stern</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Brisson</surname></persName>
+		</author>
+		<idno type="DOI">10.7554/elife.50608</idno>
+		<ptr target="https://doi.org/10.7554/elife.50608" />
+	</analytic>
+	<monogr>
+		<title level="j">eLife</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Chromosomal rearrangements maintain a polymorphic supergene controlling butterfly mimicry</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Joron</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Frezal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">T</forename><surname>Jones</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/nature10341</idno>
+		<ptr target="https://doi.org/10.1038/nature10341" />
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">477</biblScope>
+			<biblScope unit="page" from="203" to="206" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Mutation load at a mimicry supergene sheds new light on the evolution of inversion polymorphisms</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Jay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Chouteau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Whibley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Bastide</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Parrinello</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Llaurens</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Joron</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41588-020-00771-1</idno>
+		<ptr target="https://doi.org/10.1038/s41588-020-00771-1" />
+	</analytic>
+	<monogr>
+		<title level="j">Nat Genet</title>
+		<imprint>
+			<biblScope unit="volume">53</biblScope>
+			<biblScope unit="page" from="288" to="293" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">CRIS: complete reconstruction of immunoglobulin V-D-J sequences from RNA-seq data</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Islam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Bilenky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">P</forename><surname>Weng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Connors</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Hirst</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/bioadv/vbab021</idno>
+		<ptr target="https://doi.org/10.1093/bioadv/vbab021" />
+	</analytic>
+	<monogr>
+		<title level="j">Bioinform Adv</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">aTRAM-automated target restricted assembly method: a fast method for assembling loci across divergent taxa from next-generation sequencing data</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Allen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">I</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><forename type="middle">C</forename><surname>Cronk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">P</forename><surname>Johnson</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/s12859-015-0515-2</idno>
+		<ptr target="https://doi.org/10.1186/s12859-015-0515-2" />
+	</analytic>
+	<monogr>
+		<title level="j">BMC Bioinform</title>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">aTRAM 2.0: an improved, flexible locus assembler for NGS data</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Allen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Lafrance</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">A</forename><surname>Folk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">P</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">P</forename><surname>Guralnick</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/1176934318774546</idno>
+		<ptr target="https://doi.org/10.1177/1176934318774546" />
+	</analytic>
+	<monogr>
+		<title level="j">Evol Bioinform</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="1" to="4" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Targeted assembly of short sequence reads</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Warren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Holt</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/npre.2011.5524.1</idno>
+		<ptr target="https://doi.org/10.1038/npre.2011.5524.1" />
+	</analytic>
+	<monogr>
+		<title level="j">PLoS ONE</title>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">SRAssembler: Selective Recursive local Assembly of homologous genomic regions</title>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">W</forename><surname>Mccarthy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Chou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><forename type="middle">P</forename><surname>Brendel</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/s12859-019-2949-4</idno>
+		<ptr target="https://doi.org/10.1186/s12859-019-2949-4" />
+	</analytic>
+	<monogr>
+		<title level="j">BMC Bioinform</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">SLAG: a program for seeded local assembly of genes in complex genomes</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">F</forename><surname>Crane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Nemacheck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Subramanyam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">E</forename><surname>Williams</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">B</forename><surname>Goodwin</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/1755-0998.13580</idno>
+		<ptr target="https://doi.org/10.1111/1755-0998.13580" />
+	</analytic>
+	<monogr>
+		<title level="j">Mol Ecol Resour</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="1999" to="2017" />
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Structural variant detection in region-based phased diploid assemblies from linked-reads</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Luo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Zhou</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">The International symposium on bioinformatics research and applications</title>
+		<imprint>
+			<publisher>ISBRA</publisher>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">SOAPdenovo2: an empirically improved memory-efficient short-read de novo assembler</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Luo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Xie</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/2047-217X-1-18</idno>
+		<ptr target="https://doi.org/10.1186/2047-217X-1-18" />
+	</analytic>
+	<monogr>
+		<title level="j">GigaScience</title>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Sealer: a scalable gap-closing application for finishing draft genomes</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Paulino</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">L</forename><surname>Warren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">P</forename><surname>Vandervalk</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/s12859-015-0663-4</idno>
+		<ptr target="https://doi.org/10.1186/s12859-015-0663-4" />
+	</analytic>
+	<monogr>
+		<title level="j">BMC Bioinform</title>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">GAPPadder: a sensitive approach for closing gaps on draft genomes with short sequence reads</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Chu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Wu</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/s12864-019-5703-4</idno>
+		<ptr target="https://doi.org/10.1186/s12864-019-5703-4" />
+	</analytic>
+	<monogr>
+		<title level="j">BMC Genomics</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">LR_Gapcloser: a tiling path-based gap closer that uses long reads to complete genome assembly</title>
+		<author>
+			<persName><forename type="first">G-C</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T-J</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S-Q</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H-W</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J-T</forename><surname>Li</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/gigascience/giy157</idno>
+		<ptr target="https://doi.org/10.1093/gigascience/giy157" />
+	</analytic>
+	<monogr>
+		<title level="j">GigaScience</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">TGS-GapCloser: a fast and accurate gap closer for large genomes with low coverage of error-prone long reads</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Gu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">A</forename><surname>Peters</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Fan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Deng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Zhang</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/gigascience/giaa094</idno>
+		<ptr target="https://doi.org/10.1093/gigascience/giaa094" />
+	</analytic>
+	<monogr>
+		<title level="j">GigaScience</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">DENTIST-using long reads for closing assembly gaps at high accuracy</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ludwig</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Pippel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Myers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Hiller</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/gigascience/giab100</idno>
+		<ptr target="https://doi.org/10.1093/gigascience/giab100" />
+	</analytic>
+	<monogr>
+		<title level="j">GigaScience</title>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Haplotyping germline and cancer genomes with high-throughput linkedread sequencing</title>
+		<author>
+			<persName><forename type="first">Gxy</forename><surname>Zheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">T</forename><surname>Lau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Schnall-Levin</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/nbt.3432</idno>
+		<ptr target="https://doi.org/10.1038/nbt.3432" />
+	</analytic>
+	<monogr>
+		<title level="j">Nat Biotechnol</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="page" from="303" to="311" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Efficient and unique cobarcoding of second-generation sequencing reads from long DNA molecules enabling cost-effective and accurate sequencing, haplotyping, and de novo assembly</title>
+		<author>
+			<persName><forename type="first">O</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Chin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Cheng</surname></persName>
+		</author>
+		<idno type="DOI">10.1101/gr.245126.118</idno>
+		<ptr target="https://doi.org/10.1101/gr.245126.118" />
+	</analytic>
+	<monogr>
+		<title level="j">Genome Res</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="page" from="798" to="808" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Ultralow-input single-tube linked-read library method enables short-read secondgeneration sequencing systems to routinely generate highly accurate and economical long-range sequencing information</title>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Pham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T-C</forename><surname>Wu</surname></persName>
+		</author>
+		<idno type="DOI">10.1101/gr.260380.119</idno>
+		<ptr target="https://doi.org/10.1101/gr.260380.119" />
+	</analytic>
+	<monogr>
+		<title level="j">Genome Res</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="page" from="898" to="909" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Haplotype tagging reveals parallel formation of hybrid races in two butterfly species</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">I</forename><surname>Meier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">A</forename><surname>Salazar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Kučka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">W</forename><surname>Davies</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Dréau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Aldás</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><forename type="middle">B</forename><surname>Power</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">J</forename><surname>Nadeau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">R</forename><surname>Bridle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Rolian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">H</forename><surname>Barton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">O</forename><surname>Mcmillan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">D</forename><surname>Jiggins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><forename type="middle">F</forename><surname>Chan</surname></persName>
+		</author>
+		<idno type="DOI">10.1073/pnas.2015005118</idno>
+		<ptr target="https://doi.org/10.1073/pnas.2015005118" />
+	</analytic>
+	<monogr>
+		<title level="j">PNAS</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Direct determination of diploid genome sequences</title>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">I</forename><surname>Weisenfeld</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Shah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">M</forename><surname>Church</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">B</forename><surname>Jaffe</surname></persName>
+		</author>
+		<idno type="DOI">10.1101/gr.214874.116</idno>
+		<ptr target="https://doi.org/10.1101/gr.214874.116" />
+	</analytic>
+	<monogr>
+		<title level="j">Genome Res</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="757" to="767" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">ARCS: scaffolding genome drafts with linked reads</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Yeo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Coombe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">L</forename><surname>Warren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Chu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Birol</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/bioinformatics/btx675</idno>
+		<ptr target="https://doi.org/10.1093/bioinformatics/btx675" />
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="725" to="731" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">ARKS: chromosome-scale scaffolding of human genome drafts with linked read kmers</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Coombe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">P</forename><surname>Vandervalk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Chu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">D</forename><surname>Jackman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Birol</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">L</forename><surname>Warren</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/s12859-018-2243-x</idno>
+		<ptr target="https://doi.org/10.1186/s12859-018-2243-x" />
+	</analytic>
+	<monogr>
+		<title level="j">BMC Bioinform</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">ARBitR: an overlap-aware genome assembly scaffolder for linked reads</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Hiltunen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ryberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Johannesson</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/bioinformatics/btaa975</idno>
+		<ptr target="https://doi.org/10.1093/bioinformatics/btaa975" />
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">37</biblScope>
+			<biblScope unit="issue">15</biblScope>
+			<biblScope unit="page" from="2203" to="2205" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Resolving the full spectrum of human genome variation using linked-reads</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Marks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Garcia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">M</forename><surname>Barrio</surname></persName>
+		</author>
+		<idno type="DOI">10.1101/gr.234443.118</idno>
+		<ptr target="https://doi.org/10.1101/gr.234443.118" />
+	</analytic>
+	<monogr>
+		<title level="j">Genome Res</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="page" from="635" to="645" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">VALOR2: characterization of large-scale structural variants using linkedreads</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Karaoğlanoğlu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Ricketts</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Ebren</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/s13059-020-01975-8</idno>
+		<ptr target="https://doi.org/10.1186/s13059-020-01975-8" />
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biol</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">LinkedSV for detection of mosaic structural variants from linked-read exome and genome sequencing data</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Fang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Kao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">V</forename><surname>Gonzalez</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41467-019-13397-7</idno>
+		<ptr target="https://doi.org/10.1038/s41467-019-13397-7" />
+	</analytic>
+	<monogr>
+		<title level="j">Nat Commun</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Aquila_stLFR: diploid genome assembly based structural variant calling package for stLFR linked-reads</title>
+		<author>
+			<persName><forename type="first">Y</forename><forename type="middle">H</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">L</forename><surname>Grubbs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Fang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">L</forename><surname>Dill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Sidow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Zhou</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/bioadv/vbab007</idno>
+		<ptr target="https://doi.org/10.1093/bioadv/vbab007" />
+	</analytic>
+	<monogr>
+		<title level="j">Bioinform Adv</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">MindTheGap: integrated detection and assembly of short and long insertions</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Rizk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Gouin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Chikhi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Lemaitre</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/bioinformatics/btu545</idno>
+		<ptr target="https://doi.org/10.1093/bioinformatics/btu545" />
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="issue">24</biblScope>
+			<biblScope unit="page" from="3451" to="3457" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Toward almost closed genomes with GapFiller</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Boetzer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Pirovano</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/gb-2012-13-6-r56</idno>
+		<ptr target="https://doi.org/10.1186/gb-2012-13-6-r56" />
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biol</title>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">LRez: a C++ API and toolkit for analyzing and managing linked-reads data</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Morisse</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Lemaitre</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Legeai</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/bioadv/vbab022</idno>
+		<ptr target="https://doi.org/10.1093/bioadv/vbab022" />
+	</analytic>
+	<monogr>
+		<title level="j">Bioinform Adv</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">MUMmer4: a fast and versatile genome alignment system</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Marçais</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">L</forename><surname>Delcher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">M</forename><surname>Phillippy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Coston</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">L</forename><surname>Salzberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Zimin</surname></persName>
+		</author>
+		<idno type="DOI">10.1371/journal.pcbi.1005944</idno>
+		<ptr target="https://doi.org/10.1371/journal.pcbi.1005944" />
+	</analytic>
+	<monogr>
+		<title level="j">PLOS Comput Biol</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Basic local alignment search tool</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">F</forename><surname>Altschul</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Gish</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Miller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">W</forename><surname>Myers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">J</forename><surname>Lipman</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/S0022-2836(05)80360-2</idno>
+		<ptr target="https://doi.org/10.1016/S0022-2836(05)80360-2" />
+	</analytic>
+	<monogr>
+		<title level="j">J Mol Biol</title>
+		<imprint>
+			<biblScope unit="volume">215</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="403" to="410" />
+			<date type="published" when="1990">1990</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Systematic analysis of dark and camouflaged genes reveals diseaserelevant genes hiding in plain sight</title>
+		<author>
+			<persName><forename type="first">Mtw</forename><surname>Ebbert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">D</forename><surname>Jensen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Jansen-West</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/s13059-019-1707-2</idno>
+		<ptr target="https://doi.org/10.1186/s13059-019-1707-2" />
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biol</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page">97</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">A robust benchmark for detection of germline large deletions and insertions</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Zook</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">F</forename><surname>Hansen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">D</forename><surname>Olson</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41587-020-0538-8</idno>
+		<ptr target="https://doi.org/10.1038/s41587-020-0538-8" />
+	</analytic>
+	<monogr>
+		<title level="j">Nat Biotechnol</title>
+		<imprint>
+			<biblScope unit="volume">38</biblScope>
+			<biblScope unit="page" from="1347" to="1355" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Towards a better understanding of the low recall of insertion variants with shortread based variant callers</title>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">J</forename><surname>Delage</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Thevenon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Lemaitre</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/s12864-020-07125-5</idno>
+		<ptr target="https://doi.org/10.1186/s12864-020-07125-5" />
+	</analytic>
+	<monogr>
+		<title level="j">BMC Genomics</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">GC bias affects genomic and metagenomic reconstructions, underrepresenting GC-poor organisms</title>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">D</forename><surname>Browne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">K</forename><surname>Nielsen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Kot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Aggerholm</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mtp</forename><surname>Gilbert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Puetz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Rasmussen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Zervas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">H</forename><surname>Hansen</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/gigascience/giaa008</idno>
+		<ptr target="https://doi.org/10.1093/gigascience/giaa008" />
+	</analytic>
+	<monogr>
+		<title level="j">GigaScience</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Structural variant calling: the long and the short of it</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mahmoud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Gobet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">I</forename><surname>Cruz-Dávalos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Mounier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Dessimoz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">J</forename><surname>Sedlazeck</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/s13059-019-1828-7</idno>
+		<ptr target="https://doi.org/10.1186/s13059-019-1828-7" />
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biol</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

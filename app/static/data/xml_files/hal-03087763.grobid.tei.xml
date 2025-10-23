@@ -1,0 +1,731 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Using Faust DSL to Develop Custom, Sample Accurate DSP Code and Audio Plugins for the Web Browser 1</title>
+				<funder ref="#_fwU5utt">
+					<orgName type="full">Agence Nationale de la Recherche</orgName>
+					<orgName type="abbreviated">ANR</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Shihong</forename><surname>Ren</surname></persName>
+							<email>renshihong@hotmail.com</email>
+							<affiliation key="aff0">
+								<orgName type="institution">GRAME</orgName>
+								<address>
+									<addrLine>11 cours de Verdun</addrLine>
+									<settlement>LYON</settlement>
+									<country key="FR">FRANCE</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Stéphane</forename><surname>Letz</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">GRAME</orgName>
+								<address>
+									<addrLine>11 cours de Verdun</addrLine>
+									<settlement>LYON</settlement>
+									<country key="FR">FRANCE</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Yann</forename><surname>Orlarey</surname></persName>
+							<email>orlarey@grame.fr</email>
+							<affiliation key="aff0">
+								<orgName type="institution">GRAME</orgName>
+								<address>
+									<addrLine>11 cours de Verdun</addrLine>
+									<settlement>LYON</settlement>
+									<country key="FR">FRANCE</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Romain</forename><surname>Michon</surname></persName>
+							<email>michon@grame.fr</email>
+							<affiliation key="aff0">
+								<orgName type="institution">GRAME</orgName>
+								<address>
+									<addrLine>11 cours de Verdun</addrLine>
+									<settlement>LYON</settlement>
+									<country key="FR">FRANCE</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Dominique</forename><surname>Fober</surname></persName>
+							<email>fober@grame.fr</email>
+							<affiliation key="aff0">
+								<orgName type="institution">GRAME</orgName>
+								<address>
+									<addrLine>11 cours de Verdun</addrLine>
+									<settlement>LYON</settlement>
+									<country key="FR">FRANCE</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Michel</forename><surname>Buffa</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="institution" key="instit1">Université Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">INRIA</orgName>
+								<address>
+									<country key="FR">FRANCE</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Jerome</forename><surname>Lebrun</surname></persName>
+							<email>lebrun@i3s.unice.fr</email>
+							<affiliation key="aff1">
+								<orgName type="institution" key="instit1">Université Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">INRIA</orgName>
+								<address>
+									<country key="FR">FRANCE</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Using Faust DSL to Develop Custom, Sample Accurate DSP Code and Audio Plugins for the Web Browser 1</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">B7AA0416E6CD0F5AD962FA18BBE44BC5</idno>
+					<idno type="DOI">10.17743/jaes.2020.0014</idno>
+					<note type="submission">Accepted Manuscript. This manuscript has been accepted for publication on 2 September 2020:</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:13+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract/>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>The development and porting of virtual instruments or audio effects on the Web is a hot topic. Several initiatives are emerging, from industry-driven ones (e.g., Propellerhead Rack Extension running on the Web 2 ), to more community based open-source projects [1]. Most of them aim at adapting existing code bases (usually developed in native languages like C/C++) as well as facilitating the use of existing audio Digital Signal Processing (DSP) languages and platforms. Our two teams previously presented an open format for WebAudio Plugins coined WAP [2]. It aims at: (i) improving the interoperability of audio/MIDI plugins developed using pure Web APIs, (ii) porting existing native code bases, or (iii) using Domain Specific Languages (DSL). In this paper, we present a solution based around FAUST DSL, its Web-based editor, and the integration of a plugin GUI editor allowing to directly test, generate and deploy WAP plugins. We also evoke our collaborative work: one team hatching and improving FAUST, the other working on the recreation of tube guitar amplifiers and pedalboards within Web browsers. So as to fully illustrate the FAUST online framework, a case study is detailed with complete workflow, from the FAUST DSP source code written and tested in a fully functional online editor, to a self-contained plugin running in a separate host application.</p><p>Figure <ref type="figure">1</ref>: the FAUST IDE provides many embedded tools: oscilloscopes, spectroscope and spectrogram analyzer, functional default GUI, schema preview, etc.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>1.</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTRODUCTION</head><p>There are many ways to develop software with the WebAudio API today. In pure JavaScript, the genish.js environment for instance [3] allows for the development of sample-level audio processing algorithms. <ref type="bibr" target="#b2">3</ref> C/C++ written code can be transpiled to WebAssembly using Emscripten [4] and wrapped by additional JavaScript code to become ready-to-use audio nodes. Domain Specific Languages (DSL) for programming DSP algorithms that also compile to WebAssembly, like the mature Csound [5] with its set of WebAudio examples, <ref type="bibr" target="#b3">4</ref> or the recently announced SOUL DSP language with its playground<ref type="foot" target="#foot_2">5</ref> can be used. They all provide a dedicated and usually self-contained working environment.</p><p>When audio effects or audio/MIDI instruments have to be shared between several DAWs or audio environments, a plugin model is usually preferred. Several native audio plugin standards are currently available, including Steinberg's VST (Virtual Studio Technology, created in 1997 by Cubase creators), Apple's Audio Units (Logic Audio, GarageBand), Avid's AAX (ProTools creators), and LV2 from the Linux audio community. Although the APIs offered by these formats are different, they share a common goal: to implement instruments or audio effects, and to allow a host application to load them.</p><p>In the first years after the birth of WebAudio (2011), there was no standard format for high-level audio plugins. With the emergence of Web-based audio software such as digital audio workstations (DAWs) developed by companies like SoundTrap, BandLab, or AmpedStudio, it became desirable to have a standard to make WebAudio instruments and effects interoperable as plugins compatible with these DAWs, and more generally with any compatible host software.</p><p>Such a plugin standard needs to be flexible enough to support these different approaches, including the use of a variety of programming languages. New features made possible by the very nature of the Web platform (e.g., plugins can be remote or local and identified by URIs) should also be available for plugins written in different ways. To this end, some initiatives have been proposed [6,7] and with other groups of researchers and developers we made in 2018 a proposal for a WebAudio plugin standard called WAP (WebAudio Plugins), which includes an API specification, an SDK, online plugin validation tools, and a series of plugin examples written in JavaScript but also with other languages <ref type="bibr" target="#b5">6</ref> .</p><p>These examples serve as proof of concept for developers and also illustrate the power of the Web platform: plugins can be discovered from remote repositories, dynamically uploaded to a host WebApp and instantiated, connected together, etc. The project includes examples of very simple plugins and host software, but also more ambitious tools to validate the WAP standard: a virtual guitar "pedalboard" that discovers plugins from several remote repositories, and allows musicians to chain for examplevirtual audio effects pedal plugins, synthesizers, guitar amplifier simulators, drum machines, etc., and to control them via MIDI in real-time (see Fig. <ref type="figure">1</ref>). <ref type="bibr" target="#b6">7</ref> As of last year, WAP now includes support for pure MIDI plugins (a GM midi synthesizer, virtual midi keyboards, a MIDI event monitoring plugin, etc <ref type="bibr" target="#b7">8</ref> ). For more details about the WAP proposal, and how it is related to other approaches like Web Audio Modules (WAMs), WebAudio API eXtension (WAAX) [8], or JavaScript Audio Plugin (JSAP), see [2].</p><p>Figure <ref type="figure">2</ref>: The virtual pedalboard host application scans multiple remote WAP plugin servers. WAP plugins can then be dragged and dropped and assembled in a graph.</p><p>This paper is a further extended, fully revamped version of an awarded presentation that was given during the WebAudio Conference 2019 [9]. Our goal is here to highlight and detail some of the results presented, to introduce new perspectives and to flesh out newer developments. For example, the compilation chain of the Faust code on remote servers will be fully characterized and the GUI Builder will have a full section detailing a "practical case" of design with the full recreation of a novel tube guitar amplifiers PowerAmp stage simulation using a Faust approach. Also a complete user evaluation has been conducted and will be detailed with the obtained results analyzed.</p><p>In the next sections, we will focus on the new online IDE we developed, that is well suited for coding, testing, and publishing WAP plugins written in FAUST, directly in a Web browser. The IDE includes a graphical interface editor allowing developers to fine-tune the look and feel of the plugins. This editor offers a rich set of widgets that can be controlled by midi-learn. Once complete (DSP + GUI), the plugins are packaged in the form of standard W3C WebComponents and published on remote WAP plugin servers. The plugins will then be directly usable by any compatible host software, using their URLs. You can picture the WAP plugins as images in an HTML document, their URL is sufficient, and can be dynamically retrieved using APIs from a remote Web Service.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.">BACKGROUND CONTEXT AND TERMS</head><p>FAUST [10] is a functional, synchronous, domain specific programming language working at the sample level, designed for real time audio signal processing and synthesis.</p><p>FAUST programs can be efficiently compiled to a variety of target programming languages, from C++ to WebAssembly. The FAUST compiler is organized in successive stages, from the DSP block diagram to signals, and finally to the FIR (FAUST Imperative Representation) which is then translated into several target languages. The FIR language describes the computation performed on the audio samples in a generic manner. It contains primitives to read and write variables and arrays, do arithmetic operations, and defines the necessary control structures (e.g., for and while loops, if statements, etc.).</p><p>As a specification language, the FAUST code only describes the DSP part, and an abstract version of the control interface. It says nothing about the audio drivers or the GUI toolkit to be used. Architecture files are written (typically in C++ or JavaScript) to describe how to connect the DSP code to the external world.</p><p>Additional generic code is added to connect the DSP computation itself with audio inputs/outputs, and with parameter controllers, which could be buttons, sliders, numerical entries, etc. Architectures files can also possibly implement polyphonic support for MIDI-controllable instruments, by automatically dealing with dynamic voice allocation, and decoding and mapping of incoming MIDI events [11].</p><p>Several prior developments have been done to use the language on the Web platform. By adding an asm.js<ref type="foot" target="#foot_6">9</ref> backend in the compiler, and compiling the compiler itself in asm.js/JavaScript using the Emscripten transpiler, the dynamic generation of WebAudio nodes from FAUST code has been demonstrated [12,13].</p><p>With the rise of the more stable and better designed WebAssembly<ref type="foot" target="#foot_7">10</ref> format in 2017 (a portable binary-code format for executable programs, firstly to be used on the Web, but also on native environments) as a replacement of asm.js, the previous work done with asm.js was adapted. For the Web platform, two backends have been developed to generate WebAssembly text (so-called "wast" or "wat") and binary formats (so-called "wasm") [14]. When embedded in the FAUST compiler running on the Web, they allow us to dynamically compile FAUST DSP programs as pure Web applications. Additional JavaScript glue code is added to transform DSP modules in fully functional WebAudio nodes.</p><p>The node generated by the FAUST compiler can be an AudioWorklet or a ScriptProcessor. These nodes are connectable with other WebAudio nodes to create an audio processing graph, and are designed to allow the development of custom low-level DSP algorithms. The AudioWorklet currently becomes a standard in the WebAudio API as it allows the computation of audio buffers in a dedicated audio thread (different from the "main thread" where the GUI is being executed). An AudioWorklet is composed of a JavaScript wrapper called the AudioWorkletProcessor that communicates with the AudioWorkletNode [15].</p><p>FAUST also allows us to circumvent many important limitations of the WebAudio standard, like the buffer size issues, as loops appearing in the graph of connected WebAudio nodes always introduce a delay of at least one buffer (128 samples), and thus one sample delay recursive algorithms cannot be expressed. This limitation was encountered in our previous works on the implementation of feedback loops in the signal chain using pure JavaScript high-level WebAudio nodes. To illustrate how FAUSTbased solutions fulfil this important need for temporally accurate solutions, this practical case study will be detailed in Section 4.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>3.</head><p>CURRENT STATE</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">The New FAUST Online Web IDE</head><p>The compiler module generated by Emscripten was previously implemented in the FAUST IDE <ref type="bibr" target="#b10">11</ref> using a JavaScript wrapper which allowed the application to compile and transform FAUST source code into a WebAudio node. We recently restructured this wrapper in order to take advantage of modern JavaScript development environments. An updated toolchain is now used to ensure the efficiency and the compatibility of the wrapper to transform it into another JavaScript UMD <ref type="bibr" target="#b11">12</ref> module which can be imported and used in either a Webpage's runtime or a JavaScript compiling environment.</p><p>The past versions of this wrapper already provided the following features:</p><p>• Load WebAssembly version of the FAUST compiler and import its C functions into JavaScript • Compile the code: the input is the FAUST source code, the output is the compiled WebAssembly binary version with some related data • Load and wrap the module as a DSP processing function inside an AudioWorkletProcessor or a ScriptProcessor AudioNode</p><p>We added some new features to the module:</p><p>• A virtual file system (VFS): Emscripten supports a virtual file system (in memory) compatible with the C++ I/O standard library, but also usable from the JavaScript wrapper. This file system became important as the FAUST compiler searches for libraries and imported source code locally, or generates DSP code for other targets/architectures. For instance, FAUST block diagrams in SVG <ref type="bibr" target="#b12">13</ref> format generated as additional files in the compilation process, are simply written on the fly in the VFS, then loaded, decoded, and displayed. • Data output: a callback has been added into the AudioWorklet node to support additional processing or analysis after the buffer has been fully calculated. This callback returns the current output buffer, the current buffer index, and parameters change events.</p><p>In addition, to be able to calculate audio separately with a FAUST DSP independent from the browser audio context, we created an "offline processor" which will be used exclusively for getting the very first samples calculated by a DSP. This allows us to debug the DSP code running with a different sample rate. While a DSP developer needs to hear the sound produced by the algorithm, he should also be able to test it with other audio inputs, precisely display its time and frequency domain representation, etc. So, we emerged visualization, testing, and debugging tools such as MIDI/audio input simulation and output recording around the FAUST code editor to provide an integrated environment for DSP designing. This is the reason why we built a new online IDE (see Fig. <ref type="figure">1</ref>) that provides more information and details on the generated DSP through graphical representation in a Web page (e.g. real-time FAUST block diagram, signal visualizations). <ref type="bibr" target="#b12">13</ref> https://www.w3.org/Graphics/SVG/ 14 https://github.com/j-funk/kissfft-js/</p><p>The layout is responsive and configurable following the browser viewport dimensions:</p><p>• All options related to FAUST code compilation are located using controllers from the left sidebar; • All options and displays related to DSP runtime, such as MIDI, audio inputs, and quick signal probing are placed in the right sidebar; • The remaining central zone of the page is divided into two parts with configurable heights: a source code editor on the top and a multi-tab display panel which can display the logs from the compiler, a FAUST block diagram corresponding to the DSP code, a larger signal scope, a running GUI of the plugin being developed, and finally, a GUI builder/exporter for designing the user interface of the WAP plugin version of the code, usable in external host applications.</p><p>Besides UI improvements facilitating code editing and compilation, audio probes are an important addition to the new editor. We designed four modes of signal visualizations to help FAUST users to debug their DSPs: data table, oscilloscope (stacked and interleaved by channels), spectroscope, and spectrogram analyzer (see Fig. <ref type="figure" target="#fig_0">3</ref>). To implement all four probe modes, precise sample values are needed. In the browser environment, we have two ways to get audio output samples.</p><p>The first approach consists of using WebAudio AnalyserNode with its integrated functions to get the realtime audio data in frequency and time domain: This approach provides both sample values and the spectrum given by the FFT of the current audio buffer. However, it has several drawbacks. First, the AnalyserNode has only one input, which means that it needs an additional ChannelSplitterNode to retrieve the correct channel from the FAUST DSP node. Secondly, as we cannot tell when the AnalyserNode does the analysis, the audio data is provided only on demand. Thus it is impossible to get precise data in a specific buffer calculated by the FAUST DSP.</p><p>The second approach consists of getting the sample values directly with a callback in a FAUST DSP node. These values are associated with its buffer index and an event list containing all parameter changes occurring in this buffer. To get the corresponding frequency domain data, an additional FFT is required. We chose the JavaScript version of KissFFT 14 for its high performance when compiled to WebAssembly. <ref type="bibr" target="#b14">15</ref> Thus, we perform the FFT computation in the FAUST online editor with two overlaps using a Blackman window function.</p><p>The first approach is used in the implementation of the two scopes in the right sidebar as it can also probe the audio input. The second approach is used for the larger scope at the bottom. It is more flexible and it can adapt itself to continuous or on-demand signal display. Developers may need to have options to select which part of the signals they want to display: we provide four modes to trigger differently the drawing function of the scopes: Offline, Continuous, On Event, and Manual:</p><p>• Offline: FAUST WebAudio wrapper offers an "offline processor" which is useful to allow a DSP to calculate the first samples at any sample rate independently of the actual audio context one. • Continuous: similar to normal audio scopes, this mode draws in real time the most recent samples processed by the FAUST DSP. Parameter change events will be shown in the scope. On a standard personal computer, the editor is able to draw up to 1 million samples continuously without significant rendering lag. • On Event: as the FAUST DSP usually comes with a GUI to control its parameters, it is important to visualize the part of signals while parameters change.</p><p>In this mode, the scope draws only when it captures parameter change events, which is useful for debugging. • Manual: in Manual mode, the scope displays the latest samples when a user clicks on a button. After a FAUST DSP is tested in the editor, users can export the DSP to different architectures including WebAudio Plugins (WAPs) which is compiled by an online compiling service (see Fig. <ref type="figure" target="#fig_2">4</ref>). A dedicated GUI builder is integrated in the IDE that receives FAUST DSP's GUI definitions while it is compiled. Then, a default GUI is proposed and users can start customizing the GUI, testing the plugin functionalities, and finally publishing the plugin to a remote server. These points are detailed in the next two sections. <ref type="bibr" target="#b15">16</ref> https://www.gnu.org/software/libmicrohttpd/</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>3.2</head><p>The Remote Compilation Service</p><p>In order to export and run FAUST programs outside the Web browser, a Compiler as a Service (CaaS) located at https://faustservicecloud.grame.fr/ has been designed, which can cross-compile executables binaries for most of the platforms supported by FAUST.</p><p>The service is accessible via the export button of the editor (see Fig. <ref type="figure" target="#fig_2">4</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2.1">The Service API</head><p>The dialog between the editor and the remote compilation service is based on a very simple API (Application Programming Interface) of REST (Representational State Transfer) type which is detailed in the Appendix located at the end of this paper.</p><p>The first thing the editor does is to ask the server for a list of supported platforms (Windows, macOS, Web, ...) and architectures (VST, Max, ...). This information is needed in order to present possible choices to the user. When the user requests an export for the first time, the FAUST code is sent to the compilation service which will check it, and if it is correct returns an SHA key which will represent the source code for all the following operations.</p><p>To trigger the compilation itself, and retrieve the binary code, a URL is dynamically forged by the editor from this SHA key, the platform, and the architecture. If the compilation goes well, a zip folder containing the binary code is downloaded from the server. The server maintains a cache, with a limited lifetime, to avoid unnecessary recompilations of the same code.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2.2">Implementation and Deployment</head><p>The server is written in C++ and based on libmicrohttpd, <ref type="bibr" target="#b15">16</ref> a C library from the GNU Foundation allowing us to easily write a simple HTTP server.</p><p>It runs in a docker container built on top of Ubuntu 16.04 to which are added all the packages needed to compile and use FAUST, the FAUST distribution itself, all the needed SDKs, and several cross-compilers.</p><p>The server is almost exclusively limited to implementing the API we have just described. As for the FAUST compilation itself, it relies on a series of Makefiles, with precise naming conventions to perform all compilation tasks. This makes the service easily extensible just by adding Makefiles (i.e., without the need to modify it).</p><p>These Makefiles are organized in a two-level hierarchy, one folder per platform containing all the Makefiles related to that platform. By analyzing this folder hierarchy, the server can respond to the targets request seen above. The makefiles are pretty simple. They rely directly on the compilation tools of the FAUST distribution.</p><p>When the POST of a file foo.dsp is processed, the SHA-1 key of the file is first calculated. This key is used as the name of a folder containing all the compilations related to this file. When afterwards a /&lt;sha&gt;/&lt;platform&gt;/&lt;arch&gt;/binary.zip request is processed, it is first converted into a filename: sessions/&lt;sha&gt;/&lt;platform&gt;/&lt;arch&gt;/binary.zip to check if it has not already been generated. If it is not the case, the software will:</p><p>• Check that makefiles/&lt;platform&gt;/Makefile.&lt;arch&gt; exists The session folder thus serves as a cache and makes it easy to retrieve the compilation results. It is periodically emptied when the number of sessions becomes too large.</p><p>Figure <ref type="figure">5</ref>: a default GUI is proposed from a FAUST code in the editor.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>3.3</head><p>The GUI Editor</p><p>FAUST code can include abstract definitions of GUI controllers, such as in this source code extract: Here, the code describes the definition of two parameters named "Fuzz" and "Level" along with some data defining the default value, min, max, step, unit type, etc. These parameters can be programmatically set/computed such as "default_level*2" in the second example, instead of using literal values.</p><p>As previously explained, the FAUST DSP code is compiled to a JavaScript wrapper and a WebAssembly module. This is all done on the client-side. The GUI builder shares a JavaScript parameter descriptor variable that has been generated after the compilation step and that can be statically interpreted. From this parameter descriptor, a "GUI pivot descriptor" is created and a "default GUI" displayed in the GUI builder (see Fig. <ref type="figure">5</ref>). It can be filled during the GUI edition process and used to generate the final GUI code (see Fig. <ref type="figure" target="#fig_4">6</ref>). So far, we implemented only a generator for WebAudio plugins, using HTML/CSS/JavaScript code that complies with the W3C WebComponents specifications.<ref type="foot" target="#foot_11">17</ref>   At any time, the plugin (DSP + GUI) can be tested from within the IDE, without having to download it on a local disk. It is then possible to refine the GUI, adjust the layout, appearance of the controllers among a rich set of knobs, sliders, switches (Figs 6, 7 and 9 show different looks and feels that can be created from the same DSP code).</p><p>The editor is not yet 100% bijective with the FAUST definition of GUI controllers (that serve as a "hint" to bootstrap the GUI design process). For example, if you change the type of controller (i.e., slider to knob), it does not change the FAUST code back. However, having a way to build and customize a GUI this way is a great time encapsulated HTML/CSS/JS/WASM code without namespace conflicts. See https://www.webcomponents.org. saver, full sync between the FAUST code and GUI is planned as future enhancements.</p><p>The plugin can also be published on a remote plugin server, using standard Web services; this is shown in the life cycle workflow from Fig. <ref type="figure" target="#fig_6">8</ref>. This allows us to preview it in its "running state" directly in the IDE (see Fig. <ref type="figure" target="#fig_7">9</ref>).  From this dialog, a WAP plugin generated by the FAUST IDE can also be downloaded as a zipped archive file that contains the DSP WebAssembly module, the standard JSON <ref type="bibr" target="#b17">18</ref> WAP descriptor and the GUI code (HTML/CSS/JavaScript) wrapped as a WebComponent. It also includes a host HTML page for trying and testing the plugin, making the plugin usable by humans as well as by client applications. In fact, once published on a server, this file is unzipped in a remote directory. The plugin is associated with a "remote URI" and can be dynamically loaded and "unit tested" by different validation tools that come with the WAP SDK <ref type="bibr" target="#b18">19</ref> (i.e., checked for compliance of their API to the specification, that the plugin is able to <ref type="bibr" target="#b17">18</ref> https://www.json.org/json-en.html <ref type="bibr" target="#b18">19</ref> Examples/demos of online validators can be tested online, see for example https://jsbin.com/jeretab/edit?js,output.</p><p>save/restore its state, etc.), or discovered by host web applications (e.g., DAWs, etc.) One of these hosts is our "virtual pedalboard" Web application [16], a host for WAP plugins we developed to showcase the WAP standard (see Fig. <ref type="figure" target="#fig_8">10</ref>), that targets guitar and keyboard players. This application scans remote WAP servers for available plugins and makes them accessible to final users that can drag and drop and assemble them in the main part of the screen. In this example, all virtual pedal effects at the bottom of the screen have been coded and compiled with their GUI designed and tested in the FAUST IDE. <ref type="bibr" target="#b19">20</ref> </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.">A PRACTICAL USE CASE: MODELING THE POWER AMP STAGE OF A TUBE GUITAR AMP</head><p>Since 2015, we have been involved in the design, development and constant improvement of perceptually faithful simulations of existing tube guitar amplifiers like the Marshall JCM 800, used by many famous artists (e.g., AC/DC, Guns and Roses, Deep Purple, etc.), with a major constraint that everything should run within just a webbrowser [17]. Our first versions were developed in pure JavaScript using the W3C WebAudio API and are available to play with. <ref type="bibr" target="#b20">21</ref> </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Limitations of the WebAudio API and high-level WebAudio nodes when processing feedback loops</head><p>Most tube guitar amplifiers have similar topology: a preamplifier stage, a so-called "tonestack" stage including bass, midrange, and treble controls, followed by a power stage (the Power Amp). The preamplifier beefs up the high-impedance low-level signal coming from the guitar pickup microphones to a lower impedance mid-voltage signal that can drive the power stage. The preamplifier also shapes the tone of the signal; higher gain in the preamplifier leads to "overload", creating desirable crunch/distorted sounds. The power amplifier, with the help of the output transformer outputs a very low impedance, high current signal adequate to efficiently drive a loudspeaker and to produce loud amplified sounds. Another obvious and intended purpose of guitar amps is to produce interesting distorted sounds. For more details about all these stages, one can browse the AikenAmps website. <ref type="bibr">22</ref> In our previous implementations in JavaScript with the WebAudio API, the first stages were quite faithfully recreated (incl. harmonics and temporal dynamics) with very low latency [17,18,19]. However, the poweramp stage proved to be trickier to implement as it includes a Negative Feedback (NFB) loop. With pure JavaScript WebAudio API, major issues arise when dealing with loops, firstly due to the limitations imposed by its blockprocessing paradigm and also because of some divergences/bugs in how different browsers parse WebAudio graphs with loops. In the WebAudio API specs, the loops in a graph are required to include at least one delay node. Without this delay node, Firefox browser stops rendering the graph, while Chrome browser does not complain but adds, behind the scenes, a 3ms delay (the minimum size of an audio buffer being 128 frames, hence the minimal delay of 128/sampling rate: roughly 3ms at 44.1kHz). Now, to get a timewise precise implementation of loops, as the NFB with its simple RC networks induces delays usually much shorter than 3ms, a finer time precision at the level of some samples would be required to match this delay. With the current limitations, and quite un-consistently, this 3ms delay in the loopso as to conform to the specsbrings also slightly different coloring of the amps between Firefox and Chrome.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Rewriting the Power Amp stage in FAUST, in order to bypass the above mentioned limitations</head><p>Our initial WebAudio implementations were based on high level nodes provided by the API: a bank of biquad filters in series (for the Presence in the NFB loop), a waveshaper node (for simulating tubes), gain nodes (master volume, negative gain in the NFB loop and for fine tuning), and a delay node (in the NFB loop). Consequently, the first step was recreating with FAUST our signal chain as faithfully as possible -i.e. using the same filters with the same parameters, the same transfer function, the same gain values, etc. Adapting FAUST filters to behave like WebAudio ones was not straightforward but after some interactions with the FAUST and WebAudio implementers, it proved to be easier to restart from the original C++ implementation of the WebAudio filter API (Chromium browser's source code). This porting done with the FAUST team ended up in a so-called webaudio.lib (available now in the FAUST distribution). To properly simulate the tube stages, we looked for any prior art available in FAUST (e.g., in guitarix.lib from the Guitarix project<ref type="foot" target="#foot_15">23</ref> ), or waveshapers (as done by Oleg Kapitonov<ref type="foot" target="#foot_16">24</ref> in his plugins Pack or by Nick Thompson of Creative Intent for his Temper Distortion plugin<ref type="foot" target="#foot_17">25</ref> ). Most tube simulations, like the Guitarix tube simulations, relied heavily on C/C++ code, making it quite difficult to run them in Web browsers as the FAUST toolchain does not support yet hybrid FAUST/C source code with compilation target set to WebAudio/WebAssembly.</p><p>Luckily, the "Temper Distortion" simulation included a 100% FAUST-based implementation of a simple but efficient waveshaper that produced a warm, adjustable, controllable distortion that would easily fit our needs. We used it as a starting point for further developments. The code included the implementation of a simple transfer function whose curve could be adjusted (i.e., leading to more subtle/less aggressive curves). The transfer function from the Temper Distortion waveshaper code<ref type="foot" target="#foot_18">26</ref> is based on a parameterized tanh function : This is very close to the one we used in our JavaScript implementation (see Fig. <ref type="figure" target="#fig_9">11</ref> for comparison) with parameter k driving the S-shape of the curve.</p><p>In this way, our current JavaScript poweramp implementation (made of a dozen of high level WebAudio nodes) was replaced by a simple FAUST generated AudioWorklet node. <ref type="bibr">28</ref>    Major differences are the introduction of the Presence control (made of two peaking filters, at 2kHz and 4kHz) in the feedback loop, the introduction of an adjustable NFB gain and the removal of some unnecessary elements (like the now pointless resonant lowpass filter at the input). Finally, we added some GUI elements (knobs) in order to allow for the fine-tuning in real-time of the different parameters (see Fig. <ref type="figure" target="#fig_13">14</ref>), in particular the ones that control the waveshaper (i.e., drive, curve, and distortion), the NFB gain, and the Presence filters.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Generating the graphical interface, publishing and integrating the plugin in a host software, testing the plugin in the amplifier simulation chain</head><p>The current "Temper-inspired" implementation of the waveshaper does not rely on pre-calculated point tables, but on a transfer function applied to each sound sample. Obviously, this leaves some room for further optimization. The dynamic time response of the tubes is obtained using a simple amplitude-follower before the waveshaper to drive an allpass filter, altering the DC offset, and thus the slope of the curve. This simple approach would benefit from being fully confronted with our previous JavaScript implementation where both the slope and the S-shape were dynamically changed.<ref type="foot" target="#foot_21">29</ref>  This FAUST poweramp proved to be fully functional and adjustable, so we could proceed to the evaluation part. The first step of the evaluation were careful measurements and critical listening to assess the dynamical and harmonic possible shortcomings of this FAUST implementation in standalone mode, tweaking the different parameters (i.e., master volume, presence, NFB gain, presence, transfer function parameters), and also comparing its behavior with our WebAudio/JavaScript implementation. Either with dry guitar sound samples or real guitars as inputs, the Master volume and Presence controls reacted quite similarly in both implementations. Again, the typical oscillatory effects (Larsen) we got when going towards positive feedback within our JavaScript implementation were similar, slightly more controlled, in the FAUST version when pushing some parameters (Presence and NFB gain) close to their limit values.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4">Evaluation, latency measures</head><p>The FAUST IDE allowed also for the creation of a bona-fide WebAudio plugin from the FAUST implementation of the PowerAmp (see Fig. <ref type="figure" target="#fig_14">15</ref>). Inside our virtual pedalboard, we chained a special version of our JavaScript tube guitar amplifier simulation with bypassed power amp and cabinet simulation stages, and replaced the last stage with our novel FAUST-based poweramp stage (see Fig. <ref type="figure" target="#fig_4">16</ref>), and finally we compared it with the full featured, JavaScript based simulations. These results can be seen/heard in a video we published online,<ref type="foot" target="#foot_22">30</ref> using the online pedalboard WebAudio application. <ref type="bibr">31</ref> Figure <ref type="figure" target="#fig_4">16</ref>: The PowerAmp plugin in our pedalboard application, with a version of our AmpSim in which we bypassed the JS PowerAmp and cabinet simulator stages.</p><p>The differences in terms of sound/timbre and playing dynamics proved to be very small and subtle. However, we noticed that the FAUST implementation was much more stable and versatile when pushing the internal parameters of the feedback loop. When pushed towards positive feedback loops, the FAUST poweramp produced cleaner oscillations with less intermodulation distortion suggesting a smaller latency from the NFB loop.</p><p>The last step was to get a closer look at the behavior of the NFB loop whose delay ought to be lower than the undesired 3ms lower limit in our previous JavaScript implementation (due to block-based processing imposing delays of 128 samples in the back-fed signal). In the FAUST implementation, the measurement tools (Fig. <ref type="figure" target="#fig_5">17</ref>) proved the sample-wise nature of the processing with a delay of just one-sample for the NFB/Presence loop. <ref type="bibr">32</ref> This also explains the increased stability of this loop. Now, in terms of aggregated latency for the Power Amp, we did measurements of the "end-to-end" latency, from guitar to cabinet and obtained consistently better values for latency with the new FAUST implementation: around 20-21 ms compared to the 23-24 ms latency of our previous finelytuned JavaScript implementation (both using a Firefox Nightly 75.0a1 browser with an external Focusrite Scarlett and a Macbook Pro 16 under 10.14). This confirms a saving of 3ms in accordance with the difference of processing of loops between FAUST (sample-wise) and WebAudio API/JavaScript (block based).</p><p>To conclude, we have been able, using only the online FAUST IDE, to completely redesign our Power Amp stage, to fine tune it using the embedded measurement tools, to build its GUI and to thoroughly test the final version before publishing it as a plugin for Web-based host applications.</p><p>Figure <ref type="figure" target="#fig_5">17</ref>: The PowerAmp plugin latency can be measured achieving sample-wise accuracy using the tools embedded in the IDE. Yellow: a gate signal, Pink: the output from the PowerAmp. X-axis is in samples.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.">DISCUSSION</head><p>Now, the short term goals of the authors are to complete and stabilize the presented workflow, to add support for polyphonic MIDI controllable instrument plugins, and to develop more features within the WAP GUI Builder that currently provides basic editing tools. The FAUST IDE itself needs to be extended to include sound file management, so that plugins using audio samples/wavetables, for instance could be implemented. To do that, thanks to Emscripten, we plan to expose more of the already written C++ architecture files used to access sound resources on the JavaScript side. <ref type="bibr">33</ref> This will also require to extend the FAUST remote compilation service. Deploying the resulting plugins in other host applications (like more traditional DAW running on the Web) should be straightforward if they comply with the WAP specification. For example, some concluding tests have already been conducted with the AmpedStudio DAW. <ref type="bibr">34</ref> In addition, we asked a group of six audio plugin developers, with different level of expertise with the FAUST language, to follow a tutorial 35 that guided them through the creation and publication of a phaser effect only using the IDE. They did this exercise remotely and after the completion of the proposed tasks they answered an online form 36 where we asked them to evaluate their experience. These questions started by "did you manage to create, publish and test the created plugin in an online host?", and included ratings and comments of different aspects.</p><p>The results are summarized below:</p><p>• 100% of the developers managed to create a plugin (including its GUI), to publish and to test it, • Average time to complete the tasks: 37 minutes, • 83.3% of them used the visualization tools and considered them an important addition to help understanding the DSP code behavior, • 100% appreciated the fact that a default GUI is generated automatically. They found it useful both for testing the plugin during development and for prototyping its ergonomics. • 100% managed to customize the GUI as suggested in the tutorial (change size, position, colors, textures, shape of elements in the GUI) • 100% tried to do things that are not yet supported in the GUI builder (change a knob into a slider or into a push button, change default value for knobs and sliders, change the behavior of the bypass switch). All these things are possible but they require changing the source code. • 100% found the tool very useful for rapid audio plugin development/prototyping.</p><p>The questionnaire also asked to suggest improvements.</p><p>Here many proposed to improve the overall ergonomics of the GUI builder ("the most important features should be presented in a more compact way", "where is the undo button?", "the dimensions in pixels should be always visible") and complained about the lack of a magnetic grid or alignment tools. Actions like changing a slider into a knob or changing the default parameter values from the GUI builder are also missing and have been asked by all users (while this can be done by changing the source code of the plugin parameter declarations). The GUI builder is still at an early stage and a more comprehensive user needs analysis will be conducted, focusing mainly on the ergonomics of the GUI builder. This first version however, has been considered as "very useful" for prototyping rapidly an audio plugin, prior to polishing its GUI by hand, editing the HTML/CSS code.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.">CONCLUSION</head><p>In this paper, we presented the combined work of two teams deeply involved in the development of an audio DSP programming language and its complete ecosystem on the one hand, and the definition of a WebAudio plugin standard (WAP) and its complete surrounding environment on the other. We made extensive use of 37 https://guitarix.org/ 38 https://www.rebeltech.org/product/owl-pedal/ recent technologies like Emscripten as well as recognized Web standards (like WebComponents) to achieve the porting of native source components to higher performance versions using WebAudio and WebAssembly API. Combining client side and shared remote services is also part of the presented solution.</p><p>The complete workflow from the initial DSP source code, testing and running it in an integrated editor, polishing its user interface in another specialized GUI editor, to the finalized plugin running in an external host has been presented. Many examples of audio effects have been ported to WAPs directly by copying and pasting existing code from the Guitarix 37 and the OWL pedal project, <ref type="bibr">38</ref> or from various open-source projects, into the new FAUST online IDE. Once compiled, the GUI has been customized within the GUI builder part of the IDE and published to remote WAP servers. They can now be tested online in host web applications such as our Virtual Pedalboard host presented in <ref type="bibr">Figs 2,</ref><ref type="bibr">10 and 17. 39</ref> Having the authoring tools as well as the deployment platform as pure Web applications facilitates the workflow and interoperability of these components [20]. We also think that the presented toolchain could be easily adapted to other plugin formats or audio DSP production tools. Source code for the FAUST and IDE projects is located at:</p><p>• https://github.com/grame-cncm/faust • https://github.com/grame-cncm/faustide 7.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>APPENDIX: Remote Compilation Service API</head><p>The dialog between the editor and the remote compilation service (workflow in Fig. <ref type="figure">below</ref>) is based on a very simple API (Application Programming Interface) of REST (Representational State Transfer) type that we will detail here:</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>GET /targets</head><p>The GET https://faustservicecloud.grame.fr/targets allows for the querying of the service on supported platforms and architectures. The response is in json format, organized in platforms, with a list of supported architectures for each platform. Here is a simplified example of a response: { "ios": ["ios","ios-osc"], "web": ["wap","wap-poly",...], "android": ["android","smartkeyb",...], ... } Three platforms are indicated here: ios, web and android with a list of available architectures for each of them. This information is then used to forge compilation requests by indicating the desired platform and architecture, for example web/wap. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>POST /</head><p>The POST request https://faustservicecloud.grame.fr accompanied by a file foo.dsp allows to transfer this file to the compilation service. In response, it receives a 160-bit SHA-1 key, for example cf55531c580cc7d3485a5161259f0571d3e6bdef, which uniquely identifies the contents of the file and will be used to represent this file in some requests.</p><p>GET /&lt;sha&gt;/&lt;platform&gt;/&lt;arch&gt;/binary.zip</p><p>The GET request /&lt;sha&gt;/&lt;platform&gt;/&lt;arch&gt;/binary.zip launches the compilation of a source file (previously posted and represented by its SHA-1 key) for the specified platform and architecture. The result is rendered as a compressed folder that always has the same name: binary.zip.</p><p>GET /&lt;sha&gt;/&lt;platform&gt;/&lt;arch&gt;/binary.apk</p><p>The GET request /&lt;sha&gt;/&lt;platform&gt;/&lt;arch&gt;/binary.apk is identical to the previous one but retrieves an .apk (Android Package) folder that can be directly installed on Android phones.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>GET /&lt;sha&gt;/&lt;platform&gt;/&lt;arch&gt;/precompile</head><p>The GET request /&lt;sha&gt;/&lt;platform&gt;/&lt;arch&gt;/precompile launches the compilation of a source file (previously posted and represented by its SHA-1 key) for the specified platform and architecture, but without downloading the result. It allows to know the readiness of the compilation result (depending on the architecture, it can take several minutes) and only then will it trigger a download request.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>POST /compile/&lt;platform&gt;/&lt;arch&gt;/binary.zip</head><p>The POST /compile/&lt;platform&gt;/&lt;arch&gt;/binary.zip combines in a single query the transfer of the file to be compiled and the retrieval of the compilation result. This request is useful when the compilation service runs on a server in stateless mode, as with the new "cloud run" service from Google.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: Signal visualizations: oscilloscopes, spectroscope and spectrogram analyzer provided by the FAUST IDE.</figDesc><graphic coords="5,56.65,350.83,231.00,130.00" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 4 :</head><label>4</label><figDesc>Figure 4: The export panel.</figDesc><graphic coords="6,70.80,413.82,231.00,120.00" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure 6 :</head><label>6</label><figDesc>Figure 6: The default GUI can be customized: textures, knobs, sliders, switches positions size, appearance and labels, etc.</figDesc><graphic coords="7,323.95,237.34,230.99,138.10" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Figure 7 :</head><label>7</label><figDesc>Figure 7: Other designs for the same DSP code.</figDesc><graphic coords="7,351.13,413.78,92.30,92.30" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Figure 8 :</head><label>8</label><figDesc>Figure 8: Workflow of the end-to-end design and implementation of a WebAudio plugin.</figDesc><graphic coords="8,60.00,134.34,224.57,157.20" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head>Figure 9 :</head><label>9</label><figDesc>Figure 9: Other designs for the same DSP code</figDesc><graphic coords="8,56.65,327.24,231.30,147.00" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><head>Figure 10 :</head><label>10</label><figDesc>Figure 10: Host application example. The plugins set is discovered by requesting a remote WAP plugin server. Plugins are loaded dynamically when dragged and dropped in the main area.</figDesc><graphic coords="8,323.95,87.85,231.30,174.99" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_9"><head>Figure 11 :</head><label>11</label><figDesc>Figure 11: Left, the transfer function for our JS implementation, Right, the one from the FAUST implementation 27 with k=1.</figDesc><graphic coords="9,439.37,397.63,99.98,99.15" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_10"><head></head><label></label><figDesc>Figs 12 and 13 show the final diagram of the FAUST implementation of this poweramp based on the Temper Distortion source code.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_11"><head>Figure 12 :</head><label>12</label><figDesc>Figure 12: Diagrams of the final implementation.</figDesc><graphic coords="10,56.65,53.85,231.30,61.00" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_12"><head>Figure 13 :</head><label>13</label><figDesc>Figure 13: The feedback circuit. The presence filter is a set of peaking filters ported in FAUST from the WebAudio API implementation.</figDesc><graphic coords="10,56.65,135.55,231.30,81.00" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_13"><head>Figure 14 :</head><label>14</label><figDesc>Figure 14: GUI generated by the FAUST IDE, some extra parameters (negative feedback gain, waveshaper; drive, curve, saturation) are tweakable, enabling fine tuning of the NFB loop.</figDesc><graphic coords="10,56.65,377.64,231.30,60.00" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_14"><head>Figure 15 :</head><label>15</label><figDesc>Figure 15: For testing purposes, we created a WebAudio plugin from the FAUST code, using the WAP GUI Builder we developed, integrated in the FAUST IDE.</figDesc><graphic coords="10,324.10,53.85,231.00,146.00" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_15"><head>Figure :</head><label>:</label><figDesc>Figure: Communication protocol between the editor and the remote compilation service.</figDesc><graphic coords="14,55.35,359.34,231.30,242.99" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="2,127.50,368.52,326.70,237.19" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="11,323.95,53.85,231.00,227.00" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head></head><label></label><figDesc>• Create the path sessions/&lt;sha&gt;/&lt;platform&gt;/&lt;arch&gt;/ • Copy makefiles/&lt;platform&gt;/Makefile.&lt;arch&gt; into sessions/&lt;sha&gt;/&lt;platform&gt;/&lt;arch&gt;/Makefile • Cun the make command • And return session/&lt;sha&gt;/&lt;platform&gt;/&lt;arch&gt;/binary.zip</figDesc><table /></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3" xml:id="foot_0"><p>http://www.charlie-roberts.com/genish/</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="4" xml:id="foot_1"><p>https://waaw.csound.com</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="5" xml:id="foot_2"><p>https://soul.dev</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="6" xml:id="foot_3"><p>https://github.com/micbuffa/WebAudioPlugins</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="7" xml:id="foot_4"><p>Videos presenting the results of this work can be found online: https://www.youtube.com/watch?v=pe8zg8O-BFs.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="8" xml:id="foot_5"><p>See the midi folder in the github repository of the WAP SDK, video https://www.youtube.com/watch?v=jHftK3YxcjQ</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="9" xml:id="foot_6"><p>http://asmjs.org/</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="10" xml:id="foot_7"><p>https://webassembly.org</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="11" xml:id="foot_8"><p>https://faustide.grame.fr</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="12" xml:id="foot_9"><p>https://github.com/umdjs/umd</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="15" xml:id="foot_10"><p>https://github.com/j-funk/js-dsp-test/</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="17" xml:id="foot_11"><p>The WebComponents W3C standard (now in the HTML 5.2 specification) defines a way to easily distribute components with</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="20" xml:id="foot_12"><p>An online tutorial explains how to create step by step a complete plugin, including its GUI and try it in the pedalboard host : https://tinyurl.com/wnw2yl7</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="21" xml:id="foot_13"><p>Demos on: https://mainline.i3s.unice.fr/AmpSim5/</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="22" xml:id="foot_14"><p>More details on: http://www.aikenamps.com/index.php</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="23" xml:id="foot_15"><p>http://guitarix.org/</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="24" xml:id="foot_16"><p>https://github.com/olegkapitonov/Kapitonov-Plugins-Pack</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="25" xml:id="foot_17"><p>https://github.com/creativeintent/temper</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="26" xml:id="foot_18"><p>See http://www.musicdsp.org/showone.php?id=238</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="27" xml:id="foot_19"><p>Check our online comparison tool: https://jsbin.com/qifexor/edit?js,console,output,</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="28" xml:id="foot_20"><p>We did that in the past by replacing the tonestack stage by some FAUST implementations<ref type="bibr" target="#b16">[17]</ref>.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="29" xml:id="foot_21"><p>Simulation of tube amp Sag/Squish: https://youtu.be/zBhn7odezUQ</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="30" xml:id="foot_22"><p>https://youtu.be/uNp-0hzveeo</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="31" xml:id="foot_23"><p>https://mainline.i3s.unice.fr/Wasabi-Pedalboard/#, check the PowerAmp tab at bottom, drag'n'drop in the main area.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="32" xml:id="foot_24"><p>As measured in the FAUST IDE, using process = button("gate") &lt;: ((poweramp), _); style code and the embedded visualisation tools.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="33" xml:id="foot_25"><p>C++ code using the libsndfile library can be directly compiled to WebAssembly and ported to JavaScript.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="34" xml:id="foot_26"><p>https://ampedstudio.com/</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="35" xml:id="foot_27"><p>Tutorial "Create your own WebAudio Plugins": https://tinyurl.com/wnw2yl7</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="36" xml:id="foot_28"><p>Evaluation form (french): https://tinyurl.com/y9vny8qu</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>ACKNOWLEDGMENTS</head><p>This work was partially supported by the <rs type="funder">French Research National Agency (ANR)</rs> and the <rs type="projectName">WASABI [21</rs>] team (contract <rs type="grantNumber">ANR-16-CE23-0017-01</rs>). The authors would particularly like to thank <rs type="person">Jordan Sintes</rs>, <rs type="person">Guillaume Etevenard</rs> and <rs type="person">Elmahdi Korfed</rs> for their contributions to the WAP standard.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funded-project" xml:id="_fwU5utt">
+					<idno type="grant-number">ANR-16-CE23-0017-01</idno>
+					<orgName type="project" subtype="full">WASABI [21</orgName>
+				</org>
+			</listOrg>
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>THE AUTHORS</head><note type="other">Shihong</note><p>• Stéphane Letz is a researcher in Computer Music at GRAME-CNCM (Lyon, France), a member of the Audio Working Group of the W3C, and a specialist in real-time audio architectures and music protocols. He is the designer of Jack2, the popular low latency audio server. He is also one of the main developer and maintainer of the FAUST compiler.</p><p>• Yann Orlarey is the scientific director of GRAME-CNCM (Lyon, France). His research work focuses on the design and implementation of programming languages for musical and sound creation, with a particular interest in lambdacalculus, functional programming, and real-time and compilation techniques. Yann Orlarey and his colleagues at Grame are the designers of FAUST, a functional programming language for sound synthesis and audio processing with a strong focus on the design of synthesizers, musical instruments, audio effects, etc.</p><p>• Dominique Fober is a researcher in Computer Music at GRAME-CNCM (Lyon, France). His research is concerned mainly with software architecture for real-time music systems, languages for musical composition, and music notation and representation systems. </p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">iPlug 2: Desktop Audio Plug-in Framework meets Web Audio Modules</title>
+		<author>
+			<persName><forename type="first">O</forename><surname>Larkin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Harker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Kleimola</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">presented at the 4th Web Audio Conference (WAC&apos;18)</title>
+		<meeting><address><addrLine>Berlin, Germany</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2018-09">2018 Sep</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Towards an Open Web Audio Plugin Standard</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Buffa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lebrun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Kleimola</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Larkin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Letz</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3184558.3188737</idno>
+	</analytic>
+	<monogr>
+		<title level="m">The Web Conference 2018 (WWW2018</title>
+		<meeting><address><addrLine>Lyon, France</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2018-04">2018 Apr.</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Strategies for Per-Sample Processing of Audio Graphs in the Browser</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Roberts</surname></persName>
+		</author>
+		<ptr target="https://wasabi.i3s.unice.fr/dynamicPedalboard/#" />
+	</analytic>
+	<monogr>
+		<title level="m">Audio Conference (WAC&apos;17)</title>
+		<meeting><address><addrLine>London, UK</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2017-08">2017 Aug</date>
+		</imprint>
+	</monogr>
+	<note>presented at the Web 39</note>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Emscripten: an LLVM to JavaScript Compiler</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Zakai</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2048147.2048224</idno>
+	</analytic>
+	<monogr>
+		<title level="m">presented to the ACM Int. Conf. Object Oriented Programming Systems Languages and Applications (OOPSLA&apos;11)</title>
+		<meeting><address><addrLine>Portland, OR, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2011-10">2011 Oct.</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">WebAssembly AudioWorklet Csound</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Yi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Lazzarini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ed</forename><surname>Costello</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">presented at the 4th Web Audio Conference (WAC&apos;18)</title>
+		<meeting><address><addrLine>Berlin, Germany</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2018-09">2018 Sep</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Intelligent Audio Plug-in Framework for the Web Audio API</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Jillings</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Stables</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">D</forename><surname>Reiss</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">presented at the 3rd Web Audio Conference (WAC&apos;17)</title>
+		<meeting><address><addrLine>London, UK</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2017-08">2017 Aug</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Web Audio Modules</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Kleimola</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Larkin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Sound and Music Computing Conf. (SMC2015)</title>
+		<meeting><address><addrLine>Maynooth, Ireland</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2015-07">2015 Jul.</date>
+		</imprint>
+	</monogr>
+	<note>presented at the 12th</note>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">WAAX: Web Audio API eXtension</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Choi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Berger</surname></persName>
+		</author>
+		<idno type="DOI">10.5281/zenodo.1178494</idno>
+	</analytic>
+	<monogr>
+		<title level="m">the International Conference on New Interfaces for Musical Expression (NIME&apos;13)</title>
+		<meeting><address><addrLine>Daejeon, Korea</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2013-05">2013 May</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">FAUST online IDE: Dynamically compile and publish FAUST Code as WebAudio Plugins</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Letz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Orlarey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Michon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Fober</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Aamari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Buffa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lebrun</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">5th Web Audio Conference (WAC&apos;19)</title>
+		<meeting><address><addrLine>Trondheim, Norway</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2019-12">2019 Dec</date>
+		</imprint>
+	</monogr>
+	<note>presented at the</note>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Syntactical and Semantical Aspects of Faust</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Orlarey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Fober</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Letz</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s00500-004-0388-1</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Soft Computing</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Polyphony, Sample-accurate Control and MIDI Support for FAUST DSP using Combinable Architecture Files</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Letz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Orlarey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Fober</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Michon</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">presented at the Linux Audio Conference (LAC&apos;2017)</title>
+		<meeting><address><addrLine>St Etienne, France</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2017-05">2017 May</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Composing a Web of Audio Applications</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Denoux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Orlarey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Letz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Fober</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">presented at the 1st Web Audio Conference (WAC&apos;15)</title>
+		<meeting><address><addrLine>Paris, France</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2015-01">2015 Jan</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Faust Audio DSP Language on the Web</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Letz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Denoux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Orlarey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Fober</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">presented at the Linux Audio Conference (LAC&apos;2015)</title>
+		<meeting><address><addrLine>Mainz, Germany</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2015-04">2015 Apr.</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Faust Domain Specific Audio DSP Language Compiler to WebAssembly</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Letz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Orlarey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Fober</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3184558.3185970</idno>
+	</analytic>
+	<monogr>
+		<title level="m">The Web Conference (WWW2018)</title>
+		<meeting><address><addrLine>Lyon, France</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2018-04">2018 Apr.</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">AudioWorklet: The Future of Web Audio</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Choi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">the International Computer Music Conference (ICMC&apos;18)</title>
+		<meeting><address><addrLine>Daegu, South Korea</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2018-08">2018 Aug.</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Guitar Pedal Board using WebAudio</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Buffa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Demetrio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Azria</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">presented at the 2th Web Audio Conference (WAC&apos;16)</title>
+		<meeting><address><addrLine>Atlanta, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2016-04">2016 Apr.</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Real Time Tube Guitar Amplifier Simulation using WebAudio</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Buffa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lebrun</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">presented at the 3rd Web Audio Conference (WAC&apos;17)</title>
+		<meeting><address><addrLine>London, UK</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2017-08">2017 Aug</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Web Audio Guitar Tube Amplifier vs Native Simulations</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Buffa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lebrun</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">presented at the 3rd Web Audio Conference (WAC&apos;17)</title>
+		<meeting><address><addrLine>London, UK</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2017-08">2017 Aug</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Real-Time Emulation of a Marshall JCM 800 Guitar Tube Amplifier, Audio FX Pedals, in a Virtual Pedal Board</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Buffa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lebrun</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3184558.3186973</idno>
+	</analytic>
+	<monogr>
+		<title level="m">The Web Conference 2018 (WWW2018</title>
+		<meeting><address><addrLine>Lyon, France</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2018-04">2018 Apr.</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Emerging W3C APIs opened up Commercial Opportunities for Computer Music Applications</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Buffa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lebrun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Letz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Orlarey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Michon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Fober</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ren</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">The Web Conference 2020 (WWW2020</title>
+		<meeting><address><addrLine>Taipei, Taiwan</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2020-04">2020 Apr.</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">WASABI: a Two Million Song Database Project with Audio and Cultural Metadata plus WebAudio enhanced Client Applications</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Meseguer-Brocal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Peeters</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Pellerin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Buffa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Cabrio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Faron-Zucker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Giboin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Mirbel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Hennequin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Moussallam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Piccoli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Fillon</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">presented at the 3rd Web Audio Conference (WAC&apos;17)</title>
+		<meeting><address><addrLine>London, UK</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2017-08">2017 Aug</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

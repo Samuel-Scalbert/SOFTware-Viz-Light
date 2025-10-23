@@ -1,0 +1,755 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Seshat: A tool for managing and verifying annotation campaigns of audio data</title>
+				<funder ref="#_ybQaZ64 #_M7SftMD #_sdFzRSw #_yD4PS7D">
+					<orgName type="full">unknown</orgName>
+				</funder>
+				<funder ref="#_kWCfa8V">
+					<orgName type="full">Microsoft Research</orgName>
+				</funder>
+				<funder>
+					<orgName type="full">J. S. McDonnell Foundation Understanding Human Cognition Scholar Award</orgName>
+				</funder>
+				<funder ref="#_wjmZnYm #_9suXddZ">
+					<orgName type="full">Agence Nationale de la Recherche</orgName>
+					<orgName type="abbreviated">ANR</orgName>
+				</funder>
+				<funder ref="#_DG643rn">
+					<orgName type="full">Google</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Hadrien</forename><surname>Titeux</surname></persName>
+							<email>hadrien.titeux@ens.fr</email>
+							<affiliation key="aff0">
+								<orgName type="laboratory">LSCP</orgName>
+								<orgName type="institution" key="instit1">ENS</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">EHESS</orgName>
+								<orgName type="institution" key="instit4">INRIA</orgName>
+								<orgName type="institution" key="instit5">PSL Research University</orgName>
+								<address>
+									<settlement>Paris</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Rachid</forename><surname>Riad</surname></persName>
+							<email>rachid.riad@ens.fr</email>
+							<affiliation key="aff0">
+								<orgName type="laboratory">LSCP</orgName>
+								<orgName type="institution" key="instit1">ENS</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">EHESS</orgName>
+								<orgName type="institution" key="instit4">INRIA</orgName>
+								<orgName type="institution" key="instit5">PSL Research University</orgName>
+								<address>
+									<settlement>Paris</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="institution" key="instit1">NPI</orgName>
+								<orgName type="institution" key="instit2">ENS</orgName>
+								<orgName type="institution" key="instit3">INSERM</orgName>
+								<orgName type="institution" key="instit4">UPEC</orgName>
+								<orgName type="institution" key="instit5">PSL Research University</orgName>
+								<address>
+									<settlement>Créteil</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Xuan-Nga</forename><surname>Cao</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="laboratory">LSCP</orgName>
+								<orgName type="institution" key="instit1">ENS</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">EHESS</orgName>
+								<orgName type="institution" key="instit4">INRIA</orgName>
+								<orgName type="institution" key="instit5">PSL Research University</orgName>
+								<address>
+									<settlement>Paris</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Nicolas</forename><surname>Hamilakis</surname></persName>
+							<email>nick.hamilakis562@gmail.com</email>
+							<affiliation key="aff0">
+								<orgName type="laboratory">LSCP</orgName>
+								<orgName type="institution" key="instit1">ENS</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">EHESS</orgName>
+								<orgName type="institution" key="instit4">INRIA</orgName>
+								<orgName type="institution" key="instit5">PSL Research University</orgName>
+								<address>
+									<settlement>Paris</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Kris</forename><surname>Madden</surname></persName>
+							<email>thekrismadden@gmail.com</email>
+							<affiliation key="aff0">
+								<orgName type="laboratory">LSCP</orgName>
+								<orgName type="institution" key="instit1">ENS</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">EHESS</orgName>
+								<orgName type="institution" key="instit4">INRIA</orgName>
+								<orgName type="institution" key="instit5">PSL Research University</orgName>
+								<address>
+									<settlement>Paris</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Alejandrina</forename><surname>Cristia</surname></persName>
+							<email>alecristia@gmail.com</email>
+							<affiliation key="aff0">
+								<orgName type="laboratory">LSCP</orgName>
+								<orgName type="institution" key="instit1">ENS</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">EHESS</orgName>
+								<orgName type="institution" key="instit4">INRIA</orgName>
+								<orgName type="institution" key="instit5">PSL Research University</orgName>
+								<address>
+									<settlement>Paris</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Anne-Catherine</forename><surname>Bachoud-Lévi</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="institution" key="instit1">NPI</orgName>
+								<orgName type="institution" key="instit2">ENS</orgName>
+								<orgName type="institution" key="instit3">INSERM</orgName>
+								<orgName type="institution" key="instit4">UPEC</orgName>
+								<orgName type="institution" key="instit5">PSL Research University</orgName>
+								<address>
+									<settlement>Créteil</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Emmanuel</forename><surname>Dupoux</surname></persName>
+							<email>emmanuel.dupoux@gmail.com</email>
+							<affiliation key="aff0">
+								<orgName type="laboratory">LSCP</orgName>
+								<orgName type="institution" key="instit1">ENS</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">EHESS</orgName>
+								<orgName type="institution" key="instit4">INRIA</orgName>
+								<orgName type="institution" key="instit5">PSL Research University</orgName>
+								<address>
+									<settlement>Paris</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Seshat: A tool for managing and verifying annotation campaigns of audio data</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">1C77A93E18CB681B5A2D77BCF4C34097</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:12+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>speech transcription</term>
+					<term>speech corpora</term>
+					<term>annotations management</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>We introduce Seshat, a new, simple and open-source software to efficiently manage annotations of speech corpora. The Seshat software allows users to easily customise and manage annotations of large audio corpora while ensuring compliance with the formatting and naming conventions of the annotated output files. In addition, it includes procedures for checking the content of annotations following specific rules that can be implemented in personalised parsers. Finally, we propose a double-annotation mode, for which Seshat computes automatically an associated inter-annotator agreement with the γ measure taking into account the categorisation and segmentation discrepancies.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.">Introduction</head><p>Large corpora of speech, obtained in the laboratory and in naturalistic conditions, become easier to collect. This new trend broadens the scope of scientific questions on speech and language that can be answered. However, this poses an important challenge for the construction of reliable and usable annotations. Managing annotators and ensuring the quality of their annotations are highly demanding tasks for research endeavours and industrial projects <ref type="bibr" target="#b18">(Zue et al., 1990)</ref>. When organised manually, the manager of annotation campaigns usually faces three major problems: the mishandling of files (e.g., character-encoding problems, incorrect naming of files), the non-conformity of the annotations <ref type="bibr" target="#b12">(Moreno et al., 2000)</ref>, and the inconsistency of the annotations <ref type="bibr" target="#b8">(Gut and Bayerl, 2004)</ref>. In this paper, we introduce Seshat, a system for the automated management of annotation campaigns for audio/speech data which addresses these challenges. It is built on two components that communicate via a Restful API: a back-end (server) written in Flask and a front-end (client) in Angular Typescript. Seshat is easy to install for nondevelopers and easy to use for researchers and annotators while having some extension capabilities for developers. In Section 2, we describe the related work on annotations tools, which do not provide solutions to all the aforementioned challenges during corpus creation. In Section 3, we make an overview of the different functionalities of the software. Then, we explain, in Section 4, the architecture of the software, and also the several UX/UI design and engineering choices that have been made to facilitate the usage of the platform. We describe how to use of Seshat in Section 5 and Section 6 presents two specific use-cases. Finally, we conclude and describe future plans for Seshat in Section 7.</p><p>Equal contribution. This work was conducted while E. Dupoux was a part-time Research Scientist at Facebook AI Research. Code for Seshat is available on Github at https:// github.com/bootphon/seshat</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.">Related Work</head><p>Self-hosted annotation systems. There are many standalone solutions for the transcription of speech data that are already used by researchers: Transcriber <ref type="bibr" target="#b0">(Barras et al., 2001)</ref>, Wavesurfer <ref type="bibr" target="#b14">(Sjölander and Beskow, 2000)</ref>, Praat <ref type="bibr">(Boersma and others, 2002)</ref>, <ref type="bibr">ELAN (MacWhinney, 2014)</ref>, XTrans <ref type="bibr" target="#b7">(Glenn et al., 2009)</ref>. These systems allow the playback of sound data and the construction of different layers of annotations with various specifications, with some advanced capabilities (such as annotations with hierarchical or no relationship between layers, number of audio channels, video support). Yet, these solutions lack a management system: each researcher must track the files assigned to annotators and build a pipeline to parse (and eventually check) the output annotation files. Moreover, checking can only be done once the annotations have been submitted to the researchers. This task becomes quickly untraceable as the number of files and annotators grow. In addition, most of these transcription systems do not provide a way to evaluate consistency (intra-and inter-annotator agreement) that would be appropriate for speech data <ref type="bibr" target="#b10">(Mathet et al., 2015)</ref>. Web-based annotations systems. There are several webbased annotation systems for the annotation of audio data. Among them we find light-weight systems, like the VIA software <ref type="bibr" target="#b5">(Dutta and Zisserman, 2019)</ref> or Praat on the web <ref type="bibr" target="#b4">(Dominguez et al., 2016)</ref> that allow to build simple layers of annotations. However, they do not provide a proper management system for a pool of annotators nor do they integrate annotation checking. On the other side of the spectrum, there are more sophisticated systems with various capabilities. Camomille <ref type="bibr" target="#b13">(Poignant et al., 2016)</ref> and the EMU-SDMS system (that can also be used offline) <ref type="bibr" target="#b16">(Winkelmann et al., 2017)</ref> allow to work with speech data and to distribute the tasks to several annotators. But these systems require expertise in web hosting and technologies to deploy and modify them. Finally, WebAnno <ref type="bibr" target="#b17">(Yimam et al., 2013)</ref> and GATE Teamware <ref type="bibr" target="#b2">(Bontcheva et al., 2013)</ref> are the tools that most closely match our main contributions regarding quality con-trol (conformity and consistency checking), annotators' management and flexibility. WebAnno includes consistency checking with the integration of different metrics <ref type="bibr" target="#b11">(Meyer et al., 2014)</ref>. However, these tools have only been built for text data. The format and all the custom layers have been designed for Natural Language Processing tasks. Porting WebAnno to support speech data seemed a major engineering challenge. That is why it appeared necessary to develop a new and user-friendly tool addressed to the speech community.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.">Overview of Seshat</head><p>Seshat is a user-friendly web-based interface whose objective is to smoothly manage large campaigns of audio data annotation, see Figure <ref type="figure" target="#fig_1">2</ref>. Below, we describe the several terms used in Seshat's workflow:</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Audio Corpus</head><p>A set of audio/speech files that a Campaign Manager wants to annotate. It is indicated either by a folder containing sound files, or by a CSV summarizing a set of files. We support the same formats as Praat so far: WAV, Flac and MP3.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Annotation Campaign</head><p>An object that enables the Campaign Manager to assign Annotation Tasks to the Annotators. It references a Corpus, and allows the Manager to track the annotation's tasks progress and completion in real time. At its creation, a Textgrid Checking Scheme can also be defined for that campaign.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Annotation Task</head><p>It is contained in an Annotation Campaign, it references an audio file from the campaign's designated Audio Corpus, and assigned to Annotators. It can either be a Single Annotator Task (assigned to one Annotator) or a Double Annotator Task (assigned to two annotators, who will annotatote the assigned task in parallel).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Textgrid Checking Scheme</head><p>A set of rules defining the TextGrid files' structure and content of the annotations. It is set at the beginning of the Annotation Campaign's creation, and is used to enforce that all TextGrids from the campaign contain the same amount of Tiers, with the same names. It can also enforce, for certain chosen tiers, a set of valid annotations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Campaign Manager</head><p>Users with the rights to create Annotation Campaigns and Annotators user accounts, and assign Annotation Tasks to Annotators.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Annotator</head><p>Users who are assigned a set of Annotation Tasks.</p><p>Their job is to complete the annotation of the audio files with the Praat software.</p><p>If the TextGrid file they submit does not comply with their Annotation Task's TextGrid Checking Scheme, Seshat pinpoint their annotation er-rors with detailed messages. The annotator can resubmit the concerned file to the platform based on these different feedbacks.</p><p>Once they they connected to their instance of Seshat, campaign managers can access ongoing annotation campaigns or create new ones. Campaign managers are able to add annotators, assign annotation tasks and track progress. Annotator see a list of assigned tasks. The first step for them is to download the sound file with its corresponding autogenerated template TextGrid. In the current implementation, the annotation work has to be done locally with Praat.</p><p>An upcoming version will use of web tools like Praat on the web <ref type="bibr" target="#b4">(Dominguez et al., 2016)</ref>. Once the task is completed, the TextGrid file is to be uploaded to Seshat via the web interface. We used the TextGrid format because of the wide acceptance of the Praat software in the speech science community (e.g., language acquisition research, clinical linguistics, phonetics and phonology).</p><p>The Textgrid Checking Scheme that encompasses rules on the tier's naming, file structure, and the content of the annotations, is associated with a specific campaign and defined at the creation of the campaign. Seshat back-end will automatically check that the submitted TextGrid file conforms to the Annotation Campaign's Textgrid Checking Scheme.</p><p>Seshat allows the campaign manager to create two type of tasks: single annotator, and double annotator. Regarding the first task, one audio file is attributed to one annotator. Once the annotation is completed, Sesha automatically checks the conformity of the annotation, and only declares a tasks completed if the conformity checks is passed. Regarding the second task, one audio file is attributed to two annotators. The two annotators annotate the same file independently, then the two versions are merged and the annotators are guided through a compare and review process to agree one final version. We summarise in the Figure <ref type="figure" target="#fig_0">1</ref> the different steps for the double-annotator task. At each step during merging, the two annotators are provided feedbacks to focus on where are the disagreements. This process also results in the computation of an Inter-annotator agreement for each file. The double annotator task can be used to train new annotators alongside experts.</p><p>Annotating speech data is a joint task of segmentation and categorisation of audio events. That is why we adopted the γ measure <ref type="bibr" target="#b10">(Mathet et al., 2015)</ref> to evaluate the inter-or intra-annotator agreement in each individual tier. Campaign manager can customise the distance used by γ by inserting a custom distance along their own parser (See short snippet of code for a parser of French Phonetics with the SAMPA alphabet in Algorithm 1).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.">Development</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1.">Engineering choices</head><p>Our utmost priority when building Seshat was to make it as easy as possible for others to deploy, use, administer and eventually contribute to. To do so, we chose the most common frameworks that are free and open-source, all of which are detailed in the following sections. Additionally, to match the current trend in web development, we decided to use the so-called "web-app" architecture for Seshat, i.e.,  we separated the application into two distinct entities: a front-end, running on the browser, and a back-end, serving data to the front-end and interacting with the database.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1.1.">Back-end Choices</head><p>The back-end system runs on a server. It holds and updates the campaign databases and runs the annotation checking and inter-rater agreement evaluation services. We chose Python, given its widespread use in the scientific community 1 , with a wide array of speech and linguistic packages. Moreover, its usage on the back-end side will allow the future integration of powerful speech processing tools like Pyannote <ref type="bibr" target="#b3">(Bredin et al., 2019)</ref> to semi-automatize annotations. We thus went for Python3.6 for Seshat's server back-end. We used the Flask-Smorest 2 extension (which is based on Flask 3 ) to clearly and thoroughly document our API, which can be exported to the popular OpenAPI 3.0.2 4 RESTful API description format. The files and server data are stored on a MongoDB<ref type="foot" target="#foot_0">5</ref> database, chosen for its flexible document model and general ease of use. We used the Object-Relational Mapping (ORM) MongoEngine<ref type="foot" target="#foot_1">6</ref> to define our database schemas and interact with that database. MongoDB's GridFS system also allowed us to directly store annotation files (which are usually very light-weight) directly in the database, instead of going through the file system.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1.2.">Front-end Choices</head><p>The front-end handles all of the interactions between the users (campaing manager or annotator) with the databses.</p><p>It is implemented as an App within their browser. We decided to base Seshat's front-end on the Angular Typescript<ref type="foot" target="#foot_2">7</ref> framework. Despite its' steep learning curve, it enforces strict design patterns that guarantee that others can make additions to our code without jeopardising the stability of the App. Angular Typescript has a wide community support in the web development industry and is backed by Google and Microsoft. Moreover, the fact that it is based on Type-Script alleviates the numerous shortcomings of JavaScript, ensuring our implementation's readability and stability.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.">UX/UI Choices</head><p>The interface and the features we selected for our implementation are the process of a year-long iterative process involving a team of annotators, two campaign managers and software engineers. We followed some guiding principles from the recent Material<ref type="foot" target="#foot_3">8</ref> design language. Our goal while designing our interface (with the help of a professional designer) was to make it fully usable by nontechnical people. We also put some extra care into the annotators' interface to give them a clear sense of what is to be done, how they should follow the annotation protocol, and how to correct potential errors in their annotations (See Figure <ref type="figure" target="#fig_2">3</ref>) The goal was to reduce the number of actions to perform for annotators and enable to focus only on the annotations content. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.">Using Seshat</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1.">Installation and Setup</head><p>Setting up a modern fully-fledged web service is a arduous task, usually requiring a seasoned system administrator as well as sometimes having very precise system requirements. Luckily, the Docker 9 virtualisation platform ensures that anyone with a recent-enough install of that software can set up Seshat in about one command (while still allowing some flexibility via a configuration file). For those willing to have a more tightly-controlled installation of Seshat on their system, we also fully specify the manual installation steps in our online documentation 10 ).</p><p>Importing an audio corpus that you are willing to annotate is easy as dropping files into a default 'corpora/' folder. It is possible to either drop a folder containing audio files (with no constraints on the folder's structure), or a CSV file listing audio filenames along with their durations (in case the files are sensitive and you're not willing to risk them being hosted on the server). It is then possible to review the automatically imported files via the web interface.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2.">Launching and monitoring an annotation campaign</head><p>The Campaign manager can easily define and monitor annotation campaign. As shown in Figure <ref type="figure" target="#fig_5">5</ref>, the online form enable to choose corpora, pre-define and pre-configure the annotations scheme (tiers and parsers). There are 2 types of tiers already implemented by default: one with no check at all, and one with pre-defined categories. For the latter, these categories are pre-defined when the campaign is created. Only Campaign managers can access and build new campaigns. If Campaign manager have several campaigns they can easily switch between them via the menu bar or get a full overview with the dashboard (See Figure <ref type="figure" target="#fig_3">4</ref>). The campaign managers can visualise the progress of the assigned tasks at the campaign level or more precisely at the task level. They can retrieve all the intermediate files that have been created for each task. For instance, the campaign manager can examine qualitatively and quantitatively what are 9 https://www.docker.com/ 10 https://seshat-annotation.readthedocs.io/ the annotation differences before the merge phases of the double annotator task. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3.">Scripting API</head><p>For those willing to interact with Seshat using code, it is possible to interact with Seshat using either its RESTful API or its command-line interface (CLI). The API endpoints that can be called are all listed in a simple interface, and can be made from any programming language able to make HTTP requests. The CLI interface can be used via your terminal, and therefore can be interacted with using Bash scripts. A typical usage of these features would be to assign annotation tasks from a large speech corpus (spoken by several speakers) to a large pool of annotators, all the while making sure each annotator has a similar number of tasks, with each speaker being evenly distributed among annotators as well. This would be tedious to do manually via the user interface, but easy to program in any scripting language.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.4.">Annotation Parser Customisation</head><p>We aimed at a reasonable trade-off between simplicity and flexibility for the TextGrid annotations checking component. However, we understand (from our own experience in particular) that sometimes annotations can follow a very specific and complex standard (for instance, parsing SAMPA phonemes strings). To allow users to define their own annotation standards, we added the possibility for users to define an annotation parser, via a simple packagebased extension system (taking inspiration from pyannote's extension system). Anyone willing to create a new annotation parser has to be able to program in Python and have a minimal understanding of its packaging system. As presented in our example French SAMPA Parser (Algorithm 1), implementing a custom annotation parsers only requires the overload of two methods from Seshat's BaseCustomParser class:</p><p>• check-annotation: takes an annotation string as input and raises an error if and only if the annotation is deemed to be invalid. It doesn't return anything.</p><p>• distance: takes two annotations as input and should return a float corresponding to the distance between these two annotations.  <ref type="bibr">4 ' d ' , ' e ' , ' e ˜' , ' f ' , ' g ' , ' i ' , ' j ' , ' k ' , ' l ' , 'm' , ' n ' , 5 ' o ' , ' o ˜' , ' p ' , ' s ' , ' t ' , ' u ' , ' v ' , 'w ' , ' y ' , ' z</ref>  s e l f . PHONEMES = s o r t e d ( s e l f . PHONEMES, key = l e n , r e v e r s e = T r u e ) 10 11 d e f p a r s e s a m p a ( s e l f , p h o s t r : s t r ) -&gt; L i s t [ s t r ] : 12</p><p>" " " P a r s e s a F r e n c h phoneme s t r i n g i n t o a phoneme l i s t 13 ex : " s e p t a ˜b r " -&gt; [ s , e , p , t , a ˜, b , r ] " " " 14 o r i g i n a l s t r = s t r Algorithm 1: Parser Plugin Example. This parser checks the units to allow only phone sequences in the SAMPA format. The distance that can be used for the inter-rater agreement is the Levenshtein distance.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.5.">Inter-rater agreement: the γ measure</head><p>It is necessary have a measure of confidence to obtain highquality datasets and therefore to draw valid conclusions from annotations. Annotations tasks of audio and speech data usually have some specificities. The items to annotate have to be both segmented in time and categorised. The segments can be hierarchically defined or overlapping. In addition, the audio stream may require only sparse annotations (especially in-the-wild recordings which contain a lot of non-speech segments). To evaluate speech annotations, the measure needs to take these characteristics into account.</p><p>That is why we decided to re-implement and compute the γ measure (see <ref type="bibr" target="#b10">Mathet et al. (2015)</ref> for its design and the advantages of this measure over previous agreement measures). First, the γ software aligns (tier-wise) the annotations of the different annotators. To align the two sets of annotations the γ measure the distance between all the individual units.</p><p>The difference of position of two annotated units u and v is measured with the positional distance:</p><formula xml:id="formula_0">dpos(u, v) = |start(u) -start(v)| + | end(u) -end(v)| (end(u) -start(u)) + (end(v) -start(v)) 2</formula><p>If the tiers are categorical, the distance for the content of the annotated units u and v is defined as:</p><formula xml:id="formula_1">dcat(u, v) = 1(cat(u) == cat(v))</formula><p>This distance can be over-written by the custom parser as mentioned above. These two distance are summed with equal weights to obtain the distance between every annotated units from 2 annotators. Then, it is possible to obtain the disorder δ(a) of a specific alignment a by summing the distance of all the aligned units in a. All possible alignments a are considered and the one that minimises the disorder δ(a) is kept.</p><p>To get the value of γ, the disorder is chance-corrected to obtain an expected disorder. It is obtained by re-sampling randomly the annotations of the annotators. This means that real annotations are drawn from the annotators, and one position in the audio is randomly chosen. The annotation is split at this random position and the two parts are permuted. It is then possible to obtain an approximation of the expected disorder δ e . The final agreement measure is defined as:</p><formula xml:id="formula_2">γ = 1 - δ(a) δ e</formula><p>This γ measure is automatically computed by the back-end server for the double-annotator tasks. The Campaign manager can retrieve these measures in Seshat by downloading a simple CSV file.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.">Use cases</head><p>We present two use cases on which Seshat was developped: clinical interviews, and daylong child-centered recordings.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1.">Clinical interviews</head><p>Seshat was intially developped to study the impact of Huntington's Disease <ref type="bibr" target="#b15">(Walker, 2007)</ref> on speech and language production. One hundred and fifty two interviews between a neuropsychologist and a patient with the Huntington's Disease (HD) were recorded between June 2018 and November 2019. The campaign manager created a campaign with multiple tiers to annotate the turn takings and the speech/non speech boundaries of the utterances of the patient. For both tasks, the annotations did not need to cover completely the audio (sparsity property mentioned above). For the Turn-taking annotations, there are 3 predefined tiers, each one with a single class ('Patient', 'Non-Patient', and 'Noise'), which results in possible overlap between these classes. For the Utterance annotations, there is only one pre-defined class ('Utterance').</p><p>To this date, a total of 67 files have been fully annotated with the help of Seshat by a cohort of 18 speech pathologist students (see Figure <ref type="figure" target="#fig_5">5</ref>). Among these, 16 have been done by 2 different annotators independently with the Doubleannotator task. The results are summarised in Table <ref type="table">1</ref>.</p><p>Even though there are more categories for Turn-Takings than Utterance <ref type="bibr" target="#b8">(Gut and Bayerl (2004)</ref> reported that the more categories the more the task is difficult in speech annotations), the mean γ for the Turn-Takings γ = 0.64 is slightly higher than the one for Utterance γ = 0.61. And the range of values for the Turn-Takings is smaller than the Utterance. Indeed, the speech pathologists reported the difficulty to annotate the boundary of utterances in spontaneous speech, with several ambiguous cases due to pauses. These results will help us to redefine the protocol and be more precise on the given instructions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2.">In-the-wild child-centered recordings</head><p>The Seshat software is also currently used to annotate audio files in a study of day-long audio-recordings captured by Table <ref type="table">1</ref>: γ Inter-rater agreements summary for 16 clinical interviews between a neuropsychologist and a patient with the HD.</p><p>two devices (LENA <ref type="bibr" target="#b6">(Gilkerson and Richards, 2008)</ref>, and a BabyCloud baby-logger device) worn by young children growing up in remote Papua New Guinea. The project aims at establishing language input and outcomes in this seldomstudied population. To establish reliability levels, 20 1min files were double-annotated by 2 speech pathology students. Among the tasks given to the annotators there was:</p><p>(1) locating the portions of Speech (Speech activity), (2) locating the speech produced by an adult that is directed to a child or not (Adult-Directed Speech versus Child-Directed Speech). As in the previous example, the annotations do not need to cover the full audio file. The Speech Activity task has only 1 class ('Speech') and the Addressee task has 2 classes ('ADS', 'CDS'). These recordings have been done in naturalistic and noisy conditions; moreover, the annotators do not understand the language. Probably as a result of these challenges, agreement between annotators is lower than in the Clinical interviews use case. This information is nonetheless valuable to the researchers, as it can help them appropriately lower their confidence in the ensuing speech quantity estimates.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.">Conclusion and Future work</head><p>Seshat is a new tool for the management of audio annotation efforts. Seshat enables users to define their own campaign of annotations. Based on this configuration, Seshat automatically enforces the format of the annotations returned by the annotators. Besides, we also add the capability to finely tailor the parsing of the annotations. Finally, Seshat provides automatic routines to compute the inter-rate agreements that are specifically designed for audio annotations. Seshat lays some foundations for more advanced features, either for the interface or the annotation capabilities. In future work, we plan to implement an automatic task assignments and an integration of a diarization processing step to reduce human effort. Another planned feature is to add possibility for the campaign manager to design more complex annotation workflows such as, for instance, dependencies between tiers or more intermediate steps of annotations.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: Double Annotator task overview. Inter-rater agreement is computed by the interface for the first independently annotated files in Red and Blue.</figDesc><graphic coords="3,52.16,69.17,487.55,121.52" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: Seshat architecture: two different front-end, for annotators and campaign manager, a back-end with persistent data storage of the annotations and the inter-rater agreements.</figDesc><graphic coords="3,52.16,244.60,234.01,178.33" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: Assigned task from the annotator's point of view.</figDesc><graphic coords="4,52.16,69.16,234.02,176.41" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 4 :</head><label>4</label><figDesc>Figure 4: Dashboard for the campaign manager</figDesc><graphic coords="4,304.87,104.84,234.02,103.29" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head></head><label></label><figDesc>y i n g t o match l o n g e s t phoneme names f i r s t 19 f o r phoneme i n s e l f . PHONEMES: 20 i f p h o s t r [ : l e n ( phoneme ) ] == phoneme : 21 p h o l i s t . a p p e n d ( p h o s t r [ : l e n ( phoneme ) ] ) 22 p h o s t r = p h o s t r [ l e n ( phoneme ) c h e c k a n n o t a t i o n ( s e l f , a n n o t : s t r ) -&gt; None : 32 s e l f . p a r s e s a m p a ( a n n o t ) 33 34 d e f d i s t a n c e ( s e l f , a n n o t a : s t r , a n n o t b : s t r ) -&gt; f l o a t : 35 " " " Computes t h e l e v e n s h t e i n d i s t a n c e b e t w e e n two phone s e q u e n c e s " " " 36 p a r s e d a = s e l f . p a r s e s a m p a ( a n n o t a ) 37 p a r s e d b = s e l f . p a r s e s a m p a ( a n n o t b ) 38 r e t u r n l e v e n s h t e i n ( p a r s e d a , p a r s e d b )</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Figure 5 :</head><label>5</label><figDesc>Figure 5: Annotation Campaign definition in Seshat for clinical interviews between a patient with the Huntington's Disease and a neuropsychologist Tiers γ Mean Range #classes Turn-Takings 0.64 0.18 3 Utterance 0.61 0.39 1</figDesc><graphic coords="6,52.16,69.17,234.02,221.53" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 2 :</head><label>2</label><figDesc>γ Inter-rater agreement for 20 1-min slices extracted from child-centered day-long recordings. ADS and CDS stand for Adult-Directed Speech and Child-Directed Speech respectively.</figDesc><table><row><cell>Tiers</cell><cell></cell><cell>γ</cell><cell></cell></row><row><cell></cell><cell cols="3">Mean Range #classes</cell></row><row><cell>Speech activity</cell><cell>0.46</cell><cell>0.60</cell><cell>1</cell></row><row><cell>ADS vs CDS</cell><cell>0.27</cell><cell>0.39</cell><cell>2</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="5" xml:id="foot_0"><p>https://www.mongodb.com/</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="6" xml:id="foot_1"><p>http://mongoengine.org/</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="7" xml:id="foot_2"><p>https://angular.io/</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="8" xml:id="foot_3"><p>https://material.io/design/introduction/ #principles</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head n="8.">Acknowledgements</head><p>This research was conducted thanks to <rs type="funder">Agence Nationale de la Recherche</rs> (<rs type="grantNumber">ANR-17-CE28-0007 Lan-gAge</rs>, <rs type="grantNumber">ANR-16-DATA-0004</rs> <rs type="projectName">ACLEW</rs>, <rs type="grantNumber">ANR-14-CE30-0003</rs> <rs type="projectName">MechELex</rs>, <rs type="grantNumber">ANR-17-EURE-0017</rs>, <rs type="grantNumber">ANR-10-IDEX-0001-02 PSL</rs>*, <rs type="grantNumber">ANR-19-P3IA-0001</rs>, ) and grants from <rs type="funder">Facebook AI Research</rs> (<rs type="grantName">Research Grant</rs>), <rs type="funder">Google</rs> (<rs type="grantName">Faculty Research Award</rs>), and <rs type="funder">Microsoft Research</rs> (<rs type="grantName">Azure Credits</rs> and Grant), and a <rs type="funder">J. S. McDonnell Foundation Understanding Human Cognition Scholar Award</rs>.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_wjmZnYm">
+					<idno type="grant-number">ANR-17-CE28-0007 Lan-gAge</idno>
+				</org>
+				<org type="funded-project" xml:id="_ybQaZ64">
+					<idno type="grant-number">ANR-16-DATA-0004</idno>
+					<orgName type="project" subtype="full">ACLEW</orgName>
+				</org>
+				<org type="funded-project" xml:id="_M7SftMD">
+					<idno type="grant-number">ANR-14-CE30-0003</idno>
+					<orgName type="project" subtype="full">MechELex</orgName>
+				</org>
+				<org type="funding" xml:id="_sdFzRSw">
+					<idno type="grant-number">ANR-17-EURE-0017</idno>
+				</org>
+				<org type="funding" xml:id="_yD4PS7D">
+					<idno type="grant-number">ANR-10-IDEX-0001-02 PSL</idno>
+				</org>
+				<org type="funding" xml:id="_9suXddZ">
+					<idno type="grant-number">ANR-19-P3IA-0001</idno>
+					<orgName type="grant-name">Research Grant</orgName>
+				</org>
+				<org type="funding" xml:id="_DG643rn">
+					<orgName type="grant-name">Faculty Research Award</orgName>
+				</org>
+				<org type="funding" xml:id="_kWCfa8V">
+					<orgName type="grant-name">Azure Credits</orgName>
+				</org>
+			</listOrg>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Transcriber: development and use of a tool for assisting speech corpora production</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Barras</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Geoffrois</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Liberman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Speech Communication</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="issue">1-2</biblScope>
+			<biblScope unit="page" from="5" to="22" />
+			<date type="published" when="2001">2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Praat, a system for doing phonetics by computer</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Boersma</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Glot international</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<date type="published" when="2002">2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Gate teamware: a web-based, collaborative text annotation framework</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Bontcheva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Cunningham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Roberts</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Roberts</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Tablan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Aswani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Gorrell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Language Resources and Evaluation</title>
+		<imprint>
+			<biblScope unit="volume">47</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="1007" to="1029" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<title level="m" type="main">pyannote. audio: neural building blocks for speaker diarization</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Bredin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Yin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Coria</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Gelly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Korshunov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Lavechin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Fustes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Titeux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Bouaziz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M.-P</forename><surname>Gill</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1911.01255</idno>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Praat on the web: an upgrade of praat for semi-automatic speech annotation</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Dominguez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Latorre</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Farrús</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Codina-Filba</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Wanner</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of COLING 2016, the 26th International Conference on Computational Linguistics: System Demonstrations</title>
+		<meeting>COLING 2016, the 26th International Conference on Computational Linguistics: System Demonstrations</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="218" to="222" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">The via annotation software for images, audio and video</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Dutta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Zisserman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 27th ACM International Conference on Multimedia</title>
+		<meeting>the 27th ACM International Conference on Multimedia</meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="2276" to="2279" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<title level="m" type="main">The lena natural language study</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Gilkerson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Richards</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Xtrans: A speech annotation and transcription tool</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">L</forename><surname>Glenn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Strassel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Lee</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Tenth Annual Conference of the International Speech Communication Association</title>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Measuring the reliability of manual annotations of speech corpora</title>
+		<author>
+			<persName><forename type="first">U</forename><surname>Gut</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">S</forename><surname>Bayerl</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Speech Prosody 2004, International Conference</title>
+		<imprint>
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<monogr>
+		<title level="m" type="main">The CHILDES project: Tools for analyzing talk</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Macwhinney</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<publisher>Psychology Press</publisher>
+			<biblScope unit="volume">II</biblScope>
+		</imprint>
+	</monogr>
+	<note>: The database</note>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">The unified and holistic method gamma (γ) for interannotator agreement measure and alignment</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Mathet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Widlöcher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J.-P</forename><surname>Métivier</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computational Linguistics</title>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="437" to="479" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Dkpro agreement: An open-source java library for measuring inter-rater agreement</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">M</forename><surname>Meyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mieskes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Stab</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Gurevych</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of COLING 2014, the 25th International Conference on Computational Linguistics: System Demonstrations</title>
+		<meeting>COLING 2014, the 25th International Conference on Computational Linguistics: System Demonstrations</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="105" to="109" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Speechdatcar. a large speech database for automotive environments</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Moreno</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Lindberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Draxler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Richard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Choukri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Euler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Allen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">LREC</title>
+		<imprint>
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">The camomile collaborative annotation platform for multi-modal, multi-lingual and multi-media documents</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Poignant</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Budnik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Bredin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Barras</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Stefas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Bruneau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Adda</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Besacier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Ekenel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Francopoulo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Tenth International Conference on Language Resources and Evaluation (LREC 2016)</title>
+		<meeting>the Tenth International Conference on Language Resources and Evaluation (LREC 2016)</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="1421" to="1425" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Wavesurfer-an open source speech tool</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Sjölander</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Beskow</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Sixth International Conference on Spoken Language Processing</title>
+		<imprint>
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Huntington&apos;s disease</title>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">O</forename><surname>Walker</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The Lancet</title>
+		<imprint>
+			<biblScope unit="volume">369</biblScope>
+			<biblScope unit="page" from="218" to="228" />
+			<date type="published" when="2007">2007. 9557</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Emu-sdms: Advanced speech database management and analysis in r</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Winkelmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Harrington</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Jänsch</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computer Speech &amp; Language</title>
+		<imprint>
+			<biblScope unit="volume">45</biblScope>
+			<biblScope unit="page" from="392" to="410" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Webanno: A flexible, web-based and visually supported system for distributed annotations</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Yimam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Gurevych</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">E</forename><surname>De Castilho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Biemann</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 51st Annual Meeting of the Association for Computational Linguistics: System Demonstrations</title>
+		<meeting>the 51st Annual Meeting of the Association for Computational Linguistics: System Demonstrations</meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="1" to="6" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Speech database development at mit: Timit and beyond</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Zue</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Seneff</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Glass</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Speech communication</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="351" to="356" />
+			<date type="published" when="1990">1990</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

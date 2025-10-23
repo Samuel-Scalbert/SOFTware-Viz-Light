@@ -1,0 +1,1680 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">The WASABI Song Corpus and Knowledge Graph for Music Lyrics Analysis</title>
+				<funder ref="#_Rhpeabc">
+					<orgName type="full">Agence Nationale de la Recherche</orgName>
+					<orgName type="abbreviated">ANR</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author role="corresp">
+							<persName><forename type="first">Michael</forename><surname>Fell</surname></persName>
+							<email>mic.fell@gmail.com</email>
+						</author>
+						<author>
+							<persName><forename type="first">Elena</forename><surname>Cabrio</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Maroua</forename><surname>Tikat</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Franck</forename><surname>Michel</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Michel</forename><surname>Buffa</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Fabien</forename><surname>Gandon</surname></persName>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="institution">University of Turin Svizzera</orgName>
+								<address>
+									<addrLine>Corso</addrLine>
+									<postCode>185 -10149</postCode>
+									<settlement>Torino</settlement>
+									<country key="IT">Italy</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<orgName type="institution" key="instit1">Université Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<addrLine>930 route des Colles</addrLine>
+									<postCode>06903</postCode>
+									<settlement>Sophia Antipolis CEDEX</settlement>
+									<region>I3S</region>
+									<country>France, France</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">The WASABI Song Corpus and Knowledge Graph for Music Lyrics Analysis</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">539D390E0D0C8EE520CEABB69138585F</idno>
+					<note type="submission">Received: date / Accepted: date</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:12+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Corpus (Creation</term>
+					<term>Annotation</term>
+					<term>etc.)</term>
+					<term>Information Extraction</term>
+					<term>Information Retrieval</term>
+					<term>Knowledge Graph</term>
+					<term>Music and Song Lyrics</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>We present the WASABI 1 Song Corpus, a large corpus of songs enriched with metadata extracted from music databases on the Web, and resulting from the processing of song lyrics and from audio analysis. More specifically, given that lyrics encode an important part of the semantics of a song, we focus here on the description of the methods we proposed to extract relevant information from the lyrics, such as their structure segmentation, their topics, the explicitness of the lyrics content, the salient passages of a song and the emotions conveyed. The corpus contains 1.73M songs with lyrics (1.41M unique lyrics) annotated at different levels with the output of the above mentioned methods. The corpus labels and the provided methods can be exploited by music search engines and music professionals (e.g. journalists, radio presenters) to better handle large collections of lyrics, allowing an intelligent browsing, categorization and recommendation of songs. We demonstrate the utility and versatility of the WASABI Song Corpus in three concrete application scenarios. Together with the work on the corpus, we present the work achieved to transition the dataset into a knowledge graph, the WASABI RDF Knowledge Graph, and we show how this will enable an even richer set of applications.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>Let us consider the following scenario: following David Bowie's death, a journalist plans to prepare a radio show about the artist's musical career to acknowledge his qualities. To discuss the topic from different angles, she needs to have at her disposal the artist biographical information to know the history of his career, the song lyrics to know what he was singing about, his musical style, the emotions his songs were conveying, live recordings and interviews, etc. Similarly, streaming professionals such as Deezer, Spotify, Pandora or Apple Music aim at enriching music listening experience with artists' information, to offer suggestions for listening to other songs/albums from the same or similar artists, or automatically determining the emotion felt when listening to a track to propose coherent playlists to the user. To support such scenarios, the need for rich and accurate musical knowledge bases and tools to explore and exploit this knowledge becomes evident.</p><p>In the context of the WASABI research project that started in 2017 (funded by the French Research Agency), a two million song database has been built, with metadata on 77k artists, 208k albums, and 2.10M songs <ref type="bibr" target="#b40">[41]</ref>. The metadata has been i) aggregated, merged and curated from different data sources on the Web, and ii) enriched by pre-computed or on-demand analyses of the lyrics and audio data. The WASABI Song Corpus contains songs in 36 different languages, even if the vast majority are in English. As for the songs genres, the most common ones are Rock, Pop, Country and Hip Hop.</p><p>Given that lyrics encode an important part of the semantics of a song, in Fell et al. <ref type="bibr" target="#b25">[26]</ref> we described the methods we have developed to enrich the WASABI Song Corpus with their structure segmentation, the explicitness of the lyrics content, the salient passages of a song, the addressed topics and the emotions conveyed. In the current paper, we extend this previous work in a number of directions by:</p><p>providing additional details on the methods used to extract lyrics metadata.</p><p>presenting two additional application scenarios: scenario B is centered around investigating artists influence (see Section 8.2) and application scenario C focuses on linking the song lyrics to knowledge bases (see Section 8.3). describing the formalization, generation and the ongoing publication of the WASABI Song Corpus as an RDF Knowledge Graph (see <ref type="bibr">Section 9)</ref>.</p><p>The paper is organized as follows. Section 2 introduces the WASABI Song Corpus and the metadata initially extracted from music databases on the Web. Section 3 describes the segmentation method we applied to decompose lyrics in their building blocks in the corpus. Section 4 explains the method used to summarize song lyrics, leveraging their structural properties. Section 5 reports on the annotations resulting from the explicit content classifier, while Section 6 describes how information on the emotions are extracted from the lyrics. Section 7 describes the topic modeling we performed on the lyrics. Section 8 presents three different application scenarios for the corpus. Section 9 describes the formalization, generation and the ongoing publication of the WASABI Song Corpus as an RDF knowledge graph. Section 10 reports on similar existing resources, while Section 11 concludes the paper.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">The WASABI Song Corpus</head><p>In this section, we first describe the steps undertaken to construct the WASABI Song Corpus. We then give key statistics of the obtained dataset along with information on its availability.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Constructing the WASABI Song Corpus</head><p>On the collected song database introduced above, various levels of analysis have been performed, and interactive Web Audio applications have been built on top of the output. For example, the TimeSide analysis and annotation framework have been linked <ref type="bibr" target="#b29">[30]</ref> to make on-demand audio analysis possible. In connection with the FAST project<ref type="foot" target="#foot_1">2</ref> , an offline chord analysis of 442k songs has been performed, and both an online enhanced audio player <ref type="bibr" target="#b48">[49]</ref> and chord search engine <ref type="bibr" target="#b49">[50]</ref> have been built around it. A rich set of Web Audio applications and plugins has been proposed <ref type="bibr" target="#b11">[12,</ref><ref type="bibr" target="#b12">13,</ref><ref type="bibr" target="#b13">14]</ref>. All these metadata, computational analyses and Web Audio applications have now been gathered in one easy-to-use web interface, the WASABI Interactive Navigator<ref type="foot" target="#foot_2">3</ref> , illustrated in Figure <ref type="figure">1</ref>.</p><p>We started building the WASABI Song Corpus by collecting for each artist the complete discography, band members with their instruments, time line, equipment they use, and so on. For each song we collected its lyrics from LyricWiki<ref type="foot" target="#foot_3">4</ref> , the synchronized lyrics when available<ref type="foot" target="#foot_4">5</ref> , the DBpedia abstracts and the categories the song belongs to, e.g. genre, label, writer, release date, awards, producers, artist and band members, the stereo audio track from Deezer, the unmixed audio tracks of the song, its ISRC, bpm and duration.</p><p>We matched the song ids from the corpus with the ids from MusicBrainz, iTunes, Discogs, Spotify, Amazon, AllMusic, GoHear, YouTube. Figure <ref type="figure">2</ref> illustrates all the data sources we have used to create the dataset. We have also aligned the corpus with the publicly available LastFM dataset <ref type="foot" target="#foot_5">6</ref> which assigns social tags to songs.</p><p>As of today, the corpus contains 1.73M songs with lyrics (1.41M unique lyrics). 73k songs have at least an abstract on DBpedia, and 11k have been identified as "classic songs" (they have been number one, or got a Grammy Fig. <ref type="figure">1</ref>: The WASABI Interactive Navigator <ref type="bibr" target="#b14">[15]</ref>. award, or have lots of cover versions). About 2k songs have a multi-track audio version, and on-demand source separation using open-unmix <ref type="bibr" target="#b53">[54]</ref> or Spleeter <ref type="bibr" target="#b30">[31]</ref> is provided as a TimeSide plugin.</p><p>Several Natural Language Processing methods have been applied to the lyrics of the songs included in the WASABI Song Corpus, and various analyses of the extracted information have been carried out. After providing some statistics, the rest of the article describes the different annotations we added to the lyrics of the songs in the dataset. Based on the research we have conducted, the following lyrics annotations are added: lyrical structure (Section 3), summarization (Section 4), explicit lyrics (Section 5), emotion in lyrics (Section 6) and topics in lyrics (Section 7). Fig. <ref type="figure">2:</ref> The datasources connected to the WASABI Song Corpus <ref type="bibr" target="#b15">[16]</ref>.</p><p>Table <ref type="table" target="#tab_0">1</ref> summarizes the most relevant annotations provided in our corpus. Some of those annotation layers are provided for all the 1.73M songs included in the WASABI corpus, while some others apply to subsets of the corpus, due to various constraints described in the next sections. Annotations with p are predictions of our models.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Statistics on the WASABI Song Corpus</head><p>This section summarizes key statistics on the corpus, such as the language and genre distributions, the songs coverage in terms of publication years, and then gives the technical details on its accessibility.</p><p>Selection Bias. The amount of lyrics published per decade, per genre, per language etc. is biased by the availability of lyrics for that decade on the crawled web sites. More specifically, the WASABI project initiated the construction of its knowledge base in 2016, at the beginning of the project, taking as its "initial seed" the songs published on the now closed LyricsWikia site, a crowd sourcing wiki manually created by humans. The fact that such source contains more English songs than others, more popular songs, etc. is reflected in the following distributions of our dataset.</p><p>Language Distribution. Figure <ref type="figure">3a</ref> shows the distribution of the ten most frequent languages in our corpus. <ref type="foot" target="#foot_6">7</ref> In total, the corpus contains songs of 36 different languages. The vast majority (76.1%) is English, followed by Spanish (6.3%) and by four languages in the 2-3% range (German, French, Italian, Portuguese). On the bottom end, Swahili and Latin amount to 0.1% (around 2k songs) each.</p><p>Genre Distribution. In Figure <ref type="figure">3b</ref> we depict the distribution of the ten most frequent genres in the corpus. <ref type="foot" target="#foot_7">8</ref> In total, 1.06M of the titles are tagged with a genre. It should be noted that the genres are very sparse with a total of 528 different ones. This high number partially stems from the fact that many "subgenres" such as Alternative Rock, Indie Rock, Pop Rock all constitute own genres in the dataset and we take them as is. Specifically, we do not perform any clustering to -for instance -unite Alternative Rock with Rock. We omit displaying "subgenres" in Figure <ref type="figure">3b</ref> for clarity. The most common genres are Rock (9.7%), Pop (8.6%), Country (5.2%), Hip Hop (4.5%) and Folk (2.7%).</p><p>Publication Year. Figure <ref type="figure">3c</ref> shows the number of songs published in our corpus, by decade. <ref type="foot" target="#foot_8">9</ref> Over 50% of all songs in the WASABI Song Corpus are from the 2000s or later and only around 10% are from the seventies or earlier. Note one peculiarity, the number of songs in the 2010-2020 decade is lower than in the previous decade. The main reason for this is the initial creation of the dataset in 2016, i.e. our dataset can contain only songs for 6 years of the decade concerned. Assessing and ensuring the quality of a large dataset formed by the aggregation of multiple data sources is a difficult and ongoing process. Metadata from various sources can often be inaccurate or contradictory. Multiple hackathons were held between 2017 and 2021, during which a variety of people from different backgrounds and with varying levels of expertise explored the dataset in an open-ended manner. These hackathons have helped identify many recurring errors, conflicts, and problems, and we have written a series of scripts (available in the dataset's Github repository) to fix some of them.</p><p>The dataset is intended to be maintained for at least the next three years, as we have new projects and ongoing PhD theses around this work, that will leverage and extend it. More metadata will be added (from the MIR audio analysis of the songs, or obtained by linking the songs to existing midi transcriptions or to their online music scores), and we are developing new metadata quality assessment tools (based on visualizations and inference rules) that will allow the community to better detect and report erroneous, contradictory or missing metadata <ref type="bibr" target="#b41">[42]</ref>. On the other hand, the quality of the extracted lyrics metadata has been validated using different methods described in the articles cited in following sections of this paper about lyrics analysis.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.4">Availability and Accessibility of the WASABI Song Corpus</head><p>The WASABI Song Corpus is available and accessible in multiple ways and formats. First of all, it can be searched by end-users through the WASABI Interactive Navigator<ref type="foot" target="#foot_9">10</ref> , a rich Web application that relies on a MongoDB back-end server and an Elasticsearch index. It can also be queried by applications in two ways: either using a REST API<ref type="foot" target="#foot_10">11</ref> backed by the MongoDB database, or using our public SPARQL endpoint hosted on a Virtuoso OS triple store <ref type="foot" target="#foot_11">12</ref> . Furthermore, the dataset is also provided as a dump that can be downloaded from Zenodo <ref type="foot" target="#foot_12">13</ref> . The dump contains the dataset in two different formats: the JSON format extracted from our MongoDB back-end, and the RDF knowledge graph that is described in details in section 9. In all cases (web application, API/SPARQL programmatic access, dumps) all the metadata is publicly available under a Creative Commons Attribution-Non Commercial license.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.5">Getting Access to Copyrighted Content</head><p>It is important to note that during the project we had access to copyrighted content -song lyrics and audio files -that we are not allowed to include in the publicly released dataset. Nevertheless, significant work has been done on the analysis of the lyrics and the results are available on the project's GitHub (metadata, ML models, Python scripts and Jupyter notebooks). These results open the way to many scientific uses by the NLP community.</p><p>Notice that an online data source we used for song lyrics at the beginning of the WASABI project (2017-2021), LyricsWikia, is now offline <ref type="foot" target="#foot_13">14</ref> . However, it is still possible for researchers to obtain the full lyrics we used using commercial APIs such as MusixMatch <ref type="foot" target="#foot_14">15</ref> . Moreover, if you contact the authors, it is possible to obtain our unrestricted lyrics files under conditions of confidentiality and scientific use only. As for the audio content of the songs, 30-second clips are accessible via the public Deezer Audio API or full-length content through the YouTube API.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Lyrics Structure Annotations</head><p>Generally speaking, lyrics structure segmentation consists of two stages: text segmentation to divide lyrics into segments, and semantic labeling to label each segment with a structure type (e.g. Intro, Verse, Chorus).</p><p>In <ref type="bibr" target="#b26">[27]</ref> we proposed a method to segment lyrics based on their repetitive structure in the form of a self-similarity matrix (SSM). Figure <ref type="figure" target="#fig_1">4</ref> shows a linebased SSM for the song text written on top of it <ref type="foot" target="#foot_15">16</ref> . The lyrics consist of seven segments and shows the typical repetitive structure of a Pop song. The main diagonal is trivial, since each line is maximally similar to itself. Notice further the additional diagonal stripes in segments 2, 4 and 7; this indicates a repeated part, typically the chorus. Based on the simple idea that eyeballing an SSM will reveal (parts of) a song's structure, we proposed a Convolutional Neural Network architecture that successfully learned to predict segment borders in the lyrics when "looking at" their SSM. Table <ref type="table" target="#tab_1">2</ref> shows the genre-wise results we obtained using our proposed architecture. One important insight was that more repetitive lyrics as often found in genres such as Country and Punk Rock are much easier to segment than lyrics in Rap or Hip Hop which often do not even contain a chorus. We found that in many cases, where the lyrics do not reveal the segment structure, the audio of the song can come to aid and inform the segmentation model <ref type="bibr" target="#b28">[29]</ref>. Leveraging a corpus of synchronized text-audio representations, we showed that taking into account both modalities -the song audio and the song lyrics -improved the segmentation performance. <ref type="foot" target="#foot_16">17</ref>In the WASABI Interactive Navigator, the line-based SSM of a song text can be visualized. It is toggled by clicking on the violet-blue square on top of  the song text. For a subset of songs the color opacity indicates how repetitive and representative a segment is, based on the fitness metric that we proposed in <ref type="bibr" target="#b24">[25]</ref>. Note how in Figure <ref type="figure" target="#fig_1">4</ref>, the segments 2, 4 and 7 are shaded more darkly than the surrounding ones. As highly fit (opaque) segments often coincide with a chorus, this is a first approximation of chorus detection. Given the variability in the set of structure types provided in the literature according to different genres <ref type="bibr" target="#b54">[55,</ref><ref type="bibr" target="#b9">10]</ref>, rare attempts have been made in the literature to achieve a more complete semantic labeling, labeling the lyrics segments as Intro, Verse, Bridge, Chorus etc.</p><p>For each song text, we provide an SSM based on a normalized characterbased edit distance <ref type="foot" target="#foot_17">18</ref> on two levels of granularity, to enable other researchers to work with these structural representations: line-wise similarity and segmentwise similarity.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Lyrics Summary</head><p>Given the repeating forms, peculiar structure and other unique characteristics of song lyrics, in <ref type="bibr" target="#b24">[25]</ref> we introduced a method for extractive summarization of lyrics that takes advantage of these additional elements to more accurately identify relevant information in song lyrics. More specifically, it relies on the intimate relationship between the audio and the lyrics. The so-called audio thumbnails, snippets of usually 30 seconds of music, are a popular means to summarize a track in the audio community. The intuition is this: the more repeated and the longer a part, the better it represents the song. We transferred an audio thumbnailing approach to our domain of lyrics and showed that adding the thumbnail improves summary quality. We evaluated our method on 50k lyrics belonging to the top 10 genres of the WASABI Song Corpus and according to qualitative criteria such as Informativeness and Coherence. Figure <ref type="figure" target="#fig_2">5</ref> shows our results for different summarization models. Our model RankTopicFit, which combines graph-based, topic-based and thumbnail-based summarization, outperforms all other summarizers. We further find that the genres RnB and Country are highly overrepresented in the lyrics sample with respect to the full corpus, indicating that songs belonging to these genres are more likely to contain a chorus. Finally, Figure <ref type="figure" target="#fig_3">6</ref> shows an example summary of four lines length obtained with our proposed RankTopicFit method. It is toggled in the WASABI Interactive Navigator by clicking on the green square on top of the song text.</p><p>The four-line summaries of 50k English song lyrics used in our experiments are freely available within the WASABI Song Corpus; the Python code of the applied summarization methods is also available <ref type="foot" target="#foot_18">19</ref> .  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">Explicit Language in Lyrics</head><p>On audio recordings, the Parental Advisory Label is placed in recognition of profanity and to warn parents of material potentially unsuitable for children. Nowadays, such labeling is carried out mainly manually on a voluntary basis, with the drawbacks of being time consuming and therefore costly, error prone and partly a subjective task. In <ref type="bibr" target="#b23">[24]</ref> we have tackled the task of automated explicit lyrics detection, based on the songs carrying such a label. We compared automated methods ranging from dictionary-based lookup to state-of-the-art deep neural networks to automatically detect explicit contents in English lyrics. More specifically, the dictionary-based methods rely on a swear word dictionary D n which is automatically created from example explicit and clean lyrics. Then, we use D n to predict the class of an unseen song text in one of two ways: (i) the Dictionary Lookup simply checks if a song text contains words from D n . (ii) the Dictionary Regression uses a bag of words (BOW) made from D n as the feature set of a logistic regression classifier. In Table <ref type="table">3</ref>: Performance comparison of our different models. Precision (P ), Recall (R) and f-score (F 1 ) in %.</p><p>the Tf-idf BOW Regression the BOW is expanded to the whole vocabulary of a training sample instead of only the explicit terms. Furthermore, the model TDS Deconvolution is a deconvolutional neural network <ref type="bibr" target="#b55">[56]</ref> that estimates the importance of each word of the input for the classifier decision. In our experiments, we worked with 179k lyrics that carry gold labels provided by Deezer (17k tagged as explicit) and obtained the results shown in Figure <ref type="figure">3</ref>. We found the very simple Dictionary Lookup method to perform on par with much more complex models such as the BERT Language Model <ref type="bibr" target="#b20">[21]</ref> as a text classifier. Our analysis revealed that some genres are highly overrepresented among the explicit lyrics. Inspecting the automatically induced explicit words dictionary reflects that genre bias. The dictionary of 32 terms used for the dictionary lookup method consists of around 50% of terms specific to the Rap genre, such as glock, gat, clip (gun-related), thug, beef, gangsta, pimp, blunt (crime and drugs). Finally, the terms holla, homie, and rapper are obviously not swear words, but highly correlated with explicit content lyrics.</p><p>Our corpus contains 52k tracks labeled as explicit and 663k clean (not explicit) tracks <ref type="foot" target="#foot_19">20</ref> . We have trained a classifier (77.3% f-score on test set) on the 438k English lyrics which are labeled and classified the remaining 455k previously untagged English tracks. We provide both the predicted labels in the WASABI Song Corpus and the trained classifier to apply it to unseen text.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">Emotional Description</head><p>In sentiment analysis the task is to predict if a text has a positive or a negative emotional valence. In the recent years, a transition from detecting sentiment (positive vs. negative valence) to more complex formulations of emotion detection (e.g. joy, fear, surprise) <ref type="bibr" target="#b44">[45]</ref> has become more visible; even tackling the problem of emotion in context <ref type="bibr" target="#b17">[18]</ref>. One family of emotion detection approaches is based on the valence-arousal model of emotion <ref type="bibr" target="#b51">[52]</ref>, locating every emotion in a two-dimensional plane based on its valence (positive vs. negative) and arousal (aroused vs. calm). <ref type="foot" target="#foot_20">21</ref>  joyful, angry or calm are located in the plane. Manually labeling texts with multi-dimensional emotion descriptions is an inherently hard task. Therefore, researchers have resorted to distant supervision, obtaining gold labels from social tags from LastFM. These approaches <ref type="bibr" target="#b32">[33,</ref><ref type="bibr" target="#b16">17]</ref> define a list of social tags that are related to emotion, then project them into the valence-arousal space using an emotion lexicon <ref type="bibr" target="#b56">[57,</ref><ref type="bibr" target="#b43">44]</ref>.</p><p>Recently, Deezer made valence-arousal annotations for 18,000 English tracks available <ref type="foot" target="#foot_21">22</ref> [20], and we transferred the valence-arousal annotations of Deezer to our songs. In Figure <ref type="figure" target="#fig_4">7</ref> the green dots visualize the emotion distribution of these songs. 23 Based on their annotations, we train an emotion regression model using BERT, with an evaluated 0.44/0.43 Pearson correlation/Spearman correlation for valence and 0.33/0.31 for arousal on the test set.</p><p>We integrated Deezer's labels into our corpus and also provide the valencearousal predictions for the 1.73M tracks with lyrics <ref type="bibr" target="#b22">[23]</ref>. We also provide the LastFM social tags (276k) and emotion tags (87k entries) to help researchers with building variants of emotion recognition models.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">Topic Modelling</head><p>We built a topic model on the lyrics of our corpus using Latent Dirichlet Allocation (LDA) <ref type="bibr" target="#b8">[9]</ref>. We determined the hyperparameters α, η and the topic We manually labeled a number of more recognizable topics to characterize their semantic content (as War, Death, Love). Figures 9-13 illustrate these topics with word clouds <ref type="foot" target="#foot_22">24</ref> of the most characteristic words per topic. For instance, the topic Money contains words of both the field of earning money (job, work, boss, sweat) as well as spending it (pay, buy). The topic Family is both about the people of the family (mother, daughter, wife) and the land (sea, valley, tree) <ref type="bibr" target="#b22">[23]</ref>. We provide the topic distribution of our LDA topic model for each song and make available the trained topic model to enable its application to unseen lyrics.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8">Exploiting and Reasoning over the Lyrics Annotation Layers: Application Scenarios</head><p>Following a user-oriented approach, in the earlier stages of the WASABI project, a number of potential users of the WASABI Song Corpus were interviewed (as musicologists, journalists, artists), so as to design a set of motivating use-case scenarios. In this section, we analyze them from an NLP perspective, and we show how exploiting and reasoning over the different annotation layers resulting from the application to the song lyrics of the NLP methods we presented could open a wide range of possibilities of analysis on the artists and their musical productions, from different perspectives.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8.1">Application Scenario A: Diachronic Corpus Analysis</head><p>An important task for musicologists is to analyze the discography of a particular artist. Nearly all artists have different sounds -and touch at different topics in their lyrics -over time, but some notably have more drastic changes than others. Some of these changes might just be because of more experience and better production, but some extend beyond that. Digging into them can provide interesting hints on the artists' lives, and on the historical context inspiring them. Adding the time dimension to the metadata we extracted from the lyrics, we can indeed visualize how they evolved during the life of an artist and ultimately try i) to understand what caused certain ruptures (for example in the subjects covered, or in the verse/chorus cut of the songs), and ii) to study variations in the compositions as the improved/decreased complexity of the songs (audio, texts).</p><p>In the rest of this section, we focus on the change over time, providing a diachronic corpus analysis as follows: we examine the changes in the annotations over the course of time, by grouping the corpus into decades of songs according to the distribution shown in Figure <ref type="figure">3c</ref>. After providing this overview analysis for the whole corpus and therefore for various artists, we close the section by focusing on the development of a specific artist, namely David Bowie.</p><p>Changes in Topics. The importance of certain topics has changed over the decades, as depicted in Figure <ref type="figure" target="#fig_1">14a</ref>. Some topics have become more important, others have declined, or stayed relatively the same. We define the importance of a topic for a decade of songs as follows: first, the LDA topic model trained on the full corpus gives the probability of the topic for each song separately. We then average these song-wise probabilities over all songs of the decade. For each of the cases of growing, diminishing and constant importance, we display two topics. The topics War and Death have appreciated in importance over time. This is partially caused by the rise of Heavy Metal in the beginning of the 1970s, as the vocabulary of the Death topic is very typical for the genre (see for instance the "Metal top 100 words" in <ref type="bibr" target="#b27">[28]</ref>). We measure a decline in the importance of the topics Love and Family. The topics Money and Religion seem to be evergreens as their importance stayed rather constant over time. Changes in Explicitness. We find that newer songs are more likely being tagged as having explicit content lyrics. Figure <ref type="figure" target="#fig_1">14b</ref> shows our estimates of explicitness per decade, the ratio of songs in the decade tagged as explicit to all songs of the decade. Note that the Parental Advisory Label was first distributed in 1985 and many older songs may not have been labeled retroactively. The depicted evolution of explicitness may therefore overestimate the "true explicitness" of newer music and underestimate it for music before 1985.</p><p>Changes in Emotion. We estimate the emotion of songs in a decade as the average valence and arousal of songs of that decade. We find songs to decrease both in valence and arousal over time. This decrease in positivity (valence) is in line with the diminishment of positively connoted topics such as Love and Family and the appreciation of topics with a more negative connotation such as War and Death.</p><p>As an interesting anecdotal evidence, we find the singer David Bowie to write more about the topic Family in his very young age (70s), to then put more weight on a topic such as Love (80s), to later return to an emphasis in Family in his old days (2000s). We illustrate the topic importance trajectories in Figure <ref type="figure" target="#fig_2">15</ref>.</p><p>While in this section we have shown the application of the diachronic analysis on the corpus as a whole, and on one specific artist, it can actually be used also to find similarities among artists with regard to the evolution of the topics and emotions addressed by their lyrics, or sharing the same kind of song structures.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8.2">Application Scenario B: Artists Influence</head><p>Discovering relations between artists to track how they co-produce, co-write, and ultimately influence each other, is another interesting task to research, and among the needs expressed by journalists and musicologists. We operationalize this problem in the following, by creating a social network of the artists in our corpus, to unveil connections between them in the WASABI Song Corpus. We base our analysis on the available song abstracts extracted from DBpedia. These are short texts describing the circumstances in which a song was written, composed, collaborations that lead to it, or more generally, relevant context information associated with the song. Central to our interest, we find that inside such song abstracts, other artists related to the song in some way are mentioned. Figure <ref type="figure" target="#fig_7">16</ref> shows an example abstract of a song by the artist Bob Dylan in which another artist, Cher, is mentioned. In this example, Cher is mentioned since she covered the song.</p><p>To build such a social network of artists, we perform Named Entity Recognition on the song abstracts using the spaCy <ref type="bibr" target="#b31">[32]</ref> library. <ref type="foot" target="#foot_23">25</ref> As Named Entity Recognition is language-specific, in this work we limit ourselves to English abstracts (i.e., to 22.3k abstracts, from 4.8k different artists). After applying the Named Entity Recognition, we obtain annotations for each song abstract as depicted in Figure <ref type="figure" target="#fig_7">16</ref>. Since our goal is identifying artists in the abstracts, we focus our search on named entities with the types that we found persons or bands to be tagged with: PERSON or ORG (organization).</p><p>For our purposes, we therefore consider only those named entities t with tags ORG or PERSON, where t is an artist in the WASABI Song Corpus. We discard all other named entities. After collecting all artist mentions in the song abstracts, we create a graph of artist mentions. Starting with the empty graph G=(V, E), for each artist mention t appearing in one of the song abstracts of an artist A we add both A and t to V. Furthermore, we add edges (A, t) to E. As we consider an undirected graph G, a connection between two artists A and B is established when both artists mention the same other artist t, i.e. if both (A, t) and (B, t) are edges in E. We finally identify corresponding artists A and their mentions t with A in the graph. For example, Cher as artist, Cher as PERSON, and Cher as ORG are all collapsed to one node, Cher, in the graph. Since the artist Bob Dylan has an edge to the artist mention Cher as ORG (see Figure <ref type="figure" target="#fig_7">16</ref>), we establish a connection in G between the artist Cher and the artist Bob Dylan.</p><p>Figure <ref type="figure" target="#fig_8">17</ref> depicts the most connected artists in the dataset as resulting from the application of our method. The blue circles quantify the total number of other artists mentioning the target artist, for example Bob Dylan has 129 other artists mentioning him in some song abstract. <ref type="foot" target="#foot_24">26</ref> Some artists have more songs with abstracts, which increases their chance to mention other artists, hence appearing as more connected. To account for that bias, we also report a normalized artist connectivity, by discounting the number of song abstracts of an artist. This is illustrated with the interior pink circles inside the blue circles. For example, we find that Bob Dylan is mentioned most often (129 times) but also has a high number of song abstracts (133). Differently, Frank Sinatra is mentioned less often (55 times), but has also far less song abstracts <ref type="bibr" target="#b11">(12)</ref>. The normalized connectivity of Frank Sinatra is higher than that of Bob Dylan, as visualized by the pink interior circles.</p><p>Overall, we can see that the most connected artists are also among the most influential artists in their respective genres and decades: Frank Sinatra (50s/60s), John Lennon (60s/70s), Michael Jackson (80s/90s) as well as newer ones such as Beyoncé and Jay-Z (married to each other) for the 2000s. We find that besides The Rolling Stones there are only artists, not bands, in the most connected list. We speculate that it is more likely for a band member to appear as artist mention, since it is more likely for a band member to co-write, co-compose, co-produce than for a whole band.</p><p>At the current stage, we can detect the artist mentions in song abstracts, while we cannot reliably detect yet the relations among the different artists nor the context in which they are mentioned. This is left for future work, and will require linking the artists mentions to knowledge bases, as explained in Section 9.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8.3">Application Scenario C: Linking Lyrics and Real-World Knowledge</head><p>The third application scenario, endorsed by archivists from Radio-France, considers the possibility of connecting songs with real world events. For example, during the protest movement against the "yellow jackets" in France, animators of music radio programs have repeatedly requested research for songs about protests, rebellion, anti-government movements, revolution. To support such search, an automated system that given an event finds related songs (i.e., lyrics mentioning or describing such event, or written during a certain historical period) could be developed. As a result of the example query on songs about protests, the U2 song Sunday Bloody Sunday could be output (among others), which describes an actual historical event with the same name. While for the general case, the linking between song lyrics and real-world events is complicated (and often there are no specific mentions of them in the lyrics, but some metaphorical reminder), in this specific example, a named entity tagger could detect the event Bloody Sunday. An entity linker such as Babelfy<ref type="foot" target="#foot_25">27</ref> consequently could link it to the corresponding event (i.e., the 1972 Bloody Sunday incident in Ireland where British troops shot and killed unarmed civil rights protesters: https://en.wikipedia.org/wiki/Bloody_Sunday_(1972)). The presence of such entities describing a specific event, or of people renewed to have taken part in specific actions, could be additionally crossed with the results of the topic modeling and emotions recognition methods previously described (Sections 7 and 6). In the direction of enabling such linked applications, we are currently working on representing the WASABI Song Corpus as an RDF Knowledge Graph, as described in the following section.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="9">The WASABI RDF Knowledge Graph</head><p>The WASABI RDF Knowledge Graph relies upon the Semantic Web standards: RDF provides the conceptual data model and syntaxes, RDFS and OWL provide support for knowledge formalization and reasoning, while SPAR-QL supports querying RDF graphs.</p><p>All the tools, scripts, configuration and mapping files required to generate the knowledge graph, as well as the WASABI ontology, are available from the project's Github repository <ref type="foot" target="#foot_26">28</ref> .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="9.1">RDF Knowledge Graph Model, Vocabularies and Formalization</head><p>The first version of the WASABI RDF Knowledge Graph, published in late 2020, contains the metadata of the songs, artists and albums described in Section 2 (date and place of recording, producer, genre, record label, composers, instruments, etc.), as well as the lyrics summary (Section 4) and explicitness labels (Section 5). The RDF model relies primarily on two vocabularies: the Music Ontology <ref type="bibr" target="#b50">[51]</ref>, a rich vocabulary to describe musical metadata, and the WASABI ontology <ref type="bibr" target="#b10">[11]</ref> that we designed as an extension of the Music Ontology with respect to specific entities and attributes pertaining to the analysis of song lyrics, such as the detected language and the existence of explicit lyrics in a song. Additionally, the WASABI Knowledge Graph reuses classes and properties from several common metadata vocabularies: Dublin Core Metadata, FOAF, SCOT 29 , Schema.org and the DBpedia ontology. Specialized terms were also imported from the Audio Features Ontology 30 and the OMRAS2 Chord Ontology 31 .</p><p>We recently published version 2.0 of the dataset that relies on an extension of the WASABI ontology to account for the identified emotions and topics of a song (Sections 6 and 7 respectively). A subset of the RDF representation of a song is depicted in Figure <ref type="figure" target="#fig_5">18</ref>, with a specific focus on lyrics-related properties. To represent the emotions, we updated the WASABI ontology to model the valence and arousal dimensions of Russel's model as illustrated in Figure <ref type="figure" target="#fig_4">7</ref>. Initially, we considered using the EmOCA ontology <ref type="bibr" target="#b5">[6]</ref>, however its use requires to represent emotions with emoca:hasMinimum and emoca:hasMaximum properties that are not relevant in WASABI where the valence and arousal exist as single values.</p><p>To represent social and emotion tags we reused the SCOT 32 (Social Semantic Cloud of Tags) ontology. Tags are ordered collections of terms of type scot:Tag, that we represent as RDF lists linked to the song through properties wsb:social tags and wsb:emotion tags. Similarly, a song lyrics summary is an ordered collection of lines, linked to the song with property wsb:song summary. The same principle applies for topics that are ordered, but in addition each topic consists of a bag of words. Hence, the song is associated with an RDF list of topics with property wsb:topics, while each topic has multiple words (wsb:topic term). This representation of topics as bags of words differs from common topics modeling where a topic is a single subject, such as in the Ontopic 33 ontology. 29 SCOT (Social Semantic Cloud of Tags) Ontology: http://rdfs.org/scot/spec/ 30 Audio Features Ontology: http://purl.org/ontology/af/ 31 OMRAS2 Chord Ontology: http://purl.org/ontology/chord/ 32 http://rdfs.org/scot/spec/ 33 http://www.ontologydesignpatterns.org/ont/dul/ontopic.owl Fig. <ref type="figure" target="#fig_5">18</ref>: RDF representation of a song, its artist and some properties related to lyrics analysis. The following namespaces are used: mo: Music Ontology, wsb: WASABI Ontology, scot: SCOT Ontology.).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="9.2">Interlinking, Querying and Reasoning on the RDF Knowledge Graph</head><p>The 55 million triples RDF dataset is available as a DOI-identified dump that can be downloaded from Zenodo <ref type="foot" target="#foot_27">34</ref> , and a public SPARQL endpoint <ref type="foot" target="#foot_28">35</ref> set up to enable the community to query the knowledge graph. Complying with Linked Data good practices, all resources in the knowledge graph, may they denote vocabulary terms, concepts or physical objects, are given URIs that i) can be dereferenced to documents describing the resources (selecting RDF or HTML based on content negotiation), and ii) can be shared across datasets, making it possible to interlink resources with rich semantic relationships.</p><p>In the WASABI RDF Knowledge Graph, all artists, songs and albums are linked to their corresponding web pages in multiple websites. More interestingly, songs and albums are linked to genres named after their DBpedia URIs. Therefore, beyond looking within the WASABI dataset for songs of a given genre, SPARQL federated queries make it possible to query WASABI and DBpedia simultaneously, so as to aggregate songs pertaining to a given set of genres from both sources.</p><p>We are currently working on broadening these possibilities of simultaneously querying multiple datasets, relying not only on linked resources but also on external knowledge to improve different reasoning tasks. Following the same direction as the work shown in Application Scenario B (Section 8.2), we are currently investigating how DBpedia abstracts (text in natural language providing rich information about artists biography, influences, historical and political contexts, interpretations of a song's meaning and so on) can be used to extract Named Entities and the relationships among them. As shown in Application Scenario C (Section 8.3), being able to link such Named Entities to structured knowledge bases (such as DBpedia and Wikidata) would allow to push forward with the lyrics understanding through advanced reasoning capabilities. To answer the query about the songs pertaining to protests and rebellions, we could retrieve all songs mentioning Wikidata entities that are instances or sub-classes of the massacre class, or DBpedia entities that are instances or sub-classes of the MilitaryConflict class. Results about all sorts of conflicts would be returned, including e.g. the song Sunday Bloody Sunday. Such query can then be specialized to filter undesired entities (and songs).</p><p>Furthermore, reasoning can be conveyed by the application of rules implementing specific domain knowledge, meant to infer new facts. For instance, "the influence of one artist on another" can be expressed in a SPARQL query implementing rules such as: "if artist A was a producer of artist B, then A influenced B", or "if artists A and B worked together on album C, then they influenced each other". Again, disambiguating the entities mentioned in lyrics and in the DBpedia abstracts through their linking to knowledge bases (e.g. following the relation dbo:producer in DBpedia) would definitely help in the reasoning task.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="10">Related Work</head><p>This section describes available databases containing songs and lyrics, and summarizes existing work on Natural Language Processing of song lyrics.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="10.1">Databases of Songs and Lyrics</head><p>The Million Song Dataset (MSD) project<ref type="foot" target="#foot_29">36</ref>  <ref type="bibr" target="#b6">[7]</ref> is a collection of audio features and metadata for a million contemporary popular music tracks. Such dataset shares some similarities with WASABI with respect to metadata extracted from Web resources (as artist names, tags, years) and audio features, even if at a smaller scale. Given that it mainly focuses on audio data, a complementary dataset providing lyrics of the Million Song dataset was released, called musiXmatch dataset 37 . It consists in a collection of song lyrics in bag-of-words (plus stemmed words), associated with MSD tracks. However, no other processing of the lyrics is done, as is the case in our work.</p><p>MusicWeb and its successor MusicLynx <ref type="bibr" target="#b1">[2]</ref> link music artists within a Webbased application for discovering connections between them and provides a browsing experience using extra-musical relations. The project shares some ideas with WASABI, but works on the artist level, and does not perform analyses on the audio and lyrics content itself. It reuses, for example, MIR metadata from AcousticBrainz.</p><p>The WASABI project was built on a broader scope than these projects and mixes a wider set of metadata, including ones from audio and natural language processing of lyrics. In addition, as presented in this paper, it comes with a large set of Web Audio enhanced applications (multitrack player, online virtual instruments and effect, on-demand audio processing, audio player based on extracted, synchronized chords, etc.) Some of the goals of the DOREMUS project <ref type="bibr" target="#b36">[37]</ref> overlap with WASABI, yet in a rather different context. DOREMUS integrates musical metadata from the Bibliothèque nationale de France, Radio France and Philharmonie de Paris. It focuses specifically on classical and traditional music, therefore it is likely that there is little overlap with WASABI that focuses on popular songs. Furthermore, DOREMUS does not deal with audio signal analysis nor lyrics processing as in WASABI, but integrates MIDI resources to achieve music recommendation and automatic playlists generation.</p><p>The Listening Experience Database (LED) collects people's music listening experiences as they are reported in documents like diaries, memoirs, letters or oral history recording <ref type="bibr" target="#b0">[1]</ref>. It mostly relates to legacy music that has little overlap with WASABI.</p><p>The MELD framework <ref type="bibr" target="#b45">[46]</ref> supports the publication of musicology articles with multi-modal user interfaces that connect different forms of digital resources such as text, audio, video, images and musical scores. Some development could be undertaken to allow musicologists publish articles that would leverage musical data from the WASABI RDF Knowledge Graph.</p><p>The MIDI Linked Data project <ref type="bibr" target="#b39">[40]</ref> publishes a large knowledge graph representing in RDF over 300,000 MIDI files. Each one is linked to its DBpedia counterpart, and the RDF model relies on the MIDI ontology and Music Ontology. As such, MIDI Linked Data can be used as a complement of WASABI to allow working on MIDI files together with the audio and text analyses provided by WASABI. It is worth noticing that some MIDI content was used during the evaluation of the chords extraction in WASABI <ref type="bibr" target="#b47">[48,</ref><ref type="bibr" target="#b49">50,</ref><ref type="bibr" target="#b48">49]</ref> yet not from the MIDI Linked Data project.</p><p>The works mentioned above are all about public databases. Let us however notice that companies such as Spotify, GraceNote, Pandora, or Apple Music have sophisticated private knowledge bases of songs and lyrics to feed their search and recommendation algorithms, but there are not publicly available (and mainly rely on audio features).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="10.2">Natural Language Processing of Song Lyrics</head><p>Lyrics Segmentation. Only a few papers in the literature have focused on the automated detection of the structure of lyrics. Watanabe et al. <ref type="bibr" target="#b57">[58]</ref> propose the task to automatically identify segment boundaries in lyrics and train a logistic regression model for the task with the repeated pattern and textual features. Mahedero et al. <ref type="bibr" target="#b38">[39]</ref> report experiments on the use of standard NLP tools for the analysis of music lyrics. Among the tasks they address, for structure extraction they focus on a small sample of lyrics having a clearly recognizable structure (which is not always the case) divided into segments. More recently, Baratè et al. <ref type="bibr" target="#b3">[4]</ref> describe a semantics-driven approach to the automatic segmentation of song lyrics, and mainly focus on pop/rock music. Their goal is not to label a set of lines in a given way (e.g. verse, chorus), but rather identifying recurrent as well as non-recurrent groups of lines. They propose a rule-based method to estimate such structure labels of segmented lyrics.</p><p>Explicit Content Detection. Bergelid [5] consider a dataset of English lyrics to which they apply classical machine learning algorithms. The explicit labels are obtained from Soundtrack Your Brand<ref type="foot" target="#foot_30">38</ref> . They also experiment with adding lyrics metadata to the feature set, such as the artist name, the release year, the music energy level, and the valence/positiveness of a song. Chin et al. <ref type="bibr" target="#b18">[19]</ref> apply explicit lyrics detection to Korean song texts. They also use tf-idf weighted BOW as lyrics representation and aggregate multiple decision trees via boosting and bagging to classify the lyrics for explicit content. More recently, Kim and Mun <ref type="bibr" target="#b34">[35]</ref> proposed a neural network method to create explicit words dictionaries automatically by weighting a vocabulary according to all words' frequencies in the explicit class vs. the clean class, accordingly. They work with a corpus of Korean lyrics. Xia et al. <ref type="bibr" target="#b58">[59]</ref> model song texts in a low-dimensional vector space as bags of concepts, the "emotional units"; those are combinations of emotions, modifiers and negations. Yang and Lee <ref type="bibr" target="#b59">[60]</ref> leverage the music's emotion annotations from AllMusic which they map to a lower dimensional psychological model of emotion. They train a lyrics emotion classifier and show by qualitative interpretation of an ablated model (decision tree) that the deciding features leading to the classes are intuitively plausible. Hu et al. <ref type="bibr" target="#b33">[34]</ref> aim to detect emotions in song texts based on Russell's model of mood; rendering emotions continuously in the two dimensions of arousal and valence (positive/negative). They analyze each sentence as bag of "emotional units"; they reweight sentences' emotions by both adverbial modifiers and tense and even consider progressing and adversarial valence in consecutive sentences. Additionally, singing speed is taken into account. With the fully weighted sentences, they perform clustering in the 2D plane of valence and arousal. Although the method is unsupervised at runtime, there are many parameters tuned manually by the authors in this work.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Emotion Recognition</head><p>Mihalcea and Strapparava <ref type="bibr" target="#b42">[43]</ref> render emotion detection as a multi-label classification problem, songs express intensities of six different basic emotions: anger, disgust, fear, joy, sadness, surprise. Their corpus (100 song texts) has time-aligned lyrics with information on musical key and note progression. Using Mechanical Turk each line of song text is annotated with the six emotions. For emotion classification, they use bags of words and concepts, as musical features key and notes. Their classification results using both modalities, textual and audio features, are significantly improved compared to a single modality.</p><p>Topic Modelling Among the works addressing this task for song lyrics, Mahedero et al. <ref type="bibr" target="#b38">[39]</ref> define five ad hoc topics (Love, Violent, Antiwar, Christian, Drugs) into which they classify their corpus of 500 song texts using supervision. Related, Fell <ref type="bibr" target="#b21">[22]</ref> also uses supervision to find bags of genre-specific n-grams. Employing the view from the literature that BOWs define topics, the genre-specific terms can be seen as mixtures of genre-specific topics.</p><p>Logan et al. <ref type="bibr" target="#b37">[38]</ref> apply the unsupervised topic model Probabilistic LSA to their ca. 40k song texts. They learn latent topics for both the lyrics corpus as well as a NYT newspaper corpus (for control) and show that the domainspecific topics slightly improve the performance in their MIR task. While their MIR task performs highly better when using acoustic features, they discover that both methods err differently. Kleedorfer et al. <ref type="bibr" target="#b35">[36]</ref> apply Non-negative Matrix Factorization (NMF) to ca. 60k song texts and cluster them into 60 topics. They show the so discovered topics to be intrinsically meaningful.</p><p>Sterckx <ref type="bibr" target="#b52">[53]</ref> have worked on topic modeling of a large-scale lyrics corpus of 1M songs. They build models using Latent Dirichlet allocation with topic counts between 60 and 240 and show that the 60 topics model gives a good trade-off between topic coverage and topic redundancy. Since popular topic models such as LDA represent topics as weighted bags of words, these topics are not immediately interpretable. This gives rise to the need of an automatic labeling of topics with smaller labels. A recent approach <ref type="bibr" target="#b7">[8]</ref> relates the topical BOWs with titles of Wikipedia articles in a two step procedure: first, candidates are generated, then ranked.</p><p>For the topic of network analysis in the song lyrics domain, Atherton et al. <ref type="bibr" target="#b2">[3]</ref> have analyzed how different song writers have influenced one another by investigating how trigrams in the lyrics are initially used by one writer and later in time reproduced by other writers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="11">Conclusion</head><p>In this paper we have described the WASABI Song Corpus, focusing in particular on the lyrics annotations resulting from the applications of the methods we proposed to extract relevant information from the lyrics. So far, lyrics annotations concern their structure segmentation, their topic, the explicitness of the lyrics content, the summary of a song and the emotions conveyed. We motivated using our corpus by presenting three different application scenarios. While parts of them are not yet fully implemented, we described our progress in transforming our dataset into a knowledge graph, the WASABI RDF Knowledge Graph, which will be vital both in these implementations and in enabling further interesting application scenarios in future work.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>( a )Fig. 3 :</head><label>a3</label><figDesc>Fig. 3: Statistics on the WASABI Song Corpus</figDesc><graphic coords="7,109.04,464.72,262.66,136.64" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Fig. 4 :</head><label>4</label><figDesc>Fig. 4: Structure of the lyrics of "Everytime" by Britney Spears as displayed in the WASABI Interactive Navigator.</figDesc><graphic coords="10,105.67,89.45,269.40,250.70" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Fig. 5 :</head><label>5</label><figDesc>Fig. 5: Human ratings per summarization model (five point Likert scale). Models are Rank: graph-based, Topic: topic-based, Fit: thumbnail-based, and model combinations.</figDesc><graphic coords="12,72.00,89.45,336.75,172.61" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Fig. 6 :</head><label>6</label><figDesc>Fig. 6: Summary of the lyrics of "Everytime" by Britney Spears as displayed in the WASABI Interactive Navigator.</figDesc><graphic coords="12,173.02,320.66,134.70,75.14" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure 7</head><label>7</label><figDesc>Fig. 7: Emotion distribution in the corpus in the valence-arousal plane.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Fig. 8 :</head><label>8</label><figDesc>Fig. 8: Topic War Fig. 9: Topic Death</figDesc><graphic coords="15,240.37,89.45,134.68,88.83" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Fig. 14 :Fig. 15 :</head><label>1415</label><figDesc>Fig. 14: Evolution of different annotations during the decades</figDesc><graphic coords="17,124.19,454.23,232.35,145.26" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head>Fig. 16 :</head><label>16</label><figDesc>Fig. 16: Example abstract showing the artist Cher being mentioned in a Bob Dylan song.</figDesc><graphic coords="19,72.00,89.45,336.74,71.68" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><head>Fig. 17 :</head><label>17</label><figDesc>Fig. 17: Connections between artists in the WASABI Song Corpus. Blue circle sizes indicate number of connections, pink interior circles are normalized for song abstracts of artist.</figDesc><graphic coords="21,72.00,89.45,336.75,186.24" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_9"><head></head><label></label><figDesc>Recently, Delbouys et al. [20] address the task of multimodal music mood prediction based on the audio signal and the lyrics of a track. They propose a new model based on deep learning outperforming traditional feature engineering based approaches. Performances are evaluated on their published dataset with associated valence and arousal values which we introduced in Section 6</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="4,105.67,89.45,269.39,371.00" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="5,122.51,89.45,235.71,238.19" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="23,72.00,89.45,336.74,243.10" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc>Most relevant song-wise annotations in the WASABI Song Corpus.</figDesc><table><row><cell>Annotation</cell><cell>Labels</cell><cell>Description</cell></row><row><cell>Lyrics</cell><cell>1.73M</cell><cell>segments of lines of text</cell></row><row><cell>Languages</cell><cell>1.73M</cell><cell>36 different ones</cell></row><row><cell>Genre</cell><cell>1.06M</cell><cell>528 different ones</cell></row><row><cell>Last FM id</cell><cell>326k</cell><cell>UID</cell></row><row><cell>Structure</cell><cell>1.73M</cell><cell>SSM ∈ R n×n (n: length)</cell></row><row><cell>Social tags</cell><cell>276k</cell><cell>S = {rock, joyful, 90s, ...}</cell></row><row><cell>Emotion tags</cell><cell>87k</cell><cell>E ⊂ S = {joyful, tragic, ...}</cell></row><row><cell>Explicitness</cell><cell>455k</cell><cell>True (85k), False (370k)</cell></row><row><cell>Explicitness p</cell><cell>715k</cell><cell>True (52k), False (663k)</cell></row><row><cell>Summary p</cell><cell>50k</cell><cell>four lines of song text</cell></row><row><cell>Emotion</cell><cell>16k</cell><cell>(valence, arousal) ∈ R 2</cell></row><row><cell>Emotion p</cell><cell>1.73M</cell><cell>(valence, arousal) ∈ R 2</cell></row><row><cell>Topics p</cell><cell>1.05M</cell><cell>Prob. distrib. ∈ R 60</cell></row><row><cell>Total tracks</cell><cell>2.10M</cell><cell>diverse metadata</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 2 :</head><label>2</label><figDesc></figDesc><table><row><cell>Genre</cell><cell>P</cell><cell>R</cell><cell>F 1</cell></row><row><cell>Rock</cell><cell cols="2">73.8 57.7</cell><cell>64.8</cell></row><row><cell>Hip Hop</cell><cell cols="2">71.7 43.6</cell><cell>54.2</cell></row><row><cell>Pop</cell><cell cols="2">73.1 61.5</cell><cell>66.6</cell></row><row><cell>RnB</cell><cell cols="2">71.8 60.3</cell><cell>65.6</cell></row><row><cell>Alternative Rock</cell><cell cols="2">76.8 60.9</cell><cell>67.9</cell></row><row><cell>Country</cell><cell cols="2">74.5 66.4</cell><cell>70.2</cell></row><row><cell>Hard Rock</cell><cell cols="2">76.2 61.4</cell><cell>67.7</cell></row><row><cell>Pop Rock</cell><cell cols="2">73.3 59.6</cell><cell>65.8</cell></row><row><cell>Indie Rock</cell><cell cols="2">80.6 55.5</cell><cell>65.6</cell></row><row><cell>Heavy Metal</cell><cell cols="2">79.1 52.1</cell><cell>63.0</cell></row><row><cell cols="3">Southern Hip Hop 73.6 34.8</cell><cell>47.0</cell></row><row><cell>Punk Rock</cell><cell cols="3">80.7 63.2 70.9</cell></row><row><cell>Alternative Metal</cell><cell cols="2">77.3 61.3</cell><cell>68.5</cell></row><row><cell>Pop Punk</cell><cell cols="3">77.3 68.7 72.7</cell></row><row><cell>Gangsta Rap</cell><cell cols="2">73.6 35.2</cell><cell>47.7</cell></row><row><cell>Soul</cell><cell cols="2">70.9 57.0</cell><cell>63.0</cell></row></table><note><p>Lyrics segmentation performances across musical genres in terms of Precision (P ), Recall (R) and F 1 in %. Performances on genres with less repetitive and highly repetitive structures are underlined and in bold, respectively.</p></note></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1" xml:id="foot_0"><p>Web Audio Semantic Aggregated in the Browser for Indexation</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2" xml:id="foot_1"><p>http://www.semanticaudio.ac.uk</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3" xml:id="foot_2"><p>http://wasabi.i3s.unice.fr/</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="4" xml:id="foot_3"><p>https://en.wikipedia.org/wiki/LyricWiki</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="5" xml:id="foot_4"><p>from http://usdb.animux.de/</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="6" xml:id="foot_5"><p>http://millionsongdataset.com/lastfm/</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="7" xml:id="foot_6"><p>Based on language detection performed on the lyrics.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="8" xml:id="foot_7"><p>We take the genre of the album as ground truth since song-wise genres are much rarer.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="9" xml:id="foot_8"><p>We take the album publication date as proxy since song-wise labels are too sparse.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="10" xml:id="foot_9"><p>http://wasabi.i3s.unice.fr/</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="11" xml:id="foot_10"><p>https://wasabi.i3s.unice.fr/apidoc/</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="12" xml:id="foot_11"><p>http://wasabi.inria.fr/sparql</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="13" xml:id="foot_12"><p>https://doi.org/10.5281/zenodo.5603369</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="14" xml:id="foot_13"><p>https://en.wikipedia.org/wiki/LyricWiki</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="15" xml:id="foot_14"><p>https://developer.musixmatch.com/, here is a sample code for lyrics retrieval using this API at https://jsbin.com/joyifojuva/edit</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="16" xml:id="foot_15"><p>https://wasabi.i3s.unice.fr/#/search/artist/Britney%20Spears/album/In% 20The%20Zone/song/Everytime</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="17" xml:id="foot_16"><p>Obtained f-scores ranged between 70.8% for text-based and 75.3% for text-audio-based models.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="18" xml:id="foot_17"><p>In our segmentation experiments we found this simple metric to outperform more complex metrics that take into account the phonetics or the syntax.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="19" xml:id="foot_18"><p><ref type="bibr" target="#b18">19</ref> https://github.com/TuringTrain/lyrics_thumbnailing</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="20" xml:id="foot_19"><p>Labels provided by Deezer. Furthermore, 625k songs have a different status such as unknown or censored version.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="21" xml:id="foot_20"><p>Sometimes, a third dimension of dominance is part of the model.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="22" xml:id="foot_21"><p>https://github.com/deezer/deezer_mood_detection_dataset</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="24" xml:id="foot_22"><p>made with https://www.wortwolken.com/</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="25" xml:id="foot_23"><p>The software can be downloaded at https://spacy.io/. We used the large model en core web trf which is based on a transformers architecture.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="26" xml:id="foot_24"><p>Note that in this figure we only show the artists with the most connections. Most connections from Bob Dylan are not visible as they are connected to not visualized nodes.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="27" xml:id="foot_25"><p>http://babelfy.org</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="28" xml:id="foot_26"><p>https://github.com/micbuffa/WasabiDataset/</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="34" xml:id="foot_27"><p>Version 1: https://doi.org/10.5281/zenodo.4312641, version 2: https://doi.org/10. 5281/zenodo.5603369</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="35" xml:id="foot_28"><p>http://wasabi.inria.fr/sparql</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="36" xml:id="foot_29"><p>http://millionsongdataset.com</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="38" xml:id="foot_30"><p>https://www.soundtrackyourbrand.com</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><p>Acknowledgements This work is partly funded by the <rs type="funder">French Research National Agency (ANR)</rs> under the <rs type="projectName">WASABI</rs> project (contract <rs type="grantNumber">ANR-16-CE23-0017-01</rs>).</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funded-project" xml:id="_Rhpeabc">
+					<idno type="grant-number">ANR-16-CE23-0017-01</idno>
+					<orgName type="project" subtype="full">WASABI</orgName>
+				</org>
+			</listOrg>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Crowdsourcing linked data on listening experiences through reuse and enhancement of library data</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Adamou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Brown</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Barlow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Allocca</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>D'aquin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">International Journal on Digital Libraries</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="61" to="79" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">MusicLynx: Exploring music through artist similarity graphs</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Allik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Thalmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Sandler</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Companion Proc. (Dev. Track) The Web Conf</title>
+		<meeting><address><addrLine>WWW</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">I said it first: Topological analysis of lyrical influence networks</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Atherton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Kaneshiro</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ISMIR</title>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="654" to="660" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">A semantics-driven approach to lyrics segmentation</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Baratè</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">A</forename><surname>Ludovico</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Santucci</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/SMAP.2013</idno>
+	</analytic>
+	<monogr>
+		<title level="m">2013 8th International Workshop on Semantic and Social Media Adaptation and Personalization</title>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="73" to="79" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<monogr>
+		<title level="m" type="main">Classification of explicit music content using lyrics and music metadata</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Bergelid</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Emotion Ontology for Context Awareness</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Berthelon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Sander</surname></persName>
+		</author>
+		<ptr target="https://hal.archives-ouvertes.fr/hal-00908543" />
+	</analytic>
+	<monogr>
+		<title level="m">Coginfocom 2013 -4th IEEE Conference on Cognitive Infocommunicaitons</title>
+		<meeting><address><addrLine>Budapest, Hungary</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">The million song dataset</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Bertin-Mahieux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">P</forename><surname>Ellis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Whitman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Lamere</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 12th International Conference on Music Information Retrieval (ISMIR 2011)</title>
+		<meeting>the 12th International Conference on Music Information Retrieval (ISMIR 2011)</meeting>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<author>
+			<persName><forename type="first">S</forename><surname>Bhatia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">H</forename><surname>Lau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Baldwin</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1612.05340</idno>
+		<title level="m">Automatic labelling of topics with neural embeddings</title>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Latent dirichlet allocation</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">M</forename><surname>Blei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">Y</forename><surname>Ng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">I</forename><surname>Jordan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of machine Learning research</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="993" to="1022" />
+			<date type="published" when="2003-01">Jan. 2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<monogr>
+		<author>
+			<persName><forename type="first">D</forename><surname>Brackett</surname></persName>
+		</author>
+		<ptr target="https://books.google.fr/books?id=yHniAAAAMAAJ" />
+		<title level="m">Interpreting Popular Music</title>
+		<imprint>
+			<publisher>Cambridge University Press</publisher>
+			<date type="published" when="1995">1995</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">The WASABI dataset: cultural, lyrics and audio analysis metadata about 2 million popular commercially released songs</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Buffa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Cabrio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Fell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Gandon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Giboin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Hennequin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Michel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Pauwels</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Pellerin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Tikat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Winckler</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of ESWC 2021</title>
+		<meeting>ESWC 2021</meeting>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note>to be published</note>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Real time tube guitar amplifier simulation using webaudio</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Buffa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lebrun</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. 3rd Web Audio Conference (WAC 2017)</title>
+		<meeting>3rd Web Audio Conference (WAC 2017)</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Web audio guitar tube amplifier vs native simulations</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Buffa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lebrun</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. 3rd Web Audio Conf</title>
+		<meeting>3rd Web Audio Conf<address><addrLine>WAC</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Towards an open web audio plugin standard</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Buffa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lebrun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Kleimola</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Letz</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Companion Proceedings of the The Web Conference</title>
+		<imprint>
+			<publisher>International World Wide Web Conferences Steering Committee</publisher>
+			<date type="published" when="2018">2018. 2018</date>
+			<biblScope unit="page" from="759" to="766" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">A 2 Million Commercial Song Interactive Navigator</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Buffa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lebrun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Pauwels</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Pellerin</surname></persName>
+		</author>
+		<ptr target="https://hal.inria.fr/hal-02366730" />
+	</analytic>
+	<monogr>
+		<title level="m">WAC 2019 -5th WebAudio Conference 2019</title>
+		<meeting><address><addrLine>Trondheim, Norway</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Webaudio plugins in daws and for live performance</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Buffa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lebrun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Pellerin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Letz</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">14th International Symposium on Computer Music Multidisciplinary Research (CMMR&apos;19)</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Music mood dataset creation based on last.fm tags</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Morisio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename></persName>
+		</author>
+		<idno type="DOI">10.5121/csit.2017.70603</idno>
+	</analytic>
+	<monogr>
+		<title level="m">2017 International Conference on Artificial Intelligence and Applications</title>
+		<meeting><address><addrLine>Vienna Austria</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2017-05">May 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Semeval-2019 task 3: Emocontext contextual emotion detection in text</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Chatterjee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">N</forename><surname>Narahari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Joshi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Agrawal</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 13th International Workshop on Semantic Evaluation</title>
+		<meeting>the 13th International Workshop on Semantic Evaluation</meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="39" to="48" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Explicit content detection in music lyrics using machine learning</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Chin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Shin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">Y</forename><surname>Yi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2018 IEEE International Conference on Big Data and Smart Computing (BigComp)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="517" to="521" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<title level="m" type="main">Music mood detection based on audio and lyrics with deep neural net</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Delbouys</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Hennequin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Piccoli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Royo-Letelier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Moussallam</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1809.07276</idno>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<title level="m" type="main">Bert: Pre-training of deep bidirectional transformers for language understanding</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Devlin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">W</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Toutanova</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1810.04805</idno>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<author>
+			<persName><forename type="first">M</forename><surname>Fell</surname></persName>
+		</author>
+		<title level="m">Lyrics classification</title>
+		<meeting><address><addrLine>Germany</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+		<respStmt>
+			<orgName>Saarland University</orgName>
+		</respStmt>
+	</monogr>
+	<note type="report_type">Master&apos;s thesis</note>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<author>
+			<persName><forename type="first">M</forename><surname>Fell</surname></persName>
+		</author>
+		<ptr target="https://tel.archives-ouvertes.fr/tel-02587910" />
+		<title level="m">Natural language processing for music information retrieval : deep analysis of lyrics structure and content</title>
+		<imprint>
+			<publisher>Université Côte d&apos;Azur</publisher>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Theses</note>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Comparing Automated Methods to Detect Explicit Content in Song Lyrics</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Fell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Cabrio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Corazza</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Gandon</surname></persName>
+		</author>
+		<ptr target="https://hal.archives-ouvertes.fr/hal-02281137" />
+	</analytic>
+	<monogr>
+		<title level="m">RANLP 2019 -Recent Advances in Natural Language Processing</title>
+		<meeting><address><addrLine>Varna, Bulgaria</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Song lyrics summarization inspired by audio thumbnailing</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Fell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Cabrio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Gandon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Giboin</surname></persName>
+		</author>
+		<ptr target="https://hal.archives-ouvertes.fr/hal-02281138" />
+	</analytic>
+	<monogr>
+		<title level="m">RANLP 2019 -Recent Advances in Natural Language Processing (RANLP)</title>
+		<meeting><address><addrLine>Varna, Bulgaria</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Love me, love me, say (and write!) that you love me: Enriching the WASABI song corpus with lyrics annotations</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Fell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Cabrio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Korfed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Buffa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Gandon</surname></persName>
+		</author>
+		<ptr target="https://www.aclweb.org/anthology/2020.lrec-1.262/" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of The 12th Language Resources and Evaluation Conference, LREC 2020</title>
+		<meeting>The 12th Language Resources and Evaluation Conference, LREC 2020<address><addrLine>Marseille, France</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2020">May 11-16, 2020. 2020</date>
+			<biblScope unit="page" from="2138" to="2147" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Lyrics Segmentation: Textual Macrostructure Detection using Convolutions</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Fell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Nechaev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Cabrio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Gandon</surname></persName>
+		</author>
+		<ptr target="https://hal.archives-ouvertes.fr/hal-01883561" />
+	</analytic>
+	<monogr>
+		<title level="m">Conference on Computational Linguistics (COL-ING)</title>
+		<meeting><address><addrLine>Santa Fe, New Mexico, United States</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="2044" to="2054" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Lyrics-based analysis and classification of music</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Fell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Sporleder</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of COLING 2014, the 25th International Conference on Computational Linguistics: Technical Papers</title>
+		<meeting>COLING 2014, the 25th International Conference on Computational Linguistics: Technical Papers</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="620" to="631" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Lyrics segmentation via bimodal text-audio representation</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Fell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Yaroslav</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">B</forename><surname>Gabriel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Cabrio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Gandon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Peeters</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Natural Language Engineering</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note>to appear</note>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Telemeta: An open-source web framework for ethnomusicological audio archives management and automatic analysis</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Fillon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Simonnot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">F</forename><surname>Mifune</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Khoury</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Pellerin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Le Coz</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 1st International Workshop on Digital Libraries for Musicology</title>
+		<meeting>the 1st International Workshop on Digital Libraries for Musicology</meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="1" to="8" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Spleeter: A fast and state-of-the art music source separation tool with pre-trained models</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Hennequin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Khlif</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Voituret</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Moussallam</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Late-Breaking/Demo ISMIR 2019</title>
+		<imprint>
+			<publisher>Deezer Research</publisher>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<monogr>
+		<title level="m" type="main">spaCy: Industrial-strength Natural Language Processing in Python</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Honnibal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Montani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Van Landeghem</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Boyd</surname></persName>
+		</author>
+		<idno type="DOI">10.5281/zenodo.1212303</idno>
+		<ptr target="https://doi.org/10.5281/zenodo.1212303" />
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Lyric text mining in music mood classification</title>
+		<author>
+			<persName><forename type="first">X</forename><surname>Hu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">S</forename><surname>Downie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">F</forename><surname>Ehmann</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">American music</title>
+		<imprint>
+			<biblScope unit="volume">183</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="2" to="209" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Lyric-based song emotion detection with affective lexicon and fuzzy clustering method</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Hu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Yang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ISMIR</title>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">A hybrid modeling approach for an automated lyrics-rating system for adolescents</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><forename type="middle">Y</forename><surname>Mun</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">European Conference on Information Retrieval</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="779" to="786" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Oh oh oh whoah! towards automatic topic detection in song lyrics</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Kleedorfer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Knees</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Pohle</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ISMIR</title>
+		<imprint>
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Improving (re-) usability of musical datasets: An overview of the doremus project</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Lisena</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Achichi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Choffé</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Cecconi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Todorov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Jacquemin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Troncy</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bibliothek Forschung und Praxis</title>
+		<imprint>
+			<biblScope unit="volume">42</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="194" to="205" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Semantic analysis of song lyrics</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Logan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Kositsky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Moreno</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/ICME.2004.1394328</idno>
+	</analytic>
+	<monogr>
+		<title level="m">2004 IEEE International Conference on Multimedia and Expo (ICME) (IEEE Cat</title>
+		<imprint>
+			<date type="published" when="2004">2004</date>
+			<biblScope unit="volume">04</biblScope>
+			<biblScope unit="page" from="827" to="830" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Natural language processing of lyrics</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">P G</forename><surname>Mahedero</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Martínez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Cano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Koppenberger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Gouyon</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1101149.1101255</idno>
+		<ptr target="http://doi.acm.org/10.1145/1101149.1101255" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 13th Annual ACM International Conference on Multimedia, MULTIMEDIA &apos;05</title>
+		<meeting>the 13th Annual ACM International Conference on Multimedia, MULTIMEDIA &apos;05<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2005">2005</date>
+			<biblScope unit="page" from="475" to="478" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">The midi linked data cloud</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Meroño-Peñuela</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Hoekstra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Gangemi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Bloem</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>De Valk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Stringer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Janssen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>De Boer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Allik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Schlobach</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Semantic Web Conference</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="156" to="164" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">WASABI: a Two Million Song Database Project with Audio and Cultural Metadata plus WebAudio enhanced Client Applications</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Meseguer-Brocal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Peeters</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Pellerin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Buffa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Cabrio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Faron Zucker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Giboin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Mirbel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Hennequin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Moussallam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Piccoli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Fillon</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Web Audio Conference 2017 -Collaborative Audio #WAC2017</title>
+		<meeting><address><addrLine>London, London, United Kingdom</addrLine></address></meeting>
+		<imprint>
+			<publisher>Queen Mary University</publisher>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Interactive multimedia visualization for exploring and fixing a multi-dimensional metadata base of popular musics</title>
+		<author>
+			<persName><forename type="first">Michel</forename><surname>Buffa Maroua Tikat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">W</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the MEPDaW Workshop, ISWC 2021</title>
+		<meeting>the MEPDaW Workshop, ISWC 2021</meeting>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Lyrics, music, and emotions</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Mihalcea</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Strapparava</surname></persName>
+		</author>
+		<ptr target="https://www.aclweb.org/anthology/D12-1054" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2012 Joint Conference on Empirical Methods in Natural Language Processing and Computational Natural Language Learning</title>
+		<meeting>the 2012 Joint Conference on Empirical Methods in Natural Language Processing and Computational Natural Language Learning<address><addrLine>Jeju Island, Korea</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="590" to="599" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Obtaining reliable human ratings of valence, arousal, and dominance for 20,000 english words</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mohammad</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics</title>
+		<meeting>the 56th Annual Meeting of the Association for Computational Linguistics</meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="174" to="184" />
+		</imprint>
+	</monogr>
+	<note>Long Papers</note>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Semeval-2018 task 1: Affect in tweets</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mohammad</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Bravo-Marquez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Salameh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kiritchenko</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 12th international workshop on semantic evaluation</title>
+		<meeting>the 12th international workshop on semantic evaluation</meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="1" to="17" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Meld: a linked data framework for multimedia access to music digital libraries</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">R</forename><surname>Page</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Lewis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">M</forename><surname>Weigl</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ACM/IEEE Joint Conference on Digital Libraries (JCDL)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2019">2019. 2019</date>
+			<biblScope unit="page" from="434" to="435" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<monogr>
+		<title level="m" type="main">Exploiting synchronized lyrics and vocal features for music emotion detection</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Parisi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Francia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Olivastri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">S</forename><surname>Tavella</surname></persName>
+		</author>
+		<idno>CoRR abs/1901.04831</idno>
+		<ptr target="http://arxiv.org/abs/1901.04831" />
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Confidence measures and their applications in music labelling systems based on hidden Markov models</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Pauwels</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>O'hanlon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Fazekas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Sandler</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. 18th Int. Soc. Music Information Retrieval (ISMIR 2017)</title>
+		<meeting>18th Int. Soc. Music Information Retrieval (ISMIR 2017)</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">A web-based system for suggesting new practice material to music learners based on chord content</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Pauwels</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Sandler</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Joint Proc. 24th ACM IUI Workshops</title>
+		<imprint>
+			<date type="published" when="2019">IUI2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">Exploring real-time visualisations to support chord learning with a large music collection</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Pauwels</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Xambó</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Roma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Barthet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Fazekas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. 4th Web Audio Conf</title>
+		<meeting>4th Web Audio Conf<address><addrLine>WAC</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">The Music Ontology</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Raimond</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Abdallah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Sandler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Giasson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 8th ISMIR Conf</title>
+		<meeting>the 8th ISMIR Conf</meeting>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+			<biblScope unit="page" from="417" to="422" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">A circumplex model of affect</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Russell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of personality and social psychology</title>
+		<imprint>
+			<biblScope unit="volume">39</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page">1161</biblScope>
+			<date type="published" when="1980">1980</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<monogr>
+		<author>
+			<persName><forename type="first">L</forename><surname>Sterckx</surname></persName>
+		</author>
+		<title level="m">Topic detection in a million songs</title>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+		<respStmt>
+			<orgName>Ghent University</orgName>
+		</respStmt>
+	</monogr>
+	<note type="report_type">PhD thesis</note>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<analytic>
+		<title level="a" type="main">Open-unmix-a reference implementation for music source separation</title>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">R</forename><surname>Stöter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Uhlich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Liutkus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Mitsufuji</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Open Source Software</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">Analysing popular music: theory, method and practice</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Tagg</surname></persName>
+		</author>
+		<idno type="DOI">10.1017/S0261143000001227</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Popular Music</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page" from="37" to="67" />
+			<date type="published" when="1982">1982</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<analytic>
+		<title level="a" type="main">Textual deconvolution saliency (tds): a deep tool box for linguistic analysis</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Vanni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ducoffe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Aguilar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Precioso</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Mayaffre</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics</title>
+		<meeting>the 56th Annual Meeting of the Association for Computational Linguistics</meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="548" to="557" />
+		</imprint>
+	</monogr>
+	<note>Long Papers</note>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">Norms of valence, arousal, and dominance for 13,915 english lemmas</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">B</forename><surname>Warriner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Kuperman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Brysbaert</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Behavior research methods</title>
+		<imprint>
+			<biblScope unit="volume">45</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="1191" to="1207" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<analytic>
+		<title level="a" type="main">Modeling discourse segments in lyrics using repeated patterns</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Watanabe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Matsubayashi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Orita</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Okazaki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Inui</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Fukayama</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Nakano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Goto</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of COLING 2016, the 26th International Conference on Computational Linguistics: Technical Papers</title>
+		<meeting>COLING 2016, the 26th International Conference on Computational Linguistics: Technical Papers</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="1959" to="1969" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<analytic>
+		<title level="a" type="main">Sentiment vector space model for lyric-based song sentiment classification</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Xia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">F</forename><surname>Wong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Xu</surname></persName>
+		</author>
+		<ptr target="http://dl.acm.org/citation.cfm?id=1557690.1557725" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 46th Annual Meeting of the Association for Computational Linguistics on Human Language Technologies: Short Papers, HLT-Short &apos;08</title>
+		<meeting>the 46th Annual Meeting of the Association for Computational Linguistics on Human Language Technologies: Short Papers, HLT-Short &apos;08<address><addrLine>Stroudsburg, PA, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2008">2008</date>
+			<biblScope unit="page" from="133" to="136" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<analytic>
+		<title level="a" type="main">Music emotion identification from lyrics</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Lee</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/ISM.2009.123</idno>
+	</analytic>
+	<monogr>
+		<title level="m">2009 11th IEEE International Symposium on Multimedia</title>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="page" from="624" to="629" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

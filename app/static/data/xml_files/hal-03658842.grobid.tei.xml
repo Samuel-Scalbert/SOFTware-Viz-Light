@@ -1,0 +1,1225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">How Networks of Citizen Observatories Can Increase the Quality and Quantity of Citizen-Science-Generated Data Used to Monitor SDG Indicators</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2022-03-30">30 March 2022</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Sasha</forename><forename type="middle">Marie</forename><surname>Woo</surname></persName>
+							<email>swoods@earthwatch.org.uk</email>
+							<idno type="ORCID">0000-0002-2663-3848</idno>
+							<affiliation key="aff0">
+								<address>
+									<settlement>of</settlement>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Mari</forename><surname>Daskoli</surname></persName>
+							<email>mdaskol@eds.uoa.gr</email>
+							<idno type="ORCID">0000-0001-7350-948X</idno>
+							<affiliation key="aff0">
+								<address>
+									<settlement>of</settlement>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Alexis</forename><surname>Jo</surname></persName>
+							<email>alexis.joly@inria.fr</email>
+							<idno type="ORCID">0000-0002-3116-0811</idno>
+							<affiliation key="aff0">
+								<address>
+									<settlement>of</settlement>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Pierre</forename><surname>Bonnet</surname></persName>
+							<email>pierre.bonnet@cirad.fr</email>
+							<idno type="ORCID">0000-0002-2828-4389</idno>
+							<affiliation key="aff0">
+								<address>
+									<settlement>of</settlement>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Karen</forename><surname>Soacha</surname></persName>
+							<email>soacha@icm.csic.es</email>
+							<idno type="ORCID">0000-0002-2828-4389</idno>
+							<affiliation key="aff0">
+								<address>
+									<settlement>of</settlement>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Sonia</forename><surname>Liñan</surname></persName>
+							<email>slinan@icm.csic.es</email>
+							<idno type="ORCID">0000-0003-0431-4683</idno>
+							<affiliation key="aff0">
+								<address>
+									<settlement>of</settlement>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Tim</forename><surname>Woods</surname></persName>
+							<email>t.woods@drk.de</email>
+							<idno type="ORCID">0000-0002-2663-3848</idno>
+							<affiliation key="aff0">
+								<address>
+									<settlement>of</settlement>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Jaume</forename><surname>Piera</surname></persName>
+							<email>jpiera@icm.csic.es</email>
+							<idno type="ORCID">0000-0001-5818-9836</idno>
+							<affiliation key="aff0">
+								<address>
+									<settlement>of</settlement>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Luigi</forename><surname>Ceccaroni</surname></persName>
+							<email>lceccaroni@earthwatch.org.uk</email>
+							<idno type="ORCID">0000-0002-3116-0811</idno>
+							<affiliation key="aff0">
+								<address>
+									<settlement>of</settlement>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">How Networks of Citizen Observatories Can Increase the Quality and Quantity of Citizen-Science-Generated Data Used to Monitor SDG Indicators</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2022-03-30">30 March 2022</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">3E37EEB3EFEEC2F8A511D1749E43C64C</idno>
+					<idno type="DOI">10.3390/su14074078</idno>
+					<note type="submission">Received: 28 February 2022 Accepted: 25 March 2022</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:12+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>citizen science</term>
+					<term>citizen observatory</term>
+					<term>Sustainable Development Goals</term>
+					<term>interoperability</term>
+					<term>co-design</term>
+					<term>education</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>There is a growing acknowledgement that citizen observatories, and other forms of citizengenerated data, have a significant role in tracking progress towards the Sustainable Development Goals. This is evident in the increasing number of Sustainable Development Goals' indicators for which such data are already being used and in the high-level recognition of the potential role that citizen science can play. In this article, we argue that networks of citizen observatories will help realise this potential. Drawing on the Cos4Cloud project as an example, we highlight how such networks can make citizen-generated data more interoperable and accessible (among other qualities), increasing their impact and usefulness. Furthermore, we highlight other, perhaps overlooked, advantages of citizen observatories and citizen-generated data: educating and informing citizen scientists about the Sustainable Development Goals and co-creating solutions to the global challenges they address.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.">Introduction</head><p>Central to the 2030 Agenda for Sustainable Development <ref type="bibr" target="#b0">[1]</ref> are the United Nations' 17 Sustainable Development Goals (SDGs) and the associated indicators defined and set as quality criteria for promoting action at the national, regional and international levels. The SDGs are also used to evaluate progress in a range of areas contributing to sustainable development, such as poverty reduction, improvements in health, education and sustainable growth and the preservation of natural environments, peace, justice and international cooperation. Reliable, timely, comprehensive and consistent data are essential to inform processes aimed at promoting and assessing the fulfilment of the 2030 Agenda <ref type="bibr" target="#b1">[2]</ref>. There is, however, growing recognition that traditional data sources, such as government surveys, are not sufficient for providing such information <ref type="bibr" target="#b2">[3]</ref>.</p><p>Citizen science provides new means and opportunities for collecting various kinds of data to monitor the progress towards sustainability. Defined as work undertaken by, or within, citizen communities with the support and moderation of scientists, educators 2 of 17 and other community stakeholders, citizen science aims to advance science, foster scientific literacy and research competence, encourage democratic engagement and participation, and empower people to join the debate about complex current problems <ref type="bibr" target="#b3">[4]</ref>. A growing body of evidence demonstrates that citizen science is particularly effective at contributing data to promoting and assessing specific SDGs and indicators. Some recent theoretical reviews <ref type="bibr" target="#b4">[5]</ref> and empirical studies of active citizen science projects <ref type="bibr" target="#b1">[2,</ref><ref type="bibr" target="#b5">6,</ref><ref type="bibr" target="#b6">7]</ref>, studying citizen science's contribution towards the achievement of the SDGs, have identified several positive correlations.</p><p>A significant number of environmental citizen science initiatives and projects worldwide are "already contributing" or "could contribute" to one-third of the SDG indicators, e.g., by monitoring environmental quality (SDG 6, 13, 14 and 15), or health and wellbeing (SDG 3) <ref type="bibr" target="#b1">[2]</ref>. Indeed, citizen science project coordinators show greater confidence in assessing the impacts of their projects by relating them to specific SDGs, or by attuning their methodology to the measurement of specific SDG indicators <ref type="bibr" target="#b7">[8]</ref>. For example, the FreshWater Watch <ref type="bibr" target="#b8">[9]</ref> project, run by Earthwatch, contributes to the specific SDG indicator 6.3.2 "Proportion of bodies of water with good ambient water quality", with citizen scientists involved in the project measuring key indicators of their local water bodies' quality and uploading the data collected to a global platform. Governments are known to use this information to understand river water quality, while it also helps to fill data gaps to meet SDG 6 objectives <ref type="bibr" target="#b9">[10]</ref>.</p><p>Besides engagement in data collection and policy-making, there are further collaboration channels through which citizen science can support the SDGs, including education and multi-stakeholder partnerships <ref type="bibr" target="#b4">[5]</ref>. Indeed, education is an important field identified in Schleicher and Schmidt (2020)'s analysis of 130 German citizen science projects as to how they connect to the SDGs <ref type="bibr" target="#b6">[7]</ref>. In the study by Moczek et al. <ref type="bibr" target="#b5">[6]</ref>, "Quality education" (SDG 4) was among the top SDGs reported to be currently supported through the projects surveyed.</p><p>Nevertheless, citizen science has yet to reach its full potential as a set of non-traditional scientific procedures and sources of collective data and as a means for societal participation and empowerment to monitor global sustainability challenges <ref type="bibr" target="#b10">[11]</ref>; cited as having "the potential to provide credible data to bridge the data gaps [ . . . ] and [ . . . ] enable the monitoring of SDG environmental indicators" <ref type="bibr" target="#b11">[12]</ref>. Moreover, beyond collecting and analysing data through social participation, citizen science is perfectly positioned to boost education, partnership, and action for sustainability, through its collaborative nature and by enriching mainstream school-based activities and approaches. However, most of these goals have not yet been fully realised.</p><p>Supporting citizen science to increase the scope, quality and quantity of citizengenerated data available for SDG monitoring and reporting and to boost education, partnership, and collaborative action for sustainability can be achieved in several ways. One way is to demonstrate its impact on society, the environment and the economy, as the MICS (Measuring the Impact of Citizen Science) project <ref type="bibr" target="#b12">[13]</ref> does, through an online tool for impact assessment. A second way, which is the focus of this article, is by creating and supporting a network of citizen observatories through the development of services and associated measures, which is the main aim of Cos4Cloud (Co-designed citizen observatories for the EOS-Cloud), a European Horizon 2020 project <ref type="bibr" target="#b13">[14]</ref>.</p><p>Citizen observatories are community-based environmental monitoring and information systems that invite individuals to collect and share observations mainly of an environmental content, often by mobile phones connected to the internet <ref type="bibr" target="#b14">[15,</ref><ref type="bibr" target="#b15">16]</ref>. They are characterised as including participation of citizens in environmental monitoring and governance, a bi-directional flow of data and information, "in situ" citizen-generated observations and the use of mobile and web technologies. However, citizen observatories face many challenges, such as the sustainability of citizen participation, the quality of the data generated with respect to the research questions addressed, the management of participation scalability and platform maintenance costs. The Cos4Cloud project is developing a range of technological services that will enable the networking of citizen observatories and help address many of the challenges they face. The Cos4Cloud vision is to boost citizen science through the support of citizen observatories by improving:</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>•</head><p>data quality, by simplifying expert verification, or using AI to improve identification; • data interoperability, by facilitating integration between data sets; • data accessibility, by processing data so they can be more easily uploaded to the European Open Science Cloud <ref type="bibr">[17]</ref> ensuring open access; • the sustainability and maintenance of citizen observatories, for example, through low-cost tools that can be used, adapted and replicated.</p><p>As Cos4Cloud partners, we argue here that networks of citizen observatories, meaning citizen observatories interacting, sharing and learning from and with each other and their communities of practice around common goals or interests, can aid citizen science in realising its full potential and contributing to SDG monitoring in three main ways:</p><p>• by capitalising on the interoperability of data, which will lead to larger, integrated and more useful data sets; • by building on co-design approaches, involving and combining the citizens' and researchers' experience and expertise throughout the project's life cycle; • by feeding and supporting the education and learning experience of building on, participating in and contributing to sustainable development and global citizenship (which is the focus of SDG 4.7, as well as a cross-cutting theme across all SDGs).</p><p>We do this, firstly, by explaining the methodology that underpins citizen observatories and how standard or new procedures can contribute to monitoring progress towards the SDGs. We discuss how networks of citizen observatories build on and enhance the progress made to date by individual citizen observatories and the limitations of this approach. Secondly, we demonstrate how projects such as Cos4Cloud can improve and support these efforts through interoperability, co-design and education, via three case studies: Pl@ntNet as a service to improve interoperability; co-design as a method to develop services, such as Cos4Bio, with the users (citizen observatories) in mind; and integration of citizen observatory technologies into environmental education. Finally, we discuss how these supported networks of citizen observatories, enhanced by the actions of Cos4Cloud, can be more effective at contributing to SDG monitoring, at a societal and political level.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.">Materials and Methods</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1.">Citizen Observatories: Opportunities to Support the SDGs</head><p>Citizen observatories can contribute to monitoring progress towards many SDGs. As mentioned in Section 1, this focuses on their main function, namely engaging citizens in contributing to the generation and analysis of reliable, timely, comprehensive and consistent data, based on which progress towards SDGs can be measured. This is enabled through the direct involvement of citizen scientists in data collection and analysis in a range of scientific fields. Citizen observatory data involve environmental and nature observations on land use (e.g., LandSense) and biodiversity (e.g., iSpot, Pl@ntnet or Artportalen), up to astronomy observations leading to the classification of galaxies (e.g., Galaxy Zoo). Another method central to how citizen observatories' function is by building on citizens' collective intelligence, including the "information, experience and knowledge embodied within individuals and communities" <ref type="bibr" target="#b16">[18]</ref>.</p><p>Despite worldwide political support for the development of citizen observatories, including by the European Commission, several reservations have been expressed about the reliability of data obtained via citizen-based observations compared to those obtained by professional researchers, and the lack of quality standards needed for informed decisionmaking and environmental governance. Indeed, there are studies demonstrating limitations in the scalability and reliability of data collected through citizen observatories <ref type="bibr" target="#b17">[19]</ref>. Nevertheless, there is also evidence that the citizen-centred approach used by citizen observatories appears to translate into sustained participation by participants, leading to the generation of better-quality data <ref type="bibr" target="#b18">[20]</ref>. By providing data across vast geographical and temporal scales, citizen observatories can accumulate new, timely and comprehensive data.</p><p>An illustration of the ability and efficiency of citizen science to collect high-throughput and large-scale, research-grade data is the Global Biodiversity Information Facility (GBIF), a biodiversity network and data infrastructure. More than 87% of the data entries published on the GBIF platform since 2019 consist of citizen science data, compared to an average of 51% of occurrences coming from citizens before 2019. This source has great potential for addressing some of the data gaps on biodiversity and ecosystem health <ref type="bibr" target="#b10">[11]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2.">Limitations of the Citizen Observatory Method</head><p>Although some citizen observatories can disseminate their data widely through international platforms such as GBIF, these represent only a small fraction of all the citizen observatories worldwide. Most encounter a range of technical, financial and administrative difficulties that prevent them from contributing their citizen-generated data to such high-level aggregation platforms. These challenges include: (i) a lack of pathways to make their data and information available; (ii) a lack of connections, mutualisation and synchronisation between different citizen observatories, meaning that data sets remain largely fragmented or overlapping; (iii) greater difficulty in identifying gaps in data coverage, because data sets are not connected; and (iv) a lack of expertise or resources to deploy new technologies efficiently, such as artificial intelligence (AI) and big data analytics.</p><p>These barriers limit the use of citizen observatory data, for example, when establishing global regulations. As a consequence, the available data for high-level monitoring and decision-making are strongly biased towards particular regions, taxonomic groups and acquisition protocols; the latter being a methodology for structured data collection, designed to enable robust statistical analysis in relation to the research question being addressed. This is even worse for scientific fields other than biodiversity (e.g., air quality, water quality, noise pollution), most of which lack a single platform or infrastructure recognised globally as the central repository for environmental data.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3.">The Cos4Cloud Methodology for Improving Citizen Observatory Networks</head><p>More significant interaction among citizen observatories could improve the usefulness of their data, and increase the scale and impact of their contribution to monitoring the SDGs. Cos4Cloud is one of the first initiatives to address the challenges faced by citizen observatories by facilitating citizen observatory networking through interoperability, codesign and education.</p><p>Many citizen observatories collect data to feed the monitoring of the SDGs directly or indirectly. Cos4Cloud works with nine such observatories, some of which feed into SDG monitoring directly (such as the previously mentioned FreshWater Watch, which contributes to SDG indicator 6.3.2 "Proportion of bodies of water with good ambient water quality") and some of which feed into SDG monitoring indirectly (such as Odour Collect, a citizen observatory developed to empower citizens to tackle odour pollution and thus contribute to SDG 3.9.1 "Mortality rate attributed to household and ambient air pollution").</p><p>The Cos4Cloud project is developing a suite of technological tools and services to support and strengthen networking between these different citizen observatories. A full description of each service is available on the project's website <ref type="bibr" target="#b13">[14]</ref>. Once ready (in 2023), these will be uploaded to the European Open Science Cloud (EOSC) as modules, so that any citizen science observatory can select and install the services it needs to improve its functionalities. In this way, Cos4Cloud reflects Europe's need for better connections between the disparate infrastructures developed for different citizen observatories, such as their data storage and data-sharing mechanisms.</p><p>Cos4Cloud will act as a minimum viable ecosystem (MVE) for citizen observatories. The MVE, a methodology that aims to co-design and co-develop an ecosystem of actors for citizen observatories proposed by Cos4Cloud, consists of co-designed and prototyped ser-vices to face citizen observatories' challenges. A key aspect is to ensure that the interactions among the different components have a synergic benefit for all participating stakeholders. As shown in Figure <ref type="figure" target="#fig_0">1</ref>, there are three main components of the MVE for COs: CO-portals, experts' portals, and AI-based automatic-validation tools. The interaction and feedback among them (coloured arrows) improve the associated services and data quality.</p><p>functionalities. In this way, Cos4Cloud reflects Europe's need for better connections between the disparate infrastructures developed for different citizen observatories, such as their data storage and data-sharing mechanisms.</p><p>Cos4Cloud will act as a minimum viable ecosystem (MVE) for citizen observatories. The MVE, a methodology that aims to co-design and co-develop an ecosystem of actors for citizen observatories proposed by Cos4Cloud, consists of co-designed and prototyped services to face citizen observatories' challenges. A key aspect is to ensure that the interactions among the different components have a synergic benefit for all participating stakeholders. As shown in Figure <ref type="figure" target="#fig_0">1</ref>, there are three main components of the MVE for COs: COportals, experts' portals, and AI-based automatic-validation tools. The interaction and feedback among them (coloured arrows) improve the associated services and data quality.  <ref type="formula">3</ref>) are integrated into different experts' portals (4), providing a higher level of validation <ref type="bibr" target="#b4">(5)</ref>. The expert validations provide feedback and can be grouped into different reference sets (6) that can be used as complementary high-quality training sets <ref type="bibr" target="#b6">(7)</ref> to improve the classification capabilities of the AI-based automatic-validation tools (which in turn will provide better recommendations for future collaborative validations in each CO) generating high-quality data in global repositories <ref type="bibr" target="#b7">(8)</ref>.</p><p>Thus, the main contribution of Cos4Cloud to SDG monitoring is via networking: strengthening, enriching and multiplying the work offered by each citizen observatory alone. This networking will be enabled by: (1) improved interoperability; (2) the use of codesign; and (3) education and learning for sustainable development. These three elements are discussed as case studies in the following section, where we explore how individual citizen observatories are being supported by the technologies developed in the Cos4Cloud project.  <ref type="formula">3</ref>) are integrated into different experts' portals (4), providing a higher level of validation <ref type="bibr" target="#b4">(5)</ref>. The expert validations provide feedback and can be grouped into different reference sets (6) that can be used as complementary highquality training sets <ref type="bibr" target="#b6">(7)</ref> to improve the classification capabilities of the AI-based automatic-validation tools (which in turn will provide better recommendations for future collaborative validations in each CO) generating high-quality data in global repositories <ref type="bibr" target="#b7">(8)</ref>.</p><p>Thus, the main contribution of Cos4Cloud to SDG monitoring is via networking: strengthening, enriching and multiplying the work offered by each citizen observatory alone. This networking will be enabled by: (1) improved interoperability; (2) the use of co-design; and (3) education and learning for sustainable development. These three elements are discussed as case studies in the following section, where we explore how individual citizen observatories are being supported by the technologies developed in the Cos4Cloud project.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.">Results</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1.">How Cos4Cloud Improves Interoperability: AI-Based Plant Identification through Pl@ntNet</head><p>Pl@ntnet <ref type="bibr" target="#b19">[21]</ref> is a citizen observatory that relies on AI technologies to help people identify plants with their smartphones. It is one of the largest biodiversity observatories in the world, with several million contributors in over 200 countries.</p><p>The general workflow of Pl@ntNet is shown in Figure <ref type="figure">2</ref> and consists of three main components and processes: the Pl@ntNet app, enriching the database and exploiting the database.</p><p>Pl@ntnet <ref type="bibr" target="#b19">[21]</ref> is a citizen observatory that relies on AI technologies to help people identify plants with their smartphones. It is one of the largest biodiversity observatories in the world, with several million contributors in over 200 countries.</p><p>The general workflow of Pl@ntNet is shown in Figure <ref type="figure">2</ref> and consists of three main components and processes: the Pl@ntNet app, enriching the database and exploiting the database.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Figure 2.</head><p>General pipeline of the Pl@ntNet citizen observatory and its three main components and processes <ref type="bibr" target="#b20">[22]</ref>.</p><p>Pl@ntNet app: The primary component consists of a plant-recognition application for smartphones that allows anyone to take a picture of a plant and send it to a server for recognition, performed by a convolutional neural network <ref type="bibr" target="#b21">[23]</ref>. Pictures should be centred on individual specimens, avoiding strong contrast, as well as the presence of visual noise (such as fingers or any manufactured objects). The user is returned with a list of candidate species associated with a confidence score and an adapted illustrative picture enabling the user to validate a species and share the observation.</p><p>Enriching the database: This process aims to improve the observations collected by the app users. The annotation of the vast volume of data (over four million observations were shared in 2020) cannot be carried out by expert botanists alone and, therefore, various crowdsourcing mechanisms are used: the main one integrated within the app itself. In all views of the application, the users can enrich an observation, either by proposing a new species name or by voting on the names submitted by other contributors.</p><p>Exploitation of the database: In this step, the enriched dataset is (i) used to enhance the model by re-training it on a larger and more complete dataset, and (ii) made available for the needs of stakeholders, including both personal (88%) and professional (12%) users.</p><p>Pl@ntNet directly contributes to monitoring progress towards several SDG indicators. Broadly, Pl@ntNet contributes to SDG 15 "Life on Land", supporting the identification of new species. When an image of a species which is not yet illustrated in Pl@ntNet is submitted, the AI plant identification model usually provides a "no result" message to the citizen scientist. The citizen scientist can then share their plant observation without any species name. In this instance, more experienced botanists would have to suggest the most probable plant species name visible on the image, which would then need to be validated by the users' network community. This mechanism has thus allowed for the expansion of 800 plant species illustrated in the first version of the Pl@ntNet mobile app (launched in Figure <ref type="figure">2</ref>. General pipeline of the Pl@ntNet citizen observatory and its three main components and processes <ref type="bibr" target="#b20">[22]</ref>.</p><p>Pl@ntNet app: The primary component consists of a plant-recognition application for smartphones that allows anyone to take a picture of a plant and send it to a server for recognition, performed by a convolutional neural network <ref type="bibr" target="#b21">[23]</ref>. Pictures should be centred on individual specimens, avoiding strong contrast, as well as the presence of visual noise (such as fingers or any manufactured objects). The user is returned with a list of candidate species associated with a confidence score and an adapted illustrative picture enabling the user to validate a species and share the observation.</p><p>Enriching the database: This process aims to improve the observations collected by the app users. The annotation of the vast volume of data (over four million observations were shared in 2020) cannot be carried out by expert botanists alone and, therefore, various crowdsourcing mechanisms are used: the main one integrated within the app itself. In all views of the application, the users can enrich an observation, either by proposing a new species name or by voting on the names submitted by other contributors.</p><p>Exploitation of the database: In this step, the enriched dataset is (i) used to enhance the model by re-training it on a larger and more complete dataset, and (ii) made available for the needs of stakeholders, including both personal (88%) and professional (12%) users.</p><p>Pl@ntNet directly contributes to monitoring progress towards several SDG indicators. Broadly, Pl@ntNet contributes to SDG 15 "Life on Land", supporting the identification of new species. When an image of a species which is not yet illustrated in Pl@ntNet is submitted, the AI plant identification model usually provides a "no result" message to the citizen scientist. The citizen scientist can then share their plant observation without any species name. In this instance, more experienced botanists would have to suggest the most probable plant species name visible on the image, which would then need to be validated by the users' network community. This mechanism has thus allowed for the expansion of 800 plant species illustrated in the first version of the Pl@ntNet mobile app (launched in February 2013), to more than 38,000 plant species in the actual version and more specifically, within SDG 2 "Zero Hunger", Pl@ntNet contributes to the indicators 2.3 and 2.4, which are related to improving agricultural productivity and sustainable food production systems, respectively, through its use by professional agrarian bodies.</p><p>The primary added value of the Cos4Cloud project over the base Pl@ntNet workflow is to enable its interoperability with (i) other citizen observatories and networks, (ii) third-party applications developed by industrial, academic or associative actors, and (iii) networks of experts and scientists. In this regard, we highlight hereafter two main achievements.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1.1.">Pl@ntNet Identification as a Service</head><p>In the context of Cos4Cloud, Pl@ntNet is developing a RESTful JSON-based application programming interface (API), a software interface dedicated to offering a service to other software, allowing the integration of Pl@ntNet's visual identification engine in third-party applications. The web service <ref type="bibr" target="#b22">[24]</ref> is co-designed and developed through the collaborative effort of the Pl@ntNet team and the end users of the service, while the API allows interoperability among the systems which use it. In this way, an application for monitoring the biodiversity of a region can, therefore, use this image-based plant identification service, complete the taxonomical/ecological information disseminated to its users thanks to the data provided by GBIF or Encyclopedia of Life (EOL) on the species determined, and enrich the knowledge of the species concerned by sharing these occurrences on the country's national biodiversity data aggregation portal.</p><p>As illustrated in Table <ref type="table">1</ref>, the service offers a diversity of key features facilitating its integration in a wide variety of contexts. The regularly updated and enriched identification model ensures continuous development and improvement of the Pl@ntNet API. If the service does not exhaustively cover the plant diversity of interest to a user at the time of the integration, the user can use the service knowing that it might be able to cover the species of interest in a future update. The automated rejection of inappropriate content also facilitates interoperability, normalising and standardising the quality of shared data and providing assurance to application developers that their users will not be able to share inappropriate content within their systems or with other platforms.</p><p>Table <ref type="table">1</ref>. Pl@ntNet features facilitating interoperability and integration.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Functionality Description Added Value Example</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Set-valued species classification</head><p>The service returns a list of species corresponding to the query, each associated with a probability output by the deep learning model.</p><p>The probability output allows for better quality control in the downstream applications provided to end users.</p><p>An application may suggest to its end users to re-submit a better-quality photo if the confidence score returned for identification is too low. If the confidence score is very high, it can automatically record the observation for the end user.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Flora selection (optional)</head><p>This option allows the returned species to be filtered according to a given flora (among 41 possible floras at the time of writing).</p><p>The identification quality is improved, and the service can be more easily customised for specific use cases.</p><p>An application will not display a visually similar species for a given identification request (of the same genus, for example) if the species is not within the selected flora.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Similarity search</head><p>For each recognised species, the service returns the closest pictures to the query in the Pl@ntNet database.</p><p>This allows better quality control of the identification by the end user. It also provides access to Pl@ntNet images to illustrate the species.</p><p>Application developers do not have to manage visual data to illustrate the identified species and can benefit from the data shared by Pl@ntNet.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Multi-images and multi-organ observations</head><p>Several pictures of the same individual plant can be provided as input of the service (particularly photos of the different organs, including the flower, the fruit or the leaf).</p><p>The identification quality is improved, and the service can be more easily customised for specific use cases.</p><p>A biodiversity monitoring app can be used whatever the season or the phenological stage of the plant.</p><p>Table <ref type="table">1</ref>. Cont.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Key Features Description Added Value Example</head><p>Regularly updated and enriched identification model Pl@ntNet's AI model used for the identification service is regularly updated based on the collaboratively revised Pl@ntNet database and research progress.</p><p>The identification quality is regularly improved, and the number of recognised species increases.</p><p>Newly identified species are rapidly recognisable by other users</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Automated rejection of inappropriate content</head><p>Any picture of non-plant entities is automatically tagged as "Reject".</p><p>Inappropriate content can be filtered before it enters the data flow of the downstream applications (database, app screens, etc.).</p><p>This feature facilitates the integration of the service into educational applications, ensuring the identification of only visual plant data.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>API dashboard and documentation</head><p>The website my.plantnet.org provides rich documentation of the service as well as a dashboard allowing the users to follow its usage of the service.</p><p>Developers can easily integrate the service into downstream applications and monitor their usage.</p><p>An application using this service can monitor its consumption of the service in terms of number of queries per day, week, month, etc.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Quality of Service Description Added Value Example</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Non-regression tests of the identification quality</head><p>The quality of the identification is measured on several benchmarks before each model's update.</p><p>The user has the guarantee that the identification quality is not degrading.</p><p>An application using this service can enrich the amount of information on each new identifiable species, these species being always identifiable in future versions of the recognition model.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Quality of service monitoring</head><p>The quality of service is monitored continuously based on several criteria (status, response time and scalability) and an alert system allows the developers to react quickly.</p><p>Service downtime is limited. An application using this service can use it at any time.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Secured access with an API key</head><p>The use of the service requires a token provided at account creation (with email validation).</p><p>This highly limits the risk of attacks.</p><p>This limits the risk of denial of service attacks.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Scalability</head><p>Pl@ntNet's infrastructure and data management software are highly scalable.</p><p>Developers of downstream applications do not have to manage the workload themselves.</p><p>A third-party application can have a peak in usage or a large increase in users without causing the service to slow down.</p><p>At the time of publication, 5000 end users have created an account to use the Pl@ntNet identification API, with an average of 500 identification queries per account. As indicated, thanks to the interoperability of the API, the service can be used in a variety of contexts, many of which support the work of citizen observatories.</p><p>Bineo Consulting, a partner in the Cos4Cloud project, is one such user. Bineo is a developer of web technologies for biodiversity monitoring, including Natusfera: a citizen observatory adapted from iNaturalist. Within the framework of biodiversity portals, Bineo Consulting uses the Pl@ntNet identification API to facilitate a review of the quality of observations shared on these portals. Users of these portals can, therefore, validate the data produced more efficiently, accelerating the use of these data in different contexts, both regulatory and educational. During 2020-2022, Bineo Consulting has requested 50,000 identifications on this service.</p><p>Tela Botanica, a network of 50,000 French-speaking botanists, aims to promote the exchange of information, and produce open data for the benefit of all botanists, from amateurs to professionals. This non-governmental organisation has been developing an information portal on French flora for over 20 years. It offers a personal observation manager, "le Carnet en Ligne" (the Online Book), which allows its members to produce and share botanical observations. Through the interoperability of this web software with the Pl@ntNet identification API, users can benefit from identification assistance, which enables them to compare their initial identification with the one proposed by Pl@ntNet.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1.2.">Pl@ntNet Research-Grade Data</head><p>As part of Cos4Cloud, Pl@ntNet has developed a pipeline for filtering and sharing research-grade Pl@ntNet data. These research-grade observations are shared in two main ways: (i) through the GBIF platform <ref type="bibr" target="#b23">[25]</ref>, a platform of free and open access biodiversity data, and (ii) through a web service within Pl@ntNet API. The pipeline to filter the data consists of five key steps.</p><p>Firstly, AI-based rejection of inappropriate content is carried out, where any picture of non-plant entities is automatically rejected. Secondly, AI-based rejection of house plants and captive plants of the gardens removes species that are not part of the GBIF spectrum of interest, which focuses on the spontaneous biodiversity of natural or semi-natural environments. Thirdly, there is AI-based quality control of species names, where only observations with a confidence score above 90% according to the most recent Pl@ntNet's identification model are shared, except for observations revised by the community, which is the fourth step. Here, community-based quality control of species names ensures that observations revised by the community are shared only if their identification reaches a sufficient degree of confidence. The confidence score is computed according to a weighted majority voting algorithm, where the weight of each member mostly depends on the number of species he has observed in the Pl@ntNet database. In this way, the validation of a plant observation is based on both the evaluation of the image quality and the species identification. The scientific name of a species can only be validated if (i) the name suggested by the citizen scientist is registered in one of the taxonomic reference lists provided by the Pl@ntNet data providers (for example, Kew Gardens); and (ii) scientists with a high confidence score on their user profile validate the initial determination proposal of the citizen scientist. Finally, location-based quality control of species names ensures that observations are only shared when the species name matches the most trusted checklist for the country/region where the observation was recorded.</p><p>The monitoring of Pl@ntNet observations shared with GBIF allows experts who analyse these data on the GBIF platform to directly access all the information related to each observation on the Pl@ntNet website. This continuous back and forth, made possible by the interoperability of the two platforms, encourages case-by-case exchanges between data producers and analysts. Thus, thanks to this pipeline and improved interoperability between the Pl@ntNet citizen observatory and GBIF via Cos4Cloud technology, 11 million research-grade Pl@ntNet observations have been shared within GBIF. Through the GBIF literature tracking programme, it is possible to query the published research articles using Pl@ntNet research-grade data (154 articles at the time of publication). Thus, while Pl@ntNet itself does not provide interpretations on environmental pollution, sustainability or climate change based on the types of plants growing in an area, the data collected contribute to such predictions, as evidenced by the literature utilising these data impacting a number of SDGs, including: new approaches for biodiversity conservation and restoration (SDG 15), new approaches for invasive species prediction and risk assessment (SDG 15, 2.3 and 2.4), new approaches for sustainable agriculture and landscape management (SDGs 2.3 and 2.4), new modelling approaches of the impact of global change on vegetation (SDGs 13 and 15).</p><p>Pl@ntNet users are encouraged to produce and share observations of interest for biodiversity studies thanks to ongoing collaboration with many local and national NGOs and research organisations with which Pl@ntNet partners. These actors, who promote a better understanding and protection of biodiversity, encourage the networks of users they train to implement good practices for identification, and also to contribute to less known and more interesting species for scientific purposes. This encouragement is formulated both in the communication materials that they distribute and during face-to-face training sessions. Indeed, face-to-face discussions are integral to the Cos4Cloud methodology for co-design, described in the following case study 3.2. How Cos4Cloud's co-design methodology supports citizen observatories.</p><p>Co-design is a collaborative strategy for developing solutions to problems that involve different types of actors <ref type="bibr" target="#b24">[26]</ref>. Collaborative work and collective intelligence, together with co-creation, participatory design and design thinking, came together to create a set of tools that support the development of specialised services of Cos4Cloud.</p><p>These tools were implemented through a process that begins with the need to understand each observatory's technological and social conditions, that is, its context and the user community, in order for the challenges to be solved. It continued with the definition of the needs and expectations of the community involved, the ideation of possible solutions, the prototyping of the idea with its multiple adjustment cycles and, finally, testing that helped validate the prototype. This approach considers users as "experts" of their own experience, and their needs and concerns are central to the design process. In Cos4Cloud, users are understood from two perspectives: the citizen observatories themselves and the user communities. This does not mean that the perspectives are artificially separated; on the contrary, their combination allows for a greater understanding of the complexity of the technological ecosystem of the observatories.</p><p>Co-design, as a methodological process that guided the construction of services, in the context of Cos4Cloud, had two main roles: firstly, to take into account the diversity and level of involvement of the end users; and, secondly, to facilitate the networking among citizen observatory communities. The co-design of the observatories scaled or increased the capacity of the services to respond to the socio-technological challenges that the observatories faced. This co-design approach was based on three main axes: (1) the integration of the communities of each observatory; (2) the connection of challenges; and</p><p>(3) the co-creation of solutions from the perspective of interoperability.</p><p>Integration of the communities: The diversity of geographic scales in which citizen science observatories operate, added to their possible thematic approaches or the particularities of the project they support, makes these platforms work in some cases as silos, both at the community and data management levels. Additionally, the governance schemes of the observatories are not regularly visible, and therefore it is not clear how decision-making and possible collaboration between observatories and their respective communities operate.</p><p>By integrating the nine observatories, Cos4Cloud took advantage of the power of networking, in addition to co-design, to create a community of co-design. This made it possible to interact with user communities from various regions of Europe and Colombia dedicated to environmental and biodiversity monitoring to gain a more comprehensive understanding of the context of the required technological services and their needs.</p><p>During the co-design process, collaborative workshops were held that collected user stories, identified needs, prioritised requirements and mapped the expectations of the observatory communities, promoting potential future collaboration between them.</p><p>Connection of challenges: Both citizen science and the technological platforms that support the management of their data are the subject of relatively recent studies. The communities that participate in this platform (end users, managers, developers, researchers and community managers) and those dedicated to studying them are in an initial process of understanding the socio-technological challenges they face. The governance of data and infrastructure, the diversity of technologies based on the platform needs, and the multiplicity of user profiles and thematic areas of application, from health to astronomy, are some of the variables to be considered.</p><p>To achieve a greater understanding of these challenges from the reality of multiple observatories, the Cos4Cloud co-design was approached by an interdisciplinary team that managed to connect the dimensions of education, technology, communication, engagement and governance.</p><p>Co-creation of solutions: Each observatory has been developed with its own set of technologies. This technological diversity, added to the lack of categorisation and data transfer standards, made it even more challenging to design technological services useful for the global community of citizen science observatories. To address this challenge, the technical teams from each of the nine observatories joined in a single working group that, hand in hand with the co-design community, co-created and tested multiple technological solutions.</p><p>As a result, the services are co-designed considering interoperability principles and multiple technological scenarios; they integrate the principles of FAIR data, prioritise the openness and reproducibility of services through open licences, and are created with the user in mind. One such service is Cos4Bio <ref type="bibr" target="#b25">[27]</ref>, whose main mission is to create an ecosystem that experts in biodiversity related to citizen science can use to carry out searches and downloads quickly and in a standardised way, generating data sets from different sources of information, such as citizen observatories. Through co-design workshops, experts expressed a need for biodiversity data to be searchable by location as well as species-feedback that has subsequently been implemented into the service.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2.">How Cos4Cloud Enables Citizen Observatories to Support Education and Learning</head><p>The inherent difficulty of addressing current environmental and sustainability challenges requires not only a range of interventions but also the combination and integration of many interventions at various levels. Citizen science and environmental education can both address and promote sustainability. In the case of citizen science, this is achieved by: (1) aiding environmental monitoring and research procedures, (2) raising scientific and environmental literacy and (3) promoting global citizenship through the citizens' active involvement in real issues. Environmental awareness and participation in policy-making are equally expected outcomes together with the development of a sense of place. This is in alignment with how environmental education views its role <ref type="bibr" target="#b26">[28]</ref>, by emphasising the need for (a) pedagogical practices that actively engage learners in individual and collective inquiry processes about current environmental and sustainability issues and (b) learning experiences that lead to the development of "action competence", the ability to act based on the active and critical construction of knowledge, which leads to emancipation and democratic participation <ref type="bibr" target="#b27">[29,</ref><ref type="bibr" target="#b28">30]</ref>. Thus, the concept of environmentally active and responsible citizenship is a central tenet for both citizen science and environmental education and a key tool for bringing forth sustainability.</p><p>In the Cos4Cloud project, we not only assert that citizen science and environmental education are compatible and complementary to each other, but also that there is a great potential for integrating them into school-based practice to support the realisation of the SDGs. Responsible and active citizenship and informed participation for attaining sustainability lie at the core of citizen science <ref type="bibr" target="#b29">[31,</ref><ref type="bibr" target="#b30">32]</ref>. Likewise, environmental education departs from engaging with science in the traditional way. It opens up new ways to learn <ref type="bibr" target="#b31">[33]</ref> by emphasising experience, intrinsic motivation, self-directed engagement and collaboration on a quest to explore and address local sustainability issues and concerns <ref type="bibr" target="#b32">[34]</ref>. To this end, it puts forth a pedagogy that involves challenge-based, cross-disciplinary and action-oriented learning and participation in authentic learning experiences, which take place in either formal or informal education contexts <ref type="bibr" target="#b33">[35]</ref> with the aim to empower young people to become active and responsible citizens <ref type="bibr" target="#b34">[36]</ref>.</p><p>The Cos4Cloud project builds on the integration of citizen science into formal school educational processes. Such integration opens up various learning opportunities along the lines of all SDGs, particularly SDG 4. Moreover, it carries significant benefits for the students and the school communities. Engaging students in collaborative inquiry processes with a focus on real environmental issues enhances the school community's openness to science and participation in local sustainable development efforts <ref type="bibr" target="#b35">[37]</ref>. The educational potential of integrating citizen science into environmental education activities and projects within schools goes well beyond cognitive outcomes to fostering the students' scientific and environmental literacy and action competence. It aims to cultivate new ways of thinking and collaborating as a basis for developing active citizenship for sustainability <ref type="bibr" target="#b36">[38]</ref>. Rele-vant research <ref type="bibr" target="#b37">[39]</ref> shows that engaging students in appropriately designed environmental citizen science projects within school contexts increases their participation in similar future initiatives. Likewise, environmental education provides a rich pedagogical context, which structures and enhances the learning experiences gained from citizen science activities far beyond contributing to data collection procedures alone.</p><p>Alongside the Cos4Cloud project's initiatives to develop technological services to support the networking of citizen observatories, there have been sustained efforts to activate networking within formal education to promote and expand citizen science practice for sustainability beyond the traditional adult audiences and engage youths, school students in particular, and as a mode to enrich the quality of education for sustainability. This strategy was designed to take place across three interconnected actions, through: (1) the creation of an educational network of teachers, educational stakeholders and schools supportive of integrating citizen science into school-based environmental education practices;</p><p>(2) the provision of teacher training programmes and the design of supportive educational materials to assist teachers in their work; and (3) the implementation of school-based educational activities, and the evaluation of their learning potential and educational impact in contributing to achieving SDGs.</p><p>In this context, environmental educators were empowered to engage students in projects focusing on current environmental challenges through citizen observatories such as Pl@ntnet and Odour Collect. Similarly, students were able to use citizen science-based technology including the Pl@ntNet-API to not only monitor biodiversity but also support inquiry-based learning about the sustainability challenges associated with and affecting it. By facilitating access to species identification, participants quickly discover that not only are there a large number of species around them, but that they make multiple contributions to the natural and societal environment. Indeed, by training students to use Pl@ntNet, they become autonomous in exploring the biodiversity of environments outside of school activities, allowing them to better understand the challenges surrounding it. Cos4Cloud plans to develop these methods across other citizen science observatories, integrating citizen science technologies to strengthen education for sustainable development across Europe.</p><p>Thus, while individual citizen observatories can provide a context for citizens' education and learning on local sustainability issues and participation, directly contributing to SDG 4.7 (Education for sustainable development and global citizenship) and transversally benefitting multiple SDGs by educating citizens on global challenges and the SDGs themselves, by creating a network of citizen observatories and supporting them with interoperable technology through projects such as Cos4Cloud, students are better educated and engaged, improving the quality and quantity of data collected.</p><p>To explore the educational potential of the integration of citizen observatory technologies into school environmental education, Cos4Cloud coordinated the implementation and evaluation of five case studies within Greek schools, during the spring term of 2020-2021. Of these case studies, four were carried out in secondary schools and one in a primary school, and four were based on the use of Pl@ntNet, while one focused on Odour Collect.</p><p>To support the integration of citizen science into school environmental practice, Cos4Cloud facilitated the creation of educational scenarios by different groups of Greek educational designers, including teachers. Each scenario focused on a different theme and environmental issue, and offered a detailed description of a proposed way of implementing citizen science in schools, using the project's citizen observatory platforms. All scenarios were accompanied by creative and pedagogically informed activities and employed a range of integrated and interdisciplinary approaches to learning, encouraging students to engage in action learning and to use the outcomes of their learning to improve their school and local environments. For example, one scenario, "The magical world of plants-transforming the schoolyard and protecting life with Pl@ntnet", focused on the theme of biodiversity, the issue of climate change as a biodiversity problem, and the designing of a "green fence" to absorb noise and chemical pollution, improving their local environment.</p><p>The five case studies considered and evaluated a number of these educational scenarios. For each case study, teachers completed a case study report and evaluation form to describe how they carried out their educational activities and to share their personal estimations of what the students had learned from participating in them. The completed forms were subjected to qualitative content analysis. Although the analysis is still in progress, and will be published in full at a later stage, there are strong indications that the integration of Cos4Cloud's technologies into environmental education had a distinct impact. For instance, teachers described a range of learning outcomes from the students' engagement in the project's citizen observatory platforms and tools, including the development of new skills related to their scientific digital literacies, or the awakening of students' senses and emotions; the nurturing of a sense of connectedness with the environments the students studied; as well as a new appreciation for nature and the recognition that citizen science opens up a way to participate and contribute to some broader, global and worthwhile efforts.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.">Discussion</head><p>Citizen observatories can contribute to monitoring progress towards many SDGs. As we have detailed, the main contribution of Cos4Cloud to SDG monitoring is via the enhanced networking of citizen observatories through improved interoperability, co-design and education and learning for sustainable development. These enhancements should enable citizen observatories to have greater positive impacts at both the societal and political level.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1.">Citizen Observatory Networks for Society</head><p>The strength of citizen observatories is the potential mobilisation of a large number of people to make progress towards a common goal. As networks, citizen observatories provide an enhanced experience: participants feel "part of something bigger" without losing their connection with local issues. One potential barrier to participation, which Cos4Cloud addresses through the co-design approach, is the identification of typical participation profiles, so that potential participants can easily see whether the proposed citizen observatory corresponds to their expectations in terms of objective, level of involvement and expertise in particular. This helps to limit the possible disappointment of participants who would not have the means (technical or in terms of availability) to participate, and maintains active engagement. Furthermore, sustained communication between active members, and during the training of new members, is facilitated if each actor knows the capacities and expectations of the other participants, via a functional network of participants and observatories.</p><p>Through the enhancement of citizen observatory networks with Cos4Cloud services, we aim to reduce the cost of data gathering, which is a significant barrier in SDG reporting <ref type="bibr" target="#b2">[3]</ref> and in citizen science efforts more generally. With the availability of free and widely accessible web or mobile technologies, citizen observatories encourage the involvement of new participants, who benefit from new tools to progress in their activities.</p><p>Indeed, Cos4Cloud can also support efforts to include low-income groups, especially those in the Global South. Thanks to the pooling of resources, whether it is data, methodological support, or capacity to maintain IT infrastructure or software, the costs of adapting citizen observatories to new geographical, thematic or linguistic contexts have been reduced. This favours their deployment in contexts where we would not have been able to set them up due to high initial costs. For example, we can cite the Kenyan Lewa Conservancy, which has set up a citizen observatory for monitoring its flora <ref type="bibr" target="#b38">[40]</ref>, or the South African environmental education association iScanTree, based on Pl@ntNet services. Thanks to previous work to adapt Pl@ntNet services to the European and North African contexts, the cost of implementing these two new citizen observatories has been greatly reduced. The web and mobile interfaces for participation were already in place, a number of locally occurring species were already described and illustrated and training materials for new members were already produced. Because all these services and documents are already available, the designers of these new citizen observatories have been able to focus only on the most specific parts of their contexts and objectives, thus reducing the time needed to implement them. The drastic reduction in implementation costs partially explains why actors usually far removed from activities can become involved in setting up and running new citizen observatories. Eco-tourism structures, training centres and organisations in charge of managing territorial areas have thus appropriated the services offered within the framework of Cos4Cloud's citizen observatories, adapting them to their needs in South America, Sub-Saharan or Southern Africa, India or other regions of Southeast Asia.</p><p>Finally, the creation and support of networks between teachers and school communities with citizen observatories are among the activities reinforced by Cos4Cloud. The development of networking in formal education and informal learning is a key component of expanding citizen science and increasing its educational impacts; it is also a key condition for promoting sustainability and the SDGs. This is most readily sought through the creation of synergies with school environmental education for sustainability and can be significantly fostered through networking. Empowering citizens, youths in particular, to actively participate in documenting and reclaiming quality environmental conditions in their communities involves a great learning potential and stands as a key indicator of sustainability. The co-design of appropriate educational materials and the provision of in-service teacher training can significantly boost educational networking and all of the above have been defined as important objectives of the Cos4Cloud project.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.">Citizen Observatory Networks for Policy</head><p>SDG 17, "Partnerships for the goals: Strengthen the means of implementation and revitalise the global partnership for sustainable development", provides a policy framework that supports public engagement in scientific research, inclusive of citizen science both as a research object of policy, and as an instrument of policy <ref type="bibr" target="#b39">[41]</ref>. That said, inconsistency in data quality across citizen science projects and bias among scientists for certain data sources <ref type="bibr" target="#b40">[42]</ref> render citizen science data underused in environmental policy.</p><p>Cos4Cloud services aim to improve data quality and thus build trust in citizen science data, particularly through improved data interoperability. The aforementioned Cos4Bio, which integrates biodiversity observations from multiple citizen observatories in one place, and the similarly functioning Cos4Env, which integrates environmental observations, allow experts in the fields of citizen science, biodiversity and environmental science to view all observations in one place. While individual citizen observatories can validate these observations according to their own specific algorithms, experts using the service will be able to search observations from multiple citizen observatories including ArtPortalent, iSpot, Natusfera and PlantNet and utilise the data for their research. For example, researchers studying the distribution of a specific species at the national level could download all the observations of that species from the service, regardless of the citizen science observatory or country they come from, breaking down the barriers of validity and accessibility that prevent citizen science data from feeding into environmental policy.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.">Conclusions</head><p>Citizen science is evolving from a field dominated by isolated, small-scale, environmental monitoring projects (i.e., local groups focusing on local issues) to one in which citizen-generated data are more integrated and interoperable and make a significant contribution to monitoring progress towards overcoming current great global challenges. Like scientific progress in general, citizen science also addresses human needs and concerns. In addition, there are established projects that already integrate data at a global scale, such as some of those found on the EU-citizen.science and SciStarter platforms, which enable participation from anywhere in the world. There is a growing focus, among citizen-science projects, on the most significant challenges of our time.</p><p>The UN 17 SDGs encompass these global challenges but, with just eight years to go until 2030 (at the time of writing), there is an urgent need to step up efforts towards achieving them. Networks of citizen observatories, such as those supported and facilitated by Cos4Cloud, are essential to unlock the potential of citizen science. Such networks amplify the impact of citizen-generated data and help overcome some of the barriers to their use (e.g., lack of interoperability and accessibility, and undefined quality). As discussed in this article, these networks also create further opportunities in measuring progress towards the SDGs and in achieving them through data interoperability, through co-design of tools and activities and through education and learning.</p><p>This opening up of science, and of the processes through which the global challenges we face are tracked and measured, is, we argue, even more important than citizen science's potential to contribute data to measure this progress. It will not be possible to achieve the SDGs, or to address the environmental challenges we face, without far more, and more significant, actions from citizens. To put it another way: we do not just need citizens to assist in monitoring biodiversity loss; we need them to take drastic actions, at the population scale, to reverse this trend. Similarly, the environmental challenges will not be solved simply by citizens helping to measure how hot our world is getting; we need those same citizens, along with all the others, to take the steps needed to reverse current negative trends. By raising awareness of the challenges we face and the remedial measures that individuals can take, citizen science is a pathway to motivating society to act towards a more sustainable future.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 .</head><label>1</label><figDesc>Figure 1. The Cos4Cloud MVE. Starting from a raw observation (1), citizen observatory portals generate a collaborative validation from the inputs of other participants and suggestions provided by AI-based automatic-validation tools (2). Community-validated observations (3) are integrated into different experts' portals (4), providing a higher level of validation<ref type="bibr" target="#b4">(5)</ref>. The expert validations provide feedback and can be grouped into different reference sets (6) that can be used as complementary high-quality training sets<ref type="bibr" target="#b6">(7)</ref> to improve the classification capabilities of the AI-based automatic-validation tools (which in turn will provide better recommendations for future collaborative validations in each CO) generating high-quality data in global repositories<ref type="bibr" target="#b7">(8)</ref>.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 1 .</head><label>1</label><figDesc>Figure 1. The Cos4Cloud MVE. Starting from a raw observation (1), citizen observatory portals generate a collaborative validation from the inputs of other participants and suggestions provided by AI-based automatic-validation tools (2). Community-validated observations (3) are integrated into different experts' portals<ref type="bibr" target="#b3">(4)</ref>, providing a higher level of validation<ref type="bibr" target="#b4">(5)</ref>. The expert validations provide feedback and can be grouped into different reference sets (6) that can be used as complementary highquality training sets<ref type="bibr" target="#b6">(7)</ref> to improve the classification capabilities of the AI-based automatic-validation tools (which in turn will provide better recommendations for future collaborative validations in each CO) generating high-quality data in global repositories<ref type="bibr" target="#b7">(8)</ref>.</figDesc><graphic coords="5,156.54,171.70,348.18,247.14" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="6,157.92,86.01,388.32,212.16" type="bitmap" /></figure>
+		</body>
+		<back>
+
+			<div type="availability">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Data Availability Statement: Not applicable.</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Author Contributions: Conceptualisation, J.P.; methodology, J.P., A.J., P.B., K.S., S.L. and M.D.; software, J.P., A.J. and P.B.; validation, J.P., A.J. and P.B.; formal analysis, K.S., S.L. and M.D.; investigation, J.P., A.J., P.B., K.S., S.L. and M.D.; writing-original draft preparation, T.W., S.M.W., M.D. and L.C.; writing-review and editing, S.M.W., M.D., A.J., P.B., K.S., S.L., L.C. and J.P.; supervision, J.P.; project administration, K.S. and S.L.; funding acquisition, J.P. All authors have read and agreed to the published version of the manuscript.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Funding:</head><p>The research described in this paper was funded by the European Commission via the Cos4Cloud and MICS projects, which have received funding from the European Union's Horizon 2020 research and innovation programme under grant agreements 863463 and 824711. ICM-CSIC authors acknowledge the institutional support of the "Severo Ochoa Centre of Excellence" accreditation (CEX2019-000928-S). The opinions expressed in this work are those of the authors and are not necessarily those of the Cos4Cloud or MICS partners or the European Commission.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Institutional Review Board Statement: Not applicable.</head><p>Informed Consent Statement: Informed consent was obtained from all subjects involved in the study.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Conflicts of Interest:</head><p>The authors declare no conflict of interest. Funders had no role in the design of the study; in the collection, analysis, or interpretation of data; in the writing of the manuscript, or in the decision to publish the results.</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<ptr target="www.un.org/ga/search/view_doc.asp?symbol=A/RES/70/1&amp;Lang=E" />
+		<title level="m">Resolution A/RES/70/1. Transforming Our World: The 2030 Agenda for Sustainable Development</title>
+		<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>United Nations</publisher>
+			<date type="published" when="2015-02-27">2015. 27 February 2022</date>
+		</imprint>
+	</monogr>
+	<note>Seventieth United Nations General Assembly; United Nations</note>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Mapping citizen science contributions to the UN sustainable development goals</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Fraisl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Campbell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>See</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">U</forename><surname>Wehn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wardlaw</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Gold</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Moorthy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Arias</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Piera</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">L</forename><surname>Oliver</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s11625-020-00833-7</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Sustain. Sci</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page" from="1735" to="1751" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Citizen science and the United Nations Sustainable Development Goals</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Fritz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>See</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Carlson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">M</forename><surname>Haklay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">L</forename><surname>Oliver</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Fraisl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Mondardini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Brocklehurst</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">A</forename><surname>Shanley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Schade</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41893-019-0390-3</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Sustain</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page" from="922" to="930" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Civic education and citizen science: Definitions, categories, knowledge representation</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Ceccaroni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bowser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Brenton</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Analyzing the Role of Citizen Science in Modern Research</title>
+		<editor>
+			<persName><forename type="first">L</forename><surname>Ceccaroni</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">J</forename><surname>Piera</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Hershey, PA, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>IGI Global</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="1" to="23" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Channels of collaboration for citizen science and the sustainable development goals</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Shulla</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">L</forename><surname>Filho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">H</forename><surname>Sommer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">L</forename><surname>Salvia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Borgemeister</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.jclepro.2020.121735</idno>
+	</analytic>
+	<monogr>
+		<title level="j">J. Clean. Prod</title>
+		<imprint>
+			<biblScope unit="volume">264</biblScope>
+			<biblScope unit="page">121735</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note>CrossRef</note>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">A Self-Assessment of European Citizen Science Projects on Their Contribution to the UN Sustainable Development Goals (SDGs)</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Moczek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Voigt-Heucke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Mortega</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">F</forename><surname>Cartas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Knobloch</surname></persName>
+		</author>
+		<idno type="DOI">10.3390/su13041774</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Sustainability</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page">1774</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Citizen Science in Germany as Research and Sustainability Education: Analysis of the Main Forms and Foci and Its Relation to the Sustainable Development Goals</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Schleicher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Schmidt</surname></persName>
+		</author>
+		<idno type="DOI">10.3390/su12156044</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Sustainability</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page">6044</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Coordinator Perceptions When Assessing the Impact of Citizen Science towards Sustainable Development Goals</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Sprinks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Woods</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Parkinson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">U</forename><surname>Wehn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Joyce</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Ceccaroni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Gharesifard</surname></persName>
+		</author>
+		<idno type="DOI">10.3390/su13042377</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Sustainability</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page">2377</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Freshwater</forename><surname>Watch</surname></persName>
+		</author>
+		<ptr target="https://freshwaterwatch.thewaterhub.org/" />
+		<imprint>
+			<date type="published" when="2022-02-27">27 February 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Using citizen science to understand river water quality while filling data gaps to meet United Nations Sustainable Development Goal 6 objectives</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Hegarty</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Hayes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Regan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Bishop</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Clinton</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.scitotenv.2021.146953</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Sci. Total Environ</title>
+		<imprint>
+			<biblScope unit="volume">783</biblScope>
+			<biblScope unit="page">146953</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<title level="m">Measuring Progress: Environment and the SDGs; United Nations Environment Programme</title>
+		<meeting><address><addrLine>Nairobi, Kenya</addrLine></address></meeting>
+		<imprint>
+			<publisher>UNEP</publisher>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title level="m">Global Environment Outlook-GEO-6: Healthy Planet, Healthy People</title>
+		<meeting><address><addrLine>Nairobi, Kenya</addrLine></address></meeting>
+		<imprint>
+			<publisher>United Nations Environment Programme</publisher>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Mics</surname></persName>
+		</author>
+		<ptr target="https://mics.tools/" />
+		<imprint>
+			<date type="published" when="2022-02-27">27 February 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<ptr target="https://cos4cloud-eosc.eu/" />
+		<title level="m">Cos4Cloud</title>
+		<imprint>
+			<date type="published" when="2022-02-27">27 February 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<author>
+			<persName><surname>Weobserve</surname></persName>
+		</author>
+		<ptr target="www.weobserve.eu/about/citizen-observatories/" />
+		<title level="m">Citizen Observatories</title>
+		<imprint>
+			<publisher>Laxembourg</publisher>
+			<date type="published" when="2018-02-27">2018. 27 February 2022</date>
+		</imprint>
+		<respStmt>
+			<orgName>International Institute for Applied Systems Analysis</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Citclops: A next-generation sensor system for the monitoring of natural waters and a citizens&apos; observatory for the assessment of ecosystems&apos; status</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Ceccaroni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Piera</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">R</forename><surname>Wernand</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Zielinski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Busch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">J</forename><surname>Van Der Woerd</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Bardaji</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Friedrichs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Novoa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Thijsse</surname></persName>
+		</author>
+		<idno type="DOI">10.1371/journal.pone.0230084</idno>
+	</analytic>
+	<monogr>
+		<title level="j">PLoS ONE</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page">230084</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">A conceptual approach to a citizens&apos; observatory-Supporting communitybased environmental governance</title>
+		<author>
+			<persName><forename type="first">H.-Y</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Kobernus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Broday</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bartonova</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/1476-069X-13-107</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Environ. Health</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page">107</biblScope>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Mapping the current landscape of citizen-driven environmental monitoring: A systematic literature review</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Rathnayake</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Joshi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Cerratto-Pargman</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/15487733.2020.1829845</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Sustain. Sci. Pr. Policy</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page" from="326" to="334" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Reducing the Risk of Co-Optation in Alternative Food Networks: Multi-Stakeholder Cooperatives, Social Capital, and Third Spaces of Cooperation</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Ajates</surname></persName>
+		</author>
+		<idno type="DOI">10.3390/su132011219</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Sustainability</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page">11219</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">A look inside the Pl@ntNet experience</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Joly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Bonnet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Goëau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Barbe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Selmi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Champ</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Dufour-Kowalski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Affouard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Carré</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J.-F</forename><surname>Molino</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s00530-015-0462-9</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Multimed. Syst</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="page" from="751" to="766" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<title level="m" type="main">Uncertainty in Predictions of Deep Learning Models for Fine-Grained Classification</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Lorieul</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<pubPlace>Montpellier, France</pubPlace>
+		</imprint>
+		<respStmt>
+			<orgName>Université de Montpellier</orgName>
+		</respStmt>
+	</monogr>
+	<note type="report_type">Ph.D. Thesis</note>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Pl@ntNet App in the Era of Deep Learning</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Affouard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J.-C</forename><surname>Lombardo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Goeau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Bonnet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Joly</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 5th International Conference on Learning Representations, ICLR 2017, Workshop Track Proceedings</title>
+		<meeting>the 5th International Conference on Learning Representations, ICLR 2017, Workshop Track Proceedings<address><addrLine>Toulon, France</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2017-04-26">24-26 April 2017. 27 February 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<ptr target="https://my.plantnet.org/" />
+		<title level="m">Pl@ntNet</title>
+		<imprint>
+			<date type="published" when="2022-02-27">27 February 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<monogr>
+		<author>
+			<persName><forename type="first">A</forename><surname>Affouard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Joly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J.-C</forename><surname>Lombardo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Champ</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Goeau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Bonnet</surname></persName>
+		</author>
+		<ptr target="https://www.gbif.org/dataset/7a3679ef-5582-4aaa-81f0-8c2545cafc81" />
+		<title level="m">Pl@ntNet Observations; Version 1.2. Pl@ntNet. Occurrence Dataset</title>
+		<imprint>
+			<date type="published" when="2020-01-01">2020. 1 January 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Co-creation and the new landscapes of design</title>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">B</forename><surname>Sanders</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">-N</forename><surname>Stappers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">J</forename></persName>
+		</author>
+		<idno type="DOI">10.1080/15710880701875068</idno>
+	</analytic>
+	<monogr>
+		<title level="j">CoDesign</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page" from="5" to="18" />
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<ptr target="https://cos4bio.eu/" />
+		<title level="m">Cos4Bio</title>
+		<imprint>
+			<date type="published" when="2022-02-27">27 February 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Responsible Environmental Action: Its Role and Status in Environmental Education and Environmental Quality</title>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">C</forename><surname>Short</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/00958960903206781</idno>
+	</analytic>
+	<monogr>
+		<title level="j">J. Environ. Educ</title>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<biblScope unit="page" from="7" to="21" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">The action competence approach in environmental education</title>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">B</forename><surname>Jensen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Schnack</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/13504620600943053</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Environ. Educ. Res</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page" from="471" to="486" />
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Action competence and environmental education</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Breiting</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Sorensen</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/0305764990290305</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Camb. J. Educ</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="page" from="349" to="353" />
+			<date type="published" when="1999">1999</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title/>
+		<ptr target="https://discovery.ucl.ac.uk/id/eprint/10058422/1/Citizen-Science.pdf" />
+	</analytic>
+	<monogr>
+		<title level="j">Citizen Science</title>
+		<imprint>
+			<date type="published" when="2022-02-27">27 February 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Citizen science in the social sciences and humanities: The power of interdisciplinarity</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Tauginien Ė</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Butkevičien Ė</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Vohland</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Heinisch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Daskolia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Suškevičs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Portela</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Balázs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Pr Ūse</surname></persName>
+		</author>
+		<idno type="DOI">10.1057/s41599-020-0471-y</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Palgrave Commun</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page">89</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Citizen Observatories as Advanced Learning Environments</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Mominó</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Piera</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Jurado</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Analyzing the Role of Citizen Science in Modern Research</title>
+		<meeting><address><addrLine>Hershey, PA, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>IGI Global</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="192" to="212" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<title level="m" type="main">Education for Sustainable Development: A Roadmap</title>
+		<ptr target="https://unesdoc.unesco.org/ark:/48223/pf0000374802" />
+		<imprint>
+			<date type="published" when="2020-02-27">2020. 27 February 2022</date>
+			<publisher>UNESCO</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<title level="m" type="main">Framework for the Implementation of Education for Sustainable Development for the Period of 2020-2030</title>
+		<ptr target="https://unesdoc.unesco.org/ark:/48223/pf0000370215" />
+		<imprint>
+			<date type="published" when="2009-02-27">2009. 27 February 2022</date>
+			<publisher>UNESCO</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<ptr target="https://unesdoc.unesco.org/ark:/48223/pf0000247444?posInSet=2&amp;q" />
+		<title level="m">Education for Sustainable Development Goals: Learning Objectives</title>
+		<meeting><address><addrLine>Paris</addrLine></address></meeting>
+		<imprint>
+			<publisher>UNESCO</publisher>
+			<date type="published" when="2017-02-27">2017. 27 February 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Next Steps for Citizen Science</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Bonney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">L</forename><surname>Shirk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">B</forename><surname>Phillips</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Wiggins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">L</forename><surname>Ballard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">J</forename><surname>Miller-Rushing</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">K</forename><surname>Parrish</surname></persName>
+		</author>
+		<idno type="DOI">10.1126/science.1251554</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Science</title>
+		<imprint>
+			<biblScope unit="volume">343</biblScope>
+			<biblScope unit="page" from="1436" to="1437" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Knowledge gain and behavioral change in citizen-science programs</title>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">C</forename><surname>Jordan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">T</forename><surname>Gray</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">V</forename><surname>Howe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">R</forename><surname>Brooks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">G</forename><surname>Ehrenfeld</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/j.1523-1739.2011.01745.x</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Conserv. Biol</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="1148" to="1154" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Key issues and new approaches for evaluating citizen-science learning outcomes</title>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">C</forename><surname>Jordan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">L</forename><surname>Ballard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Phillips</surname></persName>
+		</author>
+		<idno type="DOI">10.1890/110280</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Front. Ecol. Environ</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page" from="307" to="309" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">How citizen scientists contribute to monitor protected areas thanks to automatic plant identification tools</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Bonnet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Joly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Faton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Brown</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Kimiti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Deneu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Servajean</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Affouard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lombardo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Mary</surname></persName>
+		</author>
+		<idno type="DOI">10.1002/2688-8319.12023</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Ecol. Solut. Évid</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page">12023</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Citizen Science and Policy</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Schade</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Pelacho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">G E</forename><surname>Van Noordwijk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Vohland</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Hecker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Manzoni</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-030-58278-4_18</idno>
+	</analytic>
+	<monogr>
+		<title level="m">The Science of Citizen Science</title>
+		<editor>
+			<persName><forename type="first">K</forename><surname>Vohland</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Berlin/Heidelberg, Germany</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="351" to="371" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">The science of citizen science: Exploring barriers to use as a primary research tool</title>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">K</forename><surname>Burgess</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">B</forename><surname>Debey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">E</forename><surname>Froehlich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Schmidt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">J</forename><surname>Theobald</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">K</forename><surname>Ettinger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Hillerislambers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Tewksbury</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">K</forename><surname>Parrish</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Biol. Conserv</title>
+		<imprint>
+			<biblScope unit="volume">208</biblScope>
+			<biblScope unit="page" from="113" to="120" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1016/j.biocon.2016.05.014</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

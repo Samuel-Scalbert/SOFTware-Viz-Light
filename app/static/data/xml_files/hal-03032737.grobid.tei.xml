@@ -1,0 +1,699 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="fr">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Genotyping structural variations with long reads</title>
+				<funder ref="#_ngq38H9 #_DhgC2UV #_kjxMhvA #_ygrrZJt #_ppYuBkW #_tNkxbZ4">
+					<orgName type="full">unknown</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author role="corresp">
+							<persName><forename type="first">Lolita</forename><surname>Lecompte</surname></persName>
+							<email>lolita.lecompte@inria.fr</email>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 6074</orgName>
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">IRISA</orgName>
+								<address>
+									<postCode>F-35000</postCode>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 6074</orgName>
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">IRISA</orgName>
+								<address>
+									<postCode>F-35000</postCode>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Pierre</forename><surname>Peterlongo</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 6074</orgName>
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">IRISA</orgName>
+								<address>
+									<postCode>F-35000</postCode>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 6074</orgName>
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">IRISA</orgName>
+								<address>
+									<postCode>F-35000</postCode>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Dominique</forename><surname>Lavenier</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 6074</orgName>
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">IRISA</orgName>
+								<address>
+									<postCode>F-35000</postCode>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 6074</orgName>
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">IRISA</orgName>
+								<address>
+									<postCode>F-35000</postCode>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Claire</forename><surname>Lemaitre</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 6074</orgName>
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">IRISA</orgName>
+								<address>
+									<postCode>F-35000</postCode>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff0">
+								<orgName type="laboratory">UMR 6074</orgName>
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">IRISA</orgName>
+								<address>
+									<postCode>F-35000</postCode>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Genotyping structural variations with long reads</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">41536D0F629B7495C8FA7E7AD45DA3D5</idno>
+					<idno type="DOI">.10.1093/bioinformatics/xxxxxx</idno>
+					<note type="submission">Submitted on 1 Dec 2020 Received on XXXXX; revised on XXXXX; accepted on XXXXX</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:14+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>from teaching and research institutions in France or abroad, or from public or private research centers. L'archive ouverte pluridisciplinaire HAL, est destinée au dépôt et à la diffusion de documents scientifiques de niveau recherche, publiés ou non, émanant des établissements d'enseignement et de recherche français ou étrangers, des laboratoires publics ou privés.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="fr">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>Structural variations (SVs) are characterized as genomic segments of at least 50 base pair (bp) long, that are rearranged in the genome. There are several types of SVs such as deletions, insertions, duplications, inversions or translocations. With the advent of Next-Generation Sequencing (NGS) technologies and the re-sequencing of many individuals in populations, SVs have been admitted as a key component of human polymorphism <ref type="bibr" target="#b2">(Audano et al., 2019)</ref>. This kind of polymorphism has been shown involved in many biological processes such as diseases or evolution <ref type="bibr" target="#b13">(Lupski, 2015)</ref>. Databases referencing such variants grow as new variants are discovered. At this time, dbVar, the reference database of human genomic SVs <ref type="bibr" target="#b17">(Phan et al., 2017)</ref> now contains more than 36 million variant calls, illustrating that many SVs have already been discovered and characterized in human populations.</p><p>When studying SV in newly sequenced individuals, one can distinguish two distinct problems: discovery and genotyping. In the SV discovery problem, the aim is to identify all the variants that differentiate the given re-sequenced individual with respect usually to a reference genome. In the SV genotyping problem, the aim is to evaluate if a given known SV (or set of SVs) is present or absent in the re-sequenced individual, and assess, if it is present, with which ploidy (heterozygous or homozygous). At first glance, the genotyping problem may seem included in the discovery problem, since present SVs should be discovered by discovery methods. However, in discovery algorithms, SV evidence is only investigated for present variants (i.e. incorrect mappings) and not for absent ones. If a SV has not been called, we cannot know if the caller missed it (false negative) or if the variant is truly absent in this individual and this could be validated by a significant amount of correctly mapped reads in this region. Moreover, in the genotyping problem, knowing what we are looking for should make the problem simpler and the genotyping result hopefully picture(0,0) <ref type="bibr">(-35,0)</ref>(1,0)30 (0,35)(0,-1)30 picture picture(0,0)(35,0)(-1,0)30 (0,35)(0,-1)30 picture "output" -2020/11/30 -page 2 -#2 picture(0,0) <ref type="bibr">(-35,0)</ref>(1,0)30 (0,-35)(0,1)30 picture picture(0,0)(35,0)(-1,0)30 (0,-35)(0,1)30 picture more precise. With the fine characterization of a growing number of SVs in populations of many organisms, genotyping newly sequenced individuals becomes very interesting and informative, in particular in human medical diagnosis contexts or more generally in any association or population genomics studies.</p><p>In this work, we focus on the second problem: genotyping already known SVs in a newly sequenced sample. Such genotyping methods already exist for short reads data <ref type="bibr" target="#b0">(Alkan et al., 2011;</ref><ref type="bibr" target="#b4">Chander et al., 2019)</ref>: for instance, SVtyper <ref type="bibr" target="#b5">(Chiang et al., 2015)</ref>, SV 2 <ref type="bibr" target="#b1">(Antaki et al., 2017)</ref>, Nebula (https://www.biorxiv.org/content/10.1101/566620v1). Though short reads are often used to discover and genotype SVs, this is well known that their short size makes them ill-adapted for predicting large SVs or SVs located in repeated regions. SVs are often located alongside repeated sequences such as mobile elements <ref type="bibr" target="#b10">(Kidd et al., 2010)</ref>, resulting in mappability issues that make the genotyping problem harder when using short read data.</p><p>Third generation sequencing technology, such as Pacific Biosciences (PacBio) and Oxford Nanopore Technologies (ONT), can produce much longer reads compared to NGS technologies. Despite their high error rate, long reads are crucial in the study of SVs and have enabled new SV discoveries <ref type="bibr" target="#b16">(Norris et al., 2016;</ref><ref type="bibr" target="#b8">Huddleston et al., 2017;</ref><ref type="bibr" target="#b20">Stancu et al., 2017;</ref><ref type="bibr" target="#b9">Jain et al., 2018)</ref>. Indeed, the size range of these sequences can reach a few kilobases (kb) to megabases, thus long reads can extend over rearranged sequence portions as well as over the repeated sequences often present at SV's breakpoint regions.</p><p>Following long read technology's development, many SV discovery tools have emerged, such as Sniffles <ref type="bibr" target="#b18">(Sedlazeck et al., 2018)</ref>, NanoSV <ref type="bibr">(Stancu et al., 2017), pbsv (unpublished)</ref> or SVIM <ref type="bibr" target="#b7">(Heller and Vingron, 2019)</ref>. Among these tools, some implement a genotyping module that gives the frequency of alleles after calling SVs of the sequenced samples. Nonetheless, discovery tools require post-processing to evaluate if a set of SVs is present or not in the sample and to compare the SV calls between different samples. To our knowledge, there exist only two tools, that can perform genotyping with long read data for a given set of SVs, the discovery tool Sniffles with a specific option and the SV visualisation tool svviz2, but both are not purely dedicated to the genotyping task.</p><p>The main contribution of this work is a novel method to genotype known SVs using long read data. We also provide an implementation of this method in the tool named SVJedi. SVJedi accuracy and robustness were evaluated on simulated data of real deletions in a human chromosome. It was also applied to a real human dataset and compared to a gold standard call set provided by the Genome in a Bottle (GiaB) Consortium, containing both deletions and insertions. High genotyping accuracy was achieved on both simulated and real data. We also demonstrated the improvement of such a dedicated method over other long read genotyping tools and other approaches, namely SV discovery with long reads and SV genotyping with short reads.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">Methods</head><p>The method assigns a genotype for a set of already known SVs in a given individual sample sequenced with long read data. It assesses for each SV if it is present in the given individual, and if so, how many variant alleles it holds, i.e. whether the individual is heterozygous or homozygous for the particular variant.</p><p>For clarity purposes, we describe here the method for deletion genotyping only. The genotyping of insertions is perfectly symmetrical, the genotyping of inversions and translocations differs only by the number of breakpoints to examine and follows the same strategy. The method takes as input a variant file with SV coordinates in VCF format, a reference genome and the sample of long read sequences. It outputs a variant file complemented with the individual genotype information for each input variant in VCF format.</p><p>The method consists of four different steps, that are illustrated in Fig. <ref type="figure">1</ref>. The fundamentals of the method lie in its first step, which generates representative allele sequences that represent the two alleles of each SV. Long reads are then aligned on the whole set of representative allele sequences. An important step consists in selecting and counting only informative alignments to finally estimate the genotype for each input variant.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Representative allele sequence generation</head><p>Starting from a known variant file in VCF format and the corresponding reference genome, the first step consists in generating two sequences for each SV, corresponding to the two possible allele sequences. These representative allele sequences are hereafter simply called allele sequences. In the case of deletions, these are parts of the reference genome that may be absent in a given individual. They are characterized in the VCF file by a starting position on the reference genome and a length. We define the reference allele sequence (allele 0) as the sequence of the deletion with adjacent sequences at each side, and the alternative allele sequence (allele 1) consists in the joining of the two previous adjacent sequences. Given that reads of several kb will be mapped on these allele sequences, the size of the adjacent sequences, denoted by L adj , was set to 5,000 bp at each side, giving a 10 kb sequence for allele 1 and 10 kb plus the deletion size for allele 0. For deletions larger than 2×L adj , that is here larger than 10 kb, two representative sequences are generated for allele 0, one for each breakpoint. The same adjacent sequence size is used, i.e. 5,000 bp, on each side of the breakpoints, giving then three 10 kb sequences: one for allele 1, and two for allele 0 (left and right breakpoints).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Mapping</head><p>Sequenced long reads are aligned on all previously generated allele sequences, using Minimap2 <ref type="bibr" target="#b12">(Li, 2018)</ref> (version 2.17-r941). Option -c is specified to generate a CIGAR for each alignment. Alignments are then output in a PAF file.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Informative alignment selection</head><p>Minimap2 raw alignment results have to be carefully filtered out to remove i) uninformative alignments, which are those not discriminating between the two possible alleles, and ii) spurious false positive alignments, that are mainly due to repeated sequences.</p><p>Informative alignments for the genotyping problem are those that overlap the SV breakpoints, that is the sequence adjacencies that are specific to one or the other allele. In the case of a deletion, the reference allele contains two such breakpoints, the start and end positions of the deletion sequence; the alternative sequence, the shortest one, contains one such breakpoint at the junction of the two adjacent sequences (see the red thick marks of Fig. <ref type="figure">1</ref>).</p><p>To be considered as overlapping a breakpoint, an alignment must cover at least dover bp from each side of the breakpoint (dover is set by default to 100 bp). In other words, if x and y are the sizes of the aligned parts on the allele sequence at the respectively left and right sides of the breakpoint, they must satisfy the following condition in equation (1) for the alignment to be kept :</p><formula xml:id="formula_0">(x&gt;dover) &amp; (y &gt;dover) (1)</formula><p>Concerning the filtering of spurious false positive alignments, Minimap2 alignments are first filtered based on the mapping quality (MAPQ) score. To focus on uniquely mapped reads, the MAPQ score of the alignments must be greater than 10. This is not sufficient to filter out alignments due to repetitive sequences since mapping is performed on a small subset of the reference genome and these alignments may appear as uniquely mapped on this subset.</p><p>As Minimap2 is a sensitive local aligner, many of the spurious alignments only cover subsequences of both the allele and the read sequences. To maximize the probability that the aligned read originates from the genomic region holding the SV, we, therefore, require the read to be aligned with the allele sequence in a semi-global manner. Each alignment extremity must correspond to an extremity of at least one of the two aligned sequences. This criterion gathers four types of situations, namely the read is included in the allele sequence, or vice-versa, or the read left end aligns on the allele sequence right end or vice-versa. picture(0,0)(-35,0)(1,0)30 (0,35)(0,-1)30 picture picture(0,0)(35,0)(-1,0)30 (0,35)(0,-1)30 picture "output" -2020/11/30 -page 3 -#3 picture(0,0)(-35,0)(1,0)30 (0,-35)(0,1)30 picture picture(0,0)(35,0)(-1,0)30 (0,-35)(0,1)30 picture  Indeed this criteria is not strictly applied and a distance of d end of the alignment to an extremity of at least one of the two aligned sequences is tolerated (d end is set by default to 100 bp). More formally, if a 1 and a 2 (resp. r 1 and r 2 ) are the sizes of the unaligned parts at the, respectively, left and right sides of the alignment on the allele sequence (resp. read sequence) (see Fig. <ref type="figure" target="#fig_1">2</ref>), then the alignment must fulfill the following condition in equation ( <ref type="formula" target="#formula_1">2</ref>) to be kept:</p><formula xml:id="formula_1">(a 1 &lt;d end r 1 &lt;d end ) &amp; (a 2 &lt;d end r 2 &lt;d end )<label>(2)</label></formula><p>The left member of equation ( <ref type="formula" target="#formula_1">2</ref>) imposes that the unaligned part at the left of the alignment is small in at least one of the two aligned sequences; the right member imposes the same condition at the right side of the alignment.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.4">Genotype estimation</head><p>For each variant, the genotype is estimated based on the ratio of amounts of reads informatively aligned to each allele sequence. In the case of deletions and insertions, the allele sequences of a given variant are of different sizes and contain a different number of breakpoints (for a deletion for instance, the reference allele contains 2 breakpoints, whereas the alternative allele contains only 1), so even if both alleles are covered with the same read depth, there would be fewer reads that align on the shortest allele sequence and that overlap at least one breakpoint. To prevent a bias towards the longest allele, reported read counts for the longest allele are normalized according to the allele sequence length ratio, assuming that read count is proportional to the sequence length. More precisely, in the case of a deletion, the reference allele is the longest allele. Its allele sequence size is the deletion size plus 2×L adj (cumulative size of the adjacent sequences) if the deletion is smaller than 2×L adj . Otherwise it is composed of two sequences of size 2×L adj each centered on each breakpoint. We therefore apply the following formula to compute the normalized read count for the reference allele, c * 0 , as a function of the observed read count for the reference allele, c 0 , and the deletion size, del size :</p><formula xml:id="formula_2">c * 0 = c 0 × 2×L adj (2×L adj +del size ) if del size &lt;2×L adj c 0 × 1 2 otherwise (3)</formula><p>Finally, a genotype is estimated if the variant presence or absence is supported by at least min_cov different reads after normalization (sum of the read counts for each allele). By default, this parameter is set to 3.</p><p>Genotypes are estimated according to a maximum likelihood strategy. The likelihoods of the three possible genotypes given the observed normalized read counts (c * 0 and c 1 ) are computed based on a simple binomial model, assuming a diploid individual, as described in <ref type="bibr" target="#b15">Nielsen et al. (2011)</ref> (see also <ref type="bibr" target="#b11">(Li, 2011)</ref>):</p><formula xml:id="formula_3">L(0/0)=(1-err) c * 0 ×err c 1 ×C c * 0 c * 0 +c 1 (4) L(1/1)=err c * 0 ×(1-err) c 1 ×C c * 0 c * 0 +c 1 (5) L(0/1)= 1 2 c * 0 +c 1 ×C c * 0 c * 0 +c 1 (6)</formula><p>where err is the probability that a read maps to a given allele erroneously, assuming it is constant and independent between all observations. err was fixed to 5.10 -5 , after empirical experiments on a simulated dataset (see Supplementary Figure <ref type="figure">1</ref>).</p><p>Finally, the genotype with the largest likelihood is assigned and all three likelihoods are also output (-log10 transformed) as additional information in the VCF file.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.5">Implementation and availability</head><p>We provide an implementation of this method named SVJedi, freely available at https://github.com/llecompte/SVJedi, under the GNU Affero GPL license. SVJedi can also be installed from Bioconda. SVJedi is written in Python 3, it requires as input a set of SVs (VCF format), a reference genome (fasta format) picture(0,0)(-35,0)(1,0)30 (0,35)(0,-1)30 picture picture(0,0)(35,0)(-1,0)30 (0,35)(0,-1)30 picture "output" -2020/11/30 -page 4 -#4 picture(0,0)(-35,0)(1,0)30 (0,-35)(0,1)30 picture picture(0,0)(35,0)(-1,0)30 (0,-35)(0,1)30 picture and a sequencing read file (fastq or fasta format). Notably, the main steps are implemented in a modular way, allowing the user to start or re-run the program from previous intermediate results. As an example, the first step is not to be repeated if there are several long read datasets to be genotyped on the same SV set. Results shown here were obtained with release version 1.1.0.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Material</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Long read simulated dataset</head><p>SVJedi was assessed on simulated datasets on the human chromosome 1 (assembly GRCh37) based on real characterized deletions for the human genome. From the dbVar database <ref type="bibr" target="#b17">(Phan et al., 2017)</ref>, we selected 1,000 existing deletions on chromosome 1 (defined as &lt;DEL&gt; SV type), which are separated by at least 10,000 bp. The sizes of the deletions vary from 50 bp to 10 kb (with median and average sizes of 950 bp and 2,044 bp respectively) . In this experiment, deletions were distributed into the three different genotypes: 333 deletions are simulated with 0/0 genotype, 334 deletions with 0/1 genotype and the 333 remaining deletions with 1/1 genotype. different sequences were simulated containing each overlapping sets of deletions, representing the two haplotypes of the simulated individual. 1/1 genotype deletions were simulated on both haplotype sequences, whereas deletions of 0/1 genotype were simulated each on one randomly chosen of the two haplotype sequences.</p><p>Then PacBio data were simulated on both haplotypes, using SimLoRD <ref type="bibr" target="#b21">(Stöcker et al., 2016)</ref> (version v1.0.2) with varying sequencing error rates (6 %, 10 %, 16 % and 20 %), and at varying total sequencing depths (6x, 10x, 16x, 20x, 30x, 40x, 50x and 60x). Most results presented in the main text are for 16 % error rate and 30x sequencing depth. Ten such datasets were simulated to assess the reproducibility of results.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Real data</head><p>SVJedi was applied on a real human dataset, from the individual HG002, son of the so-called Ashkenazi trio dataset. A PacBio Continuous Long Read (CLR) sequencing dataset for HG002 was downloaded from the FTP server of GiaB and down-sampled to 30x read depth (FTP links are given in Supplementary Material). We considered the assembly GRCh37.p13 as the human genome reference and as a gold standard call set, we used the SV benchmark set (v0.6) of HG002 individual provided by the GiaB Consortium (https://www.biorxiv.org/content/10.1101/664623v3). This set contains 5,464 high confidence deletions and 7,281 insertions (PASS filter tag), whose sizes range from 50 bp to 125 kb (median sizes of 149 bp and 215 bp for deletions and insertions, respectively). We used the TRgt100=TRUE tags present in the GiaB VCF file to identify SVs located in Tandem Repeats greater than 100 bp (denoted as TRs, n= 6,469). 48 SVs were found located inside large (&gt; 10 kb) segmental duplications, using the UCSC Segmental Dups feature track <ref type="bibr" target="#b3">(Bailey et al., 2002)</ref>. These SVs were also genotyped in PacBio sequencing datasets of the two parents (HG003 and HG004, 30x and 27x, respectively) to assess the level of Mendelian inheritance consistency of the son predicted genotypes.</p><p>SVJedi was applied on a real human ONT PromethION 44x dataset for the individual HG002 as well. Finally, we considered a real short read dataset for the HG002 individual, 2 X 250 bp Illumina dataset from GiaB, that was downsampled to 30x read depth. This short read dataset is used for comparison with a short read based SV genotyping approach. FTP links for all real sequencing datasets are given in Supplementary Material Section 1).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">Evaluation</head><p>To evaluate the accuracy of the method, a contingency table between the estimated genotypes and the true (simulated) ones is computed, providing a clear view of the number and type of correctly and incorrectly estimated genotypes. The genotyping accuracy of the method is then assessed as the number of correctly estimated genotypes overall all estimated genotypes, as shown in equation ( <ref type="formula">7</ref>). The percentage of SVs for which a genotype could be estimated is also measured, and hereafter called the genotyping rate (equation ( <ref type="formula">8</ref>)).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Genotyping accuracy =</head><p># of correctly estimated genotypes # of estimated genotypes (7)</p><p>Genotyping rate= # of estimated genotypes # of known SVs (8)</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.4">Comparison with other genotyping approaches</head><p>Comparisons with other genotyping approaches were performed on the real PacBio 30x HG002 dataset. SVJedi was first compared to two tools, Sniffles <ref type="bibr" target="#b18">(Sedlazeck et al., 2018</ref>) and svviz2 <ref type="bibr" target="#b19">(Spies et al., 2015)</ref>. Both tools, although not dedicated to genotyping, have options that allow them to also do SV genotyping from a set of SVs and with a long read sequencing dataset. Following the recommendations of Sniffles 1 , reads were first aligned with NGMLR (version 0.2.7) on the human reference genome. Then, we used Sniffles (version 1.0.11) with the -Ivcf option to genotype the GiaB call set. For svviz2, reads were aligned on the human reference genome using Minimap2 (version 2.17-r941). Genotyping was then performed from the sorted Minimap2 alignments using svviz2 (version 2.0a3) with default parameters.</p><p>We also compared our approach with two SV discovery tools, Sniffles again but in its default mode and Pacific Biosciences SV caller, pbsv 2 . Sniffles was run with the -genotype parameter with the previously obtained NGMLR read alignments. For pbsv, reads were aligned to the reference genome using its own mapper pbmm2 (version 1.1.0) with the -sort, -median-filter and -sample parameters. SVs were then discovered and called with pbsv (version 2.2.2) using default parameters. Both Sniffles and pbsv analyses do not always predict SVs at the exact simulated coordinates, so a predicted SV is considered identical as the expected SV if both SVs overlap by at least 70 %.</p><p>Finally, SVJedi was also compared to a SV genotyping approach based on short read data. To do this, the short reads are first aligned with SpeedSeq <ref type="bibr" target="#b5">(Chiang et al., 2015)</ref> (version 0.1.2), then the known variants are genotyped with SVtyper (version 0.7.0) with the default settings.</p><p>All tools were run on a Linux 40-CPU node running at 2.60 GHz, all command lines are given in Supplementary Material Section 2.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Results</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Assessing SVJedi accuracy and robustness on simulated deletions</head><p>To comprehensively assess the accuracy and robustness of SVJedi, it was first applied to simulated data. Results for SVJedi are shown here only for deletion type SVs, as insertions variants are simply the counterpart of deletions, results for inversions and translocations are shown in Supplementary Table <ref type="table">1</ref>. PacBio long reads were simulated on artificial diploid genomes obtained by introducing deletions in the human chromosome 1. Importantly, the sets of introduced and genotyped deletions are made of real characterized deletions in human populations, to reflect the real size distribution and the real complexity of deletion breakpoints and neighboring genomic contexts. To do so, one thousand deletions located on human chromosome 1 were randomly selected from the dbVar database, ranging from 50 to 10,000 bp in size.</p><p>Table <ref type="table">1</ref> shows the obtained genotypes compared with expected ones for one simulated dataset at 30x read depth. On this dataset, SVJedi achieves 97.8 % genotyping accuracy, with 974 deletions correctly predicted over 996 with 1 https://github.com/fritzsedlazeck/Sniffles/wiki/ SV-calling-for-a-population 2 https://github.com/PacificBiosciences/pbsv picture(0,0)(-35,0)(1,0)30 (0,35)(0,-1)30 picture picture(0,0)(35,0)(-1,0)30 (0,35)(0,-1)30 picture "output" -2020/11/30 -page 5 -#5 picture(0,0)(-35,0)(1,0)30 (0,-35)(0,1)30 picture picture(0,0)(35,0)(-1,0)30 (0,-35)(0,1)30 picture SVJedi an assigned genotype. Among the 1,000 assessed deletions, only 4 could not be assigned a genotype due to insufficient coverage of informative reads, the genotyping rate being thus 99.6 %. Among the few genotyping errors, most concern 1/1 genotypes that were incorrectly predicted as 0/1.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>SVJedi predictions</head><p>0/0 0/1 1/1 ./. SVJedi genotyping accuracy results were evaluated in terms of varying sequencing depths, ranging from 6x to 60x (see Fig. <ref type="figure" target="#fig_2">3</ref>). As expected, the accuracy of SVJedi increases with the read depth, but interestingly, even at low coverage (6x) the accuracy is on average above 94 % and a plateau is quickly reached between 20x and 30x, with already 97 % of genotyping accuracy at 20x. The genotyping rate reaches its plateau at a sequencing depth of 16x. Similarly, SVJedi results were evaluated in terms of varying sequencing error rates. In this case, both genotyping accuracy and genotyping rate were not impacted by a lower or higher sequencing error rate as long as it stays realistic (see Supplementary Figure <ref type="figure" target="#fig_1">2</ref>).</p><p>The breakpoint coordinates of SVs detected by SV discovery methods are not always defined at the base pair resolution. To assess to what extent this potential imprecision can impact the genotyping accuracy of SVJedi, we performed experiments with altered breakpoint positions in the input variant VCF file. All breakpoint positions have been randomly shifted according to a Normal distribution centered on the exact breakpoint position with several standard deviations (σ) values ranging from 10 to 100 bp. We show that the genotyping accuracy with σ equals 50 bp does not fall below 94 % (see Supplementary Figure <ref type="figure" target="#fig_2">3</ref>), indicating that SVJedi is not much impacted by the exact definition of the positions of the reference breakpoints.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Application of SVJedi to a real human dataset</head><p>To get closer to the reality of biological data, we applied our tool to a real human dataset, the HG002 individual, son of the so-called Ashkenazi trio dataset, which has been highly sequenced and analyzed in various benchmarks and especially by the GiaB Consortium <ref type="bibr" target="#b22">(Zook et al., 2016)</ref>. The latter, precisely, provides a set of high confidence SV calls together with their genotype in the individual HG002. SV discovery and genotyping were based on several sequencing technologies, SV callers and careful call set merging. Their work estimated genotypes for 5,464 deletions and 7,281 insertions, which can then be considered as the ground truth. It should be noted that we can focus only on heterozygous (0/1) and homozygous for the alternative allele (1/1) genotypes. Indeed, the SV call set was obtained from SV discovery methods, which can only detect variations between the individual and the reference genome. SVJedi was applied on a 30x PacBio long read dataset from individual HG002, to assess the genotypes of both deletions and insertions of this high confidence set.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.1">SVJedi results on the HGOO2 individual</head><p>We observe a good overlap of 92.2 % between the estimated genotypes of SVJedi and the GiaB call set. More precisely, among the assigned genotypes, there are 91.7 % of deletions and 92.5 % of insertions that are genotyped by SVJedi identically as the GiaB call set (the detailed contingency tables are provided in Supplementary Table <ref type="table" target="#tab_1">2</ref>).</p><p>Among the SVs differently genotyped between SVJedi and GiaB, a large part is represented by small variants (57 % are smaller than 100 bp). The genomic context of the SVs seems also to impact the genotyping accuracy: 75 % of the differently genotyped variants are located in Tandem Repeats greater than 100 bp (TRs), compared to 51 % for the whole SV set. Both features, size and location in TR, have similar impacts on the genotyping accuracy, with a difference of 9 and 11 % for small-vs-large and TR-vs-nonTR located SVs, respectively. Combining the two factors leads to a larger difference, with the small SVs that are located in TRs having the lowest genotyping accuracy of 81.3 % compared to near perfect accuracy of 97.9 % for the larger ones outside TRs (see the cross table in Supplementary Table <ref type="table">3</ref>).</p><p>Compared to previous results on simulated data, SVJedi shows a lower genotyping rate on this real dataset, for both deletions and insertions (85.8 % and 93.6 %, respectively). As in the case of accuracy, we notice that the great majority of the non-genotyped variants are either small or located in TRs: 87 % are of size less than 100 bp and 84 % are located in TRs. The factor impacting most the genotyping rate is the SV size (genotyping rates of 74.6 % and 98.1 % for small and large SVs respectively, see Supplementary Table <ref type="table">3</ref>). The presence of a TR at the breakpoint of small SVs worsens the genotyping task, with only 68.2 % of such SVs that could be genotyped. Notably, the GiaB deletion set contains more in proportion of such small SVs (39 vs 29 % for deletions and insertions respectively), explaining the observed difference in genotyping rate between the two SV types. Interestingly, these kinds of variants seem to be more impacted by the heterogeneity of PacBio sequencing depth since when using the full 63x dataset, the overall genotyping rate increases to 96.6 %.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.2">Mendelian inheritance analysis</head><p>Since sequencing data are available for the parents of the studied individual (HG003 for the father and HG004 for the mother), we can check, as an alternative validation approach, if the predicted genotypes for the son are consistent with his parent genotypes, assuming perfect Mendelian inheritance and a very low de novo mutation rate. To do so, from the same set of deletions and insertions, which is the GiaB call set, SVJedi was applied to three PacBio sequence datasets, one per individual, with a sequencing depth of about 30x for each dataset. Overall, the Mendelian inheritance consistency of SVJedi on this trio dataset is high, with 96.9 % of the son genotypes that are consistent with his parent genotypes. As expected, most inconsistent genotypes concern SVs that were genotyped differently between SVJedi and GiaB (48.7 %, n = 154), confirming for those that they are probably wrongly assessed by SVJedi. However, these confirmed errors represent only 1.2 % of the dataset.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.3">SVJedi results on ONT data</head><p>SVJedi was applied on the same SV call set and for the same HG002 individual, but with sequencing data obtained by a different long read technology, namely Oxford Nanopore. With a 44x PromethION dataset, SVJedi shows very similar genotyping performances as with the PacBio dataset (90.7 % accuracy and 86.2 % rate, see Supplementary Table <ref type="table">4</ref>), highlighting its versatility with respect to long read sequencing technologies.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Comparison with other approaches</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.1">Comparison with other genotyping tools</head><p>SVJedi was compared on the PacBio HG002 dataset to two other tools that can genotype a set of SVs with long read sequencing data, Sniffles <ref type="bibr" target="#b18">(Sedlazeck et al., 2018)</ref> and svviz2 <ref type="bibr" target="#b19">(Spies et al., 2015)</ref>. Both tools are not purely dedicated to the genotyping problem. Sniffles is a SV discovery tool that has an option (-Ivcf) enabling a genotyping mode instead of a discovery mode, we will thereafter refer to this tool usage as Sniffles-Ivcf. svviz2 is a visualisation tool enabling to visualize how reads align to the reference and alternative alleles of a given SV, as a byproduct it can estimate a genotype based on the aligned read counts.</p><p>As shown in Table <ref type="table" target="#tab_1">2</ref>, both Sniffles-Ivcf and svviz2 have genotyping rates close to 100 % but at the expense of lower genotyping accuracies (detailed results for all genotypes are given in Supplementary Table <ref type="table">5</ref>). Sniffles-Ivcf is 10 % less accurate than SVJedi (82.0 % vs 92.2 %). svviz2 obtained the lowest genotyping accuracy (65.9 %, with a 10 % difference between deletions and insertions).</p><p>A stratified analysis of the genotyping performances of all three tools with respect to the SV size is presented in Fig. <ref type="figure" target="#fig_3">4</ref>. We can observe that SVJedi has a better accuracy than Sniffles-Ivcf for all SV size classes. As mentioned previously, the lowest accuracy of SVJedi is observed for small SVs (&lt;100 bp), but, apart from this size class, its accuracy is quite robust with respect to the size of SVs. On the opposite, svviz2 obtained its best genotyping accuracy for the smallest SVs (&lt;100 bp) and it rapidly drops for SVs larger than 250 bp, falling below 30 % for SV sizes between 1 kb and 10 kb. When comparing between SV types, svviz2 genotyping accuracy is significantly lower for insertions than deletions, with, in particular, less than 10 % of the insertions larger than 1 kb that are correctly genotyped (see Supplementary Figure <ref type="figure" target="#fig_3">4</ref>). This inability for genotyping large SVs can probably be explained by the way svviz2 identifies informative reads for a given SV: only the reads mapped initially to the reference genome are selected before re-aligning them against both the reference and alternative alleles. Consequently, most reads coming from large insertion alternative alleles could probably not be used for estimating these genotypes. To a lesser extend, Sniffles-Ivcf genotyping accuracy is also lower for large insertions than large deletions (69.6 % for insertions vs 85.7 % for deletions, ≥ 1 kb), whereas SVJedi genotyping accuracy is unaffected by SV type for all size classes.</p><p>We then compared the genotyping performances with respect to the genomic context of the SVs (Fig. <ref type="figure" target="#fig_4">5</ref>). As shown previously, SVs falling in a Tandem Repeat greater than 100 bp are harder to genotype with SVJedi, with a 9 % decrease of accuracy for these SVs, compared to those outside TRs. A larger decrease of genotyping accuracy (14 %) is observed with Sniffles-Ivcf in these regions. Although less frequent (here, only 48 concerned SVs), large segmental duplications, typically larger than 10 kb, are also likely to affect long read mapping accuracy and thus genotyping accuracy. SVJedi accuracy seemed not to be affected by these duplications, contrary to Sniffles-Ivcf (Fig. <ref type="figure" target="#fig_4">5</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.2">Comparison with a short read based genotyping approach</head><p>For this same individual (HG002), some short read datasets are also available. We, therefore, can compare SV genotyping performances between two approaches and data types, namely long versus short reads. SVJedi predictions were compared to a SV genotyping tool for short reads, SVtyper, known as a reference tool in the state of the art <ref type="bibr" target="#b5">(Chiang et al., 2015;</ref><ref type="bibr" target="#b4">Chander et al., 2019)</ref>. Since SVtyper does not support insertion variants, we focus here only  on deletions, and the 5,464 deletions from the GiaB call set were genotyped with SVtyper using a 2x250 bp 30x Illumina read dataset of HG002.</p><p>Table <ref type="table" target="#tab_1">2</ref> shows that more than half of the deletions are genotyped differently by SVtyper than in the high confidence GiaB call set, resulting in a genotyping accuracy of only 46.5 %, while this percentage rises to 91.7 % for SVJedi with long reads. Remarkably, many of the discrepancies of SVtyper with picture(0,0)(-35,0)(1,0)30 (0,35)(0,-1)30 picture picture(0,0)(35,0)(-1,0)30 (0,35)(0,-1)30 picture "output" -2020/11/30 -page 7 -#7 picture(0,0)(-35,0)(1,0)30 (0,-35)(0,1)30 picture picture(0,0)(35,0)(-1,0)30 (0,-35)(0,1)30 picture GiaB are totally contradictory with 0/0 genotypes instead of 1/1 ones (see Supplementary Table <ref type="table">5</ref>). We can clearly see, in Fig. <ref type="figure" target="#fig_4">5</ref>, that short read based genotyping is much more impacted by the presence of TRs at the breakpoint.</p><p>As expected, mapping reads in these regions is much more challenging for short than long reads. This demonstrates the higher benefit of using long reads and a dedicated genotyping tool such as SVJedi rather than short reads.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.3">Comparison with SV discovery approaches</head><p>One can wonder if these SVs could be easily detected and genotyped by long read SV discovery tools. We applied here two such tools, among the bests to date, Sniffles and the Pacific Biosciences SV caller, pbsv <ref type="bibr" target="#b18">(Sedlazeck et al., 2018;</ref><ref type="bibr" target="#b6">De Coster et al., 2019)</ref>. As a result, both tools obtained the lowest genotyping rates over all genotyping approaches: among the 12,745 SVs, only 6,127 were discovered by Sniffles, and 8,326 by pbsv (genotyping rates of 48.1 % and 65.3 % respectively, see Table <ref type="table" target="#tab_1">2</ref> and details in Supplementary Table <ref type="table">5</ref>). As expected, most of the missed SVs have an heterozygous genotype in the GiaB call set. More surprisingly, for the discovered SVs, their genotyping accuracy is overall smaller than with other approaches, with 43.9 % and 78.9 % for Sniffles and pbsv respectively. In particular, Sniffles misassigns 85 % of the discovered SVs with a 1/1 genotype in GiaB as heterozygous. pbsv shows the same type of errors but mainly for insertions, resulting in an important difference of genotyping accuracy between deletions and insertions (90.1 vs 68.8 %). These results highlight the fact that SV discovery tools, are much less precise for the genotyping task than a dedicated genotyping tool.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.4">Runtime comparison</head><p>Importantly, SVJedi does not come with a high computational cost. On a 40-CPU computing node, genotyping the 12,745 SVs with the 30x PacBio HG002 dataset took only 2h25m. The alignment step is actually the most time-consuming step and took 2h15m. Compared to other tools, SVJedi was the fastest among the tested ones (Table <ref type="table" target="#tab_1">2</ref>). Among the long read genotypers, SVJedi was 7 times faster than Sniffles-Ivcf and 50 times faster than svviz2.</p><p>The large runtime of svviz2 (more than 5 days) can be explained by the fact that it is not natively parallelized, when manually parallelized on 20 CPU (only 20 due to memory limits), it took roughly 11h.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">Discussion and conclusion</head><p>In conclusion, we provide a novel SV genotyping approach for long read data, that showed good results on simulated and real datasets. The approach is implemented in the SVJedi software for most SV types (insertions, deletions, inversions and translocations). The robustness of our tool, SVJedi, was highlighted in this work, for several sequencing depths and error rates, but also related to the precision of the breakpoint positions. On a real human dataset with more than 12,000 insertions and deletions, SVJedi obtained a better genotyping accuracy than other tested genotyping and discovery tools. SVJedi, like the other tools, had more difficulties to accurately genotype small variants (&lt;100 bp) and those located in large tandem repeat regions. However, SVJedi showed a more conservative behavior than other tools, with a lower genotyping rate for these most difficult SVs: instead of estimating an incorrect genotype, it favored not assigning any genotype at all. This work also demonstrated that this is crucial to develop dedicated SV genotyping methods, as well as SV discovery methods. Firstly, because this is the only way to get evidence for the absence of SVs in a given individual. Secondly, and more surprisingly, because SV discovery tools are not as efficient and precise to genotype variants once they have been discovered, at least with long read data as was shown here. Indeed, without a priori SV discovery is a much harder task than genotyping. Because the alternative allele is not known in discovery, discovery methods rely on fewer or noisier signals to identify the SVs than genotyping methods. Consequently, both approaches would likely benefit from different optimal parameter settings, with for instance discovery methods requiring a more stringent set of parameters to limit the false discovery rate. However, in this paper, we have no intention to oppose both approaches but rather argue that they are complementary and are intended to different purposes: when the aim is strictly to genotype or compare individuals on a set of already known variants, we have shown that using as much as possible the known features of variants is much more efficient.</p><p>Also, on real human data, we were able to quantify the impact of the sequencing technology on SV genotyping. Although this was expected that long read data would perform better than short read ones, the observed difference is considerable with a twofold increase of the genotyping accuracy with long reads. This is in particular due to the very poor performances obtained with short reads, that are ill-adapted to deal with the complex and repeat-rich regions often present at SV junctions. On the opposite, this work shows that the long-distance information contained in long reads can be efficiently used to discriminate between breakpoints, despite relatively high sequencing error rates and variability in sequencing coverage. This result underlines the relevance of such a method dedicated to genotyping from long read data.</p><p>Although long read sequencing technology remains to date more expensive than short read ones, to be used for instance in routine in the clinical setting <ref type="bibr" target="#b14">(Merker et al., 2018)</ref>, we can hope that this situation will improve in the next few years. The high genotyping accuracy and low computational requirements of SVJedi make it ready for such happening and to be integrated into routine pipelines to screen for instance disease-related SVs and therefore improve medical diagnosis or disease understanding.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>SVJedi 3 Fig. 1 .</head><label>31</label><figDesc>Fig. 1. SVJedi steps for deletion genotyping. Steps for insertion genotyping are symmetrical and are not shown on the figure for clarity purposes. 1. Two corresponding representative allele sequences are generated for each selected SV, one corresponds to the original sequence and the other to the sequence with the deletion. 2. Long read sequenced data are aligned on these allele sequences using Minimap2. 3. Informative alignments are selected. 4. Genotypes are estimated.</figDesc><graphic coords="4,118.72,297.98,217.88,64.84" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Fig. 2 .</head><label>2</label><figDesc>Fig. 2. Definition of the different distances used to select informative alignments between an allele sequence and a read. The aligned parts of the sequences are illustrated by vertical bars. The allele sequence is composed of two adjacent sequences of size L adj on either side of the breakpoint, which is represented by a red vertical thick bar. x and y are the distances of the breakpoint to respectively the start and end coordinates of the alignment on the allele sequence. a 1 and a 2 (resp. r 1 and r 2 ) are the distances of the alignment left and right extremities to the, respectively, left and right extremities of the allele sequence (resp. read sequence). It follows here, that a 1 +x = L adj and a 2 +y = L adj .</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Fig. 3 .</head><label>3</label><figDesc>Fig. 3. SVJedi genotyping accuracy results as a function of the sequencing depth for nine simulated PacBio datasets of human chromosome 1, containing 1,000 deletions from the dbVar database. The red dots correspond to the average genotyping accuracy and the red segments represent the standard deviations, at each sequencing depth.</figDesc><graphic coords="6,111.10,446.49,242.09,121.04" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Fig. 4 .</head><label>4</label><figDesc>Fig. 4. Results of genotyping tools for the 12,745 deletions and insertions from the GiaB call set in the HG002 individual according to different SV size classes: 50 to 100 bp, 100 to 250 bp, 250 bp to 1 kb, 1 to 10 kb and ≥ to 10 kb. The two figures on top represent the genotyping accuracies and the genotyping rates of SVJedi, Sniffles-Ivcf and svviz2 on a 30x PacBio dataset, and of SVtyper for deletions only on a 30x Illumina dataset. The bottom figure represents the SV count of each SV size class.</figDesc><graphic coords="7,364.44,484.89,242.09,215.19" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Fig. 5 .</head><label>5</label><figDesc>Fig. 5. Stratified analysis of genotyping accuracy and rate for several genotyping tools with respect to the genomic context of the SVs. Three categories of genomic context are considered: tandem repeats greater than 100 bp (TR), segmental duplications larger than 10 kb (SeqDup) and all other regions (Other).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 2 .</head><label>2</label><figDesc>Comparison of several tools and approaches for genotyping the 12,745 deletions and insertions of the GiAB call set in the HG002 individual. Three approaches are compared: using long read genotyping tools (first three tools), using a short read genotyping tool (SVTyper), and using long read discovery tools (last two tools). Except for the short read genotyping tool (SVtyper) that uses a 30X Illumina sequencing dataset, all other tools were run with a 30X PacBio long read dataset. Runtimes were measured on a 40-CPU computing node.</figDesc><table><row><cell>Deletions</cell><cell>Insertions</cell></row></table><note><p>* svviz2 is not parallelized.</p></note></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>Acknowledgements</head><p>We are thankful to the Genouest bioinformatics platform, computations have been made possible thanks to the resources of the Genouest infrastructure. picture(0,0)(-35,0)(1,0)30 (0,35)(0,-1)30 picture picture(0,0)(35,0)(-1,0)30 (0,35)(0,-1)30 picture "output" -<rs type="grantNumber">2020/11/30 -page 8 -#8</rs> picture(0,0)(<rs type="grantNumber">-35,0</rs>)(1,0)<rs type="grantNumber">30 (0,-35</rs>)(0,1)30 picture picture(0,0)(<rs type="grantNumber">35,0</rs>)(<rs type="grantNumber">-1,0)30 (0,-35</rs>)(<rs type="grantNumber">0,1</rs>)30 picture</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_ngq38H9">
+					<idno type="grant-number">2020/11/30 -page 8 -#8</idno>
+				</org>
+				<org type="funding" xml:id="_DhgC2UV">
+					<idno type="grant-number">-35,0</idno>
+				</org>
+				<org type="funding" xml:id="_kjxMhvA">
+					<idno type="grant-number">30 (0,-35</idno>
+				</org>
+				<org type="funding" xml:id="_ygrrZJt">
+					<idno type="grant-number">35,0</idno>
+				</org>
+				<org type="funding" xml:id="_ppYuBkW">
+					<idno type="grant-number">-1,0)30 (0,-35</idno>
+				</org>
+				<org type="funding" xml:id="_tNkxbZ4">
+					<idno type="grant-number">0,1</idno>
+				</org>
+			</listOrg>
+
+			<div type="availability">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>https://github.com/llecompte/SVJedi.git</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Genome structural variation discovery and genotyping</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Alkan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">P</forename><surname>Coe</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Rev. Genet</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page">363</biblScope>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">SV2: accurate structural variation genotyping and de novo mutation detection from whole genomes</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Antaki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">M</forename><surname>Brandler</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="issue">10</biblScope>
+			<biblScope unit="page" from="1774" to="1777" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Characterizing the major structural variant alleles of the human genome</title>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">A</forename><surname>Audano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Sulovari</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Cell</title>
+		<imprint>
+			<biblScope unit="volume">176</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="663" to="675" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Recent segmental duplications in the human genome</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Bailey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Gu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Science</title>
+		<imprint>
+			<biblScope unit="volume">297</biblScope>
+			<biblScope unit="issue">5583</biblScope>
+			<biblScope unit="page" from="1003" to="1007" />
+			<date type="published" when="2002">2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Evaluation of computational genotyping of structural variation for clinical diagnoses</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Chander</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">A</forename><surname>Gibbs</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">GigaScience</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">9</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">SpeedSeq: ultra-fast personal genome analysis and interpretation</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Chiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">M</forename><surname>Layer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Methods</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="issue">10</biblScope>
+			<biblScope unit="page" from="966" to="968" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Structural variants identified by Oxford Nanopore PromethION sequencing of the human genome</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>De Coster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>De Rijk</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Res</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page" from="1178" to="1187" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">SVIM: structural variant identification using mapped long reads</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Heller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Vingron</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">35</biblScope>
+			<biblScope unit="issue">17</biblScope>
+			<biblScope unit="page" from="2907" to="2915" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Discovery and genotyping of structural variation from long-read haploid genome sequence data</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Huddleston</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">J</forename><surname>Chaisson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Res</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="677" to="685" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Nanopore sequencing and assembly of a human genome with ultra-long reads</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Jain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Koren</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Biotechnol</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page">338</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">A human genome structural variation sequencing resource reveals insights into mutational mechanisms</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Kidd</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Graves</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Cell</title>
+		<imprint>
+			<biblScope unit="volume">143</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="837" to="847" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">A statistical framework for SNP calling, mutation discovery, association mapping and population genetical parameter estimation from sequencing data</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Li</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="issue">21</biblScope>
+			<biblScope unit="page" from="2987" to="2993" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Minimap2: pairwise alignment for nucleotide sequences</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Li</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="issue">18</biblScope>
+			<biblScope unit="page" from="3094" to="3100" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Structural variation mutagenesis of the human genome: Impact on disease and evolution</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">R</forename><surname>Lupski</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Environ. Mol. Mutagen</title>
+		<imprint>
+			<biblScope unit="volume">56</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="419" to="436" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Long-read genome sequencing identifies causal structural variation in a Mendelian disease</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">D</forename><surname>Merker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">M</forename><surname>Wenger</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genet. Med</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">159</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Genotype and SNP calling from next-generation sequencing data</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Nielsen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">S</forename><surname>Paul</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Rev. Genet</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page">443</biblScope>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Nanopore sequencing detects structural variants in cancer</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">L</forename><surname>Norris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">E</forename><surname>Workman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Cancer Biol. Ther</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="246" to="253" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">dbVar structural variant cluster set for data analysis and variant comparison</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Phan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Hsu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">F1000Research</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Accurate detection of complex structural variations using single-molecule sequencing</title>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">J</forename><surname>Sedlazeck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Rescheneder</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Methods</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="461" to="468" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">svviz: a read viewer for validating structural variants</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Spies</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Zook</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">31</biblScope>
+			<biblScope unit="issue">24</biblScope>
+			<biblScope unit="page" from="3994" to="3996" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Mapping and phasing of structural variation in patient genomes using nanopore sequencing</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">C</forename><surname>Stancu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">J</forename><surname>Van Roosmalen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Commun</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">1326</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">SimLoRD: Simulation of Long Read Data</title>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">K</forename><surname>Stöcker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Köster</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="issue">17</biblScope>
+			<biblScope unit="page" from="2704" to="2706" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Extensive sequencing of seven human genomes to characterize benchmark reference materials</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Zook</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Catoe</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Sci. Data</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page">160025</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

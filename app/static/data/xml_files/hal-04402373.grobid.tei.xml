@@ -1,0 +1,2658 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Generative Spoken Language Model based on continuous word-sized audio tokens</title>
+				<funder ref="#_64tkhyQ #_2rbqZY9">
+					<orgName type="full">Agence Nationale de la Recherche</orgName>
+					<orgName type="abbreviated">ANR</orgName>
+				</funder>
+				<funder ref="#_67pAKKX #_wbX62QD">
+					<orgName type="full">unknown</orgName>
+				</funder>
+				<funder ref="#_5U6Ffz7">
+					<orgName type="full">GENCI-IDRIS</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Robin</forename><surname>Algayres</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="laboratory">ENS</orgName>
+								<orgName type="institution" key="instit1">INRIA</orgName>
+								<orgName type="institution" key="instit2">INSERM</orgName>
+								<orgName type="institution" key="instit3">UPEC</orgName>
+								<orgName type="institution" key="instit4">PSL Research University</orgName>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="department">Meta AI</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Yossi</forename><surname>Adi</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="institution">The Hebrew University of Jerusalem</orgName>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="department">Meta AI</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Tu</forename><forename type="middle">Anh</forename><surname>Nguyen</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="department">Meta AI</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Jade</forename><surname>Copet</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="department">Meta AI</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Gabriel</forename><surname>Synnaeve</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="department">Meta AI</orgName>
+							</affiliation>
+						</author>
+						<author role="corresp">
+							<persName><forename type="first">Benoit</forename><surname>Sagot</surname></persName>
+							<email>benoitsagot@inria.fradiyoss</email>
+							<affiliation key="aff0">
+								<orgName type="laboratory">ENS</orgName>
+								<orgName type="institution" key="instit1">INRIA</orgName>
+								<orgName type="institution" key="instit2">INSERM</orgName>
+								<orgName type="institution" key="instit3">UPEC</orgName>
+								<orgName type="institution" key="instit4">PSL Research University</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Emmanuel</forename><surname>Dupoux</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="laboratory">ENS</orgName>
+								<orgName type="institution" key="instit1">INRIA</orgName>
+								<orgName type="institution" key="instit2">INSERM</orgName>
+								<orgName type="institution" key="instit3">UPEC</orgName>
+								<orgName type="institution" key="instit4">PSL Research University</orgName>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="department">Meta AI</orgName>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Generative Spoken Language Model based on continuous word-sized audio tokens</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">8126EC3511FA8D5FD9177D68DDAF5A3A</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:14+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>In NLP, text language models based on words or subwords are known to outperform their character-based counterparts. Yet, in the speech community, the standard input of spoken LMs are 20ms or 40ms-long discrete units (shorter than a phoneme). Taking inspiration from wordbased LM, we introduce a Generative Spoken Language Model (GSLM) based on word-size continuous-valued audio embeddings that can generate diverse and expressive language output. This is obtained by replacing lookup table for lexical types with a Lexical Embedding function, the cross entropy loss by a contrastive loss, and multinomial sampling by k-NN sampling. The resulting model is the first generative language model based on word-size continuous embeddings. Its performance is on par with discrete unit GSLMs regarding generation quality as measured by automatic metrics and subjective human judgements. Moreover, it is five times more memory efficient thanks to its large 200ms units. In addition, the embeddings before and after the Lexical Embedder are phonetically and semantically interpretable. 1  </p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>Recent work has opened up the possibility of learning generative language models directly from the raw audio signals, without using either text or Automatic Speech Recognition (ASR) <ref type="bibr" target="#b39">(Lakhotia et al., 2021;</ref><ref type="bibr">Kharitonov et al., 2021b;</ref><ref type="bibr">Nguyen et al., 2022b;</ref><ref type="bibr" target="#b7">Borsos et al., 2022)</ref>. The basic idea of these model is to rely on traditional text-based language models (LM), but replace the text input with some other discrete tokens directly learned from audio in an unsupervised fashion. The advantage of learning units from speech instead of relying on ASR is that this procedure can capture non-verbal vocalizations (like laughter) or intonation and rhythm, which are typically not transcribed, resulting in more expressive generations <ref type="bibr" target="#b35">(Kreuk et al., 2021;</ref><ref type="bibr"></ref> 1 Audio examples are available at our website. <ref type="bibr">Kharitonov et al., 2021b)</ref>. In addition, ASR may not be available in many languages that have insufficient textual resources and can make errors, which may then perturb the learning of the LM.</p><p>The problem of using self-discovered units, however, is that these units are typically very small, in fact, usually smaller than phonemes <ref type="bibr" target="#b39">(Lakhotia et al., 2021;</ref><ref type="bibr" target="#b7">Borsos et al., 2022)</ref>. We think that increasing the size of the units will favourably impact the semantic capabilities of a downstream spoken LM. This intuition comes from the NLP literature. Among others, <ref type="bibr" target="#b19">Graves (2013)</ref>; <ref type="bibr" target="#b42">Mikolov et al. (2011)</ref>; <ref type="bibr" target="#b6">Bojanowski et al. (2015)</ref>; <ref type="bibr">Nguyen et al. (2022a)</ref> have shown a performance gap between character-based LM and word-based LM. The main reason is that at the level of characters, it is difficult for a text LM to extract long-range syntactic and semantic relationships. This is one of the reasons why recent state-of-the-art text-based LM <ref type="bibr" target="#b56">(Radford et al., 2019)</ref> typically use a tokenizer representing word or subword units (Byte Pair Encoding <ref type="bibr" target="#b17">(Gage, 1994)</ref>, WordPiece <ref type="bibr" target="#b72">(Wu et al., 2016)</ref>, Unigram <ref type="bibr" target="#b36">(Kudo, 2018)</ref>). Another advantage of large units is to save GPU memory at training time that enables to use both larger batches and longer sequences.</p><p>In speech, building the equivalent of a text-based tokenizer is hampered by two difficulties. First, the boundary problem is that contrary to text in most orthographic systems, speech does not have spaces and punctuation to delimit between word units. Finding word boundaries from raw audio is itself a difficult challenge <ref type="bibr">(Dunbar et al., 2022a)</ref>. Second, the clustering problem, is that even if boundaries were available, the clustering of speech fragments is challenging because the same word may surface in a variety of forms depending on speaker, accent, speech rate, etc. This problem may be even more difficult to solve than the first one <ref type="bibr">(Dunbar et al., 2022a)</ref> because of the highly skewed distribution of word frequencies <ref type="bibr" target="#b1">(Algayres et al., 2022b)</ref>. Here, we investigate the possibility of building a continuous tokenizer that sidesteps these two problems by using tokens that have neither perfect boundaries nor require a clustering step. In Appendix B, we explain in more detail why we wish to avoid the clustering of speech fragments and what methods have been applied to tackle this problem so far.</p><p>Having a continuous tokenizer instead of a discrete one results in drastic changes from the point of view of the downstream LM. With a discrete tokenizer, one can define a finite list of tokens over which the LM can learn a lookup embedding table at the input of the model and use a softmax layer at the output of the model. The softmax is used in training mode to compute the loss function through a cross-entropy with the target token and at inference time to sample sentences. With continuous representations, the list of tokens is unbounded, making these computations intractable. We tackle this problem with a Lexical Embedder, a semi-learnable function that maps continuous tokens to a practically infinite list of embeddings.</p><p>The key question addressed in this paper is whether it is possible to generate speech using large (word-size) continuous units instead of short discrete ones. Our major technical contribution is to replace the three standard elements of a text-based LM (lookup table, cross-entropy loss function, multinomial sampling) with elements adapted to a virtually infinite list of continuous embeddings. We show that with these changes, it is possible to generate speech of the same quality as discrete unit models. This is interesting because our units are 200ms long which amounts to a 5-time memory reduction compared to regular discrete units <ref type="bibr" target="#b39">(Lakhotia et al., 2021;</ref><ref type="bibr" target="#b7">Borsos et al., 2022)</ref>, opening up the possibility to train spoken LMs on longer speech sequences. In addition, our model builds interpretable representations thanks to the Lexical Embedder which learns a mapping between an acoustic space, with phonetic properties, to a lexical space, with semantic and syntactic properties. We call the resulting model tGSLM (token-based GSLM).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">Related work</head><p>Unsupervised speech representations like CPC, Wav2vec2.0 and HuBERT (van den <ref type="bibr" target="#b67">Oord et al., 2018;</ref><ref type="bibr" target="#b3">Baevski et al., 2020;</ref><ref type="bibr" target="#b21">Hsu et al., 2021)</ref> are fixed-size representations (10 to 20ms long) that outperform traditional features, like mel-filterbanks and MFCCs, in many applications <ref type="bibr" target="#b73">(Yang et al., 2021)</ref>. In parallel to these works, there is a growing literature on variable-length acoustic encoding called speech sequence embeddings (SSE) <ref type="bibr" target="#b50">(Peng et al., 2020;</ref><ref type="bibr">Algayres et al., 2022a;</ref><ref type="bibr" target="#b24">Jacobs et al., 2021;</ref><ref type="bibr" target="#b27">Kamper, 2018;</ref><ref type="bibr" target="#b61">Settle and Livescu, 2016)</ref>. SSE models take a sequence of speech of any length and return a fixed-size vector. These models encode speech by maximizing phonetic information while minimizing speaker identity and recording conditions. SSEs are used for spoken term discovery <ref type="bibr" target="#b64">(Thual et al., 2018)</ref>, speech segmentation into phones or words <ref type="bibr" target="#b28">(Kamper, 2022;</ref><ref type="bibr" target="#b1">Algayres et al., 2022b)</ref> but also as input to a BERT model <ref type="bibr" target="#b1">(Algayres et al., 2022b)</ref> for spoken language modelling.</p><p>Speech generation is often performed with a neural vocoder conditioned on mel-filterbanks <ref type="bibr" target="#b66">(van den Oord et al., 2016;</ref><ref type="bibr" target="#b38">Kumar et al., 2019;</ref><ref type="bibr" target="#b32">Kong et al., 2020;</ref><ref type="bibr" target="#b54">Prenger et al., 2018)</ref>. In a text-to-speech pipeline, the mel-filterbanks are obtained with another neural network, which is conditioned on text <ref type="bibr" target="#b51">(Ping et al., 2017;</ref><ref type="bibr" target="#b62">Shen et al., 2018)</ref>. In the next step, the mel-filterbanks are decoded into natural-sounding speech by a neural vocoder <ref type="bibr" target="#b66">(van den Oord et al., 2016;</ref><ref type="bibr" target="#b38">Kumar et al., 2019;</ref><ref type="bibr" target="#b32">Kong et al., 2020;</ref><ref type="bibr" target="#b54">Prenger et al., 2018)</ref>. For the Zerospeech Challenge 2019, <ref type="bibr" target="#b12">Dunbar et al. (2019)</ref> proposed to remove text and replace it with unsupervised discrete units. This challenge has fueled a large body of works on learning low bitrate speech representations for speech compression, voice conversion and spoken language modelling <ref type="bibr" target="#b9">(Chen and Hain, 2020;</ref><ref type="bibr" target="#b40">Liu et al., 2019;</ref><ref type="bibr" target="#b16">Feng et al., 2019;</ref><ref type="bibr" target="#b2">Baevski et al., 2019;</ref><ref type="bibr" target="#b65">Tjandra et al., 2019;</ref><ref type="bibr">Kharitonov et al., 2021b;</ref><ref type="bibr" target="#b39">Lakhotia et al., 2021;</ref><ref type="bibr" target="#b44">Nguyen et al., 2020)</ref>. For evaluation, the Zero-Resource challenge used bitrate and human evaluation.</p><p>Spoken Language Model are neural networks trained to predict missing parts of a spoken sentence with predictive or contrastive losses. GSLM <ref type="bibr" target="#b39">(Lakhotia et al., 2021)</ref> is the first spoken LM able to generate expressive and consistent spoken sentences in a pure textless fashion. It uses a causal transformer LM trained with NLL loss on sequences of discrete units obtained with a kmeans clustering (with k=100) of HuBERT frames. Once trained, GSLM can generate a sequence of discrete units by multinomial sampling that is de- coded into speech with a separate vocoder. Specifically, the sampled HuBERT units are mapped to mel-filterbanks with Tacotron2.0 and decoded into speech with WaveGlow <ref type="bibr" target="#b54">(Prenger et al., 2018)</ref>, a neural vocoder. <ref type="bibr" target="#b39">Lakhotia et al. (2021)</ref> also provides a way to evaluate their spoken LM using an ASR to transcribe their spoken generations and an external LM to compute the perplexity of the resulting transcriptions. In addition, the Zerospeech Challenge 2021 <ref type="bibr" target="#b44">(Nguyen et al., 2020)</ref> designed a set of zero-shot metrics to probe what spoken LMs learn. A recent paper <ref type="bibr" target="#b7">(Borsos et al., 2022)</ref>, audi-oLM, came to our attention, which we did not have the time to include in our experiments. AudioLM works similarly to GSLM yet with the ability to generate speech that preserves the identity of the speaker. In another line of work, <ref type="bibr" target="#b1">Algayres et al. (2022b)</ref> trained a BERT model with a contrastive loss function on sentences represented as a series of SSEs. They showed the resulting BERT is able to model semantics and syntax. This work suggests that discrete tokenizers and the NLL loss are not necessary to tackle language modelling on speech. We take inspiration on their work to design our approach.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Approach</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">tGSLM: training</head><p>The general structure of tGSLM is presented in Figure <ref type="figure" target="#fig_0">1</ref>. It is composed of an encoder which segments the input speech into sequences of possibly varying size, and computes a fixed-sized Speech Sequence Embedding (SSE), which we call acoustic tokens (Section 3.1.1). These tokens are turned into lexical tokens through a learnable Lexical Embedder (Section 3.1.2), and fed into a causal Language Model that has been modified to deal with continuous inputs (Section 3.1.3).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1.1">Acoustic tokens</head><p>In Figure <ref type="figure" target="#fig_0">1</ref>, a speech sequence, S, is turned into n acoustic tokens, (a 0 , ..., a n ), after applying speech segmentation and an SSE model.</p><p>Speech segmentation consists in finding word boundaries in a speech sentence <ref type="bibr" target="#b1">(Algayres et al., 2022b;</ref><ref type="bibr" target="#b28">Kamper, 2022;</ref><ref type="bibr" target="#b34">Kreuk et al., 2020)</ref>. In this work, we rely on a naive method by placing a boundary every 200 ms, regardless of the content of the speech signal. In the Appendix A.1, we show that this method leads to better results than recent, more complex speech segmentation systems.</p><p>The acoustic tokens (a i ) i≤n are built by first encoding the speech sentence S into a series of n ′ frames (f i ) i≤n ′ with the 8th layer of Wav2vec2.0 Base from <ref type="bibr" target="#b3">Baevski et al. (2020)</ref>. For any two boundaries (k, l), a i = SSE([f k , ..., f l ]) where SSE is a self-supervised system from <ref type="bibr">Algayres et al. (2022a)</ref> trained with contrastive learning. This model has state-of-the-art performances on phonetic representation of pre-segmented words as measured by the Mean-Average-Precision metric. The acoustic tokens are extracted in a preprocessing step and stored before the training of the subsequent LM.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1.2">Lexical tokens</head><p>In a text-based transformer LM, there is often an embedding lookup table before the transformer, that has the size of the vocabulary and that maps discrete word tokens to lexical tokens <ref type="bibr" target="#b69">(Vaswani et al., 2017)</ref>. These lexical tokens, also known as word embeddings <ref type="bibr" target="#b41">(Mikolov et al., 2013)</ref>, learn during training semantic and syntactic properties that have been studied extensively in the NLP literature. In our case, the situation is different. First, instead of discrete word tokens, our LM takes as input continuous acoustic tokens which latent vo-cabulary size is unknown. Second, the mapping between acoustic and lexical space cannot be linear, as two speech segments may sound the same, i.e. be close in the acoustic space, while being semantically/syntactically different, i.e. far in the lexical space. This highly non-linear function between acoustic and lexical space is learned by our lexical embedder: LexEmb = L • q function. L is a stack of non-linear fully connected layers learned jointly with the LM. q is an information bottleneck quantization function that we had to introduce to minimize the presence of low-level non-linguistic acoustic information. For a speech sequence S composed of n acoustic tokens (a i ) i≤n , we note the sequence of lexical tokens (l i ) i≤n such as ∀i ≤ n, l i = LexEmb(a i ).</p><p>To understand why we need q, we have to go back to the LexEmb function input: the acoustic tokens. The acoustic tokens are derived from Wav2vec2.0, which is a transformer architecture whose attention mechanism covers the whole sentence. Each wav2vec2 frame, therefore, contains potential information about relative positions (through the transformer's positional embeddings), adjacent acoustic materials (through self-attention) or global properties like speaker. What we've found in preliminary experiments is that this information may leak into the acoustic tokens and be amplified by the prediction or contrastive loss of the downstream causal LM. Fortunately, it turns out that this information has low variance and can be partially removed by slightly degrading the quality of the acoustic tokens. The degradation of the acoustic tokens is the role of the function q. q is composed of a PCA reduction and a quantization step that we call d-k-means, which stands for perdimension k-means. Specifically, given a speech database that has been segmented and encoded into N acoustic tokens, (a i ) i≤N , we reduce their dimensions to d with a PCA. Then, we train d different k-means, one for each dimension of the PCA. In other words, for each j ≤ d, we train a k-means on (P CA(a i )[j]) i≤N . We chose the number of centroids per k-means to be proportional to the explained variance of each of the PCA dimensions. Once the k-means are trained, each dimension of each acoustic token is mapped to its cluster id. Finally, the cluster ids are turned into one-hot vectors and concatenated into one vector (see Appendix A.2 for more detailed explanations). d-k-means is inspired from multi-stage vector quantizer (VQ) <ref type="bibr" target="#b68">(Vasuki and Vanathi, 2006)</ref> where several VQ codebooks are learned in parallel as in <ref type="bibr" target="#b3">Baevski et al. (2020)</ref>; <ref type="bibr" target="#b74">Zeghidour et al. (2021)</ref>. The PCA and the d-k-means are trained over the whole training set as a preprocessing step, before the transformer LM. We ablate the use of q in Appendix A.2 and show that it is necessary for the LM to generate sentences<ref type="foot" target="#foot_0">2</ref> .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1.3">Causal language model</head><p>The LM is a standard causal transformer with two modifications: the loss function and the prediction heads. First, in a standard LM, the number of possible types is fixed beforehand and remains tractable even for a very large corpus (10k to 100k). Here, because the number of different lexical tokens is virtually infinite, we cannot use a standard softmax and cross-entropy loss. We first tried a simple L2 reconstruction loss with an additional decoder but it did not work for us in practice. Instead, we use a contrastive loss: the Noice Contrastive Estimation (NCE) loss <ref type="bibr" target="#b20">(Gutmann and Hyvärinen, 2010)</ref>. This loss works by maximizing the similarity between a pair of positive samples while minimizing the similarity between the positive samples and various negative samples. However, even though the SSE model from <ref type="bibr">Algayres et al. (2022a)</ref> has learned to be speaker invariant, there is still a lot of speaker-related information encoded into the acoustic tokens. This is a problem already encountered in <ref type="bibr">Algayres et al. (2022a)</ref>; <ref type="bibr" target="#b67">van den Oord et al. (2018)</ref> that is dealt with by sampling the negative tokens from the same speaker as the positive tokens.</p><p>Second, in a standard LM, the output head typically predicts the next word. However, in the case of speech, the boundary between individual phonemes is blurred by coarticulation. It is therefore easy to predict the next word by just attending to very local acoustic information at the end of the last word (something impossible to do with characters which are sequentially disentangled). We, therefore, introduce three prediction heads (three linear fully connected layers: h 1 ,h 2 ,h 3 ) which do not only predict the first next token, but also the second and third as they cannot be co-articulated with the last token encoded by the LM. These prediction layers are trained jointly with the LM. We </p><formula xml:id="formula_0">(a i , l i ) i≤N .</formula><p>In addition, a lexical space is created by indexing (l i ) i≤N into a k-NN graph. Given a speech prompt, segmented and encoded into (a 0 , ..., a t ), we do a forward pass in tGSLM and search for the nearest neighbors of h 1 output in the lexical space. l t+1 is sampled and its corresponding a t+1 is appended to (a 0 , ..., a t ). When a final a T token is sampled, (a 0 , ..., a T ) is decoded into HuBERT units and speech is generated with Tacotron2.</p><p>justify the choice of three prediction heads with a grid-search available in Appendix Table <ref type="table" target="#tab_4">5</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">tGSLM: generation</head><p>Once tGSLM training is done, we use it to generate spoken sentences. We do that in two steps: we generate a sequence of acoustic tokens (Section 3.2.1) and then decode this sequence into speech (Section 3.2.2).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2.1">Sampling</head><p>To generate a spoken sentence, we take inspiration of the popular top-k sampling method used in NLP to generate text sentences. This method requires sampling series of word tokens by sampling among the most probable word types. In our case, we do not have access to types so we are going to sample among the most probable lexical tokens. Our sampling method is summarized in Figure <ref type="figure" target="#fig_1">2</ref>. We start by collecting a few dozen hours of speech that have not been seen during tGSLM training.</p><p>The utterances are segmented and encoded into N speech segments and stored in their acoustic and lexical forms: (a i , l i ) i≤N . Using the FAISS library <ref type="bibr" target="#b25">(Johnson et al., 2017)</ref>, we index (l i ) i≤N into a k-NN graph called the lexical space. Given a prompt of t acoustic tokens (a 0 , ..., a t ), we do a forward pass into tGSLM. Then, we compute the cosine similarity of h 1 output and its k closest neighbours in the lexical space. We apply a softmax on the vector of cosine similarities and treat it as a multinomial distribution to sample one element: l t+1 . The softmax function contains a temperature parameter that controls the range of the sampling area. The acoustic tokens a t+1 that correspond l t+1 is retrieved from the stored database and appended to (a 0 , ..., a t ). Once the desired length is reached, the sequence of acoustic tokens is decoded into a spoken sentence as explained in the next section.  <ref type="formula">2022</ref>) trained a Tacotron2.0 decoder <ref type="bibr" target="#b62">(Shen et al., 2018)</ref> to map deduplicated HuBERT units into mel filterbanks. Then, speech is generated from the mel filterbanks by a WaveGlow vocoder <ref type="bibr" target="#b54">(Prenger et al., 2018)</ref>. In order to make use of this pretrained Tacotron2.0 decoder, we trained an encoderdecoder transformer model to map series of acoustic tokens to series of HuBERT units. During training, the encoder computes an attention over a series of acoustic tokens while the decoder predicts Hu-BERT units auto-regressively. At inference, given a series of acoustic tokens, a corresponding sequence of HuBERT units is obtained by taking the argmax of the decoder softmax function. Finally, the Hu-BERT units are given as input to the pre-trained Tacotron2.0 to be decoded into spoken utterances.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2.2">Speech generation</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Evaluation and datasets</head><p>4.1 Datasets and settings LJ Speech (LJ), LibriSpeech (LS), Libri-light 6k clean (LL6k-clean) are three corpora of studio recordings of read English of respectively 24, 1k and 6k hours <ref type="bibr" target="#b23">(Ito and Johnson, 2017;</ref><ref type="bibr" target="#b48">Panayotov et al., 2015;</ref><ref type="bibr" target="#b60">Rivière and Dupoux, 2021)</ref>. These corpora are used to train the different parts of the pipeline. The training details and specific model architectures can be found in Appendix Section A.3.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Generation metrics</head><p>Perplexity (PPX) is a text-based metrics used by <ref type="bibr" target="#b39">Lakhotia et al. (2021)</ref> to evaluate the overall quality of generated spoken sentences. The authors propose to transcribe the spoken generations with an external ASR system and to compute the mean perplexity score over batches of transcribed speech with an external transformer LM<ref type="foot" target="#foot_1">3</ref> . The spoken generation process is guided by a temperature parameter that controls how diverse generated sentences are. The diversity of a batch of sentences can be computed as in <ref type="bibr" target="#b39">Lakhotia et al. (2021)</ref> with the VERT score that is an average of self-BLEU <ref type="bibr" target="#b75">(Zhu et al., 2018)</ref> and auto-BLEU <ref type="bibr" target="#b39">(Lakhotia et al., 2021)</ref> scores. Typically, low temperatures produce high diversity and low perplexity, whereas high temperatures produce low diversity and high perplexity.</p><p>Finally, the perplexity of spoken generation is a metric that presents a high variance, therefore, as a compromise between acceptable generation time and low variance, we compute perplexity over batches of 100 generated utterances whose transcriptions are each exactly 30 words (around 10 seconds of audio).</p><p>Subjective judgements are computed with the meaningful Mean Opinion Scores (MMOS) in which human raters were asked to evaluate how natural (considering both grammar and meaning) a given spoken generation is. For both subjective tests, raters evaluate the samples on a scale of 1-5 with an increment of 1. We follow the method from <ref type="bibr" target="#b39">Lakhotia et al. (2021)</ref> where they evaluated 100 samples from each of the evaluated methods while enforcing at least 15 raters for each sample. The CrowdMOS package <ref type="bibr" target="#b58">(Ribeiro et al., 2011)</ref> was used with the recommended recipes for detecting and discarding inaccurate scores. As for the perplexity measures, the sentences are generated without conditioning on a prompt.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Zero-shot metrics</head><p>sW U GGY and sBLIM P are zero-shot tasks to evaluate spoken language models introduced in the Zerospeech Challenge 2021 <ref type="bibr" target="#b44">(Nguyen et al., 2020)</ref>:. These metrics are inspired by psycholinguistics and are used for interpreting what spoken LM learns. sW U GGY is a list of pairs of word/non-word synthesized with the Google TTS API and filtered for the words that are in the Lib-riSpeech training set. sBLIM P is a list of pairs of syntactically correct/incorrect synthesized sentences. Both sW U GGY and sBLIM P require the spoken LM to attribute a higher probability to the correct element in each pair. Probabilities are computed by applying the spoken LM training loss directly on the test items. ABX sem and ABX P OS are additional zeroshot tasks introduced in <ref type="bibr" target="#b1">Algayres et al. (2022b)</ref> to evaluate the semantic encoding and Part-Of-Speech (POS) tagging, this time not based on probabilities but on distances between embeddings. An ABX task is a list of triplets A,B and X where A and B belong to the same category and X is a distractor. The task is to encode the triplet with a distance d and show that d(A, B) &lt; d(A, X). In this case, A,B, and X are spoken words given in the context of a sentence. For ABX sem , A and B are close semantically, and X is random. For ABX P OS A and B share the same POS tag, and X has different POS tags. Normalised Edit Distance (NED) introduced in Versteegh et al. ( <ref type="formula">2016</ref>) is a term discovery task that consists in finding clusters or pairs of speech segments from unsegmented audio that have the same phonetic transcription. For each discovered pair, the NED is computed as the edit distance normalized by the length of the longest item in the pair. As for ABX tasks, the NED is also based on the distance between embeddings. To compute a NED score, we take inspiration of the procedure introduced in <ref type="bibr" target="#b64">Thual et al. (2018)</ref>. Given a segmentation of the LibriSpeech dev-clean subset, all speech segments are embedded into fixed-size vectors. With a k-NN, we search for the pairs of closest embeddings and sort them by cosine similarity. Starting from the higher similarities, we retrieve as much pair as necessary to cover the whole dev-clean set.</p><p>With the phoneme-level transcription of the devclean set, all pairs can be transcribed into series of phonemes. The final NED score is obtained by averaging the NED over all pairs of transcriptions. NED and ABX tasks both rely on embeddings that can be extracted at any level of a multi-layer neural model.    on LL6k-clean<ref type="foot" target="#foot_3">4</ref> while the topline, gold-tGSLM, is trained only on LibriSpeech corpus<ref type="foot" target="#foot_4">5</ref> . The dots in Figure <ref type="figure" target="#fig_3">3</ref> represent batches of generated sentences conditioned on different temperatures. Color curves are the 3rd-degree polynomial interpolation of the dots. In green dashed lines appear two VERT anchor points LJ-VERT(=0.113) and LS-VERT(=0.189). These points are the mean VERT scores obtained on batches of sentences from, respectively LJ and LibriSpeech datasets. The intersection of the dashed lines and the curves gives the scores PPX@LS-VERT and PPX@LJ-VERT that are reported in Table <ref type="table" target="#tab_0">1</ref> <ref type="foot" target="#foot_5">6</ref> .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">Results</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Generation performances</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1.1">Perplexity and diversity</head><p>Regarding the perplexity scores from Table <ref type="table" target="#tab_0">1</ref>, compared to GSLM, 200ms-tGSLM is slightly better at LJ-VERT and slightly worse at LS-VERT. The measure of perplexities being very noisy, these scores show that both models have similar performances. Some examples of transcribed spoken generations are available in Appendix Tables 8,9 and 10.</p><p>The topline gold-tGSLM produces much lower perplexities than GSLM and 200ms-tGSLM. Yet, we have experienced a problem with the speech decoder (described in Section 3.2.2) of gold-tGSLM. The scores of our topline are obtained by retrieving the exact transcriptions of the sampled SSEs instead of decoding them with the speech decoder. We had to do this because our speech decoder makes a lot of decoding mistakes when it tries to decode SSEs of variable-size speech fragments. It seems to generate fully intelligible speech only when it is trained to decode SSEs of same-size speech chunks, as is the case for 200ms-tGSLM. We think this happened because, for a lack of time and resources, we chose a poor decoding strategy (decoder from SSEs to HuBERT frames and Hu-BERT frames to speech). In our future works, we will focus on training a model to decode the SSEs directly into speech, using, for instance, recent diffusion models or a Hi-Fi Gan <ref type="bibr" target="#b53">(Polyak et al., 2021;</ref><ref type="bibr" target="#b22">Huang et al., 2022)</ref>. As a consequence of the poor performances of our speech decoder, we have not been able to leverage recent progress in speech segmentation into words <ref type="bibr" target="#b1">(Algayres et al., 2022b;</ref><ref type="bibr" target="#b28">Kamper, 2022;</ref><ref type="bibr" target="#b49">Peng and Harwath, 2023</ref>) that provide word boundaries more aligned with real words than our 200ms chunks. In Appendix A.1 are the results of our attempts at using speech segmentation systems.</p><p>tences with a VERT equal to the VERT of the LibriSpeech.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1.2">Subjective judgements</head><p>As for perplexity, we report in Table <ref type="table" target="#tab_0">1</ref>, the MMOS for batches of spoken generations that have a diversity score equal to the VERT of either LibriSpeech (MMOS@LS-VERT) or LJ (MMOS@LJ-VERT). In addition to 200ms-tGSLM and GSLM we evaluate a topline called character-gold that are speech utterances obtained with Text-To-Speech (Tacotron2.0 from <ref type="bibr" target="#b63">Shen et al. (2017)</ref>) taking in input the transcriptions of LJ and LibriSpeech utterances. From Table <ref type="table" target="#tab_0">1</ref>, for the high-temperature regime that leads to diversity scores in the range of LJ and Librispeech, 200ms-tGSLM is slightly better than GSLM and gets close scores with the topline. MMOS scores are not available for gold-tGSLM has the speech decoder did not work properly. Nonetheless, our table of results does not show the performances of tGSLM in a much lower temperature regime. When conditioned on very low temperature, GSLM can generate very simple and intelligible sentences, whereas 200ms-tGSLM start to produce gibberish. Therefore, both models have their strengths and weaknesses.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Zero-shot performances</head><p>To complete our analysis, we provide in Table <ref type="table" target="#tab_0">1</ref>, performances on the zero-shot tasks scores that are comparable for GSLM and 200ms-tGSLM. GSLM has a little advantage on sW U GGY and sBLIM P and an 200ms-tGSLM a slight advantage on ABX sem and ABX P OS . The topline gold-tGSLM, once again gets much stronger results. ABX scores are obtained, for GSLM at the 9th layer of the transformer and for tGSLM with the lexical tokens.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3">Interpretability</head><p>In order to analyze what is learned by LexEmb we measure the ABX and NED of lexical tokens and acoustic tokens. In Table <ref type="table">2</ref>, the ABX scores show that the acoustic tokens are at chance level on semantic and syntactic encoding. After the LexEmb function, the lexical tokens lose a bit of their phonetic encoding (NED increases) but gain the ability to represent semantics and syntax. However, the NED is not at chance level, meaning that a bit of acoustic information has leaked into the lexical tokens. To visualize the difference between acoustic and lexical spaces, we provide t-SNE maps in Appendix Section A.4. Training spoken LMs on long sequences of audio will become necessary in order to learn long-term semantic relations. The usage of very short acoustic units can become a bottleneck which our method helps to alleviate. To complete our analysis, we provide in Appendix A.5 a theoretical analysis of memory reduction.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">Conclusion</head><p>We introduced a generative spoken LM based on continuous word-sized acoustic tokens. Our model is able to generate speech with the same level of diversity and accuracy as a model based on discrete units. This shows that building a lexicon of types is not necessary for spoken language modelling, which is encouraging considering the difficulty of clustering large segments of speech without degrading the representation (see Appendix B). In addition, this performance was obtained with segments that were not very well aligned with word boundaries (200ms segments). The good result obtained with gold word boundaries indicates that there is room for improvement by using segments better aligned with word boundaries and of course a better speech decoder. Further work is also needed to better limit the leakage of low-level acoustic information into the LM through continuous units, which our analysis has shown is detrimental to the performance of the generative model (see also <ref type="bibr">Nguyen et al. (2022c)</ref>). Finally, the fact that the units are about 5 times larger than standard GSLM units aligns with the NLP literature that is in favour of word-based LMs. It opens the possibility to fit larger spans of audio in GPUs and capture longdistance relationships.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">Limitations</head><p>Our method has some limitations that range from GPU consumption, potential overfitting on the English language and sub-optimal decoding method. First, tGSLM is trained on 32 Nvidia V100-32Go GPUs for 30 hours. Due to the several modules at work in tGSLM (SSE model, LexEmb function, transformer decoder and seq2seq decoder), a large grid-search on hyper-parameters has been necessary which makes this work quite resourceconsuming. Secondly, during the grid-search we chose hyper-parameters to optimize the semantic and syntactic ABX scores on English. By doing so, we might have overfitted the English language and made tGSLM specifically good at generating English speech. Further analysis is required to see if our method generalizes well to syntactically and morphologically different languages, like French or Mandarin. Finally, our decoding method is based on a seq2seq transformer that produces HuBERT frames which are decoded into speech with a combination of Tacotron2.0 and WaveGlow. We chose that method as this later speech synthesiser comes pre-trained in the textlesslib Python library <ref type="bibr" target="#b29">(Kharitonov et al., 2022)</ref>. Yet, recent work on textless speech synthesis <ref type="bibr" target="#b35">Kreuk et al. (2021)</ref>; <ref type="bibr">Kharitonov et al. (2021a)</ref> skip the spectrogram prediction of Tacotron2.0 and directly train a Hifi-Gan model to generate speech from HuBERT units. This latter model shows close to human-level performances. We leave the use of Hifi-Gan instead of Tacotron2.0 for future works on tGSLM.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8">Ethical statement</head><p>tGSLM is a LM that learns to generate speech sentences by predicting its training data. Therefore, tGSLM inherits from ethical concerns associated with text-based LM, speech encoders and speech synthesizers. It is of paramount importance to safeguard against these issues.</p><p>First, generative text-based LMs are known to repeat stereotypes and biases that belong to the training corpus which can cause a series of harms <ref type="bibr" target="#b10">Chowdhery et al. (2022)</ref>; <ref type="bibr" target="#b4">Bender et al. (2021)</ref>. One way to mitigate this is to apply post-processing on generated sentences to detect harmful content. Yet, from what we have heard, tGSLM still struggles to generate sentences that fully make sense, so we do not think that post-processing is required at the moment.</p><p>Second, if tGSLM is used to continue a speech prompt, the continuation might be inconsistent for accents of underrepresented groups in the training data. Indeed, speech systems are known to encode poorly accents and dialects out of the training distribution <ref type="bibr" target="#b59">(Riviere et al., 2021)</ref>.</p><p>Finally, tGSLM continuations will not preserve any regional accentuation from the prompt, as our model only generates speech in the voice of the single speaker of the LJ dataset. to speech. Table <ref type="table" target="#tab_2">3</ref> shows generation and zeroshot scores. Overall, regarding speech generation, 200ms-tGSLM outperforms sylseg-tGSLM, dpparse-tGSLM and also GSLM. For zero-shot tasks, once again, all models score similarly. ABX scores are again obtained for GSLM with embeddings extracted from the 9th layer of the transformer and for tGSLM from the lexical tokens.</p><p>Even though true word boundaries strongly benefit tGSLM, using unsupervised speech segmentation methods did not prove beneficial. We think this is due to the low performances of state-of-the-art speech segmentation systems. These latter are only marginally better than random segmentations and lag largely behind text segmentation performances <ref type="bibr">(Dunbar et al., 2022b;</ref><ref type="bibr" target="#b1">Algayres et al., 2022b)</ref>. This result suggests that progress is needed in unsupervised speech segmentation to be able to combine segmented units into intelligible speech. After all, the best segmentation method that we works for us is the 200ms method. We have also experimented with other durations as 120ms,280ms and 360ms. We chose to go on with 200ms based on a compromise between maximal duration and maximal zero-shot task performances. These scores can be found in Appendix Table <ref type="table" target="#tab_3">4</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A.2 Discussion on q</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A.2.1 Mathematical details on q</head><p>Let us now derive q computation. Given a training corpus, that is segmented and encoded into a collection of acoustic tokens (a i ) i≤N . A PCA is trained on (a i ) i≤N and the d first dimensions are kept, let us write (a ′ i ) i≤N the resulting vectors and (v 0 , ..., v d ′ ) the explained variance of each PCA dimensions. Then, we train d separate k-means on each dimension of the PCA. The number of cluster per k-means is computed as</p><formula xml:id="formula_1">( K v 0 v 0 , , ..., K v d ′ v 0 )</formula><p>. The values of d and K were set to maximize the scores at the zero-shot tasks. Once the k-means are trained, the centroids are stored in d dictionaries (k 0 , ..., k d ). For any i ≤ N , we compute q(a i ) by assigning ∀j ≤ d, q(a i )[j] to its closest centroids in k j . Finally, cluster ids are turned into one-hot vectors and concatenated into a single vector. The following operations sum up the process.</p><formula xml:id="formula_2">∀i ≤ n, q(a i ) ←            argmax j≤K (a i [0] -k 0 [j]) argmax j≤ K v 1 v 0 (a i [1] -k 1 [j])</formula><p>. . .</p><formula xml:id="formula_3">argmax j≤ K v d v 0 (a i [d] -k d [j])            q(a i ) ←      onehot(q(a i [0])) onehot(q(a i [1])) . . . onehot(q(a i [d]))      q(a i ) ← concatenate(q(a i [0]), ..., q(a i [d]))</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A.2.2 Ablation on q</head><p>The function q introduced in Section 3.1.2, composed of a PCA and our d-k-means method, is ablated in Table <ref type="table" target="#tab_5">6</ref>. In all configurations, the embeddings right after the LexEmb function are used to compute the ABX and NED scores. On the one hand, q degrades the phonetic information in the lexical tokens (NED increases) and makes training harder (validation loss increases). On the other hand, q maximizes semantic and syntactic information (ABX increases) as well as generation quality (PPX decreases). A null value in Table <ref type="table" target="#tab_5">6</ref> means that the model is not able to produce intelligible sentences with this setup. First, these experiments show the necessity of q for the 200ms-tGSLM to generate spoken sentences. Second, the combination of these results reveals that q prevents the model from converging quickly to a bad local minimum that hinders generalization. It follows our intuition from Section 3.1.2: there seems to be a low-variance signal encoded in the acoustic tokens that interfere with the semantic and syntactic modelling. In our opinion, this signal gives away both local information, direct right and left context due to coarticulation, and global sentence-level information (relative token position and speaker identity).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A.2.3 On using MFCCs instead of Wav2vec2.0</head><p>One may say that if q is used to mitigate the downsides of the attention mechanism of Wav2vec2.0, why not use more local features like MFCC or Melfilterbanks? We argue that even though these latter features are still good for supervised tasks as ASR <ref type="bibr" target="#b55">Radford et al. (2022)</ref>, they are substantially outperformed by recent self-supervised speech models (Wav2vec2.0, CPC, HuBERT,...) at the tasks of zero-shot word discrimination <ref type="bibr">(Algayres et al., 2022a;</ref><ref type="bibr" target="#b68">Van Staden and Kamper, 2020)</ref> and keyword spotting <ref type="bibr" target="#b73">(Yang et al., 2021)</ref>. To prove our point, we compare the performances of MFCCs compare to Wav2vec2.0 at the task of discriminating acoustic tokens. As a reminder, the acoustic tokens that we used in our model, are the output of an SSE model from <ref type="bibr">Algayres et al. (2022a)</ref>, pre-trained to embed variable-length sequences of Wav2vec2.0 frames into fixed-size vectors. The same kind of SSE model but pre-trained on MFCC frames is also provided by <ref type="bibr">Algayres et al. (2022a)</ref>. Let us segment the LibriSpeech corpus every 200ms and embed the speech segments with both SSE models so that we get two collections of acoustic tokens: (a mf cc i ) i≤N and (a w2v2 i ) i≤N . Let us also apply the q function on Wav2vec2.0 acoustic tokens so that we get: (q(a w2v2 i )) i≤N . To measure performances, we use our N ED metric on the three collections of embeddings. From the  results Table <ref type="table">7</ref>, we see that Wav2vec2.0 leads to much better acoustic tokens than MFCCs. Moreover, even when q is applied on Wav2vec2.0 acoustic tokens, the N ED score of (q(a w2v2 i</p><p>)) i≤N is still much lower than on (a mf cc i ) i≤N . This latter has a NED score of 65%, which means that two neighbouring MFCC acoustic tokens have on average less than half of their phonemes in common. For that reason, why we excluded MFCC from our experiments on speech generation. ) i≤N , and finally on Wav2vec2.0 frames when q is applied: (q(a w2v2 i )) i≤N .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A.3 Hyperparameters</head><p>Wav2vec2.0 and SSE are trained on the Lib-riSpeech corpus respectively by <ref type="bibr" target="#b3">Baevski et al. (2020)</ref> and <ref type="bibr">Algayres et al. (2022a)</ref>. Wav2vec2.0 Base is a stack of 7 convolution layers and 12 transformer layers. The SSE is composed of a one GLU convolution layer (kernel size: 4, number of channels: 512, stride: 1), a transformer layer (attention heads: 4, size of attention matrices: 512 neurons, and FFN: 2048 neurons) and a final max-pooling layer along the time axis.</p><p>LexEmb is composed of two functions L • q. L is a stack of five three-layers blocks each formed by a 1024-neurons fully connected layer, a layer norm and a ReLU activation. q is of a PCA and a collection of k-means that are trained on LL6kclean. The PCA has d = 24 dimensions and the number of centroids for the first k-means is K = 10.</p><p>Transformer is identical to the one used in the original GSLM paper <ref type="bibr" target="#b39">(Lakhotia et al., 2021)</ref>. It contains 12 transformer layers with 16 heads, 1024-neuron attention matrices, and 4096-neurons FFN. On top of the transformer, the three parallel h1,h2,h3 functions are 1024-neurons fully connected layers. L,h1,h2,h3 and the transformer are trained on 32 GPUs, for 200k iterations on either the LibriSpeech or LL6k-clean. Each batch is composed of 64 audio sentences that are composed of 64 tokens. The learning rate is set at 5 -4 with a warm-up of 5000 updates and polynomial decay. We use Adam optimizer with a weight decay of 0.1. A dropout of 0.1 is applied during training. The loss function is the NCE loss with a temperature of 0.1 and 500 negative samples.</p><p>Sampling is performed in a FAISS k-NN (Johnson et al., 2017) that contains all the lexical tokens segmented in the dev-clean and test-clean from the LibriSpeech (roughly 10 hours of speech). The number of nearest neighbours from which the next token is sampled is set to 1000.</p><p>Speech generation model is an encoder and a decoder that shares the same architecture: 4 transformer layers with 8 heads, 512-neurons attention matrices, and 3072-neurons FFN. It is trained on 32 GPUs, for 30k iterations on the LibriSpeech. Each batch is composed of four audio sentences that are at maximum 20 seconds long. The learning rate is set at 5 -5 with a warm-up of 10 3 updates and polynomial decay. We use a dropout probability of 0.1 and Adam optimizer with a weight decay of 0.1. The Tacotron2.0 from <ref type="bibr" target="#b39">Lakhotia et al. (2021)</ref>; <ref type="bibr" target="#b29">Kharitonov et al. (2022)</ref> was trained on LJ.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A.4 Probing acoustic and lexical spaces</head><p>Figure <ref type="figure" target="#fig_6">4</ref> is a visualization of the acoustic and lexical representation learned by gold-tGSLM which echo a work on speech word embeddings from <ref type="bibr" target="#b11">Chung and Glass (2018)</ref>. All speech segments corresponding to real words in the LibriSpeech dev-clean set are indexed in k-NN graphs on their acoustic or lexical form. Each embedding is labelled with its true transcription. By searching for the nearest neighbors of a centre word (in red in the figure), we highlight in green the neighbours that we judged semantically related to the centre word. Figure <ref type="figure" target="#fig_6">4</ref> shows that an acoustic token has usually no semantically related neighbour other than ones with the same transcription. By contrast, lexical tokens have semantic and syntactic properties: 'London' is close to other cities and countries, 'blue' is close to colour names, beautiful is close to other positive adjectives, and 'chair' is close to 'desk' and 'table'. Nonetheless, it appears acoustic information has leaked from the acoustic tokens into the lexical tokens. For instance, the lexical neighbours of 'blue' are colours or shades that start with a 'b' and 'chest' appears in the neighbourhood of 'chair'.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A.5 Estimation of memory consumption</head><p>To estimate the memory consumption of a transformer LM with L = 16 layers, a single attention head, a batch size of 1, and an embedding size d = 1024 , let us write x ∈ IR n×d a sentence of n tokens represented with embeddings of size d . Using the formula expressed in <ref type="bibr" target="#b33">Korthikanti et al. (2022)</ref>, the number of activations to store in memory during backpropagation is approximately (buffers and negligible values being omitted) ϕ(L, n, d) = Lnd(34+5 n d ). In the LL6kclean corpus, sentences are 60s-long on average with make n = 1500 for GSLM and n = 300 for 200ms-tGSLM. 200ms-tGSLM should expect a memory reduction by a factor of ϕ(16,1500,1024)  ϕ(16,300,1024) ≈ 5.83 compared to GSLM. In practice, we observe a lower memory reduction (≈ 4.76) which can be explained by the additional parameters that are present in 200ms-tGSLM and not in GSLM, namely the LexEmb function and three prediction heads.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A.6 Inference time complexity</head><p>Taking the calculation of a forward cost from <ref type="bibr" target="#b47">Pan et al. (2021)</ref>, for a sequence length of size n, and a transformer of L = 16 layers and dimension d = 1024, a forward pass costs (12nd + 2nd) * L. This would be the cost of a forward pass in the GSLM model, but our tGSLM costs a little bit more with its LexEmb function and its sampling procedure. A forward through our LexEmb function costs 5nd 2 (5 linear layers) and the sampling procedure costs d * 100.000 (we usually take 100k items for the k-NN search). Therefore, tGSLM cost (12nd + 2nd)L + 5nd + d * 100000. For a sequence of 1 second (therefore n = 5 for tGSLM and n = 25 for GSLM), by replacing those values in the former calculation, we find that a forward in tGSLM cost 1.1e6 which is 5 times less costly than a forward in GSLM that would cost 5.2e6. Therefore, even at inference time, our tGSLM should be much faster than GSLM to run.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>200ms-tGSLM examples Generation at LJ-VERT</head><p>What is it ask her mother i want to see you said mrs tumbled i want to tell you what you you said mr cockry you are no more chance than you know. We have no desire to prevent to the astonishment of that person from the government who is not so far for receiving any property or relation to the world. Her father in her son were under growth her father was just like a treasure man who was a devil and hazards beyond his words she was a very clearly. We also see that it will be obliged to invite us to applyge them to observe such a thing is a base we must not set down that the And although he was not equally successful to him he sought the pririate regularly observed his friends invent to him and presented him their own secret he had did Because they were rested and although they could not expect to be obliged to regarded as a men of a gold and power they were not really unbusy You see he is if i miss thing i think he is dead it said mrs carpenter rather smallly for anything if he is a total let she said He remembered that great city which he tried to entertain in its pointedof view but he was very pleasant to him and could not bring whom away besides this Having required a measure for a month before their distance of sixty years he appeared to be affected by any conditions of one state and have in no battle Now the king's brothers came to him and brought him up and said i'll poor woman i woke it of you anything but i am brother and borrows my Generation at LS-VERT He turned his hands on the sale exposition and gave him to acy of old meal which wealth had never bore be a foreseenly large. While waiting to him he wished that he would wait for himself into his mother's house and held light he was that that she might be able to look. And perhaps i have nothing to say about what would you want to know i did i don't know i suppose you want to know what could call the That's all i can't do insaid woman looking out of the croad toward him while i don't know such any end enging his hand you seem to see your And having been described as the great activity of that which he was attempting all that if he now remar it for his purpose was intended with principles as It was the time had been prepared for for that such was the place that when he was saing to his land she'd made up all though blood that he It was just as willing to oppose the person who had been told of his chion he was now about to go to bank in the family to a Having been in a moment' officially desirable to acquaint him with his reference with the glorious presence of his master's cabinet he did not return to a subject of Yes i was said he but was a general service she began i could not file forhard seek i want to take my as andt understand the chance of But afterwards they had gone to top what waking into the stone doors the weathering tight their habitation and the north were histor carryance and mr carb's face and </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>gold-tGSLM examples</head><p>Generation at LJ-VERT But you have been wanting to teach me all her life in the world of her own healthy health and she has her fathers abilities an your pride. The old woman or that he would have learned all her life amongst the gods and teaching them in their father's studies and having been up the days. It goes on until i know what i am doing while i am going away from my camp in the neighbourhood to morrow we you from the whole on my. An elegant geographical character would you think it a deed or an excellent thing to do with the hold in the future won't you pick up a bit of an The evening of the twenty fifth of november eighteen united eight he returned to his royal house an the hold of the hospital an the next evening he you Guiding them in some ordinary way or buying them into cold or buying them with a copal spoon which should be thrown out of the souls of the bulkhead Secies and germany each of them had undergone more than three thousand roubles and hour to saved a bit of jewelry from s odin share and the hardness and Of the kavin and when to the door where she stood a few minutes later to reach the bottom of the harboured near the labyrinth where she reached her It says the king listening the light of his bushy fingers an holding his pipe in his arms do not bother me any more about it you know more than The investigation and on his returned to her fathers room he set down his gun at a hundred yards and the middle of the hall to learn the hut Generation at LS-VERT I can tell her that only one of my friends and loves do you think i would read her about this uttered it all the wicked said missus williams She reached her big house and stood by the dora in turning to the king he said to her you will not marion me any more have you hear To his voices and his broken heart screen with delight to henry smokeless who had entered into his dining room to limp him a mystic playful of his faintest I shall not go without thee said heat pausing to her part a of good direction and fixing her ices upon her eyes with a distant cheeks to her. Than time of missus esplanade visit her own house and china herself alone of theirlocal service and the frere settlements where built for thousand of the happiest teachers Father and mother were all seated at boston waiting for the empty school at ostrog at nine o'clock a the knight of july evening a ninth jeanne annie eighteen Minutes later he heard a bill calling against the young man who had denounce him his face became a melancholy shake in his astonishment what is it said george A poor boy in has a good power for somebody's harm to be at heaven what could you to givewhat this seemed to him a hard proposition Paper it was needless to be summoned to it by the princess and the girl became very much surprise and said about recovering the bicycle with her finger to To touch it he s a gentle young ma'am and does not see any other foreign of mortality unconnected with her father who is afraid of his flesh to GSLM examples Generation at LJ-VERT They did time in the desert two or three hundred years afterward among them the castle was not my father and they were found in palestine by fire and they Another excellent is descended a breath let the corp of a prisoner and a blow was begun the bell rang the gunsprang from the captain's paul and dropped into the And then the passing future would have been too much but to waittill the end of the week and after a little time she had gone down to the palace But he passed along entirely untouched and was still together so frightened in the morning he went to look out for some place with a barian laine and then he The brast of the bravest of the entire youth and of many of the slaves of the counillllors or of every fine breed and of the princess of france has He had not in the least delicate way of helping her but had helld her into a pretty soft and a passionate graceful manner he told her every day because But that man did not fight in the second place no ne did pay the attention to poverty it is not tpossible to suspect that the man of the previous But all the people had come to see me and had not seen me again and they felt as if i were again coming to see me and so little And people stared at him for a moment as if they were dead but he had not told them of his destiny that he would do so and they had And a cow calling up his pipe said that no sign of the procession was ever heard and that no punishment was made or judgment was made nor any other Generation at LS-VERT His proposals that being so poing doubful i should very much regard and alia in boa's addition to cloak the great morning had given me a plague off waivering she Someone to found a brown line and dance spent a moment over the vessel all saw the fair young chinese yard and dry he would waved dances in bubbles from All cathics that are not due to f co notion or naturalist that is intentionble but if there is a personality of faith in them who was intentupon for seeing The reef made the partets at the corner of a platform with them rose and ground on the floor of the lobby and of chapter fourteen two thousand se of As if sudden impulse were convinced of their usual impulses and a strong exercise upon them or rather in their progress to bring their education to the reduction of manly And rushing off from the cold winds in the west in the silence of the rock the cherry wavering soft quietness of people makes breath so cheap in a course He had been burden with visitor and had petched his old preserance for death and mary the intamminable enterprising scenes caused by constantiis this trumpetts und drrawn courage and he Great worked done an artificial lines of bounding is below the had an arm as it were it lookedfted itself and everything was so exquisite that the site was hard To jew knew that they had been driven a doctor adreadful mattering to you the young girl whom eyed by a relatives ever since daily matters while a week before Evenings in a ball volume whose close ways were rotted in whther cuts that fiddler devilalonsome his wife soldiers were harassing a women with deafferenren american last grading under fair In the introduction, we argued that the clustering of a large collection of word-size speech fragments is a daunting challenge. The first difficulty is the very large number of word types in a corpus. For instance, there are ≈4.5k word types in the 10hour-long Buckeye corpus <ref type="bibr" target="#b52">(Pitt et al., 2005)</ref>, and ≈90k in the 960-hour-long LibriSpeech <ref type="bibr" target="#b48">(Panayotov et al., 2015)</ref>. Most clustering algorithms (k-means, hierarchical-k-means, Spectral, Chinese Whisper <ref type="bibr" target="#b5">(Biemann, 2006)</ref>, Dirichlet Process-means <ref type="bibr" target="#b37">(Kulis and</ref><ref type="bibr">Jordan, 2011), Brown (Brown et al., 1992)</ref>), require in input either this unknown number of clusters or a threshold parameter that controls the number of clusters 9 . By misestimating the number of clusters, we introduce errors that can mislead the downstream LM. The second problem is the highly skewed distribution of the frequency of word types. This phenomenon, known as Zipf's Law <ref type="bibr" target="#b76">(Zipf, 1949)</ref>, states that, in text, there is a linear relation between the log-rank of word types and their log-frequencies. In practice, it means that, in a text, most word tokens are hapaxes (i.e. they have a word type that appears only once), and a small proportion of word types account for most tokens. Therefore, even if the number of word types could be correctly estimated, a clustering algorithm would have to produce many singleton clusters, which is a hard task for clustering models, especially for k-means that tend to create equal-size clusters <ref type="bibr" target="#b71">(Wu, 2012)</ref>. For those reasons, a clustering algorithm is likely to produce non-recoverable errors that will negatively impact the downstream spoken LM.</p><p>9 Some unsupervised methods to find the number of clusters exist, like the 'elbow methods' in k-means, but these methods are quite noisy and hard to apply when the number of classes is that large.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B.2 Attempt at clustering SSEs</head><p>Here are some attempts and results at the task of clustering speech fragments. First, we retrieved the gold-standard word segmentation of the LibriSpeech corpus and embedded all word tokens with the SSE model from <ref type="bibr">Algayres et al. (2022a)</ref>. Then, we clustered with k-means and hierarchicalk-means all the SSEs in the LibriSpeech into K classes. To simplify, we set K to the true number of word types. Finally, we trained a transformer LM to predict the next discrete clusters. We observed that the training loss decreased but not the validation loss. The reason for this failure was simple: most of the clusters found by k-means or hierarchical-k-means that were in the validation set were not present in the training set. These results show that those baseline clustering algorithms are not suited to the task of spoken language modelling.</p><p>Regarding more elaborate clustering methods, <ref type="bibr" target="#b15">Elkahky et al. (2023)</ref> has used a combination of HuBERT units, smoothing technics, Byte-Pair-Encoding (BPE) and Brown clustering (BC) <ref type="bibr" target="#b8">(Brown et al., 1992)</ref> with either 30k clusters or 2k clusters. The result is a discretisation of speech with word-size units. We have proved in <ref type="bibr" target="#b15">Elkahky et al. (2023)</ref> that these units can be used to train a HuBERT model and improves its downstream ASR performances. Here, we discretised the Libri-Light 6k clean <ref type="bibr" target="#b60">(Rivière and Dupoux, 2021)</ref> with these large units using either 30k and 2k clusters and gave them in input to a transformer LM trained to predict the next discrete units. We report in Table 11 sWUGGY and sBLIMP scores of GSLM, 200ms-tGSLM and the large units (called BC-30k and BC-2k). The scores show that these units perform equally well to GSLM and 200ms-tGSLM. These results show that even the most elaborate methods of clustering do not bring better results than our method to adapt spoken LM to continuous inputs.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: Speech is encoded into Wav2vec2.0 frames and segmented into chunks. These latter are converted into acoustic tokens with an SSE model and turned into lexical tokens by applying the function LexEmb. Finally, lexical tokens are fed to a causal transformer LM which attempts to predict the first, second, and third following tokens using parallel output heads. The acoustic tokens are pre-extracted before training the learnable modules (LexEmb, the transformer and the final fully connected layers) with the NCE loss. The negative samples are chosen randomly from other utterances of the same speaker.</figDesc><graphic coords="4,70.87,71.86,229.18,148.08" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: Our sampling procedure. Given a list of audio files unseen during training, N random speech segments are stored in their acoustic and lexical forms:(a i , l i ) i≤N .In addition, a lexical space is created by indexing (l i ) i≤N into a k-NN graph. Given a speech prompt, segmented and encoded into (a 0 , ..., a t ), we do a forward pass in tGSLM and search for the nearest neighbors of h 1 output in the lexical space. l t+1 is sampled and its corresponding a t+1 is appended to (a 0 , ..., a t ). When a final a T token is sampled, (a 0 , ..., a T ) is decoded into HuBERT units and speech is generated with Tacotron2.</figDesc><graphic coords="6,70.87,71.86,229.18,130.92" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head></head><label></label><figDesc>Lakhotia et al. (2021); Kharitonov et al. (</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 3</head><label>3</label><figDesc>Figure 3 provides a comparison of the original discrete unit-based GSLM with two versions of our continuous unit model: 200ms-tGSLM, trained on speech segmented every 200ms and gold-tGSLM, trained on speech segmented on the true word boundaries. GSLM and 200ms-tGSLM are trained</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head></head><label></label><figDesc>.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: PPX and VERT scores for GSLM, 200ms-tGSLM and gold-tGSLM. Each dot is obtained by generating sentences with a fixed temperature parameter. The curves are 3rd-degree polynomial interpolations of the dots. The green dashed lines are the oracle PPX/VERT obtained on the LibriSpeech and LJ corpus.</figDesc><graphic coords="8,70.87,233.72,218.27,163.70" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Figure 4</head><label>4</label><figDesc>Figure 4: t-SNE representations of acoustic (left side) and lexical (right side) tokens. After training gold-tGSLM, all speech segments corresponding to word tokens in the LibriSpeech dev-clean subset are indexed into their acoustic or lexical form. By probing an acoustic or lexical token (appearing in red), we can have a look at their acoustic and lexical nearest neighbours. The neighbours that appear in green are those deemed as semantically related to the probe.</figDesc><graphic coords="16,70.87,533.07,204.10,153.07" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc>Results on zero-shots and generation tasks for 200ms-tGSLM and GSLM, trained on LL6k-clean, and gold-tGSLM, trained on LibriSpeech. ABX is computed on tGSLM lexical tokens and on GSLM 9th layer. The last line is a topline that is composed of true sentences from both LibriSpeech and LJ.</figDesc><table><row><cell></cell><cell></cell><cell cols="2">Zero-shot metrics↑</cell><cell></cell><cell cols="2">Generation PPX↓</cell><cell cols="2">Generation MMOS↑</cell></row><row><cell></cell><cell cols="4">sWUGGY SBLIMP ABX sem ABX P OS</cell><cell>LS-VERT</cell><cell>LJ-VERT</cell><cell>LS-VERT</cell><cell>LJ-VERT</cell></row><row><cell>GSLM</cell><cell>70.36</cell><cell>56.31</cell><cell>55.85</cell><cell>59.03</cell><cell>503.25+-12.3</cell><cell>387.45+-11.2</cell><cell cols="2">3.76 +-0.035 3.78 +-0.023</cell></row><row><cell>200ms-tGSLM</cell><cell>68.53</cell><cell>55.31</cell><cell>55.89</cell><cell>60.3</cell><cell>532.87+-10.1</cell><cell>356.24+-15.7</cell><cell cols="2">4.09 +-0.016 4.04 +-0.020</cell></row><row><cell>gold-tGSLM</cell><cell>86.37</cell><cell>- †</cell><cell>65.6</cell><cell>75.59</cell><cell cols="2">361.84+-20.1* 255.32+-14.2*</cell><cell>n/a</cell><cell>n/a</cell></row><row><cell>character-gold</cell><cell>n/a</cell><cell>n/a</cell><cell>n/a</cell><cell>n/a</cell><cell>180.2</cell><cell>142.6</cell><cell cols="2">4.12 +-0.016 4.11 +-0.023</cell></row></table><note><p>*: those scores are obtained without using a speech decoder. † time-aligned word boundaries for sBLIMP are not available</p></note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 3 :</head><label>3</label><figDesc>WUGGY↑ SBLIMP↑ ABX sem ↑ ABX P OS ↑ PPX@LS-VERT↓ PPX@LJ-VERT↓ Results on zero-shot and generation tasks for GSLM and for tGSLM on three different speech segmentation methods. Models are all trained on LibriSpeech. ABX is computed on tGSLM lexical tokens and on GSLM 9th layer models sW U GGY ↑ sBLIM P ↑ ABX sem ↑ ABX P OS ↑ average ↑</figDesc><table><row><cell>GSLM</cell><cell>65.85</cell><cell>54.35</cell><cell>55.18</cell><cell>61.61</cell><cell>664.23</cell><cell>497.65</cell></row><row><cell>sylseg-tGSLM</cell><cell>64.39</cell><cell>53.21</cell><cell>54.64</cell><cell>60.01</cell><cell>634.34</cell><cell>505.87</cell></row><row><cell>dpparse-tGSLM</cell><cell>65.54</cell><cell>53.82</cell><cell>55.6</cell><cell>58.65</cell><cell>634.34</cell><cell>505.87</cell></row><row><cell>200ms-tGSLM</cell><cell>63.15</cell><cell>53.34</cell><cell>55.08</cell><cell>60.24</cell><cell>610.32</cell><cell>490.32</cell></row><row><cell></cell><cell>120ms-tGSLM</cell><cell>61.55</cell><cell>51.86</cell><cell>54.74</cell><cell>60.12</cell><cell>57.32</cell></row><row><cell></cell><cell>200ms-tGSLM</cell><cell>63.15</cell><cell>53.34</cell><cell>55.08</cell><cell>60.24</cell><cell>57.95</cell></row><row><cell></cell><cell>280ms-tGSLM</cell><cell>61.89</cell><cell>51.64</cell><cell>52.8</cell><cell>56.28</cell><cell>55.65</cell></row><row><cell></cell><cell>360ms-tGSLM</cell><cell>60.18</cell><cell>51.29</cell><cell>52.18</cell><cell>55.45</cell><cell>54.75</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 4 :</head><label>4</label><figDesc>Zero-shot tasks computed on tGSLM trained on LibriSpeech for different unit durations</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head>Table 5 :</head><label>5</label><figDesc>models sW U GGY ↑ sBLIM P ↑ ABX sem ↑ ABX P OS ↑ average ↑ Zero-shot tasks for 200ms-tGSLM trained on LibriSpeech to predict the next one, two, three, or four words PCA d-k-means Valid loss↓ NED↓ ABX sem ↑ ABX P OS ↑ PPX@LS-VERT↓ PPX@LJ-VERT↓</figDesc><table><row><cell>next word</cell><cell>61.57</cell><cell></cell><cell>52.08</cell><cell>51.48</cell><cell>53.84</cell><cell>54.75</cell></row><row><cell>next two words</cell><cell>63.02</cell><cell></cell><cell>53.48</cell><cell>54.79</cell><cell>58.01</cell><cell>57.35</cell></row><row><cell>next three words</cell><cell>63.15</cell><cell></cell><cell>53.34</cell><cell>55.08</cell><cell>60.24</cell><cell>57.95</cell></row><row><cell>next four words</cell><cell>62.25</cell><cell></cell><cell>53.1</cell><cell>54.43</cell><cell>58.81</cell><cell>57.14</cell></row><row><cell>200ms-tGSLM</cell><cell>2.51</cell><cell>35.21</cell><cell>53.87</cell><cell>58.40</cell><cell>null</cell><cell></cell><cell>null</cell></row><row><cell>200ms-tGSLM</cell><cell>4.33</cell><cell>41.50</cell><cell>54.16</cell><cell>57.99</cell><cell cols="2">840.65</cell><cell>null</cell></row><row><cell>200ms-tGSLM</cell><cell>6.21</cell><cell>44.32</cell><cell>55.08</cell><cell>60.24</cell><cell cols="2">610.32</cell><cell>490.32</cell></row><row><cell>gold-tGSLM</cell><cell>3.99</cell><cell>17.21</cell><cell>55.13</cell><cell>63.54</cell><cell cols="2">608.24</cell><cell>475.65</cell></row><row><cell>gold-tGSLM</cell><cell>6.20</cell><cell>21.87</cell><cell>58.59</cell><cell>67.71</cell><cell cols="2">432.78</cell><cell>384.57</cell></row><row><cell>gold-tGSLM</cell><cell>7.15</cell><cell>22.70</cell><cell>65.60</cell><cell>75.59</cell><cell cols="2">361.84</cell><cell>255.32</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_5"><head>Table 6 :</head><label>6</label><figDesc>Results on zero-shot and generation tasks for ablations of the PCA and d-k-means components of the LexEmb function. Models are trained on LibriSpeech. ABX and NED are computed on tGSLM lexical tokens. null means that no intelligible speech can be generated in this setting.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_7"><head>Table 8 :</head><label>8</label><figDesc>Example generations of 200ms-tGSLM trained on LL6k-clean. These generations are selected from batches of sentences that have a VERT equal 0.113 (LS-VERT) or 0.189 (LJ-VERT).</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_8"><head>Table 9 :</head><label>9</label><figDesc>Example generations of gold-tGSLM, trained on LibriSpeech. These generations are selected from two batches of sentences that have a VERT equal 0.113 (LS-VERT) or 0.189 (LJ-VERT).</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_9"><head>Table 10 :</head><label>10</label><figDesc>Example generations of GSLM, trained on LL6k. These generations are selected from two batches of sentences that have a VERT equal 0.113 (LS-VERT) or 0.189 (LJ-VERT).</figDesc><table><row><cell cols="3">WUGGY↑ SBLIMP↑</cell></row><row><cell>GSLM</cell><cell>70.36</cell><cell>56.31</cell></row><row><cell>200ms-tGSLM</cell><cell>68.53</cell><cell>55.31</cell></row><row><cell>BC-30k</cell><cell>71.32</cell><cell>55.08</cell></row><row><cell>BC-2k</cell><cell>69.00</cell><cell>54.44</cell></row><row><cell cols="3">Table 11: sWUGGY and sBLiMP GSLM and 200ms-</cell></row><row><cell cols="2">tGSLM and the large units</cell><cell></cell></row><row><cell>B Clustering SSEs</cell><cell></cell><cell></cell></row><row><cell cols="3">B.1 The problem of clustering large units</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2" xml:id="foot_0"><p>Due to this quantization step, the resulting vectors (PCA+ d-k-means) could in principle be mapped to a finite dictionary of tokens, but, in practice, there is little or no collision and the number of classes remains identical to the number of tokens, i.e., way too high to apply a softmax.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3" xml:id="foot_1"><p>ASR transcripts are obtained with a pretrained large Wav2Vec 2.0 model, trained on LibriSpeech-960h combined with a standard KenLM</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" xml:id="foot_2"><p>4-gram LM. The external LM used for perplexity is trained on the English NewsCrawl dataset and accessible at https: //github.com/facebookresearch/fairseq/ tree/main/examples/language_model</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="4" xml:id="foot_3"><p>Training 200ms-tGSLM on Libri-light 60k<ref type="bibr" target="#b26">(Kahn et al., 2019)</ref>, a larger but noisier corpus, slightly undermined the performance.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="5" xml:id="foot_4"><p>word boundaries cannot be computed for LL6k-clean because sentence-level speech and text alignments are missing</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="6" xml:id="foot_5"><p>For a given spoken LM, its PPX@LS-VERT score is the perplexity score obtained by that spoken LM when conditioned on a temperature that makes it generate spoken sen-</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="7" xml:id="foot_6"><p>The acoustic tokens that are the input of 200ms-tGSLM are extracted in a preprocessing step. They do not impact memory usage at training time.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="8" xml:id="foot_7"><p>We did not train these models on LL6k-clean because DP-Parse is hard to scale to large datasets.</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>Acknowledgements</head><p>This work was funded in part, to the authors in their academic capacities, by the <rs type="funder">Agence Nationale pour la Recherche</rs> (<rs type="grantNumber">ANR-17-EURE-0017 Frontcog</rs>, <rs type="grantNumber">ANR-10-IDEX-0001-02 PSL</rs>*, <rs type="grantNumber">ANR-19-P3IA-0001</rs> <rs type="projectName">PRAIRIE 3IA Institute</rs>), <rs type="funder">CIFAR</rs> (<rs type="projectName">Learning in Machines and Brains</rs>) and <rs type="projectName">Meta AI Research</rs> (<rs type="grantName">Research Grant</rs>). This work was performed using HPC resources from <rs type="funder">GENCI-IDRIS</rs> (Grant <rs type="grantNumber">2021-[AD011011217</rs>]).</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_64tkhyQ">
+					<idno type="grant-number">ANR-17-EURE-0017 Frontcog</idno>
+				</org>
+				<org type="funding" xml:id="_67pAKKX">
+					<idno type="grant-number">ANR-10-IDEX-0001-02 PSL</idno>
+				</org>
+				<org type="funded-project" xml:id="_2rbqZY9">
+					<idno type="grant-number">ANR-19-P3IA-0001</idno>
+					<orgName type="project" subtype="full">PRAIRIE 3IA Institute</orgName>
+				</org>
+				<org type="funded-project" xml:id="_wbX62QD">
+					<orgName type="project" subtype="full">Learning in Machines and Brains</orgName>
+				</org>
+				<org type="funded-project" xml:id="_5U6Ffz7">
+					<idno type="grant-number">2021-[AD011011217</idno>
+					<orgName type="grant-name">Research Grant</orgName>
+					<orgName type="project" subtype="full">Meta AI Research</orgName>
+				</org>
+			</listOrg>
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A Supplementary materials A.1 Speech segmentation</head><p>To study the impact of speech segmentation on tGSLM, we trained this model on LibriSpeech with two extra segmentation methods: SylSeg <ref type="bibr" target="#b57">(Räsänen et al., 2018)</ref>, and DP-Parse <ref type="bibr" target="#b1">(Algayres et al., 2022b)</ref> 8 . Sylseg segments speech into syllable-like units, using damped oscillators that exploit rhythmic cues of syllabic structure in speech. DP-Parse <ref type="bibr" target="#b1">(Algayres et al., 2022b)</ref> segments speech into wordlike units with state-of-the-art performances. This model adapts a non-parametric Bayesian model for text segmentation <ref type="bibr" target="#b18">(Goldwater et al., 2009)</ref> </p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">Speech sequence embeddings using nearest neighbors contrastive learning</title>
+		<author>
+			<persName><forename type="first">Robin</forename><surname>Algayres</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adel</forename><surname>Nabli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benoît</forename><surname>Sagot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emmanuel</forename><surname>Dupoux</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/ARXIV.2204.05148</idno>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<title level="m" type="main">Dpparse: Finding word boundaries from raw speech with an instance lexicon</title>
+		<author>
+			<persName><forename type="first">Robin</forename><surname>Algayres</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tristan</forename><surname>Ricoul</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julien</forename><surname>Karadayi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hugo</forename><surname>Laurençon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Salah</forename><surname>Zaiem</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abdelrahman</forename><surname>Mohamed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benoît</forename><surname>Sagot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emmanuel</forename><surname>Dupoux</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/ARXIV.2206.11332</idno>
+		<imprint>
+			<date type="published" when="2022">2022b</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title level="m" type="main">vq-wav2vec: Self-supervised learning of discrete speech representations</title>
+		<author>
+			<persName><forename type="first">Alexei</forename><surname>Baevski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steffen</forename><surname>Schneider</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Auli</surname></persName>
+		</author>
+		<idno>CoRR, abs/1910.05453</idno>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<title level="m" type="main">wav2vec 2.0: A framework for self-supervised learning of speech representations</title>
+		<author>
+			<persName><forename type="first">Alexei</forename><surname>Baevski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Henry</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abdelrahman</forename><surname>Mohamed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Auli</surname></persName>
+		</author>
+		<idno>CoRR, abs/2006.11477</idno>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">On the dangers of stochastic parrots: Can language models be too big?</title>
+		<author>
+			<persName><forename type="first">Emily</forename><forename type="middle">M</forename><surname>Bender</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Timnit</forename><surname>Gebru</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Angelina</forename><surname>Mcmillan-Major</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shmargaret</forename><surname>Shmitchell</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3442188.3445922</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2021 ACM Conference on Fairness, Accountability, and Transparency, FAccT &apos;21</title>
+		<meeting>the 2021 ACM Conference on Fairness, Accountability, and Transparency, FAccT &apos;21<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="610" to="623" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Chinese whispers -an efficient graph clustering algorithm and its application to natural language processing problems</title>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Biemann</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of TextGraphs: the First Workshop on Graph Based Methods for Natural Language Processing</title>
+		<meeting>TextGraphs: the First Workshop on Graph Based Methods for Natural Language Processing<address><addrLine>New York City</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2006">2006</date>
+			<biblScope unit="page" from="73" to="80" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<title level="m" type="main">Alternative structures for character-level rnns</title>
+		<author>
+			<persName><forename type="first">Piotr</forename><surname>Bojanowski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Armand</forename><surname>Joulin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tomás</forename><surname>Mikolov</surname></persName>
+		</author>
+		<idno>CoRR, abs/1511.06303</idno>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<title level="m" type="main">Audiolm: a language modeling approach to audio generation</title>
+		<author>
+			<persName><forename type="first">Zalán</forename><surname>Borsos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Raphaël</forename><surname>Marinier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Damien</forename><surname>Vincent</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eugene</forename><surname>Kharitonov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Olivier</forename><surname>Pietquin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matt</forename><surname>Sharifi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Olivier</forename><surname>Teboul</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Grangier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marco</forename><surname>Tagliasacchi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Neil</forename><surname>Zeghidour</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2209.03143</idno>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Class-based n-gram models of natural language</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Peter</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Brown</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Vincent</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><forename type="middle">V</forename><surname>Della Pietra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jenifer</forename><forename type="middle">C</forename><surname>Desouza</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><forename type="middle">L</forename><surname>Lai</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mercer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computational Linguistics</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="467" to="480" />
+			<date type="published" when="1992">1992</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Unsupervised Acoustic Unit Representation Learning for Voice Conversion Using WaveNet Auto-Encoders</title>
+		<author>
+			<persName><forename type="first">Mingjie</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Hain</surname></persName>
+		</author>
+		<idno type="DOI">10.21437/Interspeech.2020-1785</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. Interspeech 2020</title>
+		<meeting>Interspeech 2020</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="4866" to="4870" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<title level="m" type="main">Palm: Scaling language modeling with pathways</title>
+		<author>
+			<persName><forename type="first">Aakanksha</forename><surname>Chowdhery</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sharan</forename><surname>Narang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacob</forename><surname>Devlin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maarten</forename><surname>Bosma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gaurav</forename><surname>Mishra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Roberts</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Barham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hyung</forename><forename type="middle">Won</forename><surname>Chung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Charles</forename><surname>Sutton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sebastian</forename><surname>Gehrmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Parker</forename><surname>Schuh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kensen</forename><surname>Shi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sasha</forename><surname>Tsvyashchenko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joshua</forename><surname>Maynez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abhishek</forename><surname>Rao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Parker</forename><surname>Barnes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yi</forename><surname>Tay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Noam</forename><surname>Shazeer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emily</forename><surname>Vinodkumar Prabhakaran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nan</forename><surname>Reif</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ben</forename><surname>Du</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Reiner</forename><surname>Hutchinson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Pope</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacob</forename><surname>Bradbury</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Austin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Guy</forename><surname>Isard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pengcheng</forename><surname>Gur-Ari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Toju</forename><surname>Yin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anselm</forename><surname>Duke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sanjay</forename><surname>Levskaya</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sunipa</forename><surname>Ghemawat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Henryk</forename><surname>Dev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xavier</forename><surname>Michalewski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vedant</forename><surname>Garcia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Misra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Liam</forename><surname>Robinson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Denny</forename><surname>Fedus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daphne</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Ippolito</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hyeontaek</forename><surname>Luan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Barret</forename><surname>Lim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Zoph</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ryan</forename><surname>Spiridonov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Sepassi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shivani</forename><surname>Dohan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Agrawal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><forename type="middle">M</forename><surname>Omernick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thanumalayan</forename><surname>Dai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marie</forename><surname>Sankaranarayana Pillai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aitor</forename><surname>Pellat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Erica</forename><surname>Lewkowycz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rewon</forename><surname>Moreira</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Oleksandr</forename><surname>Child</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katherine</forename><surname>Polozov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zongwei</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xuezhi</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brennan</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Saeta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Orhan</forename><surname>Diaz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michele</forename><surname>Firat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><surname>Catasta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kathy</forename><surname>Wei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Douglas</forename><surname>Meier-Hellstern</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeff</forename><surname>Eck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Slav</forename><surname>Dean</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Noah</forename><surname>Petrov</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Fiedel</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/ARXIV.2204.02311</idno>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title level="m" type="main">Speech2vec: A sequence-to-sequence framework for learning word embeddings from speech</title>
+		<author>
+			<persName><forename type="first">Yu-An</forename><surname>Chung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><forename type="middle">R</forename><surname>Glass</surname></persName>
+		</author>
+		<idno>CoRR, abs/1803.08976</idno>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">The zero resource speech challenge 2019</title>
+		<author>
+			<persName><forename type="first">Ewan</forename><surname>Dunbar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robin</forename><surname>Algayres</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julien</forename><surname>Karadayi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mathieu</forename><surname>Bernard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juan</forename><surname>Benjumea</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xuan-Nga</forename><surname>Cao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lucie</forename><surname>Miskic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Charlotte</forename><surname>Dugrain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lucas</forename><surname>Ondel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alan</forename><forename type="middle">W</forename><surname>Black</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laurent</forename><surname>Besacier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sakriani</forename><surname>Sakti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emmanuel</forename><surname>Dupoux</surname></persName>
+		</author>
+		<idno>CoRR, abs/1904.11469</idno>
+	</analytic>
+	<monogr>
+		<title level="m">TTS without T</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Self-supervised language learning from raw audio: Lessons from the zero resource speech challenge</title>
+		<author>
+			<persName><forename type="first">Ewan</forename><surname>Dunbar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicolas</forename><surname>Hamilakis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emmanuel</forename><surname>Dupoux</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Journal of Selected Topics in Signal Processing</title>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Self-supervised language learning from raw audio: Lessons from the zero resource speech challenge</title>
+		<author>
+			<persName><forename type="first">Ewan</forename><surname>Dunbar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicolas</forename><surname>Hamilakis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emmanuel</forename><surname>Dupoux</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/jstsp.2022.3206084</idno>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Journal of Selected Topics in Signal Processing</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="1211" to="1226" />
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Do coarser units benefit cluster predictionbased speech pre-training?</title>
+		<author>
+			<persName><forename type="first">Ali</forename><surname>Elkahky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei-Ning</forename><surname>Hsu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paden</forename><surname>Tomasello</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tu-Anh</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robin</forename><surname>Algayres</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yossi</forename><surname>Adi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jade</forename><surname>Copet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emmanuel</forename><surname>Dupoux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abdelrahman</forename><surname>Mohamed</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/ICASSP49357.2023.10096788</idno>
+	</analytic>
+	<monogr>
+		<title level="m">ICASSP 2023 -2023 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</title>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+			<biblScope unit="page" from="1" to="5" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Combining Adversarial Training and Disentangled Speech Representation for Robust Zero-Resource Subword Modeling</title>
+		<author>
+			<persName><forename type="first">Siyuan</forename><surname>Feng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tan</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhiyuan</forename><surname>Peng</surname></persName>
+		</author>
+		<idno type="DOI">10.21437/Interspeech.2019-1337</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. Interspeech 2019</title>
+		<meeting>Interspeech 2019</meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="1093" to="1097" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">A new algorithm for data compression</title>
+		<author>
+			<persName><forename type="first">Philip</forename><surname>Gage</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The C Users Journal archive</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page" from="23" to="38" />
+			<date type="published" when="1994">1994</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">A bayesian framework for word segmentation: Exploring the effects of context</title>
+		<author>
+			<persName><forename type="first">Sharon</forename><surname>Goldwater</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Griffiths</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Johnson</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.cognition.2009.03.008</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Cognition</title>
+		<imprint>
+			<biblScope unit="volume">112</biblScope>
+			<biblScope unit="page" from="21" to="54" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<title level="m" type="main">Generating sequences with recurrent neural networks</title>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Graves</surname></persName>
+		</author>
+		<idno>CoRR, abs/1308.0850</idno>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Noisecontrastive estimation: A new estimation principle for unnormalized statistical models</title>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Gutmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aapo</forename><surname>Hyvärinen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Thirteenth International Conference on Artificial Intelligence and Statistics, volume 9 of Proceedings of Machine Learning Research</title>
+		<meeting>the Thirteenth International Conference on Artificial Intelligence and Statistics, volume 9 of Machine Learning Research<address><addrLine>Chia Laguna Resort, Sardinia, Italy</addrLine></address></meeting>
+		<imprint>
+			<publisher>PMLR</publisher>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="297" to="304" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title level="m" type="main">Hubert: Self-supervised speech representation learning by masked prediction of hidden units</title>
+		<author>
+			<persName><forename type="first">Wei-Ning</forename><surname>Hsu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benjamin</forename><surname>Bolte</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hubert</forename><surname>Yao-Hung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kushal</forename><surname>Tsai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ruslan</forename><surname>Lakhotia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abdelrahman</forename><surname>Salakhutdinov</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mohamed</surname></persName>
+		</author>
+		<idno>CoRR, abs/2106.07447</idno>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title level="m" type="main">Fastdiff: A fast conditional diffusion model for high-quality speech synthesis</title>
+		<author>
+			<persName><forename type="first">Rongjie</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Max</forename><forename type="middle">W Y</forename><surname>Lam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jun</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Su</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dong</forename><surname>Yu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yi</forename><surname>Ren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhou</forename><surname>Zhao</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<monogr>
+		<title level="m" type="main">The lj speech dataset</title>
+		<author>
+			<persName><forename type="first">Keith</forename><surname>Ito</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Linda</forename><surname>Johnson</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Acoustic word embeddings for zeroresource languages using self-supervised contrastive learning and multilingual adaptation</title>
+		<author>
+			<persName><forename type="first">Christiaan</forename><surname>Jacobs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yevgen</forename><surname>Matusevych</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Herman</forename><surname>Kamper</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/SLT48900.2021.9383594</idno>
+	</analytic>
+	<monogr>
+		<title level="m">2021 IEEE Spoken Language Technology Workshop (SLT)</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="919" to="926" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<title level="m" type="main">Billion-scale similarity search with gpus</title>
+		<author>
+			<persName><forename type="first">Jeff</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthijs</forename><surname>Douze</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hervé</forename><surname>Jégou</surname></persName>
+		</author>
+		<idno>CoRR, abs/1702.08734</idno>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<title level="m" type="main">Libri-light: A benchmark for ASR with limited or no supervision</title>
+		<author>
+			<persName><forename type="first">Jacob</forename><surname>Kahn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Morgane</forename><surname>Rivière</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Weiyi</forename><surname>Zheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Evgeny</forename><surname>Kharitonov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qiantong</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pierre-Emmanuel</forename><surname>Mazaré</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julien</forename><surname>Karadayi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vitaliy</forename><surname>Liptchinsky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ronan</forename><surname>Collobert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Fuegen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tatiana</forename><surname>Likhomanenko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gabriel</forename><surname>Synnaeve</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Armand</forename><surname>Joulin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abdelrahman</forename><surname>Mohamed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emmanuel</forename><surname>Dupoux</surname></persName>
+		</author>
+		<idno>CoRR, abs/1912.07875</idno>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<title level="m" type="main">Truly unsupervised acoustic word embeddings using weak top-down constraints in encoder-decoder models</title>
+		<author>
+			<persName><forename type="first">Herman</forename><surname>Kamper</surname></persName>
+		</author>
+		<idno>CoRR, abs/1811.00403</idno>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<title level="m" type="main">Word segmentation on discovered phone units with dynamic programming and self-supervised scoring</title>
+		<author>
+			<persName><forename type="first">Herman</forename><surname>Kamper</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/ARXIV.2202.11929</idno>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<monogr>
+		<title level="m" type="main">textlesslib: a library for textless spoken language processing</title>
+		<author>
+			<persName><forename type="first">Eugene</forename><surname>Kharitonov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jade</forename><surname>Copet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kushal</forename><surname>Lakhotia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anh</forename><surname>Tu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paden</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ann</forename><surname>Tomasello</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ali</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei-Ning</forename><surname>Elkahky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abdelrahman</forename><surname>Hsu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emmanuel</forename><surname>Mohamed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yossi</forename><surname>Dupoux</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Adi</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/ARXIV.2202.07359</idno>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<monogr>
+		<title level="m" type="main">Text-free prosody-aware generative spoken language modeling</title>
+		<author>
+			<persName><forename type="first">Eugene</forename><surname>Kharitonov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ann</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Polyak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yossi</forename><surname>Adi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jade</forename><surname>Copet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kushal</forename><surname>Lakhotia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anh</forename><surname>Tu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Morgane</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abdelrahman</forename><surname>Rivière</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emmanuel</forename><surname>Mohamed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei-Ning</forename><surname>Dupoux</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hsu</surname></persName>
+		</author>
+		<idno>CoRR, abs/2109.03264</idno>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<monogr>
+		<author>
+			<persName><forename type="first">Eugene</forename><surname>Kharitonov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ann</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Polyak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yossi</forename><surname>Adi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jade</forename><surname>Copet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kushal</forename><surname>Lakhotia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tu-Anh</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Morgane</forename><surname>Rivière</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abdelrahman</forename><surname>Mohamed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emmanuel</forename><surname>Dupoux</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2109.03264</idno>
+		<title level="m">Text-free prosody-aware generative spoken language modeling</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<title level="m" type="main">Hifi-gan: Generative adversarial networks for efficient and high fidelity speech synthesis</title>
+		<author>
+			<persName><forename type="first">Jungil</forename><surname>Kong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jaehyeon</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jaekyoung</forename><surname>Bae</surname></persName>
+		</author>
+		<idno>CoRR, abs/2010.05646</idno>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<title level="m" type="main">Reducing activation recomputation in large transformer models</title>
+		<author>
+			<persName><forename type="first">Vijay</forename><surname>Korthikanti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jared</forename><surname>Casper</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sangkug</forename><surname>Lym</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lawrence</forename><surname>Mcafee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Andersch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mohammad</forename><surname>Shoeybi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bryan</forename><surname>Catanzaro</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<title level="m" type="main">Self-supervised contrastive learning for unsupervised phoneme segmentation</title>
+		<author>
+			<persName><forename type="first">Felix</forename><surname>Kreuk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joseph</forename><surname>Keshet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yossi</forename><surname>Adi</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2007.13465</idno>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<monogr>
+		<author>
+			<persName><forename type="first">Felix</forename><surname>Kreuk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Polyak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jade</forename><surname>Copet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eugene</forename><surname>Kharitonov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tu-Anh</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Morgane</forename><surname>Rivière</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei-Ning</forename><surname>Hsu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abdelrahman</forename><surname>Mohamed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emmanuel</forename><surname>Dupoux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yossi</forename><surname>Adi</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2111.07402</idno>
+		<title level="m">Textless speech emotion conversion using decomposed and discrete representations</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Subword regularization: Improving neural network translation models with multiple subword candidates</title>
+		<author>
+			<persName><forename type="first">Taku</forename><surname>Kudo</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/P18-1007</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics</title>
+		<meeting>the 56th Annual Meeting of the Association for Computational Linguistics<address><addrLine>Melbourne, Australia</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="66" to="75" />
+		</imprint>
+	</monogr>
+	<note>Long Papers</note>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<monogr>
+		<title level="m" type="main">Revisiting kmeans: New algorithms via bayesian nonparametrics</title>
+		<author>
+			<persName><forename type="first">Brian</forename><surname>Kulis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><forename type="middle">I</forename><surname>Jordan</surname></persName>
+		</author>
+		<idno>CoRR, abs/1111.0352</idno>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<monogr>
+		<title level="m" type="main">Melgan: Generative adversarial networks for conditional waveform synthesis</title>
+		<author>
+			<persName><forename type="first">Kundan</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rithesh</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lucas</forename><surname>Thibault De Boissiere</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Gestin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jose</forename><surname>Wei Zhen Teoh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexandre</forename><surname>Sotelo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yoshua</forename><surname>De Brebisson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aaron</forename><surname>Bengio</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Courville</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/ARXIV.1910.06711</idno>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<monogr>
+		<title level="m" type="main">Generative spoken language modeling from raw audio</title>
+		<author>
+			<persName><forename type="first">Kushal</forename><surname>Lakhotia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Evgeny</forename><surname>Kharitonov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei-Ning</forename><surname>Hsu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yossi</forename><surname>Adi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Polyak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benjamin</forename><surname>Bolte</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anh</forename><surname>Tu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jade</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexei</forename><surname>Copet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adelrahman</forename><surname>Baevski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emmanuel</forename><surname>Mohamed</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Dupoux</surname></persName>
+		</author>
+		<idno>CoRR, abs/2102.01192</idno>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Unsupervised End-to-End Learning of Discrete Linguistic Units for Voice Conversion</title>
+		<author>
+			<persName><forename type="first">Andy</forename><forename type="middle">T</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hung-Yi</forename><surname>Po Chun Hsu</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lee</surname></persName>
+		</author>
+		<idno type="DOI">10.21437/Interspeech.2019-2048</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. Interspeech 2019</title>
+		<meeting>Interspeech 2019</meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="1108" to="1112" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<monogr>
+		<title level="m" type="main">Efficient estimation of word representations in vector space</title>
+		<author>
+			<persName><forename type="first">Tomas</forename><surname>Mikolov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kai</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Greg</forename><surname>Corrado</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><surname>Dean</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/ARXIV.1301.3781</idno>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<monogr>
+		<title level="m" type="main">Subword language modeling with neural networks</title>
+		<author>
+			<persName><forename type="first">Tomas</forename><surname>Mikolov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ilya</forename><surname>Sutskever</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anoop</forename><surname>Deoras</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Son</forename><surname>Hai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stefan</forename><surname>Le</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jan</forename><surname>Kombrink</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Honzaernocky</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<monogr>
+		<title level="m" type="main">Are word boundaries useful for unsupervised language learning?</title>
+		<author>
+			<persName><forename type="first">Anh</forename><surname>Tu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maureen</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robin</forename><surname>De Seyssel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patricia</forename><surname>Algayres</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ewan</forename><surname>Roze</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emmanuel</forename><surname>Dunbar</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Dupoux</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/ARXIV.2210.02956</idno>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<monogr>
+		<title level="m" type="main">The zero resource speech benchmark 2021: Metrics and baselines for unsupervised spoken language modeling</title>
+		<author>
+			<persName><forename type="first">Anh</forename><surname>Tu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maureen</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patricia</forename><surname>De Seyssel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Morgane</forename><surname>Rozé</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Evgeny</forename><surname>Rivière</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexei</forename><surname>Kharitonov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ewan</forename><surname>Baevski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emmanuel</forename><surname>Dunbar</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Dupoux</surname></persName>
+		</author>
+		<idno>CoRR, abs/2011.11588</idno>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<monogr>
+		<author>
+			<persName><forename type="first">Anh</forename><surname>Tu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eugene</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jade</forename><surname>Kharitonov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yossi</forename><surname>Copet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei-Ning</forename><surname>Adi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ali</forename><surname>Hsu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paden</forename><surname>Elkahky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robin</forename><surname>Tomasello</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benoit</forename><surname>Algayres</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abdelrahman</forename><surname>Sagot</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mohamed</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2203.16502</idno>
+		<title level="m">Generative spoken dialogue language modeling</title>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Are discrete units necessary for spoken language modeling</title>
+		<author>
+			<persName><forename type="first">Anh</forename><surname>Tu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benoit</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emmanuel</forename><surname>Sagot</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Dupoux</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/JSTSP.2022.3200909</idno>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Journal of Selected Topics in Signal Processing</title>
+		<imprint>
+			<biblScope unit="page" from="1" to="9" />
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<monogr>
+		<title level="m" type="main">Scalable vision transformers with hierarchical pooling</title>
+		<author>
+			<persName><forename type="first">Zizheng</forename><surname>Pan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bohan</forename><surname>Zhuang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jing</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Haoyu</forename><surname>He</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jianfei</forename><surname>Cai</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/ARXIV.2103.10619</idno>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">Librispeech: An asr corpus based on public domain audio books</title>
+		<author>
+			<persName><forename type="first">Vassil</forename><surname>Panayotov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Guoguo</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Povey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sanjeev</forename><surname>Khudanpur</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/ICASSP.2015.7178964</idno>
+	</analytic>
+	<monogr>
+		<title level="m">2015 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</title>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="5206" to="5210" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<monogr>
+		<title level="m" type="main">Word discovery in visually grounded, self-supervised speech models</title>
+		<author>
+			<persName><forename type="first">Puyuan</forename><surname>Peng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Harwath</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<monogr>
+		<title level="m" type="main">A correspondence variational autoencoder for unsupervised acoustic word embeddings</title>
+		<author>
+			<persName><forename type="first">Puyuan</forename><surname>Peng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Herman</forename><surname>Kamper</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karen</forename><surname>Livescu</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<monogr>
+		<author>
+			<persName><forename type="first">Wei</forename><surname>Ping</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kainan</forename><surname>Peng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Gibiansky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sercan</forename><surname>Arik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ajay</forename><surname>Kannan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sharan</forename><surname>Narang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Raiman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Miller</surname></persName>
+		</author>
+		<title level="m">Deep voice 3: 2000-speaker neural text-to-speech</title>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">The buckeye corpus of conversational speech: labeling conventions and a test of transcriber reliability</title>
+		<author>
+			<persName><forename type="first">Mark</forename><forename type="middle">A</forename><surname>Pitt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Keith</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Hume</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Scott</forename><surname>Kiesling</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">William</forename><surname>Raymond</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.specom.2004.09.001</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Speech Communication</title>
+		<imprint>
+			<biblScope unit="volume">45</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="89" to="95" />
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<monogr>
+		<title level="m" type="main">Speech resynthesis from discrete disentangled selfsupervised representations</title>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Polyak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yossi</forename><surname>Adi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jade</forename><surname>Copet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eugene</forename><surname>Kharitonov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kushal</forename><surname>Lakhotia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei-Ning</forename><surname>Hsu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abdelrahman</forename><surname>Mohamed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emmanuel</forename><surname>Dupoux</surname></persName>
+		</author>
+		<idno>CoRR, abs/2104.00355</idno>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<monogr>
+		<title level="m" type="main">Waveglow: A flow-based generative network for speech synthesis</title>
+		<author>
+			<persName><forename type="first">Ryan</forename><surname>Prenger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rafael</forename><surname>Valle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bryan</forename><surname>Catanzaro</surname></persName>
+		</author>
+		<idno>CoRR, abs/1811.00002</idno>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<monogr>
+		<title level="m" type="main">Robust speech recognition via large-scale weak supervision</title>
+		<author>
+			<persName><forename type="first">Alec</forename><surname>Radford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jong</forename><forename type="middle">Wook</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tao</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Greg</forename><surname>Brockman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christine</forename><surname>Mcleavey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ilya</forename><surname>Sutskever</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+		<respStmt>
+			<orgName>Tech. Rep., OpenAI</orgName>
+		</respStmt>
+	</monogr>
+	<note type="report_type">Technical report</note>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<monogr>
+		<title level="m" type="main">Language models are unsupervised multitask learners</title>
+		<author>
+			<persName><forename type="first">Alec</forename><surname>Radford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeff</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rewon</forename><surname>Child</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Luan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dario</forename><surname>Amodei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ilya</forename><surname>Sutskever</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<analytic>
+		<title level="a" type="main">Pre-linguistic segmentation of speech into syllable-like units</title>
+		<author>
+			<persName><forename type="first">Okko</forename><surname>Johannes Räsänen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gabriel</forename><surname>Doyle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><forename type="middle">C</forename><surname>Frank</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Cognition</title>
+		<imprint>
+			<biblScope unit="volume">171</biblScope>
+			<biblScope unit="page" from="130" to="150" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<analytic>
+		<title level="a" type="main">Crowdmos: An approach for crowdsourcing mean opinion score studies</title>
+		<author>
+			<persName><forename type="first">Flávio</forename><surname>Ribeiro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dinei</forename><surname>Florêncio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cha</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Seltzer</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/ICASSP.2011.5946971</idno>
+	</analytic>
+	<monogr>
+		<title level="m">2011 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</title>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="2416" to="2419" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<monogr>
+		<title level="m" type="main">Asr4real: An extended benchmark for speech models</title>
+		<author>
+			<persName><forename type="first">Morgane</forename><surname>Riviere</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jade</forename><surname>Copet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gabriel</forename><surname>Synnaeve</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/ARXIV.2110.08583</idno>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<analytic>
+		<title level="a" type="main">Towards unsupervised learning of speech features in the wild</title>
+		<author>
+			<persName><forename type="first">Morgane</forename><surname>Rivière</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emmanuel</forename><surname>Dupoux</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/SLT48900.2021.9383461</idno>
+	</analytic>
+	<monogr>
+		<title level="m">2021 IEEE Spoken Language Technology Workshop (SLT)</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="156" to="163" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<monogr>
+		<title level="m" type="main">Discriminative acoustic word embeddings: Recurrent neural network-based approaches</title>
+		<author>
+			<persName><forename type="first">Shane</forename><surname>Settle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karen</forename><surname>Livescu</surname></persName>
+		</author>
+		<idno>CoRR, abs/1611.02550</idno>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<analytic>
+		<title level="a" type="main">Natural tts synthesis by conditioning wavenet on mel spectrogram predictions</title>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Shen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ruoming</forename><surname>Pang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ron</forename><forename type="middle">J</forename><surname>Weiss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mike</forename><surname>Schuster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Navdeep</forename><surname>Jaitly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zongheng</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhifeng</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yu</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuxuan</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rj</forename><surname>Skerrv-Ryan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rif</forename><forename type="middle">A</forename><surname>Saurous</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yannis</forename><surname>Agiomvrgiannakis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yonghui</forename><surname>Wu</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/ICASSP.2018.8461368</idno>
+	</analytic>
+	<monogr>
+		<title level="m">2018 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="4779" to="4783" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<monogr>
+		<title level="m" type="main">Natural tts synthesis by conditioning wavenet on mel spectrogram predictions</title>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Shen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ruoming</forename><surname>Pang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ron</forename><forename type="middle">J</forename><surname>Weiss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mike</forename><surname>Schuster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Navdeep</forename><surname>Jaitly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zongheng</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhifeng</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yu</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuxuan</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">J</forename><surname>Skerry-Ryan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rif</forename><forename type="middle">A</forename><surname>Saurous</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yannis</forename><surname>Agiomyrgiannakis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yonghui</forename><surname>Wu</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/ARXIV.1712.05884</idno>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<analytic>
+		<title level="a" type="main">A Knearest neighbours approach to unsupervised spoken term discovery</title>
+		<author>
+			<persName><forename type="first">Alexis</forename><surname>Thual</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Corentin</forename><surname>Dancette</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julien</forename><surname>Karadayi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juan</forename><surname>Benjumea</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emmanuel</forename><surname>Dupoux</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IEEE Spoken Language Technology SLT-2018</title>
+		<meeting><address><addrLine>Athènes, Greece</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note>Proceedings of SLT 2018</note>
+</biblStruct>
+
+<biblStruct xml:id="b65">
+	<analytic>
+		<title level="a" type="main">VQVAE Unsupervised Unit Discovery and Multi-Scale Code2Spec Inverter for Zerospeech Challenge 2019</title>
+		<author>
+			<persName><forename type="first">Andros</forename><surname>Tjandra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Berrak</forename><surname>Sisman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mingyang</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sakriani</forename><surname>Sakti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Haizhou</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Satoshi</forename><surname>Nakamura</surname></persName>
+		</author>
+		<idno type="DOI">10.21437/Interspeech.2019-3232</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. Interspeech 2019</title>
+		<meeting>Interspeech 2019</meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="1118" to="1122" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b66">
+	<monogr>
+		<title level="m" type="main">Wavenet: A generative model for raw audio</title>
+		<author>
+			<persName><forename type="first">Aäron</forename><surname>Van Den Oord</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sander</forename><surname>Dieleman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Heiga</forename><surname>Zen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karen</forename><surname>Simonyan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Oriol</forename><surname>Vinyals</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Graves</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nal</forename><surname>Kalchbrenner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><forename type="middle">W</forename><surname>Senior</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Koray</forename><surname>Kavukcuoglu</surname></persName>
+		</author>
+		<idno>CoRR, abs/1609.03499</idno>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b67">
+	<monogr>
+		<title level="m" type="main">Representation learning with contrastive predictive coding</title>
+		<author>
+			<persName><forename type="first">Aäron</forename><surname>Van Den Oord</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yazhe</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Oriol</forename><surname>Vinyals</surname></persName>
+		</author>
+		<idno>CoRR, abs/1807.03748</idno>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b68">
+	<analytic>
+		<title level="a" type="main">A comparison of self-supervised speech representations as input features for unsupervised acoustic word embeddings</title>
+		<author>
+			<persName><forename type="first">Lisa</forename><surname>Van Staden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Herman</forename><surname>Kamper</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">;</forename><forename type="middle">A</forename><surname>Vasuki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">T</forename><surname>Vanathi</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/MP.2006.1664069</idno>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Potentials</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="39" to="47" />
+			<date type="published" when="2006">2020. 2006</date>
+		</imprint>
+	</monogr>
+	<note>A review of vector quantization techniques</note>
+</biblStruct>
+
+<biblStruct xml:id="b69">
+	<monogr>
+		<title level="m" type="main">Attention is all you need</title>
+		<author>
+			<persName><forename type="first">Ashish</forename><surname>Vaswani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Noam</forename><surname>Shazeer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Niki</forename><surname>Parmar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jakob</forename><surname>Uszkoreit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Llion</forename><surname>Jones</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aidan</forename><forename type="middle">N</forename><surname>Gomez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lukasz</forename><surname>Kaiser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Illia</forename><surname>Polosukhin</surname></persName>
+		</author>
+		<idno>CoRR, abs/1706.03762</idno>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b70">
+	<analytic>
+		<title level="a" type="main">The zero resource speech challenge 2015: Proposed approaches and results</title>
+		<author>
+			<persName><forename type="first">Maarten</forename><surname>Versteegh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xavier</forename><surname>Anguera</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aren</forename><surname>Jansen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emmanuel</forename><surname>Dupoux</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.procs.2016.04.031</idno>
+	</analytic>
+	<monogr>
+		<title level="m">SLTU-2016 5th Workshop on Spoken Language Technologies for Under-resourced languages</title>
+		<meeting><address><addrLine>Indonesia</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2016-05">2016. 09-12 May 2016</date>
+			<biblScope unit="volume">81</biblScope>
+			<biblScope unit="page" from="67" to="72" />
+		</imprint>
+	</monogr>
+	<note>Yogyakarta</note>
+</biblStruct>
+
+<biblStruct xml:id="b71">
+	<monogr>
+		<title level="m" type="main">The Uniform Effect of K-means Clustering</title>
+		<author>
+			<persName><forename type="first">Junjie</forename><surname>Wu</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-642-29807-3_2</idno>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<publisher>Springer</publisher>
+			<biblScope unit="page" from="17" to="35" />
+			<pubPlace>Berlin Heidelberg, Berlin, Heidelberg</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b72">
+	<monogr>
+		<title level="m" type="main">Google&apos;s neural machine translation system: Bridging the gap between human and machine translation</title>
+		<author>
+			<persName><forename type="first">Yonghui</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mike</forename><surname>Schuster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhifeng</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Quoc</forename><forename type="middle">V</forename><surname>Le</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mohammad</forename><surname>Norouzi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wolfgang</forename><surname>Macherey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maxim</forename><surname>Krikun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuan</forename><surname>Cao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qin</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Klaus</forename><surname>Macherey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeff</forename><surname>Klingner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Apurva</forename><surname>Shah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Melvin</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiaobing</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lukasz</forename><surname>Kaiser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephan</forename><surname>Gouws</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yoshikiyo</forename><surname>Kato</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Taku</forename><surname>Kudo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hideto</forename><surname>Kazawa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Keith</forename><surname>Stevens</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">George</forename><surname>Kurian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nishant</forename><surname>Patil</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cliff</forename><surname>Young</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><surname>Riesa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Rudnick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Oriol</forename><surname>Vinyals</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Greg</forename><surname>Corrado</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Macduff</forename><surname>Hughes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><surname>Dean</surname></persName>
+		</author>
+		<idno>CoRR, abs/1609.08144</idno>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b73">
+	<analytic>
+		<title level="a" type="main">SUPERB: Speech Processing Universal PERformance Benchmark</title>
+		<author>
+			<persName><forename type="first">Shuwen</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Po-Han</forename><surname>Chi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yung-Sung</forename><surname>Chuang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cheng-I Jeff</forename><surname>Lai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kushal</forename><surname>Lakhotia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yist</forename><forename type="middle">Y</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andy</forename><forename type="middle">T</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jiatong</forename><surname>Shi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xuankai</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Guan-Ting</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tzu-Hsien</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei-Cheng</forename><surname>Tseng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Da-Rong</forename><surname>Ko Tik Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zili</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shuyan</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shang-Wen</forename><surname>Dong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shinji</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abdelrahman</forename><surname>Watanabe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hung</forename><surname>Mohamed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lee</forename><surname>Yi</surname></persName>
+		</author>
+		<idno type="DOI">10.21437/Interspeech.2021-1775</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. Interspeech 2021</title>
+		<meeting>Interspeech 2021</meeting>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="1194" to="1198" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b74">
+	<monogr>
+		<title level="m" type="main">Soundstream: An end-to-end neural audio codec</title>
+		<author>
+			<persName><forename type="first">Neil</forename><surname>Zeghidour</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alejandro</forename><surname>Luebs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ahmed</forename><surname>Omran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jan</forename><surname>Skoglund</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marco</forename><surname>Tagliasacchi</surname></persName>
+		</author>
+		<idno>CoRR, abs/2107.03312</idno>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b75">
+	<analytic>
+		<title level="a" type="main">Texygen: A benchmarking platform for text generation models</title>
+		<author>
+			<persName><forename type="first">Yaoming</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sidi</forename><surname>Lu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lei</forename><surname>Zheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jiaxian</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Weinan</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jun</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yong</forename><surname>Yu</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3209978.3210080</idno>
+	</analytic>
+	<monogr>
+		<title level="m">The 41st International ACM SIGIR Conference on Research &amp; Development in Information Retrieval, SIGIR &apos;18</title>
+		<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="1097" to="1100" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b76">
+	<monogr>
+		<author>
+			<persName><forename type="first">George</forename><surname>Kingsley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zipf</forename></persName>
+		</author>
+		<title level="m">Human behavior and the principle of least effort</title>
+		<imprint>
+			<publisher>Addison-Wesley Press</publisher>
+			<date type="published" when="1949">1949</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

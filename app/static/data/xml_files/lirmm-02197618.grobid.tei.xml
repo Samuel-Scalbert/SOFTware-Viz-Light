@@ -1,0 +1,1027 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Massively Distributed Time Series Indexing and Querying</title>
+				<funder ref="#_g7nSkEY">
+					<orgName type="full">European Union</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Djamel-</forename><forename type="middle">Edine</forename><surname>Yagoubi</surname></persName>
+							<email>djamel-edine.yagoubi@inria.fr</email>
+						</author>
+						<author>
+							<persName><forename type="first">F</forename><surname>Lorentm Asseglia</surname></persName>
+							<email>flo-rent.masseglia@inria.fr</email>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="institution">Inria -University of Montpellier -Lirmm</orgName>
+								<address>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<orgName type="institution">Paris Descartes University</orgName>
+								<address>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Massively Distributed Time Series Indexing and Querying</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">7BD9C8ACEC7A89626CA470DA6F09459D</idno>
+					<idno type="DOI">10.1109/TKDE.2018.2880215</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:11+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Time Series</term>
+					<term>Parallel Indexing</term>
+					<term>Distributed Querying !</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Indexing is crucial for many data mining tasks that rely on efficient and effective similarity query processing. Consequently, indexing large volumes of time series, along with high performance similarity query processing, have became topics of high interest. For many applications across diverse domains though, the amount of data to be processed might be intractable for a single machine, making existing centralized indexing solutions inefficient. We propose a parallel indexing solution that gracefully scales to billions of time series (or high-dimensional vectors, in general), and a parallel query processing strategy that, given a batch of queries, efficiently exploits the index. Our experiments, on both synthetic and real world data, illustrate that our index creation algorithm works on 4 billion time series in less than 5 hours, while the state of the art centralized algorithms do not scale and have their limit on 1 billion time series, where they need more than 5 days. Also, our distributed querying algorithm is able to efficiently process millions of queries over collections of billions of time series, thanks to an effective load balancing mechanism.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">INTRODUCTION</head><p>N OWADAYS individuals are able to monitor various indicators for their personal activities (e.g., through smart-meters or smart-plugs for electricity or water consumption), or professional activities (e.g., through the sensors installed on plants by farmers). Sensors technology is also improving over time and the number of sensors is increasing, e.g., in finance and seismic studies. This results in the production of large and complex data, usually in the form of time series (or TS in short) <ref type="bibr" target="#b8">[9]</ref>, <ref type="bibr" target="#b11">[12]</ref>, <ref type="bibr" target="#b16">[17]</ref>, <ref type="bibr" target="#b19">[20]</ref>, <ref type="bibr" target="#b20">[21]</ref>, <ref type="bibr" target="#b24">[25]</ref>, <ref type="bibr" target="#b25">[26]</ref>, <ref type="bibr" target="#b26">[27]</ref>, <ref type="bibr" target="#b28">[29]</ref>, <ref type="bibr" target="#b33">[34]</ref> that challenge knowledge discovery. With such complex and massive sets of time series, fast and accurate similarity search is a key to perform many data mining tasks like Shapelets, Motifs Discovery, Classification or Clustering <ref type="bibr" target="#b18">[19]</ref>, <ref type="bibr" target="#b24">[25]</ref>, <ref type="bibr" target="#b38">[39]</ref>.</p><p>In order to improve the performance of such similarity queries, indexing is one of the most popular techniques <ref type="bibr" target="#b5">[6]</ref>, <ref type="bibr" target="#b6">[7]</ref>, which has been successfully used in a variety of settings and applications <ref type="bibr" target="#b1">[2]</ref>, <ref type="bibr" target="#b3">[4]</ref>, <ref type="bibr" target="#b7">[8]</ref>, <ref type="bibr" target="#b13">[14]</ref>, <ref type="bibr" target="#b17">[18]</ref>, <ref type="bibr" target="#b30">[31]</ref>, <ref type="bibr" target="#b31">[32]</ref>, <ref type="bibr" target="#b36">[37]</ref>. Although recent studies have shown that in certain cases sequential scans can be very efficient <ref type="bibr" target="#b24">[25]</ref>, <ref type="bibr" target="#b34">[35]</ref>, such techniques are only advantageous when the database consists of a single, long time series, and query answers are small subsequences of this long time series. Such approaches, however, are not beneficial in the general case of querying a mixed database of many small time series <ref type="bibr" target="#b37">[38]</ref> (e.g., in neuroscience, or manufacturing applications <ref type="bibr" target="#b20">[21]</ref>), which is the focus of this study. Therefore, indexing is required in order to efficiently support data exploration tasks, which involve ad-hoc queries.</p><p>In this work, we focus on the problem of similarity</p><formula xml:id="formula_0">Q1 Q2 Q3 Q4 Q5 Q1 Q2 Q3 Q4 Q5 Q1 Q2 Q3 Q4 Q5 Q1 Q2 Q3 Q4 Q5</formula><p>(a) Straightforward implementation: the batch of queries is duplicated on all the computing nodes.  search in such massive sets of time series 1 by means of scalable index construction and use. Unfortunately, making an index over billions of time series by using traditional centralized approaches is highly time consuming <ref type="bibr" target="#b21">[22]</ref>, <ref type="bibr" target="#b22">[23]</ref>. Moreover, a naive construction of the index on the parallel environment may lead to poor querying performances. This is illustrated in Figure <ref type="figure" target="#fig_1">1</ref>, where an index is computed and stored on a distributed file system. The index is in the form of a tree, where each leaf contains time series (or id/addresses of time series on the disk). We explain in details in Section 2.1 how to build and query such an index. Now, let us consider that the time series dataset is naively split on the W distributed nodes (Figure <ref type="figure" target="#fig_2">1a</ref>). Then, for a new query q, we don't know what split may contain the best answer to that query (i.e., what time series, in the distributed dataset, is the most similar to q). This is not an issue with one query. But when we deal with a batch of queries, then the parallel computing power is just under exploited by such a naive approach. Basically, a batch of queries B has to be duplicated and sequentially processed on each node. However, by means of a dedicated strategy, where each query in B could be oriented to the right partition (i.e., the partition that must correspond to the query) the querying work load can be significantly reduced (Figure <ref type="figure" target="#fig_2">1b</ref> shows an ideal case, where B is split in W subsets and really processed in parallel). Our goal is to reach such an ideal distribution of index construction and query processing in massively distributed environments.</p><p>We propose a parallel solution to construct the state of the art iSAX-based index <ref type="bibr" target="#b3">[4]</ref> over billions of time series by making the most of the parallel environment by carefully distributing the work load. Our solution takes advantage of the computing power of distributed systems by using parallel frameworks such as MapReduce or Spark <ref type="bibr" target="#b35">[36]</ref>. We provide dedicated strategies and algorithms for a deep combination of parallelism and indexing techniques, for better query performances.</p><p>Our contributions are as follows:</p><p>•</p><p>We propose a parallel index construction algorithm that takes advantage of distributed environments to efficiently build iSAX-based indices over very large volumes of time series (or high-dimensional vectors, in general).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>•</head><p>We implemented our index construction and query processing algorithms, and evaluated their performance over large volumes of data (up to 4 billion series, for a total volume of 6 Terabytes), using both synthetic and real data with sequences and vectors.</p><p>Our experiments illustrate the benefits of our algorithm with an indexing time of less than 2 hours for more than 1 billion series, while the state of the art centralized algorithm needs more than 5 days.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>•</head><p>We also propose a parallel query processing algorithm that, given a query, exploits the available processors of the distributed system to answer the query in parallel by using the constructed parallel index. As illustrated by our experiments, and owing to our distributed querying strategy, our approach is able to process 10M queries in less than 140 seconds, while the state of the art centralized algorithm needs almost 2300 seconds.</p><p>The rest of this paper 2 is organized as follows. In Section 2, we define the problem we address in the paper and present the related background. In Section 3 and Section 4, we describe the details of our parallel index construction and query processing algorithms. In Section 5, we present a detailed experimental evaluation to verify the effectiveness of our approach. In Section 6, we discuss the related work. Finally, we conclude in 7.</p><p>2. A preliminary version of this work has appeared elsewhere <ref type="bibr" target="#b32">[33]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">PROBLEM DEFINITION AND BACKGROUND</head><p>A time series X is a sequence of values X = {x 1 , ..., x n }. We assume that every time series has a value at every timestamp t = 1, 2, ..., n. The length of X is denoted by |X|. Figure <ref type="figure" target="#fig_3">2a</ref> shows a time series of length 16, which will be used as running example throughout this paper.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">iSAX Representation</head><p>Given two time series (or vectors) of real numbers, X = {x 1 , ..., x n } and Y = {y 1 , ..., y m } such that n = m, the Euclidean distance between X and Y is defined as <ref type="bibr" target="#b7">[8]</ref>:</p><formula xml:id="formula_1">ED(X, Y ) = n i=1 (x i -y i ) 2 .</formula><p>The Euclidean distance is one of the most straightforward similarity measurement methods used in time series analysis. In this work, we use it as the distance measure.</p><p>For very large time series databases, it is important to estimate the distance between two time series very quickly. There are several techniques, providing lower bounds by segmenting time series. Here, we use a popular method, called indexable Symbolic Aggregate approXimation (iSAX) representation <ref type="bibr" target="#b29">[30]</ref>, <ref type="bibr" target="#b30">[31]</ref>. The iSAX representation will be used to represent time series in our index.</p><p>The iSAX representation extends the SAX representation <ref type="bibr" target="#b15">[16]</ref>. This latter representation is based on the PAA representation <ref type="bibr" target="#b14">[15]</ref> which allows for dimensionality reduction while providing the important lower bounding property as we will show later. The idea of PAA is to have a fixed segment size, and minimize dimensionality by using the mean values on each segment. Example 1 gives an illustration of PAA. The SAX representation takes as input the reduced time series obtained using PAA. It discretizes this representation into a predefined set of symbols, with a given cardinality, where a symbol is a binary number. Example 2 gives an illustration of the SAX representation. The iSAX representation uses a variable cardinality for each symbol of SAX representation, each symbol is accompanied by a number that denotes its cardinality. We defined the iSAX representation of time series X as iSAX(X) and we call it the iSAX word of the time series X. For example, the iSAX word shown in Figure <ref type="figure" target="#fig_3">2d</ref> can be written as iSAX</p><formula xml:id="formula_2">(X) = [1 2 , 1 2 , 01 4 , 0 2 ].</formula><p>The lower bounding approximation of the Euclidean distance for iSAX representation iSAX(X) = {x 1 , ..., x w } and iSAX(Y ) = {y 1 , ..., y w } of two time series X and Y is defined as: </p><formula xml:id="formula_3">M IN DIST (iSAX(X), iSAX(Y )) = √ n w w i=1 (dist(x i , y i )) 2</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Fig. 2:</head><p>A time series X is discretized by obtaining a PAA representation and then using predetermined break-points to map the PAA coefficients into SAX symbols. Here, the symbols are given in binary notation, where 00 is the first symbol, 01 is the second symbol, etc. The time series of Figure <ref type="figure" target="#fig_3">2a</ref> in the representation of Figure <ref type="figure" target="#fig_3">2d</ref> is [fourth, third, second, second] (which becomes <ref type="bibr" target="#b10">[11,</ref><ref type="bibr" target="#b9">10,</ref><ref type="bibr">01,</ref><ref type="bibr">01]</ref> in binary). The representation of that time series in Figure <ref type="figure" target="#fig_3">2c</ref> becomes <ref type="bibr" target="#b11">[12,</ref><ref type="bibr" target="#b11">12,</ref><ref type="bibr">014,</ref><ref type="bibr">02]</ref>, where 1 ( 2) means that 1 is the selected symbol among 2 possible choices, 01 is the selected symbol among 4 possible choices, etc. , where the function dist(x i , y i ) is the distance between two iSAX symbols x i and y i . The lower bounding condition is formulated as:</p><formula xml:id="formula_4">M IN DIST (iSAX(X), iSAX(Y )) ≤ ED(X, Y )</formula><p>Using a variable cardinality allows the iSAX representation to be indexable. We can build a tree index as follows. Given a cardinality b, an iSAX word length w and leaf capacity th, we produce a set of b w children for the root node, insert the time series to their corresponding leaf, and gradually split the leaves by increasing the cardinality by one character if the number of time series in a leaf node rises above the given threshold th. Example 3. Figure <ref type="figure" target="#fig_5">3</ref> illustrates an example of iSAX index, where each iSAX word has 2 symbols and a maximum cardinality of 4. The root node has 2 2 children while each child node forms a binary sub-tree. There are three types of nodes: root node, internal node (N2, N5, N6, N7) and terminal node or leaf node (N3, N4, N8, N9, N10, N11, N12, N13). Each leaf node links to a disk file that contains the corresponding time series (up to th time series).</p><p>Note that previous studies have shown that the iSAX index is robust with respect to the choice of parameters (word length, cardinality, leaf threshold) <ref type="bibr" target="#b3">[4]</ref>, <ref type="bibr" target="#b30">[31]</ref>, <ref type="bibr" target="#b37">[38]</ref>. Moreover, it can also be used to answer queries with the Dynamic Time Warping (DTW) distance, through the use of the corresponding lower bounding envelope <ref type="bibr" target="#b12">[13]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Similarity Queries</head><p>The problem of similarity queries is one of the main problems in time series analysis and mining. In information retrieval, finding the k nearest neighbors (k-NN) of a query is a fundamental problem. In this section, we define two kinds of k nearest neighbors based queries. Definition 1. (EXACT k NEAREST NEIGHBORS) Given a query time series Q and a set of time series D, let R = ExactkN N (Q, D) be the set of k nearest neighbors of Q from D. Let ED(X, Y ) be the Euclidean distance between the points X and Y , then the set R is defined as follows:</p><formula xml:id="formula_5">(R ⊆ D) ∧ (|R| = k) ∧ (∀a ∈ R, ∀b ∈ (D -R), ED(a, Q) ≤ ED(b, Q)) Definition 2. (APPROXIMATE k NEAREST NEIGHBORS) Given</formula><p>a set of time series D, a query time series Q, and &gt; 0. We say that R = AppkN N (Q, D) is the approximate</p><formula xml:id="formula_6">k nearest neighbors of Q from D, if ED(a, Q) ≤ (1 + )ED(b, Q),</formula><p>where a is the k th nearest neighbor from R and b is the true k th nearest neighbor.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Spark</head><p>For implementing our parallel algorithms we use Spark <ref type="bibr" target="#b35">[36]</ref>, which is a parallel programming framework aiming to efficiently process large datasets. This programming model can perform analytics with in-memory techniques to overcome disk bottlenecks. Similar to MapReduce <ref type="bibr" target="#b4">[5]</ref>, Spark can be deployed on the Hadoop Distributed File System (HDFS) <ref type="bibr" target="#b27">[28]</ref>. Unlike traditional in-memory systems, the main feature of Spark is its distributed memory abstraction, called resilient distributed datasets (RDD), that is an efficient and fault-tolerant abstraction for distributing data in a cluster.</p><p>With RDD, the data can be easily persisted in main memory as well as on the hard drive. Spark is designed to support the execution of iterative algorithms.</p><p>To execute a Spark job, we need a master node to coordinate job execution, and some worker nodes to execute a parallel operation. These parallel operations are summarized to two types: (i) Transformations: to create a new RDD from an existing one (e.g., Map, MapToPair, MapPartition, FlatMap); and (ii) Actions: to return a final value to the user (e.g., Reduce, Aggregate or Count).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.4">Problem Definition</head><p>The problem we address is as follows. Given a (potentially huge) set of time series, find the results of exact and approximate k-NN queries as presented in definitions 1 and 2, by means of an index and query processing performed in parallel.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">DISTRIBUTED ISAX (DISAX)</head><p>DiSAX, our first parallel index construction, sequentially splits the dataset for distribution into partitions. Then each worker builds an independent iSAX index on its partition, with the iSAX representations having the highest possible cardinalities. Representing each time series with iSAX words of high cardinalities allows us to decide later what cardinality is really needed, by navigating "on the fly" between cardinalities. The word of lower cardinality being obtained by removing the trailing bits of each symbol in the word of higher cardinality. The output of this phase, with a cluster of W nodes, is a set of W iSAX indexes built on each split.</p><p>The pseudo-code of this index construction can be seen in Algorithm 1. The input is a data partitions that contains time series in ASCII form. First, the algorithm obtains the iSAX representation of all time series using the highest possible cardinalities (lines 2-4). Then each worker builds an independent iSAX index on its partition (lines 5-9) using the iSAX index insertion function (lines 10-26).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Query Processing</head><p>Given a collection of queries Q, in the form of time series, and the index constructed in the previous section for a database D, we consider the problem of finding time series that are similar to Q in D, as presented in definitions 1 and 2. We perform such queries with two search methods: approximate and exact.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1.1">Approximate Search</head><p>Given a batch B of queries, the master node duplicates B on each worker (node) keeping an index for a subset of the data (i.e, a data split). Each worker uses its local index to retrieve time series that correspond to each query Q ∈ B, according to the approximate k-NN criteria. On each local index, the approximate search is done by traversing the local index to the terminal node that has the same iSAX representation as the query. The target terminal node contains at least one and at most th iSAX words, where th is the leaf threshold.</p><p>A main memory sequential scan over these iSAX words is performed in order to obtain the k nearest neighbors using the Euclidean distance. query Q, sorts them by decreasing order of their distance to Q, and selects the k top ones. The algorithm, described in Algorithm 2, starts by obtain the iSAX representation of all queries time series using the highest possible cardinalities (lines 1-3). Then the master node duplicates the queries on each partition (worker) (line 4), and each worker uses its local index to retrieve time series that correspond to each query (lines 5-9), using the approximate search function (lines 10-15).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1.2">Exact Search</head><p>The exact search proceeds in two steps. In Step 1, the algorithm firstly uses the approximate search described in Section 3.1.1 to obtain AKNN, an approximate k nearest neighbours set. Then each worker creates a priority queue to examine the index nodes that may contain the time series that are probably more similar to Q than those of AKNN. Such nodes are identified as in the original iSAX <ref type="bibr" target="#b29">[30]</ref>, <ref type="bibr" target="#b30">[31]</ref>, where the lower bound distance used for priority queue ordering is computed using M IN DIST P AA iSAX according to AKNN. The difference is that, instead of a sequential scan of the series found in the identified leaf nodes, we emit the IDs of the series. In step 2, the algorithm retrieves all the time series that match the IDs emitted by the workers, and then finds the k nearest neighbors using the Euclidean distance.</p><p>The algorithm, described in Algorithm 3. The master node duplicates the queries on each partition (worker) (line 1), and each worker uses its local index and starts by putting all the children of the root in priority queue using their lower distance bound towards the query (line 8), Then the one with the best minimum distance is explored (line 9), if the best lower bound is bigger than the BSF distance (line </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Limitations of DiSAX</head><p>The parallel index constructed by DiSAX in a distributed environment is effective but calls for improvements. Actually, it leads to query response times that sometimes are high, because the query processing work is not well distributed among the computing nodes. The reason is that each node should examine all queries in the index, even if the index contains no similar result for the query. Furthermore the index obtained by iSAX2+ would be very different from the union of the local distributed iSAX indexes. This also has an impact on the size of the index. Since merging all the local indexes would call for specific algorithms (if it is even possible) the size of the global index of distributed iSAX is higher than the index of centralized iSAX2+.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">DISTRIBUTED PARTITIONED ISAX (DBA-SICPISAX AND DPISAX)</head><p>In this section, we present a novel parallel partitioned index construction algorithms, along with very fast parallel query processing techniques.</p><p>Our approach is based on a sampling phase that allows anticipating the distribution of time series among the computing nodes. Such anticipation is mandatory for an efficient query processing, since it will allow, later on, to decide what partition contains the time series that actually correspond to the query. To do so, we first extract a sample from the time series dataset, and analyze it in order to decide  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Fig. 4:</head><p>The result of the partitioning algorithms (DPiSAX and Dba-sicPiSAX) on sample S (from Table <ref type="table" target="#tab_2">1</ref>) into four partitions.</p><p>how to distribute the time series in the splits, according to their iSAX representation. However, deciding the good split criteria calls for careful attention since bad choices may lead to highly imbalanced partitions, as illustrated in this section with i) DbasicPiSAX, a first version of our partitioned indexing technique and ii) DPiSAX, the final version with, to the best of our knowledge, the best load balance and the best querying performances obtained for time series indexing in distributed environments.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Sampling</head><p>In Distributed Partitioned iSAX, our index construction combines two main phases which are executed one after the other. First, the algorithm starts by sampling the time series dataset and creates a partitioning table. Then, the time series are partitioned into groups using the partitioning table. Finally, each group is processed to create an iSAX index for each partition. More formally, our sampling is done as follows. Given a number of partitions P and a time series dataset D, the algorithm takes S sample time series of size L from D using stratified sampling, and distributes them among the W available workers. Each worker takes S/W time series and emits its iSAX words SW s = {iSAX(ts i ), i = 1, ..., L}. The master collects all the workers' iSAX words and performs the partitioning algorithm accordingly. In the following, we describe two partitioning methods that enable separating the dataset into non-overlapping subsets based on iSAX representations, namely "the basic approach" (or DbasicPiSAX) and "the statistical approach" (or DPiSAX). Both methods proceed with a common simple strategy: successively divide the sample by splitting the biggest partition into two subpartitions, until the number of partitions is equal to the number of workers. However, at each step, once the biggest partition is identified, the main difference is in the assignment strategy (i.e., how is each time series in the sample assigned to one or the other of the new partitions?).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Basic Approach: DbasicPiSAX</head><p>In the basic approach, splitting the biggest partition is done according to the first bit of each symbol in the iSAX words, as we can see in Algorithm 4 (line 1-4). Let us consider the n th splitting step, each time series is assigned to a new partition depending on the first bit of its n th symbol. Of course, when the number of symbols has been reached for a partition (i.e., it cannot be divided anymore because the last symbol has been reached) then we need to consider the remaining partitions for new splits.</p><p>Example 4. Let's consider Table <ref type="table" target="#tab_2">1</ref>, where we use iSAX words of length two to represent the time series of a sample S. Suppose that we need to generate four partitions. First, we use the first bit of the first segment to define two partitions. The first partition contains all the time series having their first iSAX word starting with 1, and the second partition contains the time series having their first iSAX word starting with 0. We obtain two partitions: "0" and "1". The biggest partition is "0" (i.e., containing the time series T S1 to T S6). This partition is split again, according to the first bit of the second symbol. We now have the following partitions: from the first step, partition "1", and from the second step, partitions "00", and "01". Now, partition "00" is the biggest one. However, it cannot be split anymore since the maximum number of symbols has been reached. We choose the next biggest partition, i.e., "1". After splitting this partition using the first bit of the second segment, we obtain two new partitions:"11" and "10". Partition "10" contains all the time series of the old partition (i.e., partition "1"). Consequently, we have four partitions, where partition "11" is empty. Figure <ref type="figure">4a</ref> shows the obtained partitions and Figure <ref type="figure">5a</ref> shows the indexes obtained with these partitions.</p><p>The partitioning Algorithm achieves two goals: 1) generating P partitions; and 2) preserving vertical division of the iSAX tree. Notice that the second goal is achieved because our partitioning algorithm uses the first bit of each symbol. Therefore, iSAX words having cardinality 2 are used to produce a set of, at most, 2 w partitions. In the original iSAX index, when the construction starts with a cardinality of 2, a set of 2 w children is produced at the root node. Intuitively, in our running example, when we compare the centralize index (the original iSAX index) in Figure <ref type="figure" target="#fig_5">3</ref>, and the parallel indexes in the Figure <ref type="figure">5a</ref> obtained with the basic partitioning approach, we observe the vertical division of the original iSAX index.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Limitations of the Basic Approach</head><p>Obviously, the partitions obtained with the basic partitioning approach are not balanced. This is due to two main reasons. First, the partitioning algorithm preserves vertical division of the original iSAX index and the iSAX index is not balanced. The second reason is that, the partitioning algorithm does not take into account the data distribution in the partitions. Because of the limits in the number of symbols, it is possible to end up with highly imbalanced partitions, as illustrated by Figure <ref type="figure">5a</ref> and also by our experiments. Because of this imbalanced distribution of the data, </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Fig. 5:</head><p>The indexes built by DPiSAX and DbasicPiSAX on sample S (from Table <ref type="table" target="#tab_2">1</ref>) on four partitions.</p><p>the basic approach is limited in the size of datasets it can process. If the capacity of a computing node is reached (i.e., the node in charge of the biggest partition cannot handle the data that corresponds to it), then the index building process cannot progress. Moreover, the maximum number of partitions that can be generated is 2 w (where w is the SAX word length). Since each partition is managed by a computing node for the local index construction, if the number of partitions is lower than the number of available computing nodes, then there will be idle nodes. This is a threat for the speed-up of the approach and calls for better solutions, as presented in the next subsection. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4">Statistical Approach: DPiSAX</head><p>Here, our partitioning paradigm considers the splitting power of each bit in the iSAX symbols, before actually splitting the partition. As in the basic approach, the biggest partition is considered for splitting at each step of the partitioning process. The main difference is that we don't use the first bit of the n th symbol for splitting the partition. Instead, we look for all bits (whatever the symbol) (Algorithm 5 lines 7-11) with the highest probability to equally distribute the time series of the partition among the two new subpartitions that will be created. To this effect, we compute for each segment the µ ± σ interval (lines 4-5), where µ is the mean and σ is the standard deviation, and we examine for each segment if the break-point of the additional bit (i.e., the bit used to generate the two new partitions) lies within the interval µ ± σ (line 9). From the segments for which this is true, we choose the one having µ closer to the break-point (line 10).</p><p>In order to illustrate this, let us consider the blue boxes of the diagrams in Figure <ref type="figure">5a</ref>. We choose the biggest blue box that ensures the best splitting by considering the next break-point.</p><p>Example 5. Let's consider the same case as described in Example 4. Figure <ref type="figure">4b</ref> shows the obtained partitions and Figure <ref type="figure">5b</ref> shows the indexes obtained with these partitions. To generate four partitions, we compute the µ ± σ interval for the first segment and the second segment, and choose the first bit of the second segment to define two partitions. The first partition contains all the time series having their second segment in iSAX word starting with 0, and the second partition contains the time series having their second segment in iSAX word starting with 1. We obtain two partitions: "0" and "1". The biggest partition is "0" (i.e., the one containing time series T S1 to T S4, T S7 and T S8). We compute the µ ± σ interval for all segment over all the time series in this partition. Then, the partition is split again, according to the first bit of the first symbol. We now have the following partitions: from the first step, partition "1", and from the second step, partitions "00", and "10". Now, partition "00" is the biggest one. This partition is split for the third time, according to the second bit of the first symbol and we obtain four partitions. We also illustrate, in Figure <ref type="figure">5a</ref>, the variability of the distribution of time series for each symbol. For instance, in partition "00", for node N 6, there is a much higher variability in the first symbol (marked "0" in the diagram, and represented by the blue box) than the second symbol (marked "01", blue box). Optimization. Because many time series have the same iSAX representation, we may end up with groups of iSAX words that are the same, even when using the maximum cardinality (as it is our case). Therefore, we turn this data duplication into an advantage. Actually, the index construction is done as in Section 3, but the difference is that in the insertion function, we provide the algorithm with a bulk insertion function. The goal of this function is to better consider iSAX words with the same representation and to improve the index construction cost. This is done by linking all the IDs of time series having the same representation to only one corresponding iSAX word.</p><p>The pseudo-code of the parallel index construction by DPiSAX is shown in Algorithm 6. Given a time series dataset, the algorithm firstly creates the iSAX representation of each time series in parallel (lines 2-4). Then, it inserts the representations in parallel to the index by using the bulkInsertion function (lines 5-9). Each time series t is inserted to the index by the worker (i.e., the processor) that is responsible for the partition to which t belongs. If the subtree of the partition does not exist, it will be created (lines <ref type="bibr" target="#b22">[23]</ref><ref type="bibr" target="#b23">[24]</ref><ref type="bibr" target="#b24">[25]</ref>. Then, the time series t is inserted to its corresponding leaf node in the subtree (lines 14-15). If the node gets full (i.e., its size gets higher than the threshold), then it will be split (lines 16-20).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.5">Query Processing</head><p>Given a collection of queries Q, in the form of time series, and the index constructed in the previous section for a database D, we consider the problem of finding time series that are similar to Q in D, according to the definitions of approximate k-NN and exact k-NN search as presented in definitions 1 and 2. Approximate and exact search are performed as follows: Actually, we are able to identify the right partition, where the index is stored and send the corresponding query by using its iSAX words. Then, we send each query to the partition that has the same iSAX word as the query. The algorithm, described in Algorithm 7, starts by obtain the iSAX representation of all queries time series using the highest possible cardinalities (lines 1-3). The master sends each query to the partition (worker) that has the same iSAX word as the query (line 4), and each worker uses its local index to retrieve time series that correspond to each query (lines 5-9), using the approximate search function (lines 10-15). rithm as described in Section 3.1.2. This is described in Algorithm 8. The master sends each query to the partition (worker) that has the same iSAX word as the query (line 1), and each worker uses its local index and starts by putting all the children of the root in priority queue using their lower distance bound towards the query (line 8). Then, the one with the best minimum distance is explored (line 9). If the best lower bound is bigger than the BSF distance (line 12) then the algorithm stops. If the node is an internal node (line 15) then all its children are added to the priority queue.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">PERFORMANCE EVALUATION</head><p>In this section, we report experimental results that show the quality and the performance of DPiSAX for indexing time series. The parallel experimental evaluation was conducted on a cluster of 32 machines, each operated by Linux, with 64 Gigabytes of main memory, Intel Xeon CPU with 8 cores and 250 Gigabytes hard disk. The iSAX2+ approach was executed on a single machine with the same characteristics.</p><p>We evaluate the performance of three versions of our solution: 1) DiSAX is the parallel implementation of iSax as described in Section 3 ; 2) DbasicPiSAX is the samplingbased indexing algorithm with basic partitioning as described in Section 4.2; 3) DPiSAX is our complete solution, with the statistical partitioning described in Section 4.4. Furthermore, we compare our solutions to two state of the art baselines: the most efficient centralized version of iSAX index (i.e., iSAX2+ <ref type="bibr" target="#b3">[4]</ref>), and Parallel Linear Search (PLS), which is a parallel version of the UCR Suite fast sequential  search (with all applicable optimizations in our context: no computation of square root, and early abandoning) <ref type="bibr" target="#b24">[25]</ref>.</p><p>Our experiments are divided into two sections. In Section 5.2, we measure the index construction times with different parameters. In Section 5.3, we focus on the query performance of our approach.</p><p>The splitting strategy of DPiSAX, described in Section 4.4 is essentially the same to the centralized state of the art one, iSAX2+, described in <ref type="bibr" target="#b3">[4]</ref>. Therefore, the results retrieved in our experiments are the same as those retrieved by iSAX2+. In the interest of space, we do not show graphs for retrieval performances, since they would systematically show a 100% agreement to those of iSAX2+.</p><p>Reproductibility: we implemented our approaches on top of Apache-Spark <ref type="bibr" target="#b35">[36]</ref>, using the Java programming language. The iSAX2+ index is also implemented with Java. Our code is available at https://djamelinfo.github.io/test/ projects/DPiSAX/.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Datasets and Settings</head><p>We carried out our experiments on two real world and synthetic datasets, up to 6 Terabytes and 4 billion series. The first real world data represents seismic time series collected from the IRIS Seismic Data Access repository <ref type="bibr" target="#b9">[10]</ref>. After preprocessing, it contains 40 million time series of 256 values, for a total size of 150Gb. The second real world data is the TexMex corpus <ref type="bibr" target="#b10">[11]</ref>. It contains 1 Billion SIFT feature vectors of 128 points each (derived from 1 Billion images). Our synthetic datasets are generated using a Random Walk principle, each data series consisting of 256 points. At each time point the generator draws a random number from a Gaussian distribution N(0,1), then adds the value of the last number to the new number. This type of generator has been widely used in the past <ref type="bibr" target="#b0">[1]</ref>, <ref type="bibr" target="#b1">[2]</ref>, <ref type="bibr" target="#b2">[3]</ref>, <ref type="bibr" target="#b3">[4]</ref>, <ref type="bibr" target="#b7">[8]</ref>, <ref type="bibr" target="#b29">[30]</ref>, <ref type="bibr" target="#b36">[37]</ref>. Table <ref type="table" target="#tab_5">2</ref> shows the default parameters (unless otherwise specified in the text) used for each approach. The iSAX word length, PAA size, leaf capacity, basic cardinality, and maximum cardinality were chosen to be optimal for iSAX, which previous works <ref type="bibr" target="#b2">[3]</ref>, <ref type="bibr" target="#b3">[4]</ref>, <ref type="bibr" target="#b29">[30]</ref>, <ref type="bibr" target="#b30">[31]</ref>, <ref type="bibr" target="#b36">[37]</ref> have shown to work well across data with very different characteristics.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Index Construction Time</head><p>In this section, we measure the index construction time in DPiSAX, DbasicPiSAX and DiSAX, and compare it to the construction time of the iSAX2+ index.</p><p>Figure <ref type="figure" target="#fig_12">6</ref> reports the index construction times for all approaches on our Random Walk dataset. The index construction time increases with the number of time series for all approaches. This time is much lower in the case of all parallel approaches, than that of the centralized iSAX2+. On 32 machines, and for a dataset of one billion time series, DPiSAX builds the index in 65 minutes, DbasicPiSAX in 76 minutes and DiSAX in 64 minutes, while the iSAX2+ index is built in more than 5 days on a single node. Figure <ref type="figure" target="#fig_13">7</ref> shows the same evaluation on the TexMex dataset. We can observe very similar behavior of our parallel approaches. As for the previous experiment, reported in Figure <ref type="figure" target="#fig_12">6</ref>, the centralized version of iSAX2+ builds the index on a single machine in up to 4 days. We only report the response time of scalable approaches in Figure <ref type="figure" target="#fig_13">7</ref>, for a better visual comparison of their performances.</p><p>Figure <ref type="figure" target="#fig_14">8</ref> reports an extended view on the index construction times, only for parallel approaches, and with datasets having size up to 4 billion time series (6.2TB). The running time increases with the number of time series for DPiSAX and DiSAX. DbasicPiSAX does not scale and cannot execute on datasets having size above 1Tb. This is due to its imbalanced partitions, where one of the computing node receives so much data that it cannot build the index. This will be better discussed with Figure <ref type="figure" target="#fig_2">14</ref>. Figures 9 and 10 illustrate the parallel speed-up of our approach on the Random Walk (Figure <ref type="figure">9</ref>) and the TexMex (Figure <ref type="figure" target="#fig_2">10</ref>) datasets. The results show a near optimal gain for DPiSAX and DiSAX on our dataset. From the figure <ref type="figure">9</ref>, we observe that the construction time for DbasicPiSAX is the same with 32 nodes and 40 nodes, this is because Dba-sicPiSAX does not use all the available processors. Actually, the basic partitioning algorithm (as described in Section 4.2) is limited in the number of partitions it can generate. By construction, it is able to generate up to 2 8 = 256 partitions (more generally, 2 w partitions, where w is the SAX word length). In order to fully exploit the computing of all 320 cores, we need to build 320 partitions. This is over the maximum number of partitions that DbasicPiSAX is able to manage (i.e., in this case, 256).</p><p>Figure <ref type="figure" target="#fig_2">14</ref> reports our measures of load balance, on 32 nodes and one billion time series, where partitions are sorted by decreasing order of the measured criteria: number of nodes in the local trees <ref type="bibr" target="#b10">( 11)</ref>, number of time series in the partitions (Figure <ref type="figure" target="#fig_3">12</ref>) and index depth (Figure <ref type="figure" target="#fig_5">13</ref>). Our results illustrate the near ideal balance of our DPiSAX approach, while DbasicPiSAX is totally unbalanced. The number of time series, for instance, in the case of Dba-sicPiSAX, ranges from 0 (which means an empty partition) to 100 millions (i.e., 10% of the data is indexed on one partition out of 320). DiSAX is perfectly balanced in the index construction phase owing to its sequential split of the data in the partitioning phase, but totally imbalanced in querying because it has to send the whole batch of queries to all partitions, leading to poor performances as illustrated in the remaining of our experiments. Figure <ref type="figure" target="#fig_2">15</ref> reports the performance gains of our parallel approaches on the centralized version of iSAX2+ on our synthetic and real datasets. The results show that DPiSAX is between 40 and 120 times faster than iSAX2+. We observe that the performance gain depends on the dataset size in relation to the number of Spark nodes used in the deployment. As seen, the speedup of DPiSAX compared to the centralized iSAX2+ is higher than the number of cluster nodes, i.e. 32. The reason is that each node of the cluster has 8 cores, and for each core, Spark can create one worker (thread). Thus, the speedup is not higher than the number of cluster cores.</p><p>Note that the time Spark needs to deploy on 32 nodes is accounted for in our measurements. Thus, given the very short time needed to construct the DPiSAX index on the seismic dataset (420 seconds), the proportion of time taken by the Spark deployment when compared to index construction, is higher than the much larger Random Walk dataset.</p><p>Our experiments with varying leaf capacity show that this parameter has a negligible effect on performance (results omitted for brevity). This is because the RDD implementation used by Spark avoids the performance penalty related to disk I/O, which is heavily affected by the choice of the leaf capacity <ref type="bibr" target="#b3">[4]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3">Query Performance</head><p>In the following experiments, we evaluate the querying performance of our algorithms, and compare them to the state of the art. In the case of our synthetic data, we generate Random Walk queries with the same distribution as described in Section 5.1. For the seismic data, we obtained seismic time series from the same IRIS Seismic Data Access repository <ref type="bibr" target="#b9">[10]</ref> to be used as queries. In the case of the TexMex corpus, similar series correspond to similar images. The corpus contains 10 4 example queries together with information about which image in the corpus is the nearest neighbor. In any dataset, for each time series t in the query batch, the goal is to check if the approach is able to find the k time series that are considered to be the most similar to t in this dataset, both with exact and approximate K-NN search.</p><p>Figure <ref type="figure" target="#fig_12">16</ref> compares the search time of approximate k nearest neighbors queries for the parallel approaches proposed in this work. We can observe that the response time increases with the number of queries for all approaches. However, for DPiSAX the search time is lower than Dba-sicPiSAX (owing to the better partition balancing) and much better than DiSAX (owing to DPiSAX's cability of splitting the query batch and redirect the queries to the adequate partitions). In our experiments, we also compared the search time of parallel approaches to that of iSAX2+ for answering approximate k nearest neighbors queries with a varying size of query batch. We observed that the approximate search time of DPiSAX is better than that of the iSAX2+ by a of up to 16 (e.g., the search time for 10 millions queries is 2270 sec for iSAX2+ and 138 sec for DPiSAX).</p><p>Figure <ref type="figure" target="#fig_13">17</ref> gives the exact search run time of our parallel approaches on the index constructed over 1 billion time series. We observe that DPiSAX is always faster than Dba-sicPiSAX and DiSAX, owing to its near ideal load balance.</p><p>Figure <ref type="figure" target="#fig_14">18</ref> compares cumulative time (Indexing + Exact 10-NN) of DPiSAX, DbasicPiSAX and DiSAX to PLS. A direct use of PLS is justified under 1K queries. Above that limit, the cumulative time of building the index and querying is much lower for our approaches, which are the clear winners.</p><p>Figure <ref type="figure" target="#fig_2">19</ref> illustrates the performance gains of our approaches on the centralized version of iSAX2+ and on PLS on synthetic and real world datasets, with batches of 10K queries (indexing time not included). We observe that DPiSAX and DbasicPiSAX have the best performance, owing to their query redirection mechanisms. However, DbasicPiSAX is not always as efficient as DPiSAX because of a less balanced partitioning. DPiSAX is generally between 19 and 43 times faster than iSAX2+ and PLS.  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">RELATED WORK</head><p>In the context of time series data mining, several techniques have been developed and applied to time series data, e.g., clustering, classification, outlier detection, pattern identification, motif discovery, and others. The idea of indexing time series is relevant to all these techniques. Note that, even though several databases have been developed for the management of time series (such as Informix Time Series, InfluxDB, OpenTSDB, and DalmatinerDB based on RIAK), they do not include similarity search indexes, focusing on (temporal) SQL-like query workloads. Thus, they cannot efficiently support similarity search queries, which is the focus of our study.</p><p>In order to speed up similarity search, different works have studied the problem of indexing time series datasets, such as Indexable Symbolic Aggregate approXimation (iSAX) <ref type="bibr" target="#b29">[30]</ref>, <ref type="bibr" target="#b30">[31]</ref>, iSAX 2.0 <ref type="bibr" target="#b2">[3]</ref>, <ref type="bibr" target="#b3">[4]</ref>, iSAX2+ <ref type="bibr" target="#b3">[4]</ref>, Adaptive Data Series Index (ADS Index) <ref type="bibr" target="#b36">[37]</ref>, Dynamic Splitting Tree (DSTree) <ref type="bibr" target="#b31">[32]</ref>, Compact and Contiguous Sequence Infrastructure (Coconut) <ref type="bibr" target="#b13">[14]</ref>, Parallel Index for Sequences (ParIS) <ref type="bibr" target="#b23">[24]</ref>, and Ultra Compact Index for Variable-Length Similarity Search (ULISSE) <ref type="bibr" target="#b17">[18]</ref>. A recent study is comparing the performance of several different time series indexes <ref type="bibr" target="#b5">[6]</ref>.</p><p>The iSAX index family (iSAX 2.0, iSAX2+, ADS Index) is based on SAX representation <ref type="bibr" target="#b15">[16]</ref> of time series, which is a symbolic representation for time series that segments all time series into equi-length segments and symbolizes the mean value of each segment. As an index structure specifically designed for ultra-large collections of time series, iSAX 2.0 proposes a new mechanism and also algorithms for efficient bulk loading and node splitting policy, wich is not supported by iSAX index. In <ref type="bibr" target="#b3">[4]</ref>, the authors propose two extensions of iSAX 2.0, namely iSAX 2.0 Clustered and iSAX2+. These extensions focus on the efficient handling of the raw time series data during the bulk loading process, by using a technique that uses main memory buffers to group and route similar time series together down the tree, performing the insertion in a lazy manner. In addition to that, DSTree based on extension of APCA representation, called EAPCA <ref type="bibr" target="#b31">[32]</ref> segments time series into variable length segment. Unlike iSAX which only supports horizontal split-ting, and only the mean values can be used in splitting, the DSTree uses multiple splitting strategies. All these indexes have been developed for a centralized environment, and cannot scale up to very high volumes of time series.</p><p>The ParIS index <ref type="bibr" target="#b23">[24]</ref> was recently proposed for taking advantage of the modern hardware parallelization opportunities within a single compute node. ParIS describes techniques that use the Single Instruction Multiple Data (SIMD) instructions, as well as the multi-core and multi-socket architectures, for parallel index creation and query answering. As such, ParIS is complementary to our approach.</p><p>In this paper, we propose a parallel solution that takes advantage of distributed environments to efficiently build iSAX-based indices over billions of time series, and to query them in parallel with very small running times. To the best of our knowledge, this is the first paper that proposes such a solution.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">CONCLUSIONS</head><p>We proposed DPiSAX, a novel and efficient parallel solution to index and query billions of time series, or highdimensional vectors, in general. We evaluated the performance of our solution over large volumes of real world and synthetic datasets (up to 4 billion time series, for a total volume of 6TBs).</p><p>The experimental results illustrate the excellent performance of DPiSAX (e.g., an indexing time of less than 2 hours for more than one billion time series, while the state of the art centralized algorithm needs several days). The results also show that the distributed querying algorithm of DPiSAX is able to process millions of similarity queries over collections of billions of time series with very fast execution times (e.g., 140s for 10M queries), thanks to our load balancing mechanism. Overall, the results show that by using our parallel techniques, the indexing and mining of very large volumes of time series can now be done in very small execution times, which are impossible to achieve using traditional centralized approaches.</p><p>In our future work, we intend to combine our approach with techniques that exploit modern hardware parallelism inside each computing node (i.e., SIMD, multi-core, multisocket, and GPU) <ref type="bibr" target="#b22">[23]</ref>, <ref type="bibr" target="#b23">[24]</ref>.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head></head><label></label><figDesc>Ideal distribution of time series in the index nodes: each query is sent only to the relevant partition.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Fig. 1 :</head><label>1</label><figDesc>Fig. 1: Straightforward Vs. partitioned strategies for TS indexing and querying. Load balancing is a major lever.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Example 1 .</head><label>1</label><figDesc>Figure2bshows the PAA representation of X, the time series of Figure2a. The representation is composed of w = |X|/l values, where l is the segment size. For each segment, the set of values is replaced with their mean. The length of the final representation w is the number of segments (and, usually, w &lt;&lt; |X|).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Example 2 .</head><label>2</label><figDesc>In Figure2c, we have converted the time series X to SAX representation with size 4, and cardinality 4 using the PAA representation shown in Figure2b. We denote SAX(X) =<ref type="bibr" target="#b10">[11,</ref><ref type="bibr" target="#b9">10,</ref> 01, 01].</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head></head><label></label><figDesc>An iSAX representation of X, with 4 segments and different cardinalities[1 2 , 1 2 , 01 4 , 0 2 ].</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Fig. 3 :</head><label>3</label><figDesc>Fig. 3: Example of iSAX Index</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Algorithm 1 : 3 4 emit) 6 rootNode = new RootNode 7 foreach 9 emit (rootNode) 10 Function 11 if the subtree corresponding to iSAX word exists then 12 node = the node corresponding to iSAX word 13 if node is leaf node then 14 if</head><label>1346791011121314</label><figDesc>DiSAX Index construction Input: Data partitions P = {P 1 , P 2 , . . . , P n } of a database D, w the length of the iSAX word Output: Index structures 1 D.cache(); //cache all the database in the cluster, where each time series has a unique ID 2 MapToPair( ID of Time series: ID ,Time Series: X ) Convert time series X to iSAX word with high cardinalities and size w (ID ,iSAX word) 5 MapPartition( Set of &lt;ID,iSAX word&gt;: iSAX words &lt;ID,iSAX word&gt; in iSAX words do 8 rootNode.insert(ID ,iSAX word) insert(ID ,iSAX word) node is not full then 15 node.insert(ID ,iSAX word) (ID ,iSAX word)</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head></head><label></label><figDesc>Partitioning according to DPiSAX.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><head></head><label></label><figDesc>DbasicPiSAX indexes after partitioning and indexing. Partition "11" is empty for the sampling step, but may contain data after indexing. DPiSAX indexes after partitioning and indexing. The partitioning principle of DPiSAX allows better balance.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_9"><head>Algorithm 4 : 2 BigPartition = the biggest partition 3 / 4 Divide</head><label>4234</label><figDesc>DbasicPiSAX Partitioning Function Input: Sample S of iSAX words, p number of partitions Output: Partition Table BT 1 while the number of partitions is less than p do /In the first iteration BigPartition = S BigPartition into two partitions</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_10"><head>Algorithm 5 : 2 BigPartition = the biggest partition 3 / 4 mean 7 foreach segment s in BigPartition do 8 b 11 segmentToSplit = s 12 Divide</head><label>5234781112</label><figDesc>DPiSAX Partitioning Function Input: Sample S of iSAX words, p number of partitions Output: Partition Table BT 1 while the number of partitions is less than p do /In the first iteration BigPartition = S = getbreak-point(s) 9 if b within mean[s] ± stdev[s] then 10 if mean[s] close to b then segmentToSplit then BigPartition into two partitions in segmentToSplit</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_11"><head>Algorithm 8 : 3 get the rootN ode from iSAX index 4 foreach q in Q do 5 bsf 6 emit (ExactSearch results) 7 Function 8 bsfDist 9 while node = pop next node from queue do 10 if</head><label>8345678910</label><figDesc>DPiSAX Exact SearchInput: iSAX Indexes, where each partitions has one index I = {I 1 , I 2 , . . . , I n } and a collection Q of queries time series Output: k nearest neighbors 1 Send each query to the partition that has the same iSAX word as the query 2 MapPartition( iSAX index, Q ) = rootNode.ApprSearch(ID ,iSAX word of q) rootNode.ExactSearch(ID ,q,bsf ) ExactSearch(ID ,q) = Infinite; queue = Initialize a priority queue with all the children of the root; node is terminal node and MinDist(q,node) &lt; bsfDist then 11 bsf = Finds the k nearest neighbors 12 else if MinDist(q, node) ≥ bsfDist then<ref type="bibr" target="#b12">13</ref> of the node to priority queue ;</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_12"><head>Fig. 6 :</head><label>6</label><figDesc>Fig. 6: Logarithmic scale. Construction time as a function of dataset size. Parallel algorithms (DiSAX and DPiSAX) are run on a cluster of 32 nodes. iSAX2+ is run on a single node. With 1 billion Random Walk TS, iSAX2+ needs 5 days and our distributed algorithms need less than 2 hours.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_13"><head>Fig. 7 :</head><label>7</label><figDesc>Fig. 7: Construction time as a function of dataset size. Parallel algorithms (DiSAX and DPiSAX) are run on a cluster of 32 nodes. With 1 billion TS from TexMex dataset.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_14"><head>Fig. 8 :</head><label>8</label><figDesc>Fig. 8: Construction time as a function of dataset size, for parallel algorithms on a cluster of 32 nodes, and with datasets up to 4 billion Random Walk time series.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_15"><head>Fig. 9 :Fig. 10 :</head><label>910</label><figDesc>Fig. 9: Construction time as a function of cluster size. DPiSAX and DiSAX have has a near optimal parallel speed-up. With 1 billion TS from the Random Walk dataset.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_16"><head>Fig. 13 :Fig. 14 :Fig. 15 :Fig. 16 :Fig. 17 :Fig. 18 :</head><label>131415161718</label><figDesc>Fig. 11: number of nodes</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Algorithm 3 :</head><label>3</label><figDesc>DiSAX Exact Search Input: iSAX Indexes where each partition has one index I = {I 1 , I 2 , . . . , I n } and a collection Q of queries time series Output: k nearest neighbors 1 Duplicate Q on each partition 2 MapPartition( iSAX index, Q )</figDesc><table><row><cell>3</cell><cell>get the rootN ode from iSAX index</cell></row><row><cell>4</cell><cell>foreach q in Q do</cell></row><row><cell>5</cell><cell>bsf = rootNode.ApprSearch(ID ,iSAX word of</cell></row><row><cell></cell><cell>q) rootNode.ExactSearch(ID ,q,bsf )</cell></row><row><cell>6</cell><cell>emit (ExactSearch results)</cell></row><row><cell cols="2">7 Function ExactSearch(ID ,q)</cell></row><row><cell>8</cell><cell>bsfDist = Infinite; queue = Initialize a priority</cell></row><row><cell></cell><cell>queue with all the children of the root;</cell></row><row><cell>9</cell><cell>while node = pop next node from queue do</cell></row><row><cell>10</cell><cell>if node is terminal node and MinDist(q,node) &lt;</cell></row><row><cell></cell><cell>bsfDist then</cell></row><row><cell>11</cell><cell>bsf = Find the k nearest neighbors</cell></row></table><note><p>12 else if MinDist(q, node) ≥ bsfDist then 13 break; 14 else 15 Add the children of the node to priority queue ; 12) the algorithm stops. If node is an internal node (line 15) then all children are added into the priority queue.</p></note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>TABLE 1 :</head><label>1</label><figDesc>A sample S of 8 time series converted to iSAX representations with iSAX words of length 2</figDesc><table><row><cell cols="2">Time series iSAX words</cell><cell cols="2">Time series iSAX words</cell></row><row><cell>T S 1</cell><cell>{01, 00}</cell><cell>T S 5</cell><cell>{00, 10}</cell></row><row><cell>T S 2</cell><cell>{00, 01}</cell><cell>T S 6</cell><cell>{01, 11}</cell></row><row><cell>T S 3</cell><cell>{01, 01}</cell><cell>T S 7</cell><cell>{10, 00}</cell></row><row><cell>T S 4</cell><cell>{00, 00}</cell><cell>T S 8</cell><cell>{10, 01}</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head></head><label></label><figDesc>searching for the approximate k nearest neighbors of the time series Q is done as in Section 3.1.1. The difference is that just one iSAX index is queried instead of all the parallel indexes. Data partitions P = {P 1 , P 2 , . . . , P n } of a database D, w the length of the iSAX word, p number of partitions Output: Index structures 1 D.cache(); //cache all the database in the cluster, where each time series has a unique ID 2 MapToPair( ID of Time series: ID ,Time Series: X ) Convert the time series X to iSAX word with high cardinalities and size w</figDesc><table><row><cell cols="2">Algorithm 6: DPiSAX Index construction</cell></row><row><cell cols="2">Input: 4 emit (ID ,iSAX word)</cell></row><row><cell cols="2">5 MapPartition( Set of Set&lt;ID,iSAX word&gt;:</cell></row><row><cell></cell><cell>iSAX words )</cell></row><row><cell>6</cell><cell>rootNode = new RootNode</cell></row><row><cell>7</cell><cell>foreach Set &lt;ID,iSAX word&gt; in iSAX words do</cell></row><row><cell>8</cell><cell>rootNode.bulkInsertion(Set&lt;ID,iSAX word&gt;)</cell></row><row><cell>9</cell><cell>emit (rootNode)</cell></row><row><cell cols="2">10 Function bulkInsertion(Set &lt;ID,iSAX word&gt;:</cell></row><row><cell></cell><cell>iSAX words)</cell></row><row><cell>11</cell><cell>if the subtree corresponding to iSAX words exists</cell></row><row><cell></cell><cell>then</cell></row><row><cell>12</cell><cell>node = the node corresponding to</cell></row><row><cell></cell><cell>iSAX words</cell></row><row><cell>13</cell><cell>if node is leaf node then</cell></row><row><cell>19</cell><cell>newNode.bulkInsertion(all iSAX words</cell></row><row><cell></cell><cell>of node)</cell></row><row><cell>20</cell><cell>remove(node)</cell></row><row><cell>21</cell><cell>else</cell></row><row><cell>22</cell><cell>node.bulkInsertion(iSAX words)</cell></row><row><cell>23</cell><cell>else</cell></row><row><cell>24</cell><cell>newNode = new TerminalNode</cell></row></table><note><p><p><p>•</p>Approximate search:</p>3 14 if node is not full then 15 node.bulkInsertion(iSAX words) 16 else 17 newNode = new InternalNode 18 newNode.bulkInsertion(iSAX words) 25 newNode.bulkInsertion(iSAX words)</p></note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head></head><label></label><figDesc>iSAX Indexes, where each partition has one index I = {I 1 , I 2 , . . . , I n } and a collection Q of Query time series Output: k nearest neighbors 1 MapToPair( ID of Time series: ID ,Time Series: q ) Convert time series X to iSAX word with high cardinalities and size w.</figDesc><table><row><cell>3</cell><cell>emit (ID ,iSAX word)</cell></row><row><cell cols="2">4 Send each query to the partition that has the same</cell></row><row><cell></cell><cell>iSAX word as the query</cell></row><row><cell cols="2">5 MapPartition( iSAX index, Set of &lt;ID,iSAX word&gt;:</cell></row><row><cell></cell><cell>iSAX words )</cell></row><row><cell>6</cell><cell>get the the rootN ode from iSAX index</cell></row><row><cell>7</cell><cell>foreach &lt;ID,iSAX word&gt; in iSAX words do</cell></row><row><cell>8</cell><cell>rootNode.ApprSearch(ID ,iSAX word)</cell></row><row><cell>9</cell><cell>emit (ApprSearch results)</cell></row></table><note><p><p>•</p>Exact search: for retrieving the exact k nearest neighbors of a given query time series q, we first use the approximate search, described above, in order to obtain an approximate best-so-far k nearest neighbors. Then, each worker performs the exact search algo-Algorithm 7: DPiSAX Approximate Search Input: 2 10 Function ApprSearch(ID ,iSAX word) 11 node = the node corresponding to iSAX word 12 if node is terminal node then 13 Find the k nearest neighbors using Euclidean distance 14 else 15 node.ApprSearch(ID ,iSAX word);</p></note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_5"><head>TABLE 2 :</head><label>2</label><figDesc>Default parameters</figDesc><table><row><cell>Parameters</cell><cell>Value</cell><cell>Parameters</cell><cell>Value</cell></row><row><cell>iSAX word length</cell><cell>8</cell><cell>Leaf capacity</cell><cell>1,000</cell></row><row><cell>Basic cardinality</cell><cell>2</cell><cell>Number of machines</cell><cell>32</cell></row><row><cell>Maximum cardinality</cell><cell>512</cell><cell>Sampling fraction</cell><cell>10%</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_6"><head></head><label></label><figDesc>Performance gain (query only) of our parallel approaches on iSAX2+ and PLS, for exact 10-NN search time, batches of 10k queries, over seismic, Random Walk (RW) and TexMex datasets.</figDesc><table><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell cols="2">DPiSAX</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell cols="2">DbasicPiSAX</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell cols="2">DiSAX</cell></row><row><cell></cell><cell>40X</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Performance Gain</cell><cell>20X 30X</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell>10X</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell>Vs. iSAX2+</cell><cell>Vs. iSAX2+</cell><cell>Vs. iSAX2+</cell><cell>Vs. PLS</cell><cell>Vs. PLS</cell><cell>Vs. PLS</cell></row><row><cell></cell><cell>over</cell><cell>over</cell><cell>over</cell><cell>over</cell><cell>over</cell><cell>over</cell></row><row><cell></cell><cell>Seismic</cell><cell>RW</cell><cell>TexMex</cell><cell>Seismic</cell><cell>RW</cell><cell>TexMex</cell></row><row><cell cols="2">Fig. 19:</cell><cell></cell><cell></cell><cell></cell><cell></cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>ACKNOWLEDGMENTS</head><p>The research leading to these results has received funding from the <rs type="funder">European Union</rs>'s <rs type="programName">Horizon 2020</rs>, under grant agreement No. <rs type="grantNumber">732051</rs>.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_g7nSkEY">
+					<idno type="grant-number">732051</idno>
+					<orgName type="program" subtype="full">Horizon 2020</orgName>
+				</org>
+			</listOrg>
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0" />			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Efficient similarity search in sequence databases</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Agrawal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Faloutsos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">N</forename><surname>Swami</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Int. Conf.on FODO</title>
+		<imprint>
+			<date type="published" when="1993">1993</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">The ts-tree: Efficient time series search and retrieval</title>
+		<author>
+			<persName><forename type="first">Ira</forename><surname>Assent</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ralph</forename><surname>Krieger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Farzad</forename><surname>Afschari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Seidl</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">EDBT</title>
+		<imprint>
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">isax 2.0: Indexing and mining one billion time series</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Camerra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Palpanas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Shieh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Keogh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ICDM Conf</title>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="58" to="67" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Beyond one billion time series: indexing and mining very large time series collections with i SAX2+</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Camerra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Shieh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Palpanas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Rakthanmanon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">J</forename><surname>Keogh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Knowl. Inf. Syst</title>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Mapreduce: Simplified data processing on large clusters</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Dean</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ghemawat</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Commun. ACM</title>
+		<imprint>
+			<biblScope unit="volume">51</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="107" to="113" />
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">The lernaean hydra of data series similarity search: An experimental evaluation of the state of the art</title>
+		<author>
+			<persName><forename type="first">Karima</forename><surname>Echihabi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kostas</forename><surname>Zoumpatianos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Themis</forename><surname>Palpanas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Houda</forename><surname>Benbrahim</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PVLDB</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Time-series data mining</title>
+		<author>
+			<persName><forename type="first">Philippe</forename><surname>Esling</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carlos</forename><surname>Agon</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Comput. Surv</title>
+		<imprint>
+			<biblScope unit="volume">45</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="12" />
+			<date type="published" when="2012-12">December 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Fast subsequence matching in time-series databases</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Faloutsos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ranganathan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Manolopoulos</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">SigRec</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="419" to="429" />
+			<date type="published" when="1994">1994</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Computational intelligence challenges and applications on large-scale astronomical time series databases</title>
+		<author>
+			<persName><forename type="first">Pablo</forename><surname>Huijse</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pablo</forename><forename type="middle">A</forename><surname>Estévez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pavlos</forename><surname>Protopapas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jose</forename><forename type="middle">C</forename><surname>Principe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pablo</forename><surname>Zegers</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Comp. Int. Mag</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="27" to="39" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<monogr>
+		<ptr target="http://ds.iris.edu/data/access/" />
+		<title level="m">Seismic data access</title>
+		<imprint>
+			<publisher>IRIS</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Searching in one billion vectors: re-rank with source coding</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Jégou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Tavenard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Douze</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Amsaleg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ICASSP</title>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Time-series active search for quick retrieval of audio and video</title>
+		<author>
+			<persName><forename type="first">Kunio</forename><surname>Kashino</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gavin</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hiroshi</forename><surname>Murase</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ICASSP</title>
+		<imprint>
+			<date type="published" when="1999">1999</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Exact indexing of dynamic time warping</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Eamonn</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Keogh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">VLDB</title>
+		<imprint>
+			<date type="published" when="2002">2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Coconut: A scalable bottom-up approach for building data series indexes</title>
+		<author>
+			<persName><forename type="first">Haridimos</forename><surname>Kondylakis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Niv</forename><surname>Dayan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kostas</forename><surname>Zoumpatianos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Themis</forename><surname>Palpanas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PVLDB</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">A symbolic representation of time series, with implications for streaming algorithms</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Keogh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Lonardi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Chiu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">SIGMOD</title>
+		<imprint>
+			<date type="published" when="2003">2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Experiencing sax: A novel symbolic representation of time series</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Keogh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Wei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Lonardi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Data Min. Knowl. Discov</title>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">ULISSE: ultra compact index for variable-length similarity search in data series</title>
+		<author>
+			<persName><forename type="first">Michele</forename><surname>Linardi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Themis</forename><surname>Palpanas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ICDE</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Scalable, variable-length similarity search in data series: The ulisse approach</title>
+		<author>
+			<persName><forename type="first">Michele</forename><surname>Linardi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Themis</forename><surname>Palpanas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PVLDB</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Matrix profile X: VALMOD -scalable discovery of variable-length motifs in data series</title>
+		<author>
+			<persName><forename type="first">Michele</forename><surname>Linardi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yan</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Themis</forename><surname>Palpanas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eamonn</forename><forename type="middle">J</forename><surname>Keogh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">SIGMOD</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">VALMOD: A suite for easy and exact detection of variable length motifs in data series</title>
+		<author>
+			<persName><forename type="first">Michele</forename><surname>Linardi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yan</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Themis</forename><surname>Palpanas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eamonn</forename><forename type="middle">J</forename><surname>Keogh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">SIGMOD</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Data series management: The road to big sequence analytics</title>
+		<author>
+			<persName><forename type="first">Themis</forename><surname>Palpanas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">SIGMOD Record</title>
+		<imprint>
+			<biblScope unit="volume">44</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="47" to="52" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Big sequence management: A glimpse of the past, the present, and the future</title>
+		<author>
+			<persName><forename type="first">Themis</forename><surname>Palpanas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">SOFSEM</title>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">The parallel and distributed future of data series mining</title>
+		<author>
+			<persName><forename type="first">Themis</forename><surname>Palpanas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on High Performance Computing &amp; Simulation</title>
+		<imprint>
+			<publisher>HPCS</publisher>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">ParIS: The Next Destination for Fast Data Series Indexing and Query Answering</title>
+		<author>
+			<persName><forename type="first">Botao</forename><surname>Peng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Themis</forename><surname>Palpanas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Panagiota</forename><surname>Fatourou</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE BigData</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Searching and mining trillions of time series subsequences under dynamic time warping</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Rakthanmanon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Campana</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mueen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Batista</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Westover</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zakaria</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Keogh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">KDD</title>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Practical data prediction for realworld wireless sensor networks</title>
+		<author>
+			<persName><forename type="first">Usman</forename><surname>Raza</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alessandro</forename><surname>Camerra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amy</forename><forename type="middle">L</forename><surname>Murphy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Themis</forename><surname>Palpanas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gian</forename><forename type="middle">Pietro</forename><surname>Picco</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Trans. Knowl. Data Eng</title>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+	<note>accepted for publication</note>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Longterm variability of agn at hard x-rays</title>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">H</forename><surname>Baumgartner</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Astronomy &amp; Astrophysics</title>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">The hadoop distributed filesystem: Balancing portability and performance</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Shafer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Rixner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">L</forename><surname>Cox</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Int. ISPASS</title>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Tuning time series queries in finance: Case studies and recommendations</title>
+		<author>
+			<persName><forename type="first">Dennis</forename><surname>Shasha</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Data Eng. Bull</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="40" to="46" />
+			<date type="published" when="1999">1999</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">isax: Indexing and mining terabyte sized time series</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Shieh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Keogh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">KDD Conf</title>
+		<imprint>
+			<date type="published" when="2008">2008</date>
+			<biblScope unit="page" from="623" to="631" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">isax: Disk-aware mining and indexing of massive time series datasets</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Shieh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Keogh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">DMKD</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="24" to="57" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">A data-adaptive and dynamic segmentation index for whole matching on time series</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Peng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Jian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Wei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Sheng</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PVLDB</title>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Dpisax: Massively distributed partitioned isax</title>
+		<author>
+			<persName><forename type="first">Reza</forename><surname>Djamel Edine Yagoubi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Florent</forename><surname>Akbarinia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Themis</forename><surname>Masseglia</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Palpanas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ICDM</title>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="1135" to="1140" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Time series shapelets: a new primitive for data mining</title>
+		<author>
+			<persName><forename type="first">Lexiang</forename><surname>Ye</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eamonn</forename><forename type="middle">J</forename><surname>Keogh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">KDD</title>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Matrix profile I: all pairs similarity joins for time series: A unifying view that includes motifs, discords and shapelets</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">C M</forename><surname>Yeh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Ulanova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Begum</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Ding</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">A</forename><surname>Dau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">F</forename><surname>Silva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mueen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">J</forename><surname>Keogh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ICDM</title>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Spark: Cluster computing with working sets</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Zaharia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Chowdhury</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">J</forename><surname>Franklin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Shenker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Stoica</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">HotCloud</title>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Indexing for interactive exploration of big data series</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Zoumpatianos</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Idreos</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Palpanas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">SIGMOD Conf</title>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">ADS: the adaptive data series index</title>
+		<author>
+			<persName><forename type="first">Kostas</forename><surname>Zoumpatianos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stratos</forename><surname>Idreos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Themis</forename><surname>Palpanas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">VLDB J</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="843" to="866" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Data series management: Fulfilling the need for big sequence analytics</title>
+		<author>
+			<persName><forename type="first">Kostas</forename><surname>Zoumpatianos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Themis</forename><surname>Palpanas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ICDE</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

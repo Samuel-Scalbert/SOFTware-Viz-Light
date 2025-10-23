@@ -1,0 +1,1234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">kmtricks: Efficient construction of Bloom filters for large sequencing data collections</title>
+				<funder ref="#_CzuSEFA #_qQUdNZt">
+					<orgName type="full">unknown</orgName>
+				</funder>
+				<funder ref="#_VwZ2k36">
+					<orgName type="full">Agence Nationale de la Recherche</orgName>
+					<orgName type="abbreviated">ANR</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Téo</forename><surname>Lemane</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Univ. Rennes</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">IRISA</orgName>
+								<address>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Paul</forename><surname>Medvedev</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department">Department of Computer Science and Engineering</orgName>
+								<orgName type="institution">The Pennsylvania State University</orgName>
+								<address>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="department">Department of Biology</orgName>
+								<orgName type="institution">The Pennsylvania State University</orgName>
+								<address>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff3">
+								<orgName type="department">Huck Institutes of the Life Sciences</orgName>
+								<orgName type="institution">The Pennsylvania State University</orgName>
+								<address>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Rayan</forename><surname>Chikhi</surname></persName>
+							<affiliation key="aff4">
+								<orgName type="department">Department of Computational Biology</orgName>
+								<orgName type="institution">Institut Pasteur</orgName>
+								<address>
+									<settlement>Paris</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author role="corresp">
+							<persName><forename type="first">Pierre</forename><surname>Peterlongo</surname></persName>
+							<email>pierre.peterlongo@inria.fr</email>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Univ. Rennes</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">IRISA</orgName>
+								<address>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">kmtricks: Efficient construction of Bloom filters for large sequencing data collections</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">C45075D10787E796B62BCD1F567C713D</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:12+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>When indexing large collection of sequencing data, a common operation that has now been implemented in several tools (Sequence Bloom Trees and variants, BIGSI, ..) is to construct a collection of Bloom filters, one per sample. Each Bloom filter is used to represent a set of k-mers which approximates the desired set of all the non-erroneous k-mers present in the sample. However, this approximation is imperfect, especially in the case of metagenomics data. Erroneous but abundant k-mers are wrongly included, and non-erroneous but low-abundant ones are wrongly discarded. We propose kmtricks, a novel approach for generating Bloom filters from terabase-sized collections of sequencing data. Our main contributions are 1/ an efficient method for jointly counting k-mers across multiple samples, including a streamlined Bloom filter construction by directly counting hashes instead of k-mers; 2/ a novel technique that takes advantage of joint counting to preserve low-abundant k-mers present in several samples, improving the recovery of non-erroneous k-mers. In addition, our experimental results highlight that the usual yet crude filtering of low-abundant k-mers is inappropriate for complex data such as metagenomes.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>Consortia such as the 100,000 Genomes Project <ref type="bibr" target="#b28">(Turnbull et al., 2018)</ref>, GEUVADIS <ref type="bibr" target="#b13">(Lappalainen et al., 2013)</ref>, MetaSub <ref type="bibr" target="#b20">(Mason et al., 2016)</ref> and Tara Ocean <ref type="bibr" target="#b11">(Karsenti et al., 2011)</ref> have generated large collections of genomic, transcriptomic, and metagenomic sequencing data, respectively. Rather than deep coverage of a single sample, such datasets contain a collection of sequencing experiments across many samples. For example, the Tara Ocean project generated metagenomic sequencing data across ecological niches all over the oceans, totalling at least 171 thousand billions of nucleotides. Such valuables resources are unfortunately difficult to comprehensively analyze, since their size makes bioinformatics analyses difficult.</p><p>Traditional sequence analyses such as alignment to a reference database or de novo assembly are both difficult and limited in the results they yield. For instance, metagenome assembly of individual samples (e.g. using MetaSPAdes <ref type="bibr" target="#b23">(Nurk et al., 2017)</ref>) is often not able to reconstruct low abundance genomes and tends to collapse variants between close strains. Co-assembly of multiple samples pools together coverage from multiple sites to alleviate this but results in further loss in strain specificity. Alternatively, aligning raw sequencing data to genome databases is hindered by the incompleteness of those databases.</p><p>A recently proposed alternative is to build an index of the raw sequencing data and then later query sequences of interest, e.g. genes or shorter sequence fragments around variants such as SNPs or indels. Traditional indexing approaches, such as those used by BLAST <ref type="bibr" target="#b0">(Altschul et al., 1990)</ref> or DIAMOND <ref type="bibr" target="#b6">(Buchfink et al., 2015)</ref>, do not scale to those large collections <ref type="bibr" target="#b19">(Marchet et al., 2021)</ref>. Instead, customized indexing methods have been under development. A recent review surveyed 20 tools that were all published in the last couple years, aiming to index large collections of sequencing data <ref type="bibr" target="#b19">(Marchet et al., 2021)</ref>, for example BIGSI <ref type="bibr" target="#b5">(Bradley et al., 2019)</ref>, HowDe-SBT <ref type="bibr" target="#b9">(Harris and Medvedev, 2019)</ref>, and Mantis <ref type="bibr" target="#b24">(Pandey et al., 2018)</ref>. These indexes are typically able to answer whether an arbitrary fixed-length sequence (k-mer) belongs to any of the samples, and, if so, which ones. Though much progress has been made, indexing a collection such as Tara Ocean has remained out of practical reach.</p><p>The vast majority of these large-scale k-mer indexing tools are based on common building blocks, three of them being: 1) k-mer counting, which summarizes sequencing data into a set of k-mers along with their abundances, 2), k-mer matrix construction, which aggregates lists of k-mer counts over a collection of samples (e.g. as in <ref type="bibr" target="#b18">Marchet et al. (2020)</ref>; <ref type="bibr" target="#b22">Muggli et al. (2019)</ref>) in the form of a k-mer/sample matrix with abundances as values, and 3) Bloom filters construction, where the k-mer presence/absence information for each sample is converted into a Bloom 1 filter to save space and allow fast queries. Note that these building blocks are not specific to k-mer indexing tools, e.g. 1) and 3) are commonly used in short-read de novo assembly, and 2) also appears in transcriptomics analysis <ref type="bibr" target="#b1">(Audoux et al., 2017)</ref>.</p><p>Importantly, these three steps are often categorized as "pre-processing" in k-mer indexing papers (e.g. <ref type="bibr" target="#b24">(Pandey et al., 2018;</ref><ref type="bibr" target="#b9">Harris and Medvedev, 2019)</ref>) and discounted from the running time of these indexing tools. Yet, for a dataset like Tara Oceans, these steps dwarf the running time of the subsequent index construction by up to several orders of magnitude. Although construction only needs to be done once per collection, its prohibitive running time for large collections represents an important roadblock to the usability of the tools.</p><p>In addition to the inefficiency of construction methods, sequencing errors are also dealt with sub-optimally. Even though contemporary sequencing error rates are low (0.1-1%), a vast amount of k-mers present in raw data contain sequencing errors and should be discarded during indexing. There are many read error-correction tools <ref type="bibr" target="#b27">(Song and Florea, 2015)</ref>, however, they are not a viable option for metagenomics (and RNA-seq) due to the presence of low-abundance genomes and the limited availability of reference genomes. Current approaches therefore filter out k-mers solely by checking if their abundance is below a pre-set threshold. This has the unsatisfactory drawbacks of being either too conservative (discarding all low-abundant genome data if the threshold is set too high), or too permissive (too many erroneous k-mers are kept if the threshold is set too low). In this paper, we will propose an improved method for filtering out erroneous k-mers.</p><p>Here we propose an improved algorithm for this construction step that improves both its efficiency and the ability to correct errors. Current tools take a modular approach. They first use an off-the-shelf k-mer counting tool separately for each sample, and then construct a Bloom filter from the k-mers in that sample. We observe in this paper that this modular approach has several drawbacks. First, it prevents fine-grain optimizations that can be obtained by integrating these steps. Second, it prevents efficient data lookups such as being able to identify all the samples to which a given k-mer belongs. As we will show, such lookups can help improve errorcorrection for these samples. In summary, by limiting themselves to a modular approach, current tools leave both significant speed-up and joint filtering opportunities on the table. Given the maturity and abundance of Bloom filter-based indexing tools, as well as a plateau in performance improvement of k-mer counting tools <ref type="bibr" target="#b12">(Kokot et al., 2017)</ref>, we believe that designing better construction algorithms through integration is an important research task.</p><p>Our method for constructing k-mer matrices and Bloom filters is based on a partitioned k-mer counting procedure carefully optimized for joint multi-sample counting. The main novelty is the combination of three relatively straightforward contributions that together address the issues of long running times and sub-optimal k-mers filtering. 1) We introduce a procedure for rescuing low-abundance k-mers at the heart of the joint multi-sample k-mer counting procedure. This enables more sensitive results yet discarding truly erroneous k-mers, saving the prohibitive indexing of all (vastly erroneous) k-mers. We show that joint k-mer counting is more powerful than performing one-sample k-mer counting over a metagenomics collection. 2) We introduce the concept of hash counting that enables direct construction of Bloom filters indices without resorting to k-mers, saving significant time and space. 3) We incorporate for the first time existing efficient matrix transposition techniques in such a workflow, to efficiently output Bloom filter rows directly from partitioned intermediate data, saving intermediate disk space during joint multi-sample counting.</p><p>Using our workflow, we perform for the first time a massive-scale joint k-mer counting and Bloom filter construction of a 6.5 terabase metagenomics collection, in under 50 hours and 50 GB of memory, which is 3.5 times faster than the next best alternative.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">Related works</head><p>KMC <ref type="bibr" target="#b12">(Kokot et al., 2017)</ref> and DSK <ref type="bibr" target="#b25">(Rizk et al., 2013)</ref> are two disk-based k-mer counting tools. Counting k-mers is an operation that identifies the set of k-mers present within one (or multiple) datasets and records the abundance of each k-mer. Intuitively, k-mers having a low abundance (i.e. seen few times) are more likely to be the result of one or multiple sequencing errors within reads, while k-mers above a certain abundance threshold are more likely to be correct.</p><p>In its original publication, DSK directly stored k-mers in a hash table by carefully controlling for memory and disk usage using partitioning. Recent versions of KMC and DSK are based on variants of an algorithm introduced by MSPKmerCounter <ref type="bibr" target="#b15">(Li et al., 2015)</ref> subsequently made popular by KMC. In a nutshell, sequencing reads are split into partitions stored on disk, then each partition is loaded in memory and k-mers are counted within them. Partitions are constructed in such a way that all occurrences of a k-mer appear within a single partition, and also, overlapping k-mers are attempted to be stored as longer sequences to avoid redundancy. These properties are achieved using the concepts of minimizers and super-k-mers that we will review in the Methods section, and the concept of (k + x)-mers that we will not use here.</p><p>kmc_tools is a binary tool included in KMC for manipulation of its results files, which can perform e.g. set operations on list of k-mers, such as intersection, union, or more complex ones. However, to the best of our knowledge kmc_tools does not support collections of k-mer lists (i.e. k-mer matrices) and is therefore not applicable to the work presented here.</p><p>Jellyfish <ref type="bibr" target="#b17">(Marçais and Kingsford, 2011</ref>) is an in-memory k-mer counting tool that relies on an optimized hash table. One of its key advantages, besides efficiency, is that as a byproduct it constructs a k-mer dictionary: i.e. a data structure that can efficiently associate values to k-mers and supports efficient queries. Jellyfish was notably used to perform kmer counting in HowDe-SBT. However, its key-value store feature was not used. Several other k-mer counting tools exist, however a recent benchmark <ref type="bibr" target="#b16">(Manekar and Sathe, 2018)</ref> determined that KMC 3 is one of the most efficient ones on a single node.</p><p>Simka <ref type="bibr" target="#b2">(Benoit et al., 2016)</ref> is a multi-sample k-mer counting and k-mer matrices construction tool that was used for metagenomics. It is based on a variation of the original DSK algorithm, modified to run on a distributed cluster.</p><p>HowDe-SBT <ref type="bibr" target="#b9">(Harris and Medvedev, 2019</ref>) is a k-mer indexing method for large sequencing data collections, that extends the original concept of Sequence Bloom Trees (SBT) <ref type="bibr" target="#b26">(Solomon and Kingsford, 2016)</ref>. In a nutshell, HowDe-SBT (and in general, any SBT-based method) indexes each sample using a Bloom filter and organizes filters inside a binary tree for performing queries efficiently. HowDe-SBT is the most efficient variant of SBTs to date, showing fast construction and query times, yet requires an expensive pre-processing step. Precisely, the pre-processing step consists in generating from a set of samples, one Bloom filter per sample. Each Bloom filter indexes the k-mers considered as not erroneous contained in its corresponding set. This requires to perform a time-consuming k-mer counting process for each data set.</p><p>BIGSI <ref type="bibr" target="#b5">(Bradley et al., 2019)</ref> and COBS <ref type="bibr" target="#b3">(Bingmann et al., 2019)</ref> are k-mer indexing methods which also use Bloom filters, however organized in a different layout than in the SBT family. These tools represent all Bloom filters of indexed samples in a flat manner, in a way that limits cache (1) Counting: Minimizer repartition is determined by sub-sampling D 1 and D 2 and super-k-mers are then dumped on disk according to this partitioning. Each partition is then counted with the possibility to see each element as a k-mer or as its hash value. In both modes, counted partitions may be optionally dumped to disk. In hash mode specifically, for each partition a bit-vector can be output directly ( symbol).</p><p>(2) Merging: Counted k-mers or hashes from equivalent partitions are aggregated. Different kind of matrices can be obtained: a count matrix (in ASCII or binary format), a presence/absence matrix (each row represents a k-mer or a hash value associated with a presence/absence bit-vector), and, only in hash mode, a vector of Bloom filters (i.e. a matrix of presence/absence bit-vectors, where row indices represent hashes). All these matrices can be filtered using a k-mer rescue procedure described in 4.3. In hash mode, in order to obtain samples in rows and then build Bloom filters, each partition-specific sub-matrix can be transposed.</p><p>(3) Bloom filter outputs: a Bloom filter is built for each sample through concatenation of transposed sub-matrices (in those, each row corresponds to a sample). Bloom filters can be also obtained from first counting step if aggregation is not required. In this case, this corresponds to a concatenation of bit-vectors from (1) in hash mode without k-mer rescue. misses during query. This flat structure however does not enable to reduce redundancy between samples.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Results</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">kmtricks: A modular pipeline and library for construction k-mer matrices and Bloom filters on large datasets</head><p>In this section we give an overview of our software kmtricks (for "kmer matrix tricks"). A more in-depth presentation and algorithmic details are provided Section 4. Essentially, kmtricks is a set of software components that together perform joint multi-sample k-mer counting and color matrix construction. This allows to efficiently construct the data structures (e.g. Bloom filters) needed for indexing terabase-scale collections of samples.</p><p>The components of kmtricks, along with an example execution, are presented in Fig. <ref type="figure" target="#fig_0">1</ref>. We highlight the following features which differentiates kmtricks from related works:</p><p>• Joint k-mer counting allows to rescue large amounts of k-mers that would otherwise be discarded when processing samples independently. • Direct counting of k-mer hash values instead of counting k-mers saves significant time for subsequent Bloom filter construction. • kmtricks has been designed to be a stand-alone pipeline (Fig. <ref type="figure" target="#fig_0">1</ref>), yet it is composed of modular tools (described in Section 4) which are of independent interest: partitioning a set of k-mers (according to their minimizer), jointly count k-mers, construct k-mer matrices, transpose them, and construct Bloom filters.</p><p>• kmtricks also provides a C++ library for interfacing with any stage of the pipeline, enabling for instance downstream sequence analyses based on streaming a k-mer matrix in row-major order.</p><p>We evaluated the performance of kmtricks in terms of running time, peak memory usage and maximal disk space on 100 and 674 RNA-seq samples (see Supplementary Material, Table <ref type="table" target="#tab_0">S1</ref>). On these collections, HowDe-SBT/kmtricks is 1-1.5x faster to construct than HowDe-SBT/KMC, 3-4x faster than HowDe-SBT/Jellyfish, 7x faster than COBS, 2x faster than Mantis. Thus kmtricks yields superior or comparable performance to other methods for indexing sequencing data, even though it performs the more complex operation of joint kmer counting. We will show in Section 3.3 that the performance gap between other methods and kmtricks further widens on larger inputs, i.e. terabyte-sized collections.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Dataset and computing setup</head><p>The Tara Ocean experiments (Section 3.3) were performed on large and complex sea water metagenomic data composed of 241 samples (distinct locations) by the Tara Ocean project <ref type="bibr" target="#b11">(Karsenti et al., 2011)</ref>. This dataset is composed of approximately 6.5 thousand billion nucleotides, consisting of around 266 billion distinct k-mers (k = 20), among which 174 billions k-mers occur twice or more as estimated by ntCard <ref type="bibr" target="#b21">(Mohamadi et al., 2017)</ref>. Executions were performed on a TGCC node with 4x16-cores Intel Xeon E7-8860 2.20 GHz with 3 TB of memory, on a SDD with 4.5 GB/s and 800 MB/s sequential read write, using 60 threads. Description of the data, tool versions and command lines are provided in a companion Github website (see reference <ref type="bibr" target="#b14">(Lemane and Peterlongo, 2021)</ref>). kmtricks enabled to construct Bloom filters for a very large metagenomics collection with very limited amount of RAM and reasonable computation time, outperforming all other methods (Table <ref type="table" target="#tab_0">1</ref>). Disk usage was higher than other tools but of similar magnitude than the input data. kmtricks is ≥3.5 times faster than other pipelines, while achieving superior results as it performs joint k-mer counting and is able to rescue low-abundance shared k-mers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">Scaling to a large sea water metagenome collection</head><p>We additionally ran HowDe-SBT on the Bloom Filters generated by kmtricks, thereby creating the first complete index of all metagenomics bacterial sequences obtained in the Tara Ocean project. With Bloom filters given as input, HowDe-SBT ran in 2100 minutes, with a peak RAM of 163 GB. The size of the final index is 612 GB. Of note, kmtricks executed in rescue mode but also discarding any k-mer seen only once takes twice less disk space (around 3 TB).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.4">Collection-aware k-mer filtering recovers large amounts of weak signal present in complex metagenomes</head><p>k-mer filtering consists in removing from a sample any k-mer whose number of occurrences is below a certain threshold (called solidity threshold), classically set to 2 or 3. However, with data such as metagenomics or RNA-seq that have uneven coverage and include low abundance species or expressed genes, abundance does not enable to distinguish erroneous k-mers from real ones, as highlighted in Fig. <ref type="figure" target="#fig_1">2(a)</ref>. Hence we propose to rescue low-abundant k-mers, through a rare but shared k-mer rescue procedure. This procedure consists in keeping any k-mer whose abundance is below the solidity threshold whenever this kmer is sufficiently abundant in one or several other samples. Section 4.3 provides formalization and in-depth description of the procedure.</p><p>We evaluated the effect of the k-mer rescue procedure on the Tara Ocean experiment. Intermediate results and dedicated scripts are provided in the companion github web site <ref type="bibr" target="#b14">(Lemane and Peterlongo, 2021)</ref>. For each sample i, we computed the solidity threshold t i as the smallest value ≥ 1 such that the number of k-mers occurring t i times is smaller than 10% of the total number of k-mers. (using ntCard <ref type="bibr" target="#b21">(Mohamadi et al., 2017)</ref>). In a sample i, any k-mer with abundance higher or equal to t i is conserved. Applying the rescue procedure, we then rescued any k-mer whose coverage was in a range [1, t i ] whenever it had a coverage &gt; t j in at least one other sample j. Hence a k-mer is considered as erroneous in a sample i if its abundance in i is lower than t i and there exists no other sample j in which the k-mer is seen at abundance higher or equal to t j .</p><p>We validated this strategy as follows. For each sample we computed 1. err th : the theoretical expected number of erroneous k-mers, 2. errone: the number of k-mers occurring only once, and 3. err unrescued : the number of k-mers that are still considered as erroneous after our rescue procedure.</p><p>We then look at the ratio err unrescued /err th and compare it to the ratio errone/err th . The closer a ratio is to one, the better. The Tara Oceans dataset was mainly generated by HiSeq 2000 technology (222 samples out of 241), 8 samples were generated by HiSeq2500, 4 samples by GAIIx. For each of these technologies, we computed the theoretical error rate err th . Given raw sequencing data from Acinetobacter baylyi generated by these three sequencing technologies<ref type="foot" target="#foot_0">1</ref> we counted the number of erroneous k-mers (k = 20), i.e. those absent from the reference genome. Error rates are respectively 0.0641%, 0.4838%, and 0.1715% for HiSeq2000, HiSeq2500 and GAIIx.</p><p>Results shown in Fig. <ref type="figure" target="#fig_1">2</ref>(b) highlight the importance and efficacy of our k-mer rescue procedure. Indeed, the quantity of k-mers filtered out is close to the theoretical expected value when using the rescue procedure (average ratio of 1.01). An order of magnitude too many k-mers appear to be wrongly filtered out when removing k-mers occurring only once (average ratio of 9.12).</p><p>Thus, when indexing low-error-rate data containing low-abundant genomes as in the Tara ocean bacterial metagenomes, rescuing appears to be essential as it: 1. side-steps the issue of removing lowabundant k-mers which ends up discarding an order of magnitude too many k-mers; 2. recovers a number of k-mers close to the expected one using co-occurrence across samples.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Methods</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Definitions</head><p>A minimizer of length m within a sequence s is the smallest m-mer within s, where typically "smallest" is understood in the lexicographical sense. A super-k-mer is a sequence in which all constituent k-mers have the same minimizer.</p><p>A Bloom filter <ref type="bibr" target="#b4">(Bloom, 1970</ref>) is an approximate membership query (AMQ) data structure that allows two operations: inserting and querying elements u ∈ U. It is a bit array B[0..n] with l hash functions h i : U → {0, ..., n} ∀i ∈ [1..l]. Insertion can be defined as follows B[h i (x)] ← 1, ∀i ∈ [1..l] and lookup as l i=1 B[h i (x)]. Lookups can return false positives but no false negatives. In the following, we will consider one-hash Bloom filters (l = 1).</p><p>We use the terms color-aggregative and k-mer-aggregative as defined in <ref type="bibr" target="#b19">(Marchet et al., 2021)</ref>. A color-aggregative data structure represents within a single index all k-mers of the collection, and each k-mer is associated to its pattern of presence/absence across the whole collection. Conversely, a k-mer-aggregative data structure constructs separate k-mer indices, one per sample.</p><p>We refer to hash counting as the process of counting hash values of a set of elements instead of counting the elements themselves. This is the counterpart of k-mer counting except that here k-mers are represented by their hash values, and several k-mers may collide to the same hash value.</p><p>The strand of each sequenced read being unknown, in kmtricks, as in all k-mer counting and indexing tools, each k-mer is represented by its canonical representation: the smallest string (in the lexicographic order) between itself and its reverse complement. 4.2 A modular pipeline for large-scale Bloom Filters construction: kmtricks kmtricks supports the construction of either a k-mer matrix or Bloom filters. In both cases, the input is a collection of sequencing data files in FASTQ format. The output is either a matrix having k-mers as rows, samples as columns and k-mer counts as values, or a collection of Bloom filters, one per sample. In the following, we will focus on Bloom filter construction as this pipeline includes all the ingredients necessary for k-mer matrix construction. We will describe two operational modes: hash counting for Bloom filters, k-mer counting for k-mer matrices.</p><p>In other tools, the construction process of Bloom filters can typically be broken into two steps: 1) efficiently counting k-mers then 2) inserting distinct k-mers into filters, on a per-sample basis. kmtricks streamlines this process by realizing that in the case of Bloom filters only the hashes need to be counted, not k-mers; furthermore, in order to cope with terabytes of input data and still be able to efficiently count hashes, a careful partitionaware hashing scheme is designed.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.1">Partitioning</head><p>kmtricks performs parallel k-mer counting the classical paradigm of partitioning k-mers based on their minimizers and then constructing super-k-mers, as in KMC 2 <ref type="bibr" target="#b12">(Kokot et al., 2017)</ref>. However, the process is newly modularized so that intermediate tasks correspond to separate programs. Conceptually, the set of all possible minimizers is first partitioned in the following balanced way: all partitions should contain a roughly equal total number of k-mers. This is performed by the km_-minim_repart module, using the GATB library <ref type="bibr" target="#b7">(Drezen et al., 2014)</ref> that implements a previously-known algorithm from DSK <ref type="bibr" target="#b25">(Rizk et al., 2013)</ref>.</p><p>In hash counting mode, in order to take advantage of the partitioning scheme in the context of Bloom filters construction, we use partitioned Bloom filters (pBFs). These are Bloom filters that are partitioned into P sub-filters with exclusive (and consecutive) hash spaces hp : Up → {p × s, ..., p × s + s -1} with p ∈ [0..P -1] and s = bits P (rounded up to 8) with "bits" corresponding to the user-requested Bloom filter size. Having pBFs allows to populate only a small part of a Bloom filter when processing a k-mer partition, which saves memory and enables coarse-grained parallelization at both the construction and query stages. A classical Bloom filter (except for a slightly more complex query operation, see Section 4.2.5) can be obtained by a simple concatenation of the pBFs thanks to the consecutive hash spaces.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.2">Counting</head><p>The second step, performed in km_reads_to_superk, consists in computing for each sample its super-k-mers and writing them to their corresponding partitions on disk (Fig 3 <ref type="figure">.a</ref>). From those super-k-mers, k-mers (or their hash values, depending on whether hash counting is performed) are de-duplicated and the abundance of each distinct k-mer (or hash value) is determined within each partition (km_superk_to_-kmer_counts module).</p><p>In hash counting mode, kmtricks optimizes the output in the following way. If k-mer rescue (see 3.4) is not performed, bit-vectors are output immediately instead of a list of counted hashes (Fig 3 .1.b). One bit vector is output per partition and per sample. In other words, these bit-vectors correspond to pBFs built from the hashes. Otherwise if k-mer rescue is performed (still in hash counting mode), bit-vectors cannot be immediately output as counts of the same hash value must be examined over all samples. In this case, hashes and their counts are dumped to disk for each partition from each sample (Fig. <ref type="figure" target="#fig_3">3</ref>.2.b).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.3">Merging</head><p>Finally if k-mer rescue is performed or a holistic view of k-mers (i.e. joint counting) is sought, k-mers (resp. partitions of hash values) need to undergo a merging step in order to obtain a k-mer matrix (resp. a collection of Bloom filters). Aggregation of k-mers or hashes over multiple samples is achieved using the classical k-way merge algorithm on equivalent partitions between samples. This algorithm assumes sorted inputs, which is inexpensive in our case since sorting is already performed by the counting algorithm. Merging is performed in the km_merge_-within_partition module.</p><p>In both k-mer counting mode and hash counting mode, each row count vector (corresponding to a single k-mer or hash value) is processed according to the k-mer rescue procedure, details are given in Section 4.3.</p><p>In k-mer mode, there is no additional operation after merging, except output formatting (see Section 4.2.4). Therefore the rest of this section is dedicated to the hash counting mode, i.e. the Bloom filters construction pipeline.</p><p>In hash counting mode, row count vectors are transformed into a binary representation during the merge step. In a partition, all possible hashes are considered. This means that for each missing hash value (corresponding to a k-mer not seen in the partition), an empty bit-vector is appended to the matrix. Hashes are not stored (only the bit-vectors are), as they implicitly correspond to row indices. At the end of this step, we have P sub-matrices of bits P presence/absence bit-vectors each.</p><p>At this point, the resulting matrices (k-mers matrices or Bloom filters) are color-aggregative, i.e. each row represents the presence or the absence (or counts) of the corresponding hash value across samples. If kmtricks is set to construct Bloom filters, one seeks to convert the data into k-meraggregative, where each filter represents hashes for a single collection. Switching from a color-aggregative representation to a k-mer-aggregative representation can be achieved through a bit-matrix transposition. The input matrix needs to be exhaustive in the following sense: missing hashes are represented by empty presence/absence bit-vectors, i.e. in each partition the number of presence/absence bit-vectors corresponds to s, the number of bits in a partition, as described in Section 4.1. It also needs to be sorted so that each bit-vector row corresponds to consecutive hashes in {p × s, ..., p × s + s -1}.</p><p>When performing a transposition, we transform a matrix with hashes in rows associated with presence/absence bit-vectors into a matrix with samples in rows associated with a one-hash pBF. Due to Bloom filter partitioning, P transposed matrices are in fact obtained, each with a number of rows corresponding to the number of samples. The horizontal concatenation of each corresponding row from these matrices allows one to build one Bloom filter per sample.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.4">Outputs</head><p>kmtricks can output different sort of k-mer matrices. In k-mer mode: count or presence/absence k-mer matrices. In hash mode: hashes presence/absence vectors (kmer-aggregative) or pBFs vectors (coloraggregative), both seen as bit matrices. Of note, pBFs vectors can be converted into sample-specific Bloom filters that are compatible with the SDSL library <ref type="bibr" target="#b8">(Gog et al., 2014)</ref> and HowDe-SBT (km_output_convert module).</p><p>All these outputs are readable and writable using kmtricks C++ library. In the case of k-mer counts matrix, a text output format is also supported.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.5">Query</head><p>Due to how kmtricks creates Bloom filters that are partitioned according to minimizers, the minimizer of each k-mer from a query sequence must be computed in order select the correct hash function. A compatible version of HowDe-SBT is available through the kmtricks release. kmtricks does not yet provide a stand-alone tool to directly query a Bloom filter, however this operation is supported within the kmtricks C++ library.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">A novel technique to rescue rare k-mers</head><p>To rescue low-abundant but likely correct k-mers, as performed in Section 3.4, we design a rather simple technique based on examining the abundance of each k-mer across sequencing samples. This technique is only practically applicable in conjunction with joint k-mer counting. It cannot be directly implemented in a one-sample-at-a-time construction procedure, unless such procedure discards no k-mer which would result in prohibitively large intermediate storage. When a low-abundant k-mer is observed in a sample (with abundance lower than a user-defined threshold), its abundance in other samples is used to decide whether to keep its abundance for that sample or not. Several thresholding procedures can be specified in kmtricks:</p><p>• A hard threshold applied during the counting step, called countabundance-min. This threshold filters out any k-mer whose abundance is below its value, regardless of the presence of the kmer in other samples. Kept k-mers are said to be solid. Note that this threshold can be set on a per-sample basis.</p><p>• A soft threshold, this time applied during the merging step, called merge-abundance-min. Any k-mer whose abundance is higher than its value is kept, otherwise it is provisionally discarded yet is considered candidate for being rescued. We call such a k-mer rescueable. This threshold can be set on a per-sample basis. • The merge-abundance-min threshold is modulated by a parameter that we call save-if. A rescue-able k-mer in a sample is kept (rescued) if it is solid in at least save-if other sample(s). • The last parameter, recurrence-min, allows to discard k-mers that occur in less than recurrence-min distinct samples. Such kmers are simply removed from the final matrix (i.e. result in a null bit-vector in hash mode).</p><p>Figure <ref type="figure" target="#fig_2">4</ref> presents several examples showing the application of those thresholds. count-abundance-min=1, save-if=3, recurrence-min=2. a H1 has a abundance lower than 3 in D0 but it is solid in at least save-if samples (D2, D3, D4). b H2 is non-solid on D1, D3 and D4 and is solid only in 2 samples, H2 is therefore discarded in D1, D3 and D4. c H3 is solid only in one sample, recurrence-min cannot be satisfied, the whole row is therefore discarded (dash signs in the Figure, or corresponds to the null bit-vector in hash mode).</p><formula xml:id="formula_0">D0 D1 D2 D3 D4 m-a-min 3 2 2 3 2 a H1 2 0 4 5 3 → 1 0 1 1 1 b H2 4 1 6 2 1 → 1 0 1 0 0 c H3 2 8 1 2 1 → -/0 -/0 -/0 -/0 -/0</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">Discussion</head><p>We propose a novel method for efficiently counting k-mers across multiple samples and for generating Bloom filters. In addition to being the fastest method for generating Bloom filters over terabyte-scale collections, our approach kmtricks proposes a novel mechanism to filter erroneous k-mers using their co-occurrence across samples, i.e. going beyond filtering on a per-sample basis. This approach leads to significantly improved recovery of k-mers in metagenomes.</p><p>In our tests on relatively small collections (100-674 RNA-seq datasets, with on average hundreds of millions of distinct k-mers per sample) the performance of kmtricks is roughly equivalent to the state of the art KMC k-mer counter combined with the Bloom filters construction procedure of HowDe-SBT. However kmtricks stands out on larger collections having higher number of k-mers per sample, such as Tara Ocean (&gt; 6 TB of sequences, with several billions of distinct k-mers per sample). For those, Bloom filter construction becomes a bottleneck and highlights the superior efficiency of the streamlined kmtricks pipeline.</p><p>At a high level, kmtricks is able to output matrices either in columnmajor order or in row-major order, where rows can either be k-mers or hash values. This flexibility allows kmtricks to provide inputs for both types of indexing data structures: k-mer-aggregative and color-aggregative (as defined in <ref type="bibr" target="#b19">Marchet et al. (2021)</ref> and recalled in the Methods section). Rowmajor order makes the presence/absence of a k-mer directly accessible across all samples, and is contiguous in memory. In column-major order, each Bloom filter is independent and provides information about the existence of all k-mers in one sample.</p><p>Contemporary of kmtricks, the MetaGraph software <ref type="bibr" target="#b10">(Karasikov et al., 2020)</ref> is a k-mer indexing structure that represents k-mers exactly (i.e. not using a Bloom filter) and does not support creating k-mer matrices. MetaGraph was applied to very large collections (hundreds of terabases) using cloud resources and KMC 3, which makes its contribution orthogonal to kmtricks, the latter being geared towards making computation more efficient on a single server. Ideally, kmtricks could be integrated within a MetaGraph-like approach to combine single-server efficiency within a cloud architecture.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Fig. 1 .</head><label>1</label><figDesc>Fig. 1. kmtricks pipeline overview on two samples, D 1 and D 2 , using two partitions, P 1 and P 2 , with k = 5 and minimizer size of 3. Bold read sequences are minimizers (AAA and CCC). Superscript integers represent hash values.(1) Counting: Minimizer repartition is determined by sub-sampling D 1 and D 2 and super-k-mers are then dumped on disk according to this partitioning. Each partition is then counted with the possibility to see each element as a k-mer or as its hash value. In both modes, counted partitions may be optionally dumped to disk. In hash mode specifically, for each partition a bit-vector can be output directly ( symbol).(2) Merging: Counted k-mers or hashes from equivalent partitions are aggregated. Different kind of matrices can be obtained: a count matrix (in ASCII or binary format), a presence/absence matrix (each row represents a k-mer or a hash value associated with a presence/absence bit-vector), and, only in hash mode, a vector of Bloom filters (i.e. a matrix of presence/absence bit-vectors, where row indices represent hashes). All these matrices can be filtered using a k-mer rescue procedure described in 4.3. In hash mode, in order to obtain samples in rows and then build Bloom filters, each partition-specific sub-matrix can be transposed.(3) Bloom filter outputs: a Bloom filter is built for each sample through concatenation of transposed sub-matrices (in those, each row corresponds to a sample). Bloom filters can be also obtained from first counting step if aggregation is not required. In this case, this corresponds to a concatenation of bit-vectors from (1) in hash mode without k-mer rescue.</figDesc><graphic coords="4,62.77,53.80,484.19,231.52" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Fig. 2 .</head><label>2</label><figDesc>Fig. 2. (a) Kmer histogram of one of the Tara ocean samples (chosen arbitrarily), showing a flat distribution of abundances indicative of the presence of low-abundance microbes, also highlighting the lack of separation between erroneous and correct k-mers. (b) Number of k-mers filtered divided by the number of expected number of erroneous k-mers (ideal is close to 1). Green histogram shows results obtained with the proposed rescue procedure. Red histogram shows results obtained by the classical removal of k-mers occurring only once.</figDesc><graphic coords="6,107.09,66.17,193.67,132.89" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Fig. 4 .</head><label>4</label><figDesc>Fig. 4. Example of the rescue procedure for three k-mers/hashes and five samples using sample-specific merge-abundance-min and the following set of parameters:</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Fig. 3 .</head><label>3</label><figDesc>Fig. 3. Bloom filters construction pipeline with two samples D1 and D2 using two partitions: black (1) and gray (2). Sk and Hc denote respectively super-k-mers and hash counted (1) Bloom filters pipeline without k-mer rescue: a Divide sample into partitioned super-k-mers. b Split super-k-mers into k-mers before hashing them and counting hashes in partitions. For each partition, output presence/absence bit-vectors, i.e. partitioned Bloom filters. c Concatenate equivalent partitions between samples to obtain one Bloom filter per sample. (2) Bloom filters pipeline with rare k-mer rescue: a same as (1). b same as (1), but output hashes and their counts. c Merge and binarize (according to the rescue procedure, see 4.3) equivalent partitions to build one sub-matrix per partition with pBFs in columns. d Transpose sub-matrices to obtain pBFs in rows. e same as (1)-c .</figDesc><graphic coords="8,111.18,53.80,387.35,229.32" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 .</head><label>1</label><figDesc>Comparison of construction times between kmtricks and other k-mer counting tools on the 6.5 terabases Tara Ocean collection. The makebf step corresponds to Bloom filter creation from counted k-mers by howdesbt makebf. The Memory column indicates peak RAM usage. KMC and Jellyfish counted each sample independently and removed k-mers with abundance one; whereas kmtricks performed join k-mer counting and lowabundance rescuing (see Section 4.3) which kept some of the unit abundance k-mers. Mantis and COBS were not executed due to their significantly longer construction times observed on smaller data.</figDesc><table><row><cell></cell><cell cols="3">Time (min) Memory (GB) Disk (TB)</cell></row><row><cell>kmtricks</cell><cell>2631</cell><cell>50.3</cell><cell>6.29</cell></row><row><cell cols="2">Jellyfish a + makebf &gt;10000 b</cell><cell>80.6</cell><cell>≈ 1.1</cell></row><row><cell>KMC a + makebf</cell><cell>&gt;8500 b</cell><cell>213</cell><cell>≈ 1.1</cell></row></table><note><p>a Stopped after 50h computation. b Extrapolated estimation.</p></note></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1" xml:id="foot_0"><p>Jean-Marc Aury, Genoscope, personal communication.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1" xml:id="foot_1"><p>k=20,</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2" xml:id="foot_2"><p>k=31, R Rescue mode</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>Acknowledgements</head><p>This work used HPC resources from the <rs type="institution">Très Grand Centre de Calcul of CEA</rs> (http://www-hpc.cea.fr/fr/complexe/ tgcc.htm) and the GenOuest bioinformatics core facility (https: //www.genouest.org). The authors are grateful to <rs type="person">Bob Harris</rs> for discussion on HowDeSBT, and <rs type="person">Eric Pelletier</rs> &amp; <rs type="person">Jean-Marc Aury</rs> who provided links to Tara and Acinetobacter datasets, and precious information about these data.</p></div>
+			</div>
+			<div type="funding">
+<div><head>Funding</head><p>The work was funded by <rs type="funder">IPL Inria Neuromarkers</rs>, <rs type="projectName">ANR Inception</rs> (<rs type="grantNumber">ANR-16-CONV-0005</rs>), <rs type="projectName">ANR Prairie</rs> (<rs type="grantNumber">ANR-19-P3IA-0001</rs>), <rs type="projectName">ANR SeqDigger</rs> (<rs type="grantNumber">ANR-19-CE45-0008</rs>).</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funded-project" xml:id="_VwZ2k36">
+					<idno type="grant-number">ANR-16-CONV-0005</idno>
+					<orgName type="project" subtype="full">ANR Inception</orgName>
+				</org>
+				<org type="funded-project" xml:id="_CzuSEFA">
+					<idno type="grant-number">ANR-19-P3IA-0001</idno>
+					<orgName type="project" subtype="full">ANR Prairie</orgName>
+				</org>
+				<org type="funded-project" xml:id="_qQUdNZt">
+					<idno type="grant-number">ANR-19-CE45-0008</idno>
+					<orgName type="project" subtype="full">ANR SeqDigger</orgName>
+				</org>
+			</listOrg>
+
+			<div type="availability">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>https://github.com/tlemane/</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Supplementary</head><p>Human RNA-seq benchmarks</p><p>The human RNA-seq benchmarks were done on two subsets with 100 and 674 samples from a common set of 2,585 human RNA-seq sequencing used as inputs in several k-mer indexing benchmarks, and first proposed in <ref type="bibr" target="#b26">Solomon and Kingsford (2016)</ref>. Computations were performed on the GenOuest platform on a node with 4x8-cores Xeon E5-2660 2,20 GHz 200 GB of memory. Benchmarks were performed on SSD disk with 900 MB/s and 290 MB/s sequential read/write. All benchmarks are done using 20 cores. Details about data and scripts are available from the kmtricks github companion website (see reference <ref type="bibr" target="#b14">Lemane and Peterlongo (2021)</ref>). A Conda environment is also provided to reproduce these benchmarks.</p><p>On these datasets, kmtricks outperformed the indexing steps of Mantis, HowDe-SBT and COBS in terms of computing time (by 2-8x) and memory usage (by 1-8x), and uses comparable disk space. We also substituted Jellyfish with KMC in HowDe-SBT, yielding comparable time/memory performance to kmtricks on this collection. However, KMC does not support joint k-mer counting, and its integration in a Bloom filter construction pipeline turns out to be significantly less scalable than kmtricks as shown Section 3.3, dealing with larger and more complex data.</p><p>A : 100 RNA-seq (44 GB fasta.gz) Time (min) Memory (GB) Disk (GB) makebf </p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Basic local alignment search tool</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">F</forename><surname>Altschul</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Gish</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Miller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">W</forename><surname>Myers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">J</forename><surname>Lipman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of molecular biology</title>
+		<imprint>
+			<biblScope unit="volume">215</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="403" to="410" />
+			<date type="published" when="1990">1990</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">De-kupl: exhaustive capture of biological variation in rna-seq data through k-mer decomposition</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Audoux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Philippe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Chikhi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Salson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Gallopin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Gabriel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Le Coz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Drouineau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Commes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Gautheret</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome biology</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">243</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Multiple comparative metagenomics using multiset k-mer counting</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Benoit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Peterlongo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mariadassou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Drezen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Schbath</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Lavenier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Lemaitre</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PeerJ Computer Science</title>
+		<imprint>
+			<biblScope unit="issue">11</biblScope>
+			<biblScope unit="page">94</biblScope>
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">COBS: a Compact Bit-Sliced Signature Index</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Bingmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Bradley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Gauger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Iqbal</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">LNCS</title>
+		<imprint>
+			<biblScope unit="volume">11811</biblScope>
+			<biblScope unit="page" from="285" to="303" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Space/time trade-offs in hash coding with allowable errors</title>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">H</forename><surname>Bloom</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Communications of the ACM</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page" from="422" to="426" />
+			<date type="published" when="1970">1970</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Ultrafast search of all deposited bacterial and viral genomic data</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Bradley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">C</forename><surname>Den Bakker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">P</forename><surname>Rocha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Mcvean</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Iqbal</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Biotechnology</title>
+		<imprint>
+			<biblScope unit="volume">37</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="152" to="159" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Fast and sensitive protein alignment using diamond</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Buchfink</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Xie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">H</forename><surname>Huson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature methods</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="59" to="60" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">GATB: Genome Assembly &amp; Analysis Tool Box</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Drezen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Rizk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Chikhi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Deltel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Lemaitre</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Peterlongo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Lavenier</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="issue">20</biblScope>
+			<biblScope unit="page" from="2959" to="2961" />
+			<date type="published" when="2014">2014</date>
+			<pubPlace>Oxford, England</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">From theory to practice: Plug and play with succinct data structures</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Gog</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Beller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Moffat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Petri</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">13th International Symposium on Experimental Algorithms</title>
+		<meeting><address><addrLine>SEA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2014">2014. 2014</date>
+			<biblScope unit="page" from="326" to="337" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Improved representation of sequence Bloom trees</title>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">S</forename><surname>Harris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Medvedev</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">MetaGraph: Indexing and Analysing Nucleotide Archives at Petabase-scale</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Karasikov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Mustafa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Danciu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Zimmermann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Barber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Rätsch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Kahles</surname></persName>
+		</author>
+		<idno>10.01.322164</idno>
+	</analytic>
+	<monogr>
+		<title level="j">bioRxiv</title>
+		<imprint>
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">A holistic approach to marine eco-systems biology</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Karsenti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">G</forename><surname>Acinas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Bork</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Bowler</surname></persName>
+		</author>
+		<author>
+			<persName><surname>De</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Vargas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Raes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Sullivan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Arendt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Benzoni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J.-M</forename><surname>Claverie</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLoS biol</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="issue">10</biblScope>
+			<biblScope unit="page">1001177</biblScope>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">KMC 3: counting and manipulating k-mer statistics</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Kokot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Dlugosz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Deorowicz</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="issue">17</biblScope>
+			<biblScope unit="page" from="2759" to="2761" />
+			<date type="published" when="2017">2017</date>
+			<pubPlace>Oxford, England</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Transcriptome and genome sequencing uncovers functional variation in humans</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Lappalainen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Sammeth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">R</forename><surname>Friedländer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Ac't Hoen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Monlong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Rivas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Gonzalez-Porta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Kurbatova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Griebel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">G</forename><surname>Ferreira</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">501</biblScope>
+			<biblScope unit="issue">7468</biblScope>
+			<biblScope unit="page" from="506" to="511" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">T</forename><surname>Lemane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Peterlongo</surname></persName>
+		</author>
+		<ptr target="https://github.com/pierrepeterlongo/kmtricks_benchmarks" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<title level="m" type="main">Mspkmercounter: a fast and memory efficient approach for k-mer counting</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Li</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1505.06550</idno>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">A benchmark study of k-mer counting methods for high-throughput sequencing</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">C</forename><surname>Manekar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">R</forename><surname>Sathe</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">GigaScience</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="issue">12</biblScope>
+			<biblScope unit="page">125</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">A fast, lock-free approach for efficient parallel counting of occurrences of k-mers</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Marçais</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Kingsford</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="764" to="770" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Reindeer: efficient indexing of k-mer presence and abundance in sequencing datasets</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Marchet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Iqbal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Gautheret</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Salson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Chikhi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">bioRxiv</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Data structures based on k-mers for querying large collections of sequencing data sets</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Marchet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Boucher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">J</forename><surname>Puglisi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Medvedev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Salson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Chikhi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Research</title>
+		<imprint>
+			<biblScope unit="volume">31</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="12" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">The Metagenomics and Metadesign of the Subways and Urban Biomes (MetaSUB) International Consortium inaugural meeting report</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Mason</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Afshinnekoo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ahsannudin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Ghedin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Read</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Fraser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Dudley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Hernandez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Bowler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Stolovitzky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Chernonetz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Gray</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Darling</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Burke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">P</forename><surname>Łabaj</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Graf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Noushmehr</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Moraes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Dias-Neto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Ugalde</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Xie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Zheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Shi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Tang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Ivanković</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Siam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Rascovan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Richard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Lafontaine</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Baron</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Nedunuri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Prithiviraj</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Hyat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mehr</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Banihashemi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Segata</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Suzuki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">M</forename><surname>Aranda</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Martinez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Christopher Dada</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Osuolale</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Oguntoyinbo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Dybwad</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Oliveira</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Fernandes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Oliveira</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Fernandes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">D</forename><surname>Chatziefthimiou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Chaker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Alexeev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Chuvelev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Kurilshikov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Schuster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">H</forename><surname>Siwo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Jang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">C</forename><surname>Seo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">H</forename><surname>Hwang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ossowski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Bezdan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Udekwu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Udekwu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">O</forename><surname>Lungjdahl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Nikolayeva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">U</forename><surname>Sezerman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Kelly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Metrustry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Elhaik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Gonnet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Schriml</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Mongodin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Huttenhower</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Gilbert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Hernandez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Vayndorf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Blaser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Schadt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Eisen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Beitel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Hirschberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Schriml</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Mongodin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">M I</forename><surname>Consortium</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Microbiome</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">24</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title level="m" type="main">ntcard: a streaming algorithm for cardinality estimation in genomics data</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Mohamadi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Khan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Birol</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page" from="1324" to="1330" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Building large updatable colored de bruijn graphs via merging</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">D</forename><surname>Muggli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Alipanahi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Boucher</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">35</biblScope>
+			<biblScope unit="issue">14</biblScope>
+			<biblScope unit="page" from="51" to="60" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">MetaSPAdes: A new versatile metagenomic assembler</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Nurk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Meleshko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Korobeynikov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">A</forename><surname>Pevzner</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Research</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="824" to="834" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Mantis: A Fast, Small, and Exact Large-Scale Sequence-Search Index</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Pandey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Almodaresi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Bender</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ferdman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Patro</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Cell Systems</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="201" to="207" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">DSK: k-mer counting with very low memory usage</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Rizk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Lavenier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Chikhi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="652" to="653" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Fast search of thousands of short-read sequencing experiments</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Solomon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Kingsford</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Biotechnology</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="300" to="302" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Rcorrector: efficient and accurate error correction for illumina rna-seq reads</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Song</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Florea</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">GigaScience</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="13742" to="13757" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">The 100 000 genomes project: bringing whole genome sequencing to the nhs</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Turnbull</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">H</forename><surname>Scott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Thomas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Jones</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Murugaesu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">B</forename><surname>Pretty</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Halai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Baple</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Craig</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Hamblin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bmj</title>
+		<imprint>
+			<biblScope unit="volume">361</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

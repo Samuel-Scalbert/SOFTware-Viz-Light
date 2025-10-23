@@ -1,0 +1,919 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Scalable long read self-correction and assembly polishing with multiple sequence alignment</title>
+				<funder ref="#_sSetGbV">
+					<orgName type="full">CRIANN (Normandy, France</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author role="corresp">
+							<persName><forename type="first">Pierre</forename><surname>Morisse</surname></persName>
+							<email>pierre.morisse@inria.fr</email>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">IRISA</orgName>
+								<address>
+									<postCode>35000</postCode>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Camille</forename><surname>Marchet</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="laboratory">UMR 9189 -CRIStAL</orgName>
+								<orgName type="institution" key="instit1">Univ. Lille</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<address>
+									<postCode>59000</postCode>
+									<settlement>Lille</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Antoine</forename><surname>Limasset</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="laboratory">UMR 9189 -CRIStAL</orgName>
+								<orgName type="institution" key="instit1">Univ. Lille</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<address>
+									<postCode>59000</postCode>
+									<settlement>Lille</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Thierry</forename><surname>Lecroq</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="institution" key="instit1">Normandie Univ</orgName>
+								<orgName type="institution" key="instit2">UNIROUEN</orgName>
+								<orgName type="institution" key="instit3">LITIS</orgName>
+								<address>
+									<postCode>76000</postCode>
+									<settlement>Rouen</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Arnaud</forename><surname>Lefebvre</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="institution" key="instit1">Normandie Univ</orgName>
+								<orgName type="institution" key="instit2">UNIROUEN</orgName>
+								<orgName type="institution" key="instit3">LITIS</orgName>
+								<address>
+									<postCode>76000</postCode>
+									<settlement>Rouen</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Scalable long read self-correction and assembly polishing with multiple sequence alignment</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">4B8DAC7FDFCF871C9A1939433B7B98C1</idno>
+					<idno type="DOI">10.1038/s41598-020-80757-5</idno>
+					<note type="submission">Received: 26 August 2020; Accepted: 22 December 2020</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:12+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Third-generation sequencing technologies allow to sequence long reads of tens of kbp, that are expected to solve various problems. However, they display high error rates, currently capped around 10%. Self-correction is thus regularly used in long reads analysis projects. We introduce CONSENT, a new self-correction method that relies both on multiple sequence alignment and local de Bruijn graphs. To ensure scalability, multiple sequence alignment computation benefits from a new and efficient segmentation strategy, allowing a massive speedup. CONSENT compares well to the state-of-the-art, and performs better on real Oxford Nanopore data. Specifically, CONSENT is the only method that efficiently scales to ultra-long reads, and allows to process a full human dataset, containing reads reaching up to 1.5 Mbp, in 10 days. Moreover, our experiments show that error correction with CONSENT improves the quality of Flye assemblies. Additionally, CONSENT implements a polishing feature, allowing to correct raw assemblies. Our experiments show that CONSENT is 2-38x times faster than other polishing tools, while providing comparable results. Furthermore, we show that, on a human dataset, assembling the raw data and polishing the assembly is less resource consuming than correcting and then assembling the reads, while providing better results. CONSENT is available at https ://githu b.com/moris pi/CONSE NT.</p><p>Third-generation sequencing technologies Pacific Biosciences (PacBio) and Oxford Nanopore Technologies (ONT) have become widely used since their inception in 2011. In contrast to second-generation technologies, producing reads reaching lengths of a few hundreds base pairs, they allow the sequencing of much longer reads (10 kbp on average 1 , and up to &gt; 1 million bps 2 ). These long reads are expected to solve various problems, such as contig and haplotype assembly 3,4 , scaffolding 5 , and structural variant calling 6 . However, they are very noisy. More precisely, basic ONT and non-CCS PacBio reads can reach error rates of 10 to 30%, whereas second-generation short reads usually display error rates of 1%. The error profiles of these long reads are also much more complex than those of the short reads. Indeed, they are mainly composed of insertions and deletions, whereas short reads mostly contain substitutions. As a result, error correction is often required, as the first step of projects dealing with long reads. As the error profiles and error rates of the long reads are much different from those of the short reads, correcting long reads requires specific algorithmic developments.</p><p>The error correction of long reads has thus been tackled by two main approaches. The first approach, hybrid correction, makes use of additional short reads data to perform correction. The second approach, self-correction, aims at correcting the long reads solely based on the information contained in their sequences.</p><p>Hybrid correction methods rely on different techniques such as: 1. Alignment of short reads to the long reads (CoLoRMAP 7 , HECiL 8 ) ; 2. Exploration of de Bruijn graphs, built from short reads k-mers (LoRDEC 9 , Jabba 10 , FMLRC 11 ) ; 3. Alignment of the long reads to contigs built from the short reads (MiRCA 12 , HALC 13 ) ; 4. Hidden Markov Models, initialized from the long reads sequences and trained using the short reads (Hercules 14 ) ; 5. Combination of different strategies (NaS 15 (1 + 3), HG-CoLoR 16 (1 + 2)).</p><p>Self-correction methods usually build around the alignment of the long reads against each other (PBDAGCon 17 , PBcR 18 ). We give further details on the state-of-the-art of self-correction in the "Related works ".</p><p>As first long reads sequencing experiments resulted in highly erroneous long reads (15-30% error rates on average), most methods relied on the additional use of short reads data. As a result, hybrid correction used to be much more widespread. Indeed, in 2014, for five hybrid correction tools, only two self-correction tools were available.</p><p>However, third-generation sequencing technologies evolve fast, and now manage to produce long reads reaching error rates of 10-12%. Moreover, the evolution of long-read sequencing technologies also allows to OPEN</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Contribution.</head><p>We present CONSENT, a new self-correction method that combines different efficient approaches from the state-of-the-art. CONSENT indeed starts by computing multiple sequence alignments (MSA) between overlapping regions of the long reads, in order to compute consensus sequences. These consensus sequences are then polished with local de Bruijn graphs, in order to correct remaining errors, and further reduce the final error rate. Moreover, unlike current state-of-the-art methods, CONSENT computes actual MSA, using a method based on partial order graphs <ref type="bibr" target="#b24">24</ref> . We also introduce an efficient segmentation strategy based on k-mer chaining, which allows to reduce the time footprint of the MSA. This segmentation strategy thus allows to compute scalable MSA. In particular, it allows CONSENT to efficiently scale to ONT ultra-long reads.</p><p>Our experiments show that CONSENT compares well to the latest state-of-the-art self-correction methods, and outperforms them on real ONT datasets. In particular, they show that CONSENT is the only method able to efficiently scale to ONT ultra-long reads, allowing to perform correction of a full human dataset, containing reads reaching up to 1.5 Mbp in 10 days.</p><p>Additionally, CONSENT is also able to polish assemblies generated from raw long reads. Our experiment on a full human dataset shows that assembling the raw data and polishing the assembly is less resource consuming than correcting and then assembling the data, while offering better results. Our experiments also show that CONSENT outperforms state-of-the-art assembly polishing tools in terms of resource consumption, while providing comparable results.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Results</head><p>Impact of the segmentation strategy. Before comparing CONSENT to state-of-the-art self-correction tools, we first validate our segmentation strategy. To this aim, we simulated a 50x coverage of long reads from E.coli, with a 12% error rate, using SimLoRD <ref type="bibr" target="#b25">25</ref> . The following parameters were used for the simulation: -probability-threshold 0.3 -prob-ins 0.145 -prob-del 0.06, and -prob-sub 0.02. We then ran the CONSENT pipeline, with, and without the segmentation strategy. Results of this experiment are given in Supplementary Table <ref type="table">1</ref>. We obtained these results using ELECTOR <ref type="bibr" target="#b26">26</ref> , a tool specifically designed to precisely measure correction accuracy on simulated data. In particular, ELECTOR reports metrics such as recall (number of modified bases among erroneous bases in the original data), precision (number of properly corrected bases among bases modified by the error-correction tool), and error rate before and after correction. These results show that, compared to the regular MSA implementation, our segmentation strategy allows a 47x speedup, reducing the runtime from 5 h 31 min to 7 min. Moreover, our segmentation strategy also allows to reach lower memory consumption and higher quality. In particular, the post-correction error rate is decreased by 1.77x, and the precision increases by almost 0.15%. This gain in quality can be explained by the fact that our segmentation strategy allows to get rid of spurious sequences and thus to compute more accurate alignments and consensus.</p><p>Comparison to the state-of-the-art. We compare CONSENT against state-of-the-art error correction methods. We include the following tools in the benchmark: Canu, Daccord, FLAS, and MECAT. We voluntarily exclude LoRMA from the comparison, as it tends to aggressively split the reads, and thus produce reads that are usually shorter than 900 bp. We however report LoRMA's result in Supplementary Tables <ref type="table">S3</ref> and<ref type="table">S4</ref>. We also exclude hybrid error correction tools from the benchmark, as we believe it makes more sense to only compare self-correction tools. We performed experiments both on simulated and real data. We ran all tools with default or recommended parameters, and with a number of threads corresponding to the maximum number of cores available on the systems experiments were performed on. For CONSENT, we set the minimum support to define a window to 3, the window size to 500, the overlap size between consecutive windows to 50, the k-mer size used for chaining and polishing to 9, the solidity threshold for k-mers to 4, and the solidity threshold for the anchors chain computation to 8. Additionally, only windows for which at least two anchors could be found during the segmentation algorithm were processed.</p><p>www.nature.com/scientificreports/ Datasets. For our experiments, we used simulated PacBio long reads, as well as real PacBio and ONT long reads. PacBio simulated reads were generated with SimLoRD, using the previously mentioned parameters. We generated two datasets with a 12% error rate for E. coli, S. cerevisiae and C. elegans: one with a 30x coverage, and one with a 60x coverage, corresponding to typical sequencing depths in current long reads experiments. As for the real data, we used a 89x coverage dataset from S. cerevisiae, a 63x coverage dataset from D. melanogaster, and a 29x coverage from H. sapiens chr 1, containing ultra-long reads, reaching lengths up to 340 kbp. Human data were sequenced by 2 ] and are publicly available with accession number PRJEB23027 (release 4). D. melanogaster data are publicly available with accession number SRX3676783. Real S. cerevisiae data are publicly available with accession number SRR9617898. Further details for all the datasets are given in Supplementary Table <ref type="table">S1</ref>. We used the reference genomes K-12 substr. MG1655 for E. coli, S288C for S. cerevisiae, Bristol N2 for C. elegans, BDGP Release 6 for D. melanogaster, and GRCh38 for H. sapiens. Further details on the reference sequences are given in Supplementary Table <ref type="table">S2</ref>.</p><p>Comparison on simulated data. To precisely assess the accuracy of the different correction methods, we first tested them on the simulated PacBio datasets. ELECTOR was used to evaluate the correction accuracy of each method. Correction statistics of all the aforementioned tools on the different datasets, along with their runtime and memory consumption, are given in Table <ref type="table">1</ref>. For methods having distinct, easily identifiable, steps for overlapping and correction (i.e. Daccord, MECAT and CONSENT), we additionally report runtime and memory consumption of these two processes apart. We ran all the correction experiments on a computer equipped with 16 2.39 GHz cores and 32 GB of RAM. All tools were thus run with 16 threads.</p><p>Daccord clearly performed the best in terms of number of bases and quality, outperforming all the other methods on the E. coli and the S. cerevisiae datasets. However, the overlapping step, relying on actual alignment of the long reads against each other, consumed high amounts of memory, 3x to 11x more than CONSENT or MECAT mapping strategies. As a result, Daccord could not scale to the C. elegans datasets, DALIGNER reporting an error upon start, even when run on a cluster node equipped with 128 GB of RAM. On the contrary, Canu displayed the highest error rates on all the datasets, except on the C. elegans dataset with a 30x coverage, but consumed relatively stable, low amounts of memory. In particular, on the two C. elegans datasets, it displayed the lowest memory consumption among all the other methods.</p><p>MECAT performed the best in terms of runtime, outperforming all the other tools on all the datasets. Its overlapping strategy was also highly efficient, and displayed the lowest memory consumption among all the other strategies, on all the datasets. However, compared to Minimap2 (the overlapping strategy adopted in CONSENT) MECAT's overlapping strategy displayed higher runtimes, although it remained faster than Daccord's DALIGNER. Minimap2's memory consumption, however, was larger than that of MECAT's overlapping strategy, on all the datasets. The memory consumption of Minimap2 can nonetheless easily be reduced, at the expense of a slightly larger runtime, by decreasing the size of the index used for computing the overlaps, which CONSENT sets to 1 Gbp by default.</p><p>Compared to both FLAS and CONSENT, MECAT displayed lower number of bases on all the datasets. As for FLAS, this can be explained by the fact that it is a MECAT wrapper, allowing to retrieve additional overlaps, and thus correct a greater number long reads. As a result, since it relies on MECAT's error correction strategy, FLAS displayed highly similar memory consumption. Runtime was however higher, due to the additional steps allowing to retrieve supplementary overlaps, and to the resulting higher number of reads to correct. Numbers of bases and error rates of FLAS and CONSENT were highly similar on all the datasets, varying by 0.12% at most, on the S. cerevisiae dataset with a 30x coverage. CONSENT was also faster than FLAS on the E. coli and S. cerevisiae datasets. However, on the C. elegans datasets, CONSENT displayed slightly higher runtimes.</p><p>As for the memory consumption of the error correction step, CONSENT was less efficient than MECAT on most datasets. This can be explained by the fact that CONSENT loads the correction jobs into a queue of default size 100,000. This queue thus loads the necessary data for 100,000 correction tasks into memory at once. We then iteratively allocate new tasks to threads as they become available. Reducing the size of this queue would allow CONSENT to consume less memory, at the expense of a slightly higher runtime, since the queue would have to be repopulated more often.</p><p>Comparison on real data. We then evaluated the different correction methods on a real PacBio S. cerevisiae dataset, as well as on larger, real ONT datasets from D. melanogaster and H. sapiens (chr 1). For these datasets, we not only evaluate how well the corrected long reads realign to the reference genome, but also how well they assemble. For the alignment assessment, we report how many reads were corrected, their total number of bases, their N50, the proportion of corrected reads that could be aligned, the average identity of the alignments, as well as the genome coverage, that is, the percentage of bases of the reference genome to which at least a nucleotide aligned. For the assembly assessment, we report the overall number of contigs, the number of contigs that could be aligned, the NGA50 and NGA75, and, once again, the genome coverage. We obtained alignment statistics using ELECTOR's second module, which performs alignment to the reference genome with Minimap2. We performed assemblies using Minimap2 and Miniasm <ref type="bibr" target="#b27">27</ref> . Moreover, for the H. sapiens (chr 1) dataset, we performed additional assembly experiments using the more modern and sophisticated assembler Flye <ref type="bibr" target="#b28">28</ref> . Assembly statistics were obtained with QUAST-LG <ref type="bibr" target="#b29">29</ref> . Results are given in Table <ref type="table">2</ref> for the alignment assessment, and in Table <ref type="table">3</ref> for the assembly assessment. Runtimes and memory consumption of the different methods are also given in Table <ref type="table">2</ref>. As for the simulated data, we report runtime and memory consumption of the overlapping and correction steps apart, when possible. We ran all the correction experiments on a cluster node equipped with 28 2.39 GHz cores and 128 GB of RAM. All tools were thus run with 28 threads. On these three datasets, Daccord failed to run, as DALIGNER could not perform alignment, for the same reason as for the simulated C. elegans datasets. For all the datasets, CONSENT corrected the largest number of reads, output the largest number of bases, and reached the largest genome coverage. On the S. cerevisiae dataset, CONSENT reached slightly lower alignment identity than the other tools. However, on the two more complex ONT datasets, CONSENT displayed the highest alignment identity. Additionally, the N50 of CONSENT was the highest on the S. cerevisiae dataset, and was higher than that of all the others methods, except Canu, on the two ONT datasets.</p><p>When it comes to runtime and memory consumption, MECAT outperformed all the other methods, as in the experiments on simulated data. However, it is worth noting that the runtime was comparable to other methods, and that CONSENT was the second fasted tool after MECAT on the two ONT datasets. Finally, MECAT reached the highest proportion of aligned reads, on all datasets, although CONSENT was close, since only 0.24-1.21% fewer reads could be aligned.</p><p>Moreover, on the H. sapiens (chr 1) dataset, CONSENT and Canu were the only tools able to deal with ultralong reads. Indeed, other methods reported errors when attempting to correct the original dataset. As a result, Table <ref type="table">1</ref>. Metrics output by ELECTOR on the simulated PacBio datasets. Daccord results are missing for the two C. elegans datasets, as DALIGNER failed to perform alignment, reporting an error upon start, even when ran on a cluster node with 28 2.4 GHz cores and 128 GB of RAM. Recall and precision are not reported for original reads, since they cannot be computed from uncorrected reads. Best results for each metric is highlighted in bold. in order to allow these methods to perform correction, we had to manually remove the reads longer than 50 kbp. There were 1,824 such reads, accounting for a total number of 135,364,312 bp. However, even if it managed to scale to the correction of ultra-long reads, Canu was almost seven times slower than CONSENT, making CONSENT the only tool to efficiently scale to ultra-long reads. On the S. cerevisiae dataset, the assembly yielded from FLAS corrected reads outperformed all the other assemblies in terms of number of contigs. Oppositely, the assembly yielded from CONSENT corrected reads displayed the largest number of contigs. It also displayed more errors per 100 kbp and a slightly higher number of misassemblies compared to other assemblies. Canu corrected reads yielded the assembly covering the largest proportion of the reference genome, whereas MECAT corrected reads yielded the assembly displaying the lowest number of misassemblies and errors per 100 kbp. However, all assemblies were comparable in terms of NGA50 and NGA75, and CONSENT even outperformed MECAT in terms of NGA75.</p><p>On the D. melanogaster dataset, the assembly yielded from CONSENT corrected reads outperformed all the other assemblies in terms of number of contigs, NGA50, NGA75, as well as error rate per 100 kbp. In particular, the NGA50 of the CONSENT assembly was 2.1-6.8 times larger than that of other assemblies. The assembly yielded from Canu corrected reads outperformed all the other assemblies in terms of genome coverage, but was composed of the highest number of contigs, after the assembly obtained from the raw reads. However, the genome coverage of the CONSENT assembly was slightly larger than that of FLAS and MECAT. Finally, in terms of misassemblies, the assembly generated from MECAT corrected reads outperformed the other assemblies, although they all remained comparable on this metric.</p><p>On the H. sapiens (chr 1) dataset, the assembly obtained from CONSENT corrected reads once again outperformed all the other assemblies in terms of number of contigs, NGA50, and NGA75. In particular, the NGA50 of the CONSENT assembly was almost 1.6-4.3 times larger than that of other assemblies. However, 12 contigs of the CONSENT assembly could not be aligned to the reference. As a result, compared to the assemblies obtained from FLAS and MECAT corrected reads, the assembly yielded from the CONSENT corrected reads covered 2.6% less of the reference sequence, and displayed a higher error rate per 100 kbp. These unaligned contigs and differences could likely be reduced by further adapting both CONSENT and Miniasm parameters. Moreover, the assembly yielded from CONSENT corrected reads displayed a slightly higher number of misassemblies, although it remained comparable to that of other assemblies. On this metric, the assembly generated from MECAT corrected reads once again slightly outperformed other assemblies.</p><p>In addition, as we previously mentioned, we also performed additional assembly experiments using the more modern and sophisticated assembler Flye on the H. sapiens (chr 1) dataset. Here, the assembly yielded from CONSENT corrected reads displayed the smallest number of contigs, and the lowest number of errors per 100 Table <ref type="table">2</ref>. Statistics of the real long reads, before and after correction with the different methods. Best results for each metric is highlighted in bold. <ref type="bibr" target="#b1">1</ref> Reads longer than 50 kbp were filtered out, as ultra-long reads caused the programs to stop with an error. There were 1824 such reads in the original dataset, accounting for a total number of 135,364,312 bp. <ref type="bibr" target="#b2">2</ref> Daccord could not be run on these two datasets, due to errors reported by DALIGNER. kbp. Its number of misassemblies was also smaller than that of all other assemblies, except the one generated from Canu corrected reads. Morever, the proportion of aligned contigs and the genome coverage were highly similar for all assemblies. Interestingly, only the assembly generated from CONSENT corrected reads allowed to reach larger NGA50 and NGA75 than the assembly generated from the raw reads. Compared to other correction tools, CONSENT is the only method allowing to enhance the quality of the Flye assembly in such a way. Indeed, all the other assemblies, despite displaying a smaller number of contigs than the assembly generated from raw reads, reached smaller NGA50 and NGA75. These results thus underline the fact that Flye can benefit from CONSENT correction to generate higher quality assemblies.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Assembly polishing.</head><p>As an additional feature, CONSENT also allows to perform assembly polishing. The process is pretty straightforward. Indeed, instead of computing overlaps between the long reads, as presented in the previous sections, overlaps are simply computed between the assembled contigs and the long reads used for the assembly. The rest of the pipeline remains the same. We present assembly polishing results on the simulated E. coli, S. cerevisiae, and C. elegans datasets with a 60x coverage, as well as on the real S. cerevisiae, D. melanogaster and H. sapiens (chr 1) datasets. We compare CONSENT to RACON <ref type="bibr" target="#b30">30</ref> , a state-of-the-art assembly polishing method. Results are presented in Table <ref type="table">4</ref>. We ran all the polishing experiments on a cluster node equipped with 28 2.39 GHz cores and 128 GB of RAM. All tools were thus run with 28 threads. Moreover, we only compare the runtimes of the actual polishing steps of the tools. Thus, the runtime of Minimap2, and the runtime of CONSENT pre-processing steps (sorting and reformatting the overlaps file) are not taken into account in the comparisons. Although these pre-processing steps can be slow for large datasets and large overlaps files, and are not required by RACON, we would like to underline that they allow to avoid the burden of loading the full overlaps file into memory, as required by RACON. The benefits of these pre-processing steps can be confirmed by comparing the memory consumption of CONSENT and RACON, as commented below. Moreover, to further emphasize the interest of these pre-processing steps, additional experiments on another human dataset (accession number NA12878, release 6), which are not presented here, have shown RACON could require more than 2 TB of RAM, while CONSENT displayed a peak of 39 GB. These results show that CONSENT outperformed RACON in terms of quality of the results, especially dealing better with errors, and thus greatly reducing the error rate per 100 kbp, on the E. coli, S. cerevisiae, and C. elegans datasets. RACON outperformed CONSENT in terms of NGA50, NGA75, genome coverage, and number of misassemblies, but the two methods were highly comparable on these three datasets. Oppositely, RACON Table <ref type="table">3</ref>. Statistics of the assemblies generated from the raw and corrected real long reads. Best results for each metric is highlighted in bold. <ref type="bibr" target="#b1">1</ref> As previously mentioned, Daccord results on the three datasets are absent, since it could not be run. <ref type="bibr" target="#b2">2</ref> For the assembly of the original reads on the H. sapiens (chr 1) dataset, QUAST-LG did not provide a metric for the NGA75. outperformed CONSENT in terms of errors per 100 kbp on the S. cerevisiae real dataset, but CONSENT outperformed RACON in terms of number of misassemblies NGA50, NGA75, and genome coverage.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Dataset</head><p>For the larger, eukaryotic D. melanogaster dataset, RACON outperformed CONSENT in terms of number of errors per 100 kbp, and genome coverage, but the NGA50, NGA75 of the two methods remained comparable. On the H. sapiens (chr 1) dataset, RACON once again outperformed CONSENT in terms of error rate and genome coverage, and also displayed larger NGA50 and NGA75. However, polishing the assembly with CONSENT allowed to align a greater proportion of contigs, compared to both the raw and the RACON polished assembly. On these two datasets, RACON slightly outperformed CONSENT in terms of number of misassemblies, although the two methods remained highly comparable. 2Additionally, on all the datasets, the polishing step of CONSENT was 3x to 38x faster than RACON, and also consumed up to four times less memory, thanks to its pre-processing steps.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Results on a full human dataset.</head><p>To further validate the scalability of CONSENT, we present results on a full ONT human dataset. This dataset is composed of 113 Gbp, displays an error rate of 17%, and contains ultralong reads reaching lengths up to 1.5 Mbp. Data were sequenced by 2 ] and are publicly available with accession number PRJEB23027. Further details are given in Supplementary Table <ref type="table">S1</ref>.</p><p>In this experiment, we not only evaluate how CONSENT behaves on such a large dataset, but also study the impact of the correction / assembly order on the quality of the results. We thus correct the raw data with CON-SENT, and then assemble the corrected long reads, but also assemble the raw long reads first, and then polish the assembly with CONSENT. Alignment statistics of the raw and corrected long reads are presented in Table <ref type="table" target="#tab_3">5</ref>, while statistics of the different assemblies are presented in Table <ref type="table">6</ref>. We only report CONSENT results, since other tools could not scale to this dataset. Indeed, Daccord crashed upon start due to memory limitations, while FLAS and MECAT reported errors during correction, owing to the presence of ultra-long reads, as reported in previous experiments. Canu, on the other hand, did not crash, but required an unreasonable amount of time to Table <ref type="table">4</ref>. Statistics of the assemblies, before and after polishing with RACON and CONSENT. The missing contig for the CONSENT and RACON polishings on the D. melanogaster dataset is 428 bp long, and could not be polished, due to the window size of the two methods being larger (500). Best results for each metric is highlighted in bold. <ref type="bibr" target="#b1">1</ref> For the assembly of the original reads on the H. sapiens (chr 1) dataset, QUAST-LG did not provide a metric for the NGA75. run. We ran all the experiments on a cluster node equipped with 28 2.39 GHz cores and 128 GB of RAM. Tools were thus run with 28 threads. Alignment statistics of Table <ref type="table" target="#tab_3">5</ref> show that CONSENT managed to process the whole dataset in 10 days, and required less than 100 GB of RAM. More precisely, the more computationally expensive step, in terms of memory consumption, was actually the overlaps computation, and not the error correction itself. The corrected reads displayed a higher N50 than the raw reads, the longest read reaching 929 kbp. Moreover, almost 99% of the reads could be realigned to the reference genome. The average identity of the alignments reached more than 93.5%, which is slightly higher, but consistent with the results on chr 1, presented in Table <ref type="table">2</ref>. Moreover, CONSENT managed to correct a large number of reads, and thus barely reduced the genome coverage of the original dataset.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Dataset</head><p>Assemblies statistics of Table <ref type="table">6</ref> are particularly interesting. Indeed, they show that, in addition to being extremely more computationally expensive, correcting the reads before assembling them produces less satisfying results than assembling the raw reads first, and then polishing the assembly. Indeed, the correction + assembly pipeline required more than 17 days and 1 TB of RAM, while the assembly + polishing pipeline ran in 7.5 days, and consumed less than 400 GB of RAM. In addition, the polished assembly displayed better metrics than the assembly generated from corrected reads, reaching higher NGA50, NGA75, and genome coverage, and lower error rate per 100 kbp. These results underline the fact that, for large datasets and complex genomes, assembling the raw data first, and then polishing the assembly is much more efficient than correcting the reads and then performing assembly.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Discussion</head><p>Experimental results on the human datasets are particularly promising. Indeed, they show that CONSENT is the only method able to efficiently scale to the ultra-long reads they contain. More precisely, on the human chr 1 dataset, CONSENT is almost four times faster than Canu, the only other method able to scale to the correction of ultra-long reads. Moreover, it also produces more accurate results, and thus allows to yield a more contiguous assembly. As such reads are expected to become more widely available in the future, being able to deal with them will soon become a necessity. In addition, results on the complete human dataset show that CONSENT manages to efficiently process such large datasets in 10 days, using less than 100 GB of RAM. Moreover, this memory consumption could easily be reduced by adapting the parameters of Minimap2, and reducing the size of the jobs queue used during the actual correction step. At the expense of an increased runtime, CONSENT could thus process a full human dataset on a simple laptop. Using 8 threads, setting Minimap2 parameter -I 900M, and reducing the size of the jobs queue to 50,000, we indeed estimate CONSENT would run in a month, consume at most 16 GB of RAM, and require 5 TB of disk space to process a full human dataset. The 5 TB disk space requirement comes from the overlaps file, which can easily be stored on a external hard drive. Further experiments should therefore focus on the correction of larger and more complex organisms. However, the runtime of CONSENT's correction step tends to be higher than that of other state-of-the-art methods. We discuss how to further reduce these computational costs below.</p><p>Our experiments show that the runtime of the correction step tends to rise according to the complexity of the genome. This can be explained by the highest proportion of repeated regions in more complex genomes. Such repeated regions indeed impact the alignment piles coverages, and could therefore lead to the processing of piles having very deep coverages. For such piles, our strategy of only selecting the N highest identity overlaps might prove inefficient, especially when the length of the repeated regions grows longer. To further refine the overlaps selection, we could use a validation strategy similar to that of HALC. Such a strategy would allow us to only consider sequences from the pile that actually come from the same genomic region as the long read we are attempting to correct. This would, in turn, allow us to ensure the selected sequences display low divergence, which would speed up the MSA computation, while allowing to produce higher quality consensus.</p><p>Moreover, further optimization of the parameters shall also be considered. In particular, the window size and the minimum number of anchors to allow the processing of a window significantly impact the runtime. Running various experiments with different sets of parameters could therefore allow us to find a satisfying compromise between runtime and quality of the results. The fact that the CONSENT assembly covers a smaller proportion of the reference sequence also gives us further room for improvement. In particular, looking to the unaligned contigs more into details could help us further improve the mechanisms and principles of CONSENT. Another possible improvement would be to consider multiple k-mer size for the k-mer chaining strategy. By selecting Table <ref type="table">6</ref>. Statistics of the different assemblies for the full H. sapiens dataset. Raw corresponds to the assembly generated from raw reads. Corrected corresponds to the assembly generated from corrected reads. Polished corresponds to the assembly generated from raw reads, and polished with CONSENT. Runtime and memory consumption are reported for the whole correction + assembly or assembly + polishing pipelines. QUAST-LG did not provide a metric for the NGA75 of the assembly generated from corrected reads. Best results for each metric is highlighted in bold. the best possible chaining according to the coverage or the repetitive elements of a given window, the method could be more robust and more efficient by computing smaller MSA. Finally, it is essential to note that CONSENT uses Minimap2 as its default overlapper, but does not depend on this tool. As a result, CONSENT will benefit from the progress of future overlapping strategies, and will therefore allow to propose better correction quality as the overlapping methods evolve.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Material and methods</head><p>Overview. CONSENT takes as input a FASTA file of long reads, and returns a set of corrected long reads, reporting corrected bases in uppercase, and uncorrected bases in lowercase. Like most efficient methods, CON-SENT starts by computing overlaps between the long reads using a mapping approach. These overlaps are computed using an external program, and not by CONSENT itself. This way, only matched regions need to be further aligned in order to compute consensus. These matched regions are then divided into smaller windows, that are aligned independently. The alignment of these windows is performed via a MSA strategy based on partial order graphs. This MSA is computed by iteratively constructing and adding sequences to a DAG. It also benefits from an efficient heuristic, based on k-mer chaining, allowing to reduce the time footprint of computing MSA between noisy sequences. The DAG is then used to compute the consensus of the window it originates from. Once the consensus is computed, a second correction step makes use of a local de Bruijn graph. This allows to correct weakly supported regions, that are, regions containing weak k-mers, and thus reduce the final error rate of the consensus. Finally, the consensus is realigned to the read, and correction is performed for each window. CONSENT's workflow is summarized in Fig. <ref type="figure">1</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Definitions.</head><p>Before presenting the CONSENT pipeline, we recall the notions of alignment piles and windows on such piles, as proposed in Daccord, since we rely on them throughout the rest of the paper.</p><p>Alignment piles. An alignment pile represents a set of reads that overlap with a given read A. More formally, it can be defined as follows. For any given read A, an alignment pile for A is a set of alignment tuples (A, R, Ab, Ae, Rb, Re, S) where R is a long read id, Ab and Ae represent respectively the start and the end positions of the alignment on A, Rb and Re represent respectively the start and the end positions of the alignment on R, and S indicates whether R aligns forward ( S = 0 ) or reverse-complement ( S = 1 ) to A. One can remark that this definition is slightly different from that of Daccord. In particular, Daccord adds an edit script to each tuple, representing the sequence of edit operations needed to transform</p><formula xml:id="formula_0">A[Ab..Ae] into R[Rb..Re] if S = 0 , or into R[Rb.</formula><p>.Re] if S = 1 (where R represents the reverse-complement of read R). This edit script can easily be retrieved by Daccord, as it relies on DALIGNER <ref type="bibr" target="#b31">31</ref> to compute actual alignments between the reads. However, as CON-SENT relies on a mapping strategy, it does not have access to such information. We thus chose to exclude the edit script from our definition of a tuple. In its alignment pile, we call A the template read. The alignment pile of a given template read A thus contains all the information needed for its correction. An example of an alignment pile is given in Fig. <ref type="figure">2 (left)</ref>. Prefixes and suffixes of reads overlapping A outside of the pile are not considered during the next steps, as the data they contain will not be useful for correcting A. Right: When fixing the length to L and the minimum coverage threshold to 3, the window (W b , W e ) will be processed by CONSENT. With these same parameters, the window (F b , F e ) will not be processed by CONSENT, as A[i] is not supported by at least 3 reads</p><formula xml:id="formula_1">∀ F b ≤ i ≤ F e .</formula><p>Windows on alignment piles. In addition to the notion of alignment piles, Daccord also underlined the interest of processing windows from these piles instead of processing them as a whole. A window from an alignment pile is defined as follows. Given an alignment pile for a template read A, a window of this pile is a couple (W b , W e ) , where W b and W e represent respectively the start and the end positions of the window on A, and are such as 0 ≤ W b ≤ W e &lt; |A| (i.e. the start and end positions of the window define a factor of the template read A). We refer to this factor as the window's template. Additionally, in CONSENT, only windows having the two following properties are processed for correction:</p><p>• W e -W b + 1 = L (i.e. windows have a fixed size);</p><formula xml:id="formula_2">• ∀i , W b ≤ i ≤ W e , A[i]</formula><p>is supported by at least C reads of the pile, excluding A (i.e. windows have a minimum coverage threshold).</p><p>This second property allows to ensure that CONSENT has sufficient evidence to compute a reliable consensus for each window it processes. Examples of windows CONSENT does and does not process are given in Fig. <ref type="figure">2</ref> (right).</p><p>In the case of Daccord, this window strategy allows to build local de Bruijn graphs with small values of k, and overcome the high error rates of the long reads, which cause issues when using large values of k <ref type="bibr" target="#b32">32</ref> . More generally, processing windows instead of whole alignment piles allows to divide the correction problem into smaller subproblems that can be solved faster. Specifically, in our case, as we seek to correct long reads by computing MSA, working with windows allows to save both time and memory, since the sequences that need to be aligned are significantly shorter.</p><p>Overlapping. To avoid prohibitive computation time and memory consuming full alignments, CONSENT starts by overlapping the long reads using a mapping approach. By default, this step is performed with the help of Minimap2 <ref type="bibr" target="#b33">33</ref> . However, CONSENT is not dependent on Minimap2, and the user can compute the overlaps with any other method, as long as the overlaps file follows the PAF format. We included Minimap2 as the default overlapper for CONSENT, since it offers good performances, and is thus able to scale to large organisms on reasonable setups.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Alignment piles and windows computation.</head><p>The alignment piles are computed by parsing the PAF file generated by the overlapper during the previous step. Each line indeed contains all the necessary information to define a tuple from an alignment pile. It includes the identifiers of the two long reads, the start and the end positions of their overlap, as well as the orientation of the second read relatively to the first. Moreover, for each alignment pile, CONSENT only includes the N highest identity overlaps ( N = 150 by default, although it can be user-specified), in order to reduce the time footprint, and avoid computing costly MSA of numerous sequences.</p><p>Given an alignment pile for a read A, we can then compute its set of windows. To this aim, we use an array of length |A|, which counts how many times each nucleotide of A is supported. We initialize the array with 0s at each position, and for each tuple (A, R, Ab, Ae, Rb, Re, S), we increment values at positions i such as Ab ≤ i ≤ Ae . After processing all the tuples, we retrieve the positions of the piles by finding, in the array, sketches of length L of values ≥ C . We search for such sketches because CONSENT only processes windows of fixed length and with a minimum coverage threshold. In practice, we extract overlapping windows instead of partitioning the pile into a set of non-overlapping windows. Indeed, since it is usually harder to exploit alignments located on sequences extremities, consensus sequence might be missing at the extremities of some windows. Such events would thus cause a lack of correction on the reads, and using overlapping windows allows to overcome the issue. Each window is then processed independently during the next steps. Moreover, the reads are loaded into memory to support random access and thus accelerate the correction process. Each base is encoded using 2 bits in order to reduce memory usage. The memory consumption is thus roughly 1/4 of the total size of the reads.</p><p>Window consensus. We process each window in two distinct steps. First, we align the sequences from the window using a MSA strategy based on partial order graphs, in order to compute consensus. This MSA strategy benefits from an efficient heuristic, based on k-mer chaining, allowing to decompose the global problem into smaller instances, thus reducing both time and memory consumption. Second, after computing the window's consensus, we further polish it with the help of a local de Bruijn graph, at the scale of the window, in order to get rid of the few errors that might remain.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Consensus computation.</head><p>In order to compute the consensus of a window, CONSENT uses POAv2 <ref type="bibr" target="#b24">24</ref> , an implementation of a MSA strategy based on partial order graphs. These DAGs, store all the information of the MSA. This way, at each step (i.e. at each alignment of a new sequence), the graph contains the current MSA result. To add a new sequence to the MSA, the sequence is aligned to the DAG, using a generalization of the Smith-Waterman algorithm.</p><p>Other methods usually compute 1V1 alignments between the read to be corrected and other reads overlapping with it, and then build a result DAG to summarize the alignments, and represent the MSA. In contrast, CONSENT's strategy allows to compute actual MSA, and to directly build the DAG, during the alignment computation. Indeed, the DAG is first initialized with the sequence of the window's template, and is then iteratively enriched by aligning the other sequences from the window, until it becomes the final, result graph. We then extract a matrix, representing the MSA, from the graph, and compute consensus by performing a majority vote. When a tie occurs, we chose the nucleotide from the window's template as the consensus base.</p><p>However, even on small windows, computing MSA on hundreds of bases from dozens of sequences is computationally expensive, especially when the divergence among sequences is high. To avoid the burden of building a consensus by computing full MSA, we search for collinear regions shared by these sequences, in order to split the global task into smaller instances. We thus build several consensus on regions delimited by anchors shared among the sequences, and reconstruct the global consensus from the distinct, smaller consensus sequences obtained. The rationale is to benefit from the knowledge that all the sequences come from the same genomic area. This way, on the one hand, we can compute MSA of shorter sequences, which greatly reduces the computational costs. On the other hand, we only use related sequences to build the consensus, and therefore exclude spurious sequences. This behavior allows a massive speedup along with an improvement in the global consensus quality.</p><p>To find such collinear regions, we first select k-mers that are non-repeated in their respective sequences, and shared by multiple sequences. We then rely on dynamic programming to compute the longest anchors chain a 1 , . . . , a n such as:</p><p>1. ∀i, j such that 1 ≤ i &lt; j ≤ n , a i appears before a j in every sequence containing a i and a j ; 2. ∀i , 1 ≤ i &lt; n , there are at least T reads containing a i and a i+1 (with T a solidity threshold equal to 8 by default).</p><p>We therefore compute multiple, local consensus, using substrings bordered by consecutive anchors, in sequences that contain them, and are then able to reconstruct the global consensus of the window:</p><formula xml:id="formula_3">consensus(prefix) + a 1 + consensus(]a 1 , a 2 [) + a 2 + • • • + consensus(]a n-1 ,a n [) + a n + consensus(suffix)</formula><p>. We illustrate this segmentation strategy in Supplementary Fig. <ref type="figure">S1</ref> (longest anchors chain computation) and S2 (local consensus computation and global consensus reconstruction).</p><p>Consensus polishing. After processing a given window, a few erroneous bases might remain on the computed consensus. This might happen in cases where the coverage depth of the window is relatively low, and thus cannot yield a high-quality consensus. Consequently, we propose an additional, second correction phase, that aims at polishing the consensus obtained during the previous step. This allows CONSENT to further enhance its quality, by correcting weakly supported k-mers. This feature is related to Daccord's local de Bruijn graph correction strategy. First, a local de Bruijn graph is built from the window's sequences, using only small, solid, k-mers. The rationale is that small k-mers allows CONSENT to overcome the classical issues encountered due to the high error rate of the long reads, when using large k values. CONSENT then searches for regions only composed of weak k-mers, flanked by sketches of n (usually, n = 3 ) solid k-mers. Afterwards, CONSENT attempts to find a path allowing to link a solid k-mer from the left flanking region to a solid k-mer from the right flanking region. We call these solid k-mers anchors. The graph is thus traversed, in order to find a path between two anchors, using backtracking if necessary. If a path between two anchors is found, the region containing the weak k-mers is replaced by the sequence dictated by this path. If none of the anchors pairs can be linked, the region is left unpolished. To polish sketches of weak k-mers located at the left (respectively right) extremity of the consensus, highest weighted edges of the graph are followed, until the length of the path reaches the length of the region to polish, or no edge can be followed out of the current node.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Read correction via window consensus alignment.</head><p>Once the consensus of a window has been computed and polished, we need to realign it to the template, in order to actually perform correction. To this aim, we use an optimized library of the Smith-Waterman algorithm <ref type="bibr" target="#b34">34</ref> . To avoid time-costly alignment, we locally align the consensus around the positions of the window it originates from. This way, given a window (W b , W e ) of the alignment pile of the read A, its consensus will be aligned to A[W b -O..W e + O] , where O represents the length of the overlap between consecutive windows processed by CONSENT ( O = 50 by default, although it can be user-specified). Aligning the consensus outside of the original window's extremities as such allows to take into account the error profile of the long reads. Indeed, as insertions and deletions are predominant in long reads, it is likely that a consensus could be longer than the window it originates from, thus spanning outside of this window's extremities.</p><p>In the case alignment positions of the consensus from the ith window overlap with alignment positions of the consensus from the ( i + 1)th window, we compute the overlapping sequences of the two consensus. The one containing the largest number of solid k-mers (where the k-mer frequencies of each sequence are computed from the window their consensus originate from) is chosen and kept as the correction. In the case of a tie, we arbitrarily chose the sequence from the ( i + 1)th consensus as the correction. We then correct the aligned factor of the long read by replacing it with the aligned factor of the consensus.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Conclusion</head><p>We presented CONSENT, a new self-correction method for long reads that combines different efficient strategies from the state-of-the-art. CONSENT starts by computing overlaps between the long reads to correct. It then divides the overlapping regions into smaller windows, in order to compute MSA, and consensus sequences of each window independently. These MSA are performed using a method based on partial order graphs, allowing to perform actual MSA. This method is combined to an efficient k-mer chaining strategy, which allows to further divide the MSA into smaller instances, and thus significantly reduce computation times. After computing the consensus of a given window, it is further polished with the help of a local de Bruijn graph, at the scale of the window, in order to further reduce the final error rate. Finally, the polished consensus is locally realigned to the read, in order to correct it.</p><p>Our experiments show that CONSENT compares well to, or even outperforms, other state-of-the-art selfcorrection methods in terms of quality of the results. In particular, CONSENT is the only method able to efficiently scale to the correction of ONT ultra-long reads, and is able to process a full human dataset containing reads reaching lengths up to 1.5 Mbp in 10 days. Although very recent, such reads are expected to further develop, and thus become more widely available in the near future. Being able to deal with them will thus soon become a necessity. CONSENT could therefore be the first self-correction method able to be applied to such ultra-long reads on a greater scale.</p><p>CONSENT's assembly polishing feature also offers promising results. In particular, our experiment on a full human dataset shows that assembling the raw reads and then polishing the assembly allows to greatly reduce the computational costs, but also provides better results than correcting and then assembling the reads. This conclusion raises the question of the interest of long-read error correction in assembly projects. Moreover, as the processes of long read correction and assembly polishing are not much different from one another, one can also wonder why more error correction tools do not offer such a feature. It indeed seems to be affordable at the expense of minimal additional work, while providing satisfying results. We believe that CONSENT could open the doors to more error correction tools offering such a feature in the future. Finally, it would also be interesting to evaluate already published correction tools on their ability to polish assemblies, at the expense of minimal modifications to their workflows.</p><p>The segmentation strategy introduced in CONSENT also shows that actual MSA techniques are applicable to long, noisy sequences. In addition to being useful for error correction, this could also be applied to various other problems. For instance, it could be used during the consensus steps of assembly tools, for haplotyping, and for quantification problems. The literature about MSA is vast, but lacks application on noisy sequences. We believe that CONSENT could be a first work in that direction.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 .Figure 2 .</head><label>12</label><figDesc>Figure 1. Overview of CONSENT's workflow for long read error correction.</figDesc><graphic coords="10,155.91,50.50,397.68,102.36" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Dataset Corrector Number of bases (Mbp) Error rate (%) Recall (%) Precision (%) Overlapping Correction Total Runtime Memory (MB) Runtime Memory (MB) Runtime Memory (MB)</head><label></label><figDesc></figDesc><table><row><cell></cell><cell>Original</cell><cell></cell><cell>12.2862</cell><cell>_</cell><cell>_</cell><cell>N/A</cell><cell>N/A</cell><cell>N/A</cell><cell>N/A</cell><cell>N/A</cell><cell>N/A</cell></row><row><cell></cell><cell>Canu</cell><cell></cell><cell>0.4156</cell><cell>99.7647</cell><cell>99.5887</cell><cell>_</cell><cell>_</cell><cell>_</cell><cell>_</cell><cell>19 min</cell><cell>4613</cell></row><row><cell>E. coli 30x</cell><cell>Daccord FLAS</cell><cell></cell><cell>0.0248 0.2720</cell><cell>99,9965 99.9291</cell><cell>99,9757 99.7385</cell><cell>1 min _</cell><cell>6813 _</cell><cell>13 min _</cell><cell>639 _</cell><cell>14 min 12 min</cell><cell>6813 1639</cell></row><row><cell></cell><cell>MECAT</cell><cell></cell><cell>0.2569</cell><cell>99.9302</cell><cell>99.7533</cell><cell>25 s</cell><cell>1600</cell><cell>1 min 14 s</cell><cell>1083</cell><cell>1 min 39 s</cell><cell>1600</cell></row><row><cell></cell><cell>CONSENT</cell><cell></cell><cell>0.3111</cell><cell>99.9328</cell><cell>99.6934</cell><cell>18 s</cell><cell>2345</cell><cell>7 min 16 s</cell><cell>532</cell><cell>7 min 34 s</cell><cell>2345</cell></row><row><cell></cell><cell>Original</cell><cell></cell><cell>12.2788</cell><cell>_</cell><cell>_</cell><cell>N/A</cell><cell>N/A</cell><cell>N/A</cell><cell>N/A</cell><cell>N/A</cell><cell>N/A</cell></row><row><cell></cell><cell>Canu</cell><cell></cell><cell>0.7404</cell><cell>99.4781</cell><cell>99.2658</cell><cell>_</cell><cell>_</cell><cell>_</cell><cell>_</cell><cell>24 min</cell><cell>3674</cell></row><row><cell>E. coli 60x</cell><cell>Daccord FLAS</cell><cell></cell><cell>0.0214 0.1547</cell><cell>99.9971 99.9546</cell><cell>99.9790 99.8526</cell><cell>3 min _</cell><cell>18,450 _</cell><cell>51 min _</cell><cell>1191 _</cell><cell>54 min 38 min</cell><cell>18,450 2428</cell></row><row><cell></cell><cell>MECAT</cell><cell></cell><cell>0.1714</cell><cell>99.9547</cell><cell>99.8362</cell><cell>1 min</cell><cell>2387</cell><cell>4 min</cell><cell>1553</cell><cell>5 min</cell><cell>2387</cell></row><row><cell></cell><cell>CONSENT</cell><cell></cell><cell>0.1833</cell><cell>99.9771</cell><cell>99.8196</cell><cell>1 min</cell><cell>4693</cell><cell>25 min</cell><cell>1757</cell><cell>26 min</cell><cell>4693</cell></row><row><cell></cell><cell>Original</cell><cell></cell><cell>12.283</cell><cell>_</cell><cell>_</cell><cell>N/A</cell><cell>N/A</cell><cell>N/A</cell><cell>N/A</cell><cell>N/A</cell><cell>N/A</cell></row><row><cell></cell><cell>Canu</cell><cell></cell><cell>1.1052</cell><cell>99.1766</cell><cell>98.9036</cell><cell>_</cell><cell>_</cell><cell>_</cell><cell>_</cell><cell>29 min</cell><cell>3681</cell></row><row><cell>S. cerevisiae</cell><cell>Daccord</cell><cell></cell><cell>0.1259</cell><cell>99.9874</cell><cell>99.8762</cell><cell>7 min</cell><cell>31,798</cell><cell>1 h 12 min</cell><cell>3487</cell><cell>1 h 19 min</cell><cell>31,798</cell></row><row><cell>30x</cell><cell>FLAS</cell><cell></cell><cell>0.3272</cell><cell>99.9131</cell><cell>99.6843</cell><cell>_</cell><cell>_</cell><cell>_</cell><cell>_</cell><cell>29 min</cell><cell>2935</cell></row><row><cell></cell><cell>MECAT</cell><cell></cell><cell>0.3040</cell><cell>99.9160</cell><cell>99.7072</cell><cell>1 min</cell><cell>2907</cell><cell>4 min</cell><cell>1612</cell><cell>5 min</cell><cell>2907</cell></row><row><cell></cell><cell>CONSENT</cell><cell></cell><cell>0.4102</cell><cell>99.9192</cell><cell>99.5956</cell><cell>1 min</cell><cell>5519</cell><cell>21 min</cell><cell>1503</cell><cell>22 min</cell><cell>5519</cell></row><row><cell></cell><cell>Original</cell><cell></cell><cell>12.2886</cell><cell>_</cell><cell>_</cell><cell>N/A</cell><cell>N/A</cell><cell>N/A</cell><cell>N/A</cell><cell>N/A</cell><cell>N/A</cell></row><row><cell></cell><cell>Canu</cell><cell></cell><cell>0.7919</cell><cell>99.4488</cell><cell>99.2148</cell><cell>_</cell><cell>_</cell><cell>_</cell><cell>_</cell><cell>1 h 11 min</cell><cell>3710</cell></row><row><cell>S. cerevisiae</cell><cell>Daccord</cell><cell></cell><cell>0.0400</cell><cell>99.9928</cell><cell>99.9606</cell><cell>10 min</cell><cell>32,190</cell><cell>2 h 16 min</cell><cell>1160</cell><cell>2 h 26 min</cell><cell>32,190</cell></row><row><cell>60x</cell><cell>FLAS</cell><cell></cell><cell>0.2034</cell><cell>99.9418</cell><cell>99.8049</cell><cell>_</cell><cell>_</cell><cell>_</cell><cell>_</cell><cell>1 h 30 min</cell><cell>4984</cell></row><row><cell></cell><cell>MECAT</cell><cell></cell><cell>0.2088</cell><cell>99.9428</cell><cell>99.7996</cell><cell>4 min</cell><cell>4954</cell><cell>12 min</cell><cell>2412</cell><cell>16 min</cell><cell>4954</cell></row><row><cell></cell><cell>CONSENT</cell><cell></cell><cell>0.2897</cell><cell>99.9532</cell><cell>99.7145</cell><cell>2 min</cell><cell>11,378</cell><cell>1 h 11 min</cell><cell>4754</cell><cell>1 h 13 min</cell><cell>11,378</cell></row><row><cell></cell><cell>Original</cell><cell></cell><cell>12.2806</cell><cell>_</cell><cell>_</cell><cell>N/A</cell><cell>N/A</cell><cell>N/A</cell><cell>N/A</cell><cell>N/A</cell><cell>N/A</cell></row><row><cell></cell><cell>Canu</cell><cell></cell><cell>0.5008</cell><cell>99.7103</cell><cell>99.5040</cell><cell>_</cell><cell>_</cell><cell>_</cell><cell>_</cell><cell>9 h 09 min</cell><cell>6921</cell></row><row><cell>C. elegans 30x</cell><cell>Daccord FLAS</cell><cell>_</cell><cell>_ 0.7613</cell><cell>_ 99.8613</cell><cell>_ 99.2541</cell><cell>_ _</cell><cell>_ _</cell><cell>_ _</cell><cell>_ _</cell><cell>_ 3 h 07 min</cell><cell>_ 10,565</cell></row><row><cell></cell><cell>MECAT</cell><cell></cell><cell>0.3908</cell><cell>99.8903</cell><cell>99.6212</cell><cell>27 min</cell><cell>10,535</cell><cell>21 min</cell><cell>2603</cell><cell>48 min</cell><cell>10,535</cell></row><row><cell></cell><cell>CONSENT</cell><cell></cell><cell>0.6495</cell><cell>99.8846</cell><cell>99.3596</cell><cell>16 min</cell><cell>16,711</cell><cell>3 h 40 min</cell><cell>5338</cell><cell>3 h 56 min</cell><cell>16,711</cell></row><row><cell></cell><cell>Original</cell><cell></cell><cell>12.2825</cell><cell>_</cell><cell>_</cell><cell>N/A</cell><cell>N/A</cell><cell>N/A</cell><cell>N/A</cell><cell>N/A</cell><cell>N/A</cell></row><row><cell></cell><cell>Canu</cell><cell></cell><cell>0.7934</cell><cell>99.4573</cell><cell>99.2131</cell><cell>_</cell><cell>_</cell><cell>_</cell><cell>_</cell><cell>9 h 30 min</cell><cell>7050</cell></row><row><cell>C. elegans 60x</cell><cell>Daccord FLAS</cell><cell>_</cell><cell>_ 0.3997</cell><cell>_ 99.9175</cell><cell>_ 99.6104</cell><cell>_ _</cell><cell>_ _</cell><cell>_ _</cell><cell>_ _</cell><cell cols="2">_ 10 h 45 min 13,682 _</cell></row><row><cell></cell><cell>MECAT</cell><cell></cell><cell>0.2675</cell><cell>99.9258</cell><cell>99.7415</cell><cell cols="2">1 h 28 min 10,563</cell><cell>1 h 15 min</cell><cell>3775</cell><cell>2 h 43 min</cell><cell>10,563</cell></row><row><cell></cell><cell>CONSENT</cell><cell></cell><cell>0.3858</cell><cell>99.9428</cell><cell>99.6201</cell><cell>56 min</cell><cell>15,732</cell><cell cols="2">12 h 50 min 7921</cell><cell cols="2">13 h 46 min 15,732</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 5 .</head><label>5</label><figDesc>Statistics of the full H. sapiens dataset, before and after correction with CONSENT. Best results for each metric is highlighted in bold.</figDesc><table><row><cell></cell><cell></cell><cell></cell><cell></cell><cell>Aligned</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Genome</cell><cell>Errors / 100</cell><cell></cell></row><row><cell></cell><cell></cell><cell>Method</cell><cell>Contigs</cell><cell cols="2">contigs (%)</cell><cell cols="4">NGA50 (bp) NGA75 (bp)</cell><cell>coverage (%)</cell><cell>kbp</cell><cell cols="2">Misassemblies Runtime</cell><cell>Memory (MB)</cell></row><row><cell></cell><cell></cell><cell>Original</cell><cell>1</cell><cell>100.00</cell><cell></cell><cell cols="2">4,939,014</cell><cell cols="2">4,939,014</cell><cell>99.91</cell><cell>10,721</cell><cell>0</cell><cell>N/A</cell><cell>N/A</cell></row><row><cell>E. coli 60x</cell><cell></cell><cell>RACON</cell><cell>1</cell><cell>100.00</cell><cell></cell><cell cols="2">4,663,914</cell><cell cols="2">4,663,914</cell><cell>99.90</cell><cell>499</cell><cell>0</cell><cell>5 min 55 sec</cell><cell>643</cell></row><row><cell></cell><cell></cell><cell cols="2">CONSENT 1</cell><cell>100.00</cell><cell></cell><cell cols="2">4,638,842</cell><cell cols="2">4,638,842</cell><cell>99.91</cell><cell>117</cell><cell>0</cell><cell>30 sec</cell><cell>786</cell></row><row><cell></cell><cell></cell><cell>Original</cell><cell>29</cell><cell>100.00</cell><cell></cell><cell cols="2">579,247</cell><cell cols="2">456,470</cell><cell>96.14</cell><cell>10,694</cell><cell>5</cell><cell>N/A</cell><cell>N/A</cell></row><row><cell cols="2">S. cerevisiae 60x</cell><cell>RACON</cell><cell>29</cell><cell>100.00</cell><cell></cell><cell cols="2">539,472</cell><cell cols="2">346,116</cell><cell>96.09</cell><cell>637</cell><cell>5</cell><cell>15 min 47 sec 1703</cell></row><row><cell></cell><cell></cell><cell cols="2">CONSENT 29</cell><cell>100.00</cell><cell></cell><cell cols="2">532,189</cell><cell cols="2">332,977</cell><cell>96.05</cell><cell>217</cell><cell>7</cell><cell>1 min 49 sec</cell><cell>1052</cell></row><row><cell></cell><cell></cell><cell>Original</cell><cell>47</cell><cell>100.00</cell><cell></cell><cell cols="2">5,201,998</cell><cell cols="2">2,511,520</cell><cell>99.78</cell><cell>10,974</cell><cell>5</cell><cell>N/A</cell><cell>N/A</cell></row><row><cell>C. elegans 60x</cell><cell></cell><cell>RACON</cell><cell>47</cell><cell>97.87</cell><cell></cell><cell cols="2">6,405,523</cell><cell cols="2">2,726,529</cell><cell>99.74</cell><cell>819</cell><cell>2</cell><cell>2 h 24 min</cell><cell>14,288</cell></row><row><cell></cell><cell></cell><cell cols="2">CONSENT 47</cell><cell>100.00</cell><cell></cell><cell cols="2">6,340,451</cell><cell cols="2">2,699,930</cell><cell>99.73</cell><cell>375</cell><cell>3</cell><cell>11 min</cell><cell>3648</cell></row><row><cell></cell><cell></cell><cell>Original</cell><cell>29</cell><cell>93.10</cell><cell></cell><cell cols="2">408,751</cell><cell cols="2">179,653</cell><cell>84.67</cell><cell>10,514</cell><cell>45</cell><cell>N/A</cell><cell>N/A</cell></row><row><cell cols="2">S. cerevisiae real</cell><cell>RACON</cell><cell>29</cell><cell>100.00</cell><cell></cell><cell cols="2">518,943</cell><cell cols="2">330,455</cell><cell>93.74</cell><cell>1193</cell><cell>52</cell><cell>1 h 17 min</cell><cell>3708</cell></row><row><cell></cell><cell></cell><cell cols="2">CONSENT 29</cell><cell>100.00</cell><cell></cell><cell cols="2">522,799</cell><cell cols="2">411,537</cell><cell>94.23</cell><cell>1400</cell><cell>50</cell><cell>2 min</cell><cell>1667</cell></row><row><cell></cell><cell></cell><cell>Original</cell><cell>423</cell><cell>96.45</cell><cell></cell><cell cols="2">864,011</cell><cell cols="2">159,590</cell><cell>83.20</cell><cell>10,690</cell><cell>810</cell><cell>N/A</cell><cell>N/A</cell></row><row><cell cols="2">D. melanogaster</cell><cell>RACON</cell><cell>422</cell><cell>98.34</cell><cell></cell><cell cols="2">1,446,703</cell><cell cols="2">552,532</cell><cell>93.03</cell><cell>961</cell><cell>1013</cell><cell>3 h 29 min</cell><cell>19,508</cell></row><row><cell></cell><cell></cell><cell cols="2">CONSENT 422</cell><cell>98.82</cell><cell></cell><cell cols="2">1,235,999</cell><cell cols="2">465,133</cell><cell>92.00</cell><cell>2213</cell><cell>1024</cell><cell>1 h 14 min</cell><cell>5358</cell></row><row><cell></cell><cell></cell><cell>Original 1</cell><cell>201</cell><cell>93.53</cell><cell></cell><cell cols="2">1,008,692</cell><cell>_</cell><cell></cell><cell>77.52</cell><cell>11,318</cell><cell>98</cell><cell>N/A</cell><cell>N/A</cell></row><row><cell>H. sapiens (chr 1)</cell><cell></cell><cell>RACON</cell><cell>201</cell><cell>97.01</cell><cell></cell><cell cols="2">3,481,900</cell><cell cols="2">1,282,763</cell><cell>95.69</cell><cell>2393</cell><cell>57</cell><cell>2 h 30 min</cell><cell>16,202</cell></row><row><cell></cell><cell></cell><cell cols="2">CONSENT 201</cell><cell>97.51</cell><cell></cell><cell cols="2">3,295,244</cell><cell cols="2">924,899</cell><cell>94.16</cell><cell>4727</cell><cell>65</cell><cell>31 min</cell><cell>5399</cell></row><row><cell></cell><cell></cell><cell></cell><cell>Number</cell><cell></cell><cell></cell><cell></cell><cell cols="2">Alignment</cell><cell>Genome</cell><cell>Overlapping</cell><cell></cell><cell>Correction</cell><cell>Total</cell></row><row><cell></cell><cell cols="2">Number of</cell><cell>of bases</cell><cell></cell><cell cols="2">Aligned</cell><cell>identity</cell><cell></cell><cell>coverage</cell><cell></cell><cell>Memory</cell><cell></cell><cell>Memory</cell><cell>Memory</cell></row><row><cell>Corrector</cell><cell cols="2">reads</cell><cell>(Mbp)</cell><cell>N50 (bp)</cell><cell cols="2">reads (%)</cell><cell>(%)</cell><cell></cell><cell>(%)</cell><cell>Runtime</cell><cell>(MB)</cell><cell>Runtime</cell><cell>(MB)</cell><cell>Runtime</cell><cell>(MB)</cell></row><row><cell>Original</cell><cell cols="3">15,243,243 112,970</cell><cell>12,196</cell><cell>80.57</cell><cell></cell><cell>82.74</cell><cell></cell><cell>93.56</cell><cell>N/A</cell><cell>N/A</cell><cell>N/A</cell><cell>N/A</cell><cell>N/A</cell><cell>N/A</cell></row><row><cell cols="4">CONSENT 11,913,704 102,543</cell><cell>12,880</cell><cell>98.44</cell><cell></cell><cell>93.86</cell><cell></cell><cell>93.35</cell><cell cols="2">3 days 21 h 98,332</cell><cell cols="2">6 days 11 h 45,296</cell><cell>10 days 8 h 98,332</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" xml:id="foot_0"><p>Scientific Reports | (2021) 11:761 | https://doi.org/10.1038/s41598-020-80757-5</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>Acknowledgements</head><p>Part of this work was performed using computing resources of <rs type="funder">CRIANN (Normandy, France</rs>), project <rs type="grantNumber">2017020</rs>. The authors would like to thank <rs type="person">Pierre Marijon</rs> for his help with the Bioconda release. P.M. would also like to thank <rs type="person">Pierre Marijon</rs> for his helpful advice with assemblers parameters.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_sSetGbV">
+					<idno type="grant-number">2017020</idno>
+				</org>
+			</listOrg>
+
+			<div type="availability">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Data availability</head><p>CONSENT is implemented in C++, wrapped in Python and Bash scripts, open source, supported on Linux platforms and available at https ://githu b.com/moris pi/CONSE NT.</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Author contributions</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Competing interests</head><p>The authors declare no competing interests.</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title/>
+		<idno type="DOI">10.1038/s41598-020-80757-5References</idno>
+		<ptr target="https://doi.org/10.1038/s41598-020-80757-5References" />
+	</analytic>
+	<monogr>
+		<title level="j">Scientific Reports</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="issue">1234567890</biblScope>
+			<biblScope unit="page">761</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Piercing the dark matter: Bioinformatics of long-range sequencing and mapping</title>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">J</forename><surname>Sedlazeck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">A</forename><surname>Darby</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">C</forename><surname>Schatz</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Rev. Genet</title>
+		<imprint>
+			<biblScope unit="volume">39</biblScope>
+			<biblScope unit="page" from="329" to="346" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Nanopore sequencing and assembly of a human genome with ultra-long reads</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Jain</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Biotechnol</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="page">338</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Whatshap: Weighted haplotype assembly for future-generation sequencing reads</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Patterson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J. Comput. Biol</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="page" from="498" to="509" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Hinge: long-read assembly achieves optimal repeat resolution</title>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">M</forename><surname>Kamath</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Shomorony</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Xia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Courtade</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">T</forename><surname>David</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Res</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="747" to="756" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Scaffolding and completing genome assemblies in real-time with nanopore sequencing</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">D</forename><surname>Cao</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Commun</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page">14515</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Accurate detection of complex structural variations using single-molecule sequencing</title>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">J</forename><surname>Sedlazeck</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Methods</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page" from="461" to="468" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">CoLoRMap: Correcting long reads by mapping short reads</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Haghshenas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Hach</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">C</forename><surname>Sahinalp</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Chauve</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="page" from="545" to="551" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">A hybrid error correction algorithm for long reads with iterative learning</title>
+		<author>
+			<persName><forename type="first">O</forename><surname>Choudhury</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Chakrabarty</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">J</forename><surname>Emrich</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hecil</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Sci. Rep</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="1" to="9" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Accurate and efficient long read error correction</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Salmela</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Rivals</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lordec</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="page" from="3506" to="3514" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Jabba: hybrid error correction for long sequencing reads</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Miclotte</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Algorithms Mol. Biol</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page">10</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Hybrid long read error correction using an FM-index</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">R</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Holt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Mcmillan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">D</forename><surname>Jones</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Fmlrc</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Bioinform</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="1" to="11" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">An error correction and DeNovo assembly approach for nanopore reads using short reads</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Kchouk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Elloumi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Curr. Bioinform</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page" from="241" to="252" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">High throughput algorithm for long read error correction</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Bao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Lan</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Halc</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Bioinform</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page">204</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Hercules: a profile HMM-based hybrid error correction algorithm for long reads</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Firtina</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Bar-Joseph</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Alkan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">E</forename><surname>Cicek</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">46</biblScope>
+			<biblScope unit="page">125</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Genome assembly using Nanopore-guided long and error-free DNA reads</title>
+		<author>
+			<persName><forename type="first">M.-A</forename><surname>Madoui</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Genomics</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page">327</biblScope>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Hybrid correction of highly noisy long reads using a variable-order de Bruijn graph</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Morisse</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Lecroq</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Lefebvre</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="page" from="4213" to="4222" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">finished microbial genome assemblies from long-read SMRT sequencing data</title>
+		<author>
+			<persName><forename type="first">C.-S</forename><surname>Chin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Methods</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page" from="563" to="569" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Reducing assembly complexity of microbial genomes with single-molecule sequencing</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Koren</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biol</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page">101</biblScope>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Scalable and accurate long-read assembly via adaptive k-mer weighting and repeat separation</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Koren</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Res</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="722" to="736" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">MECAT: Fast mapping, error correction, and de novo assembly for single-molecule sequencing reads</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">L</forename><surname>Xiao</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Methods</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="1072" to="1074" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Fast and high throughput algorithm for PacBio long read self-correction</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Bao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Xie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Song</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Dandan</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hals</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">RECOMB-SEQ</title>
+		<imprint>
+			<biblScope unit="volume">35</biblScope>
+			<biblScope unit="page" from="3953" to="3960" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Non hybrid long read consensus using local de Bruijn graph assembly</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Tischler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">W</forename><surname>Myers</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">bioRxiv</title>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Accurate selfcorrection of errors in long reads using de Bruijn graphs</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Salmela</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Walve</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Rivals</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Ukkonen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page" from="799" to="806" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Multiple sequence alignment using partial order graphs</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Grasso</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">F</forename><surname>Sharlow</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page" from="452" to="464" />
+			<date type="published" when="2002">2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">SimLoRD: Simulation of long read data</title>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">K</forename><surname>Stöcker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Köster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Rahmann</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="page" from="2704" to="2706" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">ELECTOR: evaluator for long reads correction methods</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Marchet</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">NAR Genom. Bioinform</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page">15</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Minimap and miniasm: Fast mapping and de novo assembly for noisy long sequences</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Li</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">arXiv</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="1" to="7" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Assembly of long, error-prone reads using repeat graphs</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Kolmogorov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Yuan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">A</forename><surname>Pevzner</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Biotechnol</title>
+		<imprint>
+			<biblScope unit="volume">37</biblScope>
+			<biblScope unit="page" from="540" to="546" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Versatile genome assembly evaluation with QUAST-LG</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mikheenko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Prjibelski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Antipov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Saveliev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Gurevich</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="page" from="142" to="150" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Fast and accurate de novo genome assembly from long uncorrected reads</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Vaser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Sovic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Nagarajan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Sikic</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Res</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="727" to="736" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Efficient local alignment discovery amongst noisy long reads</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Myers</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Algorithms in Bioinformatics</title>
+		<editor>
+			<persName><forename type="first">D</forename><surname>Brown</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">B</forename><surname>Morgenstern</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Berlin, Heidelberg</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="52" to="67" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Mapping single molecule sequencing reads using basic local alignment with successive refinement (BLASR): application and theory</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">J</forename><surname>Chaisson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Tesler</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Bioinform</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page">238</biblScope>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Minimap2: Pairwise alignment for nucleotide sequences</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Li</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="page" from="3094" to="3100" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">SSW library: An SIMD Smith-Waterman C/C++ library for use in genomic applications</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">P</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">P</forename><surname>Garrison</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">T</forename><surname>Marth</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLoS ONE</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="1" to="7" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

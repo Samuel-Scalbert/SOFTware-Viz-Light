@@ -1,0 +1,1113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="fr">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">MinYS: mine your symbiont by targeted genome assembly in symbiotic communities</title>
+				<funder>
+					<orgName type="full">French National Institute for Research in Digital Science and Technology</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2020-07-03">3 July 2020</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Cervin</forename><surname>Guyomar</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Univ. Rennes</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">IRISA</orgName>
+								<address>
+									<postCode>F-35000</postCode>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department" key="dep1">INRAE</orgName>
+								<orgName type="department" key="dep2">Institut Agro</orgName>
+								<orgName type="laboratory" key="lab1">Institut de G én étique</orgName>
+								<orgName type="laboratory" key="lab2">Environnement et Protection des Plantes (IGEPP)</orgName>
+								<orgName type="institution">Univ. Rennes</orgName>
+								<address>
+									<postCode>F-35653</postCode>
+									<settlement>Le Rheu</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="department">iDiv--German Centre for Integrative Biodiversity Research</orgName>
+								<address>
+									<addrLine>Deutscher Platz 5e</addrLine>
+									<postCode>D-04103</postCode>
+									<settlement>Leipzig</settlement>
+									<country key="DE">Germany</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Wesley</forename><surname>Delage</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Univ. Rennes</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">IRISA</orgName>
+								<address>
+									<postCode>F-35000</postCode>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Fabrice</forename><surname>Legeai</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department" key="dep1">INRAE</orgName>
+								<orgName type="department" key="dep2">Institut Agro</orgName>
+								<orgName type="laboratory" key="lab1">Institut de G én étique</orgName>
+								<orgName type="laboratory" key="lab2">Environnement et Protection des Plantes (IGEPP)</orgName>
+								<orgName type="institution">Univ. Rennes</orgName>
+								<address>
+									<postCode>F-35653</postCode>
+									<settlement>Le Rheu</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Christophe</forename><surname>Mougel</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department" key="dep1">INRAE</orgName>
+								<orgName type="department" key="dep2">Institut Agro</orgName>
+								<orgName type="laboratory" key="lab1">Institut de G én étique</orgName>
+								<orgName type="laboratory" key="lab2">Environnement et Protection des Plantes (IGEPP)</orgName>
+								<orgName type="institution">Univ. Rennes</orgName>
+								<address>
+									<postCode>F-35653</postCode>
+									<settlement>Le Rheu</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Jean-Christophe</forename><surname>Simon</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department" key="dep1">INRAE</orgName>
+								<orgName type="department" key="dep2">Institut Agro</orgName>
+								<orgName type="laboratory" key="lab1">Institut de G én étique</orgName>
+								<orgName type="laboratory" key="lab2">Environnement et Protection des Plantes (IGEPP)</orgName>
+								<orgName type="institution">Univ. Rennes</orgName>
+								<address>
+									<postCode>F-35653</postCode>
+									<settlement>Le Rheu</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author role="corresp">
+							<persName><forename type="first">Claire</forename><surname>Lemaitre</surname></persName>
+							<email>claire.lemaitre@inria.fr</email>
+							<idno type="ORCID">0000-0001-8675-170X</idno>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Univ. Rennes</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">IRISA</orgName>
+								<address>
+									<postCode>F-35000</postCode>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">MinYS: mine your symbiont by targeted genome assembly in symbiotic communities</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2020-07-03">3 July 2020</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">F28D691645EC73CDE356A1D8E8435C90</idno>
+					<idno type="DOI">10.1093/nargab/lqaa047</idno>
+					<note type="submission">Submitted on 7 Jul 2020 Received January 24, 2020; Revised May 20, 2020; Editorial Decision June 11, 2020; Accepted June 17, 2020</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:15+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>from teaching and research institutions in France or abroad, or from public or private research centers. L'archive ouverte pluridisciplinaire HAL, est destinée au dépôt et à la diffusion de documents scientifiques de niveau recherche, publiés ou non, émanant des établissements d'enseignement et de recherche français ou étrangers, des laboratoires publics ou privés.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="fr">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTRODUCTION</head><p>Advances of molecular techniques have greatly contributed to the recognition of the importance of microorganisms in every ecosystem. In particular, it is now well established that most metazoans are associated with microbes, forming complex entities referred to as holobionts. In these systems, microbes are interacting together as well as with their host, and host-microbe interactions can have significant effects on the host phenotype <ref type="bibr" target="#b0">(1)</ref>. Many animals have microbial associations with one or a few specific symbionts. This is, for example, the case for corals associated with the algal symbiont Symbiodinium (2), squids with Vibrio (3), woodlice with Wolbachia (4) or hemipteran insects with specific obligatory and facultative bacterial symbionts <ref type="bibr" target="#b4">(5)</ref>. As symbionts are generally not cultivable outside the host, the whole community is usually sequenced, resulting in a metagenomic dataset mixing host and symbiont reads. These datasets are unbalanced: the great majority of the reads often originate from the host genome, but since the genomes of the symbionts are often several orders of magnitude smaller than that of the eukaryotic host, symbiont genomes can have large read depth in such samples. This enables the extraction of relevant information about the symbionts, but requires significant effort, since the host reads are a computational burden for most analyses. In this context, providing bioinformatic tools that enable the assembly of a particular genome of interest from a metagenomic sample, ignoring the overwhelming amount of reads from other organisms, would greatly accelerate the characterization of symbiont genomes, and therefore decipher particular host-symbiont relationships.</p><p>In many cases, some knowledge and genomic resources about the symbiont of interest are already available. A common problem is to recover the full genomic sequence of the particular symbiont present in the metagenomic dataset, using available genomic resources. The way we address this problem depends on the availability of a reference genome and its closeness to the considered species. In the easiest but rarest case, a reference genome of good quality is available for the considered species, and a mapping-based approach is classically performed. Reads from the whole metagenomic datasets are mapped on this reference genome and small variants are called to characterize the strain at play. This approach does not output per se a genome sequence but rather a list of punctual variants with respect to a reference genome, without any evidence that this list is exhaustive and ignoring potential structural differences, such as large novel insertions or deletions. This approach may therefore miss crucial genomic information even when a very close refer-2 NAR Genomics and <ref type="bibr">Bioinformatics, 2020, Vol. 2, No. 3</ref> ence genome is available, since it is well known that bacterial strains can have highly variable accessory genomes, potentially responsible for pathogenicity or other phenotypic effects <ref type="bibr" target="#b5">(6)</ref>.</p><p>To circumvent these drawbacks, a more classical approach relies on de novo genome assembly to obtain full genomic sequences. In this metagenomic context, the whole community is assembled and available genomic resources are used afterward to select among the assembled contigs the ones originating from the species of interest. Contig binning tools have been designed specifically for the separation of host and symbiont contigs, such as BlobTools <ref type="bibr" target="#b6">(7)</ref> and Autometa <ref type="bibr" target="#b7">(8)</ref>. They are based on different signals computed on the contigs, including similarity with available genomic resources, but also nucleotide composition and read depth. However, their performances depend on the quality of the initial whole metagenomic assembly. Genome assembly from metagenomic data is a challenging task, because of both the many species coexisting in the samples and the polymorphism within these species. Although many recent software are devoted to this task <ref type="bibr" target="#b8">(9)</ref><ref type="bibr" target="#b9">(10)</ref><ref type="bibr" target="#b10">(11)</ref>, metagenomic assemblies are often very fragmented and come with a high computational cost <ref type="bibr" target="#b11">(12)</ref>. In the particular case where reads originating from the targeted organism are a minority in the whole metagenomic readset, this computational cost could be reduced. In addition, one would expect that focusing on a subsample of reads would lead to less fragmented assemblies.</p><p>Therefore, combining mapping-based and assemblybased approaches in a so-called targeted genome assembly seems a promising way to facilitate the characterization of specific symbionts in metagenomic datasets. In such approaches, a subset of the metagenomic reads is first recruited by mapping to a reference genome and then de novo assembled. The relative proximity between the targeted and the reference genomes is a key parameter of the approach, and the methods must be able to incorporate non-recruited reads in the assembly, in order not to miss divergent or strain-specific regions.</p><p>Several tools, such as MITObim <ref type="bibr" target="#b12">(13)</ref>, NOVOPlasty <ref type="bibr" target="#b13">(14)</ref>, LOCAS <ref type="bibr" target="#b14">(15)</ref>, Pilon <ref type="bibr" target="#b15">(16)</ref> or IMR/DENOM <ref type="bibr" target="#b16">(17)</ref>, were designed following the idea of combining mapping to a reference and de novo assembly. However, they all have limitations that make them unsuitable to handle metagenomic data. Primarily, except for NOVOPlasty, these methods rely on the assumption of genomic homogeneity (no polymorphism), which is very rarely met in a metagenomic context. Therefore, they are not suited to detect and characterize coexisting strains in metagenomic datasets. Moreover, these methods generally use the architecture of the reference genome as a starting point for the assembly, and are therefore unable to deal with large structural variants that differ from the reference genome (IMR/DENOM, Pilon, LOCAS). Finally, some tools are designed either for short organelle genomes (MITObim, NOVOPlasty) or for small resequencing datasets (LOCAS) and they are not scaling up to the size of metagenomic datasets.</p><p>To our knowledge, a single tool has been designed to guide the assembly by a reference genome in a metagenomic context. MetaCompass is a pipeline described in a pre-print ( <ref type="formula">18</ref>) that (i) recruits a subset of reads by mapping on a ref-erence genome, (ii) assembles them into contigs and (iii) assembles all the remaining non-recruited reads to recover the regions potentially missing in the reference genome. This last step ultimately amounts to assemble the whole community instead of one single genome of interest, making it a reference-guided rather than a targeted approach.</p><p>In this work, we present MinYS, a novel method for the assembly of a microbial genome of interest from metagenomic data that does not require assembling the full readset. This method can recover large regions absent from the reference genome, makes no assumption about the order and orientation of the regions homologous to the reference and is capable of returning several different solutions associated with the strain diversity within the sample. It is based on two main steps, a reference-based recruitment and assembly of reads, followed by a targeted assembly using the whole readset, filling in the gaps between the previously assembled contigs.</p><p>We applied this method to reconstruct genomes from 50 metagenomic samples of the pea aphid Acyrthosiphon pisum. Focusing on this aphid's primary endosymbiont, Buchnera aphidicola, we demonstrated the ability of MinYS to assemble complete bacterial genomes in a single contig using a remote reference genome as a primer.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>MATERIALS AND METHODS</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A novel method for targeted genome assembly with metagenomic data</head><p>Approach overview. The method described in this work relies on a two-step pipeline, described in Figure <ref type="figure" target="#fig_0">1</ref>.</p><p>The first step uses a given reference genome to build an incomplete but trustworthy assembly from a subset of the input metagenomic reads. The result of this step is hereafter referred to as the backbone contigs. The second step uses the whole set of metagenomic reads to extend the previously assembled contigs and to form a complete assembly, without a priori on the order and orientation of the backbone contigs. The result of the pipeline is a genome graph encompassing the structural diversity detected among the assembled genome. This graph can be exploited by extracting contigs, or paths of the graph that represent different strains of the targeted genome.</p><p>Assembly of backbone contigs. The first step requires a metagenomic readset and a reference genome, and returns contigs that are de novo assembled using only reads mapped on the reference genome. All metagenomic reads are mapped against the reference genome using BWA MEM <ref type="bibr" target="#b18">(19)</ref>, and the mapped reads are kept and de novo assembled using the Minia (20) assembler. Although any assembler can be used in this step, we used Minia for its low memory footprint, and its assembly algorithm similar to the one used in the second step of the method. The amount of mapped reads and the size and contiguity of the resulting assembly depend on the sequence similarity between the reference genome and the targeted genome. However, the goal of this step is not to produce a complete assembly of the targeted genome but rather to generate high-quality contigs that can reliably be used for the upcoming gap-filling step. To achieve this, we set up Minia with more stringent parameters than for a usual assembly task (i.e. with a higher k-mer size and a higher minimal abundance threshold). For the same reasons, only contigs larger than a user-defined threshold (400 bp by default) were kept for the second step.</p><p>Gap filling between backbone contigs. The essential step of the pipeline is the gap filling between backbone contigs, which enables the assembly of regions of the targeted genome that are absent or too much divergent in the reference genome. This is made possible by a targeted assembly of the whole readset using the backbone contigs as primers. This step does not require any relative ordering or orientation of contigs, since all possible combinations are tested during gap filling. As a result, structural variants can be detected, either with respect to the reference genome or within the sample.</p><p>This step is based on a module of the software MindThe-Gap, originally developed for the detection and assembly of long insertion variants <ref type="bibr" target="#b20">(21)</ref>. MindTheGap is built upon the GATB library <ref type="bibr" target="#b21">(22)</ref>, which offers memory-and timeefficient data structures for de Bruijn graphs. The 'fill' module of MindTheGap builds a de Bruijn graph of the entire input readset, and performs a local assembly between the left and the right k-mers of each insertion site, by looking for all the paths in the de Bruijn graph starting from the left (source) k-mer and ending in the right (target) k-mer. In this work, we took advantage of this module of MindThe-Gap and adapted it to the problem of simultaneous gap filling between multiple contigs. It has been modified to make possible the gap filling between a source k-mer and multiple target k-mers, enabling the 'all versus all' gap filling within a set of contigs with a linear time increase. The improvements that have been made to MindTheGap in the context of MinYS are available as a new option of MindTheGap (named contig mode) and are presented in Section S1 and Supplementary Figure <ref type="figure" target="#fig_0">S1</ref> in the Supplementary Data.</p><p>MindTheGap gap-filling results are output as a sequence graph in the GFA (graphical fragment assembly) format, containing all input contigs and their successful gap-filling sequences as nodes, together with their overlap relationships as edges.</p><p>Graph simplification. By construction, the raw sequence graph output by MindTheGap is likely to contain redundant sequence information. A graph simplification step has been therefore developed to remove uninformative sequence redundancy and hence ease the analysis and usage of such a genome graph. The different steps of this process are represented in Supplementary Figure <ref type="figure" target="#fig_1">S2</ref>.</p><p>First, it is likely that two contigs are linked in the graph by two gap-fillings with reverse-complement sequences, one starting from the left contig and the other one starting from the right contig in the reverse orientation. Such reciprocal links are removed when their sequence identity is over a 95% identity threshold.</p><p>Second, when several gap-filling sequences start (or end) from the same source contig, it is possible that a subset of them has an identical prefix (suffix) and starts to diverge only after a potential large distance from the source (target) contig. This results in redundant sequence information in the final sequence set. A node merging algorithm is applied in order to return a final set of sequences (nodes of the graph) that do not share large identical subsequences as prefix or suffix. Sets of sequences sharing the same prefix of size l are built (l equals 100 by default). Within each set, the sequences are then compared to find the first divergence between all sequences. A new node is added to the graph, containing the repeated portion of the sequences, and repeated nodes are shortened accordingly. This process is applied iteratively to every node, including the newly created nodes, for which a subset of neighbors may still show identical sequences.</p><p>Finally, simple linear paths, with no branching nodes, are merged into a single node.</p><p>After the simplification process, the resulting graph may not be a linear sequence because of intrasample polymorphism or assembly uncertainties. Although the genome graph is the main output of MinYS, it may be necessary to analyze it further to get conventional linear assemblies. This can be done either by manual inspection using interactive tools such as Bandage <ref type="bibr" target="#b22">(23)</ref> or by enumerating all possible paths within the graph.</p><p>Implementation and availability. MinYS is implemented as a python3 program and available at https://github.com/ cguyomar/MinYS and as a conda package in the Bioconda repository. Notably, it relies on the local assembly tool MindTheGap, starting from version 2.1 that enables the so-called contig mode (https://github.com/GATB/ MindTheGap). The whole pipeline presented in Figure <ref type="figure" target="#fig_0">1</ref> can be run in a single command line with few parameters to tune and is implemented in a modular way enabling to start or resume the analysis at intermediary steps. The most influential parameters concern the two de novo assembly steps (backbone and gap filling). They are standard parameters of de Bruijn graph-based assemblers that depend mainly on the expected read depth of the targeted genome in the sample, namely the size of k-mers and the k-mer minimal abundance used to filter out sequencing errors.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Application to pea aphid metagenomic datasets</head><p>In this study, we applied MinYS to the assembly of the pea aphid obligatory symbiont, B. aphidicola. We considered 50 pea aphid resequencing samples of Illumina 100-bp paired-end reads <ref type="bibr" target="#b23">(24)</ref>. Thirty-two samples contain each the sequences from a single aphid clone. In addition, 18 samples sequenced from pooling 14-35 genetically distinct pea aphid individuals were also analyzed. These samples are more challenging for metagenomic assembly due to their richer symbiotic composition and strain diversity <ref type="bibr" target="#b23">(24)</ref>.</p><p>Scripts and commands used to perform all the analyses and create tables and figures are available and documented on the following GitHub repository: https://github. com/cguyomar/MinYS paper reproducibility.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Reference genomes with increasing levels of divergence.</head><p>Reference-guided assembly was performed with four distinct reference genomes of B. aphidicola with increasing lev-els of divergence: (i) B. aphidicola from A. pisum (LSR1 accession), hereafter called closest, which is the closest available assembled genome; (ii) B. aphidicola strain G002, which was isolated from a different aphid host, Myzus persicae, hereafter called distant; (iii) B. aphidicola strain Sg, isolated from an even more distant aphid host, namely Schizaphis graminum, the most divergent reference analyzed and hereafter called most distant; and (iv) a synthetic genome obtained by deleting 116.4 kb of sequences from the closest reference genome (B. aphidicola LSR1) and referred to as incomplete. This synthetic genome was generated by applying 20 deletions, whose size ranged from 300 bp to 20 kb. The levels of divergence of these different reference genomes are supported by phylogenetic studies <ref type="bibr" target="#b24">(25)</ref>, whole genome alignments [average nucleotide identity (ANI)] and relative amounts of mapped reads from the real sequencing samples, compared to the closest reference genome (see Table <ref type="table" target="#tab_0">1</ref>).</p><p>Dataset with simulated structural variations. To assess the ability of MinYS to recover structural variations in samples with strain diversity, we created a synthetic pea aphid sample by adding to a real sample a subset of simulated reads from the previously described incomplete genome (with 20 deletions). A 50× coverage of 100-bp reads was simulated with wgsim of the SAMtools suite <ref type="bibr" target="#b25">(26)</ref>, using the parameters '-1 100 -2 100 -N 131400'.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>MinYS parameters.</head><p>MinYS was used in version 1.1, as available on Bioconda. Two sets of parameters were used to run MinYS, depending on the sample coverage. Since the coverage of pooled samples was greater than that of the individual ones, more stringent settings were chosen. For individual samples (pooled samples), a k-mer size of 61 (81) was chosen for the assembly step, along with a k-mer minimal abundance threshold of 10 (20) and a minimum contig length of 400 bp. The gap-filling step was performed with a k value of 51 (71) and a k-mer minimal abundance threshold of 5 <ref type="bibr" target="#b9">(10)</ref>, and the arguments max-length and max-nodes were set to 50 000 and 300 (1000).</p><p>Path enumeration in genome graphs. Genome graphs incorporate the genomic diversity present in a sample and therefore can often not be simply converted in a single genomic sequence. In order to provide standard assembly metrics and to allow comparisons with other assembly approaches, genome graphs were analyzed to recover a single genome sequence when only punctual polymorphism or small assembly uncertainties distinguished the different paths in the graph, or otherwise a set of genome sequences that were representative of the different genome structures. For each connected component of the graph, all possible paths were enumerated. A clustering of those paths was performed in order to output a subset of substantially different sequences. Paths were compared using the ANI metric, as implemented in pyani <ref type="bibr" target="#b26">(27)</ref>. Two paths were considered identical if an alignment with &gt;99% of sequence coverage and &gt;99% of nucleotide identity could be obtained. After all the paths have been enumerated and compared, the longest resulting sequence was arbitrary chosen and considered as the representative genome sequence, for calculating assembly metrics and making comparisons with other approaches.</p><p>Comparison with other approaches. Alternative usual approaches to assemble a particular genome from metagenomic data were applied on the 50 pea aphid samples using the distant reference genome.</p><p>Three reference-guided assembly tools were used: MITObim <ref type="bibr" target="#b12">(13)</ref>, NOVOPlasty <ref type="bibr" target="#b13">(14)</ref> and MetaCompass <ref type="bibr" target="#b17">(18)</ref>, which is based on Pilon <ref type="bibr" target="#b15">(16)</ref>. MITObim was run with the '-quick' parameter allowing the user to supply a reference genome for read baiting, and a maximal number of iterations of 31. NOVOPlasty was run using the mitochondrial genome assembly mode and recommended parameters, with a k-mer size of 39. MetaCompass was used in its reference-guided mode with default parameters. Alongside reference polishing using Pilon, MetaCompass also uses MEGAHIT <ref type="bibr" target="#b10">(11)</ref> to assemble all unmapped reads. As such, the assembly returned by MetaCompass is not targeted and contains contigs representing all the sequenced genomes. In order to extract only the contigs associated with B. aphidicola, we performed a BLAST alignment against the chosen reference genome and retained the contigs with at least 50% of their length covered by BLAST hits with e-values &lt;10 -5 . The final MetaCompass assembly therefore includes the Piloncorrected sequences and the BLAST-filtered MEGAHIT contigs.</p><p>Alternatively, two assembly-first approaches were used for comparison. A complete de novo assembly was performed for each sample using MEGAHIT <ref type="bibr" target="#b10">(11)</ref> and B. aphidicola contigs were selected by a BLAST alignment against the chosen reference genome, as in the case of Meta-Compass (at least 50% of sequence coverage and e-value &lt;10 -5 ). As in the case of MinYS, we did not include contigs &lt;1 kb, mainly associated with plasmid sequences. Alternatively, Autometa (8), a reference-free binning approach, was also used to bin Buchnera contigs from the metagenomic assembly for one particular pool sample.</p><p>All tools were run with 8 CPU cores, with the exception of Autometa that was run with 32 cores to achieve a shorter runtime. The quality of each assembly was assessed using QUAST <ref type="bibr" target="#b27">(28)</ref> and the closest reference genome (B. aphidicola str. LSR1 from A. pisum). Several assembly metrics were compared such as their length relative to the targeted genome size, the number of contigs and the length of the largest contig. Those metrics were also computed for the backbone assembly performed at the first step of MinYS, mainly as a way to measure the relative contributions of reference-based assembly and gap filling to the final assembly.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RESULTS</head><p>In this study, we applied MinYS to assemble genomes of B. aphidicola (∼640 kb), the obligatory bacterial symbiont of the pea aphid. We considered a large set of pea aphid resequencing samples of Illumina 100-bp paired-end reads, which have already been studied in a previous work, in which the microbiota of each aphid sample was detailed <ref type="bibr" target="#b23">(24)</ref>. Among the 50 datasets, 32 resulted from the sequencing of individual clones and 18 from the sequencing of pools of individuals from the same population. The number of reads is on average 84 (198) million for individual (pool) sequencing datasets, with an average coverage of 628× (3694×) for the B. aphidicola genome. In these datasets, &gt;90% of the reads originate from the insect host and are not useful when focusing on symbiont genomes. This dominance of host reads in our metagenomic datasets justifies the choice of a targeted assembly approach, which does not require assembling pea aphid reads.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Single contig assembly of the targeted genome using increasingly distant reference genomes</head><p>MinYS was first applied to the set of 32 resequenced aphid clones using several reference genomes. Assembly statistics are shown in Table <ref type="table">3</ref>. Overall, the B. aphidicola genome was very well assembled in most cases: for all samples but one, the targeted genome is assembled in one single contig, whose size is comparable to the expected genome size. Overall, the sequence accuracy was satisfying for all the assessed methods and within the range of the expected divergence to the closest reference genome.</p><p>As MinYS relies on a reference genome to perform the assembly, we compared the assembly results using increasingly distant reference genomes (Table <ref type="table" target="#tab_0">1</ref>). Figure <ref type="figure" target="#fig_1">2</ref> presents the results obtained with the different genomes and shows the contributions of the first (reference-based mapping and assembly) and second (gap filling) steps of MinYS. The main result is that using an incomplete or distant genome did not affect the assembly quality: both assembly length and contiguity are similar to those obtained using the closest genome. Using the incomplete genome, which includes 20 deletions between 300 bp and 20 kb, did not impede the assembly since all missing regions from the reference genome were well assembled, highlighting the power of MinYS to recover large previously unknown regions of the genome. Only the use of the most distant genome (B. aphidicola from S. graminum) decreased the completeness and contiguity of some assemblies. In this extreme case, still 88% of samples were assembled in a single contig, and 90% of the assemblies had their length &gt;98% of the targeted genome length.</p><p>However, using more distant reference genomes affected the intermediate results of the MinYS pipeline. Using more distant reference genomes resulted in fewer reads mapped and assembled during the first step of the pipeline, and therefore in a more partial initial backbone assembly. The fraction of the genome assembled during the first mapping and assembly step was 99% for the closest, 47% for the distant and 24% for the most distant reference genome. As a consequence, the gap-filling step is essential when using  more distant genomes. Since final assembly results are comparable, this shows that this step successfully recovers the genome portions highly divergent or missing from the reference genome. Accordingly, the running time increases when a remote reference is used, mainly due to the increase of time devoted to gap filling.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Assembly of pooled samples with a higher strain diversity</head><p>MinYS was then applied to an additional set of 18 sequencing samples of pooled aphids (with 15-34 individuals per pool). An important feature of MinYS is to output a genome graph that can represent several putative assemblies. In the case of pooled samples, the genome graph output by MinYS encompasses more diversity than in individ-ual samples, as shown by the higher number of enumerable paths in these graphs (see Table <ref type="table" target="#tab_1">2</ref>). While 77% of the individual samples were assembled in a single path, it was the case for only 6% of the pooled samples. This shows that MinYS is able to recover the higher level of strain diversity present in pooled samples. Interestingly, most alternative paths in these pooled samples differed only by punctual polymorphisms and did not encompass large structural variations.</p><p>Clustering the enumerated paths for each sample with a 99% sequence identity threshold resulted in one single representative sequence for 58% of the pooled samples. Noteworthy, using the most distant reference genome as a primer resulted in more complex graphs and pushed to its limits this post-processing step of path clustering. In this case, four samples were not considered due to excessively high compu-tational time for the comparison of sequence paths. When more than one representative sequence was generated, the longest path was arbitrary selected, explaining why the assembled length is slightly higher in pooled samples (see Table <ref type="table">3</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Assembly of coexisting structural variants</head><p>MinYS was applied to a pea aphid sample in which simulated reads from a rearranged B. aphidicola genome were added to a real pea aphid resequencing sample, simulating the coexistence in a metagenomic dataset of two strains with structural differences (here 20 deletions whose sizes ranged from 300 bp to 20 kb). In the resulting genome graph, 17 out of the 20 simulated deletions were fully recovered, with both the deleted and complete versions of the genome assembled (Figure <ref type="figure">3</ref>). Extracting the longest path from the graph resulted in a single contig of 641.5 kb, compared to the 642 kb of the closest reference genome. Similarly, the shortest path extracted from the graph was 526.4 kb long, compared to 525.6 kb for the simulated deleted genome. The longest structural variants (up to 20 kb) were all successfully recovered. Only two small variants, of 300 and 500 bp, were missing from the graph.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Comparison with other approaches for targeted genome assembly</head><p>MinYS assemblies were compared to the results of other reference-based approaches [MITObim <ref type="bibr" target="#b12">(13)</ref>, NOVOPlasty <ref type="bibr" target="#b13">(14)</ref>, MetaCompass <ref type="bibr" target="#b17">(18)</ref>] and a de novo metagenomic assembly [MEGAHIT <ref type="bibr" target="#b10">(11)</ref>] followed by BLAST-based con-tig filtering. Results using the distant reference genome are shown in Table <ref type="table">3</ref>.</p><p>MITObim was designed for reference-guided assembly of mitochondrial genomes by iterative read baiting and mapping <ref type="bibr" target="#b12">(13)</ref>. MITObim was stopped after 51 h of runtime, reaching eight iterations. It returned an incomplete assembly, with 221 kb missing (33% of the genome). As such, it does not scale up to genomes larger than mitochondrial genomes, and was not considered as an alternative to MinYS in the present work.</p><p>NOVOPlasty is another organelle assembly tool that can be used to assemble other circular genomes. Similarly to MinYS, it may output several paths within a contig graph, with the additional constraint that only cyclic graphs can be analyzed. Out of the 50 metagenomic samples, 31 were assembled as a single path. After selecting one representative path for the other samples, overall 44 samples were assembled in a single contig whose size is close to the target genome size of 642 kb (compared to 47 samples for MinYS). For the remaining six samples, the assembly sizes deviated substantially from the target genome size, ranging from 100 bp (no assembly was performed) to 1.06 Mb (see the extended assembly statistics in Supplementary Table <ref type="table" target="#tab_0">S1</ref>).</p><p>MetaCompass first polishes the supplied reference genome sequence with mapped reads using Pilon ( <ref type="formula">16</ref>) and then assembles de novo the remaining unmapped reads using MEGAHIT. To recover, among the MEGAHIT contigs, only the ones originating from the genome of interest, an additional step of mapping to the reference genome is therefore necessary and was performed here with BLAST. The first step was insufficient to return satisfying assemblies in this situation where we are using a distant reference genome. Considering only the polished sequences returned by Pilon resulted in far from complete assemblies, with an average length of 6% of the targeted length for individual samples. Therefore, the assemblies described in Table 3 were dominated by de novo assembled contigs, mitigating the referenced-based approach of MetaCompass. Overall, obtained assemblies were more fragmented and longer than expected, due to potential redundancy between polished and de novo contigs.</p><p>Finally, we compared MinYS to a full metagenomic assembly approach with MEGAHIT, followed by BLASTbased contig filtering. On individual clone samples, MEGAHIT performs on par with MinYS, resulting in complete one-contig assemblies in most cases. However, when applied to samples of pooled individuals with more polymorphism, MEGAHIT does not perform as well, with more and shorter contigs (the median size for the largest contig is 57% of the expected genome length, compared to 101% with MinYS). An explanation for this lower performance could be that highly polymorphic regions may be assembled by MEGAHIT into distinct contigs that break the contiguity, while MinYS often represents them as bubbles in the genome graph.</p><p>Notably, the metagenomic assembly approach with MEGAHIT performed poorly compared to MinYS on the metagenomic dataset simulating the co-existence of structural variants. It resulted in a 38-contig assembly, with a total length of 646 kb and an N50 of 44.5 kb, whereas sev-eral structurally different strains can be extracted from the genome graph output by MinYS in a single contig each. This highlights the difficulty of de novo assembly to deal with structural diversity in metagenomic samples.</p><p>An alternative approach to select Buchnera contigs from the whole MEGAHIT assembly was tested. Autometa is a binning method dedicated to extract microbial genomes from a single sample of a eukaryotic host. It was used on a particular sample for which the BLAST-based filtering performed poorly compared to MinYS: 24 contigs with a total size exceeding the expected size by 20 kb. On this sample, Autometa reduced the number of contigs to 8 but did not reduce the genome size; on the contrary, the latter increased with 34 kb in excess. Importantly, this approach required a substantial increase of running time of 20 h with respect to the BLAST-based filtering, using 32 CPU cores instead of 8 for the other approaches. Assembly and contig binning took overall 40 h, whereas MinYS assembled a single contig genome in 4.5 h for this sample. This large increase in running time led us to leave this strategy behind for the other samples.</p><p>Importantly, MinYS was substantially faster than all other tested tools (Table <ref type="table">3</ref>). Being designed for smaller organelle genomes, NOVOPlasty struggled to scale up to bacterial genomes. The runtime for pooled samples was 33% greater for NOVOPlasty compared to MinYS, and the median peak memory usage reached 42 GB for individual samples (6.7 GB for MinYS) and 187 GB for pooled samples (9.1 GB for MinYS). The average runtime of MinYS was 38 min for individual samples and 6.5 h for pooled samples, which was, respectively, 10 and 12 times smaller than MEGAHIT runtimes. Indeed, MEGAHIT produces contigs not only for the targeted organism, but in this case for the insect host A. pisum and all its secondary symbionts. This highlights the importance of a tool such as MinYS to efficiently recover specific genomes of interest from metagenomic data.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DISCUSSION AND CONCLUSION</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>De novo and reference guided assembly: the best of both worlds?</head><p>When working on microbial communities, focusing on the genome assembly and characterization of a particular organism can be especially relevant. For biologists, understanding these communities can be achieved by focusing on some key players with particular functional effects or ecological impacts. For bioinformaticians, assembling a single genome can be significantly less challenging than a whole community, especially in the context of symbiotic associations where reads originating from the organism of interest are a minority within host-dominated sequence data. Yet, existing tools for targeted assembly are usually not suited for metagenomic data, or rely on reference sequence correction, which is unable to capture novel sequences absent from the reference genome.</p><p>MinYS is a novel method leveraging the benefits of both reference-based and de novo assembly. By using a reference genome as a primer for the assembly, MinYS significantly reduces the computational burden of genome assembly from a metagenomic sample. In the first step, the assem-bly is restricted to a subset of the reads, and is therefore usually straightforward. During gap filling, although the whole readset is used, performing local assembly between specific source and target k-mers is also less demanding than complete metagenomic assembly. In addition, as long as trustworthy contigs are assembled in the first place, this local gap filling is less prone to include contaminant sequences. This makes the assembly both more reliable and faster. In this context of mining a particular symbiont genome out of a host-dominated sequencing dataset, MinYS was up to 12 times faster than a full metagenomic assembly.</p><p>MinYS obtained also better contiguity statistics, with the genome of B. aphidicola being assembled in one circular sequence in most cases. Admittedly, this organism has a small and simple genome containing few repeated sequences, enabling to obtain full-length assemblies with short read data. Although microbial communities associated with a host could include more complex genomes, symbiont genomes have generally small sizes (5), making our approach applicable to many other host-symbiont interactions. Moreover, although apparently simple, our analyses have shown that depending on the sequencing context, the assembly task may not be so straightforward, as highlighted by the lower contiguity of MEGAHIT assemblies when strain diversity was present in the sample. In this context, MinYS showed significant improvements in assembly contiguity with respect to other approaches. Although metagenomic assembly also delivers contigs for the other organisms of the community, we consider that the speed increase along with the contiguity improvement makes MinYS a worthy alternative to analyze particular components of microbial communities.</p><p>Dedicated host-symbiont contig binning approaches, such as BlobTools and Autometa, rely heavily on the quality of the initial full metagenomic assembly. Bypassing this full assembly also makes MinYS a more generalizable approach to a variety of situations where de novo assembly is difficult, such as low-coverage host genome resequencing, pooled sequencing or more complex metagenomic datasets.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>MinYS performs reference-based assembly, but not reference-dependent assembly</head><p>Alternative reference-based approaches usually rely on read mapping followed by a correction of the existing reference genome. On the contrary, every sequence returned by MinYS has been assembled from the metagenomic reads. This reduces the bias due to the choice of a reference genome. Thanks to the gap-filling step, it is also possible to assemble de novo regions too distant or absent in the reference genome to be captured by reference-based approaches. These regions represented up to 80% of the targeted genome in the most extreme case considered here.</p><p>Remarkably, MinYS proved to be particularly robust with respect to the level of divergence with the chosen reference genome. Thanks to its two-step approach, MinYS can adapt to different divergence levels. When using a close reference genome, the first mapping-based step is predominant, and the assembly is fast. On the contrary, when using more distant reference genomes, the gap-filling step is essential to recover regions missing or too divergent compared to the reference. MinYS can deal with both a high level of di-vergence and the presence of large novel inserted sequences. When based on an incomplete reference genome, it was able to recover all the missing sequences (including up to 20 kb contiguous missing parts).</p><p>In this work, a single set of parameters was chosen for all samples, regardless of divergence or sample coverage. However, MinYS is flexible and also allows more or less conservative parameters to be used to adapt to particular use cases, for instance to accommodate with higher levels of divergence. Overall, although MinYS relies on a reference genome as a primer for the assembly, its hybrid approach enables the use of distant reference genomes, while still being able to return full-length assemblies.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>MinYS assembles and allows visualization of genomic diversity</head><p>Species in metagenomic samples may not be homogeneous populations sharing the same genome. As highlighted by the results of MEGAHIT on pooled samples, a high level of polymorphism within a sample affects the contiguity of the assembly. Genomic loci showing significant nucleotide diversity are assembled in separate contigs instead of single consensus contigs and they fragment the assembly. In MinYS, such loci are deliberately represented as distinct nodes in the genome graph, but are still connected together. As such, the genome graph encompasses different assemblies and its complexity reflects the genomic diversity in the sample. Accordingly, pool sequencing samples, which include a greater microbial diversity <ref type="bibr" target="#b23">(24)</ref>, were assembled into more complex graphs. These graphs contain biologically meaningful information that surpasses the 'one speciesone genome' paradigm, which has been strongly criticized <ref type="bibr" target="#b28">(29,</ref><ref type="bibr" target="#b29">30)</ref>. As a consequence, many novel tools are being developed to use such genome graphs as a reference rather than a conventional linear sequence, for instance for read mapping or variant genotyping <ref type="bibr" target="#b30">(31,</ref><ref type="bibr" target="#b31">32)</ref>.</p><p>Genome graph representation is also a powerful way to represent structural variations in metagenomic samples. In the context of two coexisting strains differing by large structural variants, MinYS was able to reconstruct both strains as alternative paths in the genome graph, while MEGAHIT yielded a fragmented assembly.</p><p>Genome graphs offer the opportunity to better represent and explore the genomic diversity in metagenomic samples, but they are also challenging objects to study. The main output of MinYS is a genome graph that may require some post-processing to output one or several representative sequences. Here, all possible paths in the graphs were enumerated and compared to each other to choose a single representative genome. Additionally to the computational burden of such an enumeration, many of these paths may not represent actual strains. Therefore, an interesting but far from trivial perspective of this work would be to map back the paired-end reads on the graph in an attempt to phase the different variants, and then to provide a more accurate representation of the genomes of the strains actually present in the sample. Furthermore, long-range information provided by long-read or linked-read sequencing technologies could help not only to disentangle the different strains at play but also to simplify the genome graph for genomes containing many repeated sequences. As a matter</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 .</head><label>1</label><figDesc>Figure 1. Overview of MinYS approach, for targeted genome assembly. MinYS takes as input a reference genome and a set of metagenomic reads, and outputs the targeted genome assembly as a genome graph encompassing the potential strain diversity contained in the sample.</figDesc><graphic coords="4,128.13,69.15,368.64,242.16" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 .</head><label>2</label><figDesc>Figure 2. Effect of the level of divergence of the reference genome on MinYS assembly statistics (assembly contiguity in the top plot, assembly completeness in the bottom left plot and running time in the bottom right plot) and on the relative contribution of the first backbone assembly step (in red) and of the gap-filling step (blue). The plots show the average values for the 32 individual samples.</figDesc><graphic coords="7,55.27,68.84,487.75,291.48" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="8,68.63,189.78,487.75,301.56" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 .</head><label>1</label><figDesc>Description of the different reference genomes of B. aphidicola used in this study and their levels of divergence with the targeted genome average nucleotide identity and is computed on the aligned portions of the genome.</figDesc><table><row><cell></cell><cell></cell><cell></cell><cell></cell><cell>Length</cell><cell>Proportion of</cell><cell></cell></row><row><cell></cell><cell>Name</cell><cell>Host</cell><cell>Accession</cell><cell>(bp)</cell><cell>mapped reads</cell><cell>ANI</cell></row><row><cell>Closest</cell><cell>B. aphidicola str. LSR1</cell><cell>A. pisum</cell><cell>NC 002528.1</cell><cell>642 011</cell><cell>100%</cell><cell>100%</cell></row><row><cell>Incomplete</cell><cell>B. aphidicola str. LSR1</cell><cell>A. pisum</cell><cell></cell><cell>525 611</cell><cell>81%</cell><cell>100%</cell></row><row><cell>Distant</cell><cell>B. aphidicola str. G002</cell><cell>M. persicae</cell><cell>NZ CP002701.1</cell><cell>643 517</cell><cell>48%</cell><cell>81%</cell></row><row><cell>Most distant</cell><cell>B. aphidicola str. Sg</cell><cell>S. graminum</cell><cell>NC 004061.1</cell><cell>641 454</cell><cell>30%</cell><cell>78%</cell></row><row><cell>ANI stands for</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 2 .</head><label>2</label><figDesc>Graph complexity metrics of the genome graphs output by MinYS for individual (top) and pooled (bottom) samples with several reference genomes used as a guide</figDesc><table><row><cell></cell><cell cols="2">Reference genome</cell><cell></cell><cell></cell></row><row><cell>Closest</cell><cell>Incomplete</cell><cell>Distant</cell><cell>Most distant</cell><cell>Average</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" xml:id="foot_0"><p>Downloaded from https://academic.oup.com/nargab/article-abstract/2/3/lqaa047/5867120 by guest on 07 July 2020</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>ACKNOWLEDGEMENTS</head><p>Computations have been made possible thanks to the resources of the GenOuest infrastructure. The authors warmly thank <rs type="person">Guillaume Rizk</rs> for interesting discussions and valuable help on implementation with the GATB library.</p></div>
+<div><head>FUNDING</head><p>Funding for open access charge: Inria, the <rs type="funder">French National Institute for Research in Digital Science and Technology</rs>.</p></div>
+			</div>
+			<listOrg type="funding">
+			</listOrg>
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>NAR Genomics and Bioinformatics, 2020, Vol. 2, No. 3 7 For each metric, the median values obtained over all individual (Indiv.) or pooled (Pool) samples are given, as well as the worst value obtained over all the samples (Worst). Extended statistics are available in Supplementary Table <ref type="table">S1</ref>. 10 NAR Genomics and Bioinformatics, 2020, Vol. 2, No. 3 of fact, several software exist to map noisy long reads to genome graphs in the GFA format, such as GraphAligner <ref type="bibr" target="#b31">(32)</ref> and vg-map from the vg toolkit <ref type="bibr" target="#b30">(31)</ref>. Thanks to its standard GFA format output, it would be relatively straightforward to pipeline such tools to the MinYS output. As the high throughput of short-read technologies remains an important asset for studying strain diversity within microbial communities, we anticipate that MinYS will remain a valuable tool that evolves over the advance of sequencing technologies.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>SUPPLEMENTARY DATA</head><p>Supplementary Data are available at NARGAB Online. Conflict of interest statement. None declared.</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Host-microbiota interactions: from holobiont theory to analysis</title>
+		<author>
+			<persName><forename type="first">J.-C</forename><surname>Simon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">R</forename><surname>Marchesi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Mougel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M.-A</forename><surname>Selosse</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Microbiome</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page">5</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Host-microbe interactions in octocoral holobionts: recent advances and perspectives</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Van De Water</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Allemand</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Ferrier-Pagès</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Microbiome</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page">64</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Insights into flagellar function and mechanism from the squid-vibrio symbiosis</title>
+		<author>
+			<persName><forename type="first">M.-S</forename><surname>Aschtgen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">A</forename><surname>Brennan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Nikolakakis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Cohen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mcfall-Ngai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">G</forename><surname>Ruby</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">npj Biofilms Microbiomes</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page">32</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">The terrestrial isopod microbiome: an all-in-one toolbox for animal-microbe interactions of ecological relevance</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Bouchon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Zimmer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Dittmer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Front. Microbiol</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page">1472</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Genomics and evolution of heritable bacterial symbionts</title>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">A</forename><surname>Moran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">P</forename><surname>Mccutcheon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Nakabachi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annu. Rev. Genet</title>
+		<imprint>
+			<biblScope unit="volume">42</biblScope>
+			<biblScope unit="page" from="165" to="190" />
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">The genomics of Acinetobacter baumannii: insights into genome plasticity, antimicrobial resistance and pathogenicity</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Imperi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">C</forename><surname>Antunes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Blom</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Villa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Iacono</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Visca</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Carattoli</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IUBMB life</title>
+		<imprint>
+			<biblScope unit="volume">63</biblScope>
+			<biblScope unit="page" from="1068" to="1074" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">BlobTools: interrogation of genome assemblies</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">R</forename><surname>Laetsch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">L</forename><surname>Blaxter</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">F1000Research</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page">1287</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Autometa: automated extraction of microbial genomes from individual shotgun metagenomes</title>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">J</forename><surname>Miller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">R</forename><surname>Rees</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Ross</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Miller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Baxa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lopera</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">L</forename><surname>Kerby</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">E</forename><surname>Rey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">C</forename><surname>Kwan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">47</biblScope>
+			<biblScope unit="page">57</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">metaSPAdes: a new versatile metagenomic assembler</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Nurk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Meleshko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Korobeynikov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">A</forename><surname>Pevzner</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Res</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="824" to="834" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">IDBA-UD: a de novo assembler for single-cell and metagenomic sequencing data with highly uneven depth</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Peng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">C M</forename><surname>Leung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Yiu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">Y L</forename><surname>Chin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="page" from="1420" to="1428" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">MEGAHIT: an ultra-fast single-node solution for large and complex metagenomics assembly via succinct de Bruijn graph</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C.-M</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Luo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Sadakane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T.-W</forename><surname>Lam</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">31</biblScope>
+			<biblScope unit="page" from="1674" to="1676" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Critical assessment of metagenome interpretation: a benchmark of metagenomics software</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Sczyrba</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Methods</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="1063" to="1071" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Reconstructing mitochondrial genomes directly from genomic next-generation sequencing reads: a baiting and iterative mapping approach</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Hahn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Bachmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Chevreux</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<biblScope unit="page">129</biblScope>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">NOVOPlasty: de novo assembly of organelle genomes from whole genome data</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Dierckxsens</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Mardulyn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Smits</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">45</biblScope>
+			<biblScope unit="page">18</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">LOCAS: a low coverage assembly tool for resequencing projects</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">D</forename><surname>Klein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ossowski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Schneeberger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Weigel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">H</forename><surname>Huson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLoS One</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page">23455</biblScope>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Pilon: an integrated tool for comprehensive microbial variant detection and genome assembly improvement</title>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">J</forename><surname>Walker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Abeel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Shea</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Priest</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Abouelliel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Sakthikumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">A</forename><surname>Cuomo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Zeng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wortman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">K</forename><surname>Young</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLoS One</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page">112963</biblScope>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Multiple reference genomes and transcriptomes for Arabidopsis thaliana</title>
+		<author>
+			<persName><forename type="first">X</forename><surname>Gan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Stegle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Behr</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">G</forename><surname>Steffen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Drewe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">L</forename><surname>Hildebrand</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Lyngsoe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">J</forename><surname>Schultheiss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">J</forename><surname>Osborne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><forename type="middle">T</forename><surname>Sreedharan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">477</biblScope>
+			<biblScope unit="page" from="419" to="423" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<monogr>
+		<title level="m" type="main">MetaCompass: reference-guided assembly of metagenomes</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Cepeda</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Almeida</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">M</forename><surname>Hill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Koren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">J</forename><surname>Treangen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Pop</surname></persName>
+		</author>
+		<idno type="DOI">10.1101/212506</idno>
+		<ptr target="https://doi.org/10.1101/212506,01" />
+		<imprint>
+			<date type="published" when="2017-11">2017. November 2017</date>
+		</imprint>
+	</monogr>
+	<note>preprint: not peer reviewed</note>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Fast and accurate short read alignment with Burrows-Wheeler transform</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Durbin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="1754" to="1760" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Space-efficient and exact de Bruijn graph representation based on a Bloom filter</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Chikhi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Rizk</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Algorithms Mol. Biol</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page">22</biblScope>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">MindTheGap: integrated detection and assembly of short and long insertions</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Rizk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Gouin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Chikhi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Lemaitre</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="page" from="3451" to="3457" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">GATB: genome assembly &amp; analysis tool box</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Drezen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Rizk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Chikhi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Deltel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Lemaitre</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Peterlongo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Lavenier</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="page" from="2959" to="2961" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Bandage: interactive visualization of de novo genome assemblies</title>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">R</forename><surname>Wick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">B</forename><surname>Schultz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zobel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">E</forename><surname>Holt</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">31</biblScope>
+			<biblScope unit="page" from="3350" to="3352" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Multi-scale characterization of symbiont diversity in the pea aphid complex through metagenomic approaches</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Guyomar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Legeai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Jousselin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Mougel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Lemaitre</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J.-C</forename><surname>Simon</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Microbiome</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page">181</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Reconstructing the phylogeny of aphids (Hemiptera: Aphididae) using DNA of the obligate symbiont Buchnera aphidicola</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Nováková</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Hypša</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Klein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">G</forename><surname>Foottit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">D</forename><surname>Von Dohlen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">A</forename><surname>Moran</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol. Phylogenet. Evol</title>
+		<imprint>
+			<biblScope unit="volume">68</biblScope>
+			<biblScope unit="page" from="42" to="54" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">The sequence alignment/map format and SAMtools</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Handsaker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Wysoker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Fennell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Ruan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Homer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Marth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Abecasis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Durbin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="2078" to="2079" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Genomics and taxonomy in diagnostics for food security: soft-rotting enterobacterial plant pathogens</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Pritchard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">H</forename><surname>Glover</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Humphris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">G</forename><surname>Elphinstone</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">K</forename><surname>Toth</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Anal. Methods</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="12" to="24" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">QUAST: quality assessment tool for genome assemblies</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Gurevich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Saveliev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Vyahhi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Tesler</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="page" from="1072" to="1075" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Genome graphs and the evolution of genome inference</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Paten</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">M</forename><surname>Novak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Eizenga</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Garrison</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Res</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="665" to="676" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Computational pan-genomics: status, promises and challenges</title>
+	</analytic>
+	<monogr>
+		<title level="j">Brief. Bioinform</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="118" to="135" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note>The Computational Pan-Genomics Consortium</note>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Variation graph toolkit improves read mapping by representing genetic variation in the reference</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Garrison</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Sirén</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">M</forename><surname>Novak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Hickey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Eizenga</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">T</forename><surname>Dawson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Jones</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Garg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Markello</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">F</forename><surname>Lin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Biotechnol</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="page" from="875" to="879" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Bit-parallel sequence-to-graph alignment</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Rautiainen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Mäkinen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Marschall</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">35</biblScope>
+			<biblScope unit="page" from="3599" to="3607" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>
