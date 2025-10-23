@@ -9,10 +9,9 @@
   <script src="{{ url_for('static', filename='./JS/scripts.js') }}"></script>
   <script src="{{ url_for('static', filename='./JS/charts.js') }}"></script>
   <script src="{{ url_for('static', filename='./JS/disambiguate.js') }}"></script>
-  <script src="{{ url_for('static', filename='./JS/author.js') }}"></script>
   <script src="{{ url_for('static', filename='./JS/software.js') }}"></script>
   <script src="{{ url_for('static', filename='./JS/dashboard_search.js') }}"></script>
-  <title>SOFtware-Viz</title>
+  <title>SOFtware-Viz-Light</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -27,13 +26,13 @@
                     <span class="material-symbols-outlined">search</span>
                     <h3>Dashboard</h3>
                 </a>
-                <a href="{{ url_for("doc_info",doc_id="hal-03514297") }}">
+                <a href="{{ url_for("doc_info",doc_id="hal-02937618") }}">
                     <span class="material-symbols-outlined">search</span>
-                    <h3>Documents (hal-03514297)</h3>
+                    <h3>Documents (hal-02937618)</h3>
                 </a>
-                <a href="{{ url_for("doc_info_wsoftware",doc_id="hal-03514297",software="PostgreSQL") }}">
+                <a href="{{ url_for("doc_info_wsoftware",doc_id="hal-02937618",software="Pl@ntNet") }}">
                     <span class="material-symbols-outlined">search</span>
-                    <h3>Documents (hal-03514297/PostgreSQL)</h3>
+                    <h3>Documents (hal-02937618/Pl@ntNet)</h3>
                 </a>
                 <a href="{{ url_for("software_mentions", software="Pl@ntNet") }}">
                     <span class="material-symbols-outlined">search</span>
@@ -53,7 +52,7 @@
     </div>
     <div class="debug">
         <!-- Your PNJ content here -->
-        <a href="https://github.com/Samuel-Scalbert/SOFTware-Viz/issues">
+        <a href="https://github.com/Samuel-Scalbert/SOFTware-Viz-Light/issues">
             <img src="../../static/img/github_debug.png" alt="Github" style="width: 75px;">
             <p>Report a bug</p>
         </a>
