@@ -1,5 +1,5 @@
 <br>
-please fill the corpus.txt if you need a presentation of your corpus !!
+This corpus is a set of 150 research articles randomly selected from Inria.
 <br>
 <br>
-here : <a href="#">github_doc</a>
+If you want to modify this text you can edit the corpus.txt : <a href="https://github.com/Samuel-Scalbert/SOFTware-Viz-Light/blob/main/app/static/Corpus/corpus.txt">situated here</a>
