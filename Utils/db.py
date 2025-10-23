@@ -84,11 +84,10 @@ def insert_json_db(data_path_json,data_path_xml,db):
     doc_auth_edge = check_or_create_collection(db, 'edge_doc_to_author', 'Edges')
 
     data_json_files = os.listdir(data_path_json)
-    data_xml_list = os.listdir(data_path_xml)
+    data_xml_files = os.listdir(data_path_xml)
     files_list_registered = db.AQLQuery('FOR hal_id in documents RETURN hal_id.file_hal_id', rawResults=True)
-    dict_edge_author = {}
 
-    for data_file_xml in tqdm(data_xml_list):
+    for data_file_xml in tqdm(data_xml_files):
         file_path = f'{data_path_xml}/{data_file_xml}'
         file_name = os.path.basename(file_path)
         while "." in file_name:
@@ -105,61 +104,27 @@ def insert_json_db(data_path_json,data_path_xml,db):
             ns = {"tei": "http://www.tei-c.org/ns/1.0", 'xml': 'http://www.w3.org/XML/1998/namespace'}
 
 
+            # FILE_ID -----------------------------------------------------
+
+            data_json_get_document['file_hal_id'] = file_name
+
+
             # DOCUMENT -----------------------------------------------------
 
             title = tree.find(".//tei:fileDesc//tei:titleStmt//tei:title", ns)
             title = title.text
+            data_json_get_document['title'] = title
 
-            # Initialize the year variables
+
+            # YEAR -----------------------------------------------------
             final_year = None
-            year = None
-            year_sub = None
-            year_doi = None
-            year_pub = None
-
-            # Regex pattern to extract a 4-digit year
             year_pattern = r'\b([12]\d{3})\b'
-
-            # Check DOI for a date first (most reliable)
-            doi_tag = tree.find(".//tei:fileDesc//tei:sourceDesc//tei:biblStruct//tei:idno[@type='DOI']", ns)
-            if doi_tag is not None:
-                year_doi = get_publication_date(doi_tag.text)
-                if year_doi is not None:
-                    final_year = year_doi
+            sub_tag = tree.find(".//tei:fileDesc//tei:sourceDesc//tei:biblStruct//tei:note[@type='submission']", ns)
+            if sub_tag is not None:
+                match = re.search(year_pattern, sub_tag.text)
+                if match:
+                    final_year = match.group(1)
                     data_json_get_document['date'] = final_year
-            else:
-                # If no DOI, check for the submission date
-                sub_tag = tree.find(".//tei:fileDesc//tei:sourceDesc//tei:biblStruct//tei:note[@type='submission']", ns)
-                if sub_tag is not None:
-                    match = re.search(year_pattern, sub_tag.text)
-                    if match:
-                        year_sub = match.group(1)
-                        final_year = year_sub
-                        data_json_get_document['date'] = final_year
-
-                # If no DOI or submission date, check the publication date
-                if final_year is None:
-                    pub_tag = tree.find(".//tei:fileDesc//tei:publicationStmt//tei:date[@type='published']", ns)
-                    if pub_tag is not None:
-                        match = re.search(year_pattern, pub_tag.text)
-                        if match:
-                            if match.group(1) == pub_tag.attrib.get('when')[:4]:
-                                year_pub = match.group(1)
-                                final_year = year_pub
-                                data_json_get_document['date'] = final_year
-
-                # If no year from DOI, submission, or publication, check other sources
-                if final_year is None:
-                    date_tag = tree.findall(
-                        ".//tei:fileDesc//tei:sourceDesc//tei:biblStruct//tei:monogr//tei:imprint//tei:date", ns)
-                    for text in date_tag:
-                        if text.text is not None:
-                            match = re.search(year_pattern, text.text)
-                            if match:
-                                year = match.group(1)
-                                final_year = year
-                                data_json_get_document['date'] = final_year
-                                break  # Stop once a valid date is found
 
             # ABSTRACT -----------------------------------------------------
 
@@ -170,9 +135,6 @@ def insert_json_db(data_path_json,data_path_xml,db):
                     for p_tag in list(tag_text):
                         text = "".join(p_tag.itertext())
                     data_json_get_document['abstract'] = ['GROBID' , text]
-
-            data_json_get_document['file_hal_id'] = file_name
-            data_json_get_document['title'] = title
 
             document_document = documents_collection.createDocument(data_json_get_document)
             document_document.save()
@@ -224,14 +186,6 @@ def insert_json_db(data_path_json,data_path_xml,db):
                         edge_doc_ref['_from'] = document_document._id
                         edge_doc_ref['_to'] = references_document._id
                         edge_doc_ref.save()
-                # Define the AQL query to fetch software names and their counts
-                query = f"""
-                FOR doc IN edge_software
-                    FILTER doc._from == "{document_document._id}"
-                    LET software = DOCUMENT(doc._to)
-                    COLLECT softwareName = software.software_name.normalizedForm WITH COUNT INTO count
-                    RETURN {{ softwareName, count }}
-                """
 
             # AUTHORS -----------------------------------------------------
 
@@ -259,12 +213,6 @@ def insert_json_db(data_path_json,data_path_xml,db):
                     f'FOR auth IN authors FILTER auth.name.surname == "{author_surname}" FILTER auth.name.forename == "{author_forename}" RETURN auth._id',
                     rawResults=True)
 
-                # Extract author's role
-                try:
-                    role = elm.attrib['role']
-                except KeyError:
-                    role = 'unknown'
-
                 # Document information
                 document_halid = data_file_xml.replace(".hal.xml", "").replace(".hal.grobid.xml", "").replace(".xml",
                                                                                                               "").replace(
@@ -273,7 +221,6 @@ def insert_json_db(data_path_json,data_path_xml,db):
                 # Author document association
                 author_documents = [{
                     'document_halid': document_halid,
-                    'role': role
                 }]
 
                 # If not registered, create a new author document
