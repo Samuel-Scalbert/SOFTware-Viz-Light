@@ -7,11 +7,11 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		<fileDesc>
 			<titleStmt>
 				<title level="a" type="main">IndeGx: A Model and a Framework for Indexing RDF Knowledge Graphs with SPARQL-based Test Suits</title>
-				<funder ref="#_QhPvpWV">
+				<funder ref="#_wrxp9bt">
 					<orgName type="full">Agence Nationale de la Recherche</orgName>
 					<orgName type="abbreviated">ANR</orgName>
 				</funder>
-				<funder ref="#_6MjJcPs #_RjSRa2a">
+				<funder ref="#_RdnKUKS #_PGtN3S5">
 					<orgName type="full">unknown</orgName>
 				</funder>
 			</titleStmt>
@@ -106,7 +106,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.0" ident="GROBID" when="2024-04-12T14:51+0000">
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:12+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<ref target="https://github.com/kermitt2/grobid"/>
 				</application>
@@ -210,15 +210,15 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <div><head>Acknowledgment</head><p>This work is supported by the <rs type="projectName">ANR DeKaloG (Decentralized Knowledge Graphs)</rs> project, <rs type="grantNumber">ANR-19-CE23-0014</rs>, and by the <rs type="projectName">ANR D2KAB (Data to Knowledge in Agriculture and Biodiversity)</rs> project, <rs type="grantNumber">ANR-18-CE23-0017</rs>, both projects from <rs type="projectName">CE23 -Intelligence artificielle</rs>. The work is also supported by the <rs type="funder">3IA Côte d'Azur</rs> <rs type="grantNumber">ANR-19-P3IA-0002</rs>.</p></div>
 			</div>
 			<listOrg type="funding">
-				<org type="funded-project" xml:id="_6MjJcPs">
+				<org type="funded-project" xml:id="_RdnKUKS">
 					<idno type="grant-number">ANR-19-CE23-0014</idno>
 					<orgName type="project" subtype="full">ANR DeKaloG (Decentralized Knowledge Graphs)</orgName>
 				</org>
-				<org type="funded-project" xml:id="_RjSRa2a">
+				<org type="funded-project" xml:id="_PGtN3S5">
 					<idno type="grant-number">ANR-18-CE23-0017</idno>
 					<orgName type="project" subtype="full">ANR D2KAB (Data to Knowledge in Agriculture and Biodiversity)</orgName>
 				</org>
-				<org type="funded-project" xml:id="_QhPvpWV">
+				<org type="funded-project" xml:id="_wrxp9bt">
 					<idno type="grant-number">ANR-19-P3IA-0002</idno>
 					<orgName type="project" subtype="full">CE23 -Intelligence artificielle</orgName>
 				</org>

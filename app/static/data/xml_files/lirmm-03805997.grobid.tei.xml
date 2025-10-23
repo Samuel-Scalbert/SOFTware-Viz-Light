@@ -61,14 +61,13 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 							<date/>
 						</imprint>
 					</monogr>
-					<idno type="MD5">08AF8E0E63C3B720E0775F1C13D4F64A</idno>
-					<idno type="DOI">10.1007/978-3-031-15740-0_12</idno>
+					<idno type="MD5">514C1A40BD9A0486628CA78D8C5A4324</idno>
 				</biblStruct>
 			</sourceDesc>
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.0" ident="GROBID" when="2024-04-12T14:49+0000">
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:14+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<ref target="https://github.com/kermitt2/grobid"/>
 				</application>
@@ -115,7 +114,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Fig. 2 :</head><label>2</label><figDesc>Fig. 2: PAA representation of a time series X of length 8 with 4 segments.</figDesc></figure>
 <figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Fig. 4 :</head><label>4</label><figDesc>Fig.4: The precision gain for ASAX GSSE and ASAX LSSE compared to SAX. The obtained gain is up to 38% for both methods</figDesc></figure>
 <figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Fig. 5 :Fig. 6 :</head><label>56</label><figDesc>Fig. 5: Variable-size segmentation time for ASAX DP and ASAX LSSE as a function of dataset size. The original time series are of length 130.</figDesc></figure>
-<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>7 :Fig. 8 :</head><label>78</label><figDesc>Fig. 8: Comparison of parallel segmentation time using ASAX DP and ASAX SP, as a function of time series length. The dataset size is fixed to 10 000.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Fig. 7 :Fig. 8 :</head><label>78</label><figDesc>Fig. 7: Comparison of parallel segmentation time using ASAX DP and ASAX SP, as a function of dataset size. The original time series are of length 300.</figDesc></figure>
 		</body>
 		<back>
 			<div type="references">

@@ -7,23 +7,23 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		<fileDesc>
 			<titleStmt>
 				<title level="a" type="main">Future Generation Computer Systems</title>
+				<funder ref="#_xmasYZh">
+					<orgName type="full">EU</orgName>
+				</funder>
+				<funder ref="#_NwqqKtc">
+					<orgName type="full">MCTI/RNP-Brazil</orgName>
+				</funder>
 				<funder>
 					<orgName type="full">CAPES</orgName>
 				</funder>
-				<funder>
-					<orgName type="full">FAPERJ</orgName>
-				</funder>
-				<funder ref="#_UR2RCy7">
-					<orgName type="full">EU</orgName>
+				<funder ref="#_cYSfqK2">
+					<orgName type="full">Inria</orgName>
 				</funder>
 				<funder>
 					<orgName type="full">CNPq</orgName>
 				</funder>
-				<funder ref="#_pEBTvhr">
-					<orgName type="full">Inria</orgName>
-				</funder>
-				<funder ref="#_KJ9jNpC">
-					<orgName type="full">MCTI/RNP-Brazil</orgName>
+				<funder>
+					<orgName type="full">FAPERJ</orgName>
 				</funder>
 			</titleStmt>
 			<publicationStmt>
@@ -102,7 +102,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.0" ident="GROBID" when="2024-04-12T14:47+0000">
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:13+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<ref target="https://github.com/kermitt2/grobid"/>
 				</application>
@@ -182,14 +182,14 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <div><head>ACKNOWLEDGMENTS</head><p>This work was partially funded by <rs type="funder">CAPES</rs>, <rs type="funder">CNPq</rs>, <rs type="funder">FAPERJ</rs> and <rs type="funder">Inria</rs> (<rs type="projectName">MUSIC</rs> and <rs type="projectName">SciDISC</rs> projects), <rs type="funder">EU</rs> <rs type="programName">H2020 Programme</rs> and <rs type="funder">MCTI/RNP-Brazil</rs> (<rs type="grantName">HPC4E</rs> grant no. <rs type="grantNumber">689772</rs>), and performed (for <rs type="person">P. Valduriez</rs>) in the context of the <rs type="institution">Computational Biology Institute</rs>.</p></div>
 			</div>
 			<listOrg type="funding">
-				<org type="funded-project" xml:id="_pEBTvhr">
+				<org type="funded-project" xml:id="_cYSfqK2">
 					<orgName type="project" subtype="full">MUSIC</orgName>
 				</org>
-				<org type="funded-project" xml:id="_UR2RCy7">
+				<org type="funded-project" xml:id="_xmasYZh">
 					<orgName type="project" subtype="full">SciDISC</orgName>
 					<orgName type="program" subtype="full">H2020 Programme</orgName>
 				</org>
-				<org type="funding" xml:id="_KJ9jNpC">
+				<org type="funding" xml:id="_NwqqKtc">
 					<idno type="grant-number">689772</idno>
 					<orgName type="grant-name">HPC4E</orgName>
 				</org>

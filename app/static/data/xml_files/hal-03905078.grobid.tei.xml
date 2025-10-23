@@ -7,7 +7,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		<fileDesc>
 			<titleStmt>
 				<title level="a" type="main">Differentially Private Federated Learning on Heterogeneous Data</title>
-				<funder ref="#_SmbFken #_UEb5sw9 #_kuGZGs5">
+				<funder ref="#_tkjqjeU #_GVjyZZR #_ajgKMs3">
 					<orgName type="full">unknown</orgName>
 				</funder>
 			</titleStmt>
@@ -70,13 +70,13 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 							<date/>
 						</imprint>
 					</monogr>
-					<idno type="MD5">AC3748E4E315B6781A8610151AF6D7FD</idno>
+					<idno type="MD5">E3397D8A0C4F5EE2D1191A05C36EDB70</idno>
 				</biblStruct>
 			</sourceDesc>
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.0" ident="GROBID" when="2024-04-12T14:48+0000">
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:15+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<ref target="https://github.com/kermitt2/grobid"/>
 				</application>
@@ -147,14 +147,14 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <div><head>Acknowledgments</head><p>We thank <rs type="person">Baptiste Goujaud</rs> and <rs type="person">Constantin Philippenko</rs> for interesting discussions. We thank anonymous reviewers for their constructive feedback. The work of A. Dieuleveut is partially supported by <rs type="grantNumber">ANR-19-CHIA-0002-01 /</rs>chaire SCAI, and <rs type="person">Hi! Paris</rs>. The work of <rs type="person">A. Bellet</rs> is supported by grants <rs type="grantNumber">ANR-16-CE23-0016</rs> (Project <rs type="projectName">PAMELA</rs>) and <rs type="grantNumber">ANR-20-CE23-0015</rs> (Project <rs type="projectName">PRIDE</rs>).</p></div>
 			</div>
 			<listOrg type="funding">
-				<org type="funding" xml:id="_SmbFken">
+				<org type="funding" xml:id="_tkjqjeU">
 					<idno type="grant-number">ANR-19-CHIA-0002-01 /</idno>
 				</org>
-				<org type="funded-project" xml:id="_UEb5sw9">
+				<org type="funded-project" xml:id="_GVjyZZR">
 					<idno type="grant-number">ANR-16-CE23-0016</idno>
 					<orgName type="project" subtype="full">PAMELA</orgName>
 				</org>
-				<org type="funded-project" xml:id="_kuGZGs5">
+				<org type="funded-project" xml:id="_ajgKMs3">
 					<idno type="grant-number">ANR-20-CE23-0015</idno>
 					<orgName type="project" subtype="full">PRIDE</orgName>
 				</org>

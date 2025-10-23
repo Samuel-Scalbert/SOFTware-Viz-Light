@@ -1,0 +1,980 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="fr">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Pl@ntNet Crops: merging citizen science observations and structured survey data to improve crop recognition for agri-food-environment applications</title>
+				<funder ref="#_bjekzuA">
+					<orgName type="full">European Union</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2023-01-24">24 January 2023</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author role="corresp">
+							<persName><forename type="first">Marijn</forename><surname>Van Der Velde</surname></persName>
+							<email>marijn.van-der-velde@ec.europa.eu</email>
+							<idno type="ORCID">0000-0002-9103-7081</idno>
+						</author>
+						<author>
+							<persName><forename type="first">Hervé</forename><surname>Goëau</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Pierre</forename><surname>Bonnet</surname></persName>
+							<idno type="ORCID">0000-0002-2828-4389</idno>
+						</author>
+						<author>
+							<persName><forename type="first">Martin</forename><surname>Raphaël D'andrimont</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Antoine</forename><surname>Yordanov</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Martin</forename><surname>Affouard</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Bálint</forename><surname>Claverie</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Neija</forename><surname>Czúcz</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Laura</forename><surname>Elvekjaer</surname></persName>
+						</author>
+						<author>
+							<persName><surname>Martinez-Sanchez</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Stephan</forename><surname>Estel</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Sebastian</forename><surname>Mader</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Christian</forename><surname>Levers</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Kristin</forename><forename type="middle">B</forename><surname>Byrd</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Pelayo</forename><surname>Alvarez</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Benjamin</forename><surname>Sleeter</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">H</forename><surname>Goeau</surname></persName>
+							<idno type="ORCID">0000-0002-9103-7081</idno>
+						</author>
+						<author>
+							<persName><surname>R D'andrimont</surname></persName>
+							<idno type="ORCID">0000-0002-7326-7684</idno>
+						</author>
+						<author>
+							<persName><forename type="first">M</forename><surname>Yordanov</surname></persName>
+							<idno type="ORCID">0000-0002-7326-7684</idno>
+						</author>
+						<author>
+							<persName><forename type="first">A</forename><surname>Affouard</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">M</forename><surname>Claverie</surname></persName>
+							<idno type="ORCID">0000-0001-9479-3205</idno>
+						</author>
+						<author>
+							<persName><forename type="first">B</forename><surname>Czucz</surname></persName>
+							<idno type="ORCID">0000-0002-6462-7633</idno>
+						</author>
+						<author>
+							<persName><surname>N Elvekjaer</surname></persName>
+							<idno type="ORCID">0000-0002-6462-7633</idno>
+						</author>
+						<author>
+							<persName><forename type="first">L</forename><surname>Martinez-Sanchez</surname></persName>
+							<idno type="ORCID">0000-0002-1354-1792</idno>
+						</author>
+						<author>
+							<persName><forename type="first">X</forename><surname>Rotllan-Puig</surname></persName>
+							<idno type="ORCID">0000-0003-2046-0621</idno>
+						</author>
+						<author>
+							<persName><forename type="first">A</forename><surname>Verhegghen</surname></persName>
+							<idno type="ORCID">0000-0002-4234-0586</idno>
+						</author>
+						<author>
+							<affiliation>
+								<orgName>1 European Commission, Joint Research Centre (JRC), </orgName>
+								<address><addrLine>Ispra, Italy Montpellier, France Montpellier, France</addrLine></address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation>
+								<orgName> 2 INRIA Sophia-Antipolis-ZENITH Team, LIRMM, </orgName>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation>
+								<orgName> 3 CIRAD, CNRS, INRAE, IRD,</orgName>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Pl@ntNet Crops: merging citizen science observations and structured survey data to improve crop recognition for agri-food-environment applications</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2023-01-24">24 January 2023</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">0E99688A67B4F7B92A6DA860D8C3DB9B</idno>
+					<idno type="DOI">10.1088/1748-9326/acadf3</idno>
+					<note type="submission">Submitted on 31 Jan 2023 RECEIVED 8 April 2022 REVISED 25 October 2022 ACCEPTED FOR PUBLICATION 22 December 2022</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:12+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>citizen science</term>
+					<term>deep learning</term>
+					<term>computer vision</term>
+					<term>authoritative data</term>
+					<term>crowdsourcing</term>
+					<term>common agricultural policy</term>
+					<term>monitoring</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>ou non, émanant des établissements d'enseignement et de recherche français ou étrangers, des laboratoires publics ou privés.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="fr">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.">Introduction</head><p>Specialized social networks have an unprecedented ability to scale and match observations and expertise. Nowadays, the collection of photos and observations is often combined with powerful algorithms for various classification tasks (e.g. <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b1">2]</ref>). Methodologies are designed that can efficiently channel citizen science into environmental monitoring to inform policy processes, e.g. the monitoring of the Sustainable Development Goals <ref type="bibr" target="#b2">[3]</ref>. The synergy between expertise and citizen science is also explored in the domain of land cover and land use assessments. Citizen scientists have helped to assess the land available for biofuel production <ref type="bibr" target="#b3">[4]</ref>. Bayas et al <ref type="bibr" target="#b4">[5]</ref> investigated how the 'crowd' could contribute to in-situ land cover and use observations to complement the European Union's (EU) Land Use and Coverage Area frame Survey (LUCAS). For example, while LUCAS is carried out every three to four years, citizen scientists could make annual observations. Conversely, the geographic scope of LUCAS is EU-wide, avoiding biases that may occur in voluntarily driven observation schemes. Large-scale biodiversity and protected area monitoring are increasingly benefiting from citizen science observations <ref type="bibr" target="#b5">[6]</ref>. Novice, amateur, and expert botanists have been collecting and revising millions of geo-tagged and timestamped photographs of plant species with apps such as Flora Incognita <ref type="bibr" target="#b6">[7]</ref>, iNaturalist <ref type="bibr" target="#b7">[8]</ref>, and Pl@ntNet <ref type="bibr" target="#b8">[9]</ref>. Besides contributing to biodiversity monitoring, these apps are intrinsically motivating volunteers as they function as modern day floras. After careful expert-based quality control procedures these observations can contribute to platforms such as the Global Biodiversity Information Facility (www.gbif.org/).</p><p>Synergies between demand and supply of collection capacity and expertise are at the core of several recent and successful examples in the agrifood-environment domain (e.g. <ref type="bibr" target="#b9">[10]</ref>). Farmers are also actively participating in such activities. Although there is a long history of public engagement in agriculture, specifically through extension work with beneficial bidirectional flows of information, the term citizen science has rarely been applied to this <ref type="bibr" target="#b10">[11]</ref>. Farmers and extension workers can benefit from crop disease expertise networks to access information on treatments <ref type="bibr" target="#b11">[12]</ref>. Farmer citizen scientists participated in on-farm participatory trials providing insights into variety adaptation and selection across large geoclimatic scale <ref type="bibr" target="#b12">[13]</ref>. Farmers also have been engaged in documenting temporal trends in farmland biodiversity and relating these to agricultural practices <ref type="bibr" target="#b13">[14]</ref>. Accounting for the environmental performance of farming, but also an increasing disconnect between people and their food, warrants exploring the interfaces between food systems and citizen science <ref type="bibr" target="#b10">[11]</ref>.</p><p>Legacy data and photos can also improve underlying identification models provided proper tools facilitating integration and annotation are available. The massive digitization of herbarium specimens and annotation of specimen images is one such example <ref type="bibr" target="#b14">[15]</ref>. Pl@ntNet provides the possibility to integrate specific flora previously collected by (amateur) botanists using dedicated semi-automatic tools. In this letter, we explore the use of legacy in-situ expert photos taken and labelled during past EU-wide LUCAS surveys. Taking advantage of the existing Pl@ntNet species identification algorithms and its mobile and web functionality, we present a new application in Pl@ntNet focusing on 'Crops' . Besides user provided pictures of crops, the application is enriched with suitable LUCAS cover photos of crops. Enabling this synergy required aligning both data sources as detailed in this manuscript. Eventually, combining user collected photos and LUCAS surveyed photos and observations should improve the ability to recognize crops with Pl@ntNet and deep learning algorithms in general. These developments could give rise to various applications in the agri-foodenvironment domain. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.">Data and methods</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1.">Pl@ntNet</head><p>Pl@ntNet is an existing smartphone and web-based application that allows identifying plant species on images <ref type="bibr" target="#b15">[16]</ref>. More broadly, Pl@ntNet is a collaborative system operating since 2010 <ref type="bibr" target="#b8">[9]</ref> and involving a large community of expert and amateur contributors worldwide <ref type="bibr" target="#b16">[17]</ref>. Available in 36 languages and in 200+ countries, about 200 000 to 600 000 users use Pl@ntNet each day. Experiencing nearly exponential growth since its conception, more than 200 million plant occurrences have been recorded with Pl@ntNet around the world. Pl@ntNet provides generic functionality to recognize plants that can be used by anyone, but also dedicated applications that focus on specific flora in e.g. natural parks, from herbaria, or on activities with an educational character. Pl@ntNet is straightforward to use. After selecting a flora, a user takes up to four close-up photos of the organs of a plant following Pl@ntNet guidelines. The user specifies if the organ is e.g. a flower, fruit, leaf, bark, the so-called view. In return, Pl@ntNet provides a ranked list of the most probable predicted species. Each species is illustrated by pictures of that species for comparison, grouped by their view, that may also include a 'habitat' view if the photo was not close-up but rather provided a landscape view. See figure <ref type="figure" target="#fig_0">1</ref> on the left side for typical photos submitted to Pl@ntNet. Additional information and links to descriptive web pages of the species are also provided.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2.">LUCAS cover photos</head><p>The  Comparing typical Pl@ntNet and LUCAS Cover photos. Pl@ntNet photos distinguish leaves, flowers, and fruit. LUCAS Cover: L1 photos are included in the app (probability &gt; 0.9), L2 is &lt;0.9 but &gt;0.4, while L3 is &lt;0.4. Reproduced from <ref type="bibr" target="#b18">[19]</ref>. CC BY 4.0.</p><p>four cardinal directions from the point. A detailed methodological description, as well as the harmonised data and photos are published in <ref type="bibr" target="#b17">[18]</ref>. Besides the photos mentioned above, previously unpublished 'cover' photos were also taken. The protocol specified that these cover photos 'should be taken at a close distance, so that the structure of leaves can be clearly seen, as well as flowers or fruits' . During the five campaigns, 874 646 LUCAS cover photos were collected, out of which 242 476 were of crops. After a two-step anonymization process relying on computer vision and visual inspection (detailed in <ref type="bibr" target="#b18">[19]</ref>), these photos will be published in 2022. The Crops app ingests the cover photos of crops. See supplementary figure <ref type="figure" target="#fig_0">1</ref> and figure <ref type="figure" target="#fig_0">1</ref> on the right side for typical LUCAS cover photos of crops. As can be seen, these contain full plant views, but also more distant views, fences that may block the view, and occasionally the presence of objects to mark the point.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3.">Pl@ntNet crop recognition models</head><p>Pl@ntNet is an automated visual identification system that integrates various novel approaches in handling and classifying imagery <ref type="bibr" target="#b8">[9]</ref>. Pl@ntNet is built on the combination of a deep learning image classification model and a generalist content-based image retrieval method (for details see <ref type="bibr" target="#b8">[9,</ref><ref type="bibr" target="#b15">16]</ref>). Besides computer vision based identification, the Pl@ntNet framework is itself synchronized with observations that are validated by a network of expert botanists. This allows the recognition performances to improve with an ever increasing amount of training data. Pl@ntNet datasets and algorithms are also benchmarked in community-steered identification challenges such as</p><p>LifeCLEF <ref type="bibr" target="#b0">[1]</ref>. This type of long-term evaluation makes it possible to quickly detect major advances in terms of performance and to accelerate their integration into operational production systems such as Pl@ntNet.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.4.">Model performance and including LUCAS photos in the app</head><p>First, before including the LUCAS crop photos into the application, the accuracy of the Pl@ntNet algorithm to identify crops is evaluated on the photos contributed by citizen scientists. When training Pl@ntNet's recognition algorithm, a fraction of the data (randomly selected) that has been evaluated by experts is removed from the training set in order to evaluate the performance of the crop identification. Second, to decide which LUCAS cover photos of crops can be included in the application, considerations are made regarding the probability of the prediction and the accuracy of the crop identification by comparing the Pl@ntNet classification with the LUCAS label. This requires matching the LUCAS legend labels with the Pl@ntNet species reference list. Legend matching is also needed for the future use of the photos to train and improve the current Pl@ntNet species identification algorithm. In the Pl@ntNet procedure, while users need to specify the type of view when submitting the photo, the algorithm also classifies the view (e.g. flower, leave, bark, habitat) before classifying the species. After inclusion in the Crops app, the established expert driven Pl@ntNet quality control mechanism continues to take place.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.">Results and discussion</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1.">Model performance</head><p>A total of 218 cultivated crop species are included in the Pl@ntNet Crops application (see supplementary table <ref type="table" target="#tab_2">1</ref> and the Crops application). Along with scientific names, common names translated into 36 languages are also provided. Species covered include major crops (maize, wheat, rice, yam), but also vegetables (asparagus, eggplant), tree crops (olives, coconut), fruits (kiwi, apple), nuts (hazelnuts, pistachio), spices (cinnamon, black pepper), and cover or N-fixing crops (clover). Pl@ntNet users have already contributed 605 242 crop photos (as of 16 November 2021) from around the world to the Crops application. Out of these 605 242, the classification of 260 610 of those have also been evaluated by experts. The dataset that was used to train the model was selected from these. Before including the LUCAS cover photos, the performance of the current Pl@ntNet Crops algorithm is evaluated with the randomly selected validation set that is removed from the training set. This set contains 2654 images and allows to measure the average identification performance of unseen  <ref type="table" target="#tab_2">1</ref>, the correct species is returned in first position 89% of the time, and among the top 5 predicted species 97% of the time. This provided a satisfactory performance of the algorithm that is used in the Pl@ntNet Crops application. A threshold on the prediction probability of the algorithm will determine whether a LUCAS cover photo can be included in the app.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2.">Legend matching and species list</head><p>Pl@ntNet uses up to date Latin taxonomy to classify at species level. The LUCAS legend level 3, which is used to label the LUCAS cover photos, contains a mix of family and species names with synonyms and alternative spellings that needed to be semantically mapped to the Pl@ntNet reference species list (see supplementary table <ref type="table" target="#tab_2">1</ref>). The 218 cultivated crops in the application were matched to 36 LUCAS legend level 3 classes. Following the LUCAS class definition, the frequency distribution across the different crop types is shown in supplementary figure <ref type="figure" target="#fig_1">2</ref>. This reveals the long-tail problem <ref type="bibr" target="#b8">[9]</ref>, for only a few of the crop species-the major crops-a large amount of LUCAS observations with photos exist. However, if the Pl@ntNet observations are classified following the LUCAS legend, a large group of observations are included in the 'other fruit trees and berries' class. Of course, a much richer differentiation exists at species level for the Pl@ntNet photos. This is illustrated in figure <ref type="figure" target="#fig_1">2</ref>. Here each bar indicates a Pl@ntNet species, the size of the bar the number of Pl@ntNet citizen scientist observations for that species, while colour indicates the LUCAS legend level 3. Unfortunately, when using the original LUCAS label to evaluate the accuracy of the Pl@ntNet classification of the LUCAS cover photos, species will be grouped that may also be similar (e.g. 'dry pulses').  (table <ref type="table" target="#tab_4">2</ref>) highlights the difference between Pl@ntNet user and LUCAS surveyor provided photo. While most Pl@ntNet user photos are recognized to have a view of flowers or leaves, most LUCAS photos are classified to be of habitat type, i.e. a full plant view, or a more distant photo of a cropped field. This is despite the LUCAS protocol, which referred to pictures to be taken at a close distance.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3.">Spatial and temporal distribution of Pl@ntNet and LUCAS photos</head><p>The relative contribution of Pl@ntNet and LUCAS observations to the Crops app is evaluated by comparing the 260 620 evaluated Pl@ntNet observations and the 242 476 potential LUCAS observations. Geographically speaking, the relative contribution of LUCAS to Pl@ntNet observations across Europe is especially pronounced in Eastern Europe and away from populated coastal and metropolitan areas (see figure <ref type="figure" target="#fig_2">3</ref>). Following the launch of Pl@ntNet in 2010 and the direct uptake in the existing French Tela Botanica network (www.tela-botanica.org), it is no surprise that most Pl@ntNet user made observations have been made in France. The LUCAS cover photos are geographically distributed more uni-formly, a drawback is that generally only a single cover photo is taken at a LUCAS point. Some of these LUCAS points will have been revisited only once, while others may have been visited during all five past surveys <ref type="bibr" target="#b17">[18]</ref>.</p><p>Summarized across a year, the temporal distribution of observations contributed by Pl@ntNet users and LUCAS surveyors is seen in figure <ref type="figure" target="#fig_2">3</ref>. For Pl@ntNet this encompasses the time period between 2010 and 2021, while this covers the five survey years for LUCAS. Clearly, most photos are provided during the growing season, when Pl@ntNet users are out and about, and when the LUCAS surveys are carried out. However, the contribution of Pl@ntNet users is more stable throughout the year, while the LUCAS surveys clearly peak with the campaign time. These campaigns are also more or less staggered according to phenological development from South to North. Since 2018 the number of evaluated Pl@ntNet observations of cultivated crops have increased dramatically, reaching more than 80 000 in 2020, illustrating one of the strengths of citizen science. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.4.">Including LUCAS cover photos</head><p>Several considerations are made when deciding to include LUCAS cover photos. This includes the probability of the prediction, the accuracy of the prediction against the original LUCAS classification of the crop on the photo (distinguishing 36 classes), but also the added value the photos provide. Considerations include maximizing the total number of photos that could be added to the app, minimizing the risk of confusion with the fuzzy LUCAS legend, or increasing the number of photos for species that have few or no photos associated with them. Since human expert review is part of the Pl@ntNet workflow, erroneous classifications may be corrected. Figure <ref type="figure" target="#fig_3">4</ref> quantifies this.</p><p>Using the legend matching, the accuracy of the species classified with the highest probability by Pl@ntNet is calculated (upper left panel of figure <ref type="figure" target="#fig_3">4</ref>). The accuracy (against the independent LUCAS labels) of the classification increases with probability threshold, and even the lowest Pl@ntNet probabilities correspond to an accuracy of 0.62. Figure <ref type="figure" target="#fig_0">1</ref> illustrates this further: LUCAS cover photos with a probability of classification &gt;0.9 (L1) are included in the app, while photos predicted with a probability &lt;0.9 but &gt;0.4 (L2) and &lt;0.4 (L3) are excluded. LUCAS cover photos classified with the lowest probability (L3) include photos that are very distant (B81), have little contrast (B11), depict harvested bare soil (B21), agricultural plastic (B45), and flattened crops (B51). There are 112 445 LUCAS cover photos that could be included. The reduction from 242 476 occurs for two major reasons. First, 63 878 have been rejected as a classification could not be made by Pl@ntNet for various reasons, e.g. this happens for many of the photos with a habitat view, or there is an imposing object (e.g. a marker, notebook, . . .). Second, of the 178 598 for which a prediction could be made, the first species predicted is not part of the Crops reference list of 218 crops. This can be due to various reasons, again, the wider view of the habitat photos does not correspond to the close-up view usually provided to the algorithm which may hamper the classification, but also there is a lack of training data for the crop species in the reference list. Logically, the number of photos that could be included decreases with increasing probability threshold (upper right panel). A significant number of species could benefit from including the LUCAS cover photos. However, with an increasing probability threshold, that number decreases dramatically as well, from 133 to 26 species. Finally, the number of photos added to each species is specified in the boxplot in the lower right panel.</p><p>Following the considerations specified above, a reasonable compromise was found by setting the threshold for the probability for inclusion of LUCAS cover photos at &gt;0.5. Hereby, 70 170 LUCAS photos classified with an accuracy of 0.9 are added to the Crops app enriching 101 species. The LUCAS Cover photos currently contributing to the app can be found here:</p><p>https://identify.plantnet.org/partners/lucassurvey. In the near future, species below the 0.5 threshold will be visually evaluated as these LUCAS cover photos could improve the Pl@ntNet algorithms the most as they have been the most difficult to predict.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.5.">Pl@ntNet crops and application context</head><p>The interface and functionality of the mobile Pl@ntNet Crops application is illustrated in supplementary figure <ref type="figure" target="#fig_3">4</ref>. The app includes more than 842 320 photos and more than 675 000 observations (as of 19 October 2022) and is available as an Android and iOs app as well as through a web interface (https://identify.plantnet.org/eucrops). Various application contexts can be considered, but we consider three here. For more examples of other Pl@ntNet activities, please explore https://identify.plantnet.org/ and related literature.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.5.1.">Collecting in-situ observations</head><p>The increasing volume of freely accessible Earth Observation (EO) data through e.g. the Copernicus program, has not been matched with proportional amounts of in-situ, reference, and training data, hampering novel applications. Using automated workflows, the Pl@ntNet Crops app can contribute to collecting in-situ data for such EO applications. Since the app is global and includes 218 species cultivated around the world, this may be particularly relevant for data-poor environments. In food insecure regions, in-situ crop type data are generally missing <ref type="bibr" target="#b19">[20]</ref>. In those regions the combination of in-situ data with EO data is crucial to better inform early warning systems and guide humanitarian responses, ensuring market transparency and stability, and informing national agricultural policies <ref type="bibr" target="#b20">[21]</ref>. The use of citizen science tools such as the Pl@ntNet Crops app could also encourage individual farmers or surveyors to report on crops grown on specific parcels without the need to have expertise in geo-spatial technologies. Crop type recognition on geo-referenced images Including inferenced LUCAS cover photos in Pl@ntNet. Accuracy (upper left), correctly predicted images (upper right), number of species added to Pl@ntNet (lower left), and images per predicted species added to Pl@ntNet (lower right), as a function of the Pl@ntNet probability of the identification.</p><p>for in-situ data collection using computer vision has been successfully tested <ref type="bibr" target="#b19">[20,</ref><ref type="bibr" target="#b21">22]</ref>. Since the position of the camera may not be in the field, smart ways to link the precise position of the crop located on the photo and the field are needed. Pictures are taken directly in the field in campaigns such as those done for the Copernicus4GEOGLAM component (https://land.copernicus.eu/global/about-copernicus4geoglam) of the Copernicus Global Land Service. However, these protocols do not necessarily ensure a smooth integration in computer vision and machine learning applications. Metrics on the positional accuracy of the in-situ data collection will be extracted by comparisons against spatially explicit parcel-level farmers' declarations of crops (from e.g. France and the Netherlands) as gathered in the context of the Integrated Administration and Control System of the Common Agricultural Policy (CAP).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.5.2.">CAP</head><p>Automation and new technologies can reduce administrative burden and strengthen evidence provision for the European Union's CAP. When receiving specific subsidies, the responsible administration requests farmers to provide a georeferenced photo proving that they grow certain crops (see <ref type="bibr" target="#b22">[23]</ref>), e.g. besides crops supported by voluntary coupled support, for cover, catch, or N-fixing crops. The deep learning model developed as part of the Pl@ntNet Crops application could be ported elsewhere and implemented to take advantage of this automation. For instance, should a photo taken by a farmer result in a classification with low probability (below a threshold accepted by the administration), he/she would be immediately alerted to pay attention to the protocol and retake the photo, e.g. from a more optimized viewpoint or distance to the plant, to ensure sufficient probability of a correct crop classification. The foreseen benefits are threefold: (a) for the farmer-ensuring that his/her duty of providing the evidence was fulfilled correctly and avoiding extra efforts of coming back to the field to retake the photo at a later date; (b) for the administration handling the subsidies-receiving high quality proof captured according to the protocol enabling automatic processing and thus decreasing the need for costly expert photo evaluation; (c) for further algorithm development-the misclassified first photo could be added to the training set to improve the classification probability. Such approaches are already implemented by certain administrations to improve the environmental performance of the CAP. To receive support in Thuringia, Germany, farmers need to evidence maintenance of environmentally sensitive and biodiverse grasslands by providing the occurrence of at least six key species out of list using Flora Incognita (https://marswiki.jrc.ec.europa.eu/wikicap/images/5 /57/09_Detection_of_individual_plants.pdf). These approaches improve monitoring of practices, but also directly contribute to near real-time monitoring of ecological patterns and can thus help to assess progress towards the EU biodiversity targets in managed agricultural land.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.5.3.">Food system awareness raising</head><p>Engaging citizen scientists in food system research keeps on gaining momentum and now covers diverse applications <ref type="bibr" target="#b23">[24]</ref>. At the same time, Ryan et al <ref type="bibr" target="#b10">[11]</ref> note that the term citizen science has rarely been applied to a long history of public engagement in agriculture and food science. Consumers increasingly care about the origin and sustainability of the food they buy. In the context of the EU's Farm to Fork strategy, citizen science activities with consumers or schools could use the Crops app to explore local agricultural produce and in this process gain knowledge about the crops that are cultivated in their surroundings, the sustainability of the production process, and the interaction with the local environment. The transparency of the production chain for agricultural commodities (oil palm, cocoa, coffee, . . .) produced outside of Europe is also of concern to consumers. If geolocated crop type is combined with additional information, the development of targeted applications could improve monitoring of environmental externalities such as biodiversity impact <ref type="bibr" target="#b24">[25]</ref> of e.g. traditional and agro-forestry-based systems. These developments could strengthen the relationship between producers and consumers and encourage agronomic and environmental awareness with positive impacts on food systems, especially at the production stages. Nevertheless, Mourad et al <ref type="bibr" target="#b25">[26]</ref> found that many citizen and farmer science projects tend to focus on academic research outcomes, and not on sustainable solutions in practice. Here we propose that image recognition apps and deep learning models originating in the citizen science domain can also more indirectly feed work flows and policies implementing sustainable farm practices.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.6.">Lessons learned</head><p>Opportunistic use was made of legacy LUCAS cover photos. There was enough overlap between the visual requirements of the Pl@ntNet algorithms and the LUCAS cover photos so that 31% of the photos could be included in the app after a first inference. Inclusion of the LUCAS cover photos that are predominantly of 'habitat' type, improves the Pl@ntNet algorithm for this type of view. For 70 170 legacy LUCAS observations, the thematic accuracy was improved by distinguishing 218 species opposed to the original 36 levels. As expert evaluation improves the training set and thus the crop identification, LUCAS cover photos will increasingly be added as the algorithm improves.</p><p>Photos and observations that are voluntarily collected by apps such as Pl@ntNet and by statistically representative surveys such as LUCAS have different but complementary strengths. Now that the legends are matched, LUCAS surveyors could (voluntarily) use the app for the crop classification task, especially if they are not agronomists. While generally only a single photo is taken of a crop at a LUCAS point (i.e. similar to the one-shot problem, very few images per species and type of view, see <ref type="bibr" target="#b8">[9]</ref>), multiple photos of the same species, and of different organs, can be used for the identification by Pl@ntNet. By combining photos from volunteers and surveys, as done here, increasingly rich training datasets are created. While noise in the imagery is a drawback, a positive aspect is the diversity of such datasets. Over time, this should lead to the development of more robust identification models. Such models are needed for real-world applications.</p><p>The LUCAS protocol was not built for use in computer vision and machine learning. Taking a photo of a cropped field with many closely spaced individuals is different compared to taking a close-up photo of an organ of a single plant. Furthermore, even though a protocol for close-up photos was specified, rather heterogeneous imagery is present in the LUCAS cover set. Following on from these experiences, we have improved the instructions for the 2022 LUCAS survey protocol. Background markers are no longer included during the acquisition of LUCAS cover photos to reduce the noise in the photo for further computer vision applications. Furthermore, in the training of surveyors emphasis was placed on the need of photos taken at a close distance, that have sufficient contrast, and where individual crops could be distinguished. Direct use of the app with requirements on the probability of the classification will be suggested for the next LUCAS survey. The cover photos of the LUCAS 2022 survey will also be included in the app once available. Besides photos of crops, the LUCAS cover photo-dataset also includes photos of trees (leaves) and grasses. These may be included within other Pl@ntNet floras. Other LUCAS legacy photos, such as those taken in the four cardinal directions, may prove useful in computer vision challenges related to land cover and use and landscape analysis <ref type="bibr" target="#b26">[27]</ref>.</p><p>A proliferation of apps for plant recognition has appeared in recent years (e.g. LeafSnap, PictureThis, PlantStory, Seek, etc). Jones <ref type="bibr" target="#b27">[28]</ref> compared ten automated image recognition apps to identify British flora. Here, overall Pl@ntNet was a mid-level performer. Otter et al <ref type="bibr" target="#b28">[29]</ref> concluded that such apps cannot yet be trusted to identify toxic plants, with two out of three apps tested (including Pl@ntNet) correctly predicting about half of plants. The extension service of Michigan State University (USA) evaluated eight different apps, with Pl@ntNet ranking second (www.canr.msu.edu/news/plant-identificationtheres-an-app-for-that-actually-several). Clearly, the results of such evaluations depend strongly on the species chosen for the test set. In the future a stronger differentiation may appear between specialised systems and those oriented towards more common species.</p><p>One specific complication for certain crops is that varieties of the same species are very different. For example, Brassica oleracea L. includes cultivars such as cabbage, broccoli, cauliflower, kale, and Brussels sprouts. In Pl@ntNet, being one species, these cultivars are all in the same class, notwithstanding their different visual appearances. Traditionally in the Life-CLEF challenge <ref type="bibr" target="#b29">[30]</ref>, the leading activity on benchmarking new algorithms for automated plant recognition apps, accuracy is evaluated at species, genus, and family level. The particular difficulty of very visually distinct crop varieties has not been solved yet. Different phenological stages provide another challenge <ref type="bibr" target="#b21">[22]</ref>. In fact, plant identification can be difficult, even for a trained botanist, and benchmarked datasets are needed to improve algorithms (see for example the public dataset created by Pl@ntNet on anemones, https://plantnet.org/en/2021/03/30/aplntnet-dataset-for-machine-learning-researchers/).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.">Conclusions</head><p>A new Pl@ntNet app including more than 842k photos (as of 19 October 2022) of 218 crop species around the world is presented. The application and underlying algorithms are built on voluntarily collected photos of crops and enriched by legacy LUCAS survey cover photos of crops. The comparative strengths of merging such networked collaborative and surveybased approaches relate to temporal and geographic representivity of the sampling. The application can benefit various agri-food-environment activities and can contribute to the further development of computer vision algorithms to recognize crops on photos.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 .</head><label>1</label><figDesc>Figure 1.Comparing typical Pl@ntNet and LUCAS Cover photos. Pl@ntNet photos distinguish leaves, flowers, and fruit. LUCAS Cover: L1 photos are included in the app (probability &gt; 0.9), L2 is &lt;0.9 but &gt;0.4, while L3 is &lt;0.4. Reproduced from<ref type="bibr" target="#b18">[19]</ref>. CC BY 4.0.</figDesc><graphic coords="5,129.32,72.89,414.04,433.46" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 .</head><label>2</label><figDesc>Figure 2. Distribution of the Pl@ntNet observations with the LUCAS class equivalent (Pl@ntNet data have been converted from species to LUCAS legend level 3). Only species with a minimum of ten observations are shown.</figDesc><graphic coords="7,129.32,72.89,414.04,378.61" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 3 .</head><label>3</label><figDesc>Figure 3. (a) The geographic contribution of Pl@ntNet user and LUCAS cover provided photos. (b) The monthly distribution of Pl@ntNet user and LUCAS cover provided photos. (c) Annual totals since 2005.</figDesc><graphic coords="9,129.48,73.12,414.85,570.34" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 4 .</head><label>4</label><figDesc>Figure 4.Including inferenced LUCAS cover photos in Pl@ntNet. Accuracy (upper left), correctly predicted images (upper right), number of species added to Pl@ntNet (lower left), and images per predicted species added to Pl@ntNet (lower right), as a function of the Pl@ntNet probability of the identification.</figDesc><graphic coords="10,129.32,72.89,414.04,325.70" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head></head><label></label><figDesc>Detailed objectives are to:</figDesc><table><row><cell>(a) Present the Pl@ntNet Crops application focusing</cell></row><row><cell>on cultivated crops.</cell></row><row><cell>(b) Demonstrate how after legend matching and</cell></row><row><cell>inference with the existing Pl@ntNet algorithms</cell></row><row><cell>the Crops application is enriched with LUCAS</cell></row><row><cell>cover photos.</cell></row><row><cell>(c) Demonstrate the synergy of voluntary and</cell></row><row><cell>LUCAS collected photos and observations for</cell></row><row><cell>deep learning model development to recognize</cell></row><row><cell>crops.</cell></row><row><cell>(d) Suggest potential uses of the Pl@ntNet Crops</cell></row><row><cell>application and openly published crop recog-</cell></row><row><cell>nition models in the agri-food-environment</cell></row><row><cell>domain.</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 1 .</head><label>1</label><figDesc>Performance evaluation of Pl@ntNet's crop recognition application.</figDesc><table><row><cell cols="3">Mean average precision Top-1 accuracy Top-5 accuracy</cell></row><row><cell>0.927</cell><cell>0.891</cell><cell>0.972</cell></row><row><cell cols="2">crop images. As reported in table</cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head>Table 2 .</head><label>2</label><figDesc>Type of views of Pl@ntNet user and LUCAS cover pictures.</figDesc><table><row><cell></cell><cell>Total</cell><cell>Flower</cell><cell>Fruit</cell><cell>Leaf</cell><cell>Bark</cell><cell>Habit</cell><cell>Other</cell></row><row><cell>Pl@ntNet user (n)</cell><cell>605 242</cell><cell>231 669</cell><cell>62 541</cell><cell>260 005</cell><cell>17 099</cell><cell>26 666</cell><cell>7262</cell></row><row><cell>Pl@ntNet user (%)</cell><cell></cell><cell>38</cell><cell>10</cell><cell>43</cell><cell>3</cell><cell>4</cell><cell>1</cell></row><row><cell>LUCAS cover total (n)</cell><cell>242 476</cell><cell>24 401</cell><cell>25 333</cell><cell>67 488</cell><cell>1692</cell><cell>98 234</cell><cell>25 328</cell></row><row><cell>LUCAS cover total (%)</cell><cell></cell><cell>10</cell><cell>10</cell><cell>28</cell><cell>1</cell><cell>41</cell><cell>10</cell></row><row><cell>LUCAS cover inference &gt; 0.5 (n)</cell><cell>70 170</cell><cell>12 516</cell><cell>7662</cell><cell>23 193</cell><cell>55</cell><cell>26 235</cell><cell>509</cell></row><row><cell>LUCAS cover inference &gt; 0.5 (%)</cell><cell></cell><cell>18</cell><cell>11</cell><cell>33</cell><cell>0</cell><cell>37</cell><cell>1</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" xml:id="foot_0"><p>© 2023 The Author(s). Published by IOP Publishing Ltd</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>Acknowledgments</head><p>This project has received funding from the <rs type="funder">European Union</rs>'s <rs type="programName">Horizon 2020 research and innovation program</rs> under Grant Agreement No. <rs type="grantNumber">863463</rs> (<rs type="projectName">Cos4Cloud</rs> project).</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funded-project" xml:id="_bjekzuA">
+					<idno type="grant-number">863463</idno>
+					<orgName type="project" subtype="full">Cos4Cloud</orgName>
+					<orgName type="program" subtype="full">Horizon 2020 research and innovation program</orgName>
+				</org>
+			</listOrg>
+
+			<div type="availability">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Data availability statement</head><p>No new data were created or analysed in this study.</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">Biodiversity information retrieval through large scale content-based identification: a long-term evaluation Information Retrieval Evaluation in a Changing World</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Joly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Goëau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Glotin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Spampinato</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Bonnet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">P</forename><surname>Vellinga</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J C</forename><surname>Lombardo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Planqué</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Palazzo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Müller</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<publisher>Springer International Publishing</publisher>
+			<biblScope unit="page" from="389" to="413" />
+			<pubPlace>Switzerland</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">S H</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Goëau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Bonnet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joly</forename><forename type="middle">A</forename></persName>
+		</author>
+		<idno type="DOI">10.1016/j.compag.2020.105220</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Comput. Electron. Agric</title>
+		<imprint>
+			<biblScope unit="volume">170</biblScope>
+			<biblScope unit="page">105220</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">S</forename><surname>Fritz</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41893-019-0390-3</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Sustain</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page" from="922" to="930" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">S</forename><surname>Fritz</surname></persName>
+		</author>
+		<idno type="DOI">10.1021/es303141h</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Environ. Sci. Technol</title>
+		<imprint>
+			<biblScope unit="volume">47</biblScope>
+			<biblScope unit="page">130128103203003</biblScope>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">J C L</forename><surname>Bayas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">See</forename><forename type="middle">L</forename><surname>Bartl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Sturn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Karner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Fraisl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Moorthy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Busch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Van Der Velde</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fritz</forename><forename type="middle">S</forename></persName>
+		</author>
+		<idno type="DOI">10.3390/land9110446</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Land</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page">446</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">P</forename><surname>Bonnet</surname></persName>
+		</author>
+		<idno type="DOI">10.1002/2688-8319.12023</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Ecol. Solut. Evid</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page">12023</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">P</forename><surname>Mäder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Boho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Rzanny</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Seeland</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H C</forename><surname>Wittich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Deggelmann</forename><forename type="middle">A</forename><surname>Wäldchen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename></persName>
+		</author>
+		<idno type="DOI">10.1111/2041-210X.13611</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Methods Ecol. Evol</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page" from="1335" to="1342" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">S</forename><surname>Unger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Rollins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Tietz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Dumais</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/00219266.2020.1739114</idno>
+	</analytic>
+	<monogr>
+		<title level="j">J. Biol. Educ</title>
+		<imprint>
+			<biblScope unit="volume">55</biblScope>
+			<biblScope unit="page" from="1" to="11" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">A</forename><surname>Joly</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.ecoinf.2013.07.006</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Ecol. Inform</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page" from="22" to="34" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">J</forename><surname>Minet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Curnel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Gobin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J-P</forename><surname>Goffart</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Mélard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Tychon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wellens</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Defourny</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.compag.2017.08.026</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Comput. Electron. Agric</title>
+		<imprint>
+			<biblScope unit="volume">142</biblScope>
+			<biblScope unit="page" from="126" to="138" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ryan</surname></persName>
+		</author>
+		<idno type="DOI">10.1098/rspb.2018.1977</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Proc. R. Soc. B</title>
+		<imprint>
+			<biblScope unit="volume">285</biblScope>
+			<biblScope unit="page">20181977</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<author>
+			<persName><forename type="first">D</forename><surname>Hughes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Salathe</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1511.08060</idno>
+		<title level="m">An open access repository of images on plant health to enable the development of mobile disease diagnostics</title>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+	<note>cs.CY</note>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<author>
+			<persName><forename type="first">J</forename><surname>Van Etten</surname></persName>
+		</author>
+		<idno type="DOI">10.1073/pnas.1813720116</idno>
+		<title level="m">Proc. Natl Acad. Sci</title>
+		<meeting>Natl Acad. Sci</meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="volume">116</biblScope>
+			<biblScope unit="page" from="4194" to="4199" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">O</forename><surname>Billaud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R-L</forename><surname>Vermeersch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Porcher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Pocock</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/1365-2664.13746</idno>
+	</analytic>
+	<monogr>
+		<title level="j">J. Appl. Ecol</title>
+		<imprint>
+			<biblScope unit="volume">58</biblScope>
+			<biblScope unit="page" from="261" to="273" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">K</forename><surname>Pearson</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/biosci/biaa044</idno>
+	</analytic>
+	<monogr>
+		<title level="j">BioScience</title>
+		<imprint>
+			<biblScope unit="volume">70</biblScope>
+			<biblScope unit="page" from="610" to="620" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Pl@ntNet app in the era of deep learning ICLR</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Affouard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Goëau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Bonnet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lombardo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joly</forename><forename type="middle">A</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Int. Conf. on Learning Representations</title>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">P</forename><surname>Bonnet</surname></persName>
+		</author>
+		<idno type="DOI">10.1002/2688-8319.12023</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Ecol. Solut. Evid</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page">12023</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">R</forename><surname>Andrimont</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41597-020-00675-z</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Sci. Data</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page">352</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">R</forename><surname>Andrimont</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Yordanov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Martinez-Sanchez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Haub</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Buck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Haub</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Eiselt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Van Der Velde</surname></persName>
+		</author>
+		<idno type="DOI">10.5194/essd-14-4463-2022</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Earth Syst. Sci. Data</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="4463" to="4472" />
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<title level="m" type="main">Climate change AI workshop</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Paliyam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Nakalembe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Nyiawung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Kerner</surname></persName>
+		</author>
+		<ptr target="https://marswiki.jrc.ec.europa.eu/wikicap/images/f/ff/Geotagged_JRC_ReportV5b.pdf" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+		<respStmt>
+			<orgName>Joint Research Centre</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">I</forename><surname>Becker-Reshef</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.rse.2019.111553</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Remote Sens. Environ</title>
+		<imprint>
+			<biblScope unit="volume">237</biblScope>
+			<biblScope unit="page">111553</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">R</forename><surname>Andrimont</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Yordanov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Martinez-Sanchez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Van</forename><surname>Der Velde</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename></persName>
+		</author>
+		<idno type="DOI">10.1016/j.compag.2022.106866</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Comput. Electron. Agric</title>
+		<imprint>
+			<biblScope unit="volume">196</biblScope>
+			<biblScope unit="page">106866</biblScope>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title level="m" type="main">Use of geotagged photographs in the frame of Common Agriculture Policy checks</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Sima</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Loudjani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Devos</forename><forename type="middle">W</forename></persName>
+		</author>
+		<idno>JRC120223</idno>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<pubPlace>Ispra</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">L</forename><surname>Oakden</surname></persName>
+		</author>
+		<idno type="DOI">10.3389/fsufs.2021.596594</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Front. Sustain. Food Syst</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page">596594</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">T A</forename><surname>August</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><forename type="middle">L</forename><surname>Pescott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joly</forename><forename type="middle">A</forename><surname>Bonnet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename></persName>
+		</author>
+		<idno type="DOI">10.1016/j.patter.2020.100116</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Patterns</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page">100116</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">A</forename><surname>Mourad</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Hosseini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Avery</forename><forename type="middle">H</forename></persName>
+		</author>
+		<idno type="DOI">10.3390/su122410375</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Sustainability</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page">10375</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Andrimont</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Martinez-Sanchez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Borio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Van</forename><surname>Der Velde</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename></persName>
+		</author>
+		<idno type="DOI">10.1016/j.ecoinf.2022.101757</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Ecol. Inform</title>
+		<imprint>
+			<biblScope unit="volume">70</biblScope>
+			<biblScope unit="page">101757</biblScope>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">H</forename><surname>Jones</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/aobpla/plaa052</idno>
+	</analytic>
+	<monogr>
+		<title level="j">AoB PLANTS</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page">52</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">J</forename><surname>Otter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mayer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C A</forename><surname>Tomaszewski</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s13181-020-00803-6</idno>
+	</analytic>
+	<monogr>
+		<title level="j">J. Med. Toxicol</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page" from="42" to="47" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<monogr>
+		<title level="m" type="main">Plant identification: experts vs. machines in the era of deep learning Multimedia Tools and Applications for Environmental &amp; Biodiversity Informatics</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Bonnet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Goëau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S T</forename><surname>Hang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Lasseck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Šulc</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Malécot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Jauzein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">C</forename><surname>Melet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>You</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joly</forename><forename type="middle">A</forename></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<publisher>Springer International Publishing</publisher>
+			<biblScope unit="page" from="131" to="149" />
+			<pubPlace>Switzerland</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

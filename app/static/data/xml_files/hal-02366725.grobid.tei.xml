@@ -7,7 +7,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		<fileDesc>
 			<titleStmt>
 				<title level="a" type="main">FAUST online IDE: dynamically compile and publish FAUST code as WebAudio Plugins</title>
-				<funder ref="#_wmAPW74">
+				<funder ref="#_wmWGgaV">
 					<orgName type="full">Agence Nationale de la Recherche</orgName>
 					<orgName type="abbreviated">ANR</orgName>
 				</funder>
@@ -98,7 +98,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.0" ident="GROBID" when="2024-04-12T14:46+0000">
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:14+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<ref target="https://github.com/kermitt2/grobid"/>
 				</application>
@@ -142,7 +142,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <div><head>7.</head></div>
 			</div>
 			<listOrg type="funding">
-				<org type="funded-project" xml:id="_wmAPW74">
+				<org type="funded-project" xml:id="_wmWGgaV">
 					<idno type="grant-number">ANR-16-CE23-0017-01</idno>
 					<orgName type="project" subtype="full">WASABI</orgName>
 				</org>

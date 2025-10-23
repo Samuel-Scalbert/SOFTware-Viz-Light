@@ -7,15 +7,15 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		<fileDesc>
 			<titleStmt>
 				<title level="a" type="main">Unsupervised Fine-grained Hate Speech Target Community Detection and Characterisation on Social Media</title>
-				<funder ref="#_yKmYsa6 #_Ykgd6V2">
-					<orgName type="full">Agence Nationale de la Recherche</orgName>
-					<orgName type="abbreviated">ANR</orgName>
+				<funder ref="#_RzMgzbJ">
+					<orgName type="full">3IA Côte d</orgName>
 				</funder>
 				<funder>
 					<orgName type="full">French government</orgName>
 				</funder>
-				<funder ref="#_kFyBE9S">
-					<orgName type="full">3IA Côte d</orgName>
+				<funder ref="#_e4SxP85 #_5EBnKEv">
+					<orgName type="full">Agence Nationale de la Recherche</orgName>
+					<orgName type="abbreviated">ANR</orgName>
 				</funder>
 			</titleStmt>
 			<publicationStmt>
@@ -96,7 +96,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 							<date/>
 						</imprint>
 					</monogr>
-					<idno type="MD5">63F03A38A272B282FF6DDADCBE65E376</idno>
+					<idno type="MD5">E96FBF571DDD2061773D0906B62E238D</idno>
 					<idno type="DOI">10.1007/s13278-023-01061-4</idno>
 					<note type="submission">Submitted on 5 Mar 2023</note>
 				</biblStruct>
@@ -104,7 +104,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.0" ident="GROBID" when="2024-04-12T14:52+0000">
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:12+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<ref target="https://github.com/kermitt2/grobid"/>
 				</application>
@@ -171,14 +171,14 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <div><p>Acknowledgments. This work is supported by the <rs type="funder">French government</rs>, through the <rs type="funder">3IA Côte d</rs>'<rs type="projectName">Azur Investments</rs> in the Future project managed by the <rs type="funder">National Research Agency (ANR)</rs> with the reference number <rs type="grantNumber">ANR-19-P3IA-0002</rs> and the <rs type="projectName">EFELIA Côte d'Azur</rs> project <rs type="grantNumber">ANR-22-CMAS-0004</rs>.</p></div>
 			</div>
 			<listOrg type="funding">
-				<org type="funded-project" xml:id="_kFyBE9S">
+				<org type="funded-project" xml:id="_RzMgzbJ">
 					<orgName type="project" subtype="full">Azur Investments</orgName>
 				</org>
-				<org type="funded-project" xml:id="_yKmYsa6">
+				<org type="funded-project" xml:id="_e4SxP85">
 					<idno type="grant-number">ANR-19-P3IA-0002</idno>
 					<orgName type="project" subtype="full">EFELIA Côte d&apos;Azur</orgName>
 				</org>
-				<org type="funding" xml:id="_Ykgd6V2">
+				<org type="funding" xml:id="_5EBnKEv">
 					<idno type="grant-number">ANR-22-CMAS-0004</idno>
 				</org>
 			</listOrg>

@@ -1,0 +1,1481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Towards a Robust Detection of Language Model-Generated Text: Is ChatGPT that</title>
+				<funder ref="#_peAdHAH">
+					<orgName type="full">Agence Nationale de la Recherche</orgName>
+					<orgName type="abbreviated">ANR</orgName>
+				</funder>
+				<funder ref="#_FvFUVj5">
+					<orgName type="full">unknown</orgName>
+				</funder>
+				<funder ref="#_j4jvgDC">
+					<orgName type="full">French national research agency</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Wissam</forename><surname>Antoun</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Virginie</forename><surname>Mouilleron</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Benoît</forename><surname>Sagot</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Djamé</forename><surname>Seddah</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Djamé</forename><forename type="middle">Seddah</forename><surname>Towards</surname></persName>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="department">&apos;Information et Applications</orgName>
+								<orgName type="laboratory">16e Rencontres Jeunes Chercheurs en RI -30e Conférence sur le Traite-ment Automatique des Langues Naturelles</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<orgName type="institution">Inria</orgName>
+								<address>
+									<settlement>Paris</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff2">
+								<orgName type="department">fr/wantoun/robust-chatgpt-detection Actes de CORIA</orgName>
+								<orgName type="institution">TALN</orgName>
+								<address>
+									<postCode>2023</postCode>
+									<settlement>Paris</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff3">
+								<orgName type="department">Actes de la 30e Conférence</orgName>
+								<orgName type="laboratory">juin 2023 sur le Traitement Automatique des Langues Naturelles (TALN)</orgName>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Towards a Robust Detection of Language Model-Generated Text: Is ChatGPT that</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">F10605F64C41ECBF14402EA3AC5A1D0A</idno>
+					<note type="submission">Submitted on 20 Jun 2023</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:15+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>ChatGPT</term>
+					<term>text generation</term>
+					<term>detection of machine-generated text</term>
+					<term>robustness. MOTS-CLÉS : ChatGPT</term>
+					<term>génération de texte</term>
+					<term>détection de texte généré par machine</term>
+					<term>robustesse .inria</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>come from teaching and research institutions in France or abroad, or from public or private research centers. L'archive ouverte pluridisciplinaire</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>Advances in natural language processing (NLP) have been driven mainly by scaling up the size of pre-trained language models, along with the amount of data and compute required for training <ref type="bibr" target="#b30">(Raffel et al., 2020;</ref><ref type="bibr" target="#b28">Radford et al., 2019;</ref><ref type="bibr" target="#b29">Rae et al., 2021;</ref><ref type="bibr" target="#b14">Fedus et al., 2021;</ref><ref type="bibr" target="#b17">Hoffmann et al., 2022)</ref>. OpenAI recently released ChatGPT, a text generation model with conversational capabilities. The model is based on GPT3.5 which is a version of GPT3 <ref type="bibr" target="#b4">(Brown et al., 2020)</ref> first fine-tuned on code then fine-tuned using Reinforcement Learning from Human Feedback (RLHF) <ref type="bibr" target="#b7">(Christiano et al., 2017;</ref><ref type="bibr" target="#b33">Stiennon et al., 2020)</ref>, a method previously demonstrated by OpenAI with InstructGPT <ref type="bibr" target="#b26">(Ouyang et al., 2022)</ref>. This fine-tuning process contributes not only to the model's knowledge but also simplifies the model's interface compared to GPT3, which necessitated substantial prompt engineering to achieve satisfactory outcomes, and hence facilitating the extraction and application of that built-in knowledge.</p><p>As a result of these significant performance improvements, ChatGPT and other large language models have gained much popularity in the media and in the social context, often without fully understanding the underlying limitations of the models -e.g., the possibility of generating hateful, hateful, toxic, or disrespectful content <ref type="bibr" target="#b3">(Bender et al., 2021;</ref><ref type="bibr" target="#b23">McGuffie &amp; Newhouse, 2020;</ref><ref type="bibr" target="#b36">Weidinger et al., 2021)</ref>. Another potential misuse of LLMs or ChatGPT is industrializing radicalization and harmful propaganda which poses a significant and unconventional threat to civil society.</p><p>In response to the mounting concerns surrounding potential misuse, numerous researchers are now exploring various strategies to mitigate associated risks. For example, some have proposed watermarking techniques to trace the origin of generated text<ref type="foot" target="#foot_0">2</ref> , while others are developing methods to detect and flag text generated by these models. Of particular interest, a recent study by <ref type="bibr" target="#b15">Guo et al. (2023)</ref> investigated the text generation capabilities of ChatGPT and its proximity to human-generated text. To create a dataset of ChatGPT-generated text, the authors leveraged pre-existing questionanswering datasets in both English and Chinese, using the questions as prompts to generate responses from the model. In addition, the authors conducted a linguistic analysis to compare the output generated by ChatGPT with human-written text, and they also developed a detector to distinguish between ChatGPT-generated text and human-written text by fine-tuning a separate language model on a dataset containing both types of text.</p><p>The aim of this research is to explore the development of ChatGPT detectors in multiple languages, along with evaluating their robustness on out-of-domain text, we selected French as the language of interest. Therefore, we propose a methodology that involves translating the English dataset into French and subsequently training a classifier on the translated data. We conducted a series of evaluations in a monolingual and multilingual setting on both in-domain and out-of-domain data. The in-domain data consisted of text generated by ChatGPT using prompts related to the topics covered in the training dataset. The out-of-domain data included text generated in French by ChatGPT and Bing, a search engine powered by ChatGPT<ref type="foot" target="#foot_1">3</ref> , which has access to a broader range of internet content and may generate text on a wider range of topics than ChatGPT. Given that <ref type="bibr" target="#b37">Wolff &amp; Wolff (2020)</ref> demonstrated the vulnerability of BERT-based detectors for GPT-2 against basic attack schemes, such as substituting characters with homoglyphs or misspelled words, we also evaluated the robustness of our models against these types of attacks. Furthermore, we hypothesize that the detector models we trained rely heavily on the didactic response style of ChatGPT to distinguish between human-generated content.</p><p>The contributions of this study can be summarized as follows:</p><p>• We build upon the work of <ref type="bibr" target="#b15">Guo et al. (2023)</ref> and propose a methodology to develop ChatGPT detectors in multiple languages, focusing on French as a case study. • We evaluated the performance of the ChatGPT detectors in both a monolingual and multilingual setting. Specifically, we trained and evaluated our models on both the English and French datasets, as well as on a combined dataset containing both languages. • We investigate the generalizability of our detector by testing its performance on out-of-domain data. • We evaluate the robustness of our models against common attack schemes, such as substituting characters with homoglyphs or misspelled words. This is an important aspect to consider in the deployment of ChatGPT detectors, as attackers may attempt to evade detection by modifying the generated text in subtle ways. • We investigated the reliance of detector models on ChatGPT's didactic response style for distinguishing between human-generated content. • We release all translated datasets and models as open source to encourage further research in this area and to enable others to replicate our experiments.</p><p>Overall, our work contributes to the growing body of research on developing and evaluating ChatGPT detectors, with a focus on multilinguality, generalizability, and robustness to attacks. Our findings have practical implications for the use of ChatGPT detectors in various settings, including social media platforms, online forums, and chatbots, where the detection of harmful content is critical for maintaining a safe and respectful online environment.</p><p>2 Related Works</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Large Language Models</head><p>The race to scale up language models to new heights has been a hot topic in recent years. Researchers and tech companies have been competing to develop larger and more powerful models, often breaking records for model size and performance. The trend began with OpenAI's GPT-2 <ref type="bibr" target="#b27">(Radford et al., 2018)</ref>, which was released in 2019 and featured 1.5 billion parameters. This was quickly followed by Megatron <ref type="bibr" target="#b31">(Shoeybi et al., 2019)</ref>, a 8.3 billion parameter model, displaying steadily increasing superior zero-shot language model performance, and T5 <ref type="bibr" target="#b30">(Raffel et al., 2020)</ref>, an 11 billion parameter encoder-decoder model which advanced transfer learning and performance on several closed-book question answering tasks. The release of GPT-3 <ref type="bibr" target="#b4">(Brown et al., 2020)</ref>, and PaLM <ref type="bibr" target="#b6">(Chowdhery et al., 2022)</ref> represented a major milestone in the race to scale up language models, with their unprecedented 175 and 540B billion parameters. Scaling models to such massive scales "unlocks" new emergent capabilities as shown in <ref type="bibr" target="#b6">Chowdhery et al. (2022)</ref>. In November 2022, OpenAI released ChatGPT, a conversational language model based on GPT-3.5 fine-tuned using Reinforcement Learning from Human Feedback (RLHF) <ref type="bibr" target="#b7">(Christiano et al., 2017;</ref><ref type="bibr" target="#b33">Stiennon et al., 2020)</ref>, a method previously demonstrated by OpenAI with InstructGPT <ref type="bibr" target="#b26">(Ouyang et al., 2022)</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Detecting Synthetic Text</head><p>Detecting synthetically generated text is one of the defense mechanisms against harm caused by LLMs. One of the first major explorations of this topic was conducted following the release of GROVER (Zellers et al., 2019) a fake news generator and detector. Since this approach has been shown to work quite well, and as part of their model release strategies <ref type="bibr" target="#b32">(Solaiman et al., 2019)</ref>, OpenAI also released a GPT2 detector based on a fine-tuned RoBERTa model <ref type="bibr" target="#b19">(Liu et al., 2019)</ref>  <ref type="bibr" target="#b37">Wolff &amp; Wolff (2020)</ref> showed that the RoBERTa GPT-2 detector is vulnerable against simple attack schemes such as substituting characters with homoglyphs or misspelled words. In these cases, the detector's recall went down from 97% to 0.26% and 22.68% respectively. In order to further enhance the accuracy of detecting manipulated news articles that may deceive readers, <ref type="bibr" target="#b18">Jawahar et al. (2022)</ref> proposed a neural network-based detector that uses factual knowledge via graph convolutional neural network to distinguish between human-written news articles and manipulated news articles that mislead readers.</p><p>Following the release of ChatGPT, and with the recognition of the potential risks posed by this highlycapable model, there has been a surge of investigation into methods for detecting ChatGPT-generated text, which led to the commercial release of multiple detector products. However, as the methods used in these products are often not publicly verifiable, this study focuses solely on the academic literature surrounding detection methods.  <ref type="bibr">et al., 2018)</ref>. The authors generated ChatGPT responses using OpenAI's web application,<ref type="foot" target="#foot_2">4</ref> automating the input of questions and scraping the answers with the help of automation testing tools, for a total of 26903 ChatGPT-generated answers.</p><p>To create a French dataset, we translated the English dataset using the Google Cloud Translation API.</p><p>We then split the dataset into three splits train, validation, and test, by first selecting 710 balanced question and answer pairs to be validated, manually annotated<ref type="foot" target="#foot_3">5</ref> and to serve as our test set. We split the rest in an 80/20 split to get the training and validation set.</p><p>Furthermore, to assess the ChatGPT detectors' ability to generalize, we manually compiled out-ofdomain test data by means of:</p><p>• Manually collecting 113 ChatGPT French responses to high-quality translated questions from the test set, referred to as the ChatGPT-Native set. • Using Bing, we manually collect 106 French responses to high-quality translated questions from the test set which we refer to as the BingGPT. Given that BinGPT includes source citations in its output, we remove these artifacts from the data (as well as all of its self-referring mentions). • Randomly sampling 4454 French question-answer pairs from the French subset of the Multilingual FAQ Dataset (MFAQ) <ref type="bibr" target="#b10">(De Bruyn et al., 2021)</ref>, known as the FAQ-Rand set. • Since the French FAQ data featured in the MFAQ dataset could be machine translated, we create a smaller set from the French FAQ data featured by filtering for .gouv domains, named the FAQ-Gouv set. • 1235 sentences from The French Treebank test set, corpus from Le Monde <ref type="bibr" target="#b0">(Abeillé et al., 2000)</ref> articles, which we denote as the FTB set. • Moreover, in order to investigate our hypothesis that the detector relies heavily on the style of ChatGPT and Bing answers to distinguish between human-generated content, we created an additional set of responses to 61 questions. These responses were crafted as "open-book" answers with the same style as those provided by ChatGPT and Bing, resulting in a set of responses that we refer to as the Adversarial set.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Detector Architecture</head><p>Our approach fine-tunes pre-trained transformer-based models on our binary classification dataset.</p><p>For English, we used two pre-trained transformer models: RoBERTa <ref type="bibr" target="#b19">(Liu et al., 2019)</ref> and ELEC-TRA <ref type="bibr" target="#b8">(Clark et al., 2020)</ref>. RoBERTa is a variant of BERT <ref type="bibr" target="#b11">(Devlin et al., 2019)</ref>, trained using masked language modeling. ELECTRA, on the other hand, introduced a new training objective, Replaced Token Detection (RTD), that replaces tokens in the input sequence with tokens generated by another model and then requires the discriminator to distinguish between the replaced and original tokens.</p><p>We hypothesize that this objective should improve performance since the RTD objective greatly resembles the machine-generated text detection objective.</p><p>For French, we used two pre-trained transformer models: CamemBERT <ref type="bibr" target="#b22">(Martin et al., 2020)</ref> and CamemBERTa. <ref type="foot" target="#foot_4">6</ref> CamemBERT is a RoBERTa model trained from scratch on French text, while CamemBERTa is based on the DeBERTaV3 <ref type="bibr" target="#b16">(He et al., 2021)</ref> architecture and trained from scratch on French text using RTD.</p><p>For the multilingual setting, we only fine-tune XLM-R <ref type="bibr" target="#b9">(Conneau et al., 2020)</ref>, a multilingual RoBERTa model with supports for 100+ languages.<ref type="foot" target="#foot_5">7</ref> </p><p>4 Experimental Methodology and Results</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Experiment Design</head><p>Motivated by <ref type="bibr" target="#b15">Guo et al. (2023)</ref>, and given that the HC3 dataset comprises question/answer pairs, we investigated three distinct methods for generating dataset examples:</p><p>• Jointly incorporating the question and answer into the model input, which we refer to as the qa subset. • Using only the full answer text, which we refer to as the full subset.</p><p>• Splitting the answer text into sentences, resulting in shorter text segments and producing 455,320 training examples and 114,117 validation examples. We refer to this subset as the sentence subset.</p><p>To test the robustness of our approach against adversarial attacks, we add misspellings and simulate homoglyph substitution on the full subset of the test sets, using the nlaug (Ma, 2019) library.</p><p>Regarding our choices of training hyperparameters, we maintain a fixed batch size of 32, adopt a linear scheduler with a warmup ratio of 0.1%, and restrict our learning rate tuning to a range between 10 -5 and 5.10 -5 with a step size of 10 -5 . Our model is trained for 5 epochs, and we report the results averaged over 5 distinct random seeds for all in-domains results. For the out-of-domains experiments, we used the best models.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Results</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.1">In Domain</head><p>Table <ref type="table" target="#tab_1">1</ref> presents the results obtained from hyperparameter tuning. Notably, both evaluated French models demonstrated exceptional performance, and consistent stability evidenced by the low standard deviation scores. However, the scores for French models were comparatively lower than the English models, indicating the impact of translation on model performance. Our findings suggest that the performance of models trained on the QA and Full subset significantly deteriorates when assessed on short-length or sentence data, indicated also by the high standard deviation scores. Conversely, models trained on sentences exhibit a relatively consistent performance across all subsets. Considering the overall highest performance on the Full subset, we opted to conduct subsequent experiments with the CamemBERTa and RoBERTa models trained on the Full subset.</p><p>Furthermore, Table <ref type="table" target="#tab_2">2</ref> displays a detailed breakdown of the scores obtained from the Full subset. Notably, the models consistently achieve high recall scores in identifying ChatGPT across all tested languages. Additionally, the inclusion of misspellings and homoglyph substitutions improves the models' ability to detect human-written text while slightly reducing their performance for machinegenerated text. The multilingual model XLM-R demonstrates superior and more resilient performance on both the French and English test sets, exhibiting increased robustness against adversarial attacks. When compared to a native French-speaking human linguist, the trained model accurately identifies ChatGPT-generated content with higher accuracy, while the human linguist achieves a similar human detection score.  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.2">Out-of-Domain</head><p>To assess the potential for overfitting to our in-domain data, we evaluated the performance of our French detector on the out-of-domain test sets described previously. The results, shown in Table <ref type="table" target="#tab_3">3</ref>, reveal the detector's exceptional performance on the FTB and FAQ-Gouv test sets, with a drop in accuracy to 88.75 on the FAQ-Rand subset. This suggests the model may be detecting translation artifacts that remain in some FAQ web pages after automatic translation. Remarkably, our detector correctly identified French text generated natively by ChatGPT, suggesting that it may be possible to develop detectors for other languages by translating existing datasets. Similarly, the detector models displayed surprising performance in detecting content generated by BingGPT.</p><p>The multilingual detector model consistently outperformed the monolingual model only in detecting human-generated text but fell behind in detecting ChatGPT or BingGPT-generated text, this behavior might be due to the significantly larger pre-training dataset of XLM-R compared to CamemBERTa.</p><p>The detector models also exhibited clear weaknesses against misspelling and homoglyph-based attacks. For instance, the performance of CamemBERTa and XLM-R dropped to 44.81 and 28.18, respectively, when detecting BingGPT-generated text with misspellings added.</p><p>Finally, the low scores obtained by the detector on the adversarial response dataset we developed in the style of ChatGPT and BingGPT serve to validate our detector's heavy reliance on the writing style utilized in generating responses. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">Discussion</head><p>About the link between translation quality and the model detectability As part of our study to assess the possibility of differentiating between texts written by humans and those generated by LLMs, following the work of <ref type="bibr" target="#b15">Guo et al. (2023)</ref>, we analyzed and re-evaluated the responses in the translated French dataset. The purpose was to confirm the hypothesis that a human expert can generally distinguish between a ChatGPT-generated text and one written by a human. We initially rated the translation quality on a scale of 1 to 5, with 5 indicating a good translation. Translations with scores exceeding 3 were retained even though ChatGPT managed to interpret badly translated questions extremely well.</p><p>Additionally, we assessed the correlation between our detector's performance and translation quality scores, and found it to be weak.<ref type="foot" target="#foot_6">8</ref> </p><p>About discriminating linguistics clues We identified several visible characteristics in the generated texts. ChatGPT uses an impersonal and didactic style, characterized by extensive use of the impersonal form, conditionals statements, as shown here:</p><p>• "Cela pourrait également nuire à la réputation de l'entreprise (...)"</p><p>• "Cela pourrait entraîner une baisse des dépenses des consommateurs (...)"</p><p>• "Si vous êtes allergique aux chats, cela signifie que votre corps a une réaction anormale aux protéines présentes dans leur peau, leur urine ou leur salive. Si vous deviez manger de la viande de chat, il est possible que (...)"</p><p>The language model structures its responses to create an impression of coherence and clarity. It often reformulates the question in its answer, resulting in a didactic response that aligns with the question.</p><p>• Question: "Pourquoi mon signal wifi semble se dégrader avec le temps ? Je réinitialise/redémarre constamment mon routeur et/ou mon modem. Je dois noter que je vis dans un petit appartement et que j'ai utilisé 2 routeurs haut de gamme. Explique comme si j'avais cinq ans." GPT : "Il peut y avoir plusieurs raisons pour lesquelles votre signal Wi-Fi se dégrade avec le temps. Voici quelques explications possibles : (...)"</p><p>ChatGPT's responses are often general, and it redefines the subject on which the question is asked.</p><p>When asked "How does nature solve for Pi ?" or "*Comment la nature résout-elle pour Pi ?", it started by stating the definition of Pi:</p><p>• "Pi, ou le nombre 3,14, est une constante mathématique qui représente le rapport de la circonférence d'un cercle à son diamètre. La valeur de Pi est d'environ 3,14, mais c'est un nombre irrationnel (...)"</p><p>Additionally, ChatGPT is characterized by the absence of some human markers, such as errors in punctuation, spelling, or grammar. The language model does not use any tone, judgment, or personal touch, such as ("je pense que" / "je juge que") , which creates a neutral impression. While its responses lack a human touch, it provides a specific recommendation when discussing technical or sensitive issues, such as consulting a specialist or seeking medical attention. Also, It does not ask any questions except towards the end of the response.</p><p>• "(...) il est important de consulter un médecin dès que possible. N'hésitez pas à appeler le 911 ou votre numéro d'urgence local si vous ressentez des douleurs à la poitrine ou d'autres symptômes d'une condition médicale grave." • "(...) Il est important de vérifier les instructions de votre four à micro-ondes pour voir si le support en métal peut être utilisé en toute sécurité." • "(...) Encore une fois, je vous recommande de parler avec un dermatologue ou un autre professionnel de la santé pour déterminer le plan de traitement le plus approprié pour votre cas spécifique." • "(...) J'espère que cela vous aidera à l'expliquer ! Y a-t-il autre chose que vous aimeriez savoir sur Vénus ou sur la façon dont elle se déplace dans l'espace ?"</p><p>Our study suggests that these visible differences could be used to differentiate between human-written texts and AI-generated texts automatically. It shall be noted that the ChatGPT tendency to produce didactic text can lead any detector trained on its content to be easily fooled assuming the text follows the same patterns. This is what showed our results in Table <ref type="table" target="#tab_3">3</ref> ("Adversarial" column results).</p><p>About the character-level perturbations Interestingly, the introduction of character-level perturbations increased the model's capability of detecting the adversarial human content, albeit at the expense of its capacity to detect Bing automatically generated content. This finding suggests that the addition of perturbations to content renders it more comparable to human-generated content, confirming, for French, previous work on the subject <ref type="bibr" target="#b37">(Wolff &amp; Wolff, 2020)</ref>. These effects were much more difficult to notice in the in-domain scenarios because of the high-accuracy of the model.</p><p>Enhancing the robustness to noise of our models Although not the focus of this work, one obvious path of improvement is to add the same kind of perturbations to the training data in order to make the model more robust. To this end, we performed a quick set of experiments where we added to the training set, 50% of its content perturbed by mispellings and 50% with homoglyphs leading to a training set twice as big.<ref type="foot" target="#foot_7">9</ref> These results, presented in the lower half of Table <ref type="table" target="#tab_3">3</ref>, demonstrate that both models exhibit a minor decrease in human detection accuracy. However, they achieve substantial enhancements and improved robustness, particularly when utilizing CamemBERTa, for detecting ChatGPT-generated text in the presence of noisy data. Consequently, the detector models are now less inclined to attribute writing errors to human authors and instead focus more on writing style. This is evident from the scores obtained on the Adversarial set, where the performance on noisy data aligns more closely with that on the original set. However, this does not make the model less sensitive to other kinds of noises but it is an interesting path of improvement. As always with noisy adversarial user-generated content, the question is to find a more general approach that will avoid a constant cat and mouse game when it comes to processing productive content.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Take home message</head><p>The key takeaway from our study is that detecting adversarial text, which is designed to evade detection by language models, presents a significant challenge. OpenAI has reported<ref type="foot" target="#foot_8">10</ref> a success rate of 26% in their own supervised settings when identifying adversarial content in a challenge set of English text.<ref type="foot" target="#foot_9">11</ref> Furthermore, OpenAI has stated that their detection methods are unreliable for text shorter than 1000 characters. We would like to emphasize that our study does not claim to have produced an universally accurate detector. Our strong results are based on in-domain testing and, unsurprisingly, do not generalize in out-of-domain scenarios. This is even more so when used on text specifically designed to fool language model detectors and on text intentionally stylistically similar to ChatGPT-generated text, especially instructional text. We are currently extending the adversarial dataset using much more various sources as we believe that understanding the shortcoming of these models is of crucial importance.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">Conclusion</head><p>In conclusion, this paper proposed a methodology for developing and evaluating ChatGPT detectors in multiple languages, focusing on French as a case study. The proposed method involved translating an English dataset into French and training a classifier on the translated data. The results demonstrate that the proposed method can effectively detect ChatGPT-generated text, with a certain degree of robustness against basic attack techniques, albeit exclusively within the in-domain setting. However, the detectors display evident vulnerabilities in out-of-domain contexts, emphasizing the importance of considering different writing styles in training language models. Additionally, the study highlights the significant challenge of detecting adversarial text, which even OpenAI's detection methods have difficulties with. The key takeaway is that caution should be exercised when applying in-domain testing results to a wider variety of content. We provide open-source resources to further advance research in this and are currently working to extend the adversarial dataset to better understand the limitations of these models.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head></head><label></label><figDesc>, later<ref type="bibr" target="#b12">Fagni et al. (2021)</ref> demonstrated the performance of another RoBERTa-based detector on machine-generated tweets,<ref type="bibr" target="#b35">Uchendu et al. (2020)</ref> also used RoBERTa to spot news generated by several language models, whileAntoun et al. (2021b)  created an ELECTRA-based model(Antoun  et al., 2021a)  to spot articles generated by their AraGPT2. The authors stated that the success of their method was due to the model being pre-trained on the exact same dataset as AraGPT2, and also due to the replaced-token detection pre-training objective (RTD)<ref type="bibr" target="#b8">(Clark et al., 2020)</ref>, which bears a resemblance to the synthetic text detection objective.<ref type="bibr" target="#b25">Nguyen-Son et al. (2021)</ref> proposed a detector that uses the text similarity with round-trip translation (TSRT), to detect a machine-translated text from a never before seen translator, and achieved 86.9% detection accuracy. On the other hand,</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 1 :</head><label>1</label><figDesc>Average and standard deviation of F1 scores for the best model on the validation set with adversarial perturbations.</figDesc><table><row><cell cols="2">Train Test</cell><cell>QA</cell><cell></cell><cell>QA Full</cell><cell cols="2">Sentence</cell><cell>QA</cell><cell></cell><cell>Full Full</cell><cell cols="2">Sentence</cell><cell>QA</cell><cell></cell><cell>Sentence Full</cell><cell cols="2">Sentence</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>French</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell cols="14">CamemBERT CamemBERTa 98.23±0.3 98.48±0.3 32.00±6.3 90.13±1.0 98.49±0.4 29.11±3.6 81.82±3.4 98.37±0.5 97.79±0.4 40.20±8.6 92.43±1.2 98.44±0.4 25.08±4.7 93.48±5.2</cell><cell cols="3">96.41±0.6 90.27±0.3 96.71±0.1 91.18±0.2</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell cols="2">English</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>RoBERTa ELECTRA</cell><cell cols="16">99.88±0.03 98.91±0.2 51.23±7.6 98.58±0.7 99.86±0.03 66.93±5.4 71.10±19.4 99.39±0.07 98.17±0.1 99.27±0.2 99.07±0.2 65.23±8.3 96.24±0.7 99.35±0.1 43.82±9.1 93.57±1.9 97.05±0.4 93.60±0.1</cell></row><row><cell cols="2">Evalution set</cell><cell cols="15">French Precision Recall F1-Score Precision Recall F1-Score Precision Recall F1-Score Precision Recall F1-Score Precision Recall F1-Score English Multilingual Human Expert French-Test English-Test</cell></row><row><cell>Full subset</cell><cell cols="2">ChatGPT 0.95 Human 1</cell><cell>1 0.94</cell><cell>0.97 0.97</cell><cell>0.99 1</cell><cell>1 0.99</cell><cell>0.99 0.99</cell><cell>0.99 1</cell><cell>1 0.99</cell><cell>0.99 0.99</cell><cell>0.98 1</cell><cell>1 0.98</cell><cell>0.99 0.99</cell><cell>0.98 0.88</cell><cell>0.87 0.98</cell><cell>0.92 0.93</cell></row><row><cell>+misspelling</cell><cell>ChatGPT Human</cell><cell>1 0.95</cell><cell>0.95 1</cell><cell>0.98 0.98</cell><cell>0.99 0.82</cell><cell>0.79 0.99</cell><cell>0.88 0.9</cell><cell>1 0.96</cell><cell>0.96 1</cell><cell>0.98 0.98</cell><cell>0.99 0.99</cell><cell>0.99 0.99</cell><cell>0.99 0.99</cell><cell>--</cell><cell>--</cell><cell>--</cell></row><row><cell>+homoglyphs</cell><cell>ChatGPT Human</cell><cell>1 0.94</cell><cell>0.94 1</cell><cell>0.97 0.97</cell><cell>0.99 0.88</cell><cell>0.87 0.99</cell><cell>0.93 0.93</cell><cell>1 0.99</cell><cell>0.97 0.99</cell><cell>0.99 0.99</cell><cell>0.99 0.97</cell><cell>0.99 1</cell><cell>0.99 0.99</cell><cell>--</cell><cell>--</cell><cell>--</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 2 :</head><label>2</label><figDesc></figDesc><table /><note><p>Detailed test set scores (full subset) breakdown of CamemBERTa (French), RoBERTa (English), XLM-R (Multilingual) trained on the full subset.</p></note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 3 :</head><label>3</label><figDesc>raw +ms +hg raw +ms +hg raw +ms +hg raw +ms +hg raw +ms +hg CamemBERTa 99.19 99.92 100 88.75 99.01 99.10 96.17 100 99.57 33.57 87.61 85.49 99.19 81.42 84.96 92.45 44.81 48.37 Accuracy scores of CamemBERTa and XLM-R on the French out-of-domain test sets. ms: misspelling, hg: homoglyphs. * Dataset mix was 100% raw, 50% misspellings and 50% homoglyphs.</figDesc><table><row><cell>True label</cell><cell>Human</cell><cell>ChatGPT</cell></row><row><cell cols="3">Model raw +ms +hg XLM-R FTB 99.43 99.59 99.76 95.35 99.39 99.55 96.59 100 99.57 59.12 89.05 82.67 94.69 60.18 62.83 77.46 28.18 35.72 FAQ-Rand FAQ-Gouv Adversarial Native BingGPT</cell></row><row><cell></cell><cell>Trained on a mix of raw, misspellings and homoglyphs  *</cell><cell></cell></row><row><cell cols="3">CamemBERTa 98.98 98.54 98.79 80.56 84.51 84.73 90.64 91.49 90.21 45.90 42.62 44.26 100 99.12 99.95 91.51 91.51 90.57</cell></row><row><cell>XLM-R</cell><cell cols="2">98.54 98.78 98.79 85.20 88.84 95.32 92.34 96.17 95.32 62.26 60.66 62.30 100 97.34 99.16 62.26 53.77 56.60</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2" xml:id="foot_0"><p>At the time of writing, OpenAI was working on a tool to statistically watermark text generated by GPT-like models according to Scott Aaronson, a guest researcher at OpenAI https://scottaaronson.blog/?p=6823</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3" xml:id="foot_1"><p>https://blogs.microsoft.com/blog/2023/02/07/reinventing-search-with-a-new-ai-powered-microsoft-bing-and-edge-yourcopilot-for-the-web/</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="4" xml:id="foot_2"><p>https://chat.openai.com/chat</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="5" xml:id="foot_3"><p>The detailed annotation guideline will be publicly released with our dataset.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="6" xml:id="foot_4"><p>The model paper is currently under review and will be released soon.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="7" xml:id="foot_5"><p>We also tested mDeBERTa<ref type="bibr" target="#b16">(He et al., 2021)</ref> but it wasn't converging in any of our hyper-parameter tuning experiments.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="8" xml:id="foot_6"><p>With three different correlations measures showing the same trend: Spearman's τ of -0.25, Pearson's R of -0.26 and Kendall's τ of -0.24.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="9" xml:id="foot_7"><p>We also tested a 50% original training set + 25% misspelling + 25% homoglyphs pertubations model that led to slightly inferior performance, less than one percentage point of difference.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="10" xml:id="foot_8"><p>https://openai.com/blog/new-ai-classifier-for-indicating-ai-written-text</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="11" xml:id="foot_9"><p>Not released as the time of writing.</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>Acknowledgments</head><p>We thank the reviewers for their insightful comments. This work was partly funded by <rs type="person">Benoît Sagot</rs>'s chair in the <rs type="programName">PRAIRIE institute</rs> funded by the <rs type="funder">French national research agency</rs> (ANR as part of the "<rs type="programName">Investissements d'avenir" program</rs> under the reference <rs type="grantNumber">ANR-19-P3IA-0001</rs>). This work also received funding from the <rs type="funder">European Union</rs>'s <rs type="programName">Horizon 2020 research and innovation program</rs> under grant agreement No. <rs type="grantNumber">101021607</rs>. The authors are grateful to the OPAL infrastructure from <rs type="institution">Université Côte d'Azur</rs> for providing resources and support.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_j4jvgDC">
+					<orgName type="program" subtype="full">PRAIRIE institute</orgName>
+				</org>
+				<org type="funding" xml:id="_peAdHAH">
+					<idno type="grant-number">ANR-19-P3IA-0001</idno>
+					<orgName type="program" subtype="full">Investissements d&apos;avenir&quot; program</orgName>
+				</org>
+				<org type="funding" xml:id="_FvFUVj5">
+					<idno type="grant-number">101021607</idno>
+					<orgName type="program" subtype="full">Horizon 2020 research and innovation program</orgName>
+				</org>
+			</listOrg>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Building a treebank for French</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Abeillé</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Clément</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Kinyon</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Second International Conference on Language Resources and Evaluation (LREC&apos;00)</title>
+		<meeting>the Second International Conference on Language Resources and Evaluation (LREC&apos;00)<address><addrLine>Athens, Greece</addrLine></address></meeting>
+		<imprint>
+			<publisher>European Language Resources Association (ELRA</publisher>
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">AraELECTRA: Pre-training text discriminators for Arabic language understanding</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Antoun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Baly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Hajj</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Sixth Arabic Natural Language Processing Workshop</title>
+		<meeting>the Sixth Arabic Natural Language Processing Workshop<address><addrLine>Kyiv, Ukraine (Virtual)</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="191" to="195" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">AraGPT2: Pre-trained transformer for Arabic language generation</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Antoun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Baly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Hajj</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Sixth Arabic Natural Language Processing Workshop</title>
+		<meeting>the Sixth Arabic Natural Language Processing Workshop<address><addrLine>Kyiv, Ukraine (Virtual)</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="196" to="207" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<title level="m" type="main">On the dangers of stochastic parrots: Can language models be too big</title>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">M</forename><surname>Bender</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Gebru</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mcmillan-Major</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Shmitchell</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3442188.3445922</idno>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Language models are few-shot learners</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Brown</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Mann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Ryder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Subbiah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">D</forename><surname>Kaplan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Dhariwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Neelakantan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Shyam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Sastry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Askell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Advances in neural information processing systems</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page" from="1877" to="1901" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<author>
+			<persName><forename type="first">Chen</forename><forename type="middle">S</forename><surname>Ju</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Dong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Fang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Zeng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zhang R</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Zhang R</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Xie</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2004.03329</idno>
+		<title level="m">Meddialog: a large-scale medical dialogue dataset</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<title level="m" type="main">Palm: Scaling language modeling with pathways</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Chowdhery</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Narang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Devlin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Bosma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Mishra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Roberts</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Barham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">W</forename><surname>Chung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Sutton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Gehrmann</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2204.02311</idno>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Deep reinforcement learning from human preferences</title>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">F</forename><surname>Christiano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Leike</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Brown</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Martic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Legg</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Amodei D. ; I</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">U</forename><forename type="middle">V</forename><surname>Guyon</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Luxburg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="s">Advances in Neural Information Processing Systems</title>
+		<editor>
+			<persName><forename type="first">S</forename><surname>Bengio</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">H</forename><surname>Wallach</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">R</forename><surname>Fergus</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">S</forename><surname>Vishwanathan</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">R</forename><surname>Garnett</surname></persName>
+		</editor>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<date type="published" when="2017">2017</date>
+			<publisher>Curran Associates, Inc</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">ELECTRA: Pre-training text encoders as discriminators rather than generators</title>
+		<author>
+			<persName><forename type="first">Clark</forename><forename type="middle">K</forename><surname>Luong M.-T</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><forename type="middle">V</forename><surname>Le</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">D</forename><surname>Manning</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ICLR</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Unsupervised cross-lingual representation learning at scale</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Conneau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Khandelwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Goyal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Chaudhary</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Wenzek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Guzmán</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Grave</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Zettlemoyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Stoyanov</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2020.acl-main.747</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics</title>
+		<title level="s">Association for Computational Linguistics</title>
+		<meeting>the 58th Annual Meeting of the Association for Computational Linguistics</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="8440" to="8451" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">MFAQ: a multilingual FAQ dataset</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>De</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Lotfi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Buhmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Daelemans</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2021.mrqa-1.1</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 3rd Workshop on Machine Reading for Question Answering</title>
+		<meeting>the 3rd Workshop on Machine Reading for Question Answering<address><addrLine>Punta Cana, Dominican Republic</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="1" to="13" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">BERT: Pre-training of deep bidirectional transformers for language understanding</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Devlin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chang M.-W</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Toutanova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/N19-1423</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies</title>
+		<title level="s">Association for Computational Linguistics</title>
+		<meeting>the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies<address><addrLine>Minneapolis, Minnesota</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="4171" to="4186" />
+		</imprint>
+	</monogr>
+	<note>Long and Short Papers</note>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Tweepfake: About detecting deepfake tweets</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Fagni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Falchi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Gambini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Martella</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Tesconi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Plos one</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page">251415</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">ELI5: long form question answering</title>
+		<author>
+			<persName><forename type="first">Fan</forename><forename type="middle">A</forename><surname>Jernite</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Perez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Grangier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Weston</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Auli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/p19-1346</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 57th Conference of the Association for Computational Linguistics, ACL 2019</title>
+		<title level="s">Association for Computational Linguistics</title>
+		<editor>
+			<persName><forename type="first">A</forename><surname>Korhonen</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">D</forename><forename type="middle">R</forename><surname>Traum</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">L</forename><surname>Màrquez</surname></persName>
+		</editor>
+		<meeting>the 57th Conference of the Association for Computational Linguistics, ACL 2019<address><addrLine>Florence, Italy</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2019-07-28">2019. July 28-August 2, 2019</date>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="3558" to="3567" />
+		</imprint>
+	</monogr>
+	<note>Long Papers</note>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<title level="m" type="main">Switch transformers: Scaling to trillion parameter models with simple and efficient sparsity</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Fedus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Zoph</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Shazeer</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2101.03961</idno>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<author>
+			<persName><forename type="first">B</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Nie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Ding</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Yue</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Wu</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2301.07597</idno>
+		<title level="m">How close is chatgpt to human experts? comparison corpus, evaluation, and detection</title>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<title level="m" type="main">Debertav3: Improving deberta using electra-style pre-training with gradient-disentangled embedding sharing</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>He</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Chen W</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<monogr>
+		<title level="m" type="main">Training computeoptimal large language models</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Hoffmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Borgeaud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mensch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Buchatskaya</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Cai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Rutherford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">D L</forename><surname>Casas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">A</forename><surname>Hendricks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Welbl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Clark</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2203.15556</idno>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Automatic detection of entitymanipulated text using factual knowledge</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Jawahar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Abdul-Mageed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Lakshmanan</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2022.acl-short.10</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics</title>
+		<meeting>the 60th Annual Meeting of the Association for Computational Linguistics<address><addrLine>Dublin, Ireland</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2022">2022</date>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page" from="86" to="93" />
+		</imprint>
+	</monogr>
+	<note>Short Papers</note>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<title level="m" type="main">Roberta: A robustly optimized bert pretraining approach</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Goyal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Du</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Joshi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Levy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Lewis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Zettlemoyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Stoyanov</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2022.acl-short.10</idno>
+		<idno type="arXiv">arXiv:1907.11692</idno>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<title level="m" type="main">Nlp augmentation</title>
+		<author>
+			<persName><forename type="first">Ma</forename><forename type="middle">E</forename></persName>
+		</author>
+		<ptr target="https://github.com/makcedward/nlpaug" />
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Www&apos;18 open challenge: Financial opinion mining and question answering</title>
+		<author>
+			<persName><forename type="first">Maia</forename><forename type="middle">M</forename><surname>Handschuh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Freitas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Davis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Mcdermott R</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Zarrouk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bal-Ahur</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3184558.3192301</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Companion Proceedings of The Web Conference 2018, WWW &apos;18</title>
+		<meeting><address><addrLine>Republic and Canton of Geneva, CHE</addrLine></address></meeting>
+		<imprint>
+			<publisher>International World Wide Web Conferences Steering Committee</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="1941" to="1942" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">CamemBERT: a tasty French language model</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Martin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Muller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="middle">J</forename><surname>Ortiz Suárez P</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Dupont</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Romary</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">A</forename><surname>De</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">É</forename><surname>Clergerie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Seddah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Sagot</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2020.acl-main.645</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics</title>
+		<title level="s">Association for Computational Linguistics</title>
+		<meeting>the 58th Annual Meeting of the Association for Computational Linguistics</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="7203" to="7219" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<monogr>
+		<title level="m" type="main">The radicalization risks of gpt-3 and advanced neural language models</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Mcguffie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Newhouse</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2009.06807</idno>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<monogr>
+		<title level="m" type="main">Detectgpt: Zero-shot machine-generated text detection using probability curvature</title>
+		<author>
+			<persName><forename type="first">Mitchell</forename><forename type="middle">E</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Khazatsky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Manning</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">D</forename><surname>Finn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename></persName>
+		</author>
+		<idno type="arXiv">arXiv:2301.11305</idno>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Machine translated text detection through text similarity with round-trip translation</title>
+		<author>
+			<persName><forename type="first">-Son H.-Q</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Thao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Hidano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Gupta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kiyomoto</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2021 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies</title>
+		<meeting>the 2021 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies</meeting>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="5792" to="5797" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Training language models to follow instructions with human feedback</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Ouyang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Almeida</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Wainwright</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Mishkin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Agarwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Slama</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Gray</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Schulman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Hilton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Kelton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Miller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Simens</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Askell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Welinder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Christiano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Leike</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lowe R</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Advances in Neural Information Processing Systems</title>
+		<editor>
+			<persName><forename type="first">A</forename><forename type="middle">H</forename><surname>Oh</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">A</forename><surname>Agarwal</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">D</forename><surname>Belgrave</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">K</forename><surname>Cho</surname></persName>
+		</editor>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<title level="m" type="main">Improving language understanding by generative pre-training</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Radford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Narasimhan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Salimans</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Sutskever</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<title level="m" type="main">Language models are unsupervised multitask learners</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Radford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Child R</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Luan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Amodei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Sutskever</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<monogr>
+		<title level="m" type="main">Scaling language models: Methods, analysis &amp; insights from training gopher</title>
+		<author>
+			<persName><forename type="first">Rae</forename><forename type="middle">J W</forename><surname>Borgeaud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Cai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Millican</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Hoffmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Song</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Aslanides</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Henderson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ring R</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Young</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2112.11446</idno>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Exploring the limits of transfer learning with a unified text-to-text transformer</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Raffel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Shazeer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Roberts</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Narang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Matena</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Li</forename><forename type="middle">W</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">J</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Machine Learning Research</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="issue">140</biblScope>
+			<biblScope unit="page" from="1" to="67" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<monogr>
+		<title level="m" type="main">Megatron-LM: Training multi-billion parameter language models using model parallelism</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Shoeybi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Patwary</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Puri R</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Legresley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Casper</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Catanzaro</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1909.08053</idno>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<title level="m" type="main">Release strategies and the social impacts of language models</title>
+		<author>
+			<persName><forename type="first">I</forename><surname>Solaiman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Brundage</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Clark</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Askell</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Herbert-Voss A</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Radford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Krueger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">W</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kreps</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1908.09203</idno>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Learning to summarize with human feedback</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Stiennon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Ouyang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Ziegler</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lowe R</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Voss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Radford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Amodei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">F</forename><surname>Christiano</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="s">Advances in Neural Information Processing Systems</title>
+		<editor>
+			<persName><forename type="first">H</forename><surname>Larochelle</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">M</forename><surname>Ranzato</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">R</forename><surname>Hadsell</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">M</forename><surname>Balcan</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">H</forename><surname>Lin</surname></persName>
+		</editor>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page" from="3008" to="3021" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Curran</forename><surname>Associates</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Inc</forename></persName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Authorship attribution for neural text generation</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Uchendu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Le</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Shu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Lee</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2020.emnlp-main.673</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)</title>
+		<title level="s">Association for Computational Linguistics</title>
+		<meeting>the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="8384" to="8395" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<monogr>
+		<title level="m" type="main">Ethical and social risks of harm from language models</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Weidinger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Mellor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Rauh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Griffin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Uesato</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Huang P.-S</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Cheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Glaese</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Balle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Kasirzadeh</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2112.04359</idno>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<monogr>
+		<author>
+			<persName><forename type="first">M</forename><surname>Wolff</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Wolff</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2002.11768</idno>
+		<title level="m">Attacking neural text detectors</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Wikiqa: A challenge dataset for open-domain question answering</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">W</forename><surname>Yih</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">-T</forename><surname>Meek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing: ACL -Association for Computational Linguistics</title>
+		<meeting>the 2015 Conference on Empirical Methods in Natural Language Processing: ACL -Association for Computational Linguistics</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Defending against neural fake news</title>
+		<author>
+			<persName><surname>Zellers R</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Holtzman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Rashkin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Bisk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Farhadi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Roesner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Choi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Advances in neural information processing systems</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

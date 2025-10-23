@@ -10,7 +10,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 				<funder>
 					<orgName type="full">Poul Due Jensen Foundation</orgName>
 				</funder>
-				<funder ref="#_cgzy84F">
+				<funder ref="#_6APuGfh">
 					<orgName type="full">Danish Council for Independent Research (DFF)</orgName>
 				</funder>
 			</titleStmt>
@@ -58,13 +58,13 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 							<date/>
 						</imprint>
 					</monogr>
-					<idno type="MD5">4F881987FACD23E492C67289440BBE27</idno>
+					<idno type="MD5">39CB57BA33EFB8EA0DF3E31C9AF980A7</idno>
 				</biblStruct>
 			</sourceDesc>
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.0" ident="GROBID" when="2024-04-12T14:52+0000">
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:12+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<ref target="https://github.com/kermitt2/grobid"/>
 				</application>
@@ -104,7 +104,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <div><p>Acknowledgements. This research was partially funded by the <rs type="funder">Danish Council for Independent Research (DFF)</rs> under grant agreement no. <rs type="grantNumber">DFF-8048-00051B</rs> and the <rs type="funder">Poul Due Jensen Foundation</rs>.</p></div>
 			</div>
 			<listOrg type="funding">
-				<org type="funding" xml:id="_cgzy84F">
+				<org type="funding" xml:id="_6APuGfh">
 					<idno type="grant-number">DFF-8048-00051B</idno>
 				</org>
 			</listOrg>

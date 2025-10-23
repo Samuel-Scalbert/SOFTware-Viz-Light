@@ -8,14 +8,14 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 			<titleStmt>
 				<title level="a" type="main">Enhancing Evidence-Based Medicine with Natural Language Argumentative Analysis of Clinical Trials</title>
 				<funder>
-					<orgName type="full">3IA Côte d&apos;Azur Investments</orgName>
-				</funder>
-				<funder ref="#_4sppxPj #_sECS8RZ">
-					<orgName type="full">Agence Nationale de la Recherche</orgName>
-					<orgName type="abbreviated">ANR</orgName>
+					<orgName type="full">French government</orgName>
 				</funder>
 				<funder>
-					<orgName type="full">French government</orgName>
+					<orgName type="full">3IA Côte d&apos;Azur Investments</orgName>
+				</funder>
+				<funder ref="#_FFs9Qa3 #_mwRh3rJ">
+					<orgName type="full">Agence Nationale de la Recherche</orgName>
+					<orgName type="abbreviated">ANR</orgName>
 				</funder>
 			</titleStmt>
 			<publicationStmt>
@@ -81,14 +81,14 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 							<date type="published" when="2020-10">October 2020</date>
 						</imprint>
 					</monogr>
-					<idno type="MD5">FB4DF6A63424E40BD66A595B5B1FFF65</idno>
+					<idno type="MD5">47CA8FCB2F68BB42586132C296EC95C1</idno>
 					<idno type="DOI">10.1016/j.artmed.2021.102098</idno>
 				</biblStruct>
 			</sourceDesc>
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.0" ident="GROBID" when="2024-04-12T14:45+0000">
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:14+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<ref target="https://github.com/kermitt2/grobid"/>
 				</application>
@@ -161,12 +161,12 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <div><head>Acknowledgements</head><p>This work is partly funded by the <rs type="funder">French government labelled</rs> <rs type="programName">PIA program</rs> under its <rs type="projectName">IDEX UCA JEDI</rs> project (<rs type="grantNumber">ANR-15-IDEX-0001</rs>). This work has been supported by the <rs type="funder">French government</rs>, through the <rs type="funder">3IA Côte d'Azur Investments</rs> in the Future project managed by the <rs type="funder">National Research Agency (ANR)</rs> with the reference number <rs type="grantNumber">ANR-19-P3IA-0002</rs></p></div>
 			</div>
 			<listOrg type="funding">
-				<org type="funded-project" xml:id="_4sppxPj">
+				<org type="funded-project" xml:id="_FFs9Qa3">
 					<idno type="grant-number">ANR-15-IDEX-0001</idno>
 					<orgName type="project" subtype="full">IDEX UCA JEDI</orgName>
 					<orgName type="program" subtype="full">PIA program</orgName>
 				</org>
-				<org type="funding" xml:id="_sECS8RZ">
+				<org type="funding" xml:id="_mwRh3rJ">
 					<idno type="grant-number">ANR-19-P3IA-0002</idno>
 				</org>
 			</listOrg>
@@ -652,13 +652,13 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 			<persName><forename type="first">Sanjay</forename><surname>Modgil</surname></persName>
 		</author>
 		<author>
-			<persName><surname>Henry Prakken</surname></persName>
+			<persName><forename type="first">Henry</forename><surname>Prakken</surname></persName>
 		</author>
 		<author>
-			<persName><forename type="first">Francesca</forename><surname>Simari</surname></persName>
+			<persName><forename type="first">Guillermo</forename><surname>Simari</surname></persName>
 		</author>
 		<author>
-			<persName><surname>Toni</surname></persName>
+			<persName><forename type="first">Francesca</forename><surname>Toni</surname></persName>
 		</author>
 	</analytic>
 	<monogr>

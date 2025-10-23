@@ -1,0 +1,1176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Alin: Improving Interactive Ontology Matching by Interactively Revising Mapping Suggestions</title>
+				<funder ref="#_RguY95C">
+					<orgName type="full">unknown</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Jomar</forename><surname>Da Silva</surname></persName>
+							<email>jomar.silva@uniriotec.br</email>
+							<affiliation key="aff0">
+								<orgName type="department">Graduate Program in Informatics</orgName>
+								<orgName type="institution">Federal University of Rio de Janeiro (UFRJ)</orgName>
+								<address>
+									<country key="BR">Brazil</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Kate</forename><surname>Revoredo</surname></persName>
+							<email>katerevoredo@ppgi.ufrj.br</email>
+							<affiliation key="aff1">
+								<orgName type="department">Graduate Program in Informatics</orgName>
+								<orgName type="institution">Federal University of Rio de Janeiro (UFRJ)</orgName>
+								<address>
+									<country key="BR">Brazil</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Fernanda</forename><surname>Baião</surname></persName>
+							<email>fbaiao@inf.puc-rio.br</email>
+							<affiliation key="aff2">
+								<orgName type="department">Department of Informatics</orgName>
+								<orgName type="institution">Pontifical Catholic University of Rio de Janeiro (PUC-Rio)</orgName>
+								<address>
+									<country key="BR">Brazil</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Jérôme</forename><surname>Euzenat</surname></persName>
+							<email>jerome.euzenat@inria.fr</email>
+							<affiliation key="aff3">
+								<orgName type="institution" key="instit1">Univ. Grenoble Alpes</orgName>
+								<orgName type="institution" key="instit2">INRIA</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">Grenoble INP</orgName>
+								<orgName type="institution" key="instit5">LIG</orgName>
+								<address>
+									<postCode>F-38000</postCode>
+									<settlement>Grenoble</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Alin: Improving Interactive Ontology Matching by Interactively Revising Mapping Suggestions</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">810D4189C989CF2B045FFC88339B5770</idno>
+					<idno type="DOI">10.1017/S0269888919000249</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:15+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Ontology matching aims at discovering mappings between the entities of two ontologies. It plays an important role in the integration of heterogeneous data sources that are described by ontologies. Interactive ontology matching involves domain experts in the matching process. In some approaches, the expert provides feedback about mappings between ontology entities, i.e., these approaches select mappings to present to the expert who replies which of them should be accepted or rejected, so taking advantage of the knowledge of domain experts towards finding an alignment. In this paper, we present Alin, an interactive ontology matching approach which uses expert feedback not only to approve or reject selected mappings, but also to dynamically improve the set of selected mappings, i.e., to interactively include and to exclude mappings from it. This additional use for expert answers aims at increasing in the benefit brought by each expert answer. For this purpose, Alin uses four techniques. Two techniques were used in previous versions of Alin to dynamically select concept and attribute mappings. Two new techniques are introduced in this paper: one to dynamically select relationship mappings and another one to dynamically reject inconsistent selected mappings using anti-patterns. We compared Alin with state-of-theart tools, showing that it generates alignment of comparable quality.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>An ontology is a formal and explicit artifact that represents a shared conceptualization on a particular domain, structurally consisting of a collection of interconnected entities (concepts, attributes of concepts and relationships between concepts). One advantage of the use of ontologies is to improve communication, not only among humans but also among application systems using these ontologies. This, in turn, fosters interoperability. However, due to the recent and steeply increasing advancements of the semantic technologies and the web, there are scenarios in which several ontologies exist for the same domain, each using different entities to refer to the same realworld object. These scenarios raise communication issues among people or application systems that use these different ontologies.</p><p>Ontology matching has successfully addressed these problems by discovering correspondences (mappings) between entities of different ontologies <ref type="bibr" target="#b12">(Euzenat and Shvaiko, 2013)</ref>. One of the possible approaches to the ontology matching process is the interactive one that involves domain experts in the matching process. This involvement can be used to improve the results over fully automatic approaches <ref type="bibr">(Paulheim et al., 2013)</ref>.  <ref type="bibr" target="#b12">(Euzenat and Shvaiko, 2013)</ref> In some interactive approaches, the domain expert provides feedback about mappings between ontology entities. These approaches select mappings to present to the expert who assesses which of them should be accepted or rejected. They take advantage of the domain expert knowledge to generate an alignment, and have, as their two main steps, the selection of the mappings to receive expert feedback and the propagation of this feedback. These approaches vary in techniques for these two steps.</p><p>Current approaches select mappings before beginning the propagation step, i.e., they do not select new mappings during the propagation step. The problem with these approaches is that they do not take advantage of the expert's knowledge to select new mappings.</p><p>We focused on this problem, the first time, with ALIN Syn <ref type="bibr" target="#b8">(Da Silva et al., 2017)</ref>, which interactively selected concept mappings. In a second time, we developed a new technique, which interactively selected attribute mappings, which gave rise to the other approach, ALIN Attr (Da Silva, Revoredo, Baião and <ref type="bibr" target="#b9">Euzenat, 2018)</ref>. Alin uses the two techniques implemented in ALIN Syn and ALIN Attr .</p><p>The contributions of this research are the definition of a new structural technique to interactively select new relationship mappings and the interactive use of anti-patterns, so using the expert feedback to improve the set of selected mappings.</p><p>The Ontology Alignment Evaluation Initiative (OAEI) is a coordinated international initiative whose one of the goals is to assess the strengths and weaknesses of ontology matching systems. Alin has participated in OAEI 2018 and was evaluated in the interactive matching track, with the Conference and Anatomy data sets. When compared with the other tools, Alin got the highest precision in both data sets <ref type="bibr" target="#b0">(Algergawy et al., 2018)</ref>. In the Conference track, Alin achieved the highest recall among all tools. On the Anatomy track, Alin has not reached a prominent recall, for reasons this paper will explain.</p><p>The rest of this paper is organized as follows. Section 2 reviews Interactive Ontology Matching. In Section 3, we present the related works. Section 4 fully details Alin algorithms. Section 5 describes our evaluation methodology and discusses experimental results. Finally, Section 6 concludes the paper.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">Interactive Ontology Matching</head><p>The ontology matching process starts with two ontologies, O and O , and returns an alignment A final between the input ontologies. An alignment is a set of mappings between entities e and e from O and O respectively, defining pairs of entities. The ontology matching process can receive as input an initial alignment A init . Besides, it can get input parameters and can access external resources, such as a dictionary (Figure <ref type="figure" target="#fig_0">1</ref>).</p><p>A mapping asserts a semantic relationship between its entities, such as disjunction, subsumption, or equivalence. In this paper, we only consider the equivalence relationship. The ontology  <ref type="bibr">(Paulheim et al., 2013)</ref> matching system is responsible to find, among all the possible mappings, the ones to be included in the alignment.</p><p>Given that two ontologies representing the same domain may present different types of heterogeneity (terminological, structural or semantic, among others), we need a combination of distinct techniques to correctly discover mappings between their entities. We can see an ontology matching tool as a collection of several matching components, each implementing a specific technique dealing with a specific heterogeneity type <ref type="bibr" target="#b28">(Ngo et al., 2013)</ref>.</p><p>Interactive ontology matching processes involve domain experts. The type of expert involvement used in this paper is through feedback on selected mappings. This type takes benefit from the domain expert knowledge by submitting selected mappings to the expert who assesses which of them should be accepted or rejected (Figure <ref type="figure" target="#fig_1">2</ref>).</p><p>One common type of approach for this type of expert involvement is to divide the process into two main steps: the selection of mappings and the propagation of expert feedback. The current tools that follow this type of approach only select mappings in the selection step. They do not select any new mappings in the propagation step, thus not taking advantage of the expert feedback to select mappings.</p><p>This paper presents an approach where various techniques are used to use the expert feedback to improve the set of selected mappings, including a new technique for interactively select relationship mappings, and also including the interactive use of mapping anti-patterns.</p><p>This paper shows that the new technique causes an increase in F-measure, and, if the approach uses expert feedback as the input of the technique, then the approach requires fewer interactions with the expert to do so. It also shows that the interactive use of mapping anti-patterns decrease the number of interactions with the expert.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Related Work</head><p>There are at least three areas in which users may be involved in a matching solution <ref type="bibr" target="#b12">(Euzenat and Shvaiko, 2013</ref>):</p><p>• by providing initial alignments to the system (before matching),</p><p>• by configuring (which includes strategy and parameter selection) and tuning the system, and • by providing feedback to matchers (during or after the automatic matching process) in order for them to adapt their results.</p><p>The type of user, a domain expert, involvement used in this paper is through feedback to matchers. They benefit from the domain expert knowledge by submitting selected mappings to the expert who assesses which of the mappings should be accepted or rejected. One common type of approach for this type of expert involvement is to divide the process into two main steps: the selection of mappings and the propagation of expert feedback.</p><p>In the propagation step, different approaches can use expert feedback in different ways. Some of these approaches automatically classify selected mappings using a threshold. The threshold is a value that indicates whether a mapping should be automatically accepted (or rejected) when its similarity values are greater (or smaller) than the threshold. Expert feedback is used to calculate this threshold <ref type="bibr">(Paulheim and Hertling, 2013;</ref><ref type="bibr" target="#b19">Hertling, 2012;</ref><ref type="bibr" target="#b11">Duan et al., 2010;</ref><ref type="bibr" target="#b32">Shi et al., 2009;</ref><ref type="bibr" target="#b4">Chunhua et al., 2015)</ref>. Some approaches automatically classify some selected mappings using a classifier. These approaches use expert feedback to create the training data set for learning the classifiers <ref type="bibr" target="#b26">(Lopes et al., 2015;</ref><ref type="bibr" target="#b34">To H. et al., 2009)</ref>. Others approaches use expert feedback to modify the weight of similarity metrics <ref type="bibr" target="#b11">(Duan et al., 2010;</ref><ref type="bibr" target="#b32">Shi et al., 2009;</ref><ref type="bibr" target="#b1">Balasubramani et al., 2015)</ref> or to change the value of similarity metrics <ref type="bibr" target="#b6">(Cruz et al., 2012</ref><ref type="bibr" target="#b5">(Cruz et al., , 2014))</ref>.</p><p>Alin and its previous versions use the expert feedback to improve the set of selected mappings. Others approaches also use expert feedback to improve the set of selected mappings <ref type="bibr" target="#b24">(Lambrix and Kaliyaperumal, 2016;</ref><ref type="bibr" target="#b23">Jiménez-Ruiz et al., 2012;</ref><ref type="bibr" target="#b14">Faria et al., 2013)</ref>.</p><p>ALIN Syn <ref type="bibr" target="#b8">(Da Silva et al., 2017)</ref>, an earlier version of Alin, in the mapping selection phase, selects concept mappings through semantic and lexical similarity metrics. Afterward, it automatically accepts the selected concept mappings with the same names. Then, it suspends some of these mappings using a semantic technique. In the propagation phase, ALIN Syn uses expert feedback to unsuspend some of these suspended mappings, returning them to the set of selected mappings, thus improving it. Alin uses all the techniques used in ALIN Syn .</p><p>ALIN Attr <ref type="bibr" target="#b9">(Da Silva, Revoredo, Baião and Euzenat, 2018)</ref>, another earlier version of Alin, has the same mapping selection phase as ALIN Syn , but without suspending selected concept mappings. In the programming phase, ALIN Attr uses expert feedback to select attribute mappings. Alin uses the attribute mapping selection technique used in ALIN Attr .</p><p>SAMBO <ref type="bibr" target="#b24">(Lambrix and Kaliyaperumal, 2016)</ref> takes advantage of the expert feedback to improve the set of selected mappings, removing the selected mappings that conflict with the accepted mappings, according to a reasoner.</p><p>Logmap <ref type="bibr" target="#b22">(Jiménez-Ruiz and Grau, 2011;</ref><ref type="bibr" target="#b23">Jiménez-Ruiz et al., 2012)</ref>, in the selection step, select mappings based on similarity metrics seeking to achieve a high recall. Still, in this step, the approach also uses automatic, non-interactive, techniques for improving the precision of the set of selected mappings. In the propagation step, the approach takes advantage of the expert feedback by identifying mappings that are inconsistent with the accepted mappings, according to a reasoner, and removes them from the set of selected mappings.</p><p>AML <ref type="bibr" target="#b14">(Faria et al., 2013)</ref> initially selects mappings based on lexical, semantic and structural similarities. AML places, in automatic mode, mappings that are above a given threshold in the alignment, which then goes through a repair process.</p><p>In the interactive mode, AML uses two thresholds. Those selected mappings that are below the lower threshold, are automatically rejected. Selected mappings above the higher threshold are automatically accepted unless they generate an inconsistency. In such a case, they are submitted to the expert. Concerning the selected mappings between the two thresholds, those which generate inconsistency are automatically rejected; the others are submitted to the expert.</p><p>AML uses the expert feedback to remove mappings from the set of selected mappings. If a selected mappings is accepted, all selected mappings that have an entity in common with it are rejected, as well as all those that are inconsistent with it.</p><p>In the current approaches, the impact of expert feedback on the set of selected mappings is the removal of mappings from it, to increase the precision and decrease the number of interactions.</p><p>Alin and its previous versions also focus on using the expert feedback to select mappings to improve the set of selected mappings.</p><p>Alin uses, besides the techniques of the earlier versions, another that selects relationships mappings associated with accepted concept mappings, and mapping anti-patterns.</p><p>In the approach of <ref type="bibr" target="#b4">(Chunhua et al., 2015)</ref>, there are formulas that associate relationships mappings to the concept mappings of the concepts associated with these relationships. The formulas serve to increase the weight of these concept mappings, which increases the likelihood of the approach automatically include them into the final alignment. Alin selects relationships mappings, to receive the expert feedback, associated with accepted concepts mappings.</p><p>Alin uses mapping anti-patterns to remove mappings from the set of selected mappings. ASMOV <ref type="bibr" target="#b21">(Jean-Mary et al., 2009)</ref> uses concepts similar to mapping anti-patterns, which it calls semantic verification inferences. ASMOV chooses from the mappings found in one of these semantic verification inferences to take out of the alignment. ASMOV is an automatic matching tool, so unlike Alin, it does not use expert feedback to identify which mappings to exclude from alignment.</p><p>Section 4 further explains the Alin approach.</p><p>Several areas use user knowledge to improve their performance. In information search and retrieval area, for example, feedback data based on direct interaction (e.g., clicks, scrolling) as well as on user profiles/preferences have been proven valuable for personalizing the search process, e.g., from how queries are understood to how relevance is assessed <ref type="bibr" target="#b2">(Belkin et al., 2010)</ref>. However, in such cases, the feedback is provided by users and is used for answering the query of the same user (in a single session for relevance feedback, or across session for personalization). Ontology matching could take advantage of user feedback to improve alignments. However, interactive ontology matching is usually disconnected from the use of the resulting alignments, which may be used in different contexts. It relies on expert feedback, as opposed to user feedback, in order to find the correct alignment, not one that suits the need of a particular user. In addition, relevance feedback in information retrieval is rather used to give more or less weight to characteristics of the instances. Here it is used to revise the mappings based on more logical constraint propagation, e.g., anti-patterns.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">The Alin Approach</head><p>In this section, we describe our approach for interactively matching two ontologies. The next subsection presents the overall Alin procedure. Section 4.2 presents the terminology used to explain our approach. Section 4.3 describe the Alin algorithms.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">General principles</head><p>Alin handles three sets of mappings:</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Accepted definitely to be retained in the alignment</head><p>Selected to be decided</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Suspended selected but filtered out</head><p>The procedure of Alin is:</p><p>1. Select mappings: select the first mappings; 2. Filter mappings: suspend some selected mappings, using semantic criteria for that; 3. Ask expert: accepts or rejects selected mappings 4. Propagate: select new mappings, reject some selected mappings or unsuspend some suspended mappings (depending on newly accepted mappings) 5. Go back to 3 as long as there are undecided selected mappings da silva et al.</p><p>All versions of Alin follow this general scheme. They mainly differ on the way they implement the Propagation step.</p><p>There were two previous versions of Alin: ALIN Syn , and ALIN Attr . The problem addressed by these versions was to improve the set of selected mappings using expert feedback to select better mappings to present to the expert. These versions differ from the type of mappings that is presented to the expert: ALIN Syn , uses concept mappings only, and ALIN Attr , uses attribute mappings in addition.</p><p>One contribution of this paper, concerning the previous Alin versions, is a new structural technique to select relationship mappings, implemented by the SelectRelationshipMappings algorithm (Algorithm 9) used in the Propagate phase. The goal of the new technique is to increase the F-measure, and if the expert feedback is used to assist it, do it more efficiently (more increase per provided feedback).</p><p>In order to show the benefits of exploiting expert feedback to choose questions, we have developed two new versions of Alin: ALIN N oRel and ALIN Aut .</p><p>Another contribution is the use of mapping anti-patterns to reject the selected mappings that are inconsistent with the mappings accepted by the expert. Alin uses various algorithms to avoid and undo these anti-patterns (Algorithms 10, 11, 12 and 13).</p><p>To identify the benefits of the interactive use of anti-patterns, we have developed another version of Alin: ALIN N oAP .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Terminology</head><p>In an ontology O, its entities e can be concepts (c), which are concepts in a domain, organized in a subconcept-superconcept hierarchy, or properties, which describe attributes (a) of concepts and relationships (r ) between concepts. Table <ref type="table">1</ref> provides predicates that can be used to model an ontology.</p><p>Table <ref type="table">1</ref> Predicates for ontology description (based on <ref type="bibr" target="#b4">(Chunhua et al., 2015)</ref>)</p><formula xml:id="formula_0">Predicate Description concept(c,O) c is a concept of ontology O attr(a,O) a is an attribute of ontology O relat(r,O) r is a relationship of ontology O entity(e,O)</formula><p>e is an entity of ontology O</p><formula xml:id="formula_1">sub(c 1 ,c 2 ) c 1 is subconcept of c 2 sub(c 1 ,c 2 ,n) c 1 is subconcept of c 2 with a maximum of n depth levels dis(c 1 ,c 2 ) c 1 is disjoint of c 2 rconcept(r,c 1 ,c 2 )</formula><p>r is a relationship between c 1 and c 2 aconcept(a,c)</p><p>a is an attribute of concept c</p><p>Given two ontologies O and O , an ontology matching approach will search for mappings between the entities of these two ontologies. In this paper, all entities from O have no prime ( ); all entities from O have a prime ( ). We use the notation e, e to represent a mapping between two entities, c, c between two concepts, and r, r and a, a between two relationships and two attributes.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Algorithms</head><p>The Alin algorithms (Algorithms 1 to 14) use the variables described below:</p><p>• Selected -Set of selected mappings;</p><p>• Suspended -Set of suspended mappings;</p><p>• Accepted -Set of accepted mappings;</p><p>• SetofSimMet -Set of similarity metrics;</p><p>• SetofSemSim -Set of semantic similarity metrics, it is a subset of the set of similarity metrics; • SimMet -one similarity metric;</p><p>Alin uses the functions defined in Table <ref type="table" target="#tab_0">2</ref> in its algorithms. Alin (Algorithm 1) has two main steps: the selection step and the propagation step. The selection step is responsible for defining the initial selected, accepted and suspended mappings. The propagation step is where the expert provides feedback to the selected mappings and this feedback is propagated.</p><p>The following subsections detail these two steps.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.1">Selection Step</head><p>The Alin selection step (from line 1 to line 3 of Algorithm 1) describes the activities for defining the initial set of selected mappings, the initial set of suspended mappings and the initial alignment (accepted mappings). The algorithm has as input the two ontologies to be matched and, as parameters, a set of similarity metrics chosen by the user. The chosen similarity metrics can be semantic or lexical.</p><p>The algorithm starts selecting concept mappings (line 1 of Algorithm 1) using the Select-ConceptMappings algorithm (Algorithm 2). Inside this algorithm, the SelectMappingsPerMetric algorithm (Algorithm 3) selects mappings for each similarity metric. The SelectMappingsPerMetric algorithm treats the matching problem as a stable marriage problem with size list limited da silva et al.  <ref type="bibr" target="#b16">(Gale and Shapley, 1962;</ref><ref type="bibr" target="#b20">Irving et al., 2009)</ref>, i.e., the algorithm only selects one mapping if similarity value between the two entities of the mapping is the highest considering all the mappings with at least one of these entities.</p><p>The SelectMappingsPerMetric algorithm is executed once for each chosen metric, where it generates a set of mappings for each metric (lines 4 and 5 of Algorithm 2). The union of these sets defines the initial set of selected mappings (from line 6 to line 10 of Algorithm 2). end for 11: end for 12: return Selected After defining an initial set of selected mappings, Alin evaluates each of them to verify if some of them can already be automatically accepted (line 2 of Algorithm 1) using the AcceptConceptMappings algorithm (Algorithm 4). At first, Alin automatically accepts concept mappings whose entity names are the same and moves them from the set of selected mappings to the accepted ones (from line 1 to line 6 of Algorithm 4). After that, Alin identifies all automatically accepted concept mappings that are in an anti-pattern with other automatically accepted concept mappings (line 7 of Algorithm 4) using the UndoConceptAntiPatterns algorithm (Algorithm 10) and moves them from the accepted mappings to the set of selected mappings. This use of anti-patterns is done to minimize the precision decrease that can occur because of the automatic acceptation of mappings. Subsection 4. end if 6: end for 7: return Suspended,Selected</p><p>In the selection step, selected mappings less likely to be correct are suspended (line 3 of Algorithm 1), using the SuspendConceptMappings algorithm (Algorithm 5). The SuspendCon-ceptMappings algorithm identifies all selected mappings in which the two concepts have all semantic similarity metric values under a threshold (here 0.9, see Section 5.2) and suspends them. The similarity metrics used in this technique are chosen by the user, e.g., Resnick, Jiang-Conrath or Lin. The suspended mappings can become selected again after interaction with the expert, da silva et al.</p><p>during the propagation step (Subsection 4.3.2), by the use of the UnsuspendConceptMappings algorithm (Algorithm 7).</p><p>Subsection 4.3.2 describes the propagation of the accepted mappings.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.2">Propagation Step</head><p>The Alin propagation step (from line 4 to line 15 of Algorithm 1) describes the activities to choose the selected mapping to receive expert feedback, the feedback itself, and the feedback propagation.</p><p>At the beginning, Alin propagates the automatically accepted mappings (line 5 of the Algorithm 1) in the same way as it does with the mappings accepted by the expert.</p><p>At each iteration in the propagation step (from line 7 to line 15 of the Algorithm 1), Alin chooses among all the selected mappings, the one that has the highest sum of their similarities (line 8 of Algorithm 1). After that, this mapping receives the expert feedback (line 9 of Algorithm 1), where the expert can accept or reject the selected mapping. If the expert accepts the mapping, Alin moves it to the set of accepted mappings (line 12 of Algorithm 1) and propagates its effects (line 13 of Algorithm 1) through the PropagateAcceptedMapping algorithm (Algorithm 6).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Algorithm 6 PropagateAcceptedMapping</head><p>Input: e, e ,Accepted,Selected,Suspended,SetofSimMet Output: Selected,Suspended 1: if isconcmap( e, e ) then 2:</p><p>Selected ← SelectAttributeMappings ( e, e , SetofSimMet, Selected);</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>3:</head><p>Selected ← SelectRelationshipMappings ( e, e , Accepted, Selected);</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>4:</head><p>Suspended,Selected ← UnsuspendConceptMappings ( e, e , Suspended, Selected);</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>5:</head><p>Selected ← AvoidConceptAntiPatterns ( e, e , Selected); 6: end if 7: if isattrmap( e, e ) then 8:</p><p>Selected ← AvoidAttributeMultipleEntityAntiPattern ( e, e , Selected); 9: end if 10: if isrelatmap( e, e ) then 11:</p><p>Selected ← AvoidRelationshipMultipleEntityAntiPattern ( e, e , Selected); 12: end if 13: Return Selected,Suspended</p><p>In the propagation step, Alin only accepts mappings that have received positive feedback from the expert. So, if the expert does not make mistakes, the monotonic growth of the recall and the precision in the propagation step is guaranteed.</p><p>The techniques used to propagate the effects of the expert feedback are described in this subsection. The first three techniques described are structural ones that select new mappings. A structural technique takes, as input, one or more mappings, and it generates, as output, mappings structurally related to them.</p><p>The UnsuspendConceptMappings algorithm (Algorithm 7) implements the first structural technique. This algorithm assumes that concept mappings are more prone to be true if the superconcepts of both concepts in the mapping are in an accepted mapping. This algorithm, at each iteration, identifies all suspended mappings that are formed by subconcepts of the concepts of the accepted mappings and unsuspend them, i.e., they become again selected mappings. We implemented this technique in a prior version of Alin: ALIN Syn <ref type="bibr" target="#b8">(Da Silva et al., 2017)</ref>.</p><p>So far, the Alin approach has only taken into account concept mappings. With the second structural technique, implemented by the SelectAttributeMappings algorithm (Algorithm 8), attribute mappings of the accepted mappings were selected, i.e., once the expert accepts a concept mapping, Alin selects some mappings between the attributes of its concepts. end if 5: end for 6: return Suspended, Selected</p><p>To develop the SelectAttributeMappings algorithm, we have assumed that attribute mappings are more prone to be a mapping between attributes of concepts if their concepts are in an accepted mapping. To reduce the search space to the SelectAttributeMappings algorithm, Alin (line 4 of the Algorithm 8) used the SelectMappingsPerMetric algorithm (Algorithm 3). We implemented this technique in a prior version of Alin: ALIN Attr (Da Silva, Revoredo, Baião and <ref type="bibr" target="#b9">Euzenat, 2018)</ref>. end for 10: end for 11: return Selected To develop the third structural technique, implemented by the SelectRelationshipMappings algorithm (Algorithm 9), we have assumed that relationships are more prone to be in a mapping if they are relationships between the concepts of two accepted concept mappings. We have also assumed that relationships between subconcepts of these concepts are more prone to be in a mapping too. These situations in which the SelectRelationshipMappings algorithm selects relationship mappings are called triggers for the selection of relationship mappings (Definition 4.1).  Given c 1 , c 1 and c 2 , c 2 , the following conditions:</p><formula xml:id="formula_2">Algorithm</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Algorithm 9 SelectRelationshipMappings</head><formula xml:id="formula_3">• rconcept(r,c 1 ,c 2 ) ∧ rconcept(r ,c 1 ,c 2 ) • sub(c 3 ,c 1 ,2) ∧ rconcept(r,c 3 ,c 1 ) ∧ rconcept(r ,c 1 ,c 2 ) • sub(c 3 ,c 1 ,2) ∧ sub(c 3 ,c 1 ,2) ∧ rconcept(r ,c 3 ,c 1 ) ∧ rconcept(r,c 3 ,c 1 )</formula><p>are called triggers between c 1 , c 1 and c 2 , c 2 for the selection of the relationship mapping r, r .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.3">Mapping Anti-patterns</head><p>An ontology may have construction constraints, such as a concept cannot be equivalent to its superconcept. An alignment may have other constraints like, for example, an entity of ontology O cannot be equivalent to two entities of the ontology O . A mapping anti-pattern is a combination of mappings that generates a problematic alignment, i.e., a logical inconsistency or a violated constraint.</p><p>Alin uses three mapping anti-patterns empirically identified by Guedes <ref type="bibr" target="#b18">(Guedes et al., 2014b</ref>) (Definitions 4.2 to 4.4), extracted from the results of ontology matching tools evaluated by OAEI <ref type="bibr">(Guedes et al., 2014a)</ref>.</p><p>The multiple-entity anti-pattern (Definition 4.2) applies when a single entity does not participate in two mappings (Figure <ref type="figure" target="#fig_6">3 (a)</ref>). The cross mapping anti-pattern (Definition 4.3) applies when no subconcept can be equivalent to its superconcept. This mapping anti-pattern applies when a concept c 1 is a subconcept of the concept c 2 and c 1 is subconcept of the concept c 2 and c 1 is in a mapping with c 2 and c 2 is in a mapping with th c 1 (see Figure <ref type="figure" target="#fig_6">3 (b)</ref>). The disjunction and generalization anti-pattern (Definition 4.4) applies when a pair of concepts of an ontology that are subconcept and superconcept are in mappings with two disjoint concepts of the other ontology (Figure <ref type="figure" target="#fig_6">3 (c)</ref>). If the entities e 1 , e 1 and e 2 of mappings e 1 , e 1 and e 1 , e 2 occur in the situation described by the formula entity(e 1 , O) ∧ entity(e 1 , O ) ∧ entity(e 2 , O ), then e 1 , e 1 and e 1 , e 2 are said to be in a multiple-entity anti-pattern.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Definition 4.3 (Cross mapping anti-pattern)</head><p>If the concepts c 1 , c 2 , c 1 and c 2 of mappings c 2 , c 1 and c 1 , c 2 occur in the situation described by the formula concept(c <ref type="figure" target="#fig_2">then c 2 ,</ref><ref type="figure">c</ref> 1 and c 1 , c 2 are said to be in a cross mapping anti-pattern.</p><formula xml:id="formula_4">1 , O) ∧ concept(c 1 , O ) ∧ concept(c 2 , O) ∧ concept(c 2 , O ) ∧ sub(c 1 , c 2 ) ∧ sub(c 1 , c 2 ),</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Definition 4.4 (Disjunction and Generalization anti-pattern)</head><p>If the concepts c 1 , c 2 , c 1 and c 2 of mappings c 1 , c 1 and c 2 , c 2 occur in the situation described by the formula concept(c</p><formula xml:id="formula_5">1 , O) ∧ concept(c 1 , O ) ∧ concept(c 2 , O) ∧ concept(c 2 , O ) ∧ sub(c 1 , c 2 ) ∧ dis(c 1 , c 2 )</formula><p>, then c 1 , c 1 and c 2 , c 2 are said to be in a disjunction and generalization mapping anti-pattern.</p><p>Alin takes advantage of the fact that if a correct mapping is in a mapping anti-pattern with another mapping, the other mapping is wrong. It uses (line 7 of Algorithm 4) the UndoConceptAntiPatterns algorithm (Algorithm 10) to identify automatically accepted concept mappings that are in mapping anti-patterns with others automatically accepted concept mappings and moves these mappings from the set of accepted mappings to the set of selected mappings. Alin (line 5 of Algorithm 6) uses the AvoidConceptAntiPatterns algorithm (Algorithm 11) to identify those selected concept mappings that are in a mapping anti-patterns with an accepted concept mapping and removes them from the set of selected mappings. Alin (lines 8 and 11 of Algorithm 6) uses the AvoidAttributeMultipleEntityAntiPattern algorithm (Algorithm 12) and the AvoidRelationshipMultipleEntityAntiPattern algorithm (Algorithm 13) to identify selected attribute and relationship mappings that are in the multiple-entity anti-pattern with an accepted mapping and removes them from the set of selected mappings. if multent( a x , a x , a y , a y ) then 3:</p><p>remove a y , a y from Selected;</p><p>4:</p><p>end if 5: end for 6: return Selected</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">Evaluation overview</head><p>Alin is implemented in Java using the following APIs: Stanford CoreNLP API <ref type="bibr" target="#b27">(Manning et al., 2014)</ref> to put a word in canonical form; Simmetrics API <ref type="bibr" target="#b33">(Surhone et al., 2010)</ref>, for string-based similarity metrics; HESML API <ref type="bibr" target="#b25">(Lastra-Díaz et al., 2017)</ref>, for Wordnet <ref type="bibr">(Fellbaum, 1998)</ref> based linguistic metrics; the OWL API for handling ontologies written in OWL, and the Alignment API <ref type="bibr" target="#b10">(David et al., 2011)</ref> to deal with alignments.</p><p>da silva et al.</p><p>Algorithm 13 AvoidRelationshipMultipleEntityAntiPattern Input: r x , r x , Selected Output: Selected 1: for each r y , r y ∈ Selected do 2:</p><p>if multent( r x , r x , r y , r y ) then 3:</p><p>remove r y , r y from Selected;</p><p>4:</p><p>end if 5: end for 6: return Selected In the executions described in this section, Alin receives as input parameters six similarity metrics. We based the process of choosing the similarity metrics used by Alin on the result of these metrics in assessments <ref type="bibr" target="#b31">(Petrakis et al., 2006;</ref><ref type="bibr" target="#b3">Cheatham and Hitzler, 2013)</ref>. We chose Jaccard, Jaro-Wrinkler, and n-gram lexical metrics and the Resnick, Jiang-Conrath and Lin semantic metrics. Resnick, Jiang-Conrath, and Lin are metrics that require a taxonomy to be computed, this taxonomy is provided by <ref type="bibr">Wordnet (Fellbaum, 1998)</ref>.</p><p>The Ontology Alignment Evaluation Initiative (OAEI) is a coordinated international initiative, which organizes the evaluation of ontology matching systems. Its main goal is to compare systems and algorithms openly and on the same basis, to allow anyone to draw conclusions about the best matching strategies. OAEI provides ontologies for various domains (data sets). The ontologies of data sets can have three types of entities: concepts (classes), data properties (attributes), and object properties (relationships). OAEI provides reference alignments, which are alignments that contains the mappings that are believed to be correct, for each ontology pair in a data set.</p><p>To evaluate Alin, we followed the same protocol as the OAEI 2018 interactive matching track <ref type="bibr" target="#b0">(Algergawy et al., 2018)</ref> in which Alin participated <ref type="bibr">(Da Silva, Revoredo and Baião, 2018</ref>). An interactive matcher is run and the reference alignment is used to simulate the expert answering. At each interaction, up to three selected mappings can be submitted to the expert, as long as each selected mapping has one entity in common with another selected mapping in the interaction <ref type="bibr" target="#b13">(Faria, 2016)</ref>. The quality of an alignment generated by a matching approach is generally measured by the F-measure, which is the harmonic mean between recall and precision. When the ontology matching process is interactive another quality metric occurs, it is the number of interactions with the expert. In Tables 4 to 11 hereafter, 'Total Requests' is the number of interactions with the expert.</p><p>The OAEI 2018 interactive matching track <ref type="bibr" target="#b0">(Algergawy et al., 2018)</ref> is based on two data sets: Conference and Anatomy.</p><p>The Conference data set consists of 7 ontologies, resulting in a total of 21 ontology pairs. There are 125,860 possible mappings when we take into account only the mappings of the same entity type among all 21 ontology pairs. Alin takes into account only the mappings of the same entity type. Among the 21 ontology pairs of the Conference data set there are 305 mappings in the reference alignments.</p><p>The Anatomy data set that contains two ontologies, one with the mouse anatomy and another with the human anatomy. The number of possible mappings between the two ontologies is 9,066,176. There are 1,516 mappings in the reference alignment.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Evaluation Criteria</head><p>We measure efficiency in the use of expert feedback as the ratio between the F-measure gain over the baseline (ALIN N oRel ) and the additional number of expert answers.</p><p>We raise the following research questions to evaluate if the techniques used in Alin help to achieve the objective to generate a better alignment: RQ1: Does the SelectRelationshipMappings algorithm increases the F-measure of the generated alignment?</p><p>RQ2: Is the expert feedback more efficiently used when it assists the SelectRelationshipMappings algorithm?</p><p>RQ3: Does the interactive use of mapping anti-patterns decrease the number of interactions with the expert? RQ4: Does the use of the techniques described in this paper generates a final alignment with quality and number of interactions compatible with the state-of-the-art proposals? In order to evaluate the benefit of the proposed solutions, we developed several versions of Alin:</p><p>Alin is the full version of Alin. It uses only the accepted mappings as input of the SelectRelationshipMappings algorithm, i.e., it uses the expert feedback to assist the SelectRelationshipMappings algorithm.</p><p>ALIN N oAP is the full Alin without using anti-patterns. Comparing its results with the results of full Alin allows answering to RQ3.</p><p>ALIN Aut uses all the automatically selected concept mappings as input to the SelectRela-tionshipMappings algorithm, i.e., the line 3 of the PropagateAcceptedMapping algorithm (Algorithm 6) is removed and the AutomaticallySelectRelationshipMappings algorithm (Algorithm 14) is called between the lines 1 and 2 of Algorithm 1. Since it uses the automatically selected concept mappings as input, it does not use the expert feedback to the SelectRelationshipMappings algorithm. Comparing the results of its execution with the results of ALIN N oRel allows answering to RQ1. Comparing the results of its execution with the the results of ALIN N oRel and the results of full Alin allows answering to RQ2.</p><p>ALIN N oRel does not use the SelectRelationshipMappings algorithm, i.e., line 3 and lines from 10 to 12 are removed from the PropagateAcceptedMapping algorithm (Algorithm 6). Comparing the results of its execution with the results of ALIN Aut allows answering to RQ1. Comparing the results of its execution with the the results of ALIN Aut and the results of full Alin allows answering to RQ2. Selected ← SelectRelationshipMappings ( c, c ,Selected,Selected); 3: end for 4: Return Selected da silva et al.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Parameter Tunning</head><p>In the SelectRelationshipMappings algorithm, we searched for the relationship mappings of the subconcepts of the concepts of two accepted concept mappings. During the creation of this algorithm, we found out that if we fixed a maximum depth of the subconcepts that we searched, the number of relationship mappings that the algorithm would select decreased. So the number of interactions with the expert. The depth of 2 was where we found the maximum recall, and we set this value for Alin. From this value, we found only relationships mappings that were not accepted by the expert (Table <ref type="table" target="#tab_7">4</ref>). We modified the SuspendConceptMapping algorithm in Alin. We removed, in ALIN Syn <ref type="bibr" target="#b8">(Da Silva et al., 2017)</ref>, all mappings from the set of selected mappings in which the two mapping concepts were not semantically equivalent, i.e., if all of the semantic similarity metrics were less than 1. In Alin, using the Conference data set, we did several executions changing the minimum value of similarity, and we found that the value of 0.9 reached the best result, so in Alin, we fixed the value in 0.9 (Table <ref type="table" target="#tab_8">5</ref>). Although we have found the value by running Alin with the Conference data set, we used the same value with the Anatomy data set.</p><p>Since the parameter values were empirically set, further study would be required to make them more general. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3">Analysis of the results</head><p>We made executions with the three versions of Alin for both the Conference data set and the Anatomy data set. The execution of ALIN Aut , for the Conference data set, using the SelectRelationshipMappings algorithm generates an alignment with higher F-measure relatively to ALIN N oRel . Thus, this execution responds positively to RQ1. With all the selected mappings as input to the SelectRelationshipMappings algorithm in ALIN Aut , there is an increase of 1.02% in F-measure, but with 29.26% more interactions  With the use of the Anatomy data set, all versions achieved the same alignment, and thus the same F-measure (Table <ref type="table" target="#tab_10">7</ref>). This is because there are no relationships in the ontologies of the Anatomy data set, hence the SelectRelationshipMappings algorithm brings no benefit. Thus, the executions show that we can only respond positively to both RQ1 and RQ2 if that involved ontologies have relationships.</p><p>The interactive use of mapping anti-patterns by the Alin approach decreases the number of interactions with the expert without decreasing the F-measure (Tables <ref type="table" target="#tab_11">8</ref> and<ref type="table" target="#tab_12">9</ref>), which respond positively to the RQ3.    </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.4">Comparison between tools that participated in the OAEI 2018 interactive matching track</head><p>Alin participated in the OAEI 2018 interactive matching track. OAEI provides a comparison between tool performance in the interactive matching track each year, and it uses the Conference and the Anatomy data sets <ref type="bibr" target="#b0">(Algergawy et al., 2018)</ref>, as we can see in the tables 10 and 11.</p><p>The tools AML, LogMap, and XMAP (Tables <ref type="table" target="#tab_13">10</ref> and<ref type="table" target="#tab_14">11</ref>) are interactive ontology matching tools which select attribute and relationship mappings, but in a non-interactive way, not taking into account the expert feedback.</p><p>In relation of the F-measure, the results show that Alin generated a high-level result when running the Conference data set (Table <ref type="table" target="#tab_13">10</ref>) and Alin got a result close to other tools when running the Anatomy data set (Table <ref type="table" target="#tab_14">11</ref>) when the expert hit 100% of the answers, which answers positively to RQ4.</p><p>In relation to number of interactions with the expert, Alin, when running with the Conference data set, has a number of interactions more compatible with the other tools than with the Anatomy data set. That is because the ontologies of the Conference dataset, contrary to those of Anatomy, contain attributes and relationships, which allows the use of the SelectRelationshipMappings and the SelectAttributeMappings algorithms to improve the set of selected mappings.</p><p>When the expert make mistakes, Alin suffers a sharp fall, relative to other tools (Figures <ref type="figure">4</ref> and<ref type="figure">5</ref>), of the F-measure. This fall is because Alin uses expert feedback as input to the used techniques, which causes these techniques to generate erroneous results when the expert fails. Besides, these outputs of the techniques serve to modify the set of selected mappings, which causes the set of selected mappings to get worse, that is, correct mappings can come out, and wrong mappings can enter. Ontology matching plays an important role in the integration of heterogeneous data sources that are described by ontologies. Its purpose is to discover mappings between the entities of at least two ontologies.</p><p>Alin contributes to interactive ontology matching techniques through the use of expert feedback for the improvement of the set of selected mappings. It does this by using expert feedback to select relationship mappings and to reject selected mappings through the use of anti-patterns.</p><p>We evaluated the various new features of the Alin approach by comparing different versions of the system. The evaluation performed showed that the use of the expert feedback to improve the set of selected mappings increased the F-measure gain per interaction.</p><p>Alin participated in the interactive ontology matching track of OAEI 2018. The results showed that Alin generates an alignment with good quality in comparison to other tools, in precision, da silva et al.</p><p>recall and F-measure when the expert never makes mistakes. Hence, in spite of good quality results, the proposed technique is no silver bullet for ontology matching.</p><p>The Alin approach had good results when the expert does not make mistake, but as the approach uses expert feedback to select and reject mappings, expert mistakes generate noise for the structural techniques and for the use of mapping anti-patterns. As future work, one interesting direction is to explore how to reduce the negative effects of expert mistakes. In this case, the question of using several experts simultaneously can occur and require specific treatments.</p><p>A more informative evaluation to assess the benefits of using the expert feedback to assist the selection of mappings would consist of applying it to the mappings generated by other systems participating in OAEI.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1</head><label>1</label><figDesc>Figure1Ontology Matching Process -based on<ref type="bibr" target="#b12">(Euzenat and Shvaiko, 2013)</ref> </figDesc><graphic coords="3,138.35,90.01,283.30,137.26" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2</head><label>2</label><figDesc>Figure2Interactive Ontology Matching Process -based on(Paulheim et al., 2013)    </figDesc><graphic coords="4,152.52,89.66,283.48,199.46" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Algorithm 2</head><label>2</label><figDesc>SelectConceptMappings Input: O, O , SetofSimMet Output: Selected 1: Selected = ∅; 2: SCO ← concepts(O); 3: SCO ← concepts(O ); 4: for each SimMet ∈ SetofSimMet do</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Algorithm 7</head><label>7</label><figDesc>UnsuspendConceptMappings Input: c x , c x , Suspended, Selected Output: Suspended, Selected 1: for each c y , c y ∈ Suspended do 2:if sub(c y , c x ) ∧ sub(c y , c x ) then 3:move c y , c y from Suspended to Selected;4:</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head></head><label></label><figDesc>Input: c x , c x , Accepted, Selected Output: Selected 1: for each c y , c y ∈ Accepted such that c y , c y = c x , c x do 2: if trigger( c x , c x , c y , c y , r, r ) then 3: add r, r to Selected; 4: end if 5: end for 6: return Selected da silva et al.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Figure 3</head><label>3</label><figDesc>Figure 3 The three mapping anti-pattern used in Alin. (a) multiple-entity anti-pattern. (b) cross mapping anti-pattern. (c) disjunction and generalization anti-pattern. Based on (Jean-Mary et al., 2009)</figDesc><graphic coords="13,70.87,415.68,411.02,51.90" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head></head><label></label><figDesc>Algorithm 10 UndoConceptAntiPatterns Input: Accepted, Selected Output: Accepted, Selected 1: for each c x , c x ∈ Accepted do 2:for each c y , c y ∈ Accepted do 3: if antipat( c x , c x , c y , c y ) then 4: move c x , c x from Accepted to Selected; 5: move c y , c y from Accepted to Selected; for 9: return Accepted, Selected Algorithm 11 AvoidConceptAntiPatterns Input: c x , c x , Selected Output: Selected 1: for each c y , c y ∈ Selected do 2: if antipat( c x , c x , c y , c y ) then 3:remove c y , c y from Selected; Input: a x , a x , Selected Output: Selected 1: for each a y , a y ∈ Selected do 2:</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><head>Figure 4 Figure 5</head><label>45</label><figDesc>Figure 4 Comparison of execution of several interactive tools with different hit rates -Conference data set</figDesc><graphic coords="20,124.18,89.67,340.14,197.88" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 2</head><label>2</label><figDesc>Functions used in the Alin algorithms , e 1 , e 2 , e 2 ) returns true if e 1 , e 1 and e 2 , e 2 are in a multipleentity anti-pattern, else it returns false. See Definition 4.2. antipat( e 1 , e 1 , e 2 , e 2 ) returns true if e 1 , e 1 and e 2 , e 2 are in any of the three anti-patterns, else it returns false. See Definitions 4.2 to 4.4.</figDesc><table><row><cell>Function</cell><cell>Description</cell></row><row><cell>ename(e 1 , e 2 )</cell><cell>returns true if the name of entity e 1 is equal to the</cell></row><row><cell></cell><cell>name of entity e 2 , else return false.</cell></row><row><cell>highsum(A)</cell><cell>returns the mapping from the set of mappings A with</cell></row><row><cell></cell><cell>the highest sum of similarity metrics.</cell></row><row><cell>concepts(O)</cell><cell>returns the set of all concepts of the ontology O.</cell></row><row><cell>attributes(c)</cell><cell>returns the set of all attributes of the concept c.</cell></row><row><cell>multent( e 1</cell><cell></cell></row></table><note><p>simvalue( e, e , SimM et) returns the value of the metric SimMet between the entities e and e'. isconcmap( e, e ) returns true if e and e' are concepts, else it returns false. isattrmap( e, e ) returns true if e and e' are attributes, else it returns false. isrelatmap( e, e ) returns true if e and e' are relationships, else it returns false. isaccepted( e, e ) returns true if the expert accepts the mapping e, e , else it returns false. trigger( c 1 , c 1 , c 2 , c 2 , r, r ) returns true if there is a trigger, between c 1 , c 1 and c 2 , c 2 , for the selection of r, r , else it returns false. See Definition 4.1.</p></note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head></head><label></label><figDesc>3.3 explains anti-patterns.</figDesc><table><row><cell cols="2">Algorithm 4 AcceptConceptMappings</cell></row><row><cell cols="2">Input: Selected</cell></row><row><cell cols="2">Output: Accepted, Selected</cell></row><row><cell>5:</cell><cell>end if</cell></row><row><cell cols="2">6: end for</cell></row><row><cell cols="2">7: Accepted,Selected ← UndoConceptAntiPatterns(Accepted,Selected);</cell></row><row><cell cols="2">8: return Accepted, Selected</cell></row><row><cell cols="2">Algorithm 5 SuspendConceptMappings</cell></row><row><cell cols="2">Input: Selected,SetofSemSim</cell></row><row><cell cols="2">Output: Suspended,Selected</cell></row><row><cell cols="2">1: Suspended=∅;</cell></row></table><note><p>1: Accepted = ∅; 2: for each e, e ∈ Selected do 3: if ename(e, e ) then 4: move e, e from Selected to Accepted; 2: for each e, e ∈ Selected do 3: if ∀ SimMet ∈ SetofSemSim, simvalue( e, e , SimM et) ≤ 0.9 then 4: move e, e from Selected to Suspended; 5:</p></note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_5"><head>Table 3</head><label>3</label><figDesc>Alin versions</figDesc><table><row><cell>ALin version</cell><cell>Use the SelectRelationshipMappings algorithm</cell><cell>Use the expert feedback to assist the algorithm SelectRelationshipMappings</cell><cell>Use anti-patterns</cell></row><row><cell>ALIN N oRel</cell><cell>No</cell><cell>-</cell><cell>Yes</cell></row><row><cell>ALIN Aut</cell><cell>Yes</cell><cell>No</cell><cell>Yes</cell></row><row><cell>ALIN N oAP</cell><cell>Yes</cell><cell>Yes</cell><cell>No</cell></row><row><cell>Alin</cell><cell>Yes</cell><cell>Yes</cell><cell>Yes</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_6"><head>Table 3</head><label>3</label><figDesc>shows the characteristics of Alin versions.</figDesc><table><row><cell>Algorithm 14 AutomaticallySelectRelationshipMappings</cell></row><row><cell>Input: Selected</cell></row><row><cell>Output: Selected</cell></row><row><cell>1: for each c, c ∈ Selected do</cell></row><row><cell>2:</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_7"><head>Table 4</head><label>4</label><figDesc>Comparison between Alin executions with different maximum depths of the subconcepts using Conference data set</figDesc><table><row><cell>Maximum Depth of the Subconcepts</cell><cell cols="4">Total Requests Precision F-measure Recall</cell></row><row><cell>With no Relationships Mappings</cell><cell>246</cell><cell>0.918</cell><cell>0.793</cell><cell>0.698</cell></row><row><cell>0</cell><cell>251</cell><cell>0.919</cell><cell>0.798</cell><cell>0.705</cell></row><row><cell>1</cell><cell>254</cell><cell>0.919</cell><cell>0.802</cell><cell>0.711</cell></row><row><cell>2</cell><cell>276</cell><cell>0.921</cell><cell>0.809</cell><cell>0.721</cell></row><row><cell>3</cell><cell>295</cell><cell>0.921</cell><cell>0.809</cell><cell>0.721</cell></row><row><cell>4</cell><cell>310</cell><cell>0.921</cell><cell>0.809</cell><cell>0.721</cell></row><row><cell>5</cell><cell>321</cell><cell>0.921</cell><cell>0.809</cell><cell>0.721</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_8"><head>Table 5</head><label>5</label><figDesc>Comparison between Alin executions with different minimum semantic similarity values of the entities using the Conference data set</figDesc><table><row><cell>Minimum Semantic Similarity between the Entities</cell><cell cols="4">Total Requests Precision F-measure Recall</cell></row><row><cell>1.0</cell><cell>257</cell><cell>0.917</cell><cell>0.789</cell><cell>0.692</cell></row><row><cell>0.9</cell><cell>276</cell><cell>0.921</cell><cell>0.809</cell><cell>0.721</cell></row><row><cell>0.8</cell><cell>300</cell><cell>0.921</cell><cell>0.809</cell><cell>0.721</cell></row><row><cell>0.7</cell><cell>310</cell><cell>0.920</cell><cell>0.805</cell><cell>0.715</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_9"><head>Table 6</head><label>6</label><figDesc>Comparison between different ontology matching executions with Conference data set</figDesc><table><row><cell></cell><cell>Total Req</cell><cell>Prec</cell><cell>F</cell><cell>Rec</cell><cell>Increase in Total Requests relative ALIN N oRel to</cell><cell>Increase in F-measure relative ALIN N oRel to</cell><cell>Efficiency relative to ALIN N oRel</cell></row><row><cell cols="2">ALIN N oRel 246</cell><cell cols="3">0.918 0.793 0.698</cell><cell>-</cell><cell>-</cell><cell>-</cell></row><row><cell>ALIN Aut</cell><cell>318</cell><cell cols="3">0.921 0.811 0.725</cell><cell>29.26</cell><cell>1.02</cell><cell>0.011</cell></row><row><cell>Alin</cell><cell>276</cell><cell cols="3">0.921 0.809 0.721</cell><cell>12.19</cell><cell>1.02</cell><cell>0.027</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_10"><head>Table 7</head><label>7</label><figDesc>Comparison between different ontology matching executions with Anatomy data set ALIN N oRel . With the use of accepted mappings as input to the SelectRelationshipMappings algorithm in Full Alin, we got almost the same increase in F-measure, but with only 12.19% more interactions relative to ALIN N oRel . So, concerning ALIN N oRel , the Full Alin allows more efficiency in the use of the expert feedback than ALIN Aut . Thus, this execution responds positively to RQ2.</figDesc><table><row><cell></cell><cell>Total Req</cell><cell>Prec</cell><cell>F</cell><cell>Rec</cell><cell>Increase in Total Requests relative ALIN N oRel to</cell><cell>Increase in F-measure relative ALIN N oRel to</cell><cell>Efficiency relative to ALIN N oRel</cell></row><row><cell cols="2">ALIN N oRel 602</cell><cell cols="3">0.994 0.902 0.826</cell><cell>-</cell><cell>-</cell><cell>-</cell></row><row><cell>ALIN Aut</cell><cell>602</cell><cell cols="3">0.994 0.902 0.826</cell><cell>-</cell><cell>-</cell><cell>-</cell></row><row><cell>Alin</cell><cell>602</cell><cell cols="3">0.994 0.902 0.826</cell><cell>-</cell><cell>-</cell><cell>-</cell></row><row><cell cols="3">with the expert relative to</cell><cell></cell><cell></cell><cell></cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_11"><head>Table 8</head><label>8</label><figDesc>Comparison between Alin executions with and without mapping anti-patterns using the Conference data set</figDesc><table><row><cell></cell><cell cols="4">Total Requests Precision F-measure Recall</cell></row><row><cell>ALIN N oAP</cell><cell>329</cell><cell>0.921</cell><cell>0.809</cell><cell>0.721</cell></row><row><cell>Alin</cell><cell>276</cell><cell>0.921</cell><cell>0.809</cell><cell>0.721</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_12"><head>Table 9</head><label>9</label><figDesc>Comparison between Alin executions with and without mapping anti-patterns using the Anatomy data set</figDesc><table><row><cell></cell><cell cols="4">Total Requests Precision F-measure Recall</cell></row><row><cell>ALIN N oAP</cell><cell>679</cell><cell>0.993</cell><cell>0.903</cell><cell>0.828</cell></row><row><cell>Alin</cell><cell>602</cell><cell>0.994</cell><cell>0.902</cell><cell>0.826</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_13"><head>Table 10</head><label>10</label><figDesc>Comparison between OAEI 2018 interactive matching track tools using Conference data set with 100% hit rate<ref type="bibr" target="#b0">(Algergawy et al., 2018)</ref> </figDesc><table><row><cell></cell><cell cols="4">Total Requests Precision F-measure Recall</cell></row><row><cell>Alin</cell><cell>276</cell><cell>0.921</cell><cell>0.809</cell><cell>0.721</cell></row><row><cell>AML</cell><cell>270</cell><cell>0.912</cell><cell>0.799</cell><cell>0.711</cell></row><row><cell>LogMap</cell><cell>82</cell><cell>0.886</cell><cell>0.723</cell><cell>0.61</cell></row><row><cell>XMap</cell><cell>16</cell><cell>0.719</cell><cell>0.666</cell><cell>0.62</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_14"><head>Table 11</head><label>11</label><figDesc>Comparison between OAEI 2018 interactive matching track tools using Anatomy data set with 100% hit rate<ref type="bibr" target="#b0">(Algergawy et al., 2018)</ref> </figDesc><table><row><cell></cell><cell cols="4">Total Requests Precision F-measure Recall</cell></row><row><cell>Alin</cell><cell>602</cell><cell>0.994</cell><cell>0.902</cell><cell>0.826</cell></row><row><cell>AML</cell><cell>240</cell><cell>0.964</cell><cell>0.956</cell><cell>0.948</cell></row><row><cell>LogMap</cell><cell>388</cell><cell>0.982</cell><cell>0.909</cell><cell>0.846</cell></row><row><cell>XMap</cell><cell>35</cell><cell>0.929</cell><cell>0.897</cell><cell>0.867</cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>Acknowledgments</head><p><rs type="person">Jérôme Euzenat</rs> was partially funded by a <rs type="grantName">CNPq Special Visiting Researcher grant</rs> (<rs type="grantNumber">314782/2014-1</rs>).</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_RguY95C">
+					<idno type="grant-number">314782/2014-1</idno>
+					<orgName type="grant-name">CNPq Special Visiting Researcher grant</orgName>
+				</org>
+			</listOrg>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Results of the ontology alignment evaluation initiative 2018</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Algergawy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Cheatham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Faria</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ferrara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Fundulaki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Harrow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Hertling</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Jiménez-Ruiz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Karam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Khiat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Lambrix</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Montanelli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Paulheim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Pesquita</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Saveta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Schmidt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Shvaiko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Splendiani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Thiéblin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Trojahn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Vataščinová</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Zamazal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Zhou</surname></persName>
+		</author>
+		<ptr target="http://www.dit.unitn.it/~pavel/om2018/papers/oaei18_paper0.pdf" />
+	</analytic>
+	<monogr>
+		<title level="m">CEUR Workshop Proceedings</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="volume">2288</biblScope>
+			<biblScope unit="page" from="76" to="116" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">User involvement in ontology matching using an online active learning approach</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Balasubramani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Taheri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Cruz</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">CEUR Workshop Proceedings</title>
+		<imprint>
+			<publisher>CEUR-WS</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="volume">1545</biblScope>
+			<biblScope unit="page" from="45" to="49" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Understanding the user -logging and interpreting user interactions in information search and retrieval</title>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">J</forename><surname>Belkin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Bierig</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Buscher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Jose</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Teevan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Information Retrieval</title>
+		<imprint>
+			<biblScope unit="page" from="2009" to="2010" />
+			<date type="published" when="2010-10">2010. October 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">String similarity metrics for ontology alignment</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Cheatham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Hitzler</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 12th International Semantic Web Conference -Part II</title>
+		<meeting>the 12th International Semantic Web Conference -Part II<address><addrLine>New York, Inc.; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer-Verlag</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="294" to="309" />
+		</imprint>
+	</monogr>
+	<note>ISWC &apos;13</note>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Improving ontology matching with propagation strategy and user feedback</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Chunhua</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Zhiming</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Pengpeng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Jian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Jie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Tianxu</surname></persName>
+		</author>
+		<idno type="DOI">10.1117/12.2197167</idno>
+		<ptr target="https://doi.org/10.1117/12.2197167" />
+	</analytic>
+	<monogr>
+		<title level="m">Seventh International Conference on Digital Image Processing (ICDIP 2015)</title>
+		<imprint>
+			<date type="published" when="2015">2015. 9631</date>
+			<biblScope unit="page">6</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Pay-as-you-go multiuser feedback model for ontology matching</title>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">F</forename><surname>Cruz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Loprete</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Palmonari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Stroe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Taheri</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Knowledge Engineering and Knowledge Management</title>
+		<editor>
+			<persName><forename type="first">K</forename><surname>Janowicz</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">S</forename><surname>Schlobach</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">P</forename><surname>Lambrix</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">E</forename><surname>Hyvönen</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Cham</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer International Publishing</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="80" to="96" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Interactive user feedback in ontology matching using signature vectors</title>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">F</forename><surname>Cruz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Stroe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Palmonari</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">28th IEEE International Conference on Data Engineering</title>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="1321" to="1324" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<title level="m" type="main">ALIN results for OAEI</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Da Silva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Revoredo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">A</forename><surname>Baião</surname></persName>
+		</author>
+		<ptr target="http://www.dit.unitn.it/~pavel/om2018/papers/oaei18_paper1.pdf" />
+		<imprint>
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Semantic interactive ontology matching: Synergistic combination of techniques to improve the set of candidate correspondences</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Da Silva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Revoredo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">A</forename><surname>Baião</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Euzenat</surname></persName>
+		</author>
+		<ptr target="http://disi.unitn.it/~pavel/om2017/papers/om2017_Tpaper2.pdf" />
+	</analytic>
+	<monogr>
+		<title level="m">OM 2017 -12th ISWC workshop on ontology matching</title>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="volume">2032</biblScope>
+			<biblScope unit="page" from="13" to="24" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<monogr>
+		<author>
+			<persName><forename type="first">J</forename><surname>Da Silva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Revoredo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">A</forename><surname>Baião</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Euzenat</surname></persName>
+		</author>
+		<ptr target="http://disi.unitn.it/~pavel/om2018/papers/om2018_LTpaper3.pdf" />
+		<title level="m">Interactive Ontology Matching: Using Expert Feedback to Select Attribute Mappings</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">The Alignment API 4.0</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>David</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Euzenat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Scharffe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Trojahn Dos Santos</surname></persName>
+		</author>
+		<ptr target="http://dl.acm.org/citation.cfm?id=2019470.2019474" />
+	</analytic>
+	<monogr>
+		<title level="j">Semant. web</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="3" to="10" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">One size does not fit all: Customizing ontology alignment using user feedback</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Duan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Fokoue</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Srinivas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">The Semantic Web -ISWC 2010</title>
+		<editor>
+			<persName><forename type="first">P</forename><forename type="middle">F</forename><surname>Patel-Schneider</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Y</forename><surname>Pan</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">P</forename><surname>Hitzler</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">P</forename><surname>Mika</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">L</forename><surname>Zhang</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">J</forename><forename type="middle">Z</forename><surname>Pan</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">I</forename><surname>Horrocks</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">B</forename><surname>Glimm</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Berlin Heidelberg, Berlin, Heidelberg</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="177" to="192" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<author>
+			<persName><forename type="first">J</forename><surname>Euzenat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Shvaiko</surname></persName>
+		</author>
+		<title level="m">Ontology Matching -Second Edition</title>
+		<imprint>
+			<publisher>Springer-Verlag</publisher>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title level="m" type="main">Using the SEALS Client&apos;s Oracle in Interactive Matching</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Faria</surname></persName>
+		</author>
+		<ptr target="https://github.com/DanFaria/OAEI{_}SealsClient/blob/master/OracleTutorial.pdf" />
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">The AgreementMakerLight ontology matching system</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Faria</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Pesquita</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Santos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Palmonari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">F</forename><surname>Cruz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">M</forename><surname>Couto</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">On the Move to Meaningful Internet Systems: OTM 2013 Conferences</title>
+		<editor>
+			<persName><forename type="first">R</forename><surname>Meersman</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">H</forename><surname>Panetto</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">T</forename><surname>Dillon</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">J</forename><surname>Eder</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Z</forename><surname>Bellahsene</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">N</forename><surname>Ritter</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">P</forename><forename type="middle">De</forename><surname>Leenheer</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">D</forename><surname>Dou</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Berlin Heidelberg, Berlin, Heidelberg</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="527" to="541" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<title level="m" type="main">WordNet: An electronic lexical database</title>
+		<editor>Fellbaum, C.</editor>
+		<imprint>
+			<date type="published" when="1998">1998</date>
+			<publisher>MIT Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">College admissions and the stability of marriage</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Gale</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">S</forename><surname>Shapley</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/00029890.1962.11989827</idno>
+		<ptr target="https://doi.org/10.1080/00029890.1962.11989827" />
+	</analytic>
+	<monogr>
+		<title level="j">The American Mathematical Monthly</title>
+		<imprint>
+			<biblScope unit="volume">69</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="9" to="15" />
+			<date type="published" when="1962">1962</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Digging Ontology Correspondence Antipatterns</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Guedes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Baião</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Revoredo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 5th Workshop on Ontology and Semantic Web Patterns (WOP2014) co-located with the 13th International Semantic Web Conference (ISWC 2014)</title>
+		<meeting>the 5th Workshop on Ontology and Semantic Web Patterns (WOP2014) co-located with the 13th International Semantic Web Conference (ISWC 2014)</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="volume">1032</biblScope>
+			<biblScope unit="page" from="38" to="48" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">On the Identification and Representation of Ontology Correspondence Antipatterns</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Guedes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Baião</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Revoredo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 8th International Workshop on Modular Ontologies co-located with the 8th International Conference on Formal Ontology in Information Systems (FOIS 2014)</title>
+		<title level="s">CEUR Workshop Proceedings</title>
+		<meeting>the 8th International Workshop on Modular Ontologies co-located with the 8th International Conference on Formal Ontology in Information Systems (FOIS 2014)</meeting>
+		<imprint>
+			<date type="published" when="2014">2014b</date>
+			<biblScope unit="volume">1248</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Hertuda results for OAEI 2012</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Hertling</surname></persName>
+		</author>
+		<ptr target="http://dl.acm.org/citation.cfm?id=2887596.2887607" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 7th International Conference on Ontology Matching</title>
+		<meeting>the 7th International Conference on Ontology Matching<address><addrLine>Aachen, Germany, Germany</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="volume">946</biblScope>
+			<biblScope unit="page" from="141" to="144" />
+		</imprint>
+	</monogr>
+	<note>OM&apos;12</note>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Stable marriage with ties and bounded length preference lists</title>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">W</forename><surname>Irving</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">F</forename><surname>Manlove</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>O'malley</surname></persName>
+		</author>
+		<ptr target="http://www.sciencedirect.com/science/article/pii/S1570866708000683" />
+	</analytic>
+	<monogr>
+		<title level="m">Algorithms and Complexity in Durham Workshop ACiD</title>
+		<imprint>
+			<date type="published" when="2006">2009. 2006</date>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page" from="213" to="219" />
+		</imprint>
+	</monogr>
+	<note>Selected papers from the 2nd</note>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title level="m" type="main">Ontology matching with semantic verification</title>
+		<author>
+			<persName><forename type="first">Y</forename><forename type="middle">R</forename><surname>Jean-Mary</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">P</forename><surname>Shironoshita</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">R</forename><surname>Kabuka</surname></persName>
+		</author>
+		<editor>silva et al.</editor>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">LogMap: Logic-based and scalable ontology matching</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Jiménez-Ruiz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">C</forename><surname>Grau</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">The Semantic Web -ISWC 2011</title>
+		<editor>
+			<persName><forename type="first">L</forename><surname>Aroyo</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">C</forename><surname>Welty</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">H</forename><surname>Alani</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">J</forename><surname>Taylor</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">A</forename><surname>Bernstein</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">L</forename><surname>Kagal</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">N</forename><surname>Noy</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">E</forename><surname>Blomqvist</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Berlin Heidelberg, Berlin, Heidelberg</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="273" to="288" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Large-scale interactive ontology matching: Algorithms and implementation</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Jiménez-Ruiz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">C</forename><surname>Grau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Horrocks</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ECAI 2012 -20th European Conference on Artificial Intelligence</title>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="volume">242</biblScope>
+			<biblScope unit="page" from="444" to="449" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">A Session-based Ontology Alignment Approach enabling User Involvement</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Lambrix</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Kaliyaperumal</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Semantic Web</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="1" to="28" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">HESML: A scalable ontology-based semantic similarity measures library with a set of reproducible experiments and a replication dataset</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">J</forename><surname>Lastra-Díaz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>García-Serrano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Batet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Fernández</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Chirigati</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.is.2017.02.002</idno>
+		<ptr target="https://doi.org/10.1016/j.is.2017.02.002" />
+	</analytic>
+	<monogr>
+		<title level="j">Inf. Syst</title>
+		<imprint>
+			<biblScope unit="volume">66</biblScope>
+			<biblScope unit="issue">C</biblScope>
+			<biblScope unit="page" from="97" to="118" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<title level="m" type="main">Alinhamento Interativo de Ontologias Uma Abordagem Baseada em Query-by-Committee</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Lopes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Baião</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Revoredo</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+		<respStmt>
+			<orgName>UNIRIO</orgName>
+		</respStmt>
+	</monogr>
+	<note type="report_type">Master&apos;s thesis</note>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">The Stanford CoreNLP natural language processing toolkit</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">D</forename><surname>Manning</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Surdeanu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Bauer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Finkel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">J</forename><surname>Bethard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Mcclosky</surname></persName>
+		</author>
+		<ptr target="http://www.aclweb.org/anthology/P/P14/P14-5010" />
+	</analytic>
+	<monogr>
+		<title level="m">Association for Computational Linguistics (ACL) System Demonstrations</title>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="55" to="60" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Opening the black box of ontology matching</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Ngo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Bellahsene</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Todorov</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">The Semantic Web: Semantics and Big Data</title>
+		<editor>
+			<persName><forename type="first">P</forename><surname>Cimiano</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">O</forename><surname>Corcho</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">V</forename><surname>Presutti</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">L</forename><surname>Hollink</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">S</forename><surname>Rudolph</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Berlin Heidelberg, Berlin, Heidelberg</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="16" to="30" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">WeSeE-match results for OAEI</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Paulheim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Hertling</surname></persName>
+		</author>
+		<ptr target="http://dl.acm.org/citation.cfm?id=2874493.2874513" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 8th International Conference on Ontology Matching</title>
+		<meeting>the 8th International Conference on Ontology Matching<address><addrLine>Aachen, Germany, Germany</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2013">2013. 2013</date>
+			<biblScope unit="volume">1111</biblScope>
+			<biblScope unit="page" from="197" to="202" />
+		</imprint>
+	</monogr>
+	<note>OM&apos;13</note>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Towards Evaluating Interactive Ontology Matching Tools</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Paulheim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Hertling</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Ritze</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="s">Lecture Notes in Computer Science</title>
+		<imprint>
+			<biblScope unit="volume">7882</biblScope>
+			<biblScope unit="page" from="31" to="45" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Design and Evaluation of Semantic Similarity Measures for Concepts Stemming from the Same or Different Ontologies object instrumentality</title>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">G M</forename><surname>Petrakis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Varelas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Hliaoutakis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Raftopoulou</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 4th Workshop on Multimedia Semantics (WMS)</title>
+		<meeting>the 4th Workshop on Multimedia Semantics (WMS)</meeting>
+		<imprint>
+			<date type="published" when="2006">2006</date>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page" from="233" to="237" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Actively learning ontology matching via user interaction</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Shi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Tang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Xie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Li</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">The Semantic Web -ISWC 2009</title>
+		<editor>
+			<persName><forename type="first">A</forename><surname>Bernstein</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">D</forename><forename type="middle">R</forename><surname>Karger</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">T</forename><surname>Heath</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">L</forename><surname>Feigenbaum</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">D</forename><surname>Maynard</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">E</forename><surname>Motta</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">K</forename><surname>Thirunarayan</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Berlin Heidelberg, Berlin, Heidelberg</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="page" from="585" to="600" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">M</forename><surname>Surhone</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">T</forename><surname>Timpledon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">F</forename><surname>Marseken</surname></persName>
+		</author>
+		<title level="m">SimMetrics</title>
+		<imprint>
+			<publisher>VDM Publishing</publisher>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">An Adaptive Machine Learning Framework with User Interaction for Ontology Matching</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>To</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Ichise</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Le</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. Twenty-first International Joint Conference on Artificial Intelligence</title>
+		<meeting>Twenty-first International Joint Conference on Artificial Intelligence</meeting>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

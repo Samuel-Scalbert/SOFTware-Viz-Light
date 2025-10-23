@@ -7,51 +7,51 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		<fileDesc>
 			<titleStmt>
 				<title level="a" type="main">Results of the Ontology Alignment Evaluation Initiative 2022</title>
-				<funder ref="#_KfM6A9t">
+				<funder ref="#_qf7vrKu">
+					<orgName type="full">Swedish Research Council (Vetenskapsrådet</orgName>
+				</funder>
+				<funder ref="#_T9XwheN">
 					<orgName type="full">Agence Nationale de la Recherche</orgName>
 					<orgName type="abbreviated">ANR</orgName>
 				</funder>
-				<funder ref="#_n9ATJuX">
-					<orgName type="full">ADAPT SFI Research Centre</orgName>
+				<funder ref="#_TtVed2K #_B3B2FZy">
+					<orgName type="full">LASIGE Research Unit</orgName>
 				</funder>
-				<funder ref="#_KWjkJDH">
+				<funder ref="#_PMKrxQ2">
 					<orgName type="full">EPSRC</orgName>
+				</funder>
+				<funder ref="#_ytq9FqU">
+					<orgName type="full">SIRIUS Centre for Scalable Data Access (Research Council of Norway</orgName>
+				</funder>
+				<funder ref="#_rUzFZnm">
+					<orgName type="full">ADAPT SFI Research Centre</orgName>
 				</funder>
 				<funder>
 					<orgName type="full">Samsung Research UK (SRUK)</orgName>
 				</funder>
-				<funder ref="#_S7QF95j">
-					<orgName type="full">SIRIUS Centre for Scalable Data Access (Research Council of Norway</orgName>
-				</funder>
 				<funder>
 					<orgName type="full">FCT</orgName>
 				</funder>
-				<funder ref="#_vQy9fDq">
-					<orgName type="full">German Research Foundation</orgName>
+				<funder ref="#_VNjVKzj">
+					<orgName type="full">EU</orgName>
+				</funder>
+				<funder ref="#_B9CUdsr">
+					<orgName type="full">European Union</orgName>
+				</funder>
+				<funder ref="#_q4WSw7h">
+					<orgName type="full">unknown</orgName>
 				</funder>
 				<funder>
 					<orgName type="full">Swedish National Graduate School in Computer Science (CUGS)</orgName>
 				</funder>
-				<funder ref="#_CDgkZgJ #_kUJGG5z">
-					<orgName type="full">LASIGE Research Unit</orgName>
-				</funder>
-				<funder ref="#_qfHGmwk">
-					<orgName type="full">in Agronomy and Biodiversity</orgName>
-				</funder>
-				<funder ref="#_EgKqYZ5">
-					<orgName type="full">Swedish Research Council (Vetenskapsrådet</orgName>
-				</funder>
 				<funder>
 					<orgName type="full">Swedish e-Science Research Centre (SeRC)</orgName>
 				</funder>
-				<funder ref="#_k2N93xz">
-					<orgName type="full">European Union</orgName>
+				<funder ref="#_BdrdQY2">
+					<orgName type="full">in Agronomy and Biodiversity</orgName>
 				</funder>
-				<funder ref="#_nygGgvs">
-					<orgName type="full">EU</orgName>
-				</funder>
-				<funder ref="#_zaAygFu">
-					<orgName type="full">unknown</orgName>
+				<funder ref="#_eefezDe">
+					<orgName type="full">German Research Foundation</orgName>
 				</funder>
 			</titleStmt>
 			<publicationStmt>
@@ -392,14 +392,14 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 					<monogr>
 						<idno type="ISSN">1613-0073</idno>
 					</monogr>
-					<idno type="MD5">5CDD1933AD2E8ED25F2DDDE6B2EFF2B1</idno>
+					<idno type="MD5">E505543849F8FCE514760990198C4329</idno>
 					<note type="submission">Submitted on 18 Dec 2023</note>
 				</biblStruct>
 			</sourceDesc>
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.0" ident="GROBID" when="2024-04-12T14:52+0000">
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:14+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<ref target="https://github.com/kermitt2/grobid"/>
 				</application>
@@ -523,45 +523,45 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <div><head>Acknowledgements</head><p>We warmly thank the participants of this campaign. We know that they have worked hard to have their matching tools executable in time and they provided useful reports on their experience. The best way to learn about the results remains to read the papers that follow.</p><p>We are also grateful to <rs type="person">Martin Ringwald</rs> and <rs type="person">Terry Hayamizu</rs> for providing the reference alignment for the anatomy ontologies and thank <rs type="person">Elena Beisswanger</rs> for her thorough support on improving the quality of the dataset.</p><p>We thank <rs type="person">Andrea Turbati</rs> and the <rs type="institution">AGROVOC team</rs> for their very appreciated help with the preparation of the AGROVOC subset ontology. We are also grateful to <rs type="person">Catherine Roussey</rs> and <rs type="person">Nathalie Hernandez</rs> for their help on the Taxon alignment.</p><p>We also thank for their support the past members of the <rs type="institution">Ontology Alignment Evaluation Initiative</rs> steering committee: <rs type="person">Jérôme Euzenat</rs> (<rs type="affiliation">INRIA, FR</rs>), <rs type="person">Yannis Kalfoglou</rs> (<rs type="affiliation">Ricoh laboratories, UK</rs>), <rs type="person">Miklos Nagy</rs> (<rs type="affiliation">The Open University,UK</rs>), <rs type="person">Natasha Noy</rs> (<rs type="affiliation">Google Inc., USA</rs>), <rs type="person">Yuzhong Qu</rs> (<rs type="affiliation">Southeast University, CN</rs>), <rs type="affiliation">York Sure</rs> (<rs type="affiliation">Leibniz Gemeinschaft, DE</rs>), <rs type="person">Jie Tang</rs> (<rs type="affiliation">Tsinghua University, CN</rs>), <rs type="person">Heiner Stuckenschmidt</rs> (<rs type="affiliation">Mannheim Universität, DE</rs>), <rs type="person">George Vouros</rs> (<rs type="affiliation">University of the Aegean, GR</rs>). <rs type="person">Daniel Faria</rs> and <rs type="person">Catia Pesquita</rs> were supported by the <rs type="funder">FCT</rs> through the <rs type="funder">LASIGE Research Unit</rs> (<rs type="grantNumber">UIDB/00408/2020</rs> and <rs type="grantNumber">UIDP/00408/2020</rs>) and by the <rs type="projectName">KATY</rs> project funded by the <rs type="funder">European Union</rs>'s <rs type="programName">Horizon 2020 research and innovation program</rs> under grant agreement No <rs type="grantNumber">101017453</rs>. <rs type="person">Ernesto Jimenez-Ruiz</rs> has been partially supported by the <rs type="funder">SIRIUS Centre for Scalable Data Access (Research Council of Norway</rs>, project no.: <rs type="grantNumber">237889</rs>). <rs type="person">Irini Fundulaki</rs> and <rs type="person">Tzanina Saveta</rs> were supported by the <rs type="funder">EU</rs>'s <rs type="programName">Horizon 2020 research and innovation programme</rs> under grant agreement No <rs type="grantNumber">688227</rs> (<rs type="person">Hobbit</rs>). <rs type="person">Patrick Lambrix</rs>, <rs type="person">Huanyu Li</rs>, <rs type="person">Mina Abd Nikooie Pour</rs> and <rs type="person">Ying Li</rs> have been supported by the <rs type="funder">Swedish e-Science Research Centre (SeRC)</rs>, the <rs type="funder">Swedish Research Council (Vetenskapsrådet</rs>, dnr <rs type="grantNumber">2018-04147</rs>) and the <rs type="funder">Swedish National Graduate School in Computer Science (CUGS)</rs>. <rs type="person">Beyza Yaman</rs> has been supported by <rs type="funder">ADAPT SFI Research Centre</rs> [grant <rs type="grantNumber">13/RC/2106 P2</rs>]. <rs type="person">Jiaoyan Chen</rs>, <rs type="person">Hang Dong</rs>, <rs type="person">Yuan He</rs> and <rs type="person">Ian Horrocks</rs> have been supported by <rs type="funder">Samsung Research UK (SRUK)</rs> and the <rs type="funder">EPSRC</rs> project <rs type="projectName">ConCur</rs> (<rs type="grantNumber">EP/V050869/1</rs>).</p><p>The <rs type="projectName">Biodiversity</rs> and Ecology track has been partially funded by the <rs type="funder">German Research Foundation</rs> in the context of <rs type="projectName">NFDI4BioDiversity project</rs> (number <rs type="grantNumber">442032008</rs>) and the <rs type="grantNumber">CRC 1076</rs> AquaDiva. In 2021, the track was also supported by the Data to Knowledge <rs type="funder">in Agronomy and Biodiversity</rs> (D2KAB) project that received funding from the <rs type="funder">French National Research Agency</rs> (<rs type="grantNumber">ANR-18-CE23-0017</rs>). We would like to thank <rs type="institution">FAO AIMS</rs> and <rs type="institution">US NAL</rs> as well as the GACS project for providing mappings between AGROVOC and NALT. We would like to thank <rs type="person">Christian Pichot</rs> and the <rs type="institution">ANAEE France</rs> project for providing mappings between ANAEETHES and GEMET.</p></div>
 			</div>
 			<listOrg type="funding">
-				<org type="funding" xml:id="_CDgkZgJ">
+				<org type="funding" xml:id="_TtVed2K">
 					<idno type="grant-number">UIDB/00408/2020</idno>
 				</org>
-				<org type="funded-project" xml:id="_kUJGG5z">
+				<org type="funded-project" xml:id="_B3B2FZy">
 					<idno type="grant-number">UIDP/00408/2020</idno>
 					<orgName type="project" subtype="full">KATY</orgName>
 				</org>
-				<org type="funding" xml:id="_k2N93xz">
+				<org type="funding" xml:id="_B9CUdsr">
 					<idno type="grant-number">101017453</idno>
 					<orgName type="program" subtype="full">Horizon 2020 research and innovation program</orgName>
 				</org>
-				<org type="funding" xml:id="_S7QF95j">
+				<org type="funding" xml:id="_ytq9FqU">
 					<idno type="grant-number">237889</idno>
 				</org>
-				<org type="funding" xml:id="_nygGgvs">
+				<org type="funding" xml:id="_VNjVKzj">
 					<idno type="grant-number">688227</idno>
 					<orgName type="program" subtype="full">Horizon 2020 research and innovation programme</orgName>
 				</org>
-				<org type="funding" xml:id="_EgKqYZ5">
+				<org type="funding" xml:id="_qf7vrKu">
 					<idno type="grant-number">2018-04147</idno>
 				</org>
-				<org type="funding" xml:id="_n9ATJuX">
+				<org type="funding" xml:id="_rUzFZnm">
 					<idno type="grant-number">13/RC/2106 P2</idno>
 				</org>
-				<org type="funded-project" xml:id="_KWjkJDH">
+				<org type="funded-project" xml:id="_PMKrxQ2">
 					<idno type="grant-number">EP/V050869/1</idno>
 					<orgName type="project" subtype="full">ConCur</orgName>
 				</org>
-				<org type="funded-project" xml:id="_vQy9fDq">
+				<org type="funded-project" xml:id="_eefezDe">
 					<orgName type="project" subtype="full">Biodiversity</orgName>
 				</org>
-				<org type="funded-project" xml:id="_zaAygFu">
+				<org type="funded-project" xml:id="_q4WSw7h">
 					<idno type="grant-number">442032008</idno>
 					<orgName type="project" subtype="full">NFDI4BioDiversity project</orgName>
 				</org>
-				<org type="funding" xml:id="_qfHGmwk">
+				<org type="funding" xml:id="_BdrdQY2">
 					<idno type="grant-number">CRC 1076</idno>
 				</org>
-				<org type="funding" xml:id="_KfM6A9t">
+				<org type="funding" xml:id="_T9XwheN">
 					<idno type="grant-number">ANR-18-CE23-0017</idno>
 				</org>
 			</listOrg>

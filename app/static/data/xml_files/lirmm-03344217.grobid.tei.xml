@@ -1,0 +1,1829 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Materializing Knowledge Bases via Trigger Graphs (Technical Report)</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2021-02-04">4 Feb 2021</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Efthymia</forename><surname>Tsamoura</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Samsung AI Research</orgName>
+								<address>
+									<country key="GB">United Kingdom</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">David</forename><surname>Carral</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="institution">TU</orgName>
+								<address>
+									<settlement>Dresden</settlement>
+									<country key="DE">Germany</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Enrico</forename><surname>Malizia</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="institution">University of Bologna</orgName>
+								<address>
+									<country key="IT">Italy</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff3">
+								<orgName type="institution">Vrije Universiteit Amsterdam</orgName>
+								<address>
+									<country key="NL">The Netherlands</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Jacopo</forename><surname>Urbani</surname></persName>
+						</author>
+						<title level="a" type="main">Materializing Knowledge Bases via Trigger Graphs (Technical Report)</title>
+					</analytic>
+					<monogr>
+						<idno type="ISSN">2150-8097</idno>
+						<imprint>
+							<date type="published" when="2021-02-04">4 Feb 2021</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">3A84A263930D15B3442E9C1262917E45</idno>
+					<idno type="DOI">10.14778/xxxxxxx.xxxxxxx</idno>
+					<idno type="arXiv">arXiv:2102.02753v1[cs.DB]</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:13+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>Materializing Knowledge Bases via Trigger Graphs. PVLDB,</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>The chase is a well-established family of algorithms used to materialize Knowledge Bases (KBs), like Knowledge Graphs (KGs), to tackle important tasks like query answering under dependencies or data cleaning. A general problem of chase algorithms is that they might perform redundant computations. To counter this problem, we introduce the notion of Trigger Graphs (TGs), which guide the execution of the rules avoiding redundant computations. We present the results of an extensive theoretical and empirical study that seeks to answer when and how TGs can be computed and what are the benefits of TGs when applied over real-world KBs. Our results include introducing algorithms that compute (minimal) TGs. We implemented our approach in a new engine, and our experiments show that it can be significantly more efficient than the chase enabling us to materialize KBs with 17B facts in less than 40 min on commodity machines.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.">INTRODUCTION</head><p>Motivation. Knowledge Bases (KBs) are becoming increasingly important with many industrial key players investing on this technology. For example, Knowledge Graphs (KGs) <ref type="bibr" target="#b30">[32]</ref> have emerged as the main vehicle for representing factual knowledge on the Web and enjoy a widespread adoption <ref type="bibr" target="#b46">[48]</ref>. Moreover, several tech giants are building KGs to support their core business. For instance, the KG developed at Microsoft contains information about the world and supports question answering, while, at Google, KGs are used to help Google products respond more appropriately to user requests by mapping them to concepts in the KG. The use of KBs and KGs in such scenarios is not restricted only to database-like analytics or query answering: KBs play also a central role in neural-symbolic systems for efficient learning and explainable AI <ref type="bibr" target="#b21">[23,</ref><ref type="bibr" target="#b34">36]</ref>.</p><p>A KB can be viewed as a classical database B with factual knowledge and a set of logical rules P , called program, allowing the derivation of additional knowledge. One class of rules that is of particular interest both to academia and to industry is Datalog <ref type="bibr">[2]</ref>. Datalog is a recursive language with declarative semantics that allows users to succinctly write recursive graph queries. Beyond expressing graph queries, e.g., reachability, Datalog allows richer fixed-point graph analytics via aggregate functions. LogicBlox and LinkedIn used Datalog to develop high-performance applications, or to compute analytics over its KG <ref type="bibr" target="#b1">[3,</ref><ref type="bibr" target="#b44">46]</ref>. Google developed their own Datalog engine called Yedalog <ref type="bibr" target="#b19">[21]</ref>. Other industrial users include Facebook, BP <ref type="bibr">[10]</ref> and Samsung <ref type="bibr" target="#b38">[40]</ref>.</p><p>Materializing a KB (P, B) is the process of deriving all the facts that logically follow when reasoning over the database B using the rules in P . Materialization is a core operation in KB management. An obvious use is that of caching the derived knowledge. A second use is that of goal-driven query answering, i.e., deriving the knowledge specific to a given query only, using database techniques such as magic sets and subsumptive tabling <ref type="bibr">[8,</ref><ref type="bibr">9,</ref><ref type="bibr" target="#b11">13,</ref><ref type="bibr" target="#b53">55]</ref>. Beyond knowledge exploration, other applications of materialization are data wrangling <ref type="bibr" target="#b33">[35]</ref>, entity resolution <ref type="bibr" target="#b35">[37]</ref>, data exchange <ref type="bibr" target="#b24">[26]</ref> and query answering over OWL <ref type="bibr" target="#b42">[44]</ref> and RDFS <ref type="bibr" target="#b14">[16]</ref> ontologies. Finally, materialization has been also used in probabilistic KBs <ref type="bibr" target="#b54">[56]</ref>.</p><p>Problem. The increasing sizes of modern KBs <ref type="bibr" target="#b46">[48]</ref>, and the fact that materialization is not a one-off operation when used for goal-driven query answering, make improving the materialization performance critical. The chase, which was introduced in 1979 by Maier et al. <ref type="bibr" target="#b40">[42]</ref>, has been the most popular materialization technique and has been adopted by several commercial and open source engines such as VLog <ref type="bibr" target="#b56">[58]</ref>, RDFox <ref type="bibr" target="#b45">[47]</ref> and Vadalog <ref type="bibr">[10]</ref>.</p><p>To improve the performance of materialization, different approaches have focused on different inefficiency aspects. One approach is to reduce the number of facts added in the KB. This is the take of some of the chase variants proposed by the database and AI communities <ref type="bibr" target="#b9">[11,</ref><ref type="bibr" target="#b22">24,</ref><ref type="bibr" target="#b47">49]</ref>. A second approach is to parallelize the computation. For example, RDFox proposes a parallelization technique for Datalog rules <ref type="bibr" target="#b45">[47]</ref>, while WebPIE <ref type="bibr" target="#b57">[59]</ref> and Inferray <ref type="bibr" target="#b52">[54]</ref> propose parallelization techniques for fixed RDFS rules. Orthogonal to those approaches are those employing compression and columnar storage layouts to reduce memory consumption <ref type="bibr" target="#b32">[34,</ref><ref type="bibr" target="#b56">58]</ref>.</p><p>In this paper, we focus on a different aspect: that of avoiding redundant computations. Redundant computations is a problem that concerns all chase variants and has multiple causes. A first cause is the derivation of facts that either have been derived in previous rounds, or are logically redundant, i.e., they can be ignored without compromising query answering. The above issue has been partially addressed in Datalog with the well-known seminaïve evaluation (SNE) <ref type="bibr">[2]</ref>. SNE restricts the execution of the rules over at least one new fact. However, it cannot block the derivation of the same or logically redundant facts by different rules. A second cause of redundant computations relates to the execution of the rules: when executing a rule, the chase may consider facts that cannot lead to any derivations.</p><p>Our approach. To reduce the amount of redundant computations, we introduce the notion of Trigger Graphs (TGs). A TG is an acyclic directed graph that captures all the operations that should be performed to materialize a KB <ref type="bibr">(P, B)</ref>. Each node in a TG is associated with a rule from P and with a set of facts, while the edges specify the facts over which we execute each rule.</p><p>Intuitively, a TG can be viewed as a blueprint for reasoning over the KB. As such, we can use it to "guide" a reasoning procedure without resorting to an exhaustive execution of the rules, as it is done with the chase. In particular, our approach consists of traversing the TG, executing the rule r associated with a node v over the union of the facts associated with the parent nodes of v and storing the derived facts "inside" v. After the traversal is complete, then the materialization of the KB is simply the union of the facts in all the nodes. TG-guided materialization addresses at the same time all causes of inefficiencies described above. In particular, TGs block the derivation of the same or logically redundant facts that cannot be blocked by SNE. This is achieved by effectively partitioning into smaller subinstances the facts currently in the KB. This partitioning also enables us to reduce the cost of executing the rules.</p><p>Furthermore, in specific cases, TGs allow us reasoning via either completely avoiding certain steps involved when executing rules, or performing them at the end and collectively for all rules. Our experiments show that we get good runtime improvements with both alternatives.</p><p>Contributions. We propose techniques for computing both instance-independent and instance-dependent TGs. The former TGs are computed exclusively based on the rules of the KB and allow us to reason over any possible instance of the KB making them particularly useful when the database changes frequently. In contrast, instancedependent TGs are computed based both on the rules and the data of the KB and, thus, support reasoning over the given KB only. We show that not every program admits a finite instance-independent TG. We define a special class, called FTG, including all programs that admit a finite instance-independent TG and explore its relationship with other known classes.</p><p>As a second contribution, we propose algorithms to compute and minimize (instance-independent) TGs for linear programs: a class of programs relevant in practice. A program P not admitting a finite instance-independent TG may still admit a finite instance-dependent TG.</p><p>As a third contribution, we show that all programs that admit a finite universal model also admit a finite instance-dependent TG. We use this finding to propose a TG-guided materialization technique that supports any such program (not necessarily in FTG). The technique works by interleaving the reasoning process with the computation of the TG, and it reduces the number of redundant computations via query containment and via a novel TG-based rule execution strategy.</p><p>We implemented our approach in a new reasoner, called GLog, and compared its performance versus multiple state-of-the-art chase and RDFS engines including RDFox, VLog, WebPIE <ref type="bibr" target="#b57">[59]</ref> and Inferray <ref type="bibr" target="#b52">[54]</ref>, using well-established benchmarks, e.g., ChaseBench <ref type="bibr" target="#b9">[11]</ref>. Our evaluation shows that GLog outperforms all its competitors in all benchmarks. Moreover, in our largest experiment, GLog was able to materialize a KB with 17B facts in 37 minutes on commodity hardware.</p><p>Summary. We make the following contributions:</p><p>• (New idea) We propose a new reasoning technique based on traversing acyclic graphs, called TGs, to tackle multiple sources of inefficiency of the chase; • (New theoretical contribution) We study the class of programs admitting finite instance-independent TGs and its relationship with other known classes; • (New algorithms) We propose techniques for computing minimal instance-independent TGs for linear programs, and techniques for computing minimal instance-dependent TGs for Datalog programs; • (New system) We introduce a new reasoner, GLog, which has competitive performance, often superior to the state-of-the-art, and has good scalability. Supplementary material with all proofs, code and evaluation data is in https://bitbucket.org/tsamoura/ trigger-graphs/src/master/.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.">MOTIVATING EXAMPLE</head><p>We start our discussion with a simple example to describe how the chase works, its inefficiencies, and how they can be overcome with TGs. For the moment, we give only an intuitive description of some key concepts to aid the understanding of the main ideas. In the following sections, we will provide a formal description.</p><p>The chase works in rounds during which it executes the rules over the facts that are currently in the KB.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>First round Input</head><p>Second round Third round In most chase variants, the execution of a rule involves three steps: retrieving all the facts that instantiate the premise of the rule, then, checking whether the facts to be derived logically hold in the KB and finally, adding them to the KB if they do.</p><formula xml:id="formula_0">T (c2, c1, c2) T (c2, c1, n1) r(c1, c2) R(c1, c2) T (c2, c1, c2) T (c2, c1, n1) r(c1, c2) R(c1, c2) T (c2, c1, n1) r(c1, c2) R(c1, c2) r(c1, c2) r1 r4 r2 r2 r3 r1 r3 r4 r1 r2 r3 r4 T (c2, c1, n1) R(c1, c2) T (c2, c1, c2) R(c1, c2) T (c2, c1, c2)<label>(a</label></formula><p>Example 1. Consider the KB B = {r(c1, c2)} with a single fact and the program P1 = {r1, r2, r3, r4}:</p><formula xml:id="formula_1">r(X, Y ) → R(X, Y ) (r1) R(X, Y ) → T (Y, X, Y ) (r2) T (Y, X, Y ) → R(X, Y ) (r3) r(X, Y ) → ∃Z.T (Y, X, Z)<label>(r4)</label></formula><p>Figure <ref type="figure" target="#fig_0">1</ref> (a) depicts the rounds of the chase with such an input. In the first round, the only rules that can derive facts are r1 and r4. Rule r1 derives the fact R(c1, c2). Since this fact is not in the KB, the chase adds it to the KB. Let us now focus on r4. Notice that variable Z in r4 does not occur in the premise of r4. The chase deals with such variables by introducing fresh null (values). Nulls can be seen as "placeholders" for objects that are not known. In our case, r4 derives the fact T (c2, c1, n1), where n1 is a null, and the chase adds it to the KB. The chase then continues to the second round where rules are executed over B = B∪{R(c1, c2), T (c2, c1, n1)}. The execution of r2 derives the fact T (c2, c1, c2), which is added to the KB, yielding B = B ∪ {T (c2, c1, c2)}. Finally, the chase proceeds to the third round where only rule r3 derives R(c1, c2) from B . However, since this fact is already in B , the chase stops.</p><p>The above steps expose two inefficiencies of the chase. The first is that of incurring in the cost of deriving the same or logically redundant facts.</p><p>Example 2. Let us return back to Example 1. The chase pays the cost of executing r3 despite that r3's execution always derives facts derived in previous rounds. This is due to the cyclic dependency between rules r2 and r3: r2 derives T -facts by flipping the arguments of the Rfacts, while r3 derives R-facts by flipping the arguments of the T -facts. Despite that the SNE effectively blocks the execution of r1 and r2 in the third chase round, it cannot block the execution of r3 in the third chase round, since T (c2, c1, c2) was derived in the second round. Now, consider the fact T (c2, c1, n1). This fact is logically redundant, because it provides no extra information over T (c2, c1, c2), derived by r2. Despite being logically redundant, the chase pays the cost of deriving it.</p><p>The second inefficiency that is exposed is that of suboptimally executing the rules themselves: when computing the facts instantiating the premise of a rule, the chase considers all facts currently in the KB even the ones that cannot instantiate the premise of the rule. The root of these inefficiencies is that the chase, in each round, considers the entire KB as a source for potential derivations, with only SNE as means to avoid some redundant derivations. If we were able to "guide" the execution of the rules in a more clever way, then we can avoid the inefficiencies stated above.</p><p>For instance, consider an alternative execution strategy where r2 is executed only over the derivations of r1, while r3 and r4 are not executed at all. This strategy would not face any of the inefficiencies highlighted above, and it can be defined with a graph like the one in Figure 1 <ref type="bibr">(c)</ref>. Informally, a Trigger Graph (TG) is precisely such a graph-based blueprint to compute the materialization. In the remaining, we will first provide a formal definition of TGs and study their properties. Then, we will show that in some cases we can build a TG that is optimal for any possible set of facts given as input. In other cases, we can still build TGs incrementally. Such TGs allow to avoid redundant computations that will occur with the chase but only with the given input.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.">PRELIMINARIES</head><p>Let Consts, Nulls, Vars, and Preds be mutually disjoint, (countably infinite) sets of constants, nulls, variables, and predicates, respectively. Each predicate p is associated with a non-negative integer arity(p) ≥ 0, called the arity of p. Let EDP and IDP be disjoint subsets of Preds of intensional and extensional predicates, respectively. A term is a constant, a null, or a variable. A term is ground if it is either a constant or a null. An atom A has the form p(t1, . . . , tn), where p is an n-ary predicate, and t1, . . . , tn are terms. An atom A is extensional (resp., intensional), if the predicate of A is in EDP (resp., IDP). A fact is an atom of ground terms. A base fact is an atom of constants whose predicate is extensional. An instance I is a set of facts (possibly comprising null terms). A base instance B is a set of base facts.</p><p>A rule is a first-order formula of the form</p><formula xml:id="formula_2">∀X∀Y n i=1 Pi(Xi, Yi) → ∃ZP (Y, Z),<label>(1)</label></formula><p>where, P is an intensional predicate and for all 1 ≤ i ≤ n, Xi ⊆ X and Y1 ⊆ Y (Xi and Yi might be empty A term mapping σ is a (possibly partial) mapping of terms to terms; we write σ = {t1 → s1, . . . , tn → sn} to denote that σ(ti) = si for 1 ≤ i ≤ n. Let α be a term, an atom, a conjunction of atoms, or a set of atoms. Then σ(α) is obtained by replacing each occurrence of a term t in α that also occurs in the domain of σ with σ(t) (i.e., terms outside the domain of σ remain unchanged). A substitution is a term mapping whose domain contains only variables and whose range contains only ground terms. For two sets, or conjunctions, of atoms A1 and A2, a term mapping σ from the terms occurring in A1 to the terms occurring in A2 is said to be a homomorphism from A1 to A2 if the following hold: (i) σ maps each constant in its domain to itself, (ii) σ maps each null in its domain to Consts ∪ Nulls and (iii) for each atom A ∈ A1, σ(A) ∈ A2. We denote a homomorphism σ from A1 into A2 by σ : A1 → A2.</p><p>It is known that, for two sets of facts A1 and A2, there exists a homomorphism from A1 into A2 iff A2 |= A1 (and hence, there exists a homomorphism in both ways iff A1 ≡ A2). When A1 and A2 are null-free instances, A2 |= A1 iff A1 ⊆ A2 and A2 ≡ A1 iff A1 = A2.</p><p>For a set of two or more atoms A = {A1, . . . , An} a most general unifier (MGU) µ for A is a substitution so that: (i) µ(A1) = • • • = µ(An); and (ii) for each other substitution σ for which σ(A1) = • • • = σ(An), there exists a σ such that σ = σ • µ <ref type="bibr">[5]</ref>.</p><p>Consider a rule r of the form (1) and an instance I. A trigger for r in I is a homomorphism from the body of r into I. We denote by hs the extension of a trigger h mapping each Z ∈ Z into a unique fresh null. A rule r holds or is satisfied in an instance I, if for each trigger h for r in I, there exists an extension h of h to a homomorphism from the head of r into I. A model of a KB (P, B) is a set I ⊇ B, such that each r ∈ P holds in I. A KB may admit infinitely many different models. A model M is universal, if there exists a homomorphism from M into every other model of (P, B). A program P is Finite Expansion Set (FES), if for each base instance B, (P, B) admits a finite universal model.</p><p>A conjunctive query (CQ) is a formula of the form Q(X1, . . . , Xn) ← m i=1 Ai, where Q is a fresh predicate not occurring in P , Ai are null-free atoms and each Xj occurs in some Ai atom. We usually refer to a CQ by its head predicate. We refer to the left-hand and the right-hand side of the formula as the head and the body of the query, respectively. A CQ is atomic if its body consists of a single atom. A Boolean CQ (BCQ) is a CQ whose head predicate has no arguments. A substitution σ is an answer to Q on an instance I if the domain of σ is precisely its head variables, and if σ can be extended to a homomorphism from i Ai into I. We often identify σ with the n-tuple (σ(X1), . . . , σ(Xn)). The output of Q on I is the set Q(I) of all answers to Q on I. The answer to a BCQ Q on an instance I is true, denoted as I |= Q, if there exists a homomorphism from i=1 Ai into I. The answer to a BCQ Q on a KB (P, B) is true, denoted as (P, B) |= Q, if M |= Q holds, for each model M of (P, B). Finally, a CQ Q1 is contained in a CQ Q2, denoted as Q1 ⊆ Q2, if for each instance I, each answer to Q1 on I is in the answers to Q2 on I <ref type="bibr" target="#b18">[20]</ref>.</p><p>The chase refers to a family of techniques for repairing a base instance B relative to a set of rules P so that the result satisfies the rules in P and contains all base facts from B. In particular, the result is a universal model of (P, B), which we can use for query answering <ref type="bibr" target="#b24">[26]</ref>. By "chase" we refer both to the procedure and its output.</p><p>The chase works in rounds during which it executes one or more rules from the KB. The result of each round i ≥ 0 is a new instance I i (with I 0 = B), which includes the facts of all previous instances plus the newly derived facts. The execution of a rule in the i-th chase round, involves computing all triggers from the body of r into I i-1 , then (potentially) checking whether the facts to be derived satisfy certain criteria in the KB and finally, adding to the KB or discarding the derived facts. Different chase variants employ different criteria for deciding whether a fact should be added to the KB or whether to stop or continue the reasoning process <ref type="bibr" target="#b9">[11,</ref><ref type="bibr" target="#b47">49]</ref>. For example, the restricted chase (adopted by VLog and RDFox) adds a fact if there exists no homomorphism from this fact into the KB and terminates when no new fact is added. The warded chase (adopted by Vadalog) replaces homomorphism checks by isomorphism ones <ref type="bibr">[10]</ref> and terminates, again, when no new fact is added. The equivalent chase omits any checks and terminates when there is a round i which produces an instance that is logically equivalent to the instance produced in the (i -1)-th round <ref type="bibr" target="#b22">[24]</ref>. Notice that when a KB includes only Datalog rules all chase variants behave the same: a fact is added when it has not been previously derived and the chase stops when no new fact is added to the KB. Not all chase variants terminate even when the KB admits a finite universal model <ref type="bibr" target="#b22">[24]</ref>. The core chase <ref type="bibr" target="#b23">[25]</ref> and the equivalent one do offer such guarantees.</p><p>For a chase variant, we use Ch i (K) or Ch i (P, B) to denote the instance computed during the i-th chase round and Ch(P, B) to denote the (possibly infinite) result of the chase. Furthermore, we define the chase graph chaseGraph(P, B) for a KB (P, B) as the edgelabeled directed acyclic graph having as nodes the facts in Ch(P, B) and having an edge from a node f1 to f2 labeled with rule r ∈ P if f2 is obtained from f1 and possibly from other facts by executing r.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.">TRIGGER GRAPHS</head><p>In this section, we formally define Trigger Graphs (TGs) and study the class of programs admitting finite instance-independent TGs. First, we introduce the notion of Execution Graphs (EGs). Intuitively, an EG for a program is a digraph stating a "plan" of rule execution to reason via the program. In its general definition, an EG is not required to characterize a plan of reasoning guaranteeing completeness. Particular EGs, defined later, will also satisfy this property. Definition 4. An execution graph (EG) for a program P is an acyclic, node-and edge-labelled digraph G = (V, E, rule, ), where V and E are the graph nodes and edges sets, respectively, and rule and are the nodeand edge-labelling functions. Each node v (i) is labelled with some rule, denoted by rule(v), from P ; and (ii) if the j-th predicate in the body of rule(v) equals the head predicate of rule(u) for some node u, then there is an edge labelled j from node u to node v, denoted by u →j v.</p><p>Figures <ref type="figure" target="#fig_5">1(b</ref>) and 1 <ref type="bibr">(c)</ref> show two EGs for P1 from Example 1. Next to each node is the associated rule. Later we show that both EGs are also TGs for P1.</p><p>Since the nodes of an execution graph are associated with rules of a program, when, in the following, we refer to the head and the body of a node v, we actually mean the head and the body of rule(v). Observe that, by definition, nodes associated with extensional rules do not have entering edges, and nodes v associated with an intensional rule have at most one incoming edge associated with the j-th predicate of the body of v, i.e., there is at most one node u such that u →j v. The latter might seem counterintuitive as, in a program, the j-th predicate in the body of a rule can appear in the heads of many different rules. It is precisely to take into account this possibility that, in an execution graph, more than one node can be associated with the same rule r of the program. In this way, different nodes v1, . . . , vq associated with the same rule r can be linked with an edge labeled j to different nodes u1, . . . , uq whose head's predicate is the j-th predicate of the body of r. This models that to evaluate a rule r we might need to match the j-th predicate in the body of r with facts generated by the heads of different rules.</p><p>We now define some notions on EGs that we will use throughout the paper. For an EG G for a program P , we denote by ν(G) and (G) the sets of nodes and edges in G. The depth of a node v ∈ ν(G) is the length of the longest path that ends in v. The depth d(G) of G is 0 if G is the empty graph; otherwise, it is the maximum depth of the nodes in ν(V ).</p><p>As said earlier, EGs can be used to guide the reasoning process. In the following definition, we formalise how the reasoning over a program P is carried out by following the plan encoded in an EG for P . The definition assumes the following for each rule r in P : (i) r is of the form ∀X∀Y n i=1 Pi(Xi, Yi) → ∃ZP (Y, Z); and (ii) if r is intensional and is associated with a node v in an EG for P , then the EG includes an edge of the form ui →i v, for each 1 ≤ i ≤ n. Definition 5. Let (P, B) be a KB, G be an EG for P and v be a node in G associated with rule r ∈ P . v(B) includes a fact hs(head(r)), for each h that is either:</p><p>• a homomorphism from the body of r to B, if r is extensional; or otherwise • a homomorphism from the body of r into n i=1 ui(B) so that the following holds: the restriction of h over</p><formula xml:id="formula_3">Xi ∪ Yi is a homomorphism from Pi(Xi, Yi) into ui(B), for each 1 ≤ i ≤ n. We pose G(B) = B ∪ v∈V v(B).</formula><p>TGs are EGs guaranteeing the correct computation of conjunctive query answering.</p><formula xml:id="formula_4">Definition 6. An EG G is a TG for (P, B), if for each BCQ Q, (P, B) |= Q iff G(B) |= Q. G is a TG for P , if for each base instance B, G is a TG for (P, B).</formula><p>TGs that depend both on P and B are called instancedependent, while TGs that depend only on P are called instance-independent. The EGs shown in Figure <ref type="figure" target="#fig_0">1</ref> are both instance-independent TGs for P1.</p><p>We provide an analysis of the class of programs that admit a finite instance-independent TG denoted as FTG. Theorem 7 summarizes the relationship between FTG and the classes of programs that are bounded (BDD, <ref type="bibr" target="#b22">[24]</ref>), term-depth bounded (TDB, <ref type="bibr" target="#b37">[39]</ref>) and first-orderrewritable (FOR, <ref type="bibr" target="#b16">[18]</ref>).</p><p>Theorem 7. The following hold: P is FTG iff it is BDD; and P is TDB ∩ FOR iff it is BDD. This result is obtained by showing that if P is FTG, then it is BDD with bound the maximal depth of any instance-independent TG for P . If it is BDD with bound k, then the (finite) EG G k , which is described after Definition 9, is a TG for P .</p><p>If a program is FOR, then all facts that contain terms of depth at most k are produced in a fixed number of chase steps. Therefore, if it is also TDB, then all relevant facts in the chase are also produced in a fixed number of steps. Finally, the undecidability of FTG follows from the fact that FOR and FTG coincide for Datalog programs, which are always TDB. See the appendix for a detailed explanation.</p><p>We conclude our analysis by showing that any KB that admits a finite model, also admits a finite instancedependent TG, as stated in the following statement.</p><p>Theorem 8. For each KB (P, B) that admits a finite model, there exists an instance-dependent TG.</p><p>The key insight is that we can build a TG that mimics the chase. Below, we analyze the conditions under which the same rule execution takes place both in the chase and when reasoning over a TG. Based on this analysis we present a technique for computing instance-dependent TGs that mimic breadth-first chase variants.</p><p>Consider a rule of the form (1) and assume that the chase over a KB (P, B) executes r in some round k by instantiating its body using the facts R(ci). Consider now a TG G for (P, B). If k = 1, then this rule execution (notice that the rule has to be extensional) takes place in G if there is a node v associated with r. Otherwise, if k &gt; 1, then this rule execution takes place in G if the following holds: (i) there is a node v associated with r, (ii) each R(ci) is stored in some node ui and (iii) there is an incoming edge ui →i v, for each 1 ≤ i ≤ n. We refer to each combination of nodes of depth &lt; k whose facts may instantiate the body of a rule r when reasoning over an EG, as k-compatible nodes for r: Definition 9. Let P be a program, r be an intensional rule in P and G be an EG for P . A combination of n (not-necessarily distinct) nodes (u1, . . . , un) from G is k-compatible with r, where k ≥ 2 is an integer, if:</p><p>• the predicate in the head of ui is Ri;</p><p>• the depth of each ui is less than k; and</p><formula xml:id="formula_5">• at least one node in (u1, . . . , un) is of depth k -1.</formula><p>The above ideas are summarized in an iterative procedure, which builds at each step k a graph G k :</p><p>• (Base step) if k = 1, then for each extensional rule r add to G k a node v associated with r. • (Inductive step) otherwise, for each intensional rule r and each combination of nodes (u1, . . . , un) from G k-1 that is k-compatible with r, add to G k : (i) a fresh node v associated with r and (ii) an edge ui →i v, for each 1 ≤ i ≤ n. The inductive step ensures that G k encodes each rule execution that takes place in the k-th chase round.</p><p>So far, we did not specify when the TG computation process stops. When P is Datalog, we can stop when G k-1 (B) = G k (B). Otherwise, we can employ the termination criterion of the equivalent chase, e.g., G k-1 (B) |= G k (B), or of the restricted chase.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.">TGS FOR LINEAR PROGRAMS</head><p>In the previous section, we outlined a procedure to compute instance-dependent TGs that mimics the chase. Now, we propose an algorithm for computing instanceindependent TGs for linear programs.</p><p>Our technique is based on two ideas. The first one is that, for each base instance B, the result of chasing B using a linear program P is logically equivalent to the union of the instances computed when chasing each single fact in B using P .</p><p>The second idea is based on pattern-isomorphic facts: facts with the same predicate name and for which there is a bijection between their constants. For example, R(1, 2, 3) is pattern-isomorphic to R(5, 6, 7) but not to R(9, 9, 8). We can see that two different patternisomorphic facts will have the same linear rules executed Algorithm 1 tglinear(P ) 1: Let G be an empty EG 2: for each f ∈ H(P ) do 3: Γ is an empty EG; µ is the empty mapping 4: for each f1 →r f2 ∈ chaseGraph(P, {f }) do 5: add a fresh node u to ν(Γ) with rule(u)</p><formula xml:id="formula_6">• •= r 6: µ(u) • •= f1 →r f2 7: for each v, u ∈ ν(Γ) do 8: if µ(v) = f1 →r f2 and µ(u) = f2 → r f3 then 9: add v →1 u to (Γ) 10: G • •= G ∪ Γ 11: return G</formula><p>in the same order during chasing. We denote by H(P ) a set of facts formed over the extensional predicates in a program P , where no fact f1 ∈ H(P ) is pattern isomorphic to some other fact f2 ∈ H(P ).</p><p>Algorithm 1 combines these two ideas: it runs the chase for each fact in H(P ) then tracks the rule executions and (iii) based on these rule executions it computes a TG. In particular, for each fact f2 that is derived after executing a rule r over f1, Algorithm 1 will create a fresh node u and associate it with rule r, lines 4-6. The mapping µ associates nodes with rule executions. Then, the algorithm adds edges between the nodes based on the sequences of rule executions that took place during chasing, lines 7-9.</p><p>Algorithm 1 is (implicitly) parameterized by the chase variant. The results below are based on the equivalent chase, as it ensures termination for FES programs.</p><p>Theorem 10. For any linear program P that is FES, tglinear(P ) is a TG for P .</p><p>Algorithm 1 has a double-exponential overhead. Theorem 11. The execution time of Algorithm 1 for FES programs is double exponential in the input program P . If the arity of the predicates in P is bounded, the execution time is (single) exponential.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Minimizing TGs for linear programs</head><p>The TGs computed by Algorithm 1 may comprise nodes which can be deleted without compromising query answering. Let us return to Example 1 and to the TG G1 from Figure <ref type="figure" target="#fig_0">1</ref>: we can safely ignore the facts associated with the node u2 from G1 and still preserve the answers to all queries over (P1, B). In this section, we show a technique for minimizing TGs for linear programs.</p><p>Our minimization algorithm is based on the following. Consider a TG G for a linear program P , a base instance B of P and the query Q(X) ← R(X, Y ) ∧ S(Y, Z, Z). Assume that there exists a homomorphism from the body of the query into the facts f1 = R(c1, n1) and f2 = S(n1, n2, n2) and that f1 ∈ v(B) and f2 ∈ u(B) with v, u being two nodes of G. Since n1 is shared among two different facts associated with two different nodes, it is safe to remove u if there is another node u ∈ ν(G) whose instance u (B) includes a fact of the form S(n1, n 2 , n 2 ).</p><p>Equivalently, it is safe to remove u if there exists a homomorphism from u(B) into u (B) that maps to itself each null occurring both in u(B) and u (B). Since a null can occur both in u(B) and in u (B) if u, u share a common ancestor we can rephrase the previous statement as follows: we can remove u(B) if there exists a homomorphism from u(B) into u (B) preserving each null (from u(B)) that also occurs in some w(B) with w being an ancestor of u in G. We refer to such homomorphisms as preserving homomorphisms: Definition 12. Let G be a TG for a program P , u, v ∈ ν(G) and B be a base instance. A homomorphism from u(B) into v(B) is preserving, if it maps to itself each null occurring in some u (B) with u being an ancestor of u.</p><p>It suffices to consider only the facts in H(P ) to verify the existence of preserving homomorphisms.</p><p>Lemma 13. Let P be a linear program, G be an EG for P and u, v ∈ ν(G). Then, there exists a preserving homomorphism from u(B) into v(B) for each base instance B, iff there exists a preserving homomorphism from u({f }) into v({f }), for each fact f ∈ H(P ).</p><p>From Definition 12 and from Lemma 13 it follows that a node v of a TG can be "ignored" for query answering if there exists a node v and a preserving homomorphism from v({f }) into v ({f }), for each f ∈ H(P ). If the above holds, then we say that v is dominated by v . The above implies a strategy to reduce the size of TGs. Definition 14. For a TG G for a linear program P , the EG minLinear(G) is obtained by exhaustively applying the steps: (i) choose a pair of nodes v, v from G where v is dominated by v , (ii) remove v from ν(G); and (iii) add an edge v →1 u, for each edge v →1 u from (G).</p><p>The minimization procedure described in Definition 14 is correct: given a TG for a linear program P , the output of minLinear is still a TG for P .</p><p>Theorem 15. For a TG G for a linear program P , minLinear(G) is a TG for P .</p><p>We present an example demonstrating the TG computation and minimizes techniques described above.</p><p>Example 16. Recall Example 1. Since r is the only extensional predicate in P1, H(P1) will include two facts, say r(c1, c2) and r(c3, c3), where c1, c2 and c3 are constants. Algorithm 1 computes a TG by tracking the rule executions that take place when chasing each fact in H(P1). For example, when considering r(c1, c2), the graph Γ computed in lines 3-9 will be the TG G1 from Figure <ref type="figure" target="#fig_5">1(b)</ref>, where nodes are denoted as u1, u2, and u3.</p><p>Let us now focus on the minimization algorithm. To minimize G1, we need to identify nodes that are dominated by others. Recall that a node u in G1 is dominated by a node v, if for each f in H(P1), there exists a preserving homomorphism from u({f }) into v({f }). Based on the above, we can see that u2 is dominated by u3. For example, when B * = {r(c1, c2)}, there exists a preserving homomorphism from u2(B * ) = {R(c2, c1, n1)} into u3(B * ) = {R(c2, c1, c1)} mapping n1 to c1. Since u2 is dominated by u3, the minimization process eliminates u2 from G1. The result is the TG G2 from Figure <ref type="figure" target="#fig_5">1(c)</ref>, since no other node in G2 is dominated.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.">OPTIMIZING TGS FOR DATALOG</head><p>There are cases where we cannot compute instanceindependent TG, e.g., for Datalog programs that are not also in FTG class. In such cases, we can still create an instance-dependent TG using the procedure outlined in Section 4. In this section, we present two optimizations to this procedure which avoid redundant computations. These optimizations work with Datalog programs; thus also with non-linear rules.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1">Eliminating redundant nodes</head><p>Our first technique is based on a simple observation. Consider a node v of a TG G. Assume that v is associated with the rule a(X, Y, Z) → A(Y, X) with a being extensional. We can see that for each base instance B and each fact a(σ(X), σ(Y ), σ(Z)) in B, where σ is a variable substitution, the fact</p><formula xml:id="formula_7">A(σ(Y ), σ(X)) is in v(B). Equivalently, for each answer σ to Q(Y, X) ← a(X, Y, Z), a fact A(σ(Y ), σ(X)) is associated with v(B). The above can be generalized. Consider a node v of a TG G such that rule(v) is n i=i Ai(Yi) → A(X).</formula><p>The facts in v(B) can be obtained by (i) computing the rewriting of the query Q(X) ← n i=i Ai(Yi) w.r.t. the rules in the ancestors of v up to the extensional predicates; (ii) evaluating the rewritten query over B; and (iii) adding A(t) to v(B), for each answer t to the rewritten query over Brecall that we denote answers either as substitutions or as tuples, cf. Section 3. We refer to Q(X) ← n i=i Ai(Yi) as the characteristic query of v.</p><p>This observation suggests we can use query containment tests to identify nodes that can be safely removed from TGs (and EGs). Intuitively, the naïve algorithm above can be modified so that, at each step i, right after computing G i , and before computing G i (B), we eliminate each node u if the EG-guided rewriting over of the characteristic query of u is contained in the EG-guided rewriting of the characteristic query of another node v.</p><p>Below, we formalize the notion of EG-rewritings, then we show the correspondence between the answers to EGrewritings and the facts associated with the nodes, and we finish with an algorithm eliminating nodes from TGs. Definition 17. Let v be a node in an EG G for a Datalog program. Let rule(v) be n i=1 Ai → R(Y). The EG-rewriting of v, denoted as rew(v), is the CQ computed as follows (w.l.o.g. no pair of rules rule(u) and rule(v) with u, v ∈ ν(G) and u = v shares variables):</p><formula xml:id="formula_8">• form Q(Y) ← R(Y); associate R(Y) with v;</formula><p>• repeat the following rewriting step until no intensional atom is left in body(Q): (i) choose an intensional atom α ∈ body(Q); (ii) compute the MGU θ of {head(u), α}, where u is the node associated with α; (iii) replace α in body(Q) with body(u) and apply θ on the resulting Q; (iv) associate θ(Bj) in body(Q) with the node wj, where Bj is the j-th atom in body(u) and wj →j u ∈ (G).</p><p>The rewriting algorithm described in Definition 17 is a variant of the rewriting algorithm in <ref type="bibr" target="#b27">[29]</ref>. Our difference from <ref type="bibr" target="#b27">[29]</ref> is that at each step of the rewriting process, we consider only the rule rule(u) with u being the node with which α is associated with.</p><p>There is a correspondence between the answers to the nodes' EG-rewritings with the facts stored in the nodes.</p><p>Lemma 18. Let G be an EG for a Datalog program P and B be a base instance of P . Then for each v ∈ ν(G) we have: v(B) includes exactly a fact A(t) with A being the head predicate of rule(v), for each answer t to the EG-rewriting of v on B.</p><p>Our algorithm for removing nodes from EGs is below.</p><p>Definition 19. The EG minDatalog(G) is obtained from an EG G for a program P by exhaustively applying these steps: for each pair of nodes u and v such that (i) the depth of v is equal or larger than that of u, (ii) the predicates of head(rule(v)) and of head(rule(u)) are the same and (iii) the EG-rewriting of v is contained in the EG-rewriting of u: (a) remove the node v from ν(G), and (b) add an edge u →j w, for each edge v →j w occurring in G.</p><p>The minimization technique of Definition 19 can be proven sound and to produce a TG with fewest nodes.</p><p>Theorem 20. If G is a TG for a Datalog program P , then minDatalog(G) is a minimum size TG for P .</p><p>Deciding whether a TG of a Datalog program is of minimum size can be proven co-NP-complete. The problem's hardness lies is the necessity of performing query containment tests, carried out via homomorphism tests, which require exponential time on deterministic machines (unless P = N P ) <ref type="bibr" target="#b18">[20]</ref>. This hardness result supports the optimality of minDatalog in terms of complexity.</p><p>Theorem 21. For a Datalog program P and a TG G for P , deciding whether G is a TG of minimum size for P is co-NP-complete.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2">A more efficient rule execution strategy</head><p>EG-rewritings can be further used to optimize the execution of the rules, as shown in the example below.</p><formula xml:id="formula_9">Example 22. Consider the program P2 a(X) ∧ b(X) → A(X) (r8) a (X) ∧ b (X) → A(X) (r9)</formula><p>where a, a , b and b are extensional predicates. We denote by a, a , b and b the relations storing the tuples of the corresponding predicates in the input instance. The data of each relation are shown in Figure <ref type="figure" target="#fig_2">2</ref>.</p><p>The upper part of Figure <ref type="figure" target="#fig_2">2</ref> shows the steps involved when executing r8 and r9 using the chase: (i) shows the joins involved when executing r8; (ii)-(iii) show the joins involved when executing r9: (ii) shows the join to compute body(r9) while (iii) shows the outer join involved when checking whether the conclusions of r9 have been previously derived. Assuming that the cost of executing each join is the cost of scanning the smallest relation, the total cost of the chase is: 100 (step (i)) + 51 (step (ii)) + 50 (step (iii))=201.</p><p>The lower part of Figure <ref type="figure" target="#fig_2">2</ref> shows a more efficient strategy. The execution of r8 stays the same (step (iv)), while for r9 we first compute all tuples that are in a but not in A (step (v)) and use a \ A to restrict the tuples instantiating the body of r9 (step (vi)). The intuition is that the tuples of a that are already in A will be discarded, so it is not worth considering them when instantiating the body of r9. The total cost of this strategy is: 100 (step (iv)) + 51 (step (v)) + 1 (step (vi))=152.</p><p>Example 22 suggests a way to optimize the execution of the rules, which reduces the cost of instantiating the rule bodies. This is achieved by considering only the instantiations leading to the derivation of new conclusions. Our new rule execution strategy is described below. Definition 23. Let v be a node of an EG G for a Datalog program P , B be a base instance and I ⊆ G(B). Let A(X) be the head atom of rule(v) and let Q(Y) ← n i=1 fi be the EG-rewriting of v. The computation of v(B) under I, denoted as v(B, I), is:</p><p>1. pick m ≥ 1 atoms fi 1 , . . . , fi m from the body of Q whose variables include all variables in Y and form</p><formula xml:id="formula_10">Q (Y) ← fi 1 ∧ • • • ∧ fi m ; 2. compute v(B)</formula><p>as in Definition 5, however restrict to homomorphisms h for which (i) h(X) is an answer to Q on B and (ii) A(h(X)) ∈ I.</p><p>To help us understand Definition 23, let us apply it to Example 22. We have Q (X) ← a (X). The antijoin between Q and A (step (v) of Figure <ref type="figure" target="#fig_2">2</ref>) corresponds to restricting to homomorphisms that are answers to Q (step (2.i) of Definition 23), but are not in I (step (2.ii) of Definition 23). In our implementation, we pick one Algorithm 2 TGmat(P, B)</p><formula xml:id="formula_11">1: k • •= 0; G 0 is the empty graph; I 0 • •= ∅ 2: do 3: k • •= k + 1; I k • •= I k-1 4: Compute G k starting from G k-1 as in Section 4 5: G k • •= minDatalog(G k ) 6: for each node v of depth k do 7: add v(B, I k-1 ) (cf. Definition 23) to I k 8: while I k = I k-1 9: return I ∞</formula><p>extensional atom (m = 1) in step <ref type="bibr" target="#b60">(1)</ref>. To pick this atom, we consider each fi in the body of rew(v), then compute the join as in step (v) of Example 22 between a subset of the fi-tuples and the A-tuples in I and finally, choose the fi leading to the highest join output.</p><p>We summarize TG-guided reasoning for Datalog programs in Algorithm 2. Correctness is stated below.</p><p>Theorem 24. For a Datalog program P and a base instance B, TGmat(P, B) = Ch(P, B).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.">EVALUATION</head><p>We implemented Algorithm 1, TG-guided reasoning over a fixed TG (Def. 5) and Algorithm 2 in a new opensource reasoner called GLog. GLog is a fork of VLog <ref type="bibr" target="#b58">[60]</ref> that shares the same code for handling the extensional relations while the code for reasoning is entirely novel.</p><p>We consider three performance measures: the absolute reasoning runtime, the peak RAM consumption observed at reasoning time, and the total number of triggers. The last measure is added because it reflects the ability of TGs to reduce the number of redundant rule executions and it is robust to most implementation choices.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.1">Testbed</head><p>Systems. We compared against the following systems:</p><p>• VLog, as, to our knowledge, is the most efficient system both time-and memory-wise <ref type="bibr" target="#b56">[58,</ref><ref type="bibr" target="#b58">60]</ref>; • the latest public release of RDFox from <ref type="bibr" target="#b60">[1]</ref> as it outperforms all chase engines tested against ChaseBench <ref type="bibr" target="#b9">[11]</ref>: ChaseFun, DEMo <ref type="bibr" target="#b48">[50]</ref>, LLunatic <ref type="bibr" target="#b25">[27]</ref>, PDQ <ref type="bibr" target="#b10">[12]</ref> and Pegasus <ref type="bibr" target="#b41">[43]</ref>; • the commercial state of the art chase engine COM (name is anonymized due to licensing restrictions); • Inferray, an RDFS reasoner that uses a columnar layout and that outperforms RDFox <ref type="bibr" target="#b52">[54]</ref>; and • WebPIE, another high-performance RDFS reasoner that runs over Hadoop <ref type="bibr" target="#b57">[59]</ref>. We ran VLog, RDFox and the commercial chase engine COM using their most efficient chase implementations. For VLog, this is the restricted chase, while for RDFox and COM this is the Skolem one <ref type="bibr" target="#b9">[11]</ref>. All engines ran using a single thread. We could not obtain access to the Vadalog <ref type="bibr">[10]</ref> binaries. However, we perform an indirect comparison against Vadalog: we both compare against RDFox using the ChaseBench scenarios from <ref type="bibr" target="#b9">[11]</ref>. Benchmarks. To asses the performance of GLog on linear and Datalog scenarios, we considered benchmarks previously used to evaluate the performance of reasoning engines including VLog and RDFox: LUBM <ref type="bibr" target="#b28">[30]</ref> and UOBM <ref type="bibr" target="#b39">[41]</ref> are synthetic benchmarks; DBpedia <ref type="bibr" target="#b12">[14]</ref> (v2014, available online<ref type="foot" target="#foot_0">1</ref> ) is a KG extracted from Wikipedia; Claros <ref type="bibr" target="#b49">[51]</ref> and Reactome <ref type="bibr" target="#b20">[22]</ref> are realworld ontologies<ref type="foot" target="#foot_1">2</ref> . With both VLog and GLog, the KBs are stored with the RDF engine Trident <ref type="bibr" target="#b55">[57]</ref>.</p><p>Linear scenarios. Linear scenarios were created using LUBM, UOBM, DBpedia, Claros and Reactome. For the first four KBs, we considered the linear rules returned by translating the OWL ontologies in each KB using the method described by <ref type="bibr" target="#b59">[61]</ref>, which was the technique used for evaluating our competitors <ref type="bibr" target="#b43">[45,</ref><ref type="bibr" target="#b56">58]</ref>. This method converts an OWL ontology O into a Datalog program PL such that O |= PL. For instance, the OWL axiom A B (concept inclusion) can be translated into the rule A(X) → B(X). This technique is ideal for our purposes since this subset is what is mostly supported by RDF reasoners <ref type="bibr" target="#b43">[45]</ref>. Here, the subscript "L" stands for "lower bound". In fact, not every ontology can be fully captured by Datalog (e.g., ontologies that are not in OWL 2 RL) and in such cases the translation captures a subset of all possible derivations.</p><p>For Reactome, we considered the subset of linear rules from the program used in <ref type="bibr" target="#b58">[60]</ref>. The programs for the first four KBs do not include any existential rules while the program for Reactome does. Linear scenarios are suffixed by "LI", e.g., LUBM-LI.</p><p>Datalog scenarios. Datalog scenarios were created using LUBM, UOBM, DBpedia and Claros, as Reactome includes non-Datalog rules only. LUBM comes with a generator, which allows controlling the size of the base instance by fixing the number of different universities X in the instance. One university roughly corresponds to 132k facts. In our experiments, we set X to the following values: 125, 1k, 2k, 4k, 8k, 32k, 64k, 128k. This means that our largest KB contains about 17B facts. As programs, we used the entire Datalog programs (linear and non-linear) obtained with <ref type="bibr" target="#b59">[61]</ref> as described above. These programs are suffixed by "L". For Claros and LUBM, we used two additional programs, suffixed by "LE", created by <ref type="bibr" target="#b43">[45]</ref> as harder benchmarks. These programs extend the "L" ones with extra rules, such as the transitive and symmetric rules for owl:sameAs. The relationship between the various rulesets is LI ⊂ L ⊂ LE. ChaseBench scenarios. ChaseBench was introduced for evaluating the performance of chase engines <ref type="bibr" target="#b9">[11]</ref>.</p><p>The benchmark comes with four different families of scenarios. Out of these four families, we focused on the iBench scenarios, namely STB-128 and ONT-256 <ref type="bibr">[4]</ref> because they come with non-linear rules with existentials that involve many joins and that are highly recursive. Moreover, as we do compare against RDFox which was the top-performing chase engine in <ref type="bibr" target="#b9">[11]</ref>, we can use these two scenarios to indirectly compare against all the engines considered in <ref type="bibr" target="#b9">[11]</ref>. RDFS scenarios. In the Semantic Web, it has been shown that a large part of the inference that is possible under the RDF Schema (RDFS) <ref type="bibr" target="#b14">[16]</ref> can be captured into a set of Datalog rules. A number of works have focused on the execution of such rules. In particular, WebPIE and more recently Inferray returned state-ofthe-art performance for ρDF -a subset of RDFS that captures its essential semantics. It is interesting to compare the performance of GLog, which is a generic engine not optimized for RDFS rules, against such adhoc systems. To this end, we considered YAGO <ref type="bibr" target="#b29">[31]</ref> and a LUBM KB with 16.7M triples. As rules for GLog, we translated the ontologies under the ρDF semantics. Table <ref type="table" target="#tab_1">1</ref> shows, for each scenario, the corresponding number of rules and EDP-facts as well as the number of IDP-facts in the model of the KB. With LUBM and the linear and Datalog scenarios, the number of IDP-facts is proportional to the input size, thus it is stated as %. For instance, with the "LI" rules, the output is 116%, which means that if the input contains 1M facts, then reasoning returns 1.16M new facts. Hardware. All experiments except the ones on scalability (Section 7.5) ran on an Ubuntu 16.04 Linux PC with Intel i7 64-bit CPU and 94.1 GiB RAM. For our experiments on scalability, we used a second machine with an Intel Xeon E5 and 256 GiB of RAM due to the large sizes of the KBs. The cost of both machines is &lt;$5k, thus we arguably label them as commodity hardware.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.2">Results for linear scenarios</head><p>Table <ref type="table" target="#tab_2">2</ref> summarizes the results of our empirical evaluation for the linear scenarios. Recall that when a program is linear and FES it admits a finite TG which can be computed prior to reasoning using tglinear (Algorithm 1) and minimized using minLinear from Definition 14. Columns two to seven show the runtime and the peak memory consumption for VLog, RDFox and the commercial engine COM. The remaining columns show results related to TG-guided reasoning. Column Comp shows the time to compute and minimize a TG using tglinear and minLinear.</p><p>Column Reason shows the time to reason over the computed TG given a base instance (i.e., apply Definition 5). Column w/o cleaning shows the total runtime if we do not filter out redundant facts at reasoning time, while column w/ cleaning shows the total runtime if we additionally filter out redundancies at the end and collectively for all the rules. Notice that in both cases the total runtime includes the time to compute and reason over the TG (columns Comp and Reason). Column Mem shows the peak memory consumption. As we will explain later, in the case of linear rules, the memory consumption in GLog is the same both with and without filtering out redundant facts. Finally, the last three columns #N, #E, and D show the number of nodes, edges, and the depth (i.e., length of the longest shortest path) in the resulting TGs.</p><p>We summarize two main conclusions of our analysis. C1: TGs outperform the chase in terms of runtime and memory. The runtime improvements over the chase vary from multiple orders of magnitude (w/o filtering of redundancies) to almost two times (w/o filtering). When redundancies are discarded, the vast improvements are attributed to structure sharing, a technique which is also implemented in VLog.</p><p>Structure sharing is about reusing the same columns to store the data of different facts. For example, consider the rule R(X, Y ) → S(Y, X). Instead of creating different S-and R-facts, we can simply add a pointer from the first column of R to the second column of S and a pointer from the second column of R to the first column of S. When a rule is linear, both VLog and GLog perform structure sharing and, hence, do not allocate extra memory to store the derived facts. Apart    from the obvious benefits memory-wise, structure sharing also provides benefits in runtime as it allows deriving new facts without actually executing rules. The above, along with the fact that the facts (redundant or not) are not explicitly materialized in memory makes GLog very efficient time-wise.</p><p>When redundancies are filtered out, GLog still outperforms the other engines: it is multiple orders of magnitude faster than RDFox and COM and almost two times faster than VLog (Reactome-LI). The performance improvements are attributed to a more efficient strategy for filtering out redundancies: TGs allow filtering out redundancies after reasoning has terminated, in contrast to the chase, which is forced to filter out redundancies right after the derivation of new facts. This strategy is more efficient because we can use a single n-way join rather than multiple binary joins to remove redundancies.</p><p>With regards to memory, GLog has similar memory requirements with VLog, while it is much more memory efficient than RDFox and the commercial engine COM. C2: The TG computation overhead is small. The time to compute and minimize a TG in advance of reasoning is only a small fraction of the total runtime, see Table <ref type="table" target="#tab_2">2</ref>. We argue that even if this time was not negligible, TG-guided reasoning would still be beneficial: first, once a TG is computed reasoning over it is multiple times faster than the chase and, second, the same TG can be used to reason over the same rules independently of any changes in the database.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.3">Results for Datalog and ChaseBench</head><p>Table <ref type="table" target="#tab_3">3</ref> summarizes our results on generic (linear and non-linear) Datalog rules. The last nine columns show results for TGmat (Algorithm 2). To assess the impact of minDatalog and ruleExec, the rule execution strategy from Definition 23, we ran TGmat as follows: without minDatalog or ruleExec, column No opt; with minDatalog, but without ruleExec, column m; with both minDatalog and ruleExec, column m+r. The total runtime in the last two cases includes the runtime overhead of minDatalog and ruleExec. The last three columns report the number of nodes, edges, and depth of the computed TGs when both minDatalog or ruleExec are employed. Table <ref type="table" target="#tab_4">4</ref> shows results for ChaseBench while Table <ref type="table" target="#tab_5">5</ref> shows the number of triggers for the Datalog scenarios for VLog and GLog (we could not extract this information for RDFox and COM).</p><p>We summarize the main conclusions of our analysis. C3: TGs outperform the chase in terms of runtime and memory. Even without any optimizations, GLog is faster than VLog, RDFox and COM in all but one case. With regards to VLog, GLog is up to nine times faster in the Datalog scenarios (LUBM-LE) and up to two times faster in ChaseBench (ONT-256). With regards to RDFox, GLog is up to 20 times faster in the Datalog scenarios (Claros-L) and up to 67 times faster in ChaseBench (ONT-256). When all optimizations are enabled GLog outperforms the competitors in all cases.</p><p>We have observed that the bulk of the computation lies in the execution of the joins involved when executing few expensive rules. In GLog, joins are executed more efficiently than in the other engines (GLog uses only merge joins), since the considered instances are smaller -recall that in TGs, the execution of a rule associated with a node v considers only the instances of the parents of v. Due to the above, the optimizations do not decrease the runtime considerably. The only exception is LUBM-L, where the optimizations half the runtime.</p><p>Continuing with the optimizations, their runtime overhead is very low: it is 9% of the total runtime (LUBM-L), while the overhead of minDatalog is less than 1% of the total runtime (detailed results are in the appendix). We consider this overhead to be acceptable, since, as we shall see later, the optimizations considerably decrease the number of triggers, a performance measure which is robust to hardware and most implementation choices.</p><p>It is important to mention that GLog implements the technique in <ref type="bibr" target="#b31">[33]</ref> for executing transitive and symmetric rules. The improvements brought by this technique are most visible with LUBM-LE where the runtime increases from 18s with this technique to 71s without it. Other improvements occur with UOBM-L and DBpedia-L (69% and 57% resp.). In any case, even without this technique, GLog remains faster than its competitors in all cases.</p><p>Last, the ChaseBench experiments allow us to compare against Vadalog. According to <ref type="bibr">[10]</ref>, Vadalog is three times faster than RDFox on STB-128 and ONT-256. Our empirical results show that GLog brings more substantial runtime improvements: GLog is from 49 times to more than 67 times faster than RDFox in those scenarios.</p><p>With regards to memory, the memory footprint of GLog again is comparable to that of VLog and it is lower than that of RDFox and of COM. C4: TGs outperform the chase in terms of the number of triggers. Table <ref type="table" target="#tab_5">5</ref> shows that the total number of triggers and, hence, the amount of redundant computations, is considerably lower than the total number of triggers in VLog even when the optimizations are disabled. This is due to the different approaches employed to filter out redundancies: VLog filters out redundancies right after the execution of each rule <ref type="bibr" target="#b56">[58]</ref>, while GLog performs this filtering after each round. When the optimizations are enabled, the number of triggers further decreases: in the best case (DBpedia-L), GLog computes 1.69 times fewer triggers (79M/47M).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.4">Results for RDFS scenarios</head><p>Table <ref type="table" target="#tab_6">6</ref> summarizes the results of the RDFS scenarios where GLog is configured with both optimizations enabled. We can see that GLog is faster than both RDFS engines. With regards to Inferray, GLog is two orders of magnitude faster on LUBM and more than four times faster on YAGO. With regards to WebPIE, GLog is three orders of magnitude faster on LUBM and more than 32 times faster on YAGO. With regards to memory, GLog is more memory efficient in all but one cases.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.5">Results on scalability</head><p>We used the LUBM benchmark to create several KBs with 133M, 267M, 534M, 1B, 2B, 4B, 8B, and 17B facts respectively. Table <ref type="table" target="#tab_7">7</ref> summarizes the performance with the Datalog program LUBM-L. Columns are labeled with the size of the input database. Each column shows the runtime, the peak RAM memory consumption, and the number of derived facts for each input database. We can see that GLog can reason with up to 17B facts in less than 40 minutes without resorting to expensive hardware. We are not aware of any other centralized reasoning engine that can scale up to such an extent.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8.">RELATED WORK</head><p>One approach to improve the reasoning performance is to parallelize the execution of the rules. RDFox proposes a parallelization technique for Datalog materialization with mostly lock-free data insertion. Parallelization has been also been studied for reasoning over RDFS and OWL ontologies. For example, WebPIE encodes the materialization process into a set of MapReduce programs while Inferray executes each rule on a dedicated thread. Our experiments show that GLog outperforms all these engines in a single-core scenario. This motivates further research on parallelizing TG-based materialization.</p><p>A second approach is to reduce the number of logically redundant facts by appropriately ordering the rules. In <ref type="bibr" target="#b57">[59]</ref>, the authors describe a rule ordering that is optimal only for a fixed set of RDFS rules. In contrast, we focus on generic programs. ChaseFun <ref type="bibr" target="#b13">[15]</ref> proposes a new rule ordering technique that focuses on equality generating dependencies. Hence, it is orthogonal to our approach. In a similar spirit, the rewriting technique from <ref type="bibr" target="#b31">[33]</ref> targets transitive and symmetric rules. GLog applies this technique by default to improve the performance, but our experiments show it outperforms the state of the art even without this optimization.</p><p>To optimize the execution of the rules themselves, most chase engines rely on external DBMSs or employ state of the art query execution algorithms: LLunatic <ref type="bibr" target="#b25">[27]</ref>, PDQ and ChaseFun run on top of PostgreSQL; RDFox and VLog implement their own in-memory rule execution engine. However, none of these engines can effectively reduce the instances over which rules are executed as TGs do. Other approaches involve exploring columnar memory layouts as in VLog and Inferray to reduce memory consumption and to guarantee sequential access and efficient sort-merge join inference.</p><p>Orthogonal to the above is the work in <ref type="bibr">[10]</ref>, which introduces a new chase variant for materializing KBs of warded Datalog programs. Warded Datalog is a class of programs not admiring a finite model for any base instance. The variant works as the restricted chase does but replaces homomorphism with isomorphism checks. As a result, the computed models become bigger. An implementation of the warded chase is also introduced in <ref type="bibr">[10]</ref> which focuses on decreasing the cost of isomorphism checks. The warded chase implementation does not apply any techniques to detect redundancies in the offline fashion as we do for linear rules, or to reduce the execution cost of Datalog rules as we do in Section 6.</p><p>We now turn our attention to the applications of materialization in goal-driven query answering. Two well-known database techniques that use materialization as a tool for goal-driven query answering are magic sets and subsumptive tabling <ref type="bibr">[8,</ref><ref type="bibr">9,</ref><ref type="bibr" target="#b51">53,</ref><ref type="bibr" target="#b53">55]</ref>. The advantage of these techniques over the query rewriting ones, which are not based on materialization, e.g., <ref type="bibr">[6,</ref><ref type="bibr" target="#b17">19,</ref><ref type="bibr" target="#b27">29]</ref>, is the full support of Datalog. The query rewriting techniques can support Datalog of bounded recursion only. Beyond Datalog, materialization-based techniques have been recently proposed for goal-driven query answering over KBs with equality <ref type="bibr" target="#b11">[13]</ref>, as well as for probabilistic KBs <ref type="bibr" target="#b54">[56]</ref>, leading in both cases to significant improvements in terms of runtime and memory consumption. The above automatically turns TGs to a very powerful tool to also support query-driven knowledge exploration.</p><p>TGs are different from acyclic graphs of rule dependencies <ref type="bibr" target="#b5">[7]</ref>: the former contain a single node per rule while TGs do not.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="9.">CONCLUSION</head><p>We introduced a novel approach for materializing KBs that is based on traversing acyclic graphs of rules called TGs. Our theoretical analysis and our empirical evaluation over well-known benchmarks show that TG-guided reasoning is a more efficient alternative to the chase, since it effectively overcomes all of its limitations.</p><p>Future research involves studying the problem of updating TGs in response to KB updates, as well as extending TGs to materialize distributed KBs.  Table <ref type="table" target="#tab_1">11</ref>: RDFS scenarios. GLog is ran without the optimization from <ref type="bibr" target="#b31">[33]</ref>. Time is in sec and memory in MB.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>APPENDIX A. ADDTIONAL EXPERIMENTAL RESULTS</head><p>Number of triggers in the linear scenarios. Table <ref type="table" target="#tab_9">8a</ref> summarizes the number of triggers for the linear scenarios. We can see that the number of triggers in GLog is often higher than in VLog. This is due to the fact that GLog does not eliminate redundancies right at their creation. However, these redundancies are harmless: due to structure sharing these redundant facts are not explicitly materialized in memory and hence, they do not slow down the runtime.</p><p>Cost of optimizations. Table <ref type="table" target="#tab_9">8b</ref> summarizes the cost of optimizations for the Datalog scenarios. Recall that the optimizations in Section 6 are not applicable to ChaseBench as the rules have existential variables. Column m shows the total runtime cost of minDatalog, while column r shows the total runtime cost of ruleExec. Impact on rewriting on GLog. Tables 9, 10 and 11 summarize the performance of GLog when disabling the optimization from <ref type="bibr" target="#b31">[33]</ref>. To ease the presentation, we also copy the results of the competitor engines on the same benchmarks from Tables 3, 4 and 6. We can see that the only scenario whose performance degrades considerably is LUBM-LE shown in Table <ref type="table" target="#tab_10">9</ref>. Even in this case though, the performance of GLog is still better than the performance of its competitors: it is twice as fast as VLog, RDFox and COM in most scenarios and more than an order of magnitude faster than RDFox and COM in Claros-L.</p><p>Running RDFox in multiple threads. Tables 12, 13 and 14 show the runtime performance of RDFox when increasing the number of threads from 1 to 8 and 16. For completeness, we also copy the runtime of GLog using a single thread on the same scenarios from Tables 2, 3 and 4. We can see that the runtime of RDFox drops considerably when using 16 threads. However, it is still higher than the runtime of GLog in all cases except UOBM-L, where RDFox's runtime is 1.6s, while GLog's runtime is 2.6s. In the other scenarios, GLog is up to 7.8 times faster than RDFox (ONT-256).   </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B. ADDITIONAL DEFINITIONS</head><p>We provide some definitions that will be useful for the proofs in the next section. For a KB K where Ch(K) is defined, the depth d(t) of a term t in Ch(K) is defined as follows: if t ∈ Consts, then d(t) = 1; otherwise, if t is a null of the form n r,h,z , then d(t) = max(d(t1), . . . , d(tn)) + 1, where {t1, . . . , tn} are all terms in the range of h.</p><p>Next, we recapitulate the definitions of some known classes of programs.</p><p>Definition 25. Consider a program P and some k ≥ 0. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C. PROOFS FOR RESULTS IN SECTION 4</head><p>For a program P , we refer to the graph computed by applying the base and the inductive steps from Section 4 as the level-k full EG for P , and denote it as Φ k P . Below, we show that reasoning via a level-k full EG produces logically equivalent facts with the k-th round of the chase when the chase is applied in a breadth-first fashion: Theorem 26. For a program P , a base instance B and a k ≥ 0, Ch k (P, B) ≡ Φ k P (B).</p><p>Proof. Let P = {r1, . . . , rn}.</p><formula xml:id="formula_12">Let Φ k P = G k = (V k , E k ) and let Φ k+1 P = G k+1 = (V k+1 , E k+1 ). Let I k = Ch k ((P, B)) and let J k = G k (B).</formula><p>(⇐) To prove the claim, we show the following property, for each k ≥ 0:</p><p>• ψ. there exists a homomorphism g k : J k → I k . For k = 0, ψ holds, since I 0 = G 0 (B) = B. For k + 1 and assuming that ψ holds for k, the proof proceeds as follows. Let v k+1 1 , . . . , v k+1 m be all nodes in V k+1 of depth k + 1. For each 1 ≤ ι ≤ m, let rule(v k+1 ι ) = rι and let v k+1 ι (B) = {Fι,1, . . . , Fι,n ι }. Since each rule has a single atom in its head, it follows from Definition 5 that for each 1 ≤ ι ≤ m and each 1 ≤ κ ≤ nι, there exists a homomorphism hι,κ, such that hι,κ s (head(rι)) = Fι,κ. We distinguish the cases, for each rule rι, for 1 ≤ ι ≤ m:</p><p>• rι is an extensional rule. Hence, for each each 1 ≤ κ ≤ nι, hι,κ is a homomorphism from body(rι) into B.</p><p>• rι is not an extensional rule. WLOG, assume that rι comprises only IDP-atoms in its body. Since G k+1 is a full EG, it follows that for each 1 ≤ λ ≤ eι, there exists an edge u ι,λ → ι,λ v k+1 ι in E k+1 . Due to the above, and due to Definition 5, it follows that for each 1 ≤ κ ≤ nι, hι,κ is a homomorphism from body(rι) into eι λ u ι,λ (B).</p><p>Let N k = m ι nι κ hι,κ s (head(rι)). We further distinguish the cases:</p><p>• for each 1 ≤ ι ≤ m and each 1 ≤ κ ≤ nι, Fι,κ ∈ G k (B). Then ψ trivially holds.</p><p>• there exists 1 ≤ ι ≤ m and 1 ≤ κ ≤ nι, such that Fι,κ ∈ G k (B). Since ψ holds for k and due to g k , it follows that for each 1 ≤ ι ≤ m and each 1 ≤ κ ≤ nι, there exists a homomorphism χι,κ = hι,κ • g k from body(rι) into I k . Due to the above, for each 1 ≤ ι ≤ m and each 1 ≤ κ ≤ nι, there also exists a homomorphism ωι,κ from hι,κ s (head(rι)) into χι,κ s (head(rι)), mapping each hι,κ s (nz) to χι,κ s (n z ), where hι,κ s (z) = nz and χι,κ s (z) = n z , for each existentially quantified variable z occurring in r. Due to the above and since for each 1 ≤ ι ≤ m and each 1 ≤ κ ≤ nι, hι,κ s (c) = g k (c), there also exists a homomorphism from</p><formula xml:id="formula_13">N k into M k = m ι nι κ χι,κ s (head(rι))</formula><p>and hence from</p><formula xml:id="formula_14">I k ∪ N k into J k ∪ M k .</formula><p>The above shows that ψ holds for k + 1. (⇒) To prove the claim, we show the following property, for each k ≥ 0: • φ. there exists a homomorphism g k : I k → J k mapping each F ∈ I k to some fact F ∈ J k of the same depth. For k = 0, φ holds, since I 0 = G 0 (B) = B. For k + 1 and assuming that φ holds for k the proof proceeds as follows.</p><p>For each 1 ≤ i ≤ n and each 1 ≤ j ≤ ni, let hi,j be the j-th homomorphism from the body of rule ri into I k , where hi,j(body(ri)) comprises at least one fact of depth k. Due to the inductive hypothesis, we know that for each 1 ≤ i ≤ n and 1 ≤ j ≤ ni, there exists a homomorphism χi,j = hi,j • g k from body(ri) into J k . We distinguish the cases, for each rule ri, for 1 ≤ i ≤ n:</p><p>• rι is an extensional rule. Hence, I k = B.</p><p>• rι is not an extensional rule. WLOG, assume that rι comprises only IDP-atoms in its body. Let u 1 i,j , . . . , u</p><formula xml:id="formula_15">|body(r i )| i,j</formula><p>be the nodes in V k , such that for each 1 ≤ j ≤ ni and each 1 ≤ l ≤ |body(ri)|, the l-th fact in χi,j(body(ri)) belongs to u l i,j (B). Since φ holds for k, it follows that for each 1 ≤ j ≤ ni, some fact in χi,j(body(ri)) is of depth k. Hence some node in u 1 i,j , . . . , u</p><formula xml:id="formula_16">|body(r i )| i,j</formula><p>is of depth k. Since G k+1 is a full EG for P , it follows that for each 1 ≤ j ≤ ni and each 1 ≤ l ≤ |body(ri)|, u l i,j →j v ∈ E k+1 , where rule(v) = ri. Due to the above and due to Definition 5, it follows that for each 1 ≤ i ≤ n and each 1 ≤ j ≤ ni, we have χi,j s (head(ri)) ∈ G k+1 (B). Since for each 1 ≤ i ≤ n and each 1 ≤ j ≤ ni, there exists a homomorphism from g k from hi,j(body(ri)) into χi,j(body(ri)), it follows that for each 1 ≤ i ≤ n and each 1 ≤ j ≤ ni, there also exists a homomorphism ωi,j from hi,j s (head(ri)) into χi,j s (head(ri)), mapping each hi,j s (nz) to χi,j s (n z ), where hi,j s (z) = nz and χi,j s (z) = n z , for each existentially quantified variable z occurring in r. Due to the above and since for each</p><formula xml:id="formula_17">1 ≤ i ≤ n and each 1 ≤ j ≤ ni, hi,j s (c) = g k (c), there also exists a homomorphism from N k = n i n i j hi,j s (head(ri)) into M k = n i n i j χi,j s (head(ri)) and hence from I k ∪ N k into J k ∪ M k .</formula><p>The above shows that the induction holds for k + 1.</p><p>Theorem 7. The following hold: P is FTG iff it is BDD; and P is TDB ∩ FOR iff it is BDD.</p><p>Proof. The proof is based on the proofs of Theorem 27 and Theorem 28.</p><p>Theorem 27. P is FTG iff it is BDD.</p><p>Proof. =⇒ If P is FTG, then there is some finite TG G = (V, E) for this program. We proceed to show that P is k-BDD with k the depth of G. More precisely, we show by contradiction that Ch k (P, B) |= Ch k+1 (P, B) for any given base instance B.</p><p>1. Suppose for a contradiction that Ch k (K) |= Ch k+1 (K) with K = (P, B).</p><p>2. By the definition of the standard chase, Ch k (K) ⊆ Ch k+1 (K). <ref type="formula">2</ref>), there is some BCQ q such that Ch k (K) |= q and Ch k+1 (K) |= q.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.">By (1) and (</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.">We can show via induction that</head><formula xml:id="formula_18">G i (B) ⊆ Ch i (K) for all i ≥ 0. 5. By (4), G k (B) ⊆ Ch k (K).</formula><p>6. By (3) and ( <ref type="formula">5</ref>), G(B) |= q. 7. By (3), K |= q. 8. By ( <ref type="formula">6</ref>) and <ref type="bibr" target="#b5">(7)</ref>, the graph G is not a TG for P .</p><p>⇐= Since P is BDD, we have that P is k-BDD for some k ≥ 0. Therefore, the graph Φ k P is a TG for P by Theorem 26 and the program P is FTG.</p><p>Theorem 28. P is TDB and FOR iff it is BDD.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Proof. =⇒</head><p>• I i |= I i ∪ ∆I does not hold. Then, for each rule r ∈ P for which Σr = ∅ and for each h ∈ Σr, the chase graph chaseGraph i+1 (P, {f }) will include an edge h(body(r)) →r hs(head(r)). Due to the steps in lines 4-6, we know that Γ includes a node v associated with r ( * ). We have the following two subcases:</p><p>-There is no edge of the form f → r h(body(r)) in chaseGraph i+1 (P, {f }), for some r ∈ P . Then, it follows that h(body(r)) = f . Due to the above, due to ( * ) and due to Definition 5, it follows that the inductive hypotheses φ2 and φ3 hold for i + 1. -Otherwise. Since the inductive hypothesis φ3 holds for i and due to the steps in lines 7-9, it follows that an edge of the form v →1 v will be in Γ, where node v is associated with rule r . Furthermore, due to φ3, there exists a homomorphism g i from h(body(r)) into v ({f }). Due to g i , due to the fact that the edge v →1 v is in Γ and due to Definition 5, there exists a homomorphism g i+1 from hs(head(r)) into v({f }). Finally, due to the above, and since φ2 holds for i, it follows that h i+1 = h i • g i+1 is a homomorphism from Ch i (P, {f }) into Γ({f }). Hence, φ2 and φ3 hold for i + 1 concluding the proof of this direction and, consequently of Lemma 32.</p><p>We are now ready to return to the proof of Theorem 10. Let Γ f be the EG computed in lines 2-10 for each f ∈ H(P ). Since Algorithm 1 only adds new nodes and new edges to set of nodes and the set of edges of an input EG, it follows that</p><formula xml:id="formula_19">V = ∀f ∈H(P ) ν(Γ f ) (6) E = ∀f ∈H(P ) (Γ f )<label>(7)</label></formula><p>Since for each base instance B of P and each fact f ∈ B, there exists a fact f ∈ H(P ) and a bijective function g over the constants in C, such that g(f ) = f and from Lemma 32, it follows that Γ f ({f }) ≡ Ch ∞ (P, f ). Due to the above, due to ( <ref type="formula">6</ref>) and ( <ref type="formula" target="#formula_19">7</ref>) and since each node in V has up to one incoming edge, it follows that for each base instance</p><formula xml:id="formula_20">B of P F ∈B Ch ∞ (P, {F }) ≡ F ∈B G({F })<label>(8)</label></formula><p>Due to Definition 5 and since each node in V has up to one incoming edge, it follows that for each base instance B of P we have</p><formula xml:id="formula_21">F ∈B G({F }) = G(B)<label>(9)</label></formula><p>Finally, due to Proposition 30, and due to (8) and ( <ref type="formula" target="#formula_21">9</ref>), we have Ch ∞ (P, B) ≡ G(B), for each base instance B of P .</p><p>The above concludes the proof of the first part of Theorem 10.</p><p>Theorem 11. The execution time of Algorithm 1 for FES programs is double exponential in the input program P . If the arity of the predicates in P is bounded, the execution time is (single) exponential.</p><p>Proof. We first show the first part of the theorem with a step-by-step argument. 1. Consider some program P .  4. From results in <ref type="bibr" target="#b36">[38]</ref>, the size of Ch(P, {f }) is double exponential in P .</p><p>(a) By Proposition 30 in <ref type="bibr" target="#b36">[38]</ref>: if Ch(P, {f }) is finite, then there exists a finite entailment tree T such that the set of atoms associated with T is a complete core. (b) In Algorithm 1 in <ref type="bibr" target="#b36">[38]</ref>, the authors describe how to construct the finite entailment tree for P and {f }.</p><p>The proof of Lemma 33 directly follows from the facts that (i) there exists a preserving homomorphism from u(B) into v(B), for each base instance B and (ii) all subgraphs rooted at each child of u are copied below v.</p><p>From Lemma 33 and since Γ i+1 is a subgraph of G i+1 , we have that there exists a homomorphism (q • g) from Q into G i+1 (B) concluding the proof of ( * ) for i + 1 and hence the proof of Theorem 10.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>E. PROOFS FOR RESULTS IN SECTION 5.1</head><p>Below, we recapitulate the notion of the answers of non-Boolean CQs on a KB. The answers to a CQ Q on a KB (P, B), denoted as ans(Q, P, B), is the set of tuples that are answers to each model of (P, B), i.e., {t|t ∈ Q(I), for each model I of (P, B)}.</p><p>Lemma 18. Let G be an EG for a Datalog program P and B be a base instance of P . Then for each v ∈ ν(G) we have: v(B) includes exactly a fact A(t) with A being the head predicate of rule(v), for each answer t to the EG-rewriting of v on B.</p><p>Proof. Let R be the predicate in the body of the characteristic query of v. In order to prove Lemma 18, we have to show that t is an answer to rew(v) on B iff R(t) ∈ v(B). The proof is based on (i) the correspondence between the rewriting process of Definition 17 and the query rewriting algorithm from <ref type="bibr" target="#b27">[29]</ref>, called XRewrite and (ii) the correctness of XRewrite. In particular, the steps of the proof are as follows. First, we compute a new set of rules P * by rewriting the rules associated with the nodes in G v . This rewriting process is described in Definition 34. Then, we establish the relationship between the rewv and the rewritings computed by XRewrite. In particular, Lemma 36 shows that Definition 17 and XRewrite result in the same rewritings modulo bijective variable renaming, when the latter is provided with P * and a rewriting of the characteristic query of v denoted as Q * . A direct consequence of Lemma 36 is that XRewrite terminates when provided with P * and Q * . In order to show our goal, we make use of the above results as well as of Lemma 37 .</p><p>Below, we describe XRewrite. Given a CQ Q and a set of rules P , XRewrite computes a rewriting Qr of Q so that for any null-free instance I, the answers to Qr on (P, I) coincide with the answers to Q on (P, I). We describe how XRewrite(P, Q) works when P is Datalog. At each step i, XRewrite computes a tree T i , where each node κ is associated with a CQ denoted as query(κ). When i = 0, T 0 includes a single root node associated with Q. When i &gt; 0, then T i is computed as follows: for each leaf node κ in ν(T i-1 ), each atom β occurring in the body of query(κ) and each rule r ∈ P whose head unifies with β, XRewrite: ---→ κ to T i .</p><p>Notice that XRewrite also includes a factorization step, however, this step is only applicable in the presence of existential rules. We now introduce some notation related to Definition 17. We denote by rew i (v) the CQ at the beginning of the i-th iteration of the rewriting step of Definition 17 with rew 0 (v) being equal to the characteristic query of v. We use rew i (v) α i -→ rew i+1 (v) to denote that rew i+1 (v) results from rew i (v) after choosing the atom αi from the body of rew i (v) at the beginning of the i-th rewriting step.</p><p>Below, we describe a process that computes a new ruleset by rewriting the rules associated with the nodes of an EG.</p><p>Definition 34. Let G be an EG of a program P with a single leaf node. Let π be a mapping associating each edge ε ∈ (G) ∪ { } with denoting the empty edge, with a fresh predicate π( ). We denote by ρ(G, π) the rules obtained from the rules associated with the nodes in G after rewriting them as follows: replace each A(X) that is either</p><p>• i. the i-th intensional atom in the body of rule(v) or the head atom of rule(u) and ε • • = u →i v in (G); or • ii. the head atom of rule(κ) with κ being the leaf node of G, by A * (X), where A * = π(ε) when (i) holds, or A * = π( ) when (ii) holds.</p><p>For a node u ∈ ν(G), we denote by r π u the rule from ρ(G, π) that results after rewriting rule(u).</p><p>From Definition 34 we can see that the following holds:</p><p>Corollary 35. For an EG G of a program P with a single leaf node, a mapping π associating each edge ε ∈ (G) ∪ { } with a fresh predicate and two rules 1 and 2 from ρ(G, π), we have: the i-th body atom of 1 has the same predicate with the head atom of 2 only if j is of the form r π u j , for 1 ≤ j ≤ 2 and u2 →i u1 is in (G).</p><p>Let Γ = G v and n be the depth of Γ. Let π be a mapping from edges to predicate as defined above. Let P * be the rules in ρ(Γ, π). Let R be the predicate occurring in the head of rule(v) and let head(rule(v)) = R(Y). Let Example 41. We show how reasoning over the TG G1 from Figure <ref type="figure" target="#fig_0">1</ref> proceeds for the base instance B = {r(c1, c2)}. Reasoning starts from the root nodes u1 and u2, which are associated with the rules r1 and r4, respectively. Since there exists a homomorphism h = {X → c1, Y → c2} from body(r1) into B and from body(r4) into B, we have u1({f1}) = {R(c1, c2)} <ref type="bibr" target="#b11">(13)</ref> u2({f1}) = {T (c2, c1, n1)} (14</p><formula xml:id="formula_22">)</formula><p>where n1 is a null. Then, since there exists an edge from u1 to u3 and since u3 is associated with r2, we compute all homomorphisms from body(r2) into u1(B). Since there exists a homomorphism h = {X → c1, Y → c2} from body(r2) into u1(B), we have</p><formula xml:id="formula_23">u3({f1}) = {T (c2, c1, c2)} (<label>15</label></formula><formula xml:id="formula_24">)</formula><p>Since there is no other node, reasoning stops.</p><p>Example 42. We demonstrate the notion of preserving homomorphisms introduced in Definition 12.</p><p>Consider the facts f1 = r(c1, c2) and f2 = r(c3, c3) from the set H(P1). By applying Definition 5 for the base instance {f1}, we have u1({f1}), u2({f1}) and u3({f1}) as in (13), ( <ref type="formula">14</ref>) and <ref type="bibr" target="#b13">(15)</ref>. Similarly, by applying Definition 5 for the base instance {f2}, we have u1({f2}) = {R(c3, c3)} ( <ref type="formula">16</ref>)</p><formula xml:id="formula_25">u2({f2}) = {T (c3, c3, n2)} (17) u3({f2}) = {T (c3, c3, c3)}<label>(18)</label></formula><p>Above, n2 is a null. We can see that there exists a preserving homomorphism from u2({f1}) into u3({f1}) mapping n1 to c2, since the null n1 is not shared among the facts occurring in the instances associated with u2 and u2. For the same reason, there exists a preserving homomorphism from u2({f2}) into u3({f2}) mapping n2 to c3. Hence according to Lemma 13, there exists a preserving homomorphism from u2(B) into u3(B) for each base instance B. </p><p>T (X2, Y2, Z2) → R(Y2, Z2) (r11)</p><p>where r is the only extensional predicate. Consider now an EG having nodes u1 and u2, where ui is associated with ri for each 1 ≤ i ≤ 2, and the edge u1 →1 u2.</p><p>To compute the EG-rewriting rew(u2) of u2 we first form the query</p><formula xml:id="formula_27">Q(Y2, Z2) ← R(Y2, Z2)<label>(19)</label></formula><p>and associate the atom R(Y2, Z2) with u2. The following steps take place in the first iteration of the rewriting algorithm. First, since R(Y2, Z2) is the only intensional atom in the query we have α = R(Y2, Z2). Then, according to step (ii) and since the node u2 is associated with R(Y2, Z2), we compute the MGU θ1 of the set {head(u2), R(Y2, Z2)}. We have θ1 = {Y2 → Y2, Z2 → Z2}, since head(u2) = R(Y2, Z2). By applying the step (iii), the query in <ref type="bibr" target="#b17">(19)</ref> becomes</p><formula xml:id="formula_28">Q(Y2, Z2) ← T (X2, Y2, Z2)<label>(20)</label></formula><p>In step (iv) we associate the fact T (X2, Y2, Z2) with node u1 due to the edge u1 →1 u2.</p><p>In the second iteration of the rewriting algorithm, we have α = T (X2, Y2, Z2). Since the fact T (X2, Y2, Z2) is associated with node u1, in step (ii) we compute the MGU θ2 of the set {head(u1), T (X2, Y2, Z2)}. We have θ2 = {X1 → Y2, X2 → Y2, Y1 → Z2}. In step (iii) we replace α = T (X2, Y2, Z2) in <ref type="bibr" target="#b18">(20)</ref> with body(u1) = r(X1, Y1, Z1) and apply θ2 to the resulting query. The query in (20) becomes Q(Y2, Z2) ← r(Y2, Z2, Z1)</p><p>Since there is no incoming edge to u1, we associate no node to the fact r(Y2, Z2, Z1). The algorithm then stops, since there is no extensional fact in <ref type="bibr" target="#b19">(21)</ref>. The EG-rewriting of u2 is the query shown in <ref type="bibr" target="#b19">(21)</ref>.</p><p>Example 44. We demonstrate the notion of compatible nodes introduced in Definition 9, as well as the procedure for computing instance-dependent TGs from Section 4.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: (a) Chase execution for Example 1, (b) the TG G 1 , (c) the TG G 2 . In (b) and (c), the facts shown inside the nodes are the results of reasoning over B using the TG.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Example 3 .</head><label>3</label><figDesc>Continuing with Example 1, consider the execution of r3 in the second round of the chase. No fact derived by r4 can instantiate the premise of r3, since the premise of r3 requires the first and the third arguments of the T -facts to be the same. Hence, the cost paid for executing r3 over those facts is unnecessary.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: Different strategies for executing the rules from P 2 .</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>2 .</head><label>2</label><figDesc>The set H(P ) is exponential in P . (a) Let Ary be the maximal arity of an extensional predicate occurring in P . (b) For an extensional predicate p occurring in P , there are at most Ary Ary facts in H(P ) defined over p. (c) Since P is a linear rule set and extensional predicates may only appear in the body of a rule, we have that number of extensional predicates in P is at most |P |. (d) By (b) and (c): there are at most |P | × Ary Ary facts in H(P ).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>3 .</head><label>3</label><figDesc>For every fact f ∈ H(P ), we may have to add at most |Ch(P, {f })| 2 nodes to the graph tglinear(P ). (Note that Ch(P, {f }) is defined since P is FES.) Therefore, this graph contains at most |Ch(P, {f })| 4 edges.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>1 .</head><label>1</label><figDesc>computes a new query Q by (i) computing the MGU θ of {head(r), α}, (ii) replacing α in the body of query(κ) with body(r) and (iii) applying θ on the resulting query; 2. adds a new node κ in T i and associates it with Q ; and 3. adds the edge κ (α,r)</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Example 43 .</head><label>43</label><figDesc>We demonstrate the computation of EG-rewritings introduced in Definition 17. Consider the rules r(X1, Y1, Z1) → T (X1, X1, Y1)</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 1 :</head><label>1</label><figDesc>The considered benchmarks. #EDP's and #IDP's absolute numbers are stated in millions of facts.</figDesc><table><row><cell></cell><cell></cell><cell></cell><cell>#Rules</cell><cell></cell><cell></cell><cell>#IDP's</cell><cell></cell></row><row><cell cols="2">Scenario #EDP's</cell><cell>LI</cell><cell>L</cell><cell>LE</cell><cell>LI</cell><cell>L</cell><cell>LE</cell></row><row><cell cols="4">Linear and Datalog scenarios</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>LUBM</cell><cell>var.</cell><cell>163</cell><cell>170</cell><cell>182</cell><cell cols="3">116% 120% 232%</cell></row><row><cell>UOBM</cell><cell>2.1</cell><cell>337</cell><cell>561</cell><cell>NA</cell><cell>3.5</cell><cell>3.9</cell><cell>NA</cell></row><row><cell>DBpedia</cell><cell>29</cell><cell cols="3">4204 9396 NA</cell><cell>31.9</cell><cell>33.1</cell><cell>NA</cell></row><row><cell>Claros</cell><cell>13.8</cell><cell cols="3">1749 2689 2749</cell><cell>65.8</cell><cell>8.9</cell><cell>548</cell></row><row><cell>React.</cell><cell>5.6</cell><cell>259</cell><cell>NA</cell><cell>NA</cell><cell>11.3</cell><cell>NA</cell><cell>NA</cell></row><row><cell cols="3">ChaseBench scenarios</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>S-128</cell><cell>0.15</cell><cell></cell><cell>167</cell><cell></cell><cell></cell><cell>1.9</cell><cell></cell></row><row><cell>O-256</cell><cell>1</cell><cell></cell><cell>529</cell><cell></cell><cell></cell><cell>5.6</cell><cell></cell></row><row><cell cols="3">RDFS (ρDF) scenarios</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>LUBM</cell><cell>16.7</cell><cell></cell><cell>160</cell><cell></cell><cell></cell><cell>18</cell><cell></cell></row><row><cell>YAGO</cell><cell>18.2</cell><cell></cell><cell>498016</cell><cell></cell><cell></cell><cell>27</cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 2 :</head><label>2</label><figDesc>Linear scenarios. Time is in sec and memory in MB.</figDesc><table><row><cell></cell><cell cols="2">VLog</cell><cell cols="2">RDFox</cell><cell cols="2">COM</cell><cell></cell><cell></cell><cell cols="2">GLog</cell><cell></cell><cell></cell><cell cols="2">TG Sizes</cell><cell></cell></row><row><cell>Scenario</cell><cell cols="3">Run. Mem Run.</cell><cell cols="2">Mem Run.</cell><cell>Mem</cell><cell>Comp</cell><cell cols="5">Reason w/o cleaning w/ cleaning Mem</cell><cell>#N</cell><cell>#E</cell><cell>D</cell></row><row><cell>LUBM-LI</cell><cell>1.3</cell><cell>1617</cell><cell>22</cell><cell>2353</cell><cell>18.4</cell><cell>5122</cell><cell>0.007</cell><cell>0.2</cell><cell>0.207</cell><cell></cell><cell>1.1</cell><cell>1674</cell><cell cols="2">155 101</cell><cell>6</cell></row><row><cell>UOBM-LI</cell><cell>0.3</cell><cell>221</cell><cell>3.9</cell><cell>726</cell><cell>3.3</cell><cell>3570</cell><cell>0.01</cell><cell>0.015</cell><cell>0.025</cell><cell></cell><cell>0.2</cell><cell>219</cell><cell cols="2">313 206</cell><cell>9</cell></row><row><cell>DBpedia-LI</cell><cell>6.9</cell><cell>2579</cell><cell>44.1</cell><cell>3197</cell><cell>36.3</cell><cell>3767</cell><cell>0.448</cell><cell>0.776</cell><cell>1.224</cell><cell></cell><cell>4.5</cell><cell>2647</cell><cell cols="3">12 660 8970 17</cell></row><row><cell>Claros-LI</cell><cell>5.6</cell><cell>2870</cell><cell>78.4</cell><cell>3918</cell><cell>72.3</cell><cell>5122</cell><cell>0.006</cell><cell>0.407</cell><cell>0.413</cell><cell></cell><cell>4.8</cell><cell>2586</cell><cell cols="3">792 621 23</cell></row><row><cell>React.-LI</cell><cell>1.8</cell><cell>1312</cell><cell>12.7</cell><cell>1448</cell><cell>9.9</cell><cell>4479</cell><cell>0.002</cell><cell>0.329</cell><cell>0.329</cell><cell></cell><cell>0.9</cell><cell>1312</cell><cell cols="2">386 263</cell><cell>8</cell></row><row><cell></cell><cell cols="2">VLog</cell><cell cols="2">RDFox</cell><cell cols="2">COM</cell><cell cols="3">GLog Runtime</cell><cell cols="3">GLog Memory</cell><cell cols="2">TG Sizes</cell><cell></cell></row><row><cell>Scenario</cell><cell>Run.</cell><cell>Mem</cell><cell>Run.</cell><cell>Mem</cell><cell>Run.</cell><cell cols="2">Mem No opt</cell><cell>m</cell><cell>m+r</cell><cell>No opt</cell><cell>m</cell><cell>m+r</cell><cell>#N</cell><cell>#E</cell><cell>D</cell></row><row><cell>LUBM-L</cell><cell>1.5</cell><cell>324</cell><cell>23</cell><cell>2301</cell><cell>20.4</cell><cell>4479</cell><cell>2.4</cell><cell>2.2</cell><cell>1.0</cell><cell>446</cell><cell>424</cell><cell>264</cell><cell>56</cell><cell>33</cell><cell>4</cell></row><row><cell>LUBM-LE</cell><cell>170.5</cell><cell>2725</cell><cell>116.6</cell><cell>3140</cell><cell>115.9</cell><cell>3610</cell><cell>17.3</cell><cell>17.2</cell><cell>16.1</cell><cell>1340</cell><cell>1310</cell><cell>1338</cell><cell>63</cell><cell>43</cell><cell>5</cell></row><row><cell>UOBM-L</cell><cell>7.3</cell><cell>1021</cell><cell>10</cell><cell>784</cell><cell>10</cell><cell>4215</cell><cell>2.6</cell><cell>2.4</cell><cell>2.6</cell><cell>335</cell><cell>335</cell><cell>342</cell><cell>527</cell><cell>859</cell><cell>6</cell></row><row><cell>DBpedia-L</cell><cell>41.6</cell><cell>827</cell><cell>64.4</cell><cell>3290</cell><cell>198.4</cell><cell>3878</cell><cell>20</cell><cell>19</cell><cell>19</cell><cell>1341</cell><cell>1352</cell><cell>1339</cell><cell cols="2">4144 3062</cell><cell>8</cell></row><row><cell>Claros-L</cell><cell>431</cell><cell>3170</cell><cell>2512</cell><cell>5491</cell><cell>2373.0</cell><cell>6453</cell><cell>122</cell><cell>118.3</cell><cell>119</cell><cell>6076</cell><cell>6077</cell><cell>6078</cell><cell>438</cell><cell>404</cell><cell>9</cell></row><row><cell>Claros-LE</cell><cell cols="2">2771.8 11 895</cell><cell>*</cell><cell>*</cell><cell>*</cell><cell>*</cell><cell>1040.8</cell><cell>1012.2</cell><cell>1053.9</cell><cell>48 464</cell><cell>48 474</cell><cell>48 455</cell><cell cols="2">1461 3288</cell><cell>9</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 3 :</head><label>3</label><figDesc>Datalog scenarios. Time is in sec and memory in MB. * denotes timeout after 1h.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head>Table 4 :</head><label>4</label><figDesc>ChaseBench scenarios (S=STB-128,O=ONT-256). Runtime in sec, memory in MB.</figDesc><table><row><cell></cell><cell cols="2">VLog</cell><cell cols="2">RDFox</cell><cell cols="2">COM</cell><cell cols="2">GLog</cell><cell cols="2">TG Sizes</cell><cell></cell><cell>Scenario</cell><cell>VLog</cell><cell></cell><cell>GLog</cell><cell></cell></row><row><cell>S</cell><cell cols="2">Run. Mem</cell><cell cols="2">Run. Mem</cell><cell cols="2">Run. Mem</cell><cell cols="2">Run. Mem</cell><cell cols="2">#N #E</cell><cell>D</cell><cell></cell><cell></cell><cell cols="2">no opt m</cell><cell>m+r</cell></row><row><cell>S</cell><cell>0.5</cell><cell>1350</cell><cell>13.4</cell><cell>1747</cell><cell>10</cell><cell>5217</cell><cell>0.2</cell><cell>1266</cell><cell>192</cell><cell>0</cell><cell>0</cell><cell>LUBM-L</cell><cell>38</cell><cell>32</cell><cell>29</cell><cell>25</cell></row><row><cell>O</cell><cell>2.3</cell><cell>4930</cell><cell>49</cell><cell>3997</cell><cell>35</cell><cell>6340</cell><cell>1</cell><cell>4930</cell><cell>577</cell><cell>65</cell><cell>3</cell><cell>LUBM-LE</cell><cell>239</cell><cell>100</cell><cell>98</cell><cell>93</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>UOBM-L</cell><cell>47</cell><cell>9</cell><cell>8</cell><cell>8</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>DBpedia-L</cell><cell>79</cell><cell>63</cell><cell>61</cell><cell>47</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Claros-L</cell><cell>286</cell><cell>218</cell><cell>195</cell><cell>185</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Claros-LE</cell><cell cols="4">1099 1072 1049 1039</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_5"><head>Table 5 :</head><label>5</label><figDesc>#Triggers (millions), Datalog scenarios.</figDesc><table><row><cell></cell><cell cols="2">WebPIE</cell><cell cols="2">Inferray</cell><cell cols="2">GLog</cell><cell cols="2">TG Sizes</cell><cell></cell></row><row><cell>S</cell><cell cols="4">Run. Mem Run. Mem</cell><cell cols="2">Run. Mem</cell><cell>#N</cell><cell>#E</cell><cell>D</cell></row><row><cell>L</cell><cell>338</cell><cell>1124</cell><cell>39</cell><cell>7000</cell><cell>0.3</cell><cell>186</cell><cell>53</cell><cell>25</cell><cell>4</cell></row><row><cell>Y</cell><cell>745</cell><cell>1075</cell><cell cols="3">116.6 14 000 25</cell><cell>1603</cell><cell cols="3">1.07M 888k 20</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_6"><head>Table 6 :</head><label>6</label><figDesc>RDFS scenarios (L=LUBM,Y=YAGO). Runtime in sec, memory in MB.</figDesc><table><row><cell></cell><cell>133M</cell><cell>267M</cell><cell>534M</cell><cell>1B</cell><cell>2B</cell><cell>4B</cell><cell>8B</cell><cell>17B</cell></row><row><cell>Run.</cell><cell>13</cell><cell>27</cell><cell>56</cell><cell>203</cell><cell>226</cell><cell>520</cell><cell>993</cell><cell>2272</cell></row><row><cell>Mem</cell><cell>1</cell><cell>3</cell><cell>6</cell><cell>23</cell><cell>34</cell><cell>49</cell><cell>98</cell><cell>174</cell></row><row><cell cols="2">#IDP's 160M</cell><cell>320M</cell><cell>641M</cell><cell>1B</cell><cell>2B</cell><cell>5B</cell><cell>10B</cell><cell>20B</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_7"><head>Table 7 :</head><label>7</label><figDesc>Scalability results. Runtime in sec, memory in GB.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_9"><head>Table 8 :</head><label>8</label><figDesc>Additional Experimental Results</figDesc><table><row><cell></cell><cell cols="2">VLog</cell><cell cols="2">RDFox</cell><cell cols="2">COM</cell><cell></cell><cell cols="2">GLog Runtime</cell><cell></cell><cell cols="2">GLog Memory</cell></row><row><cell>Scenario</cell><cell cols="2">Runtime Memory</cell><cell cols="2">Runtime Memory</cell><cell cols="2">Runtime Memory</cell><cell>No opt</cell><cell>m</cell><cell>m+r</cell><cell>No opt</cell><cell>m</cell><cell>m+r</cell></row><row><cell>LUBM-L</cell><cell>1.5</cell><cell>324</cell><cell>23</cell><cell>2301</cell><cell>20.4</cell><cell>4479</cell><cell>2.5</cell><cell>2.2</cell><cell>1</cell><cell>446</cell><cell>424</cell><cell>265</cell></row><row><cell>LUBM-LE</cell><cell>170.5</cell><cell>2725</cell><cell>116.6</cell><cell>3140</cell><cell>115.9</cell><cell>3610</cell><cell>71.1</cell><cell>68.8</cell><cell>67.7</cell><cell>2880</cell><cell>2688</cell><cell>2695</cell></row><row><cell>UOBM-L</cell><cell>7.3</cell><cell>1021</cell><cell>10</cell><cell>784</cell><cell>10</cell><cell>4215</cell><cell>4.4</cell><cell>6.3</cell><cell>6.3</cell><cell>506</cell><cell>590</cell><cell>590</cell></row><row><cell>DBpedia-L</cell><cell>41.6</cell><cell>827</cell><cell>64.4</cell><cell>3290</cell><cell>198.4</cell><cell>3878</cell><cell>31.4</cell><cell>32</cell><cell>31.1</cell><cell>2335</cell><cell>2319</cell><cell>2313</cell></row><row><cell>Claros-L</cell><cell>431</cell><cell>3170</cell><cell>2512</cell><cell>5491</cell><cell>2373.0</cell><cell>6453</cell><cell>128.6</cell><cell>125.6</cell><cell>126.7</cell><cell>5954</cell><cell>5957</cell><cell>5958</cell></row><row><cell>Claros-LE</cell><cell>2771.8</cell><cell>11 895</cell><cell>*</cell><cell>*</cell><cell>*</cell><cell>*</cell><cell>1104.3</cell><cell>1094</cell><cell>1106.3</cell><cell>48 246</cell><cell>48 251</cell><cell>48 223</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_10"><head>Table 9 :</head><label>9</label><figDesc>Datalog scenarios. GLog is ran without the optimization from<ref type="bibr" target="#b31">[33]</ref>. Time is in sec and memory in MB.</figDesc><table><row><cell></cell><cell></cell><cell>VLog</cell><cell cols="2">RDFox</cell><cell></cell><cell>COM</cell><cell></cell><cell>GLog</cell></row><row><cell>Scenario</cell><cell cols="2">Runtime Memory</cell><cell cols="2">Runtime Memory</cell><cell cols="2">Runtime Memory</cell><cell cols="2">Runtime Memory</cell></row><row><cell>STB-128</cell><cell>0.5</cell><cell>1350</cell><cell>13.4</cell><cell>1747</cell><cell>10</cell><cell>5217</cell><cell>0.2</cell><cell>1266</cell></row><row><cell>ONT-256</cell><cell>2.3</cell><cell>4930</cell><cell>49</cell><cell>3997</cell><cell>35</cell><cell>6340</cell><cell>1</cell><cell>4929</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_11"><head>Table 10 :</head><label>10</label><figDesc>ChaseBench scenarios. GLog is ran without the optimization from<ref type="bibr" target="#b31">[33]</ref>. Time is in sec and memory in MB.</figDesc><table><row><cell></cell><cell></cell><cell>VLog</cell><cell></cell><cell>WebPIE</cell><cell cols="2">Inferray</cell><cell></cell><cell cols="2">GLog Runtime</cell><cell></cell><cell cols="2">GLog Memory</cell></row><row><cell>Scenario</cell><cell cols="2">Runtime Memory</cell><cell cols="2">Runtime Memory</cell><cell cols="2">Runtime Memory</cell><cell>No opt</cell><cell>m</cell><cell>m+r</cell><cell>No opt</cell><cell>m</cell><cell>m+r</cell></row><row><cell>LUBM</cell><cell>0.1</cell><cell>189</cell><cell>353</cell><cell>200</cell><cell>23</cell><cell>2000</cell><cell>0.4</cell><cell>0.4</cell><cell>0.3</cell><cell>186</cell><cell>187</cell><cell>181</cell></row><row><cell>YAGO</cell><cell>163</cell><cell>3192</cell><cell>808</cell><cell>200</cell><cell>116.6</cell><cell>14 000</cell><cell>20</cell><cell>23</cell><cell>25</cell><cell>1438</cell><cell>1602</cell><cell>1600</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_13"><head>Table 12 :</head><label>12</label><figDesc>Linear scenarios. RDFox is ran in one, eight, 16 threads and 32 threads. GLog is ran in a single thread. Time in sec.</figDesc><table><row><cell>RDFox</cell><cell>GLog Runtime</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_14"><head>Table 13 :</head><label>13</label><figDesc>Datalog scenarios. RDFox is ran in one, eight, 16 threads and 32 threads. GLog is ran in a single thread. Time in sec. * denotes runtime exception.</figDesc><table><row><cell>RDFox</cell><cell>GLog no opt</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_15"><head>Table 14 :</head><label>14</label><figDesc>ChaseBench scenarios. RDFox is ran in 1, 8, 16 threads and 32 threads. GLog is ran in a single thread. Time in sec.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_16"><head></head><label></label><figDesc>• P is Finite Expansion Set (FES), if for each base instance B, the KB (P, B) has a terminating chase. • P is k-Term Depth Bounded (k-TDB), if for each base instance B, each i ≥ 0 and each term t in Ch i (P, B), d(t) ≤ k. P is TDB, if it is k-TDB. • P is Finite Order Rewritable (FOR), if, for each BCQ Q, there is a union of BCQs (UBCQs) Q such that, for each base instance B, we have that (P, B) |= Q iff B |= Q .</figDesc><table /></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1" xml:id="foot_0"><p>https://www.cs.ox.ac.uk/isg/tools/RDFox/2014/ AAAI/input/DBpedia/ttl/</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2" xml:id="foot_1"><p>Both datasets are available in our code repository.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3" xml:id="foot_2"><p>We say that a node u in a TG defines a predicate A if the predicate of head(u) is A.</p></note>
+		</body>
+		<back>
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Theorem 29. The language of all programs that admit a finite TG is undecidable.</p><p>Proof. This follows from the fact that FTG decidability implies decidability of FOR for Datalog programs, which is undecidable <ref type="bibr" target="#b26">[28]</ref>.</p><p>Theorem 8. For each KB (P, B) that admits a finite model, there exists an instance-dependent TG.</p><p>Proof. Recall that we denote by Φ k P the level-k full EG for a program P . We can stop the expansion of the level-k full EG for a program P when Φ k-1 P (B) |= Φ k P (B) holds. The above, along with Theorem 26 and the fact that whenever Ch k-1 (P, B) |= Ch k (P, B) holds for some k ≥ 1, then the KB (P, B) admits a finite model (see <ref type="bibr" target="#b22">[24]</ref>) conclude the proof of Theorem 8.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>D. PROOFS FOR RESULTS IN SECTION 5</head><p>Theorem 10. For any linear program P that is FES, tglinear(P ) is a TG for P .</p><p>Proof. In order to show that the EG G = (V, E) computed by Algorithm 1 is a TG for P , it suffices to show that Ch ∞ (P, B) is logically equivalent to G(B). The proof makes use of Propositions 30 and 31, as well as of <ref type="bibr">Lemma 32.</ref> Note that Propositions 30 is a known result and, hence, we skip its proof, while Proposition 31 directly follows from Definition 5.</p><p>Proposition 30. For each linear program P and each base instance B, the following holds:</p><p>Proposition 31. For each linear TG G, each node v ∈ G and each base instance B, the following holds:</p><p>Lemma 32. For each fact f ∈ H(P ), Γ({f }) ≡ Ch ∞ (P, {f }), where Γ is the EG computed in lines 2-10 for fact f .</p><p>Proof. (⇒) We want to show that for each fact f ∈ H(P ), there exists a homomorphism from Γ({f }) into Ch ∞ (P, {f }). Due to Algorithm 1, we know that Γ is a graph of the form</p><p>where uj ∈ V , for each 0 ≤ i ≤ n; uj →1 uj+1 ∈ E, for each 0 ≤ i &lt; n; and un = v. To prove this direction, we will show that the following property holds, for each 0 ≤ i ≤ n:</p><p>• φ1. there exists a homomorphism h i from Γ u i ({f }) into Ch ∞ (P, {f }). For i = 0, since Γ v i is the empty graph and hence Γ u i (B) = B by Definition 5, it follows that φ1 holds. For i + 1 and assuming that φ1 holds for i the proof proceeds as follows. Since φ1 holds for i, we know that there exists a homomorphism h i from Γ u i ({f }) into Ch ∞ (P, {f }). If ui+1({f }) = ∅, then φ1 trivially holds for i + 1. Hence, we will consider the case where vi+1({f }) = ∅. Since vi+1 is a child of vi and since vi+1 is associated with some rule ri+1 ∈ P , it follows that there exists a homomorphism g from body(ri+1) into vi({f }) and vi+1({f }) = gs(head(ri+1)). Due to g and due to h i , we know that there exists a homomorphism ψ = g • h i from body(ri+1) into Ch ∞ (P, {f }) and, hence, a homomorphism ω from gs(head(ri+1)) into ψs(head(ri+1)) mapping each value c occurring in dom(g) into (g • h i )(c) and nz into n z , for each existentially quantified variable z of ri+1, where g(z) = nz and ψ(z) = n z . We distinguish the cases:</p><p>• ψs(head(ri+1)) ∈ Ch ∞ (P, {f }). Due to h i and due to ω, it follows that</p><p>Then Ch ∞ (P, {f }) |= ψs(head(ri+1)) holds and hence, there exists a homomorphism θ from ψs(head(ri+1)) into Ch ∞ (P, {f }). Due to h i , due to ω and due to θ, we can see that</p><p>The above shows that φ1 holds for i + 1 concluding the proof of this direction.</p><p>(⇐) We want to show that for each fact f ∈ H(P ), there exists a homomorphism from Ch ∞ (P, {f }) into Γ({f }). We use I i to denote Ch i (P, {f }) and chaseGraph i (P, {f }) to denote the chase graph corresponding to Ch i (P, {f }). The proof of this direction proceeds by showing that the following properties hold, for each i ≥ 0:</p><p>• φ2. there exists a homomorphism h i from Ch i (P, {f }) into Γ({f }).</p><p>• φ3. for each f1 →r 1 f2 →r 2 • • • →r j fj+1 in chaseGraph i (P, {f }), a path of the form u1 →1 • • • →1 uj is in Γ, where for each 1 ≤ k ≤ j: u k is associated with r k and there exists a homomorphism from f k+1 into u k ({f }). For i = 0, since Ch 0 (P, {f }) = {f } and since f ∈ Γ({f }) by definition, it follows that the inductive hypotheses φ2 and φ3 holds. For i + 1 and assuming that φ2 and φ3 hold for i the proof proceeds as follows. Let Σr be the set of all active triggers for each r ∈ P in I i . Let also ∆I = r∈P h∈Σr hs(head(r))</p><p>We distinguish the following cases:</p><p>Then the equivalent chase terminates and hence Ch i (P, {f }) = Ch ∞ (P, {f }). Since the inductive hypotheses φ2 and φ3 hold for i and due to the above, it follows that the inductive hypotheses will hold for i + 1.</p><p>(c) The complexity of this algorithm, as well as the size of the output tree, is double exponential in the input P and {f }. Note the discussion right after Algorithm 1 in <ref type="bibr" target="#b36">[38]</ref>.</p><p>5. By (2-4): the algorithm tglinear(P ) runs in double exponential in P .</p><p>To show that the procedure tglinear(P ) runs in single exponential time when ( * ) the arity of the predicates in P is bounded, we can show that the size of Ch(P, {f }) is (single) exponential in P if ( * ). In fact, this claim also follows from then results in <ref type="bibr" target="#b36">[38]</ref>. Namely, if ( * ), then entailment trees for P and f (as they are defined in <ref type="bibr" target="#b36">[38]</ref>) are of polynomial depth because the number of "sharing types" for P is polynomial. Therefore, the size of these trees is exponential and so is the size of Ch(P, {f }).</p><p>Lemma 13. Let P be a linear program, G be an EG for P and u, v ∈ ν(G). Then, there exists a preserving homomorphism from u(B) into v(B) for each base instance B, iff there exists a preserving homomorphism from u({f }) into v({f }), for each fact f ∈ H(P ).</p><p>Proof. (⇒) This direction trivially holds. (⇐) We want to show that if there exists a preserving homomorphism from u({f }) into v({f }), for each fact f ∈ H(P ), then there exists a preserving homomorphism from u(B) into v(B), for each base instance B. The proof works by contradiction. Suppose that there exists a base instance B , such that there does not exist a preserving homomorphism from u(B ) into v(B ). Since there does not exist a preserving homomorphism from u(B ) into v(B ) and due to Proposition 31, it follows that there does not exist a preserving homomorphism from F ∈B u({F }) into</p><p>Next we show that there exists some F ∈ B , so that there does not exist a preserving homomorphism h F from u({F }) into v({F }). The proof proceeds as follows. Suppose by contradiction that there exists a preserving homomorphism h F from u({F }) into v({F }), for each F ∈ B , but there does not exist a preserving homomorphism h B from u({B }) into v({B }). The above assumption, will be referred to as Assumption (A1). By definition, we know that a preserving homomorphism from u({B }) into v({B }) maps each value c either (i) to itself if c was a schema constant or a null occurring in (G(B ) \ G u (B )) ∩ G u (B ) or (ii) to a fresh null occurring in a single fact from v({F }). Since for each F ∈ B , h F maps each schema constant and each null occurring in (G(B ) \ G u (B )) ∩ G u (B ) to itself according to Assumption (A1) and due to the above, it follows that there exist two facts</p><p>, where h F j is a preserving homomorphism from u({F j }) into v({F j }), for each 1 ≤ j ≤ 2. However, the above leads to a contradiction, since in linear TGs each null from u({B }) or v({B }) occurs in only one fact. The above shows that if there does not exist a preserving homomorphism from F ∈B u({F }) into F ∈B v({F }), then there exists some F ∈ B , such that there does not exist a preserving homomorphism from u({F }) into v({F }). The proof proceeds as follows.</p><p>Since for each F ∈ B , there exists a bijective function g over the constants in C and an instance f ∈ H(P ), such that g(F ) = f , it follows that there does not exist a preserving homomorphism from u({f }) into v({f }), for some f ∈ H(P ). This leads to a contradiction. Hence, there exists a preserving homomorphism from u(B) into v(B), for each base instance B and thus, Lemma 13 holds.</p><p>Theorem 15. For a TG G for a linear program P , minLinear(G) is a TG for P .</p><p>Proof. Recall from Definition 14 that minLinear(G) results from G after applying the following step until reaching a fixpoint: (i) find a pair of nodes u and v with u being dominated by v; (ii) remove v from ν(G); and (iii) add an edge v →j u , for each edge u →j u from (G). Let G i be the EG computed at the beginning of the i-th step of this iterative process with G 0 = G. In order to show that minLinear(G) is a TG for P , we need to show that the following property holds for each BCQ Q entailed by (P, B):</p><p>We can see that ( * ) holds i = 0, since G 0 = G. For i + 1 and assuming that ( * ) holds for i ≥ 0 we proceed as follows.</p><p>Suppose that there exists a homomorphism q from Q into G i (B). Furthermore, let C1 and C2 be two conjuncts, such that Q = C1 ∧ C2 and q maps C1 into G u (B) and C2 into G(B) \ G u (B). Due to the above, it follows that q maps each variable occurring both in C1 and C2 either to a constant or to a null occurring in (G(B)</p><p>From Definition 14 we know that (i) there exists a pair of nodes u, v ∈ ν(G i ) with u being dominated by v and that (ii) the graph Γ i+1 that results from G i v after adding an edge v → u , for each edge u → u in (G i ), is a subgraph of G i+1 . Since q maps each variable occurring both in C1 and C2 either to a constant or to a null occurring in (G(B) \ G u (B)) ∩ G u (B) it follows that * holds for i + 1 if the following holds: Lemma 33. There exists a homomorphism g from G i u (B) into Γ i+1 (B) so that g(c) = h(c), for each c ∈ dom(h).</p><p>. Let T i be the tree computed at the end of the i-th iteration of XRewrite(P * , Q * ). Below, we establish the relationship between the rewv and the rewritings computed by XRewrite.</p><p>Lemma 36. For each branch κ 0 0 -→ . . . n -→ κ n+1 with i = (βi, i) and κ i is a node of depth i in T n+1 , there exists a sequence</p><p>such that rew n+1 (v) equals query(κ n+1 ) modulo bijective variable renaming.</p><p>The proof of Lemma 36 follows from:</p><p>, where R * = π( ), (ii) the correspondence between the rewriting steps (1)-( <ref type="formula">3</ref>) of XRewrite and the rewriting process of Definition 17 and (iii) Corollary 35.</p><p>From Lemma 36 and since rew n+1 (v) includes only EDP-atoms, we have that: XRewrite(P * , Q * ) terminates after n + 1 iterations. Furthermore, since XRewrite terminates and due to its correctness we have: R * (t) ∈ Ch n (P * , B) iff t is an answer to XRewrite(P * , Q * ) on B.</p><p>Due to Corollary 35, we also have:</p><p>Lemma 37. For each base instance B, the following inductive property holds for each 1 ≤ i ≤ n + 1:</p><p>• φ. S(t) ∈ u(B), with u being a node of depth i in Γ iff S * (t) ∈ Ch i (P * , B), where S * is the predicate of the head atom of r π u .</p><p>We now establish the correspondence between v(B) and the answers to rew(v) on B. From Lemma 37, we have: R * (t) ∈ Ch n (P * , B) iff R(t) ∈ v(B). Since R * (t) ∈ Ch n (P * , B) iff t is an answer to XRewrite(P * , Q * ) on B, it follows that R(t) ∈ v(B) iff t is an answer to XRewrite(P * , Q * ) on B. Since t is an answer to XRewrite(P * , Q * ) on B iff t is an answer to rew(v) on B and due to the above, it follows that: t is an answer to rew(v) on B iff R(t) ∈ v(B). The above completes the proof of Lemma 18. Proof. Let G i be the EG at the beginning of the i-th iteration of minDatalog(G) with G 0 = G. We show that the following property holds for each i ≤ 0:</p><p>For i = 0, φ trivially holds, since G 0 = G. For i + 1 and assuming that φ holds for i ≤ 0, we have. Let u, v be a pair of nodes in ν(G i ), such that (i) v's depth is not less than u's depth, (ii) the predicates of head(rule(v)) and of head(rule(u)) are the same and (iii) the EG-rewriting of v is contained in the EG-rewriting of u. In order to show that the inductive property for φ, it suffices to show that for each node w ∈ ν(G i ) for which v →j w ∈ (G i ) holds for some j, and each base instance B of P , w(B) is the same both in G i (B) and in G i+1 (B). However, this holds since (i) for each v →j w ∈ (G i ), we have u →j w ∈ (G i+1 ), (ii) R(t) ∈ v(B) implies R(t) ∈ u(B) and G i u = G i+1 u . The above shows that φ holds for i + 1 and concludes the proof of Lemma 38. The proof works by contradiction. Let P be a Datalog program, G be a TG for P and Γ = minDatalog(G). Suppose by contradiction that there exists a TG Γ for P with ν(Γ) &gt; ν(Γ ). From Lemma 18 we know that for each set of nodes u1, . . . , um from ν(Γ) defining a predicate A, there exists a set of nodes u 1 , . . . , u n from ν(Γ ) defining also A, such that the following holds:</p><p>Since ν(Γ) &gt; ν(Γ ), we know that there exist a set u1, . . . , um and a set u 1 , . . . , u n so that m &gt; n. Since (11) holds, we know from <ref type="bibr" target="#b50">[52]</ref> that the following hold:</p><p>• for each rew(ui) with 1 ≤ i ≤ m, there exists a rew(u j ) with 1 ≤ j ≤ n, such that rew(ui) ⊆ rew(u j );</p><p>• for each rew(u j ) with 1 ≤ j ≤ n, there exists a rew(u ) with 1 ≤ ≤ n, such that rew(u j ) ⊆ rew(u ). Since m &gt; n, it follows that there exist i1, i2 with 1 ≤ i1, i2 ≤ m and an with 1 ≤ ≤ n, such that rew(ui 1 ) ⊆ rew(u ) and rew(ui 2 ) ⊆ rew(u ) hold. Below, we show how we reach a contradiction. We consider the following cases:</p><p>• there exists an i3 with 1 ≤ i3 ≤ m and i3 = i1, i2, such that rew(u ) ⊆ rew(ui 3 ). From the above, it follows that rew(ui 1 ) ⊆ rew(ui 3 ) and rew(ui 2 ) ⊆ rew(ui 3 ) leading to a contradiction due to Corollary 39. • rew(ui 1 ) ⊆ rew(u ). From the above, it follows that rew(ui 2 ) ⊆ rew(ui 1 ) leading again to a contradiction due to Corollary 39. The above completes the proof of Theorem 20.</p><p>Theorem 21. For a Datalog program P and a TG G for P , deciding whether G is a TG of minimum size for P is co-NP-complete.</p><p>Proof. Membership. We show that deciding wether G is a TG of P not of minimum size is in NP. By Definition 19 and Theorem 20, G is a TG of P not of minimum size iff there exists a pair of vertices u and v in G satisfying the conditions in Definition 19 for which rew(v) ⊆ rew(u) (remember that the last condition holds iff there exists a homomorphism from rew(u) to rew(v)). Hence, to disprove that G is a TG of P of minimum size, it is sufficient to guess such nodes u and v, guess the homomorphism from rew(u) to rew(v) (observe that the size of rew(u) and rew(v) is polynomial), then compute rew(u) and rew(v) (feasible in deterministic polynomial time), and then check that the guessed homomorphism is correct (feasible in deterministic polynomial time). This procedure is feasible in NP.</p><p>Hardness. We show the co-NP-hardness of the problem by showing the NP-hardness of its complement. The reduction is from the NP-complete problem of query containment in relational DBs: given two CQs Q1(X) and Q2(X) for a relational DB, decide whether Q1(X) ⊆ Q2(X). Let the queries be Q1(X) ← ai 1 (Xi 1 ), . . . , ai n (Xi n ) and Q2(X) ← aj 1 (Xj 1 ), . . . , aj m (Xj m ).</p><p>We now describe the reduction. Consider the following program P and TG G.</p><p>The rules of P are obtained as follows. Let D = {a k 1 , . . . , a k } be the set of all the distinct predicates from {ai 1 , . . . , ai n }. For each of the predicates a k t in D, there is a rule a k t (X k t ) → A k t (X k t ) in P . In P there are also the rules Ai 1 (Xi 1 ), . . . , Ai n (Xi n ) → Q(X) and aj 1 (Xj 1 ), . . . , aj m (Xj m ) → Q(X).</p><p>The TG G is as follows. There is a node v k t associated with each of the rules a k t (X k t ) → A k t (X k t ); there is a node v associated with the rule Ai 1 (Xi 1 ), . . . , Ai n (Xi n ) → Q(X); and there is a node u associated with the rule aj 1 (Xj 1 ), . . . , aj m (Xj m ) → Q(X). The edges of G are: for each 1 ≤ s ≤ n, there is an edge labelled s to node v from the node v k t such that the predicate of head(rule(v k t )) is Ai s .</p><p>We show the G is a TG of minimum size for P iff Q1(X) ⊆ Q2(X).</p><p>First, observe that the predicates of the rules associated with nodes v k t are all distinct, and they differ from the predicate of the heads of the rules associated with u and v. Hence none of the nodes v k t can be removed from G in the minimization process. Nodes u and v are the only nodes in G associated with rules with the same head predicate. The depth of u is 0, while the depth of v is 1. Hence, v is the only node that can be removed in the minimization process. Therefore, G is not of minimum size iff v can be removed. The node v can be removed iff rew(v) ⊆ rew(u), and hence, by the definition of P , iff Q1(X) ⊆ Q2(X). </p><p>Proof. Let A(X) be the head atom of rule(v) and let Q(Y) ← n i=1 fi be the EG-rewriting of v. Recall from Lemma 18 that for each base instance of B of P we have: v(B) includes exactly a fact A(t) for each answer t to the EG-rewriting of v on B. Now consider any m ≥ 1 atoms fi 1 , . . . , fi m from the body of Q whose variables include all variables in Y. Consider also the query Q <ref type="bibr" target="#b15">[17]</ref>, it follows that Q is contained in Q , i.e., for each base instance B, each answer t to Q on B is an answer to Q on B. From the above, we have: each t, for which</p><p>We refer to this conclusion as ( * ).</p><p>Since step (2) of Definition 23 considers each homomorphism h for which (i) h(X) is an answer to Q on B and (ii) A(h(X)) ∈ I and due to ( * ), it follows that Claim 40 holds. Let I k be the instance computed the beginning of the k-th iteration of the steps in lines 2-8 of Algorithm 2. Then, using Claim 40, Theorem 26 and Lemma 38, we can easily show that for each k ≥ 0, the following property holds:</p><p>• φ. I k = Ch k (P, B)</p><p>The above concludes the proof of Theorem 24. Consider the program P3 a(X) → A(X) (r12)</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>F. ADDITIONAL EXAMPLES</head><p>where a and r are extensional predicates. Figure <ref type="figure">3</ref> shows part of the graph computed up to level 3. Next to each node, we show the rule associated with it. For example, node u1 is associated with rule r13 and node u2 is associated with rule r12. When k = 1, G 1 includes two nodes, one associated with rule r12 (u2) and one associated with rule r13 (u1). When k = 2, r14 has only one 2-compatible combination of nodes. That is (u1, u2). Hence, the technique will add one fresh node u3, associated with r14 and will add the edges u1 →1 u3 and u2 →2 u3. The 2-compatible combination of nodes for r15 is (u2, u2). Hence, the technique will add one fresh node u4, associated with r15 and will add the edges u2 →1 u4 and u2 →2 u4.</p><p>When k = 3, r14 has the following 3-compatible combinations of nodes: (u1, u3) and (u1, u4). For each such 3compatible combinations of nodes, the algorithm adds a fresh node and associates it with r14. For k = 3, the 3-compatible combinations of nodes for r15 are: (u2, u3), (u2, u4), (u3, u2), (u4, u2), (u3, u4), (u4, u3), (u3, u3), (u4, u4). Again, for each such combination of nodes, the algorithm adds a fresh node and associates it with r15.</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">Foundations of Databases</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Abiteboul</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Hull</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Vianu</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1995">1995</date>
+			<publisher>Addison Wesley</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Design and Implementation of the LogicBlox System</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Aref</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Cate</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">J</forename><surname>Green</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Kimelfeld</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Olteanu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Pasalic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">L</forename><surname>Veldhuizen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Washburn</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">SIGMOD</title>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="1371" to="1382" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">The iBench Integration Metadata Generator</title>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">C</forename><surname>Arocena</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Glavic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Ciucanu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">J</forename><surname>Miller</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">VLDB</title>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="108" to="119" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<author>
+			<persName><forename type="first">F</forename><surname>Baader</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Nipkow</surname></persName>
+		</author>
+		<title level="m">Term Rewriting and All That</title>
+		<meeting><address><addrLine>USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Cambridge University Press</publisher>
+			<date type="published" when="1999">1999</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Graal: A Toolkit for Query Answering with Existential Rules</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Baget</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Leclère</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mugnier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Rocher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Sipieter</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">RuleML</title>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">On rules with existential variables: Walking the decidability line</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Baget</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Leclère</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mugnier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Salvat</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Artificial Intelligence</title>
+		<imprint>
+			<biblScope unit="volume">175</biblScope>
+			<biblScope unit="issue">9-10</biblScope>
+			<biblScope unit="page" from="1620" to="1654" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Magic Sets and Other Strange Ways to Implement Logic Programs</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Bancilhon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Maier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Sagiv</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">D</forename><surname>Ullman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">PODS</title>
+		<imprint>
+			<date type="published" when="1986">1986</date>
+			<biblScope unit="page" from="1" to="15" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">On the Power of Magic</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Beeri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Ramakrishnan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Logic Programming</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="255" to="299" />
+			<date type="published" when="1991">1991</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">The Vadalog System: Datalog-based Reasoning for Knowledge Graphs</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Bellomarini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Sallinger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Gottlob</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PVLDB</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="issue">9</biblScope>
+			<biblScope unit="page" from="975" to="987" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Benchmarking the chase</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Benedikt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Konstantinidis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Mecca</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Motik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Papotti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Santoro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Tsamoura</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">PODS</title>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="37" to="52" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">PDQ: Proof-driven query answering over web-based data</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Benedikt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Leblay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Tsamoura</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">VLDB</title>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="1553" to="1556" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Goal-driven query answering for existential rules with equality</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Benedikt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Motik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Tsamoura</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">AAAI</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="1761" to="1770" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">DBpedia -A crystallization point for the Web of Data</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Bizer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lehmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Kobilarov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Auer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Becker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Cyganiak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Hellman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Web Semantics</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="154" to="165" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Functional Dependencies Unleashed for Scalable Data Exchange</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bonifati</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Ileana</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Linardi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">SSDBM</title>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Rdf schema 1.1</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Brickley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">V</forename><surname>Guha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Mcbride</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">W3C recommendation</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="2004" to="2014" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Taming the infinite chase: Query answering under expressive relational constraints</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Calì</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Gottlob</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Kifer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J. Artif. Int. Res</title>
+		<imprint>
+			<biblScope unit="volume">48</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="115" to="174" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">A general Datalog-based framework for tractable query answering over ontologies</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Calì</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Gottlob</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Lukasiewicz</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Web Semantics</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="57" to="83" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Ontop: Answering SPARQL queries over relational databases</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Calvanese</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Cogrel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Komla-Ebri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Kontchakov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Lanti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Rezk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Rodriguez-Muro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Xiao</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Semantic Web</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="471" to="487" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Optimal implementation of conjunctive queries in relational data bases</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">K</forename><surname>Chandra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">M</forename><surname>Merlin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">STOC</title>
+		<imprint>
+			<date type="published" when="1977">1977</date>
+			<biblScope unit="page" from="77" to="90" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Yedalog: Exploring knowledge at scale</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Chin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Von Dincklage</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Ercegovac</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Hawkins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">S</forename><surname>Miller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Och</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Olston</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Pereira</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">SNAPL</title>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="63" to="78" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">The reactome pathway knowledgebase</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Croft</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">F</forename><surname>Mundo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Haw</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Milacic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Weiser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Caudy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Garapati</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Gillespie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">R</forename><surname>Kamdar</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic acids research</title>
+		<imprint>
+			<biblScope unit="volume">42</biblScope>
+			<biblScope unit="issue">D1</biblScope>
+			<biblScope unit="page" from="472" to="D477" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Neural-symbolic learning systems: foundations and applications</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">S</forename><surname>Garcez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Broda</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">M</forename><surname>Gabbay</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Perspectives in neural computing</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2002">2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">On the k-Boundedness for Existential Rules</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Delivorias</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Leclère</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mugnier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Ulliana</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">RuleML+RR</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="48" to="64" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">The chase revisited</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Deutsch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Nash</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">B</forename><surname>Remmel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">PODS</title>
+		<imprint>
+			<date type="published" when="2008">2008</date>
+			<biblScope unit="page" from="149" to="158" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Data exchange: semantics and query answering</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Fagin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">G</forename><surname>Kolaitis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">J</forename><surname>Miller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Popa</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Theoretical Computer Science</title>
+		<imprint>
+			<biblScope unit="volume">336</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="89" to="124" />
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">That&apos;s All Folks! LLUNATIC Goes Open Source</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Geerts</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Mecca</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Papotti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Santoro</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">VLDB</title>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="1565" to="1568" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Ontological query answering via rewriting</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Gottlob</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Orsi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Pieris</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ADBIS</title>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="1" to="18" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Query Rewriting and Optimization for Ontological Databases</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Gottlob</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Orsi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Pieris</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM TODS</title>
+		<imprint>
+			<biblScope unit="volume">39</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="1" to="25" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">LUBM: A benchmark for OWL knowledge base systems</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Pan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Heflin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Web Semantics</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="issue">2-3</biblScope>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Yago2: A spatially and temporally enhanced knowledge base from wikipedia</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Hoffart</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Suchanek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Berberich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Weikum</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Artificial Intelligence</title>
+		<imprint>
+			<biblScope unit="volume">194</biblScope>
+			<biblScope unit="page" from="28" to="61" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<monogr>
+		<title level="m" type="main">Knowledge Graphs</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Hogan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Blomqvist</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Cochez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Amato</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>De Melo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Gutierrez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">E L</forename><surname>Gayo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kirrane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Neumaier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Polleres</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Navigli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A.-C</forename><forename type="middle">N</forename><surname>Ngomo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Rashid</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Rula</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Schmelzeisen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Sequeda</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Staab</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Zimmermann</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2003.02320[cs</idno>
+		<idno>arXiv: 2003.02320</idno>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Modular materialisation of datalog programs</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Hu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Motik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Horrocks</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">AAAI</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="2859" to="2866" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Datalog Reasoning over Compressed RDF Knowledge Bases</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Hu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Urbani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Motik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Horrocks</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">CIKM</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="2065" to="2068" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">The VADA Architecture for Cost-Effective Data Wrangling</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Konstantinou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Koehler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Abel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Civili</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Neumayr</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Sallinger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">A</forename><surname>Fernandes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Gottlob</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Keane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Libkin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">W</forename><surname>Paton</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">SIGMOD</title>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="1599" to="1602" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Extracting novel facts from tables for knowledge graph completion</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Kruit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">A</forename><surname>Boncz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Urbani</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ISWC</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="364" to="381" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Tab2know: Building a knowledge base from tables in scientific papers</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Kruit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>He</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Urbani</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ISWC</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="349" to="365" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">A Single Approach to Decide Chase Termination on Linear Existential Rules</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Leclère</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mugnier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Thomazo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Ulliana</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ICDT</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page" from="1" to="18" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">On bounded positive existential rules</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Leclère</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mugnier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Ulliana</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">DL</title>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">A Context-Aware Recommendation System for Mobile Devices</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Hwang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Park</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Motik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Horrocks</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ISWC</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="380" to="382" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Towards a complete OWL Ontology Benchmark</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Qiu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Xie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Pan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Liu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ESWC</title>
+		<imprint>
+			<date type="published" when="2006">2006</date>
+			<biblScope unit="page" from="125" to="139" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Testing implications of data dependencies</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Maier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">O</forename><surname>Mendelzon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Sagiv</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Database Systems</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="45" to="5469" />
+			<date type="published" when="1979">1979</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">The backchase revisited</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Meier</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">VLDB J</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="495" to="516" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">OWL 2 web ontology language profiles</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Motik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">C</forename><surname>Grau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Horrocks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Fokoue</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Lutz</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">W3C recommendation</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page">61</biblScope>
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Parallel Materialisation of Datalog Programs in Centralised, Main-Memory RDF Systems</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Motik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Nenov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Piro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Horrocks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Olteanu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">AAAI</title>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="129" to="137" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Datalography: Scaling datalog graph analytics on graph processing systems</title>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">E</forename><surname>Moustafa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Papavasileiou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Yocum</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Deutsch</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IEEE International Conference on Big Data</title>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="56" to="65" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">RDFox: A Highly-Scalable RDF Store</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Nenov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Piro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Motik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Horrocks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Banerjee</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ISWC</title>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="3" to="20" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Industry-scale Knowledge Graphs: Lessons and Challenges</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Noy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Jain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Narayanan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Patterson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Taylor</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Commun. ACM</title>
+		<imprint>
+			<biblScope unit="volume">62</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page" from="36" to="43" />
+			<date type="published" when="2019-07">July 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">The chase procedure and its applications in data exchange</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Onet</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">DEIS</title>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="1" to="37" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">DEMo: Data Exchange Modeling Tool</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Pichler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Savenkov</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">VLDB</title>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="page" from="1606" to="1609" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">CLAROS-Collaborating on Delivering the Future of the Past</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Rahtz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Dutton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Kurtz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Klyne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Zisserman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Arandjelovic</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">DH</title>
+		<imprint>
+			<biblScope unit="page" from="355" to="357" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">Equivalences among relational expressions with the union and difference operators</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Sagiv</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Yannakakis</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of the ACM</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="633" to="655" />
+			<date type="published" when="1980">1980</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">Adding Magic to an Optimising Datalog Compiler</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Sereni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Avgustinov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>De Moor</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">SIGMOD</title>
+		<imprint>
+			<date type="published" when="2008">2008</date>
+			<biblScope unit="page" from="553" to="566" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">Inferray: Fast in-Memory RDF Inference</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Subercaze</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Gravier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Chevalier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Laforest</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the VLDB Endowment</title>
+		<meeting>the VLDB Endowment</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page" from="468" to="479" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<analytic>
+		<title level="a" type="main">More Efficient Datalog Queries: Subsumptive Tabling Beats Magic Sets</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">T</forename><surname>Tekle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><forename type="middle">A</forename><surname>Liu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">SIGMOD</title>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="661" to="672" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">Beyond the Grounding Bottleneck: Datalog Techniques for Inference in Probabilistic Logic Programs</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Tsamoura</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Gutiérrez-Basulto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Kimmig</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">AAAI</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="10284" to="10291" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<analytic>
+		<title level="a" type="main">Adaptive Low-level Storage of Very Large Knowledge Graphs</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Urbani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Jacobs</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">WWW</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1761" to="1772" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">Column-Oriented Datalog Materialization for Large Knowledge Graphs</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Urbani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Jacobs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Krötzsch</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">AAAI</title>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="258" to="264" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<analytic>
+		<title level="a" type="main">OWL Reasoning with WebPIE: Calculating the Closure of 100 Billion Triples</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Urbani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kotoulas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Maassen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Van Harmelen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Bal</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ESWC</title>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="213" to="227" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<analytic>
+		<title level="a" type="main">Efficient Model Construction for Horn Logic with VLog</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Urbani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Krötzsch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Jacobs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Dragoste</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Carral</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IJCAR</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="680" to="688" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<analytic>
+		<title level="a" type="main">Making the Most of your Triple Store: Query Answering in OWL 2 using an RL Reasoner</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">Cuenca</forename><surname>Grau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Horrocks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Banerjee</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">WWW</title>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="1569" to="1580" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<monogr>
+		<title level="m" type="main">Assume that P is (a) FOR and</title>
+		<imprint>
+			<publisher>TDB</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<monogr>
+		<title level="m">Nulls ∪ Vars to a fresh ct ∈ Consts unique for t</title>
+		<imprint/>
+	</monogr>
+	<note>Let h be a homomorphism that maps every t ∈</note>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<monogr>
+		<title level="m" type="main">Let kϕ be the smallest number such that Ch kϕ (P, h(β)) |= Ch kϕ+1 (P, h(β)) for every disjunct β in the rewriting ωϕ. Note that</title>
+		<imprint/>
+	</monogr>
+	<note>such a number must exist by (1.b)</note>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<monogr>
+		<title level="m" type="main">For all s ∈ Preds, let ks be the smallest number such that ks &gt; kϕ for all facts ϕ that can be defined over the predicate s. Note that, the number ks is well</title>
+		<imprint/>
+	</monogr>
+	<note>defined despite the fact that we can define infinitely many different facts over any given predicate. This is because k s(t 1 ,...,tn) = k s(u 1 ,...,un) if we have that there is a bijective function mapping ti to ui for all 1 ≤ .</note>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<monogr>
+		<title level="m">Let kP be the smallest number such that kP &gt; ks + 1 for all s ∈ Preds in P</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b65">
+	<monogr>
+		<title level="m" type="main">Consider some fact ϕ = s(t1, . . . , tn), some base instance B, and some i ≥ 0. We show that, if the terms t1, . . . , tn are in Ch i (P, B) and ϕ ∈ Ch(P, B), then ϕ ∈ Ch i+k P -1 (P, B). a. h(ϕ) ∈ Ch((P, B )) with B = h(Ch i (P, B)). b. By (</title>
+		<imprint/>
+	</monogr>
+	<note>B |= ω h(ϕ) where ω h(ϕ) is a UBCQ of the form ∃x1.β1 ∨ . . . ∨ ∃xn.βn.</note>
+</biblStruct>
+
+<biblStruct xml:id="b66">
+	<monogr>
+		<title level="m" type="main">B |= ∃x k .β k for some 1 ≤ k ≤ n. d. By (c): there is a homomorphism such that h (β k ) ⊆ B . e. By (d): h (ϕ) ∈ Ch((P, h(β k ))). f. By (5) and (e): Ch k P -1 (P, h (β k )) ⊇ Ch(P, h (β k )). g. By (e) and (f): h (ϕ) ∈ Ch k P -1 (P, h (β k )). h. By (d) and (g): h (ϕ) ∈ Ch k P -1 (P, B ). i. By (h): ϕ ∈ Ch i+k P -1 (P, B). 7. For a fact ϕ = s(t1</title>
+		<author>
+			<persName><surname>By</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+	<note>let d(ϕ) = 1≤i≤n (d(ti)</note>
+</biblStruct>
+
+<biblStruct xml:id="b67">
+	<monogr>
+		<title level="m" type="main">We show via induction that, for all d ≥ 1, the set Ch d•k P (P, F ) contains all of the facts ϕ ∈ Ch(P, F ) with d(ϕ) ≤ d. • Base case: The set Ch 0 (P, F ) contains all terms of depth 1 (i.e., all constants) that occur in Ch(P, F ). Hence, by (6), the set Ch k P (P, F ) contains every ϕ ∈ Ch(P, F ) with d(ϕ) = 1. • Inductive step: Let i ≥ 1. Then, Ch (i-1)•k P (P, F ) contains all ϕ ∈ Ch(P, F ) with d(ϕ) = i -1. Hence, the set Ch (i-1)•k P +1 (P, F ) contains all t ∈ Terms in Ch(P, F ) with d(ϕ) = i. By (6), the set Ch i•k P (P, F ) contains</title>
+		<imprint/>
+	</monogr>
+	<note>all ϕ ∈ Ch(P, F ) with d(ϕ) = i</note>
+</biblStruct>
+
+<biblStruct xml:id="b68">
+	<analytic>
+		<title level="a" type="main">There is some k d ≥ 0 that depends only on P such that, for every term in t occurring in Ch</title>
+	</analytic>
+	<monogr>
+		<title level="m">P, F )), the depth t is equal or smaller than k d</title>
+		<imprint>
+			<date>1.b</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b69">
+	<monogr>
+		<title level="m" type="main">is (k d • kP )-BDD. Note that, neither k d nor kP depend on the set of facts F . ⇐= Since P ∈ BDD, P ∈ k-BDD for some k ≥ 0. Via induction on i ∈ {0</title>
+		<author>
+			<persName><forename type="first">P</forename></persName>
+		</author>
+		<imprint/>
+	</monogr>
+	<note>we can show that all terms in Ch i (P, B) are of depth i or smaller for any instance B, and hence, P ∈ k-TDB. Note that BDD ⊆ FOR has been shown in [39</note>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

@@ -1,0 +1,1432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Using Chained Views and Follow-up Queries to Assist the Visual Exploration of the Web of Big Linked Data</title>
+				<funder>
+					<orgName type="full">I3S laboratory</orgName>
+				</funder>
+				<funder ref="#_fVqejep">
+					<orgName type="full">Artificial Intelligence at University of Côte d&apos;Azur</orgName>
+				</funder>
+				<funder>
+					<orgName type="full">Minh Nhat</orgName>
+				</funder>
+				<funder ref="#_qWxFU7u">
+					<orgName type="full">University of Côte d&apos;Azur</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2022-01-10">January 10, 2022</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author role="corresp">
+							<persName><forename type="first">Aline</forename><surname>Menin</surname></persName>
+							<email>aline.menin@inria.fr</email>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Univ. Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">Inria</orgName>
+								<address>
+									<settlement>Sophia Antipolis</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Minh</forename><forename type="middle">Nhat</forename><surname>Do</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Univ. Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">Inria</orgName>
+								<address>
+									<settlement>Sophia Antipolis</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Carla</forename><surname>Dal</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Sasso</forename><surname>Freitas</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department">Institute of Informatics</orgName>
+								<orgName type="institution">Federal University of Rio Grande do Sul</orgName>
+								<address>
+									<settlement>Porto Alegre</settlement>
+									<country key="BR">Brazil</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Olivier</forename><surname>Corby</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Univ. Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">Inria</orgName>
+								<address>
+									<settlement>Sophia Antipolis</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Catherine</forename><surname>Faron</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Univ. Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">Inria</orgName>
+								<address>
+									<settlement>Sophia Antipolis</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Alain</forename><surname>Giboin</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Univ. Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">Inria</orgName>
+								<address>
+									<settlement>Sophia Antipolis</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Marco</forename><surname>Winckler</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Univ. Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">Inria</orgName>
+								<address>
+									<settlement>Sophia Antipolis</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Using Chained Views and Follow-up Queries to Assist the Visual Exploration of the Web of Big Linked Data</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2022-01-10">January 10, 2022</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">DA6F3D2D9EC206953FEE0CC69631D6B2</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:14+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>linked data</term>
+					<term>big data</term>
+					<term>SPARQL queries</term>
+					<term>distributed datasets</term>
+					<term>follow-up queries</term>
+					<term>information visualization, chained views, exploratory process</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>The Web of Linked Open Data (LOD) provides access to a great number of dynamic datasets containing valuable information to support decision-making processes in diverse application domains while being publicly accessible and up-to-date. While information visualization techniques are useful to explore, analyze, and explain relationships within LOD data, the existing tools are limited to visualizing a single dataset at a time and, often, use static and preprocessed data. In this paper, we leverage the linked aspect of LOD to support the dynamic integration of data into a visualization system by connecting views and distributed LOD datasets using the socalled follow-up queries. We demonstrate how our approach uses dynamic SPARQL queries to integrate external data into the exploration flow through visualization techniques and enrich the ongoing analysis. We ran a semi-structured interview to assess the usefulness of our approach, which results were encouraging while showing its relevance to explore big linked data.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.">Introduction</head><p>Professionals in diverse application domains such as public health <ref type="bibr" target="#b40">(Preim and Lawonn, 2020)</ref>, social media <ref type="bibr" target="#b13">(Chen et al., 2017)</ref>, and finance <ref type="bibr" target="#b30">(Ko et al., 2016)</ref> are confronted with the analysis of huge datasets to generate synthetic knowledge that supports decision-making processes. In the last 15 years, with the growth of the Open Data movement, a huge amount of data became available on the Web. For example, the EU portal gathers over 1,3 million datasets regarding subjects as diverse as environment, agriculture, justice, science and technology, government, economy, etc. Particularly, the Big Data era made available a great number and variety of very large datasets that are dynamic in nature <ref type="bibr" target="#b6">(Bikakis and Sellis, 2016)</ref>. These are often publicly available as Linked Open Data (LOD), i.e., structured data which is interlinked with other data, so it becomes more useful through semantic queries, as illustrated by the LOD Cloud, which, as of May 2020, gathered 1,301 datasets with 16,283 links or connections between datasets.</p><p>Information visualization techniques are useful to discover patterns and causal relationships within LOD datasets <ref type="bibr" target="#b4">(Bikakis, 2019)</ref>. However, since the discovery process is often exploratory (i.e., users have no predefined goal and do not expect a particular outcome <ref type="bibr" target="#b32">(Leng, 2011)</ref>), when users find something interesting, they should be able to (i) retrace their exploratory path to explain how results are found, and (ii) branch out the exploratory path to compare data observed in different views or found in different datasets. Indeed, as most of LOD datasets are very specialized, users often must explore multiple datasets to obtain the knowledge required to support decisionmaking processes. Thus, the design of visualization tools is confronted with two main challenges: the visualization system should provide multiple views to enable the exploration of different or complementary perspectives to the data; and the system should support the combination of diverse data sources during the exploration process.</p><p>Designing a single view to display all data is tempting, as displaying as much information as possible at once would minimize the need for exploration. However, the risk of engendering cognitive overload and visual clutter-related problems increases with the number of data dimensions. Moreover, it is not possible to display all types of data structures and relationships using a single view <ref type="bibr" target="#b36">(Munzner, 2014)</ref>. Multiple views can be used either through a coordinated (a change in one view will affect the other coordinated views) or chained (all views are connected but are not necessarily coordinated) layout; the latter leverage the capability of keeping the history of user interaction, which can serve for purposes of provenance analysis <ref type="bibr" target="#b36">(North et al., 2011)</ref>. Nonetheless, the integration of multiple data sources remains a challenge as most visualization systems only operate in an offline way, limiting the exploration to static and, often, small datasets of preprocessed data <ref type="bibr" target="#b4">(Bikakis, 2019)</ref>.</p><p>In a previous work <ref type="bibr">(Menin et al., 2021a)</ref>, we used chained views to support the exploration of LOD datasets while depicting provenance data. In this paper we introduce the concept of follow-up queries that allows users to create queries on demand during the exploratory process while connecting multiple LOD datasets with chained views. Our approach relies on a exploration process supported by the use of predefined SPARQL queries that the user can select on-the-fly to retrieve data from different SPARQL endpoints. It enables users to enrich the ongoing analysis by bringing external and complementary data to the exploration process, while also supporting the visual analysis and comparison of different subsets of data (from the same or different SPARQL endpoints) and, thus, the incremental exploration of the LOD cloud.</p><p>Contributions. This paper describes a generic visualization approach to assist the analysis of multiple LOD datasets based on the concepts of chained views and follow-up queries. We demonstrate the feasibility of our approach via four use case scenarios and a formative evaluation where we explore scholarly data described by RDF graphs publicly available through SPARQL endpoints. These scenarios demonstrate how the tool supports (i) composing, running, and visualizing the results of a query; (ii) subsetting the data and exploring it via different visualization techniques; (iii) instantiating a follow-up query to retrieve external data; and (iv) querying a different database and compare datasets. The usability and usefulness of the proposed approach is confirmed by results obtained with a series of semi-structured interviews. The results are encouraging while showing the relevance of the approach to explore big linked data.</p><p>The remainder of this paper is organized as follows. Section 2 compares related work on visual exploration of big and linked data, uses of chained views, and on-thefly query processing for data exploration. Section 3 presents our approach and the tools support. A formative evaluation is presented at section 4. Section 5 discusses our contributions and limitations. Section 6 summarizes the conclusions and future work.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.">Related Work</head><p>In this section, we summarize and distinguish our contributions from previous ones made towards the visual exploration of big and linked data, the usage of chained views to improve the exploration process and keep provenance information, and the usage of dynamic queries within visualization systems.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1.">Big Data Visualization</head><p>Bikakis (2019) identifies visualization methods used to handle the challenges of the Big Data era, which includes data reduction, hierarchical exploration, progressive results, incremental and adaptive processing, caching and prefetching, and user assistance.</p><p>Data reduction is used for computing abstract sets of data to enable efficient abstraction and summarizing mechanisms through approaches such as sampling and filtering <ref type="bibr" target="#b22">(Fisher et al., 2012;</ref><ref type="bibr" target="#b39">Park et al., 2016)</ref> and aggregation <ref type="bibr" target="#b5">(Bikakis et al., 2017;</ref><ref type="bibr" target="#b21">Elmqvist and Fekete, 2010)</ref>. Hierarchical approaches allow the visual exploration of very large datasets at multiple levels, offering both an overview and an intuitive way for finding specific parts of a dataset <ref type="bibr" target="#b5">(Bikakis et al., 2017)</ref>.</p><p>For the purpose of providing real-time response while dealing with huge datasets, several systems adopt progressive techniques, where results and visual elements are computed/constructed incrementally based on user interaction or as time progresses <ref type="bibr" target="#b39">(Park et al., 2016;</ref><ref type="bibr" target="#b43">Stolper et al., 2014)</ref>. Another approach to reduce response time is based on caching and/or prefetching the sets of data that the user is likely to use during the exploration process <ref type="bibr" target="#b28">(Kalinin et al., 2014)</ref>. Since usually only a small fragment of the input data is accessed by the user, on-the-fly exploration techniques are used over large and dynamic datasets by incrementally processing and indexing data according to users' interactions <ref type="bibr" target="#b0">(Alagiannis et al., 2012;</ref><ref type="bibr" target="#b37">Olma et al., 2017)</ref>. Finally, in terms of user assistance, there are various solutions using visual recommendation to help users to choose suitable visualizations for data exploration <ref type="bibr" target="#b29">(Key et al., 2012)</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2.">Linked Data Visualization</head><p>A thorough survey on LOD visualization is beyond the scope of this paper, so we refer the interested reader to the surveys by <ref type="bibr" target="#b1">Antoniazzi and Viola (2018)</ref>; <ref type="bibr" target="#b6">Bikakis and Sellis (2016)</ref>; <ref type="bibr" target="#b15">Dadzie and Rowe (2011)</ref> and to the set of papers organized by <ref type="bibr" target="#b14">Dadzie and Pietriga (2016)</ref>. As suggested by the number of surveys on the subject we find in the literature, there are various visualization approaches to assist the exploration of linked data. Particularly, there are numerous tools that support the visual inspection and debugging of RDF through node-link representations <ref type="bibr" target="#b12">(Chawuthai and Takeda, 2015;</ref><ref type="bibr" target="#b24">Graziosi et al., 2018)</ref>, which show the relationship between subjects and objects determined by its predicates (e.g., in the triple ?parent dbo:influenced ?child, the values of ?parent and ?child represent nodes and dbo:influenced represents the edge between those nodes). A common application of such tools would be to discover linked RDF graphs on the Web by using approaches such as revealing/hiding neighboring resources to explore and visualize relevant data of very large RDF graphs <ref type="bibr" target="#b16">(De Vocht et al., 2015;</ref><ref type="bibr" target="#b17">Deligiannidis et al., 2007;</ref><ref type="bibr" target="#b27">Jacksi et al., 2018)</ref>. A few tools support the exploration of OWL/RDF schema <ref type="bibr" target="#b2">(Anutariya and Dangol, 2018;</ref><ref type="bibr" target="#b31">Kremen et al., 2018)</ref>, which is of great importance to inspect the datasets to learn how to extract information from them, for example.</p><p>Although there are tools that support dynamic representation of different RDF data based on datatypes, they are mostly restricted to a single visualization technique, which provides a single perspective to the data and often does not consider the semantics behind the data (i.e., related to the application domain), resulting on a unsuitable visualization to solve domain-related tasks. Our approach supports exploratory search through various complementary visualization techniques instantiated on demand according to the task at hand, strengthening the analysis. Furthermore, regardless of the exploration goal and contrariwise to our approach, these tools often do not support the integration and simultaneous exploration of data originating from different RDF graphs, except when the data has been merged using, for instance, the service clause of SPARQL <ref type="bibr" target="#b35">(Menin et al., 2021b)</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3.">Chained Views</head><p>Systems implementing chained views or similar concepts provide two or more visualizations in the display and connect them with visual links to represent one-to-one and one-to-many relations between data items. Connected Charts tool <ref type="bibr" target="#b45">(Viau and McGuffin, 2012)</ref>, the Domino technique <ref type="bibr" target="#b23">(Gratzl et al., 2014)</ref>, GraphTrail <ref type="bibr" target="#b20">(Dunne et al., 2012)</ref> and SOMFlow <ref type="bibr" target="#b41">(Sacha et al., 2017)</ref> are good examples. These tools support dynamic instantiating of multiple views during the exploration process and leverage the visual linking between the views to enable provenance tracking. In particular, GraphTrail supports the exploration of large multivariate, heterogeneous networks through dragand-drop interactions that refine subsets of data in a new view while showing users' exploration history by lines connecting the views. In the SOMFlow tool, each view shows a cluster refinement of a dataset and links represent the analytical workflow of the exploration partition process. Although both GraphTrail and SOMFlow employ visual connections between views to show the exploration history, they are limited to exploring subsets of a unique dataset, while our approach supports the creation of views based not only on the refinement of already displayed data, but on data dynamically obtained by querying external linked datasets.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.4.">On-the-fly Query Processing</head><p>Dynamic queries are usually employed to support the exploration of datasets through the selection or filtering of data items, which resulting subsets are displayed in the same visualization or in multiple coordinated views <ref type="bibr" target="#b42">(Shneiderman et al., 1992)</ref>.</p><p>Early systems like DEVise <ref type="bibr" target="#b33">(Livny et al., 1997)</ref> and VIKING (Visual Interactive QueryING) <ref type="bibr" target="#b38">(Olsten et al., 1998)</ref> allow users to specify queries through graphical user interfaces. In both systems, querying and data browsing are unified into a single metaphor: the direct manipulation of visual representations. Such a visual query paradigm allows users that are not database experts to generate sophisticated SQL queries through intuitive graphical operations. In VQE <ref type="bibr" target="#b18">(Derthick et al., 1997)</ref>, the user is provided with a schema browser and a visual representation of the query, allowing the users to easily find the attributes they need. The authors distinguish between extensional and intentional queries: the former refers to selecting sets of objects via direct manipulation, while the latter has distinct declarative representation from what they evaluate on the current data, which can be reused on different data. <ref type="bibr" target="#b26">Heer et al. (2008)</ref> also present direct manipulation techniques that combine declarative selection queries (in a SQL-like query language) with a query relaxation engine Table <ref type="table">1</ref>. Summary of related work according to: access to external data, multiple datasets exploration, adopted approach to display queries' results, the data type, the query language (RDB: relational database, LD: linked data, N/A: not applicable), and whether the solutions provide visual query builders (VQB).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Reference</head><p>External that enables users to interactively generalize their selections. The users create selection queries through direct manipulation, and can reapply them dynamically over streaming or time-varying datasets or across different visualizations of a dataset, thereby supporting linking across views. The Polaris system <ref type="bibr" target="#b44">(Stolte et al., 2002)</ref>, precursor of Tableau, also supports the generation of relational queries through visual specifications, which allow subsetting data for analysis, filtering, sorting, and grouping the results into panels. Users could yet drill down in the visible dimensions or display different dimensions. The ConnectomeExplorer tool <ref type="bibr" target="#b3">(Beyer et al., 2013)</ref> uses knowledge-based query algebra to support the interactive specification of dynamically evaluated queries during the exploration process. The system is based on a coordinated views approach. It allows the user to formulate and answer domain-specific questions, either by interactively exploring the data or by posing dynamic queries through a visual query builder that translates queries into a query algebra. The results of queries are then represented as sets that can be explored in all views, used as input to more advanced queries, or stored and loaded from disk.</p><p>In the context of Linked Data, <ref type="bibr" target="#b19">Destandau et al. (2021)</ref> propose S-Paths, a browsing tool that systematically identifies the best-rated visualization technique to represent a given resource set. By selecting different semantic paths, the tool allows users to switch to different resource sets or to get a different perspective on the same set through SPARQL query templates applied to a SPARQL endpoint that stores a set of RDF graphs. Another approach is the Linked Data Visualization Model (LDVM) <ref type="bibr" target="#b7">(Brunetti et al., 2013)</ref>, which allows connecting different datasets, data analysis, and visualizations in a dynamic way. The users can enter or select a SPARQL endpoint and choose the graphs to visualize. Many tools are available to transform the data and extract information from specific types of LOD constructs (e.g., class hierarchy, property hierarchy, SKOS concepts hierarchy, etc.) that can be visualized through charts such as treemaps, tables, and heat maps.</p><p>Table <ref type="table">1</ref> presents a summary of the above-described on-the-fly query processing solutions. We can observe that most solutions are focused on relational databases. Despite the fast growth of LOD datasets (both in terms of production and usage), there is still little work towards the dynamic integration of external data in visualization interfaces designed for exploring LOD datasets. The solutions we identified in the literature allow the visualization of data from different datasets through multiple visualization techniques. Nonetheless, these solutions provide a single visualization technique to represent the whole SPARQL result set, restraining the analysis to a single view of the data. Moreover, S-Paths <ref type="bibr" target="#b19">(Destandau et al., 2021)</ref> is limited to the exploration of RDF graphs available via a specific SPARQL endpoint only while the analyzers provided by the LDVM <ref type="bibr" target="#b7">(Brunetti et al., 2013)</ref> provide mainly RDF abstractions, which restrain the user from exploring domain-relevant subsets of data. In this context, our proposal differs from the existing solutions by (i) allowing the exploration of any SPARQL endpoint through SPARQL queries that can assist the exploration of RDF graphs, ontologies, or particular phenomena (e.g., bibliographic networks), and (ii) instead of replacing the existing views with a view of the new dataset, it integrates the query and the new view as chained views in the dashboard to provide exploration awareness while supporting visual comparison of different datasets.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.">Our Approach</head><p>This section presents an approach based on the concepts of chained views and followup queries to support the visual exploration of multiple large datasets. Particularly, we propose the visual exploration of LOD via:</p><p>• the incremental exploration of large datasets by pre-filtering them via SPARQL queries, which not only reduces the size of the data to be explored but also enables the analysis of more meaningful data to solve the task at hand; • the exploration of data from multiple perspectives by using the chained views method, which allows users to interactively subset the data and further explore it using different visualization techniques that display the data from a different angle, while keeping the exploration path by linking the views; this allows users to focus their attention on smaller, more meaningful subsets of data; • the exploration of multiple datasets (from one or multiple databases) by instantiating new queries during the exploration process (i.e., using follow-up queries) to incrementally include external data into the exploration flow, which can be analyzed and compared within a same visualization dashboard.</p><p>We propose an approach that combines the chained views concept and the visualization techniques used by MGExplorer <ref type="bibr">(Menin et al., 2021a)</ref> and the query construction implemented by LDViz <ref type="bibr" target="#b35">(Menin et al., 2021b)</ref>. The resulting combination is then extended to include a visual representation of queries and enables on-the-fly query and data processing. Hereafter, we present the features that compose our approach.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Node-link Diagram</head><p>ClusterVis IRIS GlyphMatrix Bar chart Listing network clusters pairwise distribution listing</p><p>Table <ref type="table">2</ref>. Classification of visualization techniques available in MGExplorer according to the type of analysis they provide.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1.">Interactive Visualization using Chained Views</head><p>We provide data visualization through an extension of the tool MGExplorer <ref type="bibr">(Menin et al., 2021a)</ref>, which implements chained views to assist the exploration of multidimensional and multivariate graphs. Each view in MGExplorer features a unique visualization technique. Using chained views, MGExplorer allows to compare (i) two or more different subsets of data through a particular perspective generated for each view, and (ii) multiple perspectives of the same subset of data using several views. Table <ref type="table">2</ref> summarizes the set of available visualization techniques, briefly described herein. Network visualization is provided via a node-link diagram, which shows items as nodes connected via line segments to represent the relationship between them. The size of nodes encodes the number of relationships of the associated item within the network. The ClusterVis <ref type="bibr" target="#b11">(Cava et al., 2017)</ref> technique is used for displaying clusters obtained according to a particular relationship among data items. It has a multi-ring layout, where the innermost ring is formed by the data items (represented by circles), and the remaining rings display the data attributes (represented by rectangles). Curved lines connect the items belonging to the same cluster. Pairwise relationships between items can be visualized in two ways. The IRIS technique <ref type="bibr" target="#b10">(Cava et al., 2014)</ref> isolates the item of interest (at the center) and shows the other items with which it has a relationship on a circular axis. The GlyphMatrix technique <ref type="bibr" target="#b9">(Cava and Freitas, 2013</ref>) is a matrixbased visualization where rows and columns represent data items, and the intersecting cells embed a star-plot-like glyph encoding attributes that describe the relationship between the two items. Furthermore, a bar chart shows the distribution of values of data attributes for an item or set of items over an ordered variable (e.g., time), and a listing technique shows the set of items corresponding to the relationship between two or more nodes in the network. The original implementation of MGExplorer created chained views by subsetting the data obtained from a single dataset. In Subsection 4.3, we illustrate how chained views have been extended to feature follow-up queries.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1.1.">Exploration Process and History</head><p>The dashboard of the tools is initialized with a blank query panel and a history panel; both panels are interactive and visible throughout the whole exploration process. From the query panel, users should select a starting endpoint and query. While the other views are created throughout the exploration process, the system progressively fills in the history panel with provenance information (views and dependencies between them). Each created view is connected to the previous one using line segments to represent their relationship. This approach allows a prompt recovering of the multiple analytical paths that emerge from a particular view.</p><p>The views can be moved around, allowing the user to rearrange the visualization space in meaningful ways. Further, users can hide any of the currently displayed views, which they may revisit later using the history panel, thus cleaning the display area in a way that helps them to focus on what is relevant to the task at hand.</p><p>The system supports the visualization of multiple datasets simultaneously. Each dataset can be further explored via filtering operations that allow to select an item of interest directly on a view and choose suitable visualization techniques to explore the resulting subset of data. Upon an element selection, the system filters the dataset accordingly, and the resulting subset undergoes a process that transforms and visually maps the data attributes to the chosen visualization technique. Throughout this process, the information regarding the selection operation, the dataset, the resulting subset, the chosen view, and the transformed data are recorded in the exploration history. The integration of datasets into the exploration flow is supported by dynamic follow-up queries, described in the following.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2.">Query Representation and Processing</head><p>The visualization tool includes a querying process for retrieving datasets from multiple SPARQL endpoints and simultaneously exploring them within the same visualization dashboard. The SPARQL endpoint and query selection is supported by a query panel (Figure <ref type="figure" target="#fig_0">1</ref>), which features the list of SPARQL endpoints available and queries supported by the endpoint. Upon the selection of a query, the system displays a set of custom parameters that allow users to filter the data (e.g. in a bibliometric network, these could be the publication period and research institution of scholarly articles) (Figure <ref type="figure" target="#fig_0">1c</ref>). Users can choose a visualization technique among those present in Table <ref type="table">2</ref>. Then, upon clicking on "Run" (Figure <ref type="figure" target="#fig_0">1g</ref>), the system will retrieve the information from the form, apply the query against the chosen endpoint, transform the resulting data, and instantiate the visualization technique to display the transformed data. For the purpose of optimizing the process, we use a cache that stores the results of queries for a certain amount of time, reducing the accesses to the data server. The user can deliberately clear the results stored in the cache by using the button "Clear cache" (Figure <ref type="figure" target="#fig_0">1g</ref>), upon which the system will apply the query to the SPARQL endpoint at the next execution, acquiring updated data directly from the data server.</p><p>The visualization tool provides three types of queries:</p><p>• the initial query is the starting point of the exploration process, where the user defines the initial SPARQL endpoint and query. The initial query requires (i) a set of predefined queries (currently exported from LDViz -see Subsection 3.2.1), and (ii) at least one query that does not require an input value, for example, in Use Case Scenario III (see Subsection 4.3.3) the query requires the name of the author for which it would recover the co-authorship network. • the follow-up query is used to integrate new data to the exploration flow by applying a new query to the current or a different SPARQL endpoint during the exploratory process. Further to a set of predefined queries, the follow-up query requires (i) at least one visualization displayed on the dashboard, and (ii) a selected item from a visualization to serve as input data for the new query. • the cloned query allows the user to reuse the input data and query parameters from an existing query panel by creating a copy of the panel, where the user can make the necessary modifications to obtain a new visualization with different data. It requires at least one follow-up query displayed on the dashboard. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2.1.">Query Specification via LDViz</head><p>To assist the use of the tool by people with little or no knowledge of SPARQL, we use predefined queries in the visualization dashboard. Then, to define new SPARQL queries, we use the LDViz (Linked Data Visualizer) tool 1 . The queries are then exported as a JSON file that describes the queries and the parameters needed to execute them (i.e., SPARQL endpoint, query type, custom variables), which is used as input data for the query panels in MGExplorer. LDViz implements a generic visualization pipeline for LOD datasets based on web technologies, i.e., JavaScript, the D3 (Data-Driven Documents) library to create visualizations, and the NodeJS library to manage the linked data access server that handles data retrieval through SPARQL queries.</p><p>More information about the data model and the operating mode of LDViz can be found in <ref type="bibr" target="#b35">Menin et al. (2021b)</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3.">Implementation Details</head><p>The extended version of MGExplorer provides a modular architecture based on web components that reduce the complexity of the interface and support the reuse of elements. It also allows the easy inclusion of new visualization techniques and functionalities. We used Stencil JS 2 , a compiler that generates Web Components and builds high-performance web apps to implement the new architecture of MGExplorer. Finally, data and SPARQL queries processing is handled through a NodeJS server. Web components are a set of web platform APIs used to create new custom, reusable, encapsulated HTML tags in web pages and web apps. They are based on four main specifications: the custom elements are the foundation for designing and using new types of DOM elements; the shadow DOM defines how to use encapsulated style and markup; the ES modules define the inclusion and reuse of JavaScript documents in a standards-based, modular, performing way; and the HTML template defines how to declare fragments of markups to be used during runtime. The Shadow DOM specifications allow components to have their own dom tree, which cannot be accessed accidentally from the main document. With our approach, we can provide full encapsulation, 1 http://covid19.i3s.unice.fr:8080/ldviz 2 https://stenciljs.com/ reducing the dependencies between components while preventing style specifications either to change a component from the outside or styles from inside a component to bleed out. Thus, one can properly include a new visualization technique to the tool without affecting the rest of the components. Currently, MGExplorer comprises six main components interconnected as illustrated in Figure <ref type="figure" target="#fig_1">2</ref> and described as follows:</p><p>• the dashboard component (mge-dashboard) stores and manages the views, the data, and the user interactions (e.g., hiding, displaying, dragging, and dropping views, etc.). This component also stores the provenance data describing the exploration process and show the exploration path by drawing the connection lines between views and updating the history tree (displayed by mge-history).</p><p>It includes a list of views, a query panel (initial query), and the history panel. • the view component (mge-view) comprises a visualization technique (i.e., vis-technique) and a settings panel that serves to customize certain aspects of the visualization (e.g., sorting items, search, etc). • the settings panel component (mge-panel) serves to customize the visualization techniques by adjusting certain parameters. It uses a predefined template rendered as HTML inside the component according to the visualization technique. • the query component (mge-query) comprises the query panel where users can select and customize SPARQL queries to retrieve and explore data using the visualization. This component is placed inside the mge-view component to reuse common features (i.e., drag-and-drop, hide, display, etc.). As mentioned earlier, it can take three different forms: initial, follow-up, or clone query. • the history component (mge-history) displays the exploration path through a hierarchy that shows the dependencies between views and supports interaction for hiding and displaying views. • the visualization techniques (vis-technique) encompass six components (i.e., mge-barchart, mge-clusterviz, mge-glyph-matrix, mge-iris, mge-listing, mge-nodelink), each one comprising its own properties and methods.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.">User Study</head><p>To assess our approach, we performed a user study using semi-directive questions that followed a demonstration of our visualization tool. This user study was proposed as a formative evaluation, which aims to collect observations and recommendations that can be immediately used to improve the design of the product or service, and refine the development specifications <ref type="bibr" target="#b8">(Burmester et al., 2010)</ref>. In a typical formative evaluation we addresses questions such as: what are the usability issues in our implementation? Do users understand the underlying concepts and tasks supported by the tools? Does the system comply with recognized usability principles? The results are typically qualitative instead of summative, focusing on the needs of the design team including developers, designers, project managers, and other members. With this evaluation, we aim primary at identifying gaps between the goals of our conceptual approach and the current implementation, which is done through feedback from expert users and through the collection of specific points, where improvement is necessary before pursuing the implementation towards a professional use. For that, we designed questions for asking participants through the interview to address the following research questions:</p><p>Q1. How do users relate the content of visualizations and queries? Q2. Are users able to distinguish subsetting operations (i.e., filtering applied to existing visualizations) from the follow-up queries (resulting in visualizations of new data)? Q3. Would users be able to track the data provenance using chained views? Here, we are interested in understanding whether users can compare and distinguish data coming from different sources during the exploration process.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1.">Participants</head><p>For this study we were looking for users representing the public concerned by the exploration of LOD datasets. For that, we recruited ten participants (5 female and 5 male), aged from 26 to 61 years (N=4 between 20-29, N=3 between 30-39, N=2 between 40-59, and N=1 person aged over 60 years old) in a convenience sample. We ensure that all participants were knowledgeable of Semantic Web and are representative users of LOD datasets. Half of the participants were Ph.D. students or engineers, while the other half were post-doctoral or research fellows at universities. Semantic Web and Artificial intelligence are the main research fields of all participants. Specific research topics include linked open data, natural language processing, information retrieval, web audio, and knowledge representation. Two participants also reported using visualization tools in their research.</p><p>Participants were asked what types of data they deal with on daily and how they explore or exploit that data. Most participants (n=7) work with knowledge graphs and ontologies, which they explore using SPARQL queries, dedicated software (e.g., Protégé Ontology Editor<ref type="foot" target="#foot_0">3</ref> , Corese<ref type="foot" target="#foot_1">4</ref> , and Virtuoso SPARQL Query Editor), or software specifically created (sometimes by themselves) to answer their needs. The other participants work with text and tabular data, which they explore using mainly Python, tabular explorers, and simple charts (e.g., scatter plots and directed graphs).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.">Materials and Methods</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.1.">Protocol</head><p>In order to demonstrate the usage of the visualization tool we define a set of use case scenarios that were used to guide users during a semi-directed interview. The questions proposed to the participants might require follow-up questions according to the answers of the interviewees.</p><p>Participants gave written consent to participate in the interviews. All the data collected was anonymized. Each interview took around 35 minutes. We used Google Forms to collect the data, which the interviewer filled out to allow the interviewee to naturally express their opinions through speaking instead of writing them down.</p><p>The interview began with a presentation of the study's goals and the visualization tool. We applied a pre-test questionnaire to collect information regarding the participants' profile (i.e., age, gender, education level) and to understand their habits and needs regarding the exploration of large datasets; for example, what types of data they work with and how they explore it, whether they need to explore multiple datasets simultaneously, and what tools they use to explore those data.</p><p>In the sequence, the interviewer presented and demonstrated our visualization tool via four use case scenarios (Sect. 4.3). After each scenario, the interviewer asked the participant to describe: (i) three things they liked in the scenario; (ii) three things they disliked in the scenario; and (iii) whether, when, and why they would use the visualization, and particularly, the features presented in the scenario under consideration. The last part of the interview was dedicated to debriefing and thanking the participants.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.2.">Data and Dataset</head><p>In this study, we used data describing bibliometric networks (i.e. keywords cooccurrence and co-authorship networks). The data was retrieved from two different RDF graphs storing metadata that describe scientific publications (e.g., title, publication date, authors, research topic, etc.): the HAL Open Archive<ref type="foot" target="#foot_2">5</ref> and the Microsoft Academic Knowledge Graph (MAKG)<ref type="foot" target="#foot_3">6</ref> . The HAL Open Archive is a French open archive where authors can deposit scholarly documents from all academic fields, gathering over 2,6 million scholarly articles, including over 860,000 with full-text. The MAKG collects metadata describing over 209,7 million scientific publications from across the web and partnered sources.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.">Use Case Scenarios</head><p>For collecting the appropriate data to answer our research questions, we designed four use case scenarios, each one presenting a different aspect of the tool, i.e. (i) composing, running, and visualizing the results of a query; (ii) subsetting the data and exploring via different visualization techniques; (iii) instantiating a follow-up query to retrieve external data; and (iv) querying a different database and compare datasets. Hence, scenarios I, III, and IV address aspects of Q1 by showing the visual representation of three different datasets retrieved using three different queries. Scenario II presents the subsetting feature, which, together with the remaining scenarios, should allow us to collect feedback to answer Q2. Finally, Q3 should be answered with feedback collected throughout all scenarios since the participants should be able to identify exploratory paths, which requires the instantiating of a certain number of visualizations and queries. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.1.">Use Case Scenario I</head><p>This scenario demonstrates how one can compose and execute a SPARQL query and visualize the results using the tool. Since this is the first scenario, we start by presenting the MGExplorer's interface, including the initial views (i.e., initial query and history) and their operating mode. Then, we select a SPARQL endpoint and a query in the query panel to begin the exploration. In this scenario, we are interested in a query to retrieve a dataset describing a keyword co-occurrence network within scientific publications of a particular research institution stored in the SPARQL Endpoint HAL. Upon choosing the query, the system displays a set of custom parameters that the user may change to filter the data by publication period or research institution. Illustrating the usage of these parameters, we set the publication period as 2013 to 2020.</p><p>Upon clicking on run, a view is created showing the results represented as a nodelink diagram where keywords are represented by nodes, which size encodes the number of connections (i.e., the number of keywords with which a keyword co-occurs), and the links are defined by the publications where they jointly appear to represent the cooccurrence of both keywords in at least one publication. As the new view is displayed, the system draws a line segment with an arrow connecting the initial query to the view. The history tree is updated to include the new view, representing the dependency between the visualization and the query.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.2.">Use Case Scenario II</head><p>In this scenario, we demonstrate how one can use MGExplorer to further explore subsets of data via different visualization techniques to get different perspectives to the data. For that, we select an item in the node-link diagram by right-clicking on the corresponding node (e.g., the one representing the keyword "artificial intelligence"). This action will display a context menu featuring the list of available visualization techniques, from which we choose the IRIS to show the pairwise relationships between the keyword of interest and every other keyword with which it co-occurs. The IRIS illustrates the importance of each relationship via colored bars, where the color represents the type of publication and the height encodes the number of publications where both keywords co-occur. Further, we return to the node-link diagram, where we right-click again on the node of interest to launch a different visualization technique. This time, we select the List of Papers technique, which shows us a list of publications where the keyword "artificial intelligence" appears together with one or more of its associated items.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.3.">Use Case Scenario III</head><p>This scenario demonstrates the application of follow-up queries: extending the analysis by querying an external database using existing information in the visualization. We focus the exploration on the List of Papers. Let us consider that we are interested in the paper entitled "A Survey of the First 20 Years of Research on Semantic Web and Linked Data". We want know more about its author, "Fabien Gandon" and, particularly, about his scientific collaborations.</p><p>For that purpose, since the data being explored focus on keywords co-occurrence, we should query the HAL SPARQL endpoint to retrieve the co-authorship network of "Fabien Gandon". For that, we right-click on the item representing the publication of interest and select the option "New Query", which instantiates a query view giving the author's name as input data to be used as a parameter in the follow-up query. This view is automatically connected to the List of Papers through a line segment to represent their relationship. Furthermore, notice that the query panel's title contains the name of the author, which allows knowing at all times from which item the query was derived.</p><p>In the query view, we select the HAL SPARQL endpoint and query 6 from the list, which provides the result we are looking for, i.e., the co-authorship network of "Fabien Gandon". We keep the default parameters and execute the query. The system then instantiates a new node-link diagram where nodes correspond to authors, which size encodes the number of co-authors, and links are defined by the publications they co-authored jointly, representing their co-authorship through at least one publication. The new view is automatically connected to the query view via a line segment, and the history is updated accordingly; notice that the history tree represents queries via circles and visualization techniques via squares, providing a clear indication of the start and end of workflows.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.4.">Use Case Scenario IV</head><p>This scenario demonstrates another application of follow-up queries: comparing data from different databases. Up to this point, we have explored data from the HAL SPARQL endpoint, which gives us the scientific collaboration network of "Fabien Gandon" from the perspective of the data stored in this database. Now, let us compare this data with the co-authorship network of this researcher retrieved from MAKG.</p><p>For that purpose, we must create a new query and a new view, which would rapidly clutter the visualization space. Thus, before continuing the exploration, we hide the views that we no longer need (i.e., the first node-link diagram and the IRIS) and rearrange the remaining views to create space for this new exploration path. As we can observe, by hiding a view, the system replaces it with a gray square that serves both to indicate the existence of previously used visualizations and as a button that, upon clicking, re-displays the corresponding view.</p><p>There are two ways for performing the necessary query: (i) we start from the nodelink diagram, by right-clicking on the node that represents "Fabien Gandon", choose the option "New Query" in the context menu that appears, and follow the same steps as in the previous scenario; or (ii) since we are using the same input data (i.e., the author's name) that came from the List of Papers, we could also reuse the information on the previously used query view by cloning it, which has the advantage of allowing the reuse of parameters and input data.</p><p>By following the second way, we clone the query view by clicking on "Clone", which instantiates a new query view containing the same information as in the previous one. In the cloned query view, we change the SPARQL endpoint to MAKG and select query 9, which retrieves the co-authorship network of "Fabien Gandon". Upon executing the query, the system displays a node-link diagram where nodes represent the authors linked by the publications they co-authored together. We can compare both visualizations side-by-side, where we can promptly observe that the network found in MAKG is slightly larger than the one found in HAL. By hovering over the node that represents "Fabien Gandon" in both node-link diagrams, we observe that this author had 36 co-authors between 2015 and 2021 in 28 scholarly articles in the network retrieved from HAL. For the same period, the MAKG provides a network where this author had 67 co-authors through 64 scholarly articles.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4.">Results</head><p>From the ten interviews, we could extract a total of 116 comments, classified at Figure <ref type="figure" target="#fig_6">7</ref> as positive (what they value and appreciate) and negative (suggestions for improvements). The positive and negative aspect of each comment was determined at the moment of the interview, when the participants were asked to provide three things they liked and disliked, respectively, about the scenario they had just watched. We observed that the content of comments reach a scope that surpass the topics addressed by our research questions. Thus, to proceed with the analysis, we categorized the comments into four dimensions, defined as follows: the capability of the tool for querying different SPARQL endpoints in runtime by using predefined and customizable queries, as well as the ability to instantiate new queries at any moment of the exploration process and applying them to different SPARQL endpoints, at will. This dimension provides feedback that will help to improve the querying process and refers to Q3; and • the Usability dimension gathers comments regarding overall comments about the user interface. This dimension was named usability as most of the comments refer to how users perceived the utility, performance, and overall satisfaction with the design of the user interface. This category further distinguishes comments regarding each visualization technique used during the scenarios, the history and query panels, and the visualization dashboard. This dimension provides feedback that will help improving usability and user experience with the tools presented.</p><p>The comments were also analyzed with respect to problems in specific views.</p><p>Participants were mostly pleased with the visualization tool and the scenarios we presented, as most of the remarks were positive (56%). Although the number of negative comments seems large, accounting for 44% of all remarks, most of them refer to smalls suggestions for improving the usability of individual visualization techniques and do not hinder the use of chained views and follow-up queries. If we exclude these comments referring to usability issues (4 th dimension), the positive remarks account for 81% of the comments, suggesting that participants were overall pleased with the approach we propose to explore multiple, large datasets. Hereafter, we present and discuss these comments according to each of the above-described dimensions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4.1.">Data Integration</head><p>There were a total of six remarks regarding the data integration dimension, which were mentioned a total of nine times and were all regarding aspects that participants enjoyed. Although most participants reported the need for exploring multiple datasets simultaneously (9 out of 10 people), they would mostly do so by querying the different databases and comparing the results through non-visual and non-automatized ways (e.g., observing the different result sets in a table or text file) or through a script that map the differences between the datasets and provides the results as a table or text file. Thus, the possibility of integrating datasets from different databases and comparing them in a visual way within the same interface was perceived as a positive and useful functionality, even for those participants that mention using only one dataset at a time. The most frequent remarks (66% of comments on data integration) refer to the possibility of accessing diverse datasets and compare sets of data. Particularly, P9 said that "the visual comparison of information from different datasets allows to grasp the extension and differences between them", which illustrates the benefit of performing such comparisons.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4.2.">Exploratory Process</head><p>This dimension received a total of 22 comments, which were mostly positive (86%). The 19 positive comments were mentioned 36 times, while the three negative comments received 11 mentions. The aspects that mostly pleased the participants were the creation of queries at any moment of the exploration process and the usage of data available in the visualization as input to instantiate a new query. The positive aspect is to reuse data in the display to build new queries, as illustrated by P10 who enjoyed the idea of "choosing a specific element in a visualization and instantiating a query, allowing to start a new exploration from that specific item of interest". Every participant enjoyed the possibility of including external data to the visualization by instantiating new queries on-the-fly. Only one participant (P6) mentioned that "the operating mode of follow-up queries is not intuitive", which is sensible since the concept was introduced to participants at the time of the interview, being totally new to most of them.</p><p>Furthermore, other two negative comments were raised with particular regard to the simultaneous visualization of different datasets. The usage of a non-contextualized node-link diagram to visualize different datasets was considered to hinder the comparison between them. Further, six people missed a visual representation of differences and commonalities of the different datasets under exploration, either via colors or linking and brushing approaches. P10 suggested including a customizable node between views "that would hook the results from two or more queries and perform operations on it before visualizing, such as finding the differences between them", which is similar to what is done in <ref type="bibr" target="#b20">Dunne et al. (2012)</ref>.</p><p>Overall, participants appreciated simultaneously having on the display the visualization techniques and the queries, as well as the connection between them that illustrates the data provenance. Participants also appreciated the fact that we keep the history of the exploration via both the visual exploratory path and the interactive history panel. For instance, P5 said that "having an exploration path allows to contextualize themselves within the process" and P1 enjoyed the possibility of "seeing the history and reopen the windows that we closed".</p><p>The comment raised by P10 saying that they liked "seeing the visualizations in parallel to compare the information" illustrates how participants appreciated having side-by-side views, which remark was also raised by two other participants. A recurrent remark regards the usefulness of having different perspectives to the data either by applying new queries and retrieving new data to expand the analysis or by using multiple visualization techniques that allow exploring subsets of data from a different angle.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4.3.">Query Composition and Management</head><p>A total of fifteen remarks were collected regarding the query composition and management dimension, which were mostly positive (66,6%), accounting for 10 over 15 comments. While the positive remarks were mentioned 26 times, the negative remarks were only mentioned once each. There were particularly two topics that stood out, which regards the possibility of customizing query parameters (in our scenarios those would be the publication period and the research institution used in the query) and the feature that allows cloning a follow up query to modify it or instantiate a new query using the same input data that originates from a particular visualization technique. As mentioned by P2, "the custom parameters allow to customize the query and to define what we want as data" and "cloning the query is useful to reuse the input data without repeating the process [of instantiating a new query]". The latter statement is completed by P6, who liked the cloning feature because "it reuses the query parameters of the follow up query". However, one participant mentioned that, although they appreciate being able to clone a query, they dislike having to clone it only to modify the parameters.</p><p>Using a list of predefined queries was overall appreciated by the participants, which according to P3 and P8 "encourage users who have no knowledge of SPARQL on using the tool". However, one participant mentioned that using predefined queries restrain the exploration and they would like to write new queries themselves, which feature is part of LDViz, as mentioned earlier.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4.4.">Usability</head><p>The majority of remarks concern usability aspects of the tool (total of 73 comments, 30 positives). These remarks as presented hereafter in categories referring to the views.</p><p>Dashboard. This category got half of the usability remarks (37 comments -15 positives); it refers to the composition of the user interface that host the views (visualization techniques, queries, history and the connections between them). The total of positive and negative remarks received both 30 mentions from participants. The most appreciated aspects of the dashboard were the high speed to process the queries and display the results, which we assure by using a cache that keeps the query's results in the memory for a particular amount of time speeding up the process, and the intuitiveness of the interface, which users mentioned to be simple and easy to use. Surprisingly, only one participant said that using the interface is not intuitive, since the whole tool and the concept of chained views was new to most participants. Overall, participants also enjoyed the possibility of hiding the visualizations. P3 mentioned during the presentation of the use case scenario IV that "it helps focusing on the data resulting from the new query". In this regard, one participant (P10) also mentioned that they did not like "the fact that we cannot remove anything, only hide [views and queries]"; this participant wanted to remove the views from the dashboard when starting a new exploration flow, which is supported by refreshing the dashboard on the browser.</p><p>History Panel. Four comments regard the history layout, such as the hierarchical representation and the use of different symbols to represent views and queries, which were appreciated by the participants. As a negative aspect of the history panel, two people mentioned that they would have rather identifying the visualization technique used in each view directly in the history, e.g., by using different symbols or colors.</p><p>Query Panel. The few comments regarding the usability of the query panel (3 negative remarks) address the layout, which participants believe that could be improved. Furthermore, P3 mentioned that they would like to know directly in the interface "whether the available values for query parameters (e.g. research institutions) are exhaustive in regard to what exists in the database". Regarding the list of available queries, P10 mentioned that they would have rather "having an indication of suitable queries for the selected item by sorting the list or using colors".</p><p>Node-link diagram. Twelve comments (5 positives) acknowledge aspects such as hover over a particular node and highlight the nodes and edges connected to it, and the use of nodes' size to represent the number of connections (i.e. co-authors or associated keywords) of a particular item. Similarly, they would have liked to see the importance of such connections directly on the graph: as mentioned by P4 "it is a shame that the links are all the same, while the thickness could represent another information such as the number of publications between two nodes". A recurrent comment was regarding the non-contextualization of the node-link diagram, which hindered the understanding of the graph's nature and, therefore, the visual distinction between graphs that represent different data (e.g., keywords co-occurrence and co-authorship networks).</p><p>IRIS. Most of the comments (11 remarks; 6 positive) made about the IRIS technique regard its intuitiveness, interaction and ability to quickly identify the important connections of a particular item. P4 said that they liked "having the number of publications represented between two items" through the colored bar. Participants also enjoyed having the types of publications encoded by color in both IRIS and the List of Papers (discussed below), but disliked the lack of legend of colors that would improve the reading of these visualization techniques. Although the participants seemed to appreciate the IRIS due to the amount of information it provides, some aspects such as the focus and the size of items were troubling. Furthermore, one participant mentioned that the IRIS is a complex technique and, thus, not intuitive to use.</p><p>List of Papers. Five comments were regarding the List of Papers (2 positive). Participants appreciated having the list of publications as it gives a reference to the data source. Three people mentioned that they would like to have the possibility of sorting the list by author, publication date, title, etc. One participant even suggested allowing the user to export the list of publications as a reference file, e.g., Bib TeX.</p><p>It is worthy mentioning that the comments classified as "negative" are often suggestions for improving the tool. Most of the suggestions are quite simple and easy to solve and do not compromise the use of the tool.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.5.">Response of Research Questions</head><p>The interviews resulting on a great amount of data regarding diverse aspects of the visualization tools, reaching a scope that goes beyond of the focus of our research questions, which we try to respond hereafter.</p><p>Regarding Q1: How do users relate the content of visualizations and queries?, we observe that the connection between the views and the queries are considered easy to understand by the participants. Participants promptly associated that graphs displayed data in the views resulting from the queries. Many were happy to see the visual description of the queries (data source, query, and parameters of the query). Explicitly showing queries is something often missing in other tools and this functionality was positively valued by participants. The participants had no trouble in perceiving the meaning in the views and queries or the change between these visual components. A clear remarks of this point was stated by P2 who acknowledged "the consecutive search allows to go from keywords to authors".</p><p>Regarding Q2: Are users able to distinguish subsetting operations from follow-up queries?, we could confirm their ability of visually distinguishing these two operations. Participants understood and appreciated both features as they allow further exploration of existing data and the perspective change by bringing new data to the exploration flow. Particularly, P10 was pleased with "the possibility of starting [a new exploration flow] from a specific item displayed in a visualization technique", which illustrates their understanding and appreciation of this feature.</p><p>As for Q3: Would users be able to track the data provenance using chained views?, various comments illustrate how participants appreciate the visual exploratory path and the history panel, such as P8 "to see everything at once with the connections between views and the possibility of resuming the exploration flow". Many suggestions on how to represent views and queries in the history and how to encode visualization techniques, indicate that participants understood how to trace back the exploration path. In use case scenario IV, the participants were able to compare information retrieved from different databases, which confirms the need of displaying the differences and commonalities between datasets.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.">Discussion</head><p>In this paper, we presented a visualization approach based on chained views and followup queries to assist the exploration of multiple, large datasets. In our case study, we focused on linked open data by exploring data from two RDF graphs (HAL and MAKG) that describe scholarly articles via information such as authors, title, research topic, publication date, etc. These RDF graphs are accessible through SPARQL endpoints, which enable on-the-fly querying and data processing. We assessed our approach by the means of interview with ten expert users, where we demonstrated the usage of our visualization tool through four use case scenarios and asked for the participants' opinion on the usefulness of the presented features. The results showed a positive outlook towards exploring multiple datasets within the same visualization dashboard, allowing the instantiating of new queries during the exploration process, and keeping a visual trace of the latter. Although we applied our approach to big linked data, the concept could be easily generalized to any type of big data. Therefore, hereafter we organize the discussion according to the requirements of an efficient and effective visualization system for big data exploration as identified by <ref type="bibr" target="#b4">Bikakis (2019)</ref>.</p><p>Real-time Interaction. For the purpose of providing a pleasant user experience and keeping the system's response in the range of a few milliseconds, we use a caching approach that keeps the queries' results in memory for a certain amount of time, thus reducing the request time for follow-up queries. Since the participants of our study are used to work with large datasets in their routine and, therefore, understand the difficulties of processing such large amounts of data, the quick response of our system did not go unnoticed and has been perceived as a positive aspect of the tool.</p><p>On-the-fly Processing. To support the simultaneous exploration of multiple datasets we proposed a technique called "follow-up queries", which allows the user to instantiate and execute new queries on-the-fly, which resulting datasets are processed (e.g., filtered, transformed, and enriched) in runtime and integrated in the exploration flow. Further to enabling the comparison of data originating from one or multiple sources, this approach supports yet the incremental exploration of a large database by focusing the analysis on a different perspective at the time. Additionally, we allow the user to focus on useful datasets to the task at hand by using customizable queries, where certain parameters can be modified to meet the user's needs. Although these queries cannot be written by the user directly on the MGExplorer interface, we can eventually provide access to LDViz, where users can define meaningful queries that can later on be included into MGExplorer to enrich the exploration.</p><p>Visual Scalability. For the purpose of providing an efficient exploration of the different datasets and subsets of data, we use a customizable dashboard approach. This way, users can use drag and drop interaction to arrange the views within the dashboard in meaningful ways to the ongoing analysis, as well as hide views that they no longer use without losing the exploratory path and having the possibility of re-displaying those views, if needed. This approach allows users to explore as many datasets as they please through multiple visualization techniques without leaving the interface, which has been perceived as a positive aspect of our tool by the participants.</p><p>User Assistance. In the current state of our tool, user assistance is a major limitation, as the participants duly noticed during the interviews. In the short term, we intend to improve the tool to include information that allow users to fully leverage MG-Explorer features to explore data on their own. In the long term, future work includes extending provenance features, such as improving visual representation and increasing the types and amount of data collected, as well as studying such data to, for instance, identify the most common usages of the system (standard choices of visualizations and instantiating order) according to different types of tasks, which could be used to introduce the system to new users, suggest some well-known analysis workflows, and to improve the overall user experience.</p><p>Personalization. Both the flexible dashboard and the follow-up queries approaches provide users with the possibility of personalizing their exploration according to the task at hand. According to <ref type="bibr" target="#b32">Leng (2011)</ref>, in an exploratory context, the user has no defined goal and is looking for no particular outcome. Thus, when finding something interesting, users should be able to (i) retrace their exploratory path to explain how they found the results, and (ii) branch out the exploratory path to compare data observed in different views or found in different databases. Both features are provided through our visualization approach.</p><p>The user study mainly includes expert users as part of a formative evaluation. Despite our user study being limited by the 10-participants sample, which might be considered small for raising more general conclusions, the assessment was overall positive and allowed us to validate the core concepts related to data integration, exploratory process, and query composition and management. We rely on the concept of data saturation in qualitative studies <ref type="bibr" target="#b25">(Guest et al., 2006)</ref>, which allowed us to cover most relevant aspects during the in-depth interviews. For the exploration process and query composition and management dimensions, we could observe a consistent patterns of recurrent comments that quickly converge; for the data integration dimension we received very few comments, all positive, which may suggest that it does not represent a big issue for the participants. However, the results regarding the usability dimension are much more varied and reflect individual perceptions of the tool. Nonetheless, we believe that the usability issues do not compromise the validity of the core concepts of our approach, which we sought to validate with our research questions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.">Conclusions and Future Work</head><p>The approach presented in this paper supports data from different sources and the exploration of multidimensional networks from multiple shown by various visualization techniques. The on-the-fly data processing detects the relationships between the dataset items and their attributes before visually integrating them in the exploration flow. Furthermore, a server supports the querying of multiple SPARQL endpoints, allowing data retrieval from different datasets at runtime. Hence, the user can explore new hypotheses on the data and bring new data to the process to expand and improve the ongoing analysis. We illustrate the use of the tool on two datasets. However, the tool is generic and can accommodate queries and visualizations to any linked open data available through a SPARQL endpoint. A video demonstrating the use of the tool can be found at https://youtu.be/CA1AfQlagOE.</p><p>The results of our user study are encouraging as they reveal the importance of our approach for exploring large LOD datasets, comparing data from different sources, and using multiple visualization techniques to explore the different perspectives of a dataset. This study allowed us to validate the positive perception of the core concepts of the approach. While we cannot claim to have covered all usability issues, our findings during this formative evaluation are exactly what we expected at this stage of the project. Currently we are fixing the usability issues for making the tool suitable for a quantitative study in the near future.</p><p>This work is an important step toward understanding visualization flows in linked open data. The use of chained views enables collecting and representing provenance information. Currently, the tool records information regarding the SPARQL result set, the transformed data, the chosen views and visualization techniques, the subsets of data created on the fly, and the order in which these elements were instantiated throughout the exploration process. This information could be extracted and studied to understand the exploration patterns of different users in different contexts, which could assist the development of visualization recommendation systems to assist users throughout the analysis process by recommending the most suitable visualizations for solving different tasks or exploring different datasets based on types of data (e.g. network, hierarchical) or application domain.</p><p>Future work also includes extending the proposed method to support the exploration of different types of open data accessible through querying approaches (e.g., relational databases) to enrich the analysis with complementary data. Finally, we would like to perform a usage study of chained views and follow-up queries to understand the variations of strategies that real users might develop to find information using these methods. This would help us to improve the user experience by adjusting the exploration process according to users' usage patterns and exploration needs.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 .</head><label>1</label><figDesc>Figure 1. Overview of the query panel. (a) Select a SPARQL endpoint. (b) Select a query. (c) Custom query parameters. (d) Visualization technique to represent the results. (e) List of predefined queries for the selected SPARQL endpoint. (f) Execute the query using the selected parameters and visualize the results. (g) Clear results stored in cache for the selected query.</figDesc><graphic coords="9,94.40,77.73,406.48,138.77" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 .</head><label>2</label><figDesc>Figure 2. Overview of MGExplorer architecture and interconnected web components.</figDesc><graphic coords="10,94.40,77.72,406.49,102.60" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 3 .</head><label>3</label><figDesc>Figure 3. Exploratory path of Use Case Scenario I. (a) Initial query window. (b) Node-link diagram representing the co-occurrence network of keywords within scientific publications in HAL. (c) History tree showing the information regarding the initial query and the node-link diagram.</figDesc><graphic coords="13,114.73,77.73,365.83,225.13" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 4 .</head><label>4</label><figDesc>Figure 4. Exploratory path of Use Case Scenario II. Starting from the previous scenario, we have (a) a context menu triggered by right-clicking on a node of interest; (b) the IRIS technique showing the pairwise relationship between "artificial intelligence" and its associated items; (c) the list of papers featuring the scholarly articles where the keyword of interest appears together with one or more of its associated keywords; and (d) the history tree updated to show information about the newly instantiated visualizations.</figDesc><graphic coords="14,94.40,77.73,406.46,236.52" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure 5 .</head><label>5</label><figDesc>Figure 5. Exploratory path of Use Case Scenario III. Starting from the List of Papers from the previous scenario, we have (a) the context menu regarding the publication of interest; (b) the query panel featuring a form filled out with the SPARQL endpoint, the query, and query parameters; (c) the node-link diagram featuring the co-authorship network of the given author retrieved from HAL; and (d) the updated history tree representing the query panel through a circle and the new visualization technique with a square.</figDesc><graphic coords="15,94.40,77.73,406.48,182.90" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Figure 6 .</head><label>6</label><figDesc>Figure 6. Exploratory path of Use Case Scenario IV. After hiding the views we no longer need, we remain with (a) two gray squares and the link between them indicating a hidden part of the exploration path and the (b) list of papers. In the query panel, we use the clone button (c) to create a cloned query that reuses the same input data and parameters of this one. We now have a (d) cloned query view, which we modify to select the necessary SPARQL endpoint and query for the new exploration; and (e) the node-link diagram featuring the co-authorship network of the given author retrieved from MAKG.</figDesc><graphic coords="16,94.40,77.73,406.46,185.30" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Figure 7 .</head><label>7</label><figDesc>Figure 7. Count of positive and negative topics addressed by participants regarding each studied dimension and the number of times they were mentioned during the interview.</figDesc><graphic coords="17,94.40,77.73,406.48,203.24" type="bitmap" /></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3" xml:id="foot_0"><p>https://protege.stanford.edu/</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="4" xml:id="foot_1"><p>https://project.inria.fr/corese/</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="5" xml:id="foot_2"><p>https://data.archives-ouvertes.fr/doc/schema</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="6" xml:id="foot_3"><p>https://makg.org/</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>Acknowledgments</head><p>We acknowledge the <rs type="funder">I3S laboratory</rs> for funding the internship of <rs type="funder">Minh Nhat</rs> Do. We gratefully acknowledge the participants of our user study for their time and valuable feedback that allowed us to strength the results of this research. This work is also partially funded by <rs type="funder">University of Côte d'Azur</rs> through its <rs type="programName">IDEX JEDI program</rs> (CC : <rs type="grantNumber">C870A06232 EOTP</rs> : <rs type="projectName">LINKED</rs> <rs type="grantNumber">OPEN DATA DF : D103</rs>). and <rs type="funder">Artificial Intelligence at University of Côte d'Azur</rs>. <rs type="person">Carla Dal Sasso Freitas</rs> is a full professor at the <rs type="institution">Institute of Informatics, Federal University of Rio Grande do Sul</rs>. Her general research theme is interactive data visualization, mainly novel visualization techniques, evaluation of 2D and 3D interactions in the context of data visualization, and more recently on immersive analytics. <rs type="person">Olivier Corby</rs> is an Inria Researcher at the <rs type="institution">Wimmics/SPARKS team of University of Côte d'Azur, CNRS, Inria in France</rs>. His research interests are Semantic Web of Linked Data &amp; Knowledge Representation and Reasoning. He is also interested in Graph based Knowledge Representation, RDF/S, <rs type="person">SPARQL. Catherine Faron</rs> is an Assistant Professor at <rs type="affiliation">University of Côte d'Azur</rs> and a permanent researcher at the <rs type="institution">Wimmics team of University of Côte d'Azur, CNRS, Inria in France</rs>. Her research interests are Knowledge Engineering and Modeling, Ontologies, Graph based Knowledge Representation and Reasoning, Semantic Web. <rs type="person">Alain Giboin</rs> is an emeritus Inria Researcher at the <rs type="institution">Wimmics/SPARKS team of University of Côte d'Azur, CNRS, Inria in France</rs>. His research interests are ergonomics/interaction design of Human-Computer Interaction and Human-Computer-Human Interaction, User Interaction with and through the <rs type="institution">Social Semantic Web, Human-Data Interaction</rs>, and <rs type="institution">Knowledge Engineering</rs>. <rs type="person">Marco Winckler</rs> is a Full Professor at <rs type="affiliation">University of Côte d'Azur</rs> and a permanent researcher at the <rs type="institution">Wimmics/SPARKS team of University of Côte d'Azur, CNRS, Inria in France</rs>. His research interests are <rs type="institution">Engineering of Interactive Systems, Web Engineering, and Information Visualization</rs>.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funded-project" xml:id="_qWxFU7u">
+					<idno type="grant-number">C870A06232 EOTP</idno>
+					<orgName type="project" subtype="full">LINKED</orgName>
+					<orgName type="program" subtype="full">IDEX JEDI program</orgName>
+				</org>
+				<org type="funding" xml:id="_fVqejep">
+					<idno type="grant-number">OPEN DATA DF : D103</idno>
+				</org>
+			</listOrg>
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0" />			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Nodb: Efficient query execution on raw data files</title>
+		<author>
+			<persName><forename type="first">I</forename><surname>Alagiannis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Borovica</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Branco</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Idreos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ailamaki</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2012 ACM SIGMOD International Conference on Management of Data, SIGMOD &apos;12</title>
+		<meeting>the 2012 ACM SIGMOD International Conference on Management of Data, SIGMOD &apos;12<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="241" to="252" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">RDF graph visualization tools: A survey</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Antoniazzi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Viola</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2018 23rd Conference of Open Innovations Association (FRUCT)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="25" to="36" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Vizlod: Schema extraction and visualization of linked open data</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Anutariya</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Dangol</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2018 15th International Joint Conference on Computer Science and Software Engineering (JCSSE)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="1" to="6" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">ConnectomeExplorer: Query-Guided Visual Analysis of Large Volumetric Neuroscience Data</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Beyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Al-Awami</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Kasthuri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">W</forename><surname>Lichtman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Pfister</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Hadwiger</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="issue">12</biblScope>
+			<biblScope unit="page" from="2868" to="2877" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Big Data Visualization Tools</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Bikakis</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Encyclopedia of Big Data Technologies</title>
+		<editor>
+			<persName><forename type="first">S</forename><surname>Sakr</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">A</forename><forename type="middle">Y</forename><surname>Zomaya</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Cham</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer International Publishing</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="336" to="340" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">A hierarchical aggregation framework for efficient multilevel visual exploration and analysis</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Bikakis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Papastefanatos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Skourla</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Sellis</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Semantic Web</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="139" to="179" />
+			<date type="published" when="2017">2017</date>
+			<publisher>IOS Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<title level="m" type="main">Exploration and visualization in the web of big linked data: A survey of the state of the art</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Bikakis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">K</forename><surname>Sellis</surname></persName>
+		</author>
+		<idno>CoRR, abs/1601.08059</idno>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Formal linked data visualization model</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Brunetti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Auer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>García</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Klímek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Nečaský</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of International Conference on Information Integration and Web-Based Applications Services, IIWAS &apos;13</title>
+		<meeting>International Conference on Information Integration and Web-Based Applications Services, IIWAS &apos;13<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="309" to="318" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Valence method for formative evaluation of user experience</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Burmester</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mast</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Jäger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Homans</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 8th ACM conference on Designing Interactive Systems</title>
+		<meeting>the 8th ACM conference on Designing Interactive Systems<address><addrLine>Aarhus, Denmark</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="364" to="367" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Glyphs in matrix representation of graphs for displaying soccer games results</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Cava</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">D S</forename><surname>Freitas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">The 1st Workshop on Sports Data Visualization</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page">15</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Inside-in search: an alternative for performing ancillary search tasks on the web</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Cava</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">M</forename><surname>Freitas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Barboni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Palanque</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Winckler</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2014 9th Latin American Web Congress</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="91" to="99" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Clustervis: visualizing nodes attributes in multivariate graphs</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Cava</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">M D S</forename><surname>Freitas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Winckler</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Symposium on Applied Computing</title>
+		<meeting>the Symposium on Applied Computing</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="174" to="179" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Rdf graph visualization by interpreting linked data as knowledge</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Chawuthai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Takeda</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Joint International Semantic Technology Conference</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="23" to="39" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Social media visual analytics</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Yuan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computer Graphics Forum</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="563" to="587" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Visualisation of linked data -reprise</title>
+		<author>
+			<persName><forename type="first">A.-S</forename><surname>Dadzie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Pietriga</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Semantic Web</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="21" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Approaches to visualising linked data: A survey</title>
+		<author>
+			<persName><forename type="first">A.-S</forename><surname>Dadzie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Rowe</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Semantic Web</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="89" to="124" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">A visual exploration workflow as enabler for the exploitation of linked open data</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>De Vocht</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Dimou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Breuer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Van Compernolle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Verborgh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Mannens</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Mechant</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Van De Walle</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IESD&apos;14 Proceedings of the 3rd International Conference on Intelligent Exploration of Semantic Data</title>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="volume">1279</biblScope>
+			<biblScope unit="page" from="30" to="41" />
+		</imprint>
+	</monogr>
+	<note>CER-WS. org</note>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Rdf data exploration and visualization</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Deligiannidis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">J</forename><surname>Kochut</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">P</forename><surname>Sheth</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM first workshop on CyberInfrastructure: information management in eScience</title>
+		<meeting>the ACM first workshop on CyberInfrastructure: information management in eScience</meeting>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+			<biblScope unit="page" from="39" to="46" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">An Interactive Visual Query Environment for Exploring Data</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Derthick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Kolojejchick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">F</forename><surname>Roth</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 10th Annual ACM Symposium on User Interface Software and Technology, UIST &apos;97</title>
+		<meeting>the 10th Annual ACM Symposium on User Interface Software and Technology, UIST &apos;97<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="1997">1997</date>
+			<biblScope unit="page" from="189" to="198" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">S-Paths: Set-based visual exploration of linked data driven by semantic paths</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Destandau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Appert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Pietriga</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Semantic Web</title>
+		<imprint>
+			<biblScope unit="page" from="1" to="18" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<title level="m" type="main">GraphTrail: Analyzing Large Multivariate, Heterogeneous Networks While Supporting Exploration History</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Dunne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Henry Riche</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Metoyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Robertson</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="1663" to="1672" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Hierarchical aggregation for information visualization: Overview, techniques, and design guidelines</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Elmqvist</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J.-D</forename><surname>Fekete</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="439" to="454" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title level="m" type="main">Trust Me, i&apos;m Partially Right: Incremental Visualization Lets Analysts Explore Large Datasets Faster</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Fisher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Popov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Drucker</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="1673" to="1682" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Domino: Extracting, comparing, and manipulating subsets across multiple tabular datasets</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Gratzl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Gehlenborg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Lex</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Pfister</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Streit</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="issue">12</biblScope>
+			<biblScope unit="page" from="2023" to="2032" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Customising lod views: a declarative approach</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Graziosi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Di Iorio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Poggi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Peroni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Bonini</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 33rd Annual ACM Symposium on Applied Computing</title>
+		<meeting>the 33rd Annual ACM Symposium on Applied Computing</meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="2185" to="2192" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">How many interviews are enough?: An experiment with data saturation and variability</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Guest</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bunce</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Johnson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Field Methods</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="59" to="82" />
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Generalized selection via interactive query relaxation</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Heer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Agrawala</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Willett</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems, CHI &apos;08</title>
+		<meeting>the SIGCHI Conference on Human Factors in Computing Systems, CHI &apos;08<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2008">2008</date>
+			<biblScope unit="page" from="959" to="968" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Lod explorer: Presenting the web of data</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Jacksi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">R</forename><surname>Zeebaree</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Dimililer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Int. J. Adv. Comput. Sci. Appl. IJACSA</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Interactive data exploration using semantic windows</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Kalinin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">U</forename><surname>Cetintemel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Zdonik</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2014 ACM SIGMOD International Conference on Management of Data, SIGMOD &apos;14</title>
+		<meeting>the 2014 ACM SIGMOD International Conference on Management of Data, SIGMOD &apos;14<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="505" to="516" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Vizdeck: Self-organizing dashboards for visual analytics</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Key</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Howe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Perry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Aragon</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2012 ACM SIGMOD International Conference on Management of Data, SIGMOD &apos;12</title>
+		<meeting>the 2012 ACM SIGMOD International Conference on Management of Data, SIGMOD &apos;12<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="681" to="684" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">A survey on visual analysis approaches for financial data</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Cho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Afzal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Yau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Chae</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Malik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Beck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Jang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Ribarsky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">S</forename><surname>Ebert</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computer Graphics Forum</title>
+		<imprint>
+			<biblScope unit="volume">35</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="599" to="617" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Dataset dashboard-a sparql endpoint explorer</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Kremen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Saeeda</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Blasko</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">VOILA@ ISWC</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="70" to="77" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<title level="m" type="main">Handbook of Research on Computational Science and Engineering: Theory and Practice: Theory and Practice</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Leng</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<publisher>IGI</publisher>
+			<biblScope unit="volume">2</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Devise: Integrated querying and visual exploration of large datasets</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Livny</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Ramakrishnan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Beyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Donjerkovic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Lawande</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Myllymaki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Wenger</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 1997 ACM SIGMOD International Conference on Management of Data, SIGMOD &apos;97</title>
+		<meeting>the 1997 ACM SIGMOD International Conference on Management of Data, SIGMOD &apos;97<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="1997">1997</date>
+			<biblScope unit="page" from="301" to="312" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Towards a Visual Approach for Representing Analytical Provenance in Exploration Processes</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Menin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Cava</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">M D S</forename><surname>Freitas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Corby</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Winckler</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">25th International Conference Information Visualisation</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">From Linked Data Querying to Visual Search: Towards a Visualization Pipeline for LOD Exploration</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Menin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Faron</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Corby</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Freitas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Gandon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Winckler</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 17th International Conference on Web Information Systems and Technologies (WEBIST 2021)</title>
+		<meeting>the 17th International Conference on Web Information Systems and Technologies (WEBIST 2021)</meeting>
+		<imprint>
+			<date type="published" when="2021">2021b</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Analytic provenance: process+interaction+insight</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Munzner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">K</forename><surname>Peters Visualization ; A K Peters</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>North</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Endert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Dou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>May</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Pike</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">A</forename><surname>Fink</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the International Conference on Human Factors in Computing Systems, CHI 2011, Extended Abstracts</title>
+		<editor>
+			<persName><forename type="first">D</forename><forename type="middle">S</forename><surname>Tan</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">S</forename><surname>Amershi</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">B</forename><surname>Begole</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">W</forename><forename type="middle">A</forename><surname>Kellogg</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">M</forename><surname>Tungare</surname></persName>
+		</editor>
+		<meeting>the International Conference on Human Factors in Computing Systems, CHI 2011, Extended Abstracts<address><addrLine>Vancouver, BC, Canada</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2011-05-07">2014. 2011. May 7-12, 2011</date>
+			<biblScope unit="page" from="33" to="36" />
+		</imprint>
+	</monogr>
+	<note>Visualization Analysis and Design</note>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Slalom: Coasting through raw data via adaptive partitioning and indexing</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Olma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Karpathiotakis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Alagiannis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Athanassoulis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ailamaki</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proc. VLDB Endow</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="issue">10</biblScope>
+			<biblScope unit="page" from="1106" to="1117" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">VIQING: visual interactive querying</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Olsten</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Stonebraker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Aiken</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Hellerstein</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings. 1998 IEEE Symposium on Visual Languages (Cat. No.98TB100254</title>
+		<meeting>1998 IEEE Symposium on Visual Languages (Cat. No.98TB100254</meeting>
+		<imprint>
+			<date type="published" when="1998">1998</date>
+			<biblScope unit="page" from="162" to="169" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Visualization-aware sampling for very large databases</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Park</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Cafarella</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Mozafari</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IEEE 32nd International Conference on Data Engineering (ICDE)</title>
+		<imprint>
+			<date type="published" when="2016">2016. 2016</date>
+			<biblScope unit="page" from="755" to="766" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">A survey of visual analytics for public health</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Preim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Lawonn</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computer Graphics Forum</title>
+		<imprint>
+			<biblScope unit="volume">39</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="543" to="580" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Somflow: Guided exploratory cluster analysis with self-organizing maps and analytic provenance</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Sacha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Kraus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Bernard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Behrisch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Schreck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Asano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">A</forename><surname>Keim</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="120" to="130" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Dynamic queries: Database searching by direct manipulation</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Shneiderman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Williamson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Ahlberg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems, CHI &apos;92</title>
+		<meeting>the SIGCHI Conference on Human Factors in Computing Systems, CHI &apos;92<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="1992">1992</date>
+			<biblScope unit="page" from="669" to="670" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Progressive visual analytics: User-driven visual exploration of in-progress analytics</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">D</forename><surname>Stolper</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Perer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Gotz</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="issue">12</biblScope>
+			<biblScope unit="page" from="1653" to="1662" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Polaris: a system for query, analysis, and visualization of multidimensional relational databases</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Stolte</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Tang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Hanrahan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="52" to="65" />
+			<date type="published" when="2002">2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Connectedcharts: explicit visualization of relationships between data graphics</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Viau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">J</forename><surname>Mcguffin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computer Graphics Forum</title>
+		<imprint>
+			<biblScope unit="volume">31</biblScope>
+			<biblScope unit="issue">3pt4</biblScope>
+			<biblScope unit="page" from="1285" to="1294" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

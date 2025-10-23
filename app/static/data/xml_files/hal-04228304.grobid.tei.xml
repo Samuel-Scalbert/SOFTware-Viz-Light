@@ -7,12 +7,12 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		<fileDesc>
 			<titleStmt>
 				<title level="a" type="main">Understanding the Privacy Risks of Popular Search Engine Advertising Systems</title>
-				<funder ref="#_zSjvhfB #_Mt5CW9y #_prYu2Nm">
+				<funder ref="#_FSHQMXj #_xnpevYp #_TjnW3rh">
+					<orgName type="full">unknown</orgName>
+				</funder>
+				<funder ref="#_wq7q4dd #_H4Un7xE #_de32gMT">
 					<orgName type="full">Agence Nationale de la Recherche</orgName>
 					<orgName type="abbreviated">ANR</orgName>
-				</funder>
-				<funder ref="#_qCfBUFJ #_w7jEaKx #_nJ8yxj6">
-					<orgName type="full">unknown</orgName>
 				</funder>
 			</titleStmt>
 			<publicationStmt>
@@ -57,8 +57,11 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 						</author>
 						<author>
 							<affiliation key="aff2">
-								<orgName type="department">Brave Software</orgName>
+								<orgName type="department">Software</orgName>
 								<orgName type="institution">Imperial College London</orgName>
+								<address>
+									<country>Brave</country>
+								</address>
 							</affiliation>
 						</author>
 						<title level="a" type="main">Understanding the Privacy Risks of Popular Search Engine Advertising Systems</title>
@@ -68,14 +71,14 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 							<date/>
 						</imprint>
 					</monogr>
-					<idno type="MD5">A521937D7FFB55A19DEE43D9AB51D4E0</idno>
+					<idno type="MD5">1D91241FB20CD227C8D59FA03D8590F6</idno>
 					<idno type="DOI">10.1145/3618257.3624823</idno>
 				</biblStruct>
 			</sourceDesc>
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.0" ident="GROBID" when="2024-04-12T14:45+0000">
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:13+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<ref target="https://github.com/kermitt2/grobid"/>
 				</application>
@@ -119,7 +122,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <div xmlns="http://www.tei-c.org/ns/1.0"><head n="8">APPENDIX Ethics</head><p>Our experiments were conducted in a completely automated manner, without any human involvement or use of user data. Furthermore, the measurements we performed imposed minimal overhead on the well-resourced ad networks </p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: Cookie tracking in flat vs. partitioned cookies storage.</figDesc></figure>
 <figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 :Figure 3 :</head><label>23</label><figDesc>Figure 2: Bounce tracking.</figDesc></figure>
 <figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 4 :</head><label>4</label><figDesc>Figure 4: CDF of the number of different redirectors for Bing, DuckDuckGo, Google, and StartPage.</figDesc></figure>
-<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Figure 5 :</head><label>5</label><figDesc>Figure 5: CDF of number of different redirectors that store UID cookies for Bing, DuckDuckGo, Google, and StartPage.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Figure 5 :</head><label>5</label><figDesc>Figure 5: CDF of the number of different redirectors that store UID cookies for Bing, DuckDuckGo, Google, and StartPage.</figDesc></figure>
 <figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc>Number of search queries, destination websites, and redirection paths.</figDesc><table><row><cell></cell><cell></cell><cell># Different</cell><cell># Different</cell></row><row><cell></cell><cell># Queries</cell><cell>destination</cell><cell>redirection</cell></row><row><cell></cell><cell></cell><cell>websites</cell><cell>paths</cell></row><row><cell>Bing</cell><cell>500</cell><cell>98</cell><cell>131</cell></row><row><cell>Google</cell><cell>500</cell><cell>102</cell><cell>134</cell></row><row><cell cols="2">DuckDuckGo 500</cell><cell>56</cell><cell>94</cell></row><row><cell>StartPage</cell><cell>500</cell><cell>60</cell><cell>107</cell></row><row><cell>Qwant</cell><cell>500</cell><cell>60</cell><cell>88</cell></row></table></figure>
 <figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 2 :</head><label>2</label><figDesc>Top five most common navigation domain paths when clicking an ad for each search engine.</figDesc><table><row><cell>Search engine Domain paths</cell></row></table></figure>
 <figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 3 :</head><label>3</label><figDesc>Fraction of navigation paths that include a website from each organization across all search engines.</figDesc><table><row><cell></cell><cell cols="5">Bing Google DuckDuckGo StartPage Qwant</cell></row><row><cell>Adobe</cell><cell>0%</cell><cell>4%</cell><cell>1%</cell><cell>0%</cell><cell>1%</cell></row><row><cell>Conversant Media</cell><cell>0%</cell><cell>0%</cell><cell>1%</cell><cell>0%</cell><cell>0%</cell></row><row><cell>DuckDuck Go</cell><cell>0%</cell><cell>0%</cell><cell>100%</cell><cell>0%</cell><cell>0%</cell></row><row><cell>Facebook</cell><cell>0%</cell><cell>0%</cell><cell>0%</cell><cell>1%</cell><cell>0%</cell></row><row><cell>Google</cell><cell>3%</cell><cell>100%</cell><cell>15%</cell><cell>100%</cell><cell>11%</cell></row><row><cell>Kenshoo</cell><cell>0%</cell><cell>2%</cell><cell>2%</cell><cell>1%</cell><cell>0%</cell></row><row><cell>Microsoft</cell><cell cols="2">100% 0%</cell><cell>100%</cell><cell>0%</cell><cell>79%</cell></row><row><cell>Nielsen</cell><cell>0%</cell><cell>0%</cell><cell>0%</cell><cell>1%</cell><cell>0%</cell></row><row><cell cols="2">PPCProtect 0%</cell><cell>2%</cell><cell>0%</cell><cell>1%</cell><cell>1%</cell></row><row><cell>Qwant</cell><cell>0%</cell><cell>0%</cell><cell>0%</cell><cell>0%</cell><cell>100%</cell></row><row><cell>Rakuten</cell><cell>0%</cell><cell>0%</cell><cell>0%</cell><cell>0%</cell><cell>3%</cell></row><row><cell>StartPage</cell><cell>0%</cell><cell>0%</cell><cell>0%</cell><cell>100%</cell><cell>0%</cell></row><row><cell>Unknown</cell><cell>4%</cell><cell>23%</cell><cell>15%</cell><cell>19%</cell><cell>16%</cell></row></table></figure>
@@ -141,23 +144,23 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <div><head>ACKNOWLEDGMENTS</head><p>This research was supported in part by the <rs type="funder">French National Research Agency (ANR)</rs> through the <rs type="grantNumber">ANR-17-CE23-0014</rs>, <rs type="grantNumber">ANR-21-CE23-0031-02</rs>, and <rs type="projectName">MIAI</rs>@<rs type="funder">Grenoble Alpes</rs> <rs type="grantNumber">ANR-19-P3IA-0003</rs> grants and by the <rs type="funder">EU</rs> through the <rs type="grantNumber">101041223</rs>, <rs type="grantNumber">101021377</rs>, and <rs type="grantNumber">952215</rs> grants.</p></div>
 			</div>
 			<listOrg type="funding">
-				<org type="funding" xml:id="_zSjvhfB">
+				<org type="funding" xml:id="_wq7q4dd">
 					<idno type="grant-number">ANR-17-CE23-0014</idno>
 				</org>
-				<org type="funded-project" xml:id="_Mt5CW9y">
+				<org type="funded-project" xml:id="_H4Un7xE">
 					<idno type="grant-number">ANR-21-CE23-0031-02</idno>
 					<orgName type="project" subtype="full">MIAI</orgName>
 				</org>
-				<org type="funding" xml:id="_prYu2Nm">
+				<org type="funding" xml:id="_de32gMT">
 					<idno type="grant-number">ANR-19-P3IA-0003</idno>
 				</org>
-				<org type="funding" xml:id="_qCfBUFJ">
+				<org type="funding" xml:id="_FSHQMXj">
 					<idno type="grant-number">101041223</idno>
 				</org>
-				<org type="funding" xml:id="_w7jEaKx">
+				<org type="funding" xml:id="_xnpevYp">
 					<idno type="grant-number">101021377</idno>
 				</org>
-				<org type="funding" xml:id="_nJ8yxj6">
+				<org type="funding" xml:id="_TjnW3rh">
 					<idno type="grant-number">952215</idno>
 				</org>
 			</listOrg>

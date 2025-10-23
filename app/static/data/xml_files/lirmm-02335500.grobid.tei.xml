@@ -8,13 +8,13 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 			<titleStmt>
 				<title level="a" type="main">Provenance Data in the Machine Learning Lifecycle in Computational Science and Engineering</title>
 				<funder>
-					<orgName type="full">FAPERJ</orgName>
+					<orgName type="full">CNPq</orgName>
 				</funder>
 				<funder>
 					<orgName type="full">Inria Associated Team SciDISC</orgName>
 				</funder>
 				<funder>
-					<orgName type="full">CNPq</orgName>
+					<orgName type="full">FAPERJ</orgName>
 				</funder>
 			</titleStmt>
 			<publicationStmt>
@@ -116,13 +116,13 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 							<date/>
 						</imprint>
 					</monogr>
-					<idno type="MD5">824061B730278DC62B36DCEDEB00732D</idno>
+					<idno type="MD5">2C0C361614AF098DCA79B26CC6324490</idno>
 				</biblStruct>
 			</sourceDesc>
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.0" ident="GROBID" when="2024-04-12T14:44+0000">
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:14+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<ref target="https://github.com/kermitt2/grobid"/>
 				</application>

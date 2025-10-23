@@ -7,16 +7,16 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		<fileDesc>
 			<titleStmt>
 				<title level="a" type="main">Fine-Grained Modeling and Optimization for Intelligent Resource Management in Big Data Processing</title>
-				<funder ref="#_KmHJRn3">
+				<funder ref="#_jM7V3vw">
+					<orgName type="full">Alibaba Group</orgName>
+				</funder>
+				<funder ref="#_8pMr5vc">
 					<orgName type="full">European Research Council</orgName>
 					<orgName type="abbreviated">ERC</orgName>
 				</funder>
 				<funder>
 					<orgName type="full">China Scholarship Council</orgName>
 					<orgName type="abbreviated">CSC</orgName>
-				</funder>
-				<funder ref="#_pcfam68">
-					<orgName type="full">Alibaba Group</orgName>
 				</funder>
 			</titleStmt>
 			<publicationStmt>
@@ -139,13 +139,13 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 					<monogr>
 						<idno type="ISSN">2150-8097</idno>
 					</monogr>
-					<idno type="MD5">AAE80EC6AC4425425BBDFA7619B3813A</idno>
+					<idno type="MD5">636D79A95573900021FF064693609195</idno>
 				</biblStruct>
 			</sourceDesc>
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.0" ident="GROBID" when="2024-04-12T14:47+0000">
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:12+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<ref target="https://github.com/kermitt2/grobid"/>
 				</application>
@@ -203,11 +203,11 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <div><head>ACKNOWLEDGMENTS</head><p>This work was partially supported by the <rs type="funder">European Research Council (ERC)</rs> <rs type="programName">Horizon 2020 research and innovation programme</rs> (grant <rs type="grantNumber">n725561</rs>), <rs type="funder">Alibaba Group</rs> through <rs type="programName">Alibaba Innovative Research Program</rs>, and <rs type="funder">China Scholarship Council (CSC)</rs>. We also thank <rs type="person">Yongfeng Chai</rs>, <rs type="person">Daoyuan Chen</rs>, <rs type="person">Xiaozong Cui</rs>, <rs type="person">Botong Huang</rs>, <rs type="person">Xiaofeng Zhang</rs>, and <rs type="person">Yang Zhang</rs> from the <rs type="affiliation">Alibaba Group</rs> for the discussion and help throughout the project.</p></div>
 			</div>
 			<listOrg type="funding">
-				<org type="funding" xml:id="_KmHJRn3">
+				<org type="funding" xml:id="_8pMr5vc">
 					<idno type="grant-number">n725561</idno>
 					<orgName type="program" subtype="full">Horizon 2020 research and innovation programme</orgName>
 				</org>
-				<org type="funding" xml:id="_pcfam68">
+				<org type="funding" xml:id="_jM7V3vw">
 					<orgName type="program" subtype="full">Alibaba Innovative Research Program</orgName>
 				</org>
 			</listOrg>
@@ -1553,7 +1553,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 
 <biblStruct xml:id="b44">
 	<analytic>
-		<title level="a" type="main">Leveraging Query Logs and Machine Learning for Query Optimization</title>
+		<title level="a" type="main">Leveraging Query Logs and Machine Learning for Parametric Query Optimization</title>
 		<author>
 			<persName><forename type="first">Kapil</forename><surname>Vaidya</surname></persName>
 		</author>

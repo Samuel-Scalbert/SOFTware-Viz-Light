@@ -7,7 +7,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		<fileDesc>
 			<titleStmt>
 				<title level="a" type="main">Integrating connection search in graph queries</title>
-				<funder ref="#_tsxEjUB">
+				<funder ref="#_KWPFRSc">
 					<orgName type="full">unknown</orgName>
 				</funder>
 			</titleStmt>
@@ -64,13 +64,13 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 							<date/>
 						</imprint>
 					</monogr>
-					<idno type="MD5">3AF57392A5F46952DCC6362CFC37658C</idno>
+					<idno type="MD5">A002EB2C2FF707DEF7249A7BD415E44C</idno>
 				</biblStruct>
 			</sourceDesc>
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.0" ident="GROBID" when="2024-04-12T14:47+0000">
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:11+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<ref target="https://github.com/kermitt2/grobid"/>
 				</application>
@@ -134,7 +134,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <div><p>Acknowledgments. This work is funded by <rs type="projectName">AI Chair SourcesSay</rs> project (<rs type="grantNumber">ANR-20-CHIA-0015-01</rs>) grant.</p></div>
 			</div>
 			<listOrg type="funding">
-				<org type="funded-project" xml:id="_tsxEjUB">
+				<org type="funded-project" xml:id="_KWPFRSc">
 					<idno type="grant-number">ANR-20-CHIA-0015-01</idno>
 					<orgName type="project" subtype="full">AI Chair SourcesSay</orgName>
 				</org>

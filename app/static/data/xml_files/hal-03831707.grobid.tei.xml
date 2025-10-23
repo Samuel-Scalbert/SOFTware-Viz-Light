@@ -1,0 +1,927 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Are discrete units necessary for Spoken Language Modeling?</title>
+				<funder ref="#_utMsT8g">
+					<orgName type="full">unknown</orgName>
+				</funder>
+				<funder ref="#_JhZeydG">
+					<orgName type="full">GENCI-IDRIS</orgName>
+				</funder>
+				<funder ref="#_a2qUzkd #_wwHDZhk">
+					<orgName type="full">Agence Nationale de la Recherche</orgName>
+					<orgName type="abbreviated">ANR</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2022-08-22">22 Aug 2022</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Tu</forename><forename type="middle">Anh</forename><surname>Nguyen</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Benoit</forename><surname>Sagot</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Emmanuel</forename><surname>Dupoux</surname></persName>
+						</author>
+						<title level="a" type="main">Are discrete units necessary for Spoken Language Modeling?</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2022-08-22">22 Aug 2022</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">089EB973BDCC6DEABA9C73A10D383DD2</idno>
+					<idno type="arXiv">arXiv:2203.05936v2[cs.CL]</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:12+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Spoken Language Modeling</term>
+					<term>Discrete Units</term>
+					<term>HuBERT</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Recent work in spoken language modeling shows the possibility of learning a language unsupervisedly from raw audio without any text labels. The approach relies first on transforming the audio into a sequence of discrete units (or pseudo-text) and then training a language model directly on such pseudo-text. Is such a discrete bottleneck necessary, potentially introducing irreversible errors in the encoding of the speech signal, or could we learn a language model without discrete units at all? In this work, we study the role of discrete versus continuous representations in spoken language modeling. We show that discretization is indeed essential for good results in spoken language modeling. We show that discretization removes linguistically irrelevant information from the continuous features, helping to improve language modeling performances. On the basis of this study, we train a language model on the discrete units of the HuBERT features, reaching new state-of-the-art results in the lexical, syntactic and semantic metrics of the Zero Resource Speech Challenge 2021 (Track 1 -Speech Only).</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>I. INTRODUCTION</head><p>Pre-training language models on large-scale text data have achieved tremendous success in natural language understanding and have become a standard in Natural Language Processing (NLP) <ref type="bibr" target="#b0">[1]</ref>- <ref type="bibr" target="#b4">[5]</ref>. Recently, <ref type="bibr" target="#b2">[3]</ref> showed that very large language models are actually few-shot learners, and manage to perform well even in zero-shot settings.</p><p>Large-scale self-supervised pre-training for speech data has also become more and more popular as a method to boost the performance of Automatic Speech Recognition (ASR) <ref type="bibr" target="#b5">[6]</ref>- <ref type="bibr" target="#b7">[8]</ref>. However, these models mostly rely on fine-tuning, which requires more training and text labels, to either improve the model or evaluate the learned representations of the speech. Lately, <ref type="bibr" target="#b8">[9]</ref> introduces a new unsupervised task: Spoken language modeling, the learning of a language unsupervisedly from raw audio without any text labels, along with a suite of 4 zero-shot metrics probing for the quality of the learned models at different linguistic levels: phonetic, lexical, syntactic, semantic. The metrics are evaluated using the representations extracted from the model (phonetic, semantic) or pseudoprobability scores given by the model (lexical, syntactic). Their proposed baseline approach relies on transforming the audio into a sequence of frame-by-frame discrete units (or pseudotext) and training a language model on the pseudo-text. The Tu Anh Nguyen is with Meta and Inria, France, e-mail: nguyentu-anh208@gmail.com Benoit Sagot is with Inria, France, e-mail: benoit.sagot@inria.fr Emmanuel Dupoux is with Meta and EHESS, ENS-PSL, CNRS, Inria, France, e-mail: emmanuel.dupoux@gmail.com Fig. <ref type="figure">1</ref>. Overview of the trained BERT models. The BERT model takes as input either the continuous features extracted from CPC or the sequences of frame-by-frame discretized units obtained from k-means, and tries to predict either continuous target features (with L1, L2 or NCE loss) or discrete target units (with NLL loss). trained models displayed better-than-chance performances on nearly all the evaluation metrics of the challenge <ref type="bibr" target="#b8">[9]</ref>, <ref type="bibr" target="#b9">[10]</ref>. However, this paradigm creates a discrete bottleneck between a speech encoder and a language model which could be a potential source of error, and in addition requires multiple training phases (learning an acoustic representation, clustering it, and learning a language model). Is such a discrete bottleneck necessary?</p><p>One way in which discrete units could help language modeling stems from the fact that in contrast to text, audio data contains a lot more details, some of which are linguistically relevant (intonation, rhythm, non verbal vocalization), others not so (background noise, reverberation, speaker identity, etc). To the extent that discretization effectively removes linguistically irrelevant information from the continuous features <ref type="bibr" target="#b10">[11]</ref>, it could indeed help language modeling. Of course, this potential gain could be counterbalanced by the fact that discretization could also make errors and remove useful information.</p><p>In this work, we analyse the importance of discretization in spoken language modeling. We employ a pre-trained acoustic model to obtain either continuous or discretized features from audio data. We then train BERT language models with a Masked Language Modeling (MLM) objective on both discrete and continuous features used either as inputs or as targets and evaluate the resulting systems on zero-shot spoken language modeling metrics. We also evaluate HuBERT <ref type="bibr" target="#b6">[7]</ref>, a single model trained from raw waveform with discrete targets, on these metrics and compare the results with our best models.</p><p>Our contributions can be listed as follows:</p><p>• We show experimentally that discretization is beneficial for spoken language modeling, but we can get rid of discrete bottlenecks by using low-level continuous inputs so long as we still use discrete targets. • We show that discretization disentangles linguistic information from non-linguistic signals, forcing the transformer to focus on linguistic ones. • We show that a self-supervised model trained with a MLM objective on discrete targets like HuBERT achieves very good results on spoken language modeling metrics, showing that it can learn not only acoustic but also highlevel linguistic information.</p><p>II. RELATED WORK a) Discretization in Self-Supervised Approaches: Selfsupervised models for learning speech representation have become more and more popular as an effective pre-training method for downstream Automatic Speech Recognition (ASR) task, notably wav2vec2.0 <ref type="bibr" target="#b5">[6]</ref> and HuBERT <ref type="bibr" target="#b6">[7]</ref>. Both models comprise a feature extractor (CNN Encoder) followed by a feature encoder (Transformer Encoder), and are trained with a MLM objective like BERT. However, wav2vec2.0 discretizes the latent features obtained by the CNN Encoder and uses them as the target for the Transformer Encoder using a contrastive loss against negative samples in the sentence. On the other hand, HuBERT discretizes fixed features obtained from a teacher model and uses these fixed discrete units as the target for the Transformer Encoder using a cross-entropy loss. Finally, our work is mostly similar to <ref type="bibr" target="#b11">[12]</ref>, where they compare BERT models training on discrete units obtained from vq-wav2vec <ref type="bibr" target="#b12">[13]</ref> and continuous features obtained from wav2vec <ref type="bibr" target="#b13">[14]</ref> on the ASR task. They found that training BERT model on discrete vq-wav2vec units is more effective for ASR.</p><p>b) Spoken Language Modeling: Following the huge success of language models on text data <ref type="bibr" target="#b1">[2]</ref>- <ref type="bibr" target="#b3">[4]</ref>, the Zero Resource Speech Challenge 2021 <ref type="bibr" target="#b8">[9]</ref>, <ref type="bibr" target="#b9">[10]</ref> opens up new possibilities for learning high-level language properties from raw audio without any text labels. They introduced 4 zeroshot evaluation metrics at different linguistic levels (phonetic, lexical, syntactic, semantic), along with composite baseline systems consisting of an acoustic discretization module (Contrastive Predictive Coding, or CPC+k-means) followed by a language model (BERT or LSTM) on the discretized units. The CPC model takes the raw audio as input and produces phonetic representations at a lower frame rate of 100Hz, helping the language model to learn high-level information from the raw audio. In the same spirit, <ref type="bibr" target="#b14">[15]</ref> introduced Generative Spoken Language Modeling (GSLM), the task of learning and generating spoken language from raw audio only. They provided baseline systems consisting of a discrete speech encoder (CPC, wav2vec 2.0, HuBERT), a generative language model (GPTlike model), and a speech decoder (Tacotron-2, <ref type="bibr" target="#b15">[16]</ref>). The models are evaluated on spoken language modeling metrics <ref type="bibr" target="#b8">[9]</ref>, ASR-based generation metrics <ref type="bibr" target="#b14">[15]</ref> as well as human evaluation metrics.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>III. EXPERIMENTAL SETUP</head><p>In this section, we first present the evaluation metrics as well as the dataset used to train and evaluate the models. We then explain our models and the inference methods for model evaluation.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A. Evaluation Metrics</head><p>We evaluate our models with the ZeroSpeech 2021 Benchmark Metrics <ref type="bibr" target="#b8">[9]</ref>, consisting of 4 zero-shot tests probing for the quality of spoken language models at four linguistic levels: phonetic (Libri-light ABX metrics), lexical (sWUGGY spotthe-word metrics), syntactic (sBLIMP acceptability metrics) and semantic (sSIMI similarity metrics).</p><p>a) Libri-light ABX metrics: Given a pair of similar triphones (e.g., 'aba'-'apa') spoken by a same speaker and an intervening sound (either 'aba' or 'apa'), the model has to tell which sound has a closer representation to the intervening sound. The ABX metrics is reported as the error rate that the model fails to choose the correct triphone.</p><p>b) sWUGGY spot-the-word metrics: Given a pair of a word and a similar non-word (e.g., 'brick'-'blick'), the model has to tell which is the word based on their probability. The spot-the-word metrics is reported as the accuracy that the model assigns a higher probability to the word. c) sBLIMP acceptability metrics: Given a linguistic minimal sentence pair of matched grammatical and ungrammatical sentences (e.g., 'he loves it'-'he love it'), the model has to tell which is the grammatical sentence. The acceptability metrics is reported as the accuracy that the model assigns a higher probability to the grammatical sentence.</p><p>d) sSIMI similarity metrics: Given a pair of words (e.g., 'happy'-'joyful'), the model has to compute a similarity score based on their representations. The similarity metrics is reported as the Pearson correlation coefficient (PCC) between model scores and human judgements. In this work, the sSIMI scores are weighted across different subsets according to their sizes and averaged across LibriSpeech and synthetic subsets to make it more accurate and consistent. We reported it as wSIMI.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B. Datasets a) Training Dataset:</head><p>We train our models on Lib-riSpeech <ref type="bibr" target="#b16">[17]</ref>, an English corpus containing 1000 hours of read speech based on public domain audio books. The models are validated on LibriSpeech dev-clean and dev-other subsets, comprising 10 hours of speech in total.</p><p>b) Metrics Datasets: The metrics datasets are either extracted sounds from LibriSpeech (ABX, sSIMI) or synthesised using Google API<ref type="foot" target="#foot_0">1</ref> (sWUGGY, sBLIMP, sSIMI). The datasets containing words or sentences were filtered to only contain the LibriSpeech vocabulary (except sWUGGY non-words), and are split into dev and test sets. The dev sets have been made publicly available at the ZeroSpeech 2021 Challenge website <ref type="foot" target="#foot_1">2</ref> .</p><p>C. Models a) ZeroSpeech 2021 Baseline: The ZeroSpeech 2021 Baseline System <ref type="bibr" target="#b8">[9]</ref> is a composite of three components: an acoustic model (CPC, <ref type="bibr" target="#b17">[18]</ref>, <ref type="bibr" target="#b18">[19]</ref>), a clustering module (kmeans) and a language model (BERT, <ref type="bibr" target="#b3">[4]</ref>). The CPC model is first trained to obtain good phonetic representations of the speech, which are then discretized into sequences of units with the k-means model. The BERT model is finally trained on these discrete units to better learn linguistic information.</p><p>As we only focus on the language modeling system in this work, we shall use the best CPC model in the ZeroSpeech 2021 Baseline System, which comprises a 5-layer 1D-CNN Encoder followed by a 4-layer LSTM autoregressive model. The features are extracted from the 2nd layer (unless otherwise specified) of the LSTM model, with a rate of 100Hz, and are either discretized with a 50-unit k-means model (discrete) or left unchanged (continuous).</p><p>b) BERT with discrete and continuous features: We modify the BERT model so that it is able to take as input either discrete units obtained from k-means or continuous features extracted from CPC, in which case the masking is done by replacing the features with a masked embedding vector. We also allow the model to predict either discrete target units or continuous target features, with multiple choices of an appropriate objective for each case. When predicting discrete targets, we use a cross-entropy objective (Negative Log-Likelihood, or NLL loss) but with two slightly different implementations. We could simply employ a linear classification head at the output of the BERT model as usual (which we denote by linear NLL, or NLL-l) or force the BERT output features to be similar to the embedding vectors of the target units as for HuBERT (cf. equation ( <ref type="formula">3</ref>) from <ref type="bibr" target="#b6">[7]</ref>, we denote this by embedding NLL, or NLL-e). In the case of continuous targets, it can be a reconstruction objective (L1 loss or L2 loss) or a contrastive objective (Noise Contrastive Estimation, or NCE loss). In the latter case, the predicted features are contrasted with 100 negative features sampled from the same phrase (similar to continuousBERT, <ref type="bibr" target="#b11">[12]</ref>).</p><p>We use a BERT base model, which comprises a 12-layer Transformer Encoder. Our implementation is based on the wav2vec2.0 <ref type="bibr" target="#b5">[6]</ref> Transformer Encoder 3 using fairseq <ref type="bibr" target="#b19">[20]</ref>. Each input sequence contains the features of a full audio file, and we consider at most 15.6 seconds of audio per file. We trained all models for 250k update steps on 32 GPUs, with a batch size of 175s per GPU. The learning rate was warmed up to a peak value of 1 × 10 -5 after 32k steps. For the masking, we masked M consecutive tokens for each span, where M ∼ N (10, 10), with a total masking coverage of roughly half of the input tokens (spans may overlap).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>D. Model Inference for Evaluation</head><p>a) ABX Distance: For the ABX metrics, we extract frame-by-frame representation features for each audio file. Then, the ABX distance between two files is computed as the average angular distance of the representations along the 3 https://github.com/pytorch/fairseq/tree/main/examples/wav2vec realigned Dynamic Time Wrapping path. Given two audio files x and y with two sequences of representation r x = r x 1 , . . . , r x T and r y = r y 1 , . . . , r y S respectively, the ABX distance between x and y is computed as follows:</p><formula xml:id="formula_0">d ABX (x, y) = 1 |path DTW (r x , r y )| (i,j)∈path DTW (r x ,r y ) sim(r x i , r y j ),<label>(1)</label></formula><p>where sim(r x i , r y j ) is the angular distance (in radian) between the embeddings r x i and r y j . We note that in this paper the ABX metrics are mainly used to evaluate the input and target features of the BERT model, and therefore the ABX distances are mostly performed on the CPC features without using the BERT model.</p><p>b) Probability Estimation: For sWUGGY and sBLIMP metrics, we compute for each audio file a model-based pseudo log-probability (m-PLP) of the trained BERT model. Given an audio file x with the input and target features for the BERT model x 1 ...x T and x1 ...x T respectively, the m-PLP is computed as follows:</p><formula xml:id="formula_1">m-PLP(x) = (T -M )/∆t j=0 i=j∆t M m=1 P LP (x i+m |x i+1 ..x i+M ),<label>(2)</label></formula><p>where M is a chosen size of a sliding window, ∆t is a chosen step of the sliding window and P LP (x i+m |x i+1 ..x i+M ) is a pseudo log-probability of the target xi+m given by the BERT model with M -span masked inputs x 1 ..x i m..mx i+M +1 ..x T (m represents a masked feature).</p><p>For models with NLL or NCE loss, P LP (x i |x i+1 ..x i+M ) is computed as the log value of the probability given by the softmax layer of the BERT model (in the NLL case, the probability is computed over all tokens, while in the NCE case it is computed over all sampled negative examples). For models with L1 or L2 loss, we compute P LP (x i |x i+1 ..x i+M ) as the negative reconstruction loss of the predicted feature and the target feature xi . The negativity ensures that a correct target has a higher m-PLP.</p><p>The m-PLP extends the span-masked pseudo probability (span-PP) <ref type="bibr" target="#b8">[9]</ref> to BERT models with continuous targets. It is derived from the pseudo-loglikelihood score (PLL) for MLMs <ref type="bibr" target="#b20">[21]</ref>, which was shown to be an effective sentence scoring method for BERT models in many scenarios <ref type="bibr" target="#b21">[22]</ref>.</p><p>The choice of M and ∆t is determined for each model using the dev sets, and is given in Table <ref type="table" target="#tab_6">VI</ref>. In our experiments, we always consider ∆t = 5 and vary M in {15, 25, 35, 45, 55}. For models trained on HuBERT features (section IV-C), we vary M in {5, 10, 15, 20, 25} as the frame rate is 50Hz instead of 100Hz as for CPC.</p><p>c) Similarity Score: For the sSIMI metrics, we extract a fixed-length representation for each audio file by applying a pooling function (mean, max, min) over hidden features from one layer of the Transformer Encoder. The similarity score of two audio files is computed as the cosine similarity between the two corresponding representations. The choice of the hidden layer and the pooling function is determined for each model using the dev sets and is given in Table <ref type="table" target="#tab_6">VI</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>IV. RESULTS</head><p>A. Discrete bottleneck seems to be essential for spoken language modeling We first examine how the continuity of the input and target features affects the quality of the BERT model on the evaluation metrics. By comparing the best scores in each case, we see that having discrete inputs helps the model learn better lexical and syntactic information, whereas models with continuous inputs do have better than chance performance on the lexical task. We observe that the best models on the language model tasks are obtained with discrete inputs and discrete targets, which is the classic configuration of BERT. Predicting continuous targets from discrete inputs, where the model acts as an autoencoder decoder, is also beneficial and nearly catches up with the best models. It is interesting, still, to note that it is possible to acquire some language information without any discretization. The wSIMI scores are still quite low, but we see in general that having continuous information does help.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B. Is continuous input always bad?</head><p>We observe during our training experiments that the masked prediction objective is too easy for some models with continuous inputs and could quickly lead to overfitting. This could be explained by the fact that the input and target features are extracted from the same layer of the LSTM autoregressive module of CPC. As a consequence, we try using the input features from different layers of the LSTM module, while maintaining the same target layer. We keep using the NLLe loss for discrete targets while using NCE and L1 loss for continuous targets. The results are reported in Table <ref type="table" target="#tab_0">III</ref> We observe that using continuous input features from a different layer does reduce overfitting during training, which significantly improves the performances of the models on LM metrics, especially for sWUGGY scores. Interestingly, we note that using continuous input features from a lower LSTM layer (layer 0, where the ABX errors are high, cf. Table <ref type="table" target="#tab_0">II</ref>) to predict target features from a higher LSTM layer (layer 2) is more beneficial to the model than using high quality continuous input features from the same or higher layer as the target features (layer 2, layer 4). This is not the case, however, for discrete input models, where the model benefits from good quality input units. Overall, we observe that discrete-discrete model (with the same input and target units) yields the best performance when the quality of discrete units is good. Continuous-discrete is also a great choice when using low-level input features. When there are no discrete units at all, the LM performances are still limited, even if using a NCE loss could help a bit with syntactic and semantic metrics.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C. Varying the number of discrete units</head><p>Here, we address the question as to why discrete units are better than continuous ones. One hypothesis is that discrete units manage to remove linguistically irrelevant information and force the transformer to focus on linguistic ones. To test this, we run a speaker discrimination probe on the discrete units and continuous features. In addition, we run a new experiment varying the number of discrete units from 20 to 2000. Hypothetically, when the number of units is too small (eg, smaller than the number of phonemes), the resulting phonetic confusions should degrade the learning of higher linguistic representations. Conversely, when the number of units is too large, the quantization step would start to leak other-than-phonetic information into the representation, hence making it closer to the continuous representations.  To support our hypothesis, we run kmeans on the continuous features of both CPC and HuBERT models, and vary k to be 20, 50, 100, 200, 500, 1000, and 2000, after which we train a discrete-discrete BERT model. For the CPC features, we take the layer 2 features of the CPC-big model as usual. For the HuBERT features, we train our own HuBERT base model as described in Section IV-D, we then take the features from layer 12 of the Transformer Encoder after the 2nd iteration, which have the best ABX (cf.  Transformer classifier on the sequences of discrete units or continuous features of the utterances. The classification head is performed on the first token (bos, or begin-of-sentence) of the transformer outputs. For this speaker probing task, there are 40 classes (speakers). The models are trained for 20 epochs and are validated on the valid set. We finally report the test accuracy. For reference, we also include the forced phonemes units (frame-by-frame phonemes). As the forced phonemes contain a silence, there are 40 units in total.</p><p>The results are reported in Table <ref type="table" target="#tab_4">IV</ref> and illustrated in Figure <ref type="figure" target="#fig_0">2</ref>. As expected speaker classification accuracy increases with the number of clusters, and the continuous features yield the best classification. We can observe a U-shaped curve in performance across the different language metrics as a function of the number of units. Interestingly, the optimum number of units seems to be different across the model features (CPC, HuBERT) and linguistic levels. HuBERT features are better than CPC features in most cases, and seem to benefit from more clusters than CPC features. In general, we see that the language model scores seem to decrease slowly compared to ABX as the number of clusters becomes bigger. It is also interesting to note that the language model scores become steadily good as soon as the number of clusters is higher than the number of phonemes (40 units). This could be seen in Figure <ref type="figure" target="#fig_2">3</ref>, where we observe a limited unit-phoneme correspondence when having only 20 discrete units; but as soon as the number of clusters reaches 50, we see a clear correspondence between the units and the phonemes, although several "hard" phonemes are still dispersed and don't correspond to a single unit (e.g. ch, oy, th, uh); when there are 500 clusters, there are more units representing a single phoneme, and most "hard" phonemes are now assigned by certain units. These results support the hypothesis that the superiority of the discrete units is due to the fact that they block the propagation and amplification of non-linguistic signals that may be present (even if attenuated) in continuous representations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>D. Comparison with state-of-the-art systems</head><p>We evaluate the HuBERT model on the zero-shots metrics and compare the results with our trained BERT models. The HuBERT model is trained iteratively, using clustering units from features of previous iteration as the teacher. We trained a HuBERT base model, which comprises a 7-layer CNN Encoder followed by a 12-layer Transformer Encoder, on the Librispeech 960h dataset for 3 iterations. The teachers for each iteration are MFCC features (100 units), Transformer's layer6 of 1st iteration (500 units) and Transformer's layer12 of 2nd iteration (500 units) respectively. Architecturally, the Transformer Encoder of the HuBERT model is very similar to our model 13 (continuous input layer 0, discrete target layer 2, NLL-e loss) where they both take as input the continuous features of the CNN Encoder and predict discrete targets obtained from features of a higher level with a NLL-eloss.</p><p>Overall performances on the ZeroSpeech 2021 test sets are reported in Table <ref type="table" target="#tab_6">V</ref>. For each of discrete/continuous combinations, we choose the best performing model on the dev set as reported in Table <ref type="table" target="#tab_0">III</ref>. We also include the discretediscrete model trained on HuBERT Discrete Units (500 units), which was reported to have the best LM scores in section IV-C. We first observe a huge improvement of model 2 compared with the baseline system, even if they both use the same units for the BERT model. This improvement greatly comes from the reimplementation of the BERT model, which uses the wav2vec2 Transformer Encoder model 4 . Changing the NLL-l loss to NLL-e loss also improves a little bit (cf. Table <ref type="table" target="#tab_0">I</ref>).</p><p>It seems that using good quality discrete units as targets is very beneficial for the language models, achieving better scores than using continuous targets in all the metrics. The HuBERT model performs surprisingly well, approaching our best model on the language model tasks. This means that the Transformer Encoder of HuBERT acts as a language model as well. We see that as soon as the discrete targets have better quality, the HuBERT model manages to have better results on spoken language modeling metrics. We see that the discretediscrete model on HuBERT Discrete Units (model 26) further improves the scores on all the metrics, confirming again our finding that it's better to train a discrete-discrete model when we have good quality units.</p><p>Comparing the results with the ZeroSpeech 2021 Systems, we observe that our models are closing the gap between spoken and text-based language models.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>V. CONCLUSION</head><p>This work analyses the importance of discretization in spoken language modeling. We experimentally show that discretization is essential for spoken language modeling, although 4 One main difference between the two Transformer models is that wav2vec2 uses a Convolutional Positional Embedding instead of the standard Sinusoidal Positional Embedding. However, we did not study the effect of this difference in this paper.</p><p>high-quality discrete units are required to obtain good performances. We also show the possibility of learning high-level language properties of a self-supervised speech representation learning model like HuBERT. Finally, we obtain state-ofthe-art results on 3 out of 4 metrics of the Zero Resource Speech Challenge 2021 (Track 1 -Speech Only), bridging the gap between speech and text-based systems. Note though that because HuBERT requires a teacher that learns a discrete representation, the overall training of HuBERT is not end-toend, because the training of the teacher is not (in fact, requires several iterations). Further work is needed to simplify this kind of training loop to learn language directly from speech inputs. Further work is also needed to assess whether the present results can generalize to other languages and datasets. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B. Unit-Phone alignments for CPC Discrete Units</head><p>We analyse to what extent the discrete units obtained with different numbers of clusters correlate with the gold phonemes. Using the phoneme alignments of Librispeech available from <ref type="bibr" target="#b8">[9]</ref>, we collect all unit-phoneme pairs from the utterances of the dev-clean subset and compute the probability of each phoneme given a discrete unit. Figure <ref type="figure" target="#fig_2">3</ref> (top, middle, bottom) shows this unit-phone alignment for discrete units obtained from CPC features with 20, 50 and 500 clusters respectively. The phoneme order is obtained by clustering the rows of the 50-unit model with a hierarchical clustering method.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C. Layer-wise analysis of BERT models on ABX metrics</head><p>In addition to performing ABX on input and target features of the BERT models, we also compute the ABX error on the features extracted from hidden Transformer layers of the trained BERT/HuBERT models. Table VII reports the average (within-across) ABX errors on the Librispeech devclean subset for all the trained models in the paper.</p><p>We see that well-trained models with good language modeling scores (models 1,2,13,15,17,8,9,10; cf. Table <ref type="table" target="#tab_0">III</ref>) seem to have very good ABX errors compared to the others. By looking at the best hidden features of each model, we see that models with discrete targets (models 1,2,13) are able to reconstruct hidden features which are better than the targets, while this is not the case for most models with continuous targets (except model 10).  </p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Fig. 2 .</head><label>2</label><figDesc>Fig. 2. ABX of Discrete units and Error rate on the dev sets of LM scores (sWUGGY, sBLIMP) for different numbers of clusters for CPC and HuBERT features. The ABX is averaged on dev-clean and dev-other within and across subsets.</figDesc><graphic coords="6,334.69,56.07,205.63,275.15" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>for</head><label></label><figDesc>Computational Linguistics, Jul. 2020, pp. 2699-2712. [Online]. Available: https://aclanthology.org/2020.acl-main.240 [23] E. Kharitonov, J. Copet, K. Lakhotia, T. A. Nguyen, P. Tomasello, A. Lee, A. Elkahky, W.-N. Hsu, A. Mohamed, E. Dupoux, and Y. Adi, "textless-lib: a library for textless spoken language processing," 2022. APPENDIX A. Hyper-parameters of trained models Table VI shows the hyperparameters of all trained models in the paper.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Fig. 3 .</head><label>3</label><figDesc>Fig. 3. Probability that each discrete unit belongs to possible phonemes P (phoneme | unit) for discrete units obtained by clustering CPC features with different numbers of clusters: 20 (top), 50 (middle) and 500 (bottom). Unit-Phoneme alignments are collected on Librispeech dev-clean subset. The phoneme order is obtained by clustering the rows of the 50-unit model with a hierarchical clustering method.</figDesc><graphic coords="9,311.98,80.26,257.04,576.93" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>TABLE I PERFORMANCES</head><label>I</label><figDesc>Table I reports the performances of our BERT models, trained with either continuous or discrete CPC features of the LibriSpeech 960h dataset, on lexical (sWUGGY), syntactic (sBLIMP) and semantic (wSIMI) metrics. ON THE DEV SETS OF SWUGGY, SBLIMP, WSIMI METRICS OF BERT MODELS USING EITHER CONTINUOUS ZEROSPEECH CPC FEATURES (LAYER 2 OF THE LSTM MODULE OF CPC-BIG) OR DISCRETIZED FEATURES (WITH A 50-UNIT K-MEANS MODEL) AS INPUTS AND TARGETS. BEST SCORES IN EACH CATEGORY ARE IN BOLD, BEST SCORES OVERALL ARE UNDERLINED.</figDesc><table><row><cell>id input target loss</cell><cell cols="3">sWUGGY↑ sBLIMP↑ wSIMI↑</cell></row><row><cell cols="2">discrete input, discrete target</cell><cell></cell><cell></cell></row><row><cell>1 disc. disc. NLL-l</cell><cell>79.28</cell><cell>59.71</cell><cell>6.32</cell></row><row><cell>2 disc. disc. NLL-e</cell><cell>80.02</cell><cell>59.86</cell><cell>7.87</cell></row><row><cell cols="2">continuous input, discrete target</cell><cell></cell><cell></cell></row><row><cell>3 cont. disc. NLL-l</cell><cell>60.36</cell><cell>53.23</cell><cell>8.39</cell></row><row><cell>4 cont. disc. NLL-e</cell><cell>60.20</cell><cell>52.78</cell><cell>9.49</cell></row><row><cell cols="2">continuous input, continuous target</cell><cell></cell><cell></cell></row><row><cell>5 cont. cont. NCE</cell><cell>56.84</cell><cell>52.62</cell><cell>9.16</cell></row><row><cell>6 cont. cont. L1</cell><cell>59.23</cell><cell>53.12</cell><cell>7.85</cell></row><row><cell>7 cont. cont. L2</cell><cell>60.56</cell><cell>53.33</cell><cell>6.55</cell></row><row><cell cols="2">discrete input, continuous target</cell><cell></cell><cell></cell></row><row><cell>8 disc. cont. NCE</cell><cell>65.69</cell><cell>57.24</cell><cell>9.33</cell></row><row><cell>9 disc. cont. L1</cell><cell>73.93</cell><cell>56.02</cell><cell>10.69</cell></row><row><cell>10 disc. cont. L2</cell><cell>74.22</cell><cell>55.75</cell><cell>5.97</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head></head><label></label><figDesc>.</figDesc><table><row><cell></cell><cell></cell><cell cols="2">ABX within↓</cell><cell cols="2">ABX across↓</cell></row><row><cell></cell><cell></cell><cell>clean</cell><cell>other</cell><cell>clean</cell><cell>other</cell></row><row><cell>layer 0</cell><cell>cont. disc.</cell><cell cols="2">11.50 14.09 21.46 24.21</cell><cell cols="2">18.53 24.70 30.77 34.91</cell></row><row><cell>layer 2</cell><cell>cont. disc.</cell><cell>3.41 6.38</cell><cell>4.84 10.22</cell><cell>4.20 8.22</cell><cell>7.65 14.86</cell></row><row><cell>layer 4</cell><cell>cont. disc.</cell><cell cols="2">9.49 19.81 21.64 11.95</cell><cell cols="2">10.01 15.70 24.39 28.04</cell></row><row><cell></cell><cell></cell><cell cols="2">TABLE II</cell><cell></cell><cell></cell></row><row><cell cols="6">WITHIN AND ACROSS SPEAKER ABX ERROR (LOWER IS BETTER) ON</cell></row><row><cell cols="6">LIBRI-LIGHT DEV-CLEAN AND -OTHER FOR CONTINUOUS AND</cell></row><row><cell cols="6">DISCRETIZED FEATURES OF DIFFERENT LAYERS OF THE LSTM</cell></row><row><cell cols="6">AUTOREGRESSIVE MODULE OF CPC-BIG MODEL. LAYER 0 MEANS THE</cell></row><row><cell cols="5">OUTPUT OF THE CNN ENCODER MODULE.</cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head>TABLE IV DISCRETE</head><label>IV</label><figDesc>UNIT QUALITY (SPEAKER PROBING AND ABX) AND PERFORMANCE OF THE BERT MODELS TRAINED ON DISCRETE UNITS ON THE DEV SETS OF LM SCORES (SWUGGY, SBLIMP, WSIMI) FOR DIFFERENT NUMBERS OF CLUSTERS ON CPC AND HUBERT FEATURES. THE ABX IS AVERAGED ON DEV-CLEAN AND DEV-OTHER WITHIN AND ACROSS SUBSETS.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_5"><head>Table VII</head><label>VII</label><figDesc></figDesc><table /><note><p><p><p>). Following</p>[23]</p>, we train a speaker classifier in the following way: We randomly split LibriSpeech dev-clean utterances into train/valid/test (80%/10%/10%) sets and train a two-layer</p></note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_6"><head>TABLE V COMPARISON</head><label>V</label><figDesc>ON THE TEST SETS OF THE 4 ZEROSPEECH 2021 METRICS OF OUR BERT MODELS TRAINED ON CONTINUOUS OR DISCRETE CPC FEATURES, BERT MODEL TRAINED ON HUBERT DISCRETE UNITS AND HUBERT BASE MODELS WITH ZEROSPEECH 2021 BASELINE AND TOPLINE SYSTEMS. FOR EACH CONTINUOUS/DISCRETE COMBINATION, WE CHOOSE THE BEST PERFORMING MODEL ON THE DEV SET AS REPORTED IN TABLE III. WE TRAINED THE HUBERT MODEL FOR 3 ITERATIONS. THE TARGETS USED TO TRAIN THE 3 ITERATIONS ARE DISCRETIZED MFCC FEATURES (100 UNITS), DISCRETIZED FEATURES FROM TRANSFORMER'S LAYER6 OF 1ST ITERATION (500 UNITS) AND DISCRETIZED FEATURES FROM TRANSFORMER'S LAYER12 OF 2ND ITERATION (500 UNITS) RESPECTIVELY. ALL MODELS WERE TRAINED ON THE LIBRISPEECH 960H DATASET. FOR THE ABX METRICS, WE REPORT THE SCORES ON THE TARGET FEATURES USED TO TRAIN THE MODEL. BEST SCORES IN EACH CATEGORY ARE IN BOLD, BEST SCORES OVERALL ARE UNDERLINED.</figDesc><table><row><cell></cell><cell></cell><cell></cell><cell cols="4">ABX (target features)↓</cell><cell></cell><cell></cell><cell></cell></row><row><cell>Systems id input</cell><cell>target</cell><cell>loss</cell><cell cols="2">within clean other</cell><cell cols="2">across clean other</cell><cell cols="3">sWUGGY↑ sBLIMP↑ wSIMI↑</cell></row><row><cell cols="2">ZeroSpeech 2021 Best Baseline System [9]</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>CPC-layer2+km50</cell><cell>CPC-layer2+km50</cell><cell>NLL-l</cell><cell cols="2">6.71 10.62</cell><cell cols="2">8.41 15.06</cell><cell>75.51</cell><cell>56.16</cell><cell>2.05</cell></row><row><cell cols="2">ZeroSpeech 2021 Text Topline Systems [9]</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Forced phones</cell><cell>Forced phones</cell><cell>NLL-l</cell><cell cols="2">0.00 0.00</cell><cell cols="2">0.00 0.00</cell><cell>91.88</cell><cell>63.16</cell><cell>4.44</cell></row><row><cell>Phones</cell><cell>Phones</cell><cell>NLL-l</cell><cell>-</cell><cell>-</cell><cell>-</cell><cell>-</cell><cell>97.67</cell><cell>66.91</cell><cell>12.80</cell></row><row><cell cols="2">BERT Models on CPC-big Features</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>2 CPC-layer2+km50</cell><cell>CPC-layer2+km50</cell><cell>NLL-e</cell><cell cols="2">6.71 10.62</cell><cell cols="2">8.41 15.06</cell><cell>80.29</cell><cell>59.93</cell><cell>6.56</cell></row><row><cell>13 CPC-layer0</cell><cell>CPC-layer2+km50</cell><cell>NLL-e</cell><cell cols="2">6.71 10.62</cell><cell cols="2">8.41 15.06</cell><cell>77.22</cell><cell>55.62</cell><cell>6.61</cell></row><row><cell>17 CPC-layer0</cell><cell>CPC-layer2</cell><cell>L1</cell><cell cols="2">3.28 4.81</cell><cell cols="2">4.31 7.92</cell><cell>68.37</cell><cell>53.95</cell><cell>5.68</cell></row><row><cell>9 CPC-layer2+km50</cell><cell>CPC-layer2</cell><cell>L1</cell><cell cols="2">3.28 4.81</cell><cell cols="2">4.31 7.92</cell><cell>74.46</cell><cell>55.38</cell><cell>6.17</cell></row><row><cell>HuBERT Base Models</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>23 waveform</cell><cell>MFCC+km100</cell><cell>NLL-e</cell><cell cols="4">20.22 24.97 33.42 40.45</cell><cell>62.74</cell><cell>54.11</cell><cell>5.58</cell></row><row><cell>24 waveform</cell><cell>H-iter1-layer6+km500</cell><cell>NLL-e</cell><cell cols="2">6.29 7.51</cell><cell cols="2">8.76 12.82</cell><cell>79.13</cell><cell>58.89</cell><cell>5.45</cell></row><row><cell>25 waveform</cell><cell cols="2">H-iter2-layer12+km500 NLL-e</cell><cell cols="2">5.87 7.15</cell><cell cols="2">6.96 10.73</cell><cell>80.19</cell><cell>59.29</cell><cell>5.87</cell></row><row><cell cols="2">BERT Models on HuBERT Discrete Units</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell cols="3">26 H-iter2-layer12+km500 H-iter2-layer12+km500 NLL-e</cell><cell cols="2">5.87 7.15</cell><cell cols="2">6.96 10.73</cell><cell>83.29</cell><cell>61.93</cell><cell>9.73</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_7"><head></head><label></label><figDesc>WITHIN AND ACROSS) DEV-CLEAN ABX ERROR OF INPUT FEATURES, TARGET FEATURES AND FEATURES FROM DIFFERENT HIDDEN LAYERSOF TRANSFORMER MODEL. CPC-LX STANDS FOR LAYER X OF CPC-BIG, HJ-LX STANDS FOR LAYER X OF HUBERT J'TH ITERATION.</figDesc><table><row><cell></cell><cell></cell><cell></cell><cell cols="3">Training hyperparameters</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell cols="3">Inference hyperparameters</cell></row><row><cell></cell><cell cols="3">n units (if discrete)</cell><cell>feat.</cell><cell cols="2">masking</cell><cell>num</cell><cell cols="2">prob. est.</cell><cell cols="2">SIMI librispeech</cell><cell cols="2">SIMI synthetic</cell></row><row><cell cols="2">id input</cell><cell>target</cell><cell cols="3">stride length</cell><cell cols="2">prob. updates</cell><cell>M</cell><cell cols="3">∆t layer pooling</cell><cell>layer</cell><cell>pooling</cell></row><row><cell></cell><cell cols="5">BERT Models on CPC-big Features</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell cols="2">1 50</cell><cell>50</cell><cell cols="2">10ms</cell><cell>10</cell><cell>0.5</cell><cell>250k</cell><cell>15</cell><cell>5</cell><cell>11</cell><cell>max</cell><cell>1</cell><cell>min</cell></row><row><cell cols="2">2 50</cell><cell>50</cell><cell cols="2">10ms</cell><cell>10</cell><cell>0.5</cell><cell>250k</cell><cell>15</cell><cell>5</cell><cell>5</cell><cell>min</cell><cell>7</cell><cell>mean</cell></row><row><cell cols="2">11 50</cell><cell>50</cell><cell cols="2">10ms</cell><cell>10</cell><cell>0.5</cell><cell>250k</cell><cell>15</cell><cell>5</cell><cell>11</cell><cell>mean</cell><cell>10</cell><cell>min</cell></row><row><cell cols="2">12 50</cell><cell>50</cell><cell cols="2">10ms</cell><cell>10</cell><cell>0.5</cell><cell>250k</cell><cell>15</cell><cell>5</cell><cell>9</cell><cell>mean</cell><cell>1</cell><cell>min</cell></row><row><cell>3</cell><cell>-</cell><cell>50</cell><cell cols="2">10ms</cell><cell>10</cell><cell>0.5</cell><cell>250k</cell><cell>35</cell><cell>5</cell><cell>6</cell><cell>min</cell><cell>4</cell><cell>max</cell></row><row><cell>4</cell><cell>-</cell><cell>50</cell><cell cols="2">10ms</cell><cell>10</cell><cell>0.5</cell><cell>250k</cell><cell>35</cell><cell>5</cell><cell>8</cell><cell>mean</cell><cell>11</cell><cell>min</cell></row><row><cell cols="2">13 -</cell><cell>50</cell><cell cols="2">10ms</cell><cell>10</cell><cell>0.5</cell><cell>250k</cell><cell>25</cell><cell>5</cell><cell>10</cell><cell>max</cell><cell>10</cell><cell>min</cell></row><row><cell cols="2">14 -</cell><cell>50</cell><cell cols="2">10ms</cell><cell>10</cell><cell>0.5</cell><cell>250k</cell><cell>35</cell><cell>5</cell><cell>4</cell><cell>max</cell><cell>6</cell><cell>mean</cell></row><row><cell>5</cell><cell>-</cell><cell>-</cell><cell cols="2">10ms</cell><cell>10</cell><cell>0.5</cell><cell>250k</cell><cell>45</cell><cell>5</cell><cell>8</cell><cell>max</cell><cell>1</cell><cell>mean</cell></row><row><cell cols="2">15 -</cell><cell>-</cell><cell cols="2">10ms</cell><cell>10</cell><cell>0.5</cell><cell>250k</cell><cell>35</cell><cell>5</cell><cell>11</cell><cell>max</cell><cell>11</cell><cell>mean</cell></row><row><cell cols="2">16 -</cell><cell>-</cell><cell cols="2">10ms</cell><cell>10</cell><cell>0.5</cell><cell>250k</cell><cell>45</cell><cell>5</cell><cell>12</cell><cell>mean</cell><cell>12</cell><cell>mean</cell></row><row><cell>6</cell><cell>-</cell><cell>-</cell><cell cols="2">10ms</cell><cell>10</cell><cell>0.5</cell><cell>250k</cell><cell>35</cell><cell>5</cell><cell>1</cell><cell>mean</cell><cell>12</cell><cell>mean</cell></row><row><cell cols="2">17 -</cell><cell>-</cell><cell cols="2">10ms</cell><cell>10</cell><cell>0.5</cell><cell>250k</cell><cell>25</cell><cell>5</cell><cell>12</cell><cell>min</cell><cell>12</cell><cell>max</cell></row><row><cell cols="2">18 -</cell><cell>-</cell><cell cols="2">10ms</cell><cell>10</cell><cell>0.5</cell><cell>250k</cell><cell>35</cell><cell>5</cell><cell>1</cell><cell>mean</cell><cell>12</cell><cell>mean</cell></row><row><cell>7</cell><cell>-</cell><cell>-</cell><cell cols="2">10ms</cell><cell>10</cell><cell>0.5</cell><cell>250k</cell><cell>35</cell><cell>5</cell><cell>3</cell><cell>mean</cell><cell>1</cell><cell>mean</cell></row><row><cell cols="2">8 50</cell><cell>-</cell><cell cols="2">10ms</cell><cell>10</cell><cell>0.5</cell><cell>250k</cell><cell>25</cell><cell>5</cell><cell>12</cell><cell>mean</cell><cell>5</cell><cell>min</cell></row><row><cell cols="2">19 50</cell><cell>-</cell><cell cols="2">10ms</cell><cell>10</cell><cell>0.5</cell><cell>250k</cell><cell>25</cell><cell>5</cell><cell>8</cell><cell>mean</cell><cell>4</cell><cell>min</cell></row><row><cell cols="2">20 50</cell><cell>-</cell><cell cols="2">10ms</cell><cell>10</cell><cell>0.5</cell><cell>250k</cell><cell>25</cell><cell>5</cell><cell>8</cell><cell>mean</cell><cell>11</cell><cell>mean</cell></row><row><cell cols="2">9 50</cell><cell>-</cell><cell cols="2">10ms</cell><cell>10</cell><cell>0.5</cell><cell>250k</cell><cell>15</cell><cell>5</cell><cell>12</cell><cell>max</cell><cell>12</cell><cell>min</cell></row><row><cell cols="2">21 50</cell><cell>-</cell><cell cols="2">10ms</cell><cell>10</cell><cell>0.5</cell><cell>250k</cell><cell>15</cell><cell>5</cell><cell>11</cell><cell>mean</cell><cell>7</cell><cell>min</cell></row><row><cell cols="2">22 50</cell><cell>-</cell><cell cols="2">10ms</cell><cell>10</cell><cell>0.5</cell><cell>250k</cell><cell>15</cell><cell>5</cell><cell>4</cell><cell>mean</cell><cell>12</cell><cell>max</cell></row><row><cell cols="2">10 50</cell><cell>-</cell><cell cols="2">10ms</cell><cell>10</cell><cell>0.5</cell><cell>250k</cell><cell>15</cell><cell>5</cell><cell>10</cell><cell>max</cell><cell>12</cell><cell>max</cell></row><row><cell></cell><cell cols="3">HuBERT Base Models</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell cols="2">23 -</cell><cell>100</cell><cell cols="2">20ms</cell><cell>10</cell><cell>0.65</cell><cell>250k</cell><cell>15</cell><cell>5</cell><cell>2</cell><cell>max</cell><cell>5</cell><cell>min</cell></row><row><cell cols="2">24 -</cell><cell>500</cell><cell cols="2">20ms</cell><cell>10</cell><cell>0.65</cell><cell>400k</cell><cell>15</cell><cell>5</cell><cell>1</cell><cell>mean</cell><cell>9</cell><cell>max</cell></row><row><cell cols="2">25 -</cell><cell>500</cell><cell cols="2">20ms</cell><cell>10</cell><cell>0.65</cell><cell>400k</cell><cell>15</cell><cell>5</cell><cell>10</cell><cell>mean</cell><cell>6</cell><cell>max</cell></row><row><cell></cell><cell cols="6">BERT Models on HuBERT Discrete Units</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell cols="2">26 -</cell><cell>500</cell><cell cols="2">20ms</cell><cell>10</cell><cell>0.5</cell><cell>250k</cell><cell>10</cell><cell>5</cell><cell>7</cell><cell>mean</cell><cell>8</cell><cell>mean</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>TABLE VI</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell cols="7">HYPERPARAMETERS OF ALL TRAINED MODELS.</cell><cell></cell><cell></cell></row><row><cell cols="3">id input feature</cell><cell cols="2">target feature</cell><cell>loss</cell><cell></cell><cell>input</cell><cell>layer 3</cell><cell cols="2">layer 6</cell><cell>layer 9</cell><cell>layer 12</cell><cell>target</cell></row><row><cell></cell><cell cols="5">BERT Models on CPC-big Features</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell cols="3">1 CPC-l2+km50</cell><cell cols="2">CPC-l2+km50</cell><cell cols="2">NLL-l</cell><cell>7.3</cell><cell>5.90</cell><cell></cell><cell>6.13</cell><cell>5.64</cell><cell>3.87</cell><cell>7.3</cell></row><row><cell cols="3">2 CPC-l2+km50</cell><cell cols="2">CPC-l2+km50</cell><cell cols="2">NLL-e</cell><cell>7.3</cell><cell>5.36</cell><cell></cell><cell>6.97</cell><cell>5.40</cell><cell>3.95</cell><cell>7.3</cell></row><row><cell cols="3">11 CPC-l0+km50</cell><cell cols="2">CPC-l2+km50</cell><cell cols="2">NLL-e</cell><cell>26.11</cell><cell>15.08</cell><cell cols="2">12.16</cell><cell>10.63</cell><cell>7.01</cell><cell>7.3</cell></row><row><cell cols="3">12 CPC-l4+km50</cell><cell cols="2">CPC-l2+km50</cell><cell cols="2">NLL-e</cell><cell>22.1</cell><cell>13.57</cell><cell></cell><cell>9.40</cell><cell>10.05</cell><cell>6.06</cell><cell>7.3</cell></row><row><cell cols="2">3 CPC-l2</cell><cell></cell><cell cols="2">CPC-l2+km50</cell><cell cols="2">NLL-l</cell><cell>3.81</cell><cell>8.87</cell><cell cols="2">15.30</cell><cell>14.91</cell><cell>9.10</cell><cell>7.3</cell></row><row><cell cols="2">4 CPC-l2</cell><cell></cell><cell cols="2">CPC-l2+km50</cell><cell cols="2">NLL-e</cell><cell>3.81</cell><cell>8.47</cell><cell cols="2">16.82</cell><cell>21.47</cell><cell>12.84</cell><cell>7.3</cell></row><row><cell cols="2">13 CPC-l0</cell><cell></cell><cell cols="2">CPC-l2+km50</cell><cell cols="2">NLL-e</cell><cell>15.01</cell><cell>6.57</cell><cell></cell><cell>4.74</cell><cell>4.04</cell><cell>4.07</cell><cell>7.3</cell></row><row><cell cols="2">14 CPC-l4</cell><cell></cell><cell cols="2">CPC-l2+km50</cell><cell cols="2">NLL-e</cell><cell>9.75</cell><cell>7.03</cell><cell></cell><cell>8.78</cell><cell>10.49</cell><cell>4.98</cell><cell>7.3</cell></row><row><cell cols="2">5 CPC-l2</cell><cell></cell><cell cols="2">CPC-l2</cell><cell>NCE</cell><cell></cell><cell>3.81</cell><cell>6.47</cell><cell></cell><cell>6.83</cell><cell>6.09</cell><cell>5.98</cell><cell>3.81</cell></row><row><cell cols="2">15 CPC-l0</cell><cell></cell><cell cols="2">CPC-l2</cell><cell>NCE</cell><cell></cell><cell>15.01</cell><cell>7.45</cell><cell></cell><cell>5.63</cell><cell>4.73</cell><cell>5.93</cell><cell>3.81</cell></row><row><cell cols="2">16 CPC-l4</cell><cell></cell><cell cols="2">CPC-l2</cell><cell>NCE</cell><cell></cell><cell>9.75</cell><cell>6.82</cell><cell></cell><cell>7.19</cell><cell>5.46</cell><cell>5.50</cell><cell>3.81</cell></row><row><cell cols="2">6 CPC-l2</cell><cell></cell><cell cols="2">CPC-l2</cell><cell>L1</cell><cell></cell><cell>3.81</cell><cell>7.41</cell><cell></cell><cell>7.81</cell><cell>10.31</cell><cell>12.87</cell><cell>3.81</cell></row><row><cell cols="2">17 CPC-l0</cell><cell></cell><cell cols="2">CPC-l2</cell><cell>L1</cell><cell></cell><cell>15.01</cell><cell>6.64</cell><cell></cell><cell>4.73</cell><cell>4.71</cell><cell>5.48</cell><cell>3.81</cell></row><row><cell cols="2">18 CPC-l4</cell><cell></cell><cell cols="2">CPC-l2</cell><cell>L1</cell><cell></cell><cell>9.75</cell><cell>5.89</cell><cell></cell><cell>5.27</cell><cell>4.80</cell><cell>5.38</cell><cell>3.81</cell></row><row><cell cols="2">7 CPC-l2</cell><cell></cell><cell cols="2">CPC-l2</cell><cell>L2</cell><cell></cell><cell>3.81</cell><cell>6.35</cell><cell></cell><cell>6.58</cell><cell>7.65</cell><cell>9.20</cell><cell>3.81</cell></row><row><cell cols="3">8 CPC-l2+km50</cell><cell cols="2">CPC-l2</cell><cell>NCE</cell><cell></cell><cell>7.3</cell><cell>6.49</cell><cell></cell><cell>5.50</cell><cell>6.87</cell><cell>5.37</cell><cell>3.81</cell></row><row><cell cols="3">19 CPC-l0+km50</cell><cell cols="2">CPC-l2</cell><cell>NCE</cell><cell></cell><cell>26.11</cell><cell>15.93</cell><cell cols="2">12.85</cell><cell>10.55</cell><cell>9.09</cell><cell>3.81</cell></row><row><cell cols="3">20 CPC-l4+km50</cell><cell cols="2">CPC-l2</cell><cell>NCE</cell><cell></cell><cell>22.1</cell><cell>12.88</cell><cell cols="2">10.17</cell><cell>10.18</cell><cell>8.81</cell><cell>3.81</cell></row><row><cell cols="3">9 CPC-l2+km50</cell><cell cols="2">CPC-l2</cell><cell>L1</cell><cell></cell><cell>7.3</cell><cell>5.25</cell><cell></cell><cell>5.71</cell><cell>4.89</cell><cell>10.96</cell><cell>3.81</cell></row><row><cell cols="3">21 CPC-l0+km50</cell><cell cols="2">CPC-l2</cell><cell>L1</cell><cell></cell><cell>26.11</cell><cell>13.13</cell><cell cols="2">10.87</cell><cell>9.81</cell><cell>15.40</cell><cell>3.81</cell></row><row><cell cols="3">22 CPC-l4+km50</cell><cell cols="2">CPC-l2</cell><cell>L1</cell><cell></cell><cell>22.1</cell><cell>11.44</cell><cell></cell><cell>9.91</cell><cell>7.65</cell><cell>11.88</cell><cell>3.81</cell></row><row><cell cols="3">10 CPC-l2+km50</cell><cell cols="2">CPC-l2</cell><cell>L2</cell><cell></cell><cell>7.3</cell><cell>5.42</cell><cell></cell><cell>5.09</cell><cell>4.20</cell><cell>3.68</cell><cell>3.81</cell></row><row><cell></cell><cell cols="4">HuBERT Base Models</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell cols="2">23 waveform</cell><cell></cell><cell cols="2">MFCC+km100</cell><cell cols="2">NLL-e</cell><cell>-</cell><cell>7.13</cell><cell></cell><cell>4.18</cell><cell>5.03</cell><cell>9.05</cell><cell>27.88</cell></row><row><cell cols="2">24 waveform</cell><cell></cell><cell cols="2">H1-l6+km500</cell><cell cols="2">NLL-e</cell><cell>-</cell><cell>6.83</cell><cell></cell><cell>4.71</cell><cell>4.42</cell><cell>3.53</cell><cell>6.97</cell></row><row><cell cols="2">25 waveform</cell><cell></cell><cell cols="4">H2-l12+km500 NLL-e</cell><cell>-</cell><cell>6.66</cell><cell></cell><cell>4.43</cell><cell>4.48</cell><cell>3.78</cell><cell>6.26</cell></row><row><cell></cell><cell cols="6">BERT Models on HuBERT Discrete Units</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell cols="7">26 H2-l12+km500 H2-l12+km500 NLL-e</cell><cell>6.26</cell><cell>5.32</cell><cell></cell><cell>6.51</cell><cell>6.74</cell><cell>4.43</cell><cell>6.26</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell cols="3">TABLE VII</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>AVERAGE (</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1" xml:id="foot_0"><p>https://cloud.google.com/text-to-speech</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2" xml:id="foot_1"><p>https://zerospeech.com/2021/instructions.html#evaluation-dataset</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>ACKNOWLEDGMENTS</head><p>In this work, ED in his EHESS role was supported by the <rs type="funder">Agence Nationale pour la Recherche</rs> (<rs type="grantNumber">ANR-17-EURE-0017 Frontcog</rs>, <rs type="grantNumber">ANR-10-IDEX-0001-02 PSL</rs>*, <rs type="grantNumber">ANR-19-P3IA-0001</rs> <rs type="projectName">PRAIRIE 3IA Institute</rs>), a grant from <rs type="funder">CIFAR (Learning in Machines and Brains)</rs> and HPC resources from <rs type="funder">GENCI-IDRIS</rs> (Grant <rs type="grantNumber">2021-AD011011691R1</rs>).</p><p>We would like to thank the reviewers for their thoughtful comments on the paper. We also thank <rs type="person">Jade Copet</rs>, <rs type="person">Evgeny Kharitonov</rs>, <rs type="person">Morgane Riviere</rs>, <rs type="person">Paden Tomasello</rs>, <rs type="person">Wei-Ning Hsu</rs>, <rs type="person">Yossef Mordechay Adi</rs>, <rs type="person">Abdelrahman Mohamed</rs>, <rs type="person">Maureen de Seyssel</rs>, <rs type="person">Marvin Lavechin</rs>, <rs type="person">Robin Algayres</rs>, <rs type="person">Xuan-Nga Cao</rs>, <rs type="person">Nicolas Hamilakis</rs>, <rs type="person">Hadrien Titeux</rs>, <rs type="person">Gwendal Virlet</rs>, <rs type="person">Marianne Metais</rs> for helpful discussions on the paper.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_a2qUzkd">
+					<idno type="grant-number">ANR-17-EURE-0017 Frontcog</idno>
+				</org>
+				<org type="funding" xml:id="_utMsT8g">
+					<idno type="grant-number">ANR-10-IDEX-0001-02 PSL</idno>
+				</org>
+				<org type="funded-project" xml:id="_wwHDZhk">
+					<idno type="grant-number">ANR-19-P3IA-0001</idno>
+					<orgName type="project" subtype="full">PRAIRIE 3IA Institute</orgName>
+				</org>
+				<org type="funding" xml:id="_JhZeydG">
+					<idno type="grant-number">2021-AD011011691R1</idno>
+				</org>
+			</listOrg>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">Improving language understanding by generative pre-training</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Radford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Narasimhan</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arxiv</note>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Language models are unsupervised multitask learners</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Radford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Child</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Luan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Amodei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Sutskever</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">OpenAI blog</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page">9</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Language models are few-shot learners</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Brown</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Mann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Ryder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Subbiah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">D</forename><surname>Kaplan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Dhariwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Neelakantan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Shyam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Sastry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Askell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Agarwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Herbert-Voss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Krueger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Henighan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Child</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ramesh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Ziegler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Winter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Hesse</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Sigler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Litwin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Gray</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Chess</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Clark</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Berner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mccandlish</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Radford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Sutskever</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Amodei</surname></persName>
+		</author>
+		<ptr target="https://proceedings.neurips.cc/paper/2020/file/1457c0d6bfcb4967418bfb8ac142f64a-Paper.pdf" />
+	</analytic>
+	<monogr>
+		<title level="m">Advances in Neural Information Processing Systems</title>
+		<editor>
+			<persName><forename type="first">H</forename><surname>Larochelle</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">M</forename><surname>Ranzato</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">R</forename><surname>Hadsell</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">M</forename><forename type="middle">F</forename><surname>Balcan</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">H</forename><surname>Lin</surname></persName>
+		</editor>
+		<imprint>
+			<publisher>Curran Associates, Inc</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page" from="1877" to="1901" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">BERT: Pre-training of deep bidirectional transformers for language understanding</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Devlin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M.-W</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Toutanova</surname></persName>
+		</author>
+		<ptr target="https://aclanthology.org/N19-1423" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies</title>
+		<meeting>the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies<address><addrLine>Minneapolis, Minnesota</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2019-06">Jun. 2019</date>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="4171" to="4186" />
+		</imprint>
+	</monogr>
+	<note>Long and Short Papers</note>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">RoBERTa: A robustly optimized BERT pretraining approach</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Goyal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Du</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Joshi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Levy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Lewis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Zettlemoyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Stoyanov</surname></persName>
+		</author>
+		<idno>abs/1907.11692</idno>
+		<ptr target="http://arxiv.org/abs/1907.11692" />
+	</analytic>
+	<monogr>
+		<title level="j">CoRR</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">wav2vec 2.0: A framework for self-supervised learning of speech representations</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Baevski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mohamed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Auli</surname></persName>
+		</author>
+		<ptr target="https://proceedings.neurips.cc/paper/2020/file/92d1e1eb1cd6f9fba3227870bb6d7f07-Paper.pdf" />
+	</analytic>
+	<monogr>
+		<title level="m">Advances in Neural Information Processing Systems</title>
+		<editor>
+			<persName><forename type="first">H</forename><surname>Larochelle</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">M</forename><surname>Ranzato</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">R</forename><surname>Hadsell</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">M</forename><forename type="middle">F</forename><surname>Balcan</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">H</forename><surname>Lin</surname></persName>
+		</editor>
+		<imprint>
+			<publisher>Curran Associates, Inc</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page" from="12" to="449" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">HuBERT: Self-supervised speech representation learning by masked prediction of hidden units</title>
+		<author>
+			<persName><forename type="first">W.-N</forename><surname>Hsu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Bolte</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y.-H</forename><forename type="middle">H</forename><surname>Tsai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Lakhotia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Salakhutdinov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mohamed</surname></persName>
+		</author>
+		<ptr target="https://ieeexplore.ieee.org/document/9585401" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE/ACM Transactions on Audio, Speech, and Language Processing</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="page" from="3451" to="3460" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">W2v-BERT: Combining contrastive learning and masked language modeling for self-supervised speech pre-training</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Chung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Han</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Chiu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Qin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Pang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Wu</surname></persName>
+		</author>
+		<idno>abs/2108.06209</idno>
+		<ptr target="https://arxiv.org/abs/2108.06209" />
+	</analytic>
+	<monogr>
+		<title level="j">CoRR</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">The zero resource speech benchmark 2021: Metrics and baselines for unsupervised spoken language modeling</title>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">A</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Seyssel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Rozé</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Rivière</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Kharitonov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Baevski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Dunbar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Dupoux</surname></persName>
+		</author>
+		<ptr target="https://arxiv.org/pdf/2011.11588.pdf" />
+	</analytic>
+	<monogr>
+		<title level="m">Neural Information Processing Systems Workshop on Self-Supervised Learning for Speech and Audio Processing Workshop</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">The Zero Resource Speech Challenge 2021: Spoken language modelling</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Dunbar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Bernard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Hamilakis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">A</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">De</forename><surname>Seyssel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Rozé</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Rivière</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Kharitonov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Dupoux</surname></persName>
+		</author>
+		<ptr target="https://hal.inria.fr/hal-03329301" />
+	</analytic>
+	<monogr>
+		<title level="m">Interspeech 2021 -Conference of the International Speech Communication Association</title>
+		<meeting><address><addrLine>Brno, Czech Republic</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2021-08">Aug. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<title level="m" type="main">Analyzing speaker information in self-supervised models to improve zero-resource speech processing</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Van Niekerk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Nortje</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Baas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Kamper</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="volume">08</biblScope>
+			<biblScope unit="page" from="1554" to="1558" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Effectiveness of self-supervised pre-training for ASR</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Baevski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Auli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mohamed</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/ICASSP40776.2020.9054224</idno>
+		<ptr target="https://doi.org/10.1109/ICASSP40776.2020.9054224" />
+	</analytic>
+	<monogr>
+		<title level="m">2020 IEEE International Conference on Acoustics, Speech and Signal Processing, ICASSP 2020</title>
+		<meeting><address><addrLine>Barcelona, Spain</addrLine></address></meeting>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2020">May 4-8, 2020. 2020</date>
+			<biblScope unit="page" from="7694" to="7698" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">vq-wav2vec: Self-supervised learning of discrete speech representations</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Baevski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Schneider</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Auli</surname></persName>
+		</author>
+		<ptr target="https://openreview.net/forum?id=rylwJxrYDS" />
+	</analytic>
+	<monogr>
+		<title level="m">8th International Conference on Learning Representations, ICLR 2020</title>
+		<meeting><address><addrLine>Addis Ababa, Ethiopia</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2020">April 26-30, 2020. 2020</date>
+		</imprint>
+	</monogr>
+	<note>OpenReview.net</note>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">wav2vec: Unsupervised pre-training for speech recognition</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Schneider</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Baevski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Collobert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Auli</surname></persName>
+		</author>
+		<idno type="DOI">10.21437/Interspeech.2019-1873</idno>
+		<ptr target="https://doi.org/10.21437/Interspeech.2019-1873" />
+	</analytic>
+	<monogr>
+		<title level="m">Interspeech 2019, 20th Annual Conference of the International Speech Communication Association</title>
+		<editor>
+			<persName><forename type="first">G</forename><surname>Kubin</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Z</forename><surname>Kacic</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Graz, Austria</addrLine></address></meeting>
+		<imprint>
+			<publisher>ISCA</publisher>
+			<date type="published" when="2019-09-19">15-19 September 2019. 2019</date>
+			<biblScope unit="page" from="3465" to="3469" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">On Generative Spoken Language Modeling from Raw Audio</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Lakhotia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Kharitonov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W.-N</forename><surname>Hsu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Adi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Polyak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Bolte</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T.-A</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Copet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Baevski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mohamed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Dupoux</surname></persName>
+		</author>
+		<ptr target="https://hal.inria.fr/hal-03329219" />
+	</analytic>
+	<monogr>
+		<title level="j">Transactions of the Association for Computational Linguistics</title>
+		<imprint>
+			<date type="published" when="2021-02">Feb. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Natural TTS synthesis by conditioning wavenet on MEL spectrogram predictions</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Shen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Pang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">J</forename><surname>Weiss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Schuster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Jaitly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Skerrv-Ryan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">A</forename><surname>Saurous</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Agiomvrgiannakis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Wu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2018 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="4779" to="4783" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Librispeech: An ASR corpus based on public domain audio books</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Panayotov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Povey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Khudanpur</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2015 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</title>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="5206" to="5210" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Representation learning with contrastive predictive coding</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Van Den Oord</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Vinyals</surname></persName>
+		</author>
+		<idno>abs/1807.03748</idno>
+		<ptr target="http://arxiv.org/abs/1807.03748" />
+	</analytic>
+	<monogr>
+		<title level="j">CoRR</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Unsupervised pretraining transfers well across languages</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Rivière</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Joulin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P.-E</forename><surname>Mazaré</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Dupoux</surname></persName>
+		</author>
+		<ptr target="https://hal.archives-ouvertes.fr/hal-02959418" />
+	</analytic>
+	<monogr>
+		<title level="m">ICASSP 2020 -2020 IEEE International Conference on Acoustics, Speech and Signal Processing</title>
+		<meeting><address><addrLine>Barcelona / Virtual, Spain</addrLine></address></meeting>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2020-05">May 2020</date>
+			<biblScope unit="page" from="7414" to="7418" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">fairseq: A fast, extensible toolkit for sequence modeling</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Edunov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Baevski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Fan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Gross</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Ng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Grangier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Auli</surname></persName>
+		</author>
+		<ptr target="https://aclanthology.org/N19-4009" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of NAACL-HLT 2019: Demonstrations</title>
+		<meeting>NAACL-HLT 2019: Demonstrations</meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">BERT has a mouth, and it must speak: BERT as a Markov random field language model</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Cho</surname></persName>
+		</author>
+		<ptr target="https://aclanthology.org/W19-2304" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Workshop on Methods for Optimizing and Evaluating Neural Language Generation</title>
+		<meeting>the Workshop on Methods for Optimizing and Evaluating Neural Language Generation<address><addrLine>Minneapolis, Minnesota</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2019-06">Jun. 2019</date>
+			<biblScope unit="page" from="30" to="36" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Masked language model scoring</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Salazar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Liang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">Q</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Kirchhoff</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics</title>
+		<meeting>the 58th Annual Meeting of the Association for Computational Linguistics<address><addrLine>Online</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

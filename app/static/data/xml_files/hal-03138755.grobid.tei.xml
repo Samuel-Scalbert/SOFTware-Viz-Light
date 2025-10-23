@@ -93,14 +93,14 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 							<date/>
 						</imprint>
 					</monogr>
-					<idno type="MD5">10FAA36C1673C6918FD66F301CA346AB</idno>
+					<idno type="MD5">1E4B618B1DDED353A15564F8040BE834</idno>
 					<idno type="DOI">10.1145/3394979</idno>
 				</biblStruct>
 			</sourceDesc>
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.0" ident="GROBID" when="2024-04-12T14:47+0000">
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:12+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<ref target="https://github.com/kermitt2/grobid"/>
 				</application>
@@ -165,8 +165,8 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_10"><head>Fig. 12 .</head><label>12</label><figDesc>Fig. 12. Task Model for Searching Flights using Travel Planet.</figDesc><graphic coords="21,45.83,84.68,394.34,258.35" type="bitmap" /></figure>
 <figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_11"><head>Fig. 13 .</head><label>13</label><figDesc>Fig. 13. Task Model for Informing a Flight Leg in Travel Planet.</figDesc><graphic coords="21,45.83,378.96,394.34,156.44" type="bitmap" /></figure>
 <figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_12"><head>Fig. 14 .</head><label>14</label><figDesc>Fig. 14. Task Model for Choosing a Flight in Travel Planet.</figDesc><graphic coords="22,45.83,84.68,394.35,107.47" type="bitmap" /></figure>
-<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_13"><head>Fig. 15 .</head><label>15</label><figDesc>Fig. 15. Sequence of BDD scenarios for successfully booking a return trip.</figDesc><graphic coords="23,45.83,84.68,256.31,272.29" type="bitmap" /></figure>
-<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_14"><head>Fig. 16 .</head><label>16</label><figDesc>Fig. 16. The scenario "Successful Return Trip -Regular Case" extracted from the task models.</figDesc><graphic coords="23,305.60,144.71,131.12,141.28" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_13"><head>Fig. 15 .</head><label>15</label><figDesc>Fig. 15. Sequence of BDD scenarios for successfully booking a return trip.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_14"><head>Fig. 16 .</head><label>16</label><figDesc>Fig. 16. The scenario "Successful Return Trip -Regular Case" extracted from the task models.</figDesc><graphic coords="23,45.83,84.68,256.31,272.29" type="bitmap" /></figure>
 <figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_15"><head>Fig. 17 .</head><label>17</label><figDesc>Fig. 17. Test results of the scenario "Confirm a Flight Selection" on the task models.</figDesc><graphic coords="24,45.83,84.68,394.35,147.03" type="bitmap" /></figure>
 <figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_16"><head>Fig. 18 .</head><label>18</label><figDesc>Fig. 18. Results of matching: scenario "Confirm a Flight Selection".</figDesc><graphic coords="24,45.83,267.88,394.35,159.55" type="bitmap" /></figure>
 <figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_17"><head>Fig. 19 .</head><label>19</label><figDesc>Fig. 19. Results of matching: scenario "Confirm a Flight Selection (Full Version)".</figDesc><graphic coords="26,45.83,84.68,394.35,159.24" type="bitmap" /></figure>

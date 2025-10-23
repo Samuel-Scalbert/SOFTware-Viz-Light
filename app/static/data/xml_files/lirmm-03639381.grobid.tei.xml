@@ -1,0 +1,1010 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Elastic scalable transaction processing in LeanXcale ✩</title>
+				<funder ref="#_Mb5ERhg">
+					<orgName type="full">Spanish Research Council</orgName>
+				</funder>
+				<funder ref="#_puBZFrG">
+					<orgName type="full">European Commission</orgName>
+				</funder>
+				<funder ref="#_pHmbtSC #_vAXzuv4 #_AWeKvsf #_QDEj34U">
+					<orgName type="full">unknown</orgName>
+				</funder>
+				<funder ref="#_B2dDGMv">
+					<orgName type="full">Comunidad de Madrid</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2022-03-31">31 March 2022</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Ricardo</forename><surname>Jimenez-Peris</surname></persName>
+							<affiliation key="aff0">
+								<address>
+									<settlement>LeanXcale</settlement>
+									<country key="ES">Spain</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Diego</forename><surname>Burgos-Sancho</surname></persName>
+							<email>diego.burgos.sancho@alumnos.upm.es</email>
+							<affiliation key="aff0">
+								<address>
+									<settlement>LeanXcale</settlement>
+									<country key="ES">Spain</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="institution">Universidad Politécnica de Madrid</orgName>
+								<address>
+									<country key="ES">Spain</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Francisco</forename><surname>Ballesteros</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="laboratory">Laboratorio de Sistemas</orgName>
+								<orgName type="institution">URJC</orgName>
+								<address>
+									<country key="ES">Spain</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Marta</forename><surname>Patiño-Martinez</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="institution">Universidad Politécnica de Madrid</orgName>
+								<address>
+									<country key="ES">Spain</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Patrick</forename><surname>Valduriez</surname></persName>
+							<email>patrick.valduriez@inria.fr</email>
+							<affiliation key="aff3">
+								<orgName type="laboratory">LIRMM</orgName>
+								<orgName type="institution" key="instit1">Inria</orgName>
+								<orgName type="institution" key="instit2">University of Montpellier</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Dennis</forename><surname>Shasha</surname></persName>
+						</author>
+						<author>
+							<affiliation key="aff4">
+								<orgName type="institution">Universidad Politécnica de Madrid</orgName>
+								<address>
+									<country key="ES">Spain</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Elastic scalable transaction processing in LeanXcale ✩</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2022-03-31">31 March 2022</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">467CA9E51D3E6C53973B7D76096600D1</idno>
+					<idno type="DOI">10.1016/j.is.2022.102043</idno>
+					<note type="submission">Received 24 June 2021 Received in revised form 26 March 2022 Accepted 28 March 2022</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:11+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>Transaction processing Transaction management NewSQL database system Scalability Elasticity Cloud TPC-C</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>a b s t r a c t</head><p>Scaling ACID transactions in a cloud database is hard, and providing elastic scalability even harder. In this paper, we present our solution for elastic scalable transaction processing in LeanXcale, an industrial-strength NewSQL database system. Unlike previous solutions, it does not require any hardware assistance. Yet, it does scales linearly to 100s of servers. LeanXcale supports non-intrusive elasticity and can move data partitions without hurting the quality of service of transaction management. We show the correctness of LeanXcale transaction management. Finally, we provide a thorough performance evaluation of our solution on Amazon Web Services (AWS) shared cloud instances. The results show linear scalability, e.g., 5 million TPC-C NewOrder TPM with 200 nodes, which is greater than the TPC-C throughput obtained by the 9th highest result in all history using dedicated hardware used exclusively (not shared like in our evaluation) for the benchmark. Furthermore, the efficiency in terms of TPM per core is double that of the two top TPC-C results (also the only results in a cloud).</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.">Introduction</head><p>Recent data-intensive applications in the cloud require very high-throughput transactions over big data at unprecedented scale. Examples of such applications can be found in e-advertising, IT monitoring, IoT, smart grid, and industry 4.0. For instance, the AdWords business in e-advertising <ref type="bibr" target="#b1">[2]</ref> is update intensive and can have millions of suppliers monitoring their maximum cost-per-click (CPC) bid for their offer and updating a petabyte database, while millions of other users and potential customers would perform search queries. IT monitoring on the other hand is insert intensive, with concurrent queries to recover full time series of monitored items (equipments, applications, etc.) or the last measures from millions of monitored items. Depending on the IT business, the data ingestion rates can be huge, ranging between 100 thousand rows per second to 100 million rows per second in databases that can reach petabytes of data.</p><p>✩ Part of the system and method described in this paper is protected by a patent application of Jimenez-Peris and Ballesteros (2022) <ref type="bibr" target="#b0">[1]</ref>.</p><p>To deal with such massive scales and adapt to the changing needs of applications in terms of resources, a cloud database system must provide scalability. This can be obtained through a combination of vertical scaling, by making servers bigger (e.g., adding processors, IO bandwidth, and memory) and horizontal scaling, by adding more scale-out servers in a shared-nothing cluster. Shared-nothing is cost-effective as servers can be off-the-shelf components connected by a network and can be used in public clouds. Thus, it can be fully exploited by a distributed database system <ref type="bibr" target="#b2">[3]</ref>, with data partitioning onto multiple server nodes as the basis for parallel data processing, and distributed transaction processing to update data partitions.</p><p>In order to adapt to workload changes and be able to process greater (or lower) transaction rates, scalability must also be elastic, by dynamically provisioning (or decommissioning) servers to the cluster and increasing (or decreasing) the global capacity. Elasticity requires live data migration <ref type="bibr" target="#b3">[4]</ref>, e.g., moving or replicating a data partition from an overloaded server to another, while the system is running transactions. Furthermore, live data migration must be efficient, with low impact on performance and minimal service interruption.</p><p>Scaling ACID transactions is hard, and providing elastic scalability even harder. Traditional techniques from distributed database systems <ref type="bibr" target="#b2">[3]</ref>, such as multiversioning and snapshot isolation, provide a good basis to increase concurrency between read and write transactions, but do not scale. Furthermore, the 2PC protocol that is used to coordinate distributed transactions is blocking in case of failures, and also a bottleneck since it makes commitment longer due to the two phases.</p><p>Elasticity requires the ability to move data partitions across servers with full ACID consistency while they are being updated. Guaranteeing full transaction consistency without creating a bottleneck in a scalable solution is hard. Traditional solutions rely on offline reconfiguration where the data partitions being reconfigured are not allowed to be updated while they are transferred across servers. However, this approach results in low availability of the data being moved.</p><p>One solution that is often used is relaxing some of the ACID properties, at the expense of more complex application programming. For instance, to avoid 2PC, microservice frameworks resort to sagas <ref type="bibr" target="#b4">[5]</ref> which relax the atomicity property and require the user to provide compensating transactions. On the other hand, NoSQL systems, such as BigTable, Cassandra, and HBase, trade atomicity and consistency for scalability, with limited atomicity at the level of a single row. This makes it relatively easy to provide scaling without having to enforce ACID properties. Elasticity can also be handled in a simple way since row level atomicity is trivial, while ACID properties become much harder since the consistency of all rows modified by a transaction, very likely across different servers, has to be maintained. In the application examples above such as e-advertising, relaxing some ACID properties would simply make the application incorrect, e.g., for instance, missed CPC bids. Scaling ACID transactions has been addressed recently (see <ref type="bibr">Section 2)</ref>. Some solutions make strong assumptions regarding the database, e.g., which has to fit in main memory, or the availability of some special purpose hardware, such as RDMA or specialized clocks. Another solution is within the context of NewSQL, combining the scalability and availability of NoSQL with the consistency and usability of SQL <ref type="bibr" target="#b5">[6]</ref>. Elasticity of OLTP is typically achieved outside the database system using a framework, for instance, E-store <ref type="bibr" target="#b6">[7]</ref>.</p><p>In this paper, we present our solution for elastic scalable transaction processing in LeanXcale, an industrial-strength NewSQL database system. Our solution does not make any specific assumptions regarding the database size nor does it require any hardware assistance. Our approach is based on several principles, which we divide in three groups: scalable, efficient and elastic transaction management. Scalable transaction management avoids the single-node bottleneck with a novel decomposition of the ACID properties. Scalability is made efficient in a largescale cluster by reducing communication and CPU costs. Elastic transaction management deals with non-intrusive elasticity, that is, without hurting the quality of service (QoS) of transaction management. We show the correctness of LeanXcale transaction management.</p><p>LeanXcale has a relational key-value store, KiVi, which supports non-intrusive elasticity and can move data partitions without affecting transaction processing. This is based on an algorithm that guarantees snapshot isolation across data partitions being moved without actually affecting the processing over them. KiVi is also crucial for the efficiency of the solution since it is a relational key-value data store that has implemented all operators from relational algebra, but Join, and thus it enables to push down all operators below joins to the storage engine highly reducing the movement of tuples between storage engine and query engine. To validate our solution, we provide a thorough performance evaluation using the LeanXcale DBMS product with several benchmarks and micro-benchmarks on Amazon Web Services (AWS).</p><p>The paper is organized as follows. Section 2 discusses related work. Sections 3-5 describe each a group of principles: scalability (Section 3), efficiency (Section 4) and elasticity (Section 5). Section 6 shows the correctness of our solution. Section 7 presents the performance evaluation. Section 8 concludes.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.">Related work</head><p>There has been much work on providing scalability and elasticity for single node database systems in the context of multitenant deployments in the cloud <ref type="bibr" target="#b3">[4]</ref>. In contrast, we focus on scalability and elasticity for single large-scale OLTP applications that are deployed onto multiple nodes in a distributed database system.</p><p>Scaling ACID transactions in cloud distributed database systems has been addressed recently, with four main approaches: main memory, cluster replication, hardware assistance, and NewSQL. Main memory database systems, such as SAP HANA <ref type="bibr" target="#b7">[8]</ref> and VoltDB <ref type="bibr" target="#b8">[9]</ref>, keep all data in memory, which enables processing transactions and queries at the speed of memory without being limited by I/O bandwidth and latency. They can scale out in a shared-nothing cluster, but with some issues such as weakening isolation, losing the capability of queries and updates across data partitions or introducing the overhead of 2PC. But the main limitation is that the entire database and all intermediate results must fit in memory, which makes it unpredictable when data, transactions and queries evolve over time. Furthermore, the cost of a main memory database is extremely high compared to one that keeps data on persistent storage and a fraction of data in a cache. For many applications, e.g., e-advertising or IT monitoring, such cost is just prohibitive and not economically viable.</p><p>Cluster replication <ref type="bibr" target="#b9">[10,</ref><ref type="bibr" target="#b10">11]</ref> is used in open-source SQL database systems such as MySQL or MariaDB. Full replication, i.e., having a full copy of the database on each node, is used to distribute the read workload across nodes. The most successful approaches are based on 1-copy snapshot isolation <ref type="bibr" target="#b11">[12]</ref>, the equivalent of 1copy serializability <ref type="bibr" target="#b12">[13]</ref>, but for snapshot isolation. This approach yields logarithmic scale out <ref type="bibr" target="#b13">[14]</ref>, i.e., exponential cost to scale out, which makes it useful for read-intensive workloads, but at the expense of full replication. LeanXcale outperforms cluster replication by relying on a distributed transaction processing approach that scales out linearly to a large number of nodes.</p><p>Hardware assistance can be exploited to remove the inherent bottleneck of transactions, which is caused by the serial processing of commits combined with the latency and CPU overhead of processing transaction messages. Recently, several research prototypes have been proposed to scale transactions using the next generation of RDMA-enabled networking technology, e.g., FaRM <ref type="bibr" target="#b14">[15]</ref> and FaRMv2 <ref type="bibr" target="#b15">[16]</ref>, FaSST <ref type="bibr" target="#b16">[17]</ref> and NAM-DB <ref type="bibr" target="#b17">[18]</ref>. Using RDMA, data can be moved from one server to another directly, bypassing the CPU. FaRM <ref type="bibr" target="#b14">[15]</ref> provides scalability, availability, and serializability for committed transactions but not for aborted transactions. FaRMv2 <ref type="bibr" target="#b15">[16]</ref> extends FaRM to provide snapshot isolation to all transactions with opacity (strict serializability for both committed and aborted transactions). This is achieved using a novel timestamp-ordering protocol that leverages the low latency of RDMA to synchronize clocks. FaSST <ref type="bibr" target="#b16">[17]</ref> also provides scalability and serializability using an efficient RPC abstraction on top of unreliable datagram message-passing. However, it does not provide snapshot isolation, which provides better performance for read-heavy workloads and is more common in practice than serializability. NAM-DB <ref type="bibr" target="#b17">[18]</ref> provides scalability and snapshot isolation, not availability.</p><p>In contrast, LeanXcale does not require any hardware assistance. However, it could well exploit RDMA-enabled networking technology, to bypass the CPU in processing transaction messages. This would make our solution even better. RDMA-enabled solutions are not yet widely available in the cloud due to limitations of the number of servers that can be connected through RDMA. However, when it becomes widely available in the cloud, LeanXcale will be enriched to exploit it, which will make our innovations even more efficient.</p><p>NewSQL systems typically use a NoSQL key-value store layer under a transaction management layer, in order to provide horizontal scaling. Spanner <ref type="bibr" target="#b18">[19]</ref> is an advanced NewSQL database system with full SQL and scalable ACID transactions. It was initially developed by Google to support the e-advertising AdWords application. It uses traditional locking and 2PC and provides serializability as isolation level. To avoid the high contention between large queries and update transactions resulting from locking, Spanner also implements multiversioning, which removes read/write conflicts. However, multiversioning does not provide scalability. In order to avoid the bottleneck of centralized certification, updated data items are assigned timestamps (using real time) upon commit. For this purpose, Spanner implements an internal service called TrueTime that provides the current time and its current accuracy. To make TrueTime reliable and accurate, it uses both atomic clocks and GPS since they have different failures modes that can compensate each other. To avoid deadlocks, Spanner uses a wound-and-wait approach, thereby eliminating the bottleneck of deadlock detection. Storage management in Spanner is made scalable by leveraging BigTable, a wide column data store.</p><p>LeanXcale also implements multiversioning and avoids the bottleneck of centralized certification by assigning timestamps to updated data items upon commit. However, unlike Spanner, which uses real-time timestamps, LeanXcale uses logical timestamps, which is simpler and cheaper. LeanXcale's architecture is also different than most other NewSQL database systems that rely on a NoSQL key-value store, e.g., Spanner is built atop BigTable. LeanXcale has a relational key-value store, KiVi, that enables efficient SQL processing since all algebraic operators below a join in a query are pushed down to the data store, avoiding much data movement with the query engine.</p><p>Elasticity is typically achieved outside the database system using a framework. For instance, E-store <ref type="bibr" target="#b6">[7]</ref> is an elastic partitioning framework designed for distributed database systems. It automatically scales resources in response to changes in an application's workload and enables the database system to move data across nodes. E-store has been integrated with H-store <ref type="bibr" target="#b19">[20]</ref>, a distributed main-memory database system (which has evolved into VoltDB). In contrast, LeanXcale's elasticity is fully integrated within the database system, leveraging the ability to move data partitions across servers without disrupting data processing.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.">Scalable transaction management</head><p>In this section, we first introduce LeanXcale's architecture with transaction management in mind. Then, we present our three principles for scalable transaction management, avoiding the single-node bottleneck of traditional transaction management. The first principle (decoupling the ACID properties) enables scaling out each property independently in a composable manner. The second principle (decoupling update visibility and atomic commit) removes the bottleneck of sequential commit processing, thus enabling the parallel processing of very high numbers of commits. The third principle (waiting for updates to be visible for session consistency) provides session consistency without introducing a bottleneck.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1.">LeanXcale Architecture</head><p>The LeanXcale distributed database system has three layers:</p><p>• KiVi storage engine. KiVi is a distributed relational keyvalue store, combining the best of key-value stores (data partitioning, horizontal scaling) and relational data stores (relational schemas and algebraic operators such as predicate filtering, aggregation, grouping, and sorting).</p><p>• Transaction manager. It is a distributed transaction manager able to scale out linearly to a large number of nodes. And the main focus of this paper.</p><p>• SQL Query engine. The query engine is also distributed and can scale out both OLTP and OLAP workloads.</p><p>Using a key-value store as storage engine has been used in several NewSQL database systems such as Spanner (which uses BigTable), or Splice Machine <ref type="bibr" target="#b20">[21]</ref> and EsgynDB <ref type="bibr" target="#b21">[22]</ref> that both use HBase <ref type="bibr" target="#b22">[23]</ref>. This approach enables to scale out the storage layer to very large levels by using horizontal partitioning across storage instances. However, it comes at the expense of inefficient SQL query processing, because the interaction between the query engine and storage engine becomes inherently distributed, thus resulting in high communication overhead. For instance, consider an aggregate operation over the column, e.g., sum, of a large table of 1 billion rows. The execution of the aggregation would require scanning all the servers in parallel, and then sending the 1 billion scanned rows over the network to the query engine that will aggregate them and produce the single row result. Such execution results in high communication.</p><p>KiVi enables to push down all algebraic operators in a query plan below joins to multiple KiVi instances. The algebraic operators are executed locally at each KiVi instance, thus avoiding moving all scanned rows to the query engine for processing, and only sending the relevant rows. In the previous example, instead of moving 1 billion rows, a query execution would just move a single value per server, the local sum, i.e., 100 values in total. Since transactions may include queries to read data, KiVi's ability to perform algebraic operators yields major reduction of query latency and thus better transaction response time.</p><p>In addition, KiVi uses a variant of LSM Tree <ref type="bibr" target="#b23">[24]</ref> that is more efficient in read operations than the SSTables (String Sorted Tables) used by key-value stores, which have to read many (tens of) files that contain an overlapping range of primary keys.</p><p>The query engine is distributed. It implements both interquery parallelism and intra-query parallelism <ref type="bibr" target="#b2">[3]</ref>, in particular, intra-operator parallelism, and can have an arbitrary number of instances. To scale out OLTP workloads, each query engine instance takes care of processing a subset of the queries.</p><p>The transaction manager is also distributed and has a set of different components (see Section 3.2). It is highly scalable, able to process many millions of update transactions per second. The transaction manager is integrated within the client KiVi layer, thus providing LeanXcale the capabilities of an ACID relational key-value store.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2.">Decoupling the ACID properties</head><p>In this section, we describe our approach for decoupling the ACID properties to scale out. Let us first recall the ACID properties <ref type="bibr" target="#b24">[25]</ref>:</p><p>• Atomicity provides an all-or-nothing behavior for all the updates of a transaction.</p><p>• Consistency requires correct code for the transactions that guarantees that if the data is consistent at the start of the transaction, it should remain consistent at the end of the transaction, i.e., satisfies the database integrity constraints.</p><p>• Isolation provides synchronization atomicity, that is, guaranteeing that the execution of transactions in parallel provides certain consistency guarantees over the data (e.g., serializability or snapshot isolation).</p><p>• Durability guarantees that the updates of a transaction, once committed, are not lost in the advent of failures.</p><p>LeanXcale leverages multiversion concurrency control (MVCC) <ref type="bibr" target="#b24">[25]</ref> to avoid the contention introduced by locking between queries that read many rows and updates across these rows. In multiversioning, data is not updated in place, but instead, new versions of the rows are created with the new updates (see Algorithm 1, lines 5-7). In MVCC, a commit timestamp (CTS) is used to label each version. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Algorithm 1 KiVi Storage Engine</head><formula xml:id="formula_0">: 1a) bb 1 = R(b 1 ), 2a) bb 2 = R(b 2 ) 3a) if bb 1 + bb 2 -w ≥ 0 then W(b 1 , bb 1 -w) while the withdrawal operation from b 2 would do: 2a) bb 1 = R(b 1 ), 2a) bb 2 = R(b 2 ) 3a) if bb 1 + bb 2 -w ≥ 0 then W(b 2 , bb 2 -w).</formula><p>If the original balances are bb 1 =10, bb 2 =15 and the two withdrawals are w 1 =20 and w 2 =25, an interleaving 1a, 2a, 1b, 2b, 3a, 3b would produce bb 1 =-10, bb 2 =-10, thus a negative balance of -20 units.</p><p>Snapshot isolation is the highest isolation offered by some leading database vendors. There are a number of techniques in the literature to attain serializability on top of snapshot isolation, e.g., <ref type="bibr" target="#b25">[26,</ref><ref type="bibr" target="#b26">27]</ref> . In order to avoid write skew, LeanXcale provides select for update, which could be used too by the standard snapshot isolation.</p><p>Atomicity is attained in MVCC by making private the new versions of the data generated by the updates of the transaction, i.e., invisible to concurrent transactions. Thus, atomicity is taken care of by the component that orchestrates the transaction life cycle. In LeanXcale, this component is the local transaction manager (LTM) that is deployed on each node with transactional capabilities. LTMs are also in charge of orchestrating the commits of the transactions.</p><p>Consistency does not require specific techniques as it is the responsibility of the application developer (to provide correct code), with the support of traditional integrity control.</p><p>Isolation is also enforced through MVCC, with snapshot isolation provided as isolation level. We further decompose isolation into isolation of writes and isolation of reads. In snapshot isolation, reads never conflict. Thanks to multiversioning, they just read the version corresponding to the snapshot associated to the transaction (see Algorithm 1, lines 2-4), i.e., the oldest version of the row with a CTS lower or equal than the start timestamp of the transaction also called snapshot of the transaction. Thus, the only task to be performed is to detect write-write conflicts, which is the role of conflict managers. However, reads need be performed on a consistent snapshot of the data that guarantees snapshot isolation. This is achieved by two components, commit sequencer and snapshot server, which are described in detail in the next section.</p><p>MVCC traditionally requires certification at the beginning of the commit processing. In LeanXcale, certification is performed at the time a row is updated and if there is a conflict, one of the transactions is aborted using a first updater wins approach. Thus, only transactions that do not have conflicts (i.e., have already passed the certification) enter the commit stage. Furthermore, a transaction enters the commit stage with an assigned CTS that sets its serialization order. With this approach, certification is fully distributed and does not require a centralized certifier, which is one of the main scalability bottlenecks of MVCC-based solutions.</p><p>Durability requires a mechanism to persist changes of a transaction independently of the changes performed in the data. LeanXcale adopts the no undo/redo approach <ref type="bibr" target="#b24">[25]</ref>. The component that takes cares of durability is the logger. Writesets are kept in memory to implement this policy. However, if the writeset size becomes too large, it is persisted on disk.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3.">Decoupling update visibility and atomic commit</head><p>In this section, we describe our principle of decoupling update visibility and atomic commit to enable scaling out. Processing commits sequentially is the main bottleneck of traditional database systems <ref type="bibr" target="#b12">[13]</ref>. The reason that the traditional solution performs commit processing tasks sequentially is to ensure that newly started transactions observe a correct snapshot.</p><p>We adopt a radically different approach, by untangling commit processing and leveraging multiversioning and snapshot isolation. In particular, we maintain two counters: a snapshot counter, initialized to zero and a commit counter, initialized to one. The commit counter is used as usual to assign increasing CTSs to committing transactions. At start time, the transaction receives the current value of the snapshot counter as the start timestamp.</p><p>Let us describe in more details our solution to commit processing. The commit of a write transaction, say T i , proceeds in four sequential steps: (1) T i receives its CTS from the commit counter that is incremented; (2) T i 's writeset is written into the redo log that is flushed to stable storage. Then, the transaction is durable and the client is acknowledged that commit was successful; (3) the new versions of the data are written to the data store. Once the data is in the data store, the transaction is readable and the transaction manager is informed; (4) the transaction manager updates the snapshot counter, when there are no gaps in the serialization order until this CTS, so at this point, the transaction is visible. Gap-freedom is essential to consistency since the gapfree prefix grows monotonically in the order of the CTSs and each snapshot observes only a fraction of this key-value data store, more precisely a longer prefix with a bigger value of the snapshot.</p><p>Only step 1 is made atomic and quite fast: an integer increment. Logging can be performed later. Delaying logging only impacts the latency of the transaction commit. As we will see later, it enables parallelizing the logging process (step 2) in order to attain high logging throughput. The transaction response time only includes these two steps (1 and 2), not the time needed to store the updated data. Again, this is interesting to mask the latency of a distributed data store and open up opportunities for more efficient update propagation. When all the data modified by a transaction is updated in the data store (step 3), the transaction enters the readable state. Thus, the updated data could be read from the data store if the right snapshot is used. However, in order to guarantee consistency, these data are still invisible to new transactions. The visibility state is reached in step 4, when the snapshot counter is updated and becomes equal or greater than the CTS.  Given that the commit is not executed atomically, it is possible that T i receives a CTS smaller than T j while T j stores its updates in the data store before T i . Had updates become visible immediately, transactions would potentially observe an inconsistent snapshot containing T j updates but missing T i updates. We take this into account and only advance the snapshot counter to the value X when the updates of all transactions with a CTS smaller or equal to X are readable, i.e., when there are no gaps in the serialization order. Thus, only when the snapshot counter becomes equal or greater than T j 's CTS that the updates of T j will become visible. Thus, they can be observed by newly started transactions with a start timestamp equal or greater than T j ' CTS. In other words, a transaction T i is fully committed when the snapshot takes a value equal or higher than the CTS of T i . Until that point, its changes are invisible, and from then on, they become visible to transactions that get a start timestamp equal or higher than its CTS.</p><p>The snapshot counter represents the longest gap-free prefix of committed transactions. It is not incremented by one each time a transaction completes its commit since it would lead to the visibility of a prefix with gaps and thus, inconsistent reads. When the snapshot counter is equal to the CTS C (T j ) of transaction T j means that data versions created by T j and all transactions with CTS less than C (T j ) are durable as well as readable from the data store (i.e., stored in the data store layer, but not necessarily persisted on disk).</p><p>Fig. <ref type="figure" target="#fig_0">1</ref> shows the transaction phases during execution, with the untangling of the commit phase. Upon receiving its start timestamp, a transaction becomes active. Once it has received its CTS, it has completed. After writing the updates to the log, it is durable. Once the updates have been propagated to the data store, they become readable. Finally, once the snapshot counter has advanced to include the CTS of the transaction, its updates become visible.</p><p>Let us illustrate the evolution of commit and snapshot counters with the example in Table <ref type="table" target="#tab_1">1</ref>. Let us assume that the commit and snapshot counters have value 10. Then, five transactions (assigned with CTSs 11 to 15) start to commit in parallel. The first row in Table <ref type="table" target="#tab_1">1</ref> gives the order in which the notifications that the transaction updates have become ''durable and readable'' are received.</p><p>But since commits are done in parallel, they can happen in any arbitrary order. The second row shows the evolution of the snapshot counter with each ''durable and readable'' notification. Upon receiving the notification of CTS=11, the snapshot counter can be incremented safely from its current value, 10, to 11, because there is no gap. Then, the snapshot counter receives the notification for CTS=15. But since there are gaps between 11 and 15, it cannot be incremented. Otherwise, it could lead to inconsistent reads. For instance, assume the snapshot counter is incremented to 15. Then, a transaction could observe the updates of transaction with CTS=15 but not those of transactions with CTS=12 to 14. However, it could observe later on the updates of transactions with CTS=12 to 14 once they become ''durable and readable'', thus leading to inconsistent reads.</p><p>When notification for CTS=12 is received, the snapshot counter is advanced to 12. However, with the notification for CTS=14, the snapshot counter cannot be advanced since 13 is still missing. Finally, when the notification for CTS=13 is received, the snapshot counter can be advanced to 15 since there are no gaps until that value.</p><p>In summary, our solution processes each commit as a pipeline of tasks, thus enabling all commits to proceed in parallel. Thus, commit processing can be scaled out to very large levels. Snapshot isolation is preserved by regulating the visibility of committed updates through the snapshot counter that allows observing only gap-free prefixes of committed transactions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.4.">Waiting for updates to be visible for session consistency</head><p>Our solution returns the commit to the client when durability is guaranteed, but before the updates of the transaction become readable and visible. This may violate session consistency, also known as ''read your own writes'' <ref type="bibr" target="#b27">[28]</ref>, i.e., a client might not read its own writes across different transactions. Let us consider two consecutive transactions from one client, T 1 and T 2 . T 1 updates x and commits. T 2 starts before T 1 's update is visible, and thus, receives a start timestamp smaller as T 1 's CTS. Therefore, when T 2 reads x, it will not receive the version created by T 1 .</p><p>Session consistency can be implemented by delaying the start of new transactions after the commit of an update transaction until the snapshot counter reflects the CTS of that committed update transaction. Only then, the LTM can assign the start timestamp to a new transaction in that session. This delay can be a few tens of milliseconds, which is negligible for OLTP response time, which is in the subsecond range. This delay is only incurred by a client when it starts a transaction immediately after committing an update transaction. After committing a read-only transaction (typically around 90% of the transactions in a typical OLTP workload) there is no delay. Furthermore, if a client application performs some activity between the commit of an update transaction and the start of a new transaction, this delay can be masked. Note that, although we talk in terms of delay with respect to the time a commit becomes durable, all activities are done much earlier than in traditional database systems that simply commit transactions in sequence, waiting until the updates are visible before starting the next transaction in the current session and any other session.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.">Efficient transaction management</head><p>In this section, we present three additional principles to make transaction management efficient (and scalable), complementing the three principles in the previous section. The two first principles address the limitations of single-node bottlenecks introduced by monolithic transaction processing. The first principle (distribution and parallelization) applies to the components devoted to each ACID property, yielding linear scale out. The second principle (proactive timestamp management) substantially reduces the amount of communication and transaction latency due to communication. The third principle (asynchronous messaging and batching) helps reducing even more the overhead of distribution. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1.">Distribution and parallelization</head><p>In Section 3.2, we decomposed the ACID properties and scaled out them independently. The principle of distribution is to assign the relatively independent tasks executed by the transaction manager to the different independent components identified in the previous section: LTMs, conflict managers, loggers, snapshot server, and commit sequencer. For some of these components, the tasks can be parallelized into many component instances that can run on different nodes, thus, increasing scalability even further. Fig. <ref type="figure" target="#fig_1">2</ref> summarizes the entire transaction life cycle and the interaction between components. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Algorithm 2 Local Transaction Manager (LTM)</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>conflictManager.Abort(tid)</head><p>The transaction lifecycle is managed by the LTMs (see the LTM pseudocode in Algorithm 2). LTMs are in charge of getting the start timestamp of a transaction (Begin), using the right snapshot for reads (Read) and updating the private versions (Write), and processing the different steps of the commit (Commit) that involves logging its updates, making them readable and finally reporting to the snapshot server about the durability and readability of the transaction and providing its CTS. Since such lifecycle management can be performed independently for different transactions, they can be parallelized as well by having several independent LTMs, each collocated with the query engine (see Fig. <ref type="figure" target="#fig_1">2</ref>).</p><p>Conflict management is provided by an independent component, the conflict manager, which is parallelized across many instances. Its function is the same as conflict detection in any transaction processing system providing snapshot isolation, detecting write-write conflicts among concurrent transactions. However, unlike traditional systems that detect conflicts during validation, the conflicts are detected before reaching the commit stage.</p><p>Each conflict manager instance running on a different node (see Algorithm 3) is responsible for a subset of data record keys, i.e., a bucket. Record keys (containing a unique table identifier and key) are hashed and assigned to a bucket using the function: bucket = hash(tableID, key) mod numberOfBuckets. The bucket is the unit of distribution for the conflict manager and each conflict manager is in charge of a number of buckets. Each bucket is handled by a single conflict manager. The conflict manager keeps at most two values per data item: the CTS of the last committed version and the start timestamp of an active transaction updating the data item, if any. Along with the distribution of conflict managers, this avoids the conflict manager being a bottleneck when it handles the whole set of keys, which can be huge <ref type="bibr" target="#b19">[20]</ref>. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Algorithm 3 Conflict Manager</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DiscardUpdates(tid)</head><p>Before a transaction T i can execute an update on a data record, a conflict request is sent to the conflict manager that is responsible for this record. A conflict is detected if the conflict manager has previously accepted a request from a concurrent transaction (either active or committed). For each transaction, its LTM keeps the information about how many conflict managers have been involved. Upon successful completion of a transaction commit, all the involved LTMs are informed about its CTS so that each conflict manager updates the information about the conflicts and can perform the proper checks for future transactions.</p><p>Fig. <ref type="figure" target="#fig_3">3</ref> shows the interaction and the information maintained by the conflict manager that is responsible for rows x and y. For each row, it keeps track of the last committed transaction T i that has updated the row, and possibly an active transaction T j that has updated the row since then. When a new transaction T k checks for a conflict on x, it checks whether an active transaction T j exists that has updated x and if not, if C (T i ) of the last committed transaction that updated x is greater than S(T k ). If any of the two is true, there is a conflict. Otherwise, there is no conflict and T k is added as an active transaction for x.</p><p>In Fig. <ref type="figure" target="#fig_3">3</ref>, transaction T 1 checks for a conflict on x, T 2 for a conflict on y, and T 3 for a conflict on z. There are no conflicts. T 3 checks for a conflict on y and T 2 is active and changes y. Therefore, T 3 has a conflict. Then, T 2 confirms the commit and information about T 2 can be discarded. When later on, a transaction T 4 checks for a conflict on y, since S(T 3 ) ≥ C (T 2 ), there is no conflict, and T 3 is added to x's entry. This approach scales out conflict management.</p><p>Durability provided by the loggers can also be handled independently. The redo records of a transaction are pushed to a logger and made durable before the commit acknowledgment is returned to the user. The logger is distributed and parallelized by creating as many logger instances as needed to handle the required throughput. Each logger takes care of a fraction of log records (see <ref type="bibr">Algorithm 4)</ref>. Loggers are totally independent and do not require any coordination. There is no requirement to log records in any particular order, thus, it becomes possible to log in parallel with no coordination. Log records are inserted into the logger's buffer. The buffer content is flushed at the maximum rate allowed by the underlying storage, thus minimizing the latency of logging. Note that coordination is not needed across loggers because log records are labeled with the CTS and when redoing upon recovery, a log record is not replayed if the current row in the database has a CTS higher than the recovery log record. Thus, idempotence of recovery is guaranteed. Persist(tid, writeset, cts)</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Algorithm 4 Logger</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.">Proactive timestamp management</head><p>Proactive timestamp management addresses a potential bottleneck. We separate the beginning of a transaction from its commit by providing two independent counters: the commit and snapshot counters. We provide two independent services: a commit sequencer that maintains the commit counter, and a snapshot server that maintains the snapshot counter. Note that the work performed by these components is tiny per transaction. Thus, the main cost will become the communication with other components to request start timestamps and notify readability of transactions. The requests for CTSs are served by the local commit sequencer while the requests for start timestamps are sent to the snapshot server. The snapshot server is contacted by the LTM once the updated data of a committed transaction is applied at the data store. Thus, the snapshot server keeps track of the most recent snapshot (i.e., update visibility) for which all updates are readable in the data store layer. Timestamp management becomes the ultimate bottleneck of this approach. Therefore, it is critical to perform this task in a lean way that minimizes its cost. So far in this paper, requests for start and commit timestamps are sent in a reactive way, i.e., only when they are actually needed. We can avoid this by adopting a proactive approach to timestamp management and making proactive the commit sequencer, snapshot server, and conflict manager.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.1.">Proactive commit sequencer</head><p>Once a transaction enters the commit phase, it is guaranteed that it does not conflict with any other transaction (it has already been validated). The commit timestamp is only needed to tag the updates with that CTS. Therefore, if two transactions request a CTS, it does not matter which timestamp gets each transaction. So, using Algorithm 5, the commit sequencer can send proactively (before they are requested) a range of CTSs to each LTM. The LTMs can then assign CTSs from their local range to commit transactions, which avoids the synchronization with the commit server on a per transaction basis. Thus, there is no latency in assigning a CTS, with only one message per conflict manager every period. Return nextCTS + + Fig. <ref type="figure" target="#fig_5">4</ref> depicts this proactive approach. First, the commit sequencer proactively provides the query engine nodes with CTSs. It sends a range of CTSs periodically. CTSs are assigned to transactions from this range locally at the LTM without any communication with the commit sequencer. In the figure, the commit server first sends a range of CTSs, B 1 , to the LTM. When T 1 requests to commit, it receives the first timestamp of the latest range, i.e., 0. Then, when T 2 asks for a CTS, it receives timestamp 1. Upon the arrival of a new range of CTSs from the commit server, B 2 the range of unused timestamps will be simply discarded (2 in the example). Therefore, when T 3 requests the commit, it receives timestamp 3.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Algorithm 5 Commit Sequencer</head><p>The reason for switching to the new range instead of using the old one is to advance CTSs in sync with timestamps globally in the system, and therefore does not delay the freshness of the current snapshot. If one LTM processes transactions faster, it will receive larger timestamps while a slow LTM still uses lowvalue timestamps. This will delay the advancement of the global snapshot counter. As a result of discarding CTSs, the snapshot server is not only informed about the timestamps of committed transactions but also about unused CTS ranges, so that it can advance the snapshot counter every period independently of the relative speed of LTMs.</p><p>In the proactive approach, a period is defined for the interaction with the commit sequencer and snapshot server. Every period, the commit sequencer provides a new range of CTSs to the LTMs. Initially the range is the same nodes. After each period 10 the commit sequencer is informed about the number of transactions that committed in the past period at each LTM. This commit sequencer uses this information as an estimate for the range size for the next period for each node.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.2.">Proactive snapshot server</head><p>In the reactive approach, each time a new transaction is started, a message is sent to the snapshot server to request the current snapshot and a message with the current snapshot is sent to the requesting LTM. This means a cost of two messages per started transaction and the latency of two messages. In the proactive approach, the snapshot server proactively reports the current snapshot counter to the LTMs for every period (see <ref type="bibr">Algorithm 6)</ref>. This counter is used by newly started transactions, thus avoiding message exchange on a per-transaction basis. Therefore, a single message is sent every period to each LTM.</p><p>Recall that the snapshot server must also be informed about CTSs whenever updates have been applied at the data store, indicating that they have become readable. Instead of sending these readability confirmations per single transaction, we report a full range of CTSs, within the same range used by the commit sequencer. Note that the transaction latency is not affected by this batching, since the user application is notified as soon as the transaction has become durable.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.3.">Proactive conflict manager</head><p>Checking conflicts on a per updated row basis has a high cost since two messages are exchanged. For this reason, in the proactive mode, conflict checks are batched and sent every period. Thus, the conflict management communication cost is amortized across as many rows as possible. Fig. <ref type="figure" target="#fig_3">3</ref> shows how batching is applied to the example. Thus, transactions do not wait for messages to be exchanged to receive a start and commit timestamp. Furthermore, commit timestamp ranges and start timestamps are distributed proactively in a periodic manner to avoid two synchronous message exchanges on the transaction response time. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Return snapshot</head><p>The snapshot server also interacts periodically with query engines to collect readability notifications and report the latest snapshot timestamp. Thus, the only way to saturate these components will be with a very large-scale system that would send too many messages per period. This issue can be easily overcome using a multicast tree of nodes to distribute this information at very large scale, e.g., as in content distribution networks, yielding seamless scalability to our timestamp management.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.">Asynchronous messaging and batching</head><p>Each transaction needs several messages for transaction management, to perform conflict detection, reading and writing data, and logging. As these message exchanges are synchronous, i.e., the transaction waits for them to be completed, they become part of the critical path of the transaction response time. Although these tasks are performed synchronously, we have adopted an asynchronous approach whenever possible to remove message latency from the transaction response time. Another issue related to distribution and the inherent message exchange is the cost of messaging. For a large-scale system, it is important to minimize this cost as much as possible to reduce the distribution overhead.</p><p>We have already seen how timestamp management latency can be fully removed from the transaction response time by our proactive timestamp management. Conflict management latency can also be mostly removed from the transaction response time. We do this by checking for conflicts asynchronously. Additionally, to reduce the distribution overhead, we apply batching of requests and responses extensively. In typical batching approaches, latency is traded for throughput, which increases response times. We apply batching combined with asynchrony to avoid a negative impact on response time.</p><p>In the naive solution, an update is only executed after the conflict manager checks for conflicts. This delays transaction execution considerably. Every update causes a round-trip message delay. Additionally, it incurs the CPU cost of a round trip message exchange at the sending and receiving sides. We avoid this by performing conflict management mostly in an asynchronous way and overlapping it with transaction execution to hide its latency. We send conflict detection requests asynchronously to the conflict managers and immediately continue with the update before receiving the accept/reject response. Only when the commit is initiated, the transaction might wait for all outstanding responses to conflict requests. Note that if a negative response arrives in the middle of transaction execution, we can immediately abort the transaction.</p><p>This asynchrony does not only allow keeping response times short but also enables to apply batching to conflict management without affecting response time. Conflict detection requests are buffered, with one buffer per conflict manager. Periodically (e.g., every 10 ms), the buffers are sent to the corresponding conflict managers. When a conflict manager receives a buffer, it performs all checks and returns all responses in a single message. This reduces considerably the total number of messages sent, without affecting the response time as the delay is hidden by the concurrent transaction execution. Only the waiting for the last batch can affect the overall response time of a transaction.</p><p>Reads are necessarily synchronous. However, in our approach, writes can be performed asynchronously and we take advantage of this possibility. Writes from different transactions can be batched to be sent to KiVi instances. By trading off some delay in the update propagation, it then becomes possible to batch all the updates propagated to a particular data store instance, thus increasing the overall efficiency.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.">Elastic transaction management</head><p>Efficient, scalable transaction management (as provided by our approach so far) is useful for static workloads for which data partitioning can be well designed. However, when the workload changes dynamically, performance can degrade dramatically. For instance, in a deployment with 100 servers, the load may suddenly concentrate on the data handled by one server, thus limiting the performance to that of a centralized system. In order to adapt to workload changes and be able to process greater (or lower) transaction rates, scalability must be elastic, but also non-intrusive, i.e., without hurting the QoS of transaction management.</p><p>In this section, we present three additional principles to attain non-intrusive elasticity of transaction management and the underlying components, namely, transaction manager (LTM, logger, conflict manager), query engine, and KiVi. The first principle (non-intrusive moving of data partitions) is the first building block. The second principle (dynamic load balancing of transactional components) is the second building block, leveraging on the previous one. The third principle (transactional elasticity) extends dynamic load balancing with the capability of adding or removing nodes with transactional component instances when the average cluster load gets either too high or too low.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1.">Non-intrusive moving of data partitions</head><p>This principle is the ability to move data partitions to other servers 1 in a non-intrusive way, i.e., when being accessed by transactions while guaranteeing the ACID properties. This principle is supported by the capability of splitting transactional data partitions dynamically and moving them across servers also dynamically while fulfilling the ACID properties. Transactional data partitions are represented by means of a B+ tree that is updated as an LSM tree, in batches from a cache. A transactional data partition is thus the combination of a B+ tree and a cache. The split of the data partition involves partitioning both the B+ tree and the cache. The splitting process is as follows. First, the metadata indicates that the data partition is going to be split into two data partitions, with their key ranges. The key at which the split is performed is the middle key in the root of the B+ tree. Then, the B+ tree root node is split into an atomic process into two different root nodes, each with half of the children of the root. If the root node has a single key, the two children of the root become the two new trees. The cache is not split. Instead, when it is propagated to the B+ tree, it is propagated to the two new trees. When the cache starts to be propagated, two empty caches are 1 The method and system for online data partition movement described in this paper is protected by a patent application <ref type="bibr" target="#b0">[1]</ref>. created, one for each tree. In this way, the split process is totally online and does not stop or disrupt transaction processing.</p><p>Dynamic movement of data partitions is achieved by an algorithm that moves a data partition without stopping the ongoing transactions, not even those updating the data partition being moved. The algorithm starts by telling the metadata server that the data partition is going to be moved from the current origin KiVi server to the destination KiVi server. Then after, it notifies both the origin and destination KiVi servers about the data partition movement. The destination KiVi server can start buffering all the changes that might arrive for the data partition being moved. Then, all the instances of the client side of KiVi are notified about the data partition movement. Each client instance upon notification starts sending changes not only to the origin data partition, but also to the destination data partition. Once all client instances have been notified, then all changes are being sent to both origin and destination KiVi servers. Then, the origin KiVi server is asked to start sending the data partition to the destination KiVi server. Note that the KiVi client side configuration is not atomic, that is, all clients are configured concurrently and the final order in which they get configured can be any. Thus, the changes being sent to the destination KiVi server can be different from each client side. What is important is that all client sides are configured to send to the origin and destination servers, before starting to move the data partition, which guarantees that no updates can be missing.</p><p>The data partition being sent can be updated in the meantime. Thus, some changes might be incorporated in the sent data partition while some other changes will not. The process to send a copy of the data partition sends all the rows in the partition by traversing the corresponding leaves of the B+ tree. Changes to a row are atomic, i.e., a particular row is moved before or after a change, but not during the change itself. Since multiversioning is used, a change is always implemented as an insertion, so a row is sent either before it has been inserted or after.</p><p>At the destination KiVi server, rows are inserted using the regular processing using a cache and a B+ tree. At some point, all the rows on the origin data partition have been sent to the destination KiVi server. Then, the destination KiVi server is notified about this fact and starts applying the row changes that has been buffered and are still buffering.</p><p>An important aspect for data consistency is to guarantee the idempotence of all row changes. This is achieved by taking advantage of combining the primary key of the row with the commit timestamp. This makes a unique identifier for a particular row change. Thus, when applying the buffered row changes, if a row with the same primary key and commit timestamp is found, then the buffered row change is just discarded since the change was already applied. When a change is actually applied we say that it has been effectively applied. Also, since the buffering of changes started before starting to send a copy of the data partition, it is guaranteed that no change is missing. Any change after finalizing the reconfiguration of the clients is guaranteed to be already buffered at the destination server. In extreme loads, where the destination KiVi server never catches up, there is a temporal limit, upon which the processing over the partition would be paused to enable to complete the movement and finalize the reconfiguration. In practice, this mechanism is almost never needed.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2.">Dynamic load balancing of transactional components</head><p>The dynamic load balancing of the transactional components (query engine, transaction manager, KiVi storage engine) depends on the nature of the state they manage: session state, temporal state, or persistent state. Session state is the state related to a client session. Both the query engines and LTMs that are collocated have session state. They keep client sessions connected to them that start and commit transactions and submit SQL statements. The way to balance the load across query engines and LTMs is by moving sessions across their instances. We move sessions only when there is no transaction active in the session. Thus, moving sessions requires reconfiguring the client connection to send new transactions to a different query engine and LTM. The only state that is moved is the timestamp of the last committed update transaction needed for session consistency.</p><p>Conflict managers keep a temporal state. This state is related to the updates performed over the different keys, which has to be remembered for some time to detect write-write conflicts. The unit of distribution in conflict managers are buckets. We use hashing and then get the modulo by the number of buckets to assign a bucket to a key. Then, each conflict manager is responsible for a set of buckets. Since this information is just needed for some time, the way we deal with dynamic load balancing is by giving the responsibility of a bucket of a loaded conflict manager to a less loaded conflict manager. A naïve solution would be to send the bucket state from one conflict manager to the other and buffer the conflict requests on the receiving conflict manager. Instead, we exploit the temporality of conflict information and just send conflict requests to the old and new conflict manager for that bucket. The replies are sent only by the old conflict manager. At some point, all conflict information is in the two conflict managers. Then, LTMs are reconfigured to get the replies for the moved bucket from the new conflict manager and send only the conflict requests to the new conflict manager and remove the bucket information from the old conflict manager.</p><p>There are two components with persistent state: loggers and KiVi. However, although they are stateful, loggers can be handled almost as session state components because of two features. The first feature is that loggers are append only. The second feature is that logging information can be stored in any logger and only metadata information needs to be kept to relevant loggers in order to do recovery efficiently. To move the load from a highly loaded logger to a less loaded logger, we just need to reconfigure one LTM that sends logs to the highly loaded logger to send the logs to the less loaded logger. This information is also stored in the metadata to know that the less loaded logger is involved to recover transactions from the associated LTM from a particular commit timestamp.</p><p>The load balancing of KiVi leverages the principle of nonintrusive moving of transactional data partitions. When a KiVi instance becomes highly loaded, one of its data partitions is moved to a less loaded KiVi instance. Such moving is transparent to applications. Load balancing is a hard problem by itself. When a single resource is involved (e.g., CPU or IO bandwidth), there are greedy solutions that provide an optimal solution. This is the case for all transactional components but KiVi. A KiVi instance can be CPU, memory or IO bound. Unfortunately, multi-resource load balancing is an NP hard problem <ref type="bibr" target="#b28">[29]</ref>. We have designed a greedy multi-resource load balancing that handles multiple resources with a solution very close to the optimal in affordable computation time <ref type="bibr" target="#b29">[30]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3.">Transactional elasticity</head><p>Transactional elasticity combines the capabilities of splitting transactional data partitions, moving them and deciding where to move them based on the dynamic load balancing algorithm. The algorithm proceeds as follows. Once a new server has been provisioned and registered in the metadata, then a number of data partitions can be moved to it. When a particular data partition becomes too big or overloaded, it is split and can be moved if needed to another KiVi server. Elasticity requires setting thresholds of the average server load on the different dimensions of the load, CPU, memory and IO bandwidth. There is an upper threshold for each resource (e.g., 80% CPU) that, when overcome, triggers the provisioning of a new server. The data partitions moved to the new server are decided by the dynamic load balancing algorithm. There is a lower threshold for each resource. When the average cluster resource utilization of all resources after removing one server is below the lower threshold, then the less loaded KiVi server is chosen and the dynamic load balancing algorithm decides to which other KiVi servers to move each partition. When the server does not have any data partition, then it is decommissioned. Note that there is a highly available version of LeanXcale that provides replication of all components. However, this topic is outside the scope of this paper.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.">Correctness</head><p>In this section, we show that LeanXcale transaction management is correct, i.e., it correctly provides snapshot isolation and 1-copy transactional data movement.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1.">Snapshot isolation level correctness</head><p>We start with some basic definitions. Then, we prove that LeanXcale provides snapshot isolation and session consistency.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Definition 6.1 (Data Items and Transactions).</head><p>A transaction T i is a sequence of read and write operations bracketed by a start operation s i and a commit (c i ) or abort (a i ) operation. A data item x starts with its unborn version x init and finishes with its tombstone version x dead . A transaction T i creates a version x i of an object x when executing a write over it, denoted by w i (x i ). The reading of a particular data item version j from a transaction T i is denoted by r i (x j ). When a transaction T i has written a data item x i , it becomes committed when T i commits. A data item is read and/or written at most once within a transaction.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Definition 6.2 (Transaction History). Let T be a set of transactions.</head><p>A history H over T represents a particular execution of the transactions in T . A history defines two orders:</p><p>1. The time precedes order, denoted by ≺ t , over the transaction operations, characterized as: (a) Every transaction T i in T has a start operation (s i ) and a commit (c i ) or abort operation (a i ). All operations of committed transactions appear in H. (b) All operations of a transaction T i are totally ordered according to the order in which they were executed.</p><p>If o ij was executed before o ik then o ij ≺ t o ik .</p><p>(c) If a transaction T j reads a data item x i written by T i then w i (x i ) ≺ t r j (x i ).</p><p>(d) Given two transactions T i and T j , it follows that either</p><formula xml:id="formula_1">s j ≺ t c i or c i ≺ t s j .</formula><p>2. A version total order, denoted by ≪, among the versions of a data item where x init is the first version and if x dead exists, is also the last version. Definition 6.3 (Snapshot Read <ref type="bibr" target="#b30">[31]</ref>). All reads performed by a transaction T i occur at its start point, i.e., if r i (x j ) occurs in history H, then:</p><p>(1)</p><formula xml:id="formula_2">c j ≺ t s i (2) If w k (x k ) also occurs in H (j ̸ = k), then • Either s i ≺ t c k</formula><p>• Or c k ≺ t s i and x k ≪ x j Definition 6.4 (Snapshot Write <ref type="bibr" target="#b30">[31]</ref>). For any two committed transactions T i and T j in H that write the same object x:</p><formula xml:id="formula_3">(1) Either c i ≺ t s j or c j ≺ t s i (2) If c i ≺ t s j ≺ t c j then x i ≪ xj and if c j ≺ t s i ≺ t c i then x j ≪ x i</formula><p>We now provide a definition of snapshot isolation derived from the one provided in <ref type="bibr" target="#b30">[31]</ref> without using the GILD formalism. Definition 6.5 (Snapshot Isolation). A transaction history H over T fulfills Snapshot Isolation when: </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Definition 6.6 (Session).</head><p>A session S i is a subset of the transactions participating in a history H, such that S i ⊆ T with a total order among the transactions in the session, denoted by ≺ S i . All sessions defined in a history H are disjoint, i.e., ∀S i , S j ∈ S, i ̸ = j.S i ∩ S j = ∅. Definition 6.7 (Session Consistency). A transaction processing system provides session consistency when it is guaranteed that all transactions within a session S m of a history H observe all the updates of previous transactions in that session, i.e., ∀T i , T j ∈ S m , i ̸ = j, T i ≺ Sm T j ⇒ c i ≺ t s j .</p><p>Let us now prove that our solution provides snapshot isolation (Definition 6.5). In order to do so, we first prove that a concurrent execution is equivalent to a snapshot isolation execution in the commit timestamp order. We first prove that there are no aborted reads (Definition 6.5.1), no intermediate reads (Definition 6.5.2), nor circular dependencies(Definition 6.5.3). Then, we prove that we guarantee the snapshot read property (Definition 6.3). Finally, we also prove that the conflict detection algorithm satisfies the snapshot write property (Definition 6.4), providing the first updater wins version of it.</p><p>Finally, since the isolation levels deal with the ordering of individual transactions but not session consistency, we prove that LeanXcale also provides session consistency (Definition 6.7). This adds an extra requirement for the visibility of updates across transactions within the same session, i.e., that transactions in a session observe the writes of all previous update transactions in that session. Lemma 6.1. LeanXcale does not suffer aborted reads.</p><p>Proof. Since LeanXcale uses private versions for the updates of transactions before a transaction is readable, no transaction can ever read an object written by an aborted transaction because the aborted transaction will never become either durable or readable. □ Lemma 6.2. LeanXcale does not suffer intermediate reads.</p><p>Proof. Also due to the use of private versions, it is impossible for any transaction to read any intermediate result. Lines 6-7 in Algorithm 2 show that private versions are only accessible to the active transaction in a session that created them. Only final results will become readable by other transactions and this only happens when the transaction is committing. □ Lemma 6.3. LeanXcale does not exhibit circular dependencies.</p><p>Proof. The proof is by contradiction. There are only four possible cycles: read-read, read-write, write-read, and write-write:</p><p>• Assume that T i reads x from T j (r i (x j )) and T j reads y from T i (r j (y i )). For T j to read x from T i , T i should have committed and thus, its updates would be visible to T j . Thus, T j would have a start timestamp equal or higher than the CTS of T i , cts i ≤ sts j .</p><p>If T i has read data from T j , then cts j ≤ sts i . Since sts j &lt; cts j and sts i &lt; cts i , we would get: cts i ≤ sts j &lt; cts j ≤ sts i &lt; cts i , which leads to a contradiction.</p><p>• Assume T i reads x from T j (r i (x j )) and T j writes y that was already written by T i (y j ≫ y i ). For T i to read x from T j , T j should have committed and thus, be visible for T i . Thus, T i would have a start timestamp equal or higher than the CTS of T j : cts j ≤ sts i . For T j to write a version y j ≫ y i , T j can only do while T i is not yet committed, in which case it would be aborted by the conflict manager, or after T i has already committed. In the latter case, either T j is concurrent to T i and then the conflict manager would still abort T j because of the write-write conflict between concurrent transactions or T j starts after the commit of T i which implies that the start timestamp of T j is equal or higher than the CTS of T i : cts i ≤ sts j . In the latter case, since sts i &lt; cts i and sts j &lt; cts j , we would get: cts j ≤ sts i &lt; cts i ≤ sts j &lt; cts j , which leads to a contradiction.</p><p>• Assume that T j reads x from T i (r j (x i )) and T i writes y that was already written by T j (y i ≫ y j ). For T j to read x from T i , T i should have committed and thus, be visible for T j . Thus, T j would have a start timestamp equal or higher than the CTS of T i : cts i ≤ sts j . For T i to write a version y i ≫ y j , T i can only do while T j is not yet committed, in which case it would be aborted by the conflict manager, or after T j has already committed. In the latter case, either T i is concurrent to T j and then the conflict manager would still abort T i because of the write-write conflict between concurrent transactions or T i starts after the commit of T j , which implies that the start timestamp of T i is equal or higher than the CTS of T j , i.e., cts j ≤ sts i . For the latter, since sts j &lt; cts j and sts i &lt; cts i , we would get: cts i ≤ sts j &lt; cts j ≤ sts i &lt; cts i , which leads to a contradiction,</p><p>• Assume T i writes x i after T j writes x j , x i ≫ x j and T j writes y j after T i writes y i , y j ≫ y i . For the former, both transactions could be concurrent or sequential. If they are concurrent, T i would be aborted due to the write-write conflict. If they are sequential, then we would have: cts j ≤ sts i . For the latter, similarly, both transactions can be concurrent or sequential.</p><p>In the concurrent case, T j would be aborted by the conflict manager. In the sequential case, we would have: cts i ≤ sts j . Since sts j &lt; cts j and sts i &lt; cts i , we would get: cts j ≤ sts i &lt; cts i ≤ sts j &lt; cts j , which leads to a contradiction.</p><p>Since all possible cases lead to a contradiction, the lemma is proven. □ Lemma 6.4. LeanXcale transaction management satisfies the snapshot read property (Definition 6.3).</p><p>Proof. The proof is by contradiction. Assume the snapshot read property (Definition 6.3) is not satisfied. Then, there are two cases:</p><p>1. r i (x k ) and (c k ≺ t c j ≺ t s i and x k ≪ x j ). Thus, a transaction T i reads an older version (x k ) that is not the last one before its snapshot. Then, although the current snapshot when T i started was the one corresponding to the CTS of T j , T i read x k that corresponds to an earlier snapshot. However, this is impossible since when the snapshot reaches the CTS of T j , all transactions with CTS lower than or equal to the CTS of T j are already durable and readable. Lines 5-8 in Algorithm 6 show that the snapshot only progresses where there are no gaps in the serialization order in terms of durable and readable transactions. Thus, the versions of their updated data are already in the KiVi servers. Since all possible five cases lead to a contradiction, the lemma is proven. □ Lemma 6.5. LeanXcale transaction management satisfies the snapshot write property (Definition 6.4).</p><p>Proof. The proof is by contradiction. Assume that the snapshot write property (Definition 6.4) is not satisfied. Then, there are two cases:</p><p>1. Two concurrent transactions modify the same row and then commit. This leads to a conflict that is detected by the conflict manager that handles the row key. One transaction update notification will be processed before the other by this conflict manager. The notification that is received first, and thus also processed first, will be successful (see lines 5-7 in Algorithm 3). The other transaction will fail and the transaction will be aborted (see lines 3-4 in Algorithm 3 and lines 14-15 in Algorithm 2). Since all conflicts are solved before starting the commit, this leads to a first updater wins strategy and guarantees that two concurrent transactions cannot both update the same row and commit, which yields a contradiction. 2. Two non-concurrent transactions, T i and T j , produce versions in reverse order that they have been committed, i.e., c i ≺ t c j and x j ≪ x i . Since c i ≺ t c j , T i has necessarily a CTS lower than T j because LeanXcale uses the commit timestamp order as commit order (see <ref type="bibr">Algorithm 6)</ref>. This commit order is applied to the data versioning where the commit timestamp ordering is used to choose the version to be read (see lines 2-4 in Algorithm 1). Thus, we have c i ≺ t c j ⇒ x i ≪ x j , which leads to a contradiction.</p><p>Since the two cases result in a contradiction, the lemma is proven. □ Theorem 6.6. LeanXcale transaction management provides snapshot isolation (Definition 6.5).</p><p>Proof. Snapshot isolation (Definition 6.5) requires to fulfill five properties. Lemmas 6.1, 6.2, 6.3, 6.4, 6.5 prove each of the properties, thus, LeanXcale transactional management satisfies snapshot isolation. □ Lemma 6.7. LeanXcale transaction management provides session consistency (Definition 6.7).</p><p>Proof. The proof is by contradiction. Assume that session consistency is not guaranteed in session S m . Thus, a transaction T k ∈ S m will not observe a snapshot that includes the updates of all update transactions in S m that committed before T k in S m . Violating session consistency means that T k , instead of reading a version x j of T j ∈ S m , reads a row with a version x i written by T i that committed before T j , i.e., r k (x i ),</p><formula xml:id="formula_4">x i ≪ x j , C i ≺ t C j ≺ t S k .</formula><p>Since the session consistency mechanism enforces that the start timestamp sts k of any new started transaction T k is greater than the CTS cts j of any transaction T j ∈ S m , T j ≺ Sm T k , we have: C j ≺ t S k . For this to happen, T j should become durable and readable before the start of T k and the snapshot server has to advance the snapshot to a value equal to or higher than cts j . The snapshot getting the value of cts j or higher means that all committed transactions with CTSs lower than or equal to cts j were also durable and readable. Thus, it is impossible that T k reads row x i , since LeanXcale guarantees that the biggest version that will be read by T k has a CTS lower than or equal to the snapshot associated to the reading transaction, sts k , which means that it will return a version of x that is x j or older, but not younger. This leads to a contradiction and thus, the lemma is proven. □</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2.">1-copy transactional data movement</head><p>Elastic transaction management relies on the movement of transactional data partitions during transaction processing. LeanXcale guarantees full consistency during the movement of a transactional data partition. We formalize the concept as 1-copy transactional data movement, meaning that the behavior of the system during data movement is equivalent to that without any data movement with a single data partition not being moved. Lemma 6.8. No updates lost.</p><p>Proof. The data partition movement starts by configuring all client sides to send updates to both the origin and destination KiVi servers. Suppose for the sake of contradiction that at least one update is lost. If the update is lost, it can only be because the update did not reach the destination KiVi server since the destination KiVi server would apply all buffered updates. Thus, the update would have been sent before the client side that produces it was reconfigured. This leads to a contradiction since the data partition movement would only start after the client side was reconfigured to send to both the origin and destination KiVi servers. □ Lemma 6.9. Idempotence of updates.</p><p>Proof. Updates are identified by the primary key of the row they modify and the CTS. If an update that is applied on the origin KiVi server is also buffered at the destination KiVi server, and thus re-applied, the row with that primary key would be labeled as a version equal or higher to the CTS of that transaction (higher in the case that some updates happened on the origin KiVi server before the state of the row was sent to the destination KiVi server) and that update would be discarded. Thus, updates are idempotent and only effectively applied once in the order of the CTSs. □ Lemma 6.10. Synchronous replica after data partition movement is completed.</p><p>Proof. After the data partition is moved, i.e., all the rows from the data partition have been copied to the destination KiVi server, the destination KiVi server has a copy of the data partition with a fraction of the updates that happened after all client sides were reconfigured to send to the origin and destination servers. Furthermore, the destination KiVi server has all the updates that have been sent since the data partition was moved (see Lemma 6.8) and continues to receive all the updates over that data partition as part of each transaction. Thus, once all buffered updates have been applied, it becomes a synchronous replica of the origin data partition. □ Theorem 6.11. Data partition movement satisfies 1-copy guarantees.</p><p>Proof. From Lemmas 6.8-6.10, it follows that no updates are lost and that duplicate updates are applied only once. It also follows that after the data partition movement is completed, both origin and destination data partitions are updated synchronously. Thus, the process guarantees that the data partition behaves as 1-copy that is not moved. □</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.">Performance evaluation</head><p>This section evaluates the scalability and elasticity of transaction processing in LeanXcale using the TPC-C benchmark and microbenchmarks on Amazon Web Services (AWS). After introducing our experimental setup, we present our experimental results.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.1.">Experimental setup</head><p>Cluster configuration. For the TPC-C benchmark, we deploy LeanXcale using two kinds of nodes: metadata nodes and data nodes. The metadata nodes contain instances of metadata components (configuration manager, conflict manager, logger, . . . ). The data nodes contain the query engine, LTM and KiVi servers. We use a cluster of up to 200 AWS i3en.2xlarge servers as data nodes and up to 20 AWS i3en.2xlarge servers as metadata nodes. Each i3en.2xlarge instance has 8 vCPUs (4 physical cores with hyperthreading), 64 GB of memory and 2 NVMe disks of 2,5TB. For load injection, we use 1 AWS server for every 20 LeanXcale data servers.</p><p>LeanXcale deployment. One node is used for the meta-data components across all configurations from 1 to 200 servers. Each data node has 4 instances of KiVi servers, and one instance of the query engine and LTM. There is one metadata node for every 20 data nodes or fraction of them. Each metadata node has one instance of the Apache Zookeeper configuration manager, 4 instances of the conflict manager, and 8 instances of the logger. Each 4 loggers are assigned to one of the two disks in each AWS instance. There is a minimum of 5 zookeeper instances, so there are always at least 5 metadata nodes.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>TPC-C dataset deployment:</head><p>The TPC-C dataset is deployed as follows. Each server node handles 2,000 data warehouses. All the TPC-C tables are partitioned using the warehouse id, except the read-only table Item that is replicated at all nodes.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.2.">Scalability</head><p>We run TPC-C with 4 configurations of 1, 20, 100 and 200 data servers in AWS. The experiments (see Fig. <ref type="figure" target="#fig_6">5</ref>) show linear scale out from 1 to 200 servers, reaching 11 million transactions per minute (TPM). In particular, we reach about 5 million New Order TPM, which is greater than the TPC-C throughput obtained by the 9th highest result in all history. Out of these 9 results only 5 are in a cluster deployment <ref type="bibr" target="#b31">[32]</ref>.</p><p>For TPC-C, there are only two results released in a cloud data center, which are also the two top ones. These results are from Alibaba Cloud Elastic using 65,394 and 6,720 cores, respectively, yet used exclusively (not shared with other users as we do) for the benchmark. Trying with those high-end configurations was beyond our economic capabilities. However, LeanXcale's efficiency per core (TPM per core) is much higher, with 22700+ new order TPM per core versus 10800+, i.e., double that of Alibaba. The other systems use highly tuned bare metal hardware (SANs with enough memory to keep all data in memory) while we run on a public cloud with shared instances. Fig. <ref type="figure" target="#fig_7">6</ref> shows the average latency (response time) of different TPC-C transactions (NewOrder, Delivery, Payment, StockLevel and OrderStatus) for the largest deployment, i.e., with 200 AWS instances. Note that the latencies are quite below the SLA required by the benchmark (5 s for all transactions except StockLevel that is 20 s). Another important observation is that the latencies are pretty steady. Latencies for low loads are under millisecond. The greater latencies shown in Fig. <ref type="figure" target="#fig_7">6</ref> are due to the system getting close to saturation, which yields larger request queues and thus corresponding waiting times.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.3.">Elasticity</head><p>To evaluate the elasticity of the different transactional components described in Section 3, we exercise several microbenchmarks, one per component (logger, conflict manager, KiVi server). We also study the effectiveness of load balancing across KiVi servers and the global elasticity of all components.  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.3.1.">Logger elasticity</head><p>It is exercised by increasing the update transaction load in terms of number of warehouses (actually, the client threads of the warehouses) during around 15 min until the threshold for triggering logger elasticity is reached. Then, the load is kept stable for half an hour and then, the load is started to be reduced. The results are shown in Fig. <ref type="figure" target="#fig_8">7</ref>. On the left y axis, we can see the number of messages processed by each logger (initially, one logger). On the right y axis, we can see the load in terms of number of warehouses, where each warehouse has 10 client threads as mandated by TPC-C. The load is increased from 4,000 until 40,000 warehouses. When the load goes beyond 30,000 warehouses, which results in over 40,000 log messages per second, elasticity is triggered, and a new logger is provisioned (orange line). Then, half of the LTMs connect to the new logger and disconnect from the initial one. This process is quite fast, taking only a few seconds to commute to the new logger. This is possible because LeanXcale transaction management does not have any requirement in terms of log ordering. Once the switch of half of the LTMs is completed, both loggers get half the load of the log messages. Finally, around minute 42, the load starts to decrease. When the load gets below 20,000 log messages per logger, elasticity is triggered again and all LTMs sending load to the second logger switch back to the first logger. In a few seconds, the process is completed, and the second logger decommissioned. Then, the first logger gets the full load, which is below 40,000 log messages per second and goes down to 5000 messages per second.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.3.2.">Conflict manager elasticity</head><p>The micro-benchmark for conflict manager elasticity is similar to that for loggers. The load is increased in terms of warehouses (actually, the client threads allocated to each warehouse) until the elasticity threshold is reached. Then, the load is sustained for half an hour and then decreased until reaching the initial load. The results are depicted in Fig. <ref type="figure" target="#fig_9">8</ref>. The load is shown with double y axis as before. On the left y axis, the load is shown in terms of conflicts per second received by each conflict manager (initially one, see the orange line). On the right y axis, the load is shown in terms of warehouses. The increase in warehouses has a faster effect on the load received by the conflict managers in terms of conflicts per second, since they are received along the transaction instead of at the end as with the loggers. When the load goes above 160,000 conflicts per second, a new conflict manager is provisioned. Unlike with logger elasticity, the process takes longer, but there is the advantage that no state is transmitted across conflict managers. Each of them receives all the conflict information and at some point, the conflicts known only by the first conflict manager are forgotten because they are obsolete. Thus, at that point, the second conflict manager knows all the needed conflicts and the responsibility of half of the conflict buckets is transferred to the second conflict manager. Then, the first conflict manager starts receiving half the load. The process for provisioning the second conflict manager until the first conflict manager handles half the load takes about two minutes. Then, after 30 min of constant load, the load is decreased. This process takes a little less than the first two minutes, since the load is smaller and it takes less time for the information kept by the second conflict manager to become totally obsolete, at which point, all its buckets are transferred to the first conflict manager that starts to handle the full load. The responsibility of conflict buckets just requires sending configuration messages to all LTMs. The advantage of this process is that it does not require to stop the processing at any point, thus not disrupting the QoS of transaction management.  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.3.3.">KiVi Server elasticity</head><p>In this micro-benchmark, we show the elasticity of the KiVi servers. The results are shown in Fig. <ref type="figure" target="#fig_10">9</ref>. The top chart shows the CPU usage of the two servers and the bottom chart the evolution of the overall throughput and response time. We run one KiVi server in charge of 200 warehouses. Initially, only the load for the first 100 warehouses is generated. Five minutes later, the load for the other 100 warehouses starts to be injected. Each table partition corresponds to 100 warehouses. This increases the load in the KiVi server above the elasticity threshold, which triggers the provisioning of a new KiVi server five minutes later with another KiVi server. One of the table partitions starts to be transferred to the second KiVi server. The transfer is completed in less than 1.5 min, including the time it takes for the second KiVi server to process all the buffered requests during the transfer. As can be seen in the figure, the only effect in the QoS is a slight increment in average response time of 10 ms during the state transfer across the two KiVi servers. The throughput is kept steady all the time.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.3.4.">Load balancing across KiVi servers</head><p>We show how the load of table partitions is balanced across KiVi servers. We focus on KiVi server load balancing, which is the most challenging since it is stateful. The micro-benchmark is run with 2 KiVi servers. The results are shown in Fig. <ref type="figure" target="#fig_11">10</ref>. Each table partition contains information of 40 warehouses. The first KiVi server is responsible for 9 table partitions and the second one for 7 table partitions. There are 80 warehouses for which no load is injected, corresponding to 2 table partitions for which KiVi server 1 is responsible. Thus, each KiVi server is receiving exactly the same load corresponding to 7 table partitions, i.e., 280 warehouses. Ten minutes after the start of the experiment, the load starts to be injected in the two table partitions (i.e., 80 warehouses) without any load. This causes the first KiVi server to get significantly more load than the second one. Then, 2 min later, load balancing is triggered and one table partition is moved from the first KiVi server to the second one. The table partition movement takes one minute to be completed. At this point, each KiVi server is handling half the workload. As can be seen during the table partition movement, there is a load increase in both servers. The first server receives more load and sends a copy of one of the table partitions to the second server. The second server gets a load increase because it receives a copy of the table partition. Thus, it must also buffer the requests corresponding to this table partition, and when the copy is finished, it has to apply the buffered updates. The full process takes around 3 min and at that point, the load of both servers is fully balanced, each one processing 160 warehouses.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.3.5.">Global elasticity</head><p>To evaluate the elasticity of all components, we deploy one node with data populated for 1,200 TPC-C warehouses. This node has one instance of each transactional component (KiVi server, logger, conflict manager, query engine, commit sequencer, snapshot server and LTM). Then, we start injecting load corresponding to the first 200 warehouses. Every 15 min, the load for another 200 new warehouses is added to the overall workload. Each load increase makes the overall load to go above the threshold, which triggers the provisioning of a new node. Each new node contains an instance of all components. After provisioning a new node, the load is balanced across all nodes. The warehouses still with no load remain as they are while the rest of the load corresponding to the active warehouses is balanced across all servers.</p><p>Fig. <ref type="figure" target="#fig_2">11</ref> top left shows the overall throughput and average latency. There are a couple of peaks of about 50 ms every time the load is increased. The first peak corresponds to initial tasks for balancing the data to the new server. The second peak corresponds to the finalization of these tasks, mainly to apply all the buffered updates to the data partitions of the moved tables. The process of moving all data across all servers (KiVi servers, conflict managers) is completed in about 5 min. Note that the load increase is done in steps, while in a real workload, the change in load would be smoother, thus giving us more time to adapt.</p><p>The throughput evolution of the conflict managers is shown in Fig. <ref type="figure" target="#fig_2">11</ref> bottom right. When the load is increased, the number of conflicts per second in the conflict managers increases. This increase is each time smaller, since the load increase is shared across all conflict managers. Such behavior stems from the fact  that the conflicts are hashed so their load is more or less evenly distributed across buckets.</p><p>Fig. <ref type="figure" target="#fig_2">11</ref> top right shows the throughput evolution in the loggers. Each load increase is actually received by the first node. Thus, the impact on the load is always the same, since the logger of the first node gets its load doubled each time. This is because we increase the load on warehouses without load and these warehouses are not actually moved until they receive load.</p><p>Fig. <ref type="figure" target="#fig_2">11</ref> bottom left shows the evolution of CPU usage of the KiVi servers. As for loggers, the load increase falls in the first KiVi server since it is the one that contains the data partitions of warehouses with no load. This doubles the load of the first KiVi server. In the new KiVi server, there is a first period where the load is low, as it is just buffering updates and receiving the data partition messages. Then, its CPU usage raises to the level of the other KiVi servers.</p><p>In summary, this experiment shows the elasticity of all transactional components that, by working together, deliver the elasticity of the LeanXcale database system as a whole. Such elasticity is non intrusive so that the QoS is barely affected during the elastic reconfigurations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8.">Conclusion</head><p>In this paper, we presented our solution to elastic scalable transaction processing in LeanXcale, an industrial-strength NewSQL database system. Unlike previous solutions, it does not require any special hardware assistance, such as RDMA-enabled networks or specialized clocks. Furthermore, its architecture is different than most NewSQL database systems such as Spanner that rely on a NoSQL key-value store. Our approach to elastic scalable transaction management is based on a number of principles, which we divided in three groups: scalable, efficient and elastic transaction management.</p><p>We proved that LeanXcale transaction management is correct, i.e., it correctly provides snapshot isolation and 1-copy transactional data movement.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Fig. 1 .</head><label>1</label><figDesc>Fig. 1. Transaction Phases.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Fig. 2 .</head><label>2</label><figDesc>Fig. 2. Lifecycle of a Transaction.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>1 :</head><label>1</label><figDesc>procedure Log(tid, writeset, cts) 2:</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Fig. 3 .</head><label>3</label><figDesc>Fig. 3. Example of Conflict Management.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>1: nextCTS ← 0 2 :</head><label>2</label><figDesc>function GetCTS → Integer 3:</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Fig. 4 .</head><label>4</label><figDesc>Fig. 4. Proactive Commit Sequencer.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Fig. 5 .</head><label>5</label><figDesc>Fig. 5. TPC-C Scalability Results for 1, 20, 100 and 200 Nodes.</figDesc><graphic coords="15,146.20,55.32,302.88,149.92" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head>Fig. 6 .</head><label>6</label><figDesc>Fig. 6. Transaction Latency for 200 Server Deployment.</figDesc><graphic coords="15,146.20,239.12,302.88,139.20" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><head>Fig. 7 .</head><label>7</label><figDesc>Fig. 7. Logger Elasticity.</figDesc><graphic coords="16,134.28,55.32,326.88,108.32" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_9"><head>Fig. 8 .</head><label>8</label><figDesc>Fig. 8. Conflict Manager Elasticity.</figDesc><graphic coords="16,135.57,197.52,324.26,107.14" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_10"><head>Fig. 9 .</head><label>9</label><figDesc>Fig. 9. KiVi Server Elasticity.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_11"><head>Fig. 10 .</head><label>10</label><figDesc>Fig. 10. KiVi Server Load Balancing.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head></head><label></label><figDesc>← t ∈ BD|(table = t.table ∧ PK = t.pk ∧ t.cts ≤ STS) ∧ ∄t2 ∈ BD|(table = t2.table ∧ PK = t2.pk ∧ t2.cts ≤ STS ∧ t2.cts &gt; t.cts)</figDesc><table><row><cell cols="2">1: BD ← 0</cell></row><row><cell cols="2">2: function Read(table, PK, STS) → Tuple</cell></row><row><cell>3:</cell><cell></cell></row><row><cell>4:</cell><cell>Return tuple</cell></row><row><cell cols="2">5: procedure Write(Tuples, CTS)</cell></row><row><cell>6:</cell><cell>for t = (table, PK , Cols) ∈ Tuples) do</cell></row><row><cell>7:</cell><cell>BD ← BD + (table, PK , Cols, CTS)</cell></row><row><cell></cell><cell>LeanXcale provides snapshot isolation as its isolation level.</cell></row><row><cell cols="2">Snapshot isolation provides a slightly lower isolation than seri-</cell></row><row><cell cols="2">alizability. In particular, it is possible to have an anomaly called</cell></row><row><cell cols="2">write skew. It involves a constraint across two rows (or more)</cell></row><row><cell cols="2">and writing different rows involved in the constraint by the two</cell></row><row><cell cols="2">transactions. Let us illustrate with an example. Consider a bank</cell></row><row><cell cols="2">that allows a person having two bank accounts, say b 1 and b 2 ,</cell></row><row><cell cols="2">to have a negative balance in any of the two accounts as far as</cell></row><row><cell cols="2">the global balance remains positive. Two concurrent withdrawals,</cell></row><row><cell cols="2">each from a different account, can lead to a negative global</cell></row><row><cell cols="2">imbalance. A withdrawal operation W of w units from b 1 would</cell></row><row><cell>do</cell><cell></cell></row></table><note><p>tuple</p></note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 1</head><label>1</label><figDesc>Untangled Transaction Commit.</figDesc><table><row><cell>CTS notifications</cell><cell>11</cell><cell>15</cell><cell>12</cell><cell>14</cell><cell>13</cell></row><row><cell>Evolution of snapshot counter</cell><cell>11</cell><cell>11</cell><cell>12</cell><cell>12</cell><cell>15</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>1 :</head><label>1</label><figDesc>conflicts ← {} 2: function Conflicts(pk, tid, sts) → Boolean</figDesc><table><row><cell>3:</cell><cell>if ConflictsWithAnyConcurrentTxn(pk, sts) then</cell></row><row><cell>4:</cell><cell>Return True</cell></row><row><cell>5:</cell><cell>else</cell></row><row><cell>6:</cell><cell>Store(conflicts, pk, tid, sts)</cell></row><row><cell>7:</cell><cell>Return False</cell></row><row><cell cols="2">8: procedure Commit(tid, cts)</cell></row><row><cell>9:</cell><cell>SetUpdatesToCommitted(tid, cts)</cell></row><row><cell cols="2">10: procedure Abort(tid)</cell></row><row><cell>11:</cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_5"><head></head><label></label><figDesc>1. No aborted reads. For any aborted transaction T i in H, any committed transaction T j cannot read any object modified by T i . 2. No intermediate reads. For any committed transaction T i in H, no transaction T j can read a version of an object x written by T i that was not the final modification of x. 3. No circular dependencies. H cannot contain circular information flow, i.e., if T i reads or writes a version written by T j , T j cannot read or modify a version written by T i . 4. H fulfills Snapshot Read (Definition 6.3). 5. H fulfills Snapshot Write (Definition 6.4).</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_6"><head></head><label></label><figDesc>Thisis shown in lines 20-21 in Algorithm 2, where snap-shotServer.DurableAndRedable is only invoked after logger.Log and dataManager.Write. This makes the transaction durable and readable. Therefore, when performing the read operation, it is guaranteed that the KiVi servers get the oldest version that has a version number lower than or equal to the snapshot, corresponding to the CTS of T j (see lines 3-4 in Algorithm 1). So, this leads to a contradiction.2. r j (x i ) and (c k ≺ t s j ≺ t c i and x k ≪ x i ). Thus, T j reads a younger version, x i written by T i , which is after T j 's snapshot sts j . There are five cases (all the possible states of a transaction from ongoing to visible):(a) x i is still private. In this case, it is impossible that any other transaction reads it, thus leading to a contradiction. Lines 6-7 in Algorithm 2 show that only a session can read from the private versions stored in the session local writeset. (b) T i is durable but x i has not yet been written in a KiVi server. As in the previous case, x i could not be read by T j from storage, thus leading to a contradiction. This is shown in lines 16-20 in Algorithm 2: since line<ref type="bibr" target="#b19">20</ref> has not yet been executed, x i only exists in the session local writeset so it cannot be read by any other transaction. (c) x i is in storage, but T i is not yet readable. Since T i is not readable, the snapshot is lower than the CTS of T i and thus can never be chosen by the storage engine as version to be read, which leads to a contradiction This is shown in lines 16-21 in Algorithm 2: since line<ref type="bibr" target="#b20">21</ref> has not yet been executed, x i is readable since it is written on the KiVi server but because the CTShas not yet been notified as durable and readable and thus the snapshot is lower than that CTS, no transaction can read (see lines 2-4 in Algorithm 1). (d) T i is readable but not visible. Although it is readable, T i is still not visible. Since the snapshot is lower than T i 's CTS, it can never be chosen by the storage engine as the version to be read, which leads to a contradiction (see lines 2-4 in Algorithm 1). (e) T i is visible. The snapshot server provides newly started transactions with a snapshot equal to or higher than the CTS of T i , cts i . However, we have sts j &lt; cts i , so the KiVi server will never return x i as version of x for the read operation, since it only returns versions with a timestamp equal to or lower than sts j , which leads to a contradiction (see lines 2-4 in Algorithm 1).</figDesc><table /></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>Acknowledgments</head><p>This work has been partially funded by the <rs type="funder">European Commission</rs> under the projects <rs type="projectName">Infinitech</rs> (contract #<rs type="grantNumber">856632</rs>), <rs type="projectName">Cybele</rs> (contract #<rs type="grantNumber">825355</rs>) and <rs type="projectName">PHYSICS</rs> (contract #<rs type="grantNumber">101017047</rs>), the <rs type="funder">Comunidad de Madrid</rs> under the industrial doctorate grant #<rs type="grantNumber">IND2018_TIC-9846</rs> and <rs type="grantNumber">EDGEDATA P2018/TCS-4499</rs> and, by the <rs type="funder">Spanish Research Council</rs> under the projects <rs type="projectName">QoSDATA</rs> (<rs type="grantNumber">PID220-119461GB-100/AEI/10.13039/501100011033</rs>) and <rs type="projectName">CloudDB</rs> (contract <rs type="grantNumber">TIN2016-80350-P</rs>).</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funded-project" xml:id="_puBZFrG">
+					<idno type="grant-number">856632</idno>
+					<orgName type="project" subtype="full">Infinitech</orgName>
+				</org>
+				<org type="funded-project" xml:id="_pHmbtSC">
+					<idno type="grant-number">825355</idno>
+					<orgName type="project" subtype="full">Cybele</orgName>
+				</org>
+				<org type="funded-project" xml:id="_B2dDGMv">
+					<idno type="grant-number">101017047</idno>
+					<orgName type="project" subtype="full">PHYSICS</orgName>
+				</org>
+				<org type="funding" xml:id="_vAXzuv4">
+					<idno type="grant-number">IND2018_TIC-9846</idno>
+				</org>
+				<org type="funded-project" xml:id="_Mb5ERhg">
+					<idno type="grant-number">EDGEDATA P2018/TCS-4499</idno>
+					<orgName type="project" subtype="full">QoSDATA</orgName>
+				</org>
+				<org type="funded-project" xml:id="_AWeKvsf">
+					<idno type="grant-number">PID220-119461GB-100/AEI/10.13039/501100011033</idno>
+					<orgName type="project" subtype="full">CloudDB</orgName>
+				</org>
+				<org type="funding" xml:id="_QDEj34U">
+					<idno type="grant-number">TIN2016-80350-P</idno>
+				</org>
+			</listOrg>
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Information Systems 108 <ref type="bibr">(2022)</ref>  Finally, we provided a thorough performance evaluation of our solution on AWS. The experimental results using the TPC-C benchmark show that LeanXcale can scale linearly from 1 to 200 servers and reach 5 million of NewOrder TPM and 11 million TPM overall. Furthermore, they also show double efficiency per core (i.e., 2*TPM per core) compared to the two top TPC-C results from Alibaba, which are the only results in a cloud data center but with no shared instances.</p><note type="other">102043</note><p>Elasticity is demonstrated individually for all transactional components (logger, conflict manager, KiVi server) and globally. In particular, it is shown that all servers (i.e., loggers, KiVi servers, . . . ) can be scaled up and down without impacting the QoS as well as balancing the load across KiVi servers.</p><p>As far as we know, this is the only industrial-strength solution for transaction processing that provides both scalability and elasticity in the cloud without resorting to any special hardware, with its performance evaluation in a public cloud with shared instances.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Declaration of competing interest</head><p>The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Method and system for online data partition movement</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Jimenez-Peris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Ballesteros</surname></persName>
+		</author>
+		<idno>Filing date: 16/02/2022</idno>
+	</analytic>
+	<monogr>
+		<title level="j">European Patent Office. File application number</title>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<title level="m" type="main">F1 -the faulttolerant distributed rdbms supporting google&apos;s ad business</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Shute</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Oancea</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ellner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Handy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Rollins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Samwel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Vingralek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Whipkey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Jegerlehner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Littlefield</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Tong</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<publisher>SIGMOD</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title level="m" type="main">Principles of Distributed Database Systems</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Özsu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Valduriez</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<publisher>Springer</publisher>
+		</imprint>
+	</monogr>
+	<note>fourth ed.</note>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Data Management in the Cloud: Challenges and Opportunities</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Agrawal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Das</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">E</forename><surname>Abbadi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Synthesis Lectures on Data Management</title>
+		<imprint>
+			<publisher>Morgan &amp; Claypool Publishers</publisher>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">H</forename><surname>Garcia-Molina</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Salem</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Sagas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">SIGMOD Record</title>
+		<imprint>
+			<biblScope unit="page" from="249" to="259" />
+			<date type="published" when="1987">1987</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Distributed database systems: The case for newSQL</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Valduriez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Jimenez-Peris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">T</forename><surname>Özsu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Transactions on Large-Scale Data-and Knowledge-Centered Systems</title>
+		<imprint>
+			<publisher>TLDKS</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="1" to="15" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">E-Store: Fine-grained elastic partitioning for distributed transaction processing systems</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Taft</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Mansour</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Serafini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Duggan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">J</forename><surname>Elmore</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Aboulnaga</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Pavlo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Stonebraker</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the VLDB Endowment (PVLDB)</title>
+		<meeting>the VLDB Endowment (PVLDB)</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="245" to="256" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">SAP HANA database: data management for modern business applications</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Färber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">K</forename><surname>Cha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Primsch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Bornhövd</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Sigg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Lehner</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM SIGMOD Record</title>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">The voltDB main memory database system</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Stonebraker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Weisberg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Data Engineering Bulletin</title>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Middleware-based data replication providing snapshot isolation</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Kemme</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Patiño-Martınez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Jimenez-Peris</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">SIGMOD Conference</title>
+		<imprint>
+			<date type="published" when="2005">2005</date>
+			<biblScope unit="page" from="419" to="430" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Consistent database replication at the middleware level</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Patiño-Martinez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Jimenez-Peris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Kemme</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Alonso</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Middle-R</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Computer Systems (TOCS)</title>
+		<imprint>
+			<biblScope unit="page" from="375" to="423" />
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Snapshot isolation and integrity constraints in replicated databases</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Kemme</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Patiño-Martınez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Jimenez-Peris</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Database Systems (TODS)</title>
+		<imprint>
+			<biblScope unit="page" from="1" to="49" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<author>
+			<persName><forename type="first">P</forename><surname>Bernstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Hadzilacos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Goodman</surname></persName>
+		</author>
+		<title level="m">Concurrency Control and Recovery in Database Systems</title>
+		<imprint>
+			<publisher>Addison-Wesley</publisher>
+			<date type="published" when="1987">1987</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Are quorums an alternative for data replication</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Jimenez-Peris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Patiño-Martınez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Alonso</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Kemme</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Database Systems</title>
+		<imprint>
+			<biblScope unit="page" from="257" to="294" />
+			<date type="published" when="2003">2003</date>
+			<publisher>TODS</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">No compromises: distributed transactions with consistency, availability, and performance</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Dragojevic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Narayanan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">B</forename><surname>Nightingale</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Renzelmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Shamis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Badam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Castro</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">USENIX Symposium on Operating Systems Design and Implementation</title>
+		<imprint>
+			<publisher>OSDI</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="54" to="70" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Fast general distributed transactions with opacity</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Shamis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Renzelmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Novakovic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Chatzopoulos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Dragojevic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Narayanan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Castro</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">SIGMOD Conference</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="433" to="448" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">FaSST: Fast, scalable and simple distributed transactions with two-sided (RDMA) datagram RPCs</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Kalia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Kaminsky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">G</forename><surname>Andersen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">USENIX Symposium on Operating Systems Design and Implementation</title>
+		<imprint>
+			<publisher>OSDI</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="185" to="201" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">The end of a myth: Distributed transactions can scale</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Zamanian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Binnig</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Harris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Kraska</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the VLDB Endowment (PVLDB)</title>
+		<meeting>the VLDB Endowment (PVLDB)</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="685" to="696" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Spanner: Google&apos;s globally distributed database</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">C</forename><surname>Corbett</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">USENIX Symposium on Operating Systems Design and Implementation</title>
+		<imprint>
+			<publisher>OSDI</publisher>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="251" to="264" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">H-Store: A highperformance, distributed main memory transaction processing system</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Kallman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Kimura</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Natkins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Pavlo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Rasin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">B</forename><surname>Zdonik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">P C</forename><surname>Jones</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Madden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Stonebraker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Hugg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">J</forename><surname>Abadi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the VLDB Endowment (PVLDB)</title>
+		<meeting>the VLDB Endowment (PVLDB)</meeting>
+		<imprint>
+			<date type="published" when="2008">2008</date>
+			<biblScope unit="page" from="1496" to="1499" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<title level="m" type="main">Splice Machine: The Only Hadoop RDBMS</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Machine</surname></persName>
+		</author>
+		<ptr target="http://www.splicemachine.com/wp-content/uploads/sp.WhitePaper_141015.pdf" />
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<publisher>Tech. Rep</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title level="m" type="main">Enterprise Class Operational SQL-on-Hadoop</title>
+		<author>
+			<persName><forename type="first">Esgyndb</forename><surname>Esgyndb</surname></persName>
+		</author>
+		<ptr target="https://esgyn.com/wp-content/uploads/EsgynDB-Technical-Whitepaper-v2.1.pdf" />
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Tech. Rep</note>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Apache</surname></persName>
+		</author>
+		<ptr target="https://hbase.apache.org/" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<pubPlace>Hbase</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">The log-structured merge-tree (LSM-tree)</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>O'neil</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Cheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Gawlick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>O'neil</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Acta Informatica</title>
+		<imprint>
+			<biblScope unit="page" from="351" to="385" />
+			<date type="published" when="1996">1996</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">System and method for highly scalable decentralized and low contention transaction processing</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Jimenez-Peris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Patiño-Martinez</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">European Patent #EP</title>
+		<imprint>
+			<biblScope unit="volume">2780832</biblScope>
+			<biblScope unit="page">597</biblScope>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+	<note>US Patent #US9</note>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Making snapshot isolation serializable</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Fekete</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Liarokapis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>O'neil</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>O'neil</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Shasha</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Database Systems (ACMTDS)</title>
+		<imprint>
+			<biblScope unit="page" from="492" to="528" />
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Serializable isolation for snapshot databases</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">J</forename><surname>Cahill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">U</forename><surname>Röhm</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">D</forename><surname>Fekete</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">SIGMOD Conference</title>
+		<imprint>
+			<date type="published" when="2008">2008</date>
+			<biblScope unit="page" from="729" to="738" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Eventually consistent</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Vogels</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Communications of the ACM</title>
+		<imprint>
+			<biblScope unit="page" from="14" to="19" />
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">On multidimensional packing problems</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Chekuri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Khanna</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">SIAM Journal on Computing (SICOMP)</title>
+		<imprint>
+			<biblScope unit="page" from="837" to="851" />
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">A multiresource load balancing algorithm for cloud cache systems</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Jia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Brondino</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Jimenez-Peris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Patiño-Martinez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Ma</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM Symposium on Applied Computing</title>
+		<meeting>the ACM Symposium on Applied Computing</meeting>
+		<imprint>
+			<publisher>SAC</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="463" to="470" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<monogr>
+		<title level="m" type="main">Weak Consistency: A Generalized Theory and Optimistic Implementations for Distributed Transactions</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Adya</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1999">1999</date>
+		</imprint>
+		<respStmt>
+			<orgName>Massachusetts Institute of Technology</orgName>
+		</respStmt>
+	</monogr>
+	<note type="report_type">Ph.D. thesis</note>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<monogr>
+		<ptr target="http://tpc.org/tpcc/results/tpcc_results5.asp" />
+		<title level="m">The Transaction Processing Performance Council</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+		<respStmt>
+			<orgName>TPC-C Top Results, Tech. Rep</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

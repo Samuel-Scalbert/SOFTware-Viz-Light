@@ -1,0 +1,2859 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="fr">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Global patterns in genomic diversity underpinning the evolution of insecticide resistance in the aphid crop pest Myzus persicae</title>
+				<funder ref="#_e9jVZVH">
+					<orgName type="full">National Science Foundation</orgName>
+				</funder>
+				<funder ref="#_EQ2MbgR">
+					<orgName type="full">Biotechnology and Biological Sciences Research Council</orgName>
+					<orgName type="abbreviated">BBSRC</orgName>
+				</funder>
+				<funder ref="#_hejZSTY">
+					<orgName type="full">Defense Advanced Research Projects Agency</orgName>
+					<orgName type="abbreviated">DARPA</orgName>
+				</funder>
+				<funder ref="#_vXcQePM">
+					<orgName type="full">European Research Council</orgName>
+					<orgName type="abbreviated">ERC</orgName>
+				</funder>
+				<funder ref="#_6Ga69z7 #_fzRsgya">
+					<orgName type="full">BBSRC</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Saurabh</forename><surname>Kumar</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Erick</forename><surname>Singh</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Bartlomiej</forename><surname>Cordeiro</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Adam</forename><surname>Troczka</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Joanna</forename><surname>Pym</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Thomas</forename><surname>Mackisack</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Ana</forename><surname>Mathers</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Fabrice</forename><surname>Duarte</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Stéphanie</forename><surname>Legeai</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Pablo</forename><surname>Robin</surname></persName>
+						</author>
+						<author>
+							<persName><surname>Bielza</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Kumar</forename><forename type="middle">Saurabh</forename><surname>Singh</surname></persName>
+							<idno type="ORCID">0000-0001-8352-5897</idno>
+							<affiliation key="aff0">
+								<orgName type="department">College of Life and Environmental Sciences, Biosciences</orgName>
+								<orgName type="institution">University of Exeter</orgName>
+								<address>
+									<settlement>Penryn</settlement>
+									<region>Cornwall</region>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Erick</forename><forename type="middle">M G</forename><surname>Cordeiro</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department" key="dep1">Departamento de Entomologia e Acarologia</orgName>
+								<orgName type="department" key="dep2">Escola Superior de Agricultura</orgName>
+								<orgName type="institution" key="instit1">&quot;Luiz de Queiroz,&quot;</orgName>
+								<orgName type="institution" key="instit2">Universidade de São Paulo</orgName>
+								<address>
+									<settlement>Piracicaba</settlement>
+									<country key="BR">Brazil</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Bartlomiej</forename><forename type="middle">J</forename><surname>Troczka</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">College of Life and Environmental Sciences, Biosciences</orgName>
+								<orgName type="institution">University of Exeter</orgName>
+								<address>
+									<settlement>Penryn</settlement>
+									<region>Cornwall</region>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Adam</forename><surname>Pym</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">College of Life and Environmental Sciences, Biosciences</orgName>
+								<orgName type="institution">University of Exeter</orgName>
+								<address>
+									<settlement>Penryn</settlement>
+									<region>Cornwall</region>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Joanna</forename><surname>Mackisack</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">College of Life and Environmental Sciences, Biosciences</orgName>
+								<orgName type="institution">University of Exeter</orgName>
+								<address>
+									<settlement>Penryn</settlement>
+									<region>Cornwall</region>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Thomas</forename><forename type="middle">C</forename><surname>Mathers</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="department">Department of Crop Genetics</orgName>
+								<orgName type="institution">John Innes Centre</orgName>
+								<address>
+									<addrLine>Norwich Research Park</addrLine>
+									<settlement>Norwich</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Ana</forename><surname>Duarte</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">College of Life and Environmental Sciences, Biosciences</orgName>
+								<orgName type="institution">University of Exeter</orgName>
+								<address>
+									<settlement>Penryn</settlement>
+									<region>Cornwall</region>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Fabrice</forename><surname>Legeai</surname></persName>
+							<affiliation key="aff3">
+								<orgName type="laboratory" key="lab1">INRAE</orgName>
+								<orgName type="laboratory" key="lab2">UMR 1349 IGEPP</orgName>
+								<address>
+									<settlement>Le Rheu</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Stéphanie</forename><surname>Robin</surname></persName>
+							<affiliation key="aff3">
+								<orgName type="laboratory" key="lab1">INRAE</orgName>
+								<orgName type="laboratory" key="lab2">UMR 1349 IGEPP</orgName>
+								<address>
+									<settlement>Le Rheu</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Pablo</forename><surname>Bielza</surname></persName>
+							<affiliation key="aff4">
+								<orgName type="department">Departamento de Producción Vegetal</orgName>
+								<orgName type="institution">Universidad Politécnica de Cartagena</orgName>
+								<address>
+									<settlement>Cartagena</settlement>
+									<country key="ES">Spain</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Hannah</forename><forename type="middle">J</forename><surname>Burrack</surname></persName>
+							<affiliation key="aff5">
+								<orgName type="department">Department of Entomology and Plant Pathology</orgName>
+								<orgName type="institution">North Carolina State University</orgName>
+								<address>
+									<settlement>Raleigh</settlement>
+									<region>NC</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Kamel</forename><surname>Charaabi</surname></persName>
+							<affiliation key="aff6">
+								<orgName type="department">Biotechpole of Sidi Thabet</orgName>
+								<orgName type="laboratory">Laboratory of Biotechnology and Nuclear Technologies</orgName>
+								<orgName type="institution">National Center of Nuclear Sciences and Technologies</orgName>
+								<address>
+									<addrLine>Sidi Thabet</addrLine>
+									<settlement>Ariana</settlement>
+									<country key="TN">Tunisia</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Ian</forename><surname>Denholm</surname></persName>
+							<idno type="ORCID">0000-0001-9797-874X</idno>
+							<affiliation key="aff7">
+								<orgName type="department">Department of Biological and Environmental Sciences</orgName>
+								<orgName type="institution">University of Hertfordshire</orgName>
+								<address>
+									<settlement>Hatfield</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Christian</forename><forename type="middle">C</forename><surname>Figueroa</surname></persName>
+							<idno type="ORCID">0000-0001-9218-5564</idno>
+							<affiliation key="aff8">
+								<orgName type="department">Instituto de Ciencias Biológicas</orgName>
+								<orgName type="institution">Universidad de Talca</orgName>
+								<address>
+									<settlement>Talca</settlement>
+									<country key="CL">Chile</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Richard</forename><forename type="middle">H</forename><surname>Ffrench-Constant</surname></persName>
+							<idno type="ORCID">0000-0001-5385-9888</idno>
+							<affiliation key="aff0">
+								<orgName type="department">College of Life and Environmental Sciences, Biosciences</orgName>
+								<orgName type="institution">University of Exeter</orgName>
+								<address>
+									<settlement>Penryn</settlement>
+									<region>Cornwall</region>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Georg</forename><surname>Jander</surname></persName>
+							<affiliation key="aff9">
+								<orgName type="institution">Boyce Thompson Institute</orgName>
+								<address>
+									<settlement>Ithaca</settlement>
+									<region>NY</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">John</forename><forename type="middle">T</forename><surname>Margaritopoulos</surname></persName>
+							<idno type="ORCID">0000-0002-5893-8400</idno>
+							<affiliation key="aff10">
+								<orgName type="department" key="dep1">Department of Plant Protection at Volos</orgName>
+								<orgName type="department" key="dep2">Institute of Industrial and Fodder Crops</orgName>
+								<orgName type="institution">Hellenic Agricultural Organization &apos;DEMETER&apos;</orgName>
+								<address>
+									<settlement>Volos</settlement>
+									<country key="GR">Greece</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Emanuele</forename><surname>Mazzoni</surname></persName>
+							<idno type="ORCID">0000-0001-9845-6038</idno>
+							<affiliation key="aff11">
+								<orgName type="department" key="dep1">Department of Sustainable Crop Production</orgName>
+								<orgName type="department" key="dep2">Section Sustainable Crop and Food Protection</orgName>
+								<orgName type="institution">Università Cattolica del Sacro Cuore</orgName>
+								<address>
+									<settlement>Piacenza</settlement>
+									<country key="IT">Italy</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Ralf</forename><surname>Nauen</surname></persName>
+							<idno type="ORCID">0000-0002-7525-8589</idno>
+							<affiliation key="aff12">
+								<orgName type="department">Crop Science Division</orgName>
+								<orgName type="institution" key="instit1">Bayer AG</orgName>
+								<orgName type="institution" key="instit2">R&amp;D</orgName>
+								<address>
+									<settlement>Monheim</settlement>
+									<country key="DE">Germany</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Claudio</forename><forename type="middle">C</forename><surname>Ramírez</surname></persName>
+							<affiliation key="aff8">
+								<orgName type="department">Instituto de Ciencias Biológicas</orgName>
+								<orgName type="institution">Universidad de Talca</orgName>
+								<address>
+									<settlement>Talca</settlement>
+									<country key="CL">Chile</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Guangwei</forename><surname>Ren</surname></persName>
+							<affiliation key="aff13">
+								<orgName type="department">Tobacco Research Institute</orgName>
+								<orgName type="institution">Chinese Academy of Agricultural Sciences</orgName>
+								<address>
+									<settlement>Qingdao</settlement>
+									<country key="CN">China</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Ilona</forename><surname>Stepanyan</surname></persName>
+							<affiliation key="aff14">
+								<orgName type="department">Scientific Center of Zoology and Hydroecology</orgName>
+								<orgName type="institution" key="instit1">National Academy of Science</orgName>
+								<orgName type="institution" key="instit2">Republic of Armenia</orgName>
+								<address>
+									<addrLine>16 Cesar</addrLine>
+									<settlement>Yerevan, Parkville</settlement>
+									<region>Victoria</region>
+									<country>Armenia., Australia</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Paul</forename><forename type="middle">A</forename><surname>Umina</surname></persName>
+							<affiliation key="aff15">
+								<orgName type="department">School of BioSciences</orgName>
+								<orgName type="institution">The University of Melbourne</orgName>
+								<address>
+									<settlement>Parkville</settlement>
+									<region>Victoria</region>
+									<country key="AU">Australia</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Nina</forename><forename type="middle">V</forename><surname>Voronova</surname></persName>
+							<affiliation key="aff16">
+								<orgName type="department">The Department of General Ecology and Methods of Biology Teaching</orgName>
+								<orgName type="institution">Belarusian State University</orgName>
+								<address>
+									<settlement>Minsk</settlement>
+									<country>Republic of Belarus</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">John</forename><surname>Vontas</surname></persName>
+							<idno type="ORCID">0000-0002-8704-2574</idno>
+							<affiliation key="aff17">
+								<orgName type="department">Institute of Molecular Biology &amp; Biotechnology</orgName>
+								<orgName type="institution">Foundation for Research &amp; Technology Hellas</orgName>
+								<address>
+									<settlement>Crete</settlement>
+									<country key="GR">Greece</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff18">
+								<orgName type="department">Department of Crop Science</orgName>
+								<orgName type="institution">Agricultural University of Athens</orgName>
+								<address>
+									<settlement>Athens</settlement>
+									<country key="GR">Greece</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Martin</forename><forename type="middle">S</forename><surname>Williamson</surname></persName>
+							<affiliation key="aff19">
+								<orgName type="department">Department of Biointeractions and Crop Protection</orgName>
+								<orgName type="institution">Rothamsted Research</orgName>
+								<address>
+									<settlement>Harpenden</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Alex</forename><forename type="middle">C C</forename><surname>Wilson</surname></persName>
+							<affiliation key="aff20">
+								<orgName type="department">Department of Biology</orgName>
+								<orgName type="institution">University of Miami</orgName>
+								<address>
+									<addrLine>Coral Gables</addrLine>
+									<region>FL</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Gao</forename><surname>Xi-Wu</surname></persName>
+							<affiliation key="aff21">
+								<orgName type="department" key="dep1">Department of Entomology</orgName>
+								<orgName type="department" key="dep2">College of Plant Protection</orgName>
+								<orgName type="institution">China Agricultural University</orgName>
+								<address>
+									<settlement>Beijing</settlement>
+									<country key="CN">China</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Young-Nam</forename><surname>Youn</surname></persName>
+							<idno type="ORCID">0000-0002-4956-1904</idno>
+							<affiliation key="aff22">
+								<orgName type="department" key="dep1">Department of Applied Biology</orgName>
+								<orgName type="department" key="dep2">College of Agricultural and Life Science</orgName>
+								<orgName type="institution">Chungnam National University</orgName>
+								<address>
+									<settlement>Daejeon</settlement>
+									<country key="KR">Korea</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Christoph</forename><forename type="middle">T</forename><surname>Zimmer</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">College of Life and Environmental Sciences, Biosciences</orgName>
+								<orgName type="institution">University of Exeter</orgName>
+								<address>
+									<settlement>Penryn</settlement>
+									<region>Cornwall</region>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Jean-Christophe</forename><surname>Simon</surname></persName>
+							<affiliation key="aff3">
+								<orgName type="laboratory" key="lab1">INRAE</orgName>
+								<orgName type="laboratory" key="lab2">UMR 1349 IGEPP</orgName>
+								<address>
+									<settlement>Le Rheu</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Alex</forename><surname>Hayward</surname></persName>
+							<idno type="ORCID">0000-0001-7413-718X</idno>
+							<affiliation key="aff0">
+								<orgName type="department">College of Life and Environmental Sciences, Biosciences</orgName>
+								<orgName type="institution">University of Exeter</orgName>
+								<address>
+									<settlement>Penryn</settlement>
+									<region>Cornwall</region>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author role="corresp">
+							<persName><forename type="first">Chris</forename><surname>Bass</surname></persName>
+							<email>c.bass@exeter.ac.uk</email>
+							<idno type="ORCID">0000-0002-2590-1492</idno>
+							<affiliation key="aff0">
+								<orgName type="department">College of Life and Environmental Sciences, Biosciences</orgName>
+								<orgName type="institution">University of Exeter</orgName>
+								<address>
+									<settlement>Penryn</settlement>
+									<region>Cornwall</region>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff23">
+								<orgName type="department">Syngenta Crop Protection</orgName>
+								<orgName type="institution">Werk Stein</orgName>
+								<address>
+									<settlement>Schaffhauserstrasse, Stein</settlement>
+									<country key="CH">Switzerland</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Global patterns in genomic diversity underpinning the evolution of insecticide resistance in the aphid crop pest Myzus persicae</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">D0595E446E2C4E5F818D547D7585F51D</idno>
+					<idno type="DOI">10.1038/s42003-021-02373-x</idno>
+					<note type="submission">Submitted on 25 Oct 2021 Received: 18 November 2020; Accepted: 17 June 2021;</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:13+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>niveau recherche, publiés ou non, émanant des établissements d'enseignement et de recherche français ou étrangers, des laboratoires publics ou privés.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="fr">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>I</head><p>nsect pests damage agricultural production, endanger food security, and transmit diseases that harm crop plants, livestock, and humans. Although pesticides provide an important tool for controlling crop pests and disease vectors, a wide range of pest species have repeatedly shown the capacity to overcome them through the evolution of resistance <ref type="bibr" target="#b0">[1]</ref><ref type="bibr" target="#b1">[2]</ref><ref type="bibr" target="#b2">[3]</ref> . In many cases, resistance now represents the single greatest threat to the sustainability of insect pest control <ref type="bibr" target="#b0">1,</ref><ref type="bibr" target="#b1">2,</ref><ref type="bibr" target="#b3">4</ref> . Consequently, new strategies and tools to combat resistance, underpinned by a greater understanding of the ecological and evolutionary processes involved, are urgently required. In this battle against pesticide resistance recent technological advances in genome sequencing provide promise that a new era of research, employing powerful genomic interrogation of global insect populations, can provide new insight into the molecular and evolutionary response of pests to selection <ref type="bibr" target="#b0">1,</ref><ref type="bibr" target="#b4">5</ref> .</p><p>Aphids are hemipteran insects that are of particular applied importance as plant pests, causing tens of millions to billions US$ of yield loss per annum across a wide range of food and commodity crops <ref type="bibr" target="#b5">6</ref> . Aphids are also exceptional models for the study of a range of fundamental ecological and evolutionary topics, including reproductive mode variation, insect-plant interactions, virus transmission, phenotypic plasticity, symbiosis, and insecticide resistance <ref type="bibr" target="#b1">2,</ref><ref type="bibr" target="#b6">7</ref> . Research on this important group of insects has been greatly facilitated by the publication of draft genome sequence assemblies for a number of aphid species <ref type="bibr" target="#b6">[7]</ref><ref type="bibr" target="#b7">[8]</ref><ref type="bibr" target="#b8">[9]</ref><ref type="bibr" target="#b9">[10]</ref><ref type="bibr" target="#b10">[11]</ref> . However, to date, studies of genetic variation within aphid populations have primarily used a limited number of molecular markers or candidate gene-based approaches <ref type="bibr" target="#b11">12,</ref><ref type="bibr" target="#b12">13</ref> .</p><p>One of the most economically important aphid crop pests worldwide, and an emerging insect research model, is the peach potato aphid, Myzus persicae (Sulzer). The status of this species as a pest is enhanced by its global distribution, remarkable efficiency as a vector of more than 100 different plant viruses, and its extremely broad host range <ref type="bibr" target="#b13">14</ref> . Indeed, the exceptional ability of M. persicae to colonise over 100 plant species from 40 diverse families suggests that it is a rare example of a true generalist <ref type="bibr" target="#b7">8</ref> . This contrasts with other aphid species which tend to specialise on a limited number of hosts <ref type="bibr" target="#b5">6</ref> , and/or consist of several hostadapted biotypes / races, that specialise on a subset of the total host range <ref type="bibr" target="#b12">13</ref> . While clonal lineages of M. persicae can colonise distantly related host species in the laboratory <ref type="bibr" target="#b7">8,</ref><ref type="bibr" target="#b14">15</ref> , certain races that have adapted to feed on tobacco can be morphologically and genetically differentiated from M. persicae sensu stricto (s.s.), and have been formally named as M. persicae subsp. nicotianae <ref type="bibr" target="#b15">16,</ref><ref type="bibr" target="#b16">17</ref> . This clearly suggests that host races/subspecies do form in M. persicae sensu latu (s.l.), however, whether this is true for other host plants, and the impact of this on gene flow and genetic differentiation is poorly understood.</p><p>In common with many invertebrates, M. persicae acts as a host for mutualistic symbionts. Like other aphids, M. persicae feeds on the phloem sap of plants and thus relies on the intracellular mutualistic bacterium Buchnera aphidicola to provide essential amino acids that are missing or rare in its diet. In addition to its obligate association with B. aphidicola, M. persicae may develop facultative associations with additional bacterial symbionts that can provide other ecological benefits <ref type="bibr" target="#b17">18</ref> . However, to date, the frequency of these secondary symbionts in populations of M. persicae worldwide remains unknown.</p><p>The control of M. persicae worldwide has relied almost exclusively on the use of synthetic insecticides, and this has led to the evolution of resistance to multiple classes of chemistry <ref type="bibr" target="#b1">2</ref> . At least seven independent mechanisms of resistance have been described in this species to date, including mutation of insecticide targets in the aphid nervous system, enhanced expression of insecticide detoxifying enzymes and reduced penetration of insecticide through the cuticle (reviewed in <ref type="bibr" target="#b1">2</ref> ). However, the ecological and evolutionary factors influencing the emergence and spread of these mechanisms in global populations of M. persicae has never been investigated. M. persicae has also evolved mechanisms to overcome natural insecticides, such as the secondary metabolites produced by plants. The best example of this is the tobacco-adapted subspecies, M. p. nicotianae, that exhibits high levels of resistance to nicotine, the potent natural insecticide produced by this plant <ref type="bibr" target="#b18">19</ref> .</p><p>The extent of resistance in M. persicae currently represents a major threat to its sustainable control, with just a handful of insecticides retaining efficacy <ref type="bibr" target="#b1">2</ref> . Thus, it is increasingly important to understand the underlying processes and mechanisms involved in the evolution of resistance to older and recently deployed compounds, to guide the development of effective strategies to prolong the life of current and future insecticides. Here, we addressed this need by generating a population genomic resource for M. persicae comprising a high-quality chromosomal-scale genome assembly together with resequenced genomes of 127 clonal aphid lines collected from all continents where crops are grown. We leverage this combination of fine-scale genome-wide data with large-scale sampling across geographic and host divides, to investigate both the mechanisms underpinning insecticide resistance, and ecological and evolutionary factors influencing its emergence and spread. Specifically, our analyses of this population genomic dataset addressed the following key questions:</p><p>1. Based on the aphid clones sequenced, to what extent are M. persicae populations structured by geography and/or host plant association? 2. How does observed population structure influence the emergence and spread of insecticide resistance genes, and is there evidence for the co-option of host plant adaptations during the evolution of resistance to synthetic insecticides? 3. How repeatable is resistance evolution: (i) To what extent is resistance a consequence of single versus multiple alternative resistance mutations? (ii) Do resistance mutations typically arise once and spread, or have multiple independent origins? 4. Can we leverage our new genomic and biological resources to uncover novel resistance to recently introduced insecticides and characterise the underpinning genetic architecture?</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Results and discussion</head><p>Generation of genomic resources for M. persicae. To enhance the accuracy of population genomic and genome-wide association studies in M. persicae, we generated a chromosome-level genome assembly of the M. persicae s.s. clone G006 <ref type="bibr" target="#b19">20</ref> . Almost 40 Gb of PacBio single-molecule real-time (SMRT) sequencing data were assembled into 773 contigs, with an N50 of 3,162,279 bp. These contigs were then categorized and ordered into six chromosomescale scaffolds, corresponding to the haploid chromosome number of this species <ref type="bibr" target="#b20">21</ref> , using in vivo chromatin conformation capture (HiC) data (Fig. <ref type="figure" target="#fig_0">1a</ref>). This resulted in a final assembly of 391 Mb, with 95.7% of assembled content contained in the six scaffolds, and a scaffold N50 of 69.9 Mb (Supplementary Table <ref type="table">1</ref>). DNAseq data derived from M. persicae males and asexual females were used to identify the X chromosome (scaffold 1), as described previously <ref type="bibr" target="#b8">9</ref> . The completeness of the gene space in the assembled genome was assessed using the Benchmarking Universal Single-Copy Orthologues (BUSCO) pipeline <ref type="bibr" target="#b21">22</ref> , with 97.3% of the Arthropoda test gene set found to be present as complete single copies (Supplementary Table <ref type="table">1</ref>). Thus, the new G006 assembly (G006v2) represents a near complete and highly contiguous assembly and a significant improvement on the existing short read assembly of this clone (G006v1) <ref type="bibr" target="#b7">8</ref> (Supplementary Table <ref type="table">1</ref>). Structural genome annotation using a workflow incorporating RNAseq data predicted a total of 23,214 protein-coding genes in the assembly. Of these, 21,899 were successfully assigned functional annotations based on BLAST searches against the nonredundant protein database of NCBI and the InterPro database.</p><p>To generate a population genomic resource for aphid research we assembled a collection of 127 clones of M. persicae s.l. derived from 19 countries covering all continents except Antarctica (Fig. <ref type="figure" target="#fig_0">1b</ref>, Supplementary Data 1). The clones were collected from 14 host plants encompassing a range of agriculturally important crops. Of the assembled clones, ~110 are maintained as asexual lineages in the Bass laboratory. These are available to other researchers as live cultures or preserved material, providing an excellent resource for genotype-phenotype association studies. All clones were sequenced using Illumina paired-end sequencing to an average coverage of 40X (Fig. <ref type="figure" target="#fig_0">1b</ref>, Supplementary Data 1), with data mapped to the reference chromosome-level assembly of G006v2, and a collection of &gt;30 reference genomes of known insect symbionts and a number of viruses known to infect aphids <ref type="bibr" target="#b22">23,</ref><ref type="bibr" target="#b23">24</ref> (see methods).</p><p>We identified a total of 45,627,645 high-quality biallelic single nucleotide polymorphisms (SNPs) comprising 14,647,103 nonreference-homozygous and 30,980,542 heterozygous variant calls. This represents, on average, one variant every 9 bp of the single copy genome of M. persicae. For each clone, variant density was similar across the five autosomes averaging between 3.2 and 3.6 SNPs every 1 kb of genomic length (Fig. <ref type="figure" target="#fig_0">1c</ref>). SNP density was lower on the X chromosome (2.8 SNPs every kb, Fig. <ref type="figure" target="#fig_0">1c</ref>), which may reflect the greater purifying selection of deleterious recessive alleles on X in hemizygous (X0) males <ref type="bibr" target="#b24">25</ref> . Variants were distributed evenly across the autosomes, however, a marked reduction in SNP frequency was observed towards the ends of the X chromosome (Hi-C Scaffold 1, Fig. <ref type="figure" target="#fig_0">1c</ref>), which contain a high density of repetitive DNA <ref type="bibr" target="#b8">9</ref> . Pairwise comparisons of genetic distance between the sequenced clones (Supplementary Data 2) identified two clones from the US, S75 and S126, as most similar, with 101 and 92 unique variant sites respectively, and clone S6 from the UK and clone S107 from the US the most divergent, with 35,365 and 59,698 unique variant sites respectively.</p><p>Metagenomic analysis of the microbial component present in the sequence data revealed that, as expected, all clones carry the primary symbiont Buchnera aphidicola (Supplementary Data 3). With respect to other microbes, while several of the clones were found to be infected with the densovirus MpDNV, they were found to be essentially free of secondary symbionts (Supplementary Data 3). This finding suggests that secondary symbionts may play a less important role in enhancing the (context-dependent) fitness of M. persicae when compared to other aphid species <ref type="bibr" target="#b25">26</ref> .</p><p>Geography and host plant influence M. persicae population structure. To investigate the ecological and evolutionary factors influencing the emergence and spread of insecticide resistance in M. persicae, we first explored population structure in our dataset. A maximum likelihood (ML) phylogenetic analysis of more than 1 million neutrally evolving SNPs recovered highly supported monophyletic clades (bootstrap values of &gt;95%), structured by host plant association, and, to a lesser extent, geographic location (Fig. <ref type="figure" target="#fig_2">2a</ref>, and Supplementary Fig. <ref type="figure" target="#fig_0">1</ref>). Almost all (26/27) clones from tobacco were contained in a single clade, despite their diverse geographic origin (5 countries and 4 continents). This supports the hypothesis that a single ancestral lineage successfully established and diversified on this host <ref type="bibr" target="#b11">12,</ref><ref type="bibr" target="#b26">27</ref> . Significant hostassociated clustering was also apparent for clones from peach/ nectarine (i.e. Prunus persica), with 46/51 clones occurring in the P. persica dominated clades. Loose groupings of clones from other host species were also observed. For example, 5 out of 10 clones from pepper grouped in a single highly supported clade, while 6 out of 11 clones from oilseed rape grouped with a single clone from broccoli and a single clone from tomato, and a further 3 oilseed rape clones formed an exclusive grouping. Nested within host plant groupings, clones also frequently grouped in subclades on the basis of country of origin. Further investigation of the phylogenetic relationships between the sequenced clones by neighbour-net network analysis supported the topology of the ML tree, and the clustering of clones on the basis of host plant and geography, while displaying evidence of reticulate evolution among deeper splits, consistent with the lower clade support values observed for more basal nodes in the ML phylogeny (Supplementary Fig. <ref type="figure" target="#fig_2">2</ref>).</p><p>PCA analyses reinforced the observed phylogenetic patterns, with clones clustering by certain host plants (tobacco and peach) and geographic location (Figs. <ref type="figure" target="#fig_2">2b,</ref><ref type="figure" target="#fig_2">2c</ref>, and Supplementary Fig. <ref type="figure" target="#fig_3">3</ref>). ADMIXTURE <ref type="bibr" target="#b27">28</ref> analysis partitioned genetic variation into 12 genetic clusters distributed worldwide (i.e., optimal K = 12, Supplementary Fig. <ref type="figure" target="#fig_4">4</ref>), and again suggested that population structure in global M. persicae s.l. is influenced by host plant and geographic location (Fig. <ref type="figure" target="#fig_3">3a</ref>). Haplotype-based analysis using fineSTRUCTURE <ref type="bibr" target="#b28">29</ref> , which provides greater power to detect subtle levels of genetic differentiation <ref type="bibr" target="#b28">29</ref> , supported two levels of genetic structure, at a higher level differentiation by host plant, and at a finer scale by geographic location (Fig. <ref type="figure" target="#fig_2">2d</ref>). Two large clusters broadly encompassed clones from tobacco and peach respectively, however, other clones again exhibited a degree of clustering on the basis of other hosts, such as pepper and oilseed rape. Finer clusters were frequently based on geographic location with a high degree of co-ancestry commonly observed among samples collected from the same country (Fig. <ref type="figure" target="#fig_2">2d</ref>). Finally, to formally test the hypothesis that host plant and geography play a significant role in partitioning genetic variation in M. persicae s.l., hierarchical analysis of molecular variance (AMOVA) based on pairwise F ST values was performed. This analysis confirmed that both host plant and geography are significant factors in structuring M. persicae s.l. populations (p = &lt;0.0001 in both cases), explaining 6.3% and 5.3% of the total variation in the data respectively (Supplementary Table <ref type="table">2</ref>).</p><p>Taken together, our population genomic analyses provide evidence of genetic differentiation in globally sampled M. persicae s.l. based on geography and host plant association. However, they also reveal significant admixture and high connectivity between populations. In terms of geography, particularly strong migration and/or gene flow was evident between certain populations in Southern Europe and Northern Africa, and certain populations in Europe and Asia with those in Australia (Fig. <ref type="figure" target="#fig_3">3b</ref>). Previous studies have suggested that long-distance migration is uncommon in M. persicae <ref type="bibr" target="#b15">16,</ref><ref type="bibr" target="#b29">30</ref> . Thus, the spread of genotypes over distant geographic areas is likely a result of anthropogenic factors, including long-distance transport and trade, and the globalization of agriculture. Our analyses of the influence of host plant on M. persicae s.l. population structure worldwide provide the first whole-genome level support for a tobacco-adapted race/ subspecies (i.e. the M. p. nicotianae taxon), the legitimacy of which has been previously called into question <ref type="bibr" target="#b30">31,</ref><ref type="bibr" target="#b31">32</ref> . Our results also imply a degree of genetic differentiation in lineages associated with other host plants, namely peach, pepper and oilseed rape. However, it is important to acknowledge that the patterns we observe for clones derived from these host plants require further investigation due to current limitations in sampling across different host plants and regions. Specifically, with the exception of M. persicae clones from tobacco and peach, sample sizes for clones derived from other host plants in this study are small (in all cases n &lt; 11) (Supplementary Data 1). Thus, further more extensive sequencing of clones from other hosts is required to determine the precise status and inclusivity of these groupings.</p><p>To explore the genomic landscape of divergence among putative host-associated populations of M. persicae, and identify candidate genomic regions exhibiting signatures of selection associated with host-plant use, we calculated F ST , Tajima's D and nucleotide diversity (π) statistics in windows of 10 kb across the five autosomes, and scanned for hard and soft selective sweeps using the homozygosity statistic H12 using a 1000 SNP sliding window <ref type="bibr" target="#b32">33</ref> . This analysis revealed a heterogeneous pattern of divergence, with interspersed peaks and valleys (Fig. <ref type="figure" target="#fig_4">4</ref>), consistent with the results of genome scans conducted on host-associated populations of several other insect species <ref type="bibr" target="#b33">34</ref> . H12 analysis revealed several peaks across all five autosomes as candidate targets of selection differentiating host lineages, with high F ST values and reduced Tajima's D and nucleotide diversity in the majority of these regions providing additional evidence that these loci may be involved in adaptive divergence (Fig. <ref type="figure" target="#fig_4">4</ref>). Curation of genes residing in 15 of these peaks per autosome identified genes encoding a range of biological functions, including olfactory recognition, digestion, detoxification and excretion, and nucleic acid binding (Supplementary Data 4). The function of these genes suggests roles in host plant recognition and exploitation; however, further functional analyses are required to test this hypothesis. It is also important to acknowledge that genetic differentiation between insect host-plant lineages at specific loci can result from a range of extrinsic and/or intrinsic factors that may be functionally unrelated to host-plant specialization <ref type="bibr" target="#b34">35</ref> . For example, in aphids genetic differentiation associated with host use may also be influenced by variation in reproductive mode. Specifically, M. persicae clones from peach represent cyclical parthenogens (CP) that reproduce sexually once a year. In contrast, clones from field crops may be CP, obligate parthenogens (OP) that reproduce asexually all year round, or functional parthenogens (FP) exhibiting a range of variation in their ability to produce sexual morphs <ref type="bibr" target="#b35">36,</ref><ref type="bibr" target="#b36">37</ref> . This variation can result in genetic divergence between CP and OP/FP clones as a consequence of reproductive isolation, and potentially in genes controlling reproduction. Thus, future experimental validation of the reproductive capacity of the clones sampled from field crops in this study is required to explore the influence of reproductive mode on observed host-associated genetic divergence.</p><p>Insecticide resistance mechanism in global populations of M. persicae. The subdivision of a single insect species into populations that specialize on specific host plants (such as tobacco-adapted M. persicae) can lead to partial reproductive isolation between host races and thus reduced gene flow. In the case of insect crop pests, this can have significant applied implications. For example, barriers limiting genetic exchange can strongly affect the emergence and spread of genes conferring resistance to insecticides. To explore the evolution of insecticide resistance in worldwide samples of M. persicae, and the extent to which host-plant associations have influenced its development, we first interrogated our genomic data for known resistance mutations. Specifically, we examined the following five known mechanisms: (a) voltage-gated sodium channel (VGSC) knock-down resistance (kdr) mutations L1014F, M918T, M918L, that lead to pyrethroid resistance <ref type="bibr" target="#b37">[38]</ref><ref type="bibr" target="#b38">[39]</ref><ref type="bibr" target="#b39">[40]</ref><ref type="bibr" target="#b40">[41]</ref> ; (b) the acetylcholinesterase enzyme mutation S431F, conferring resistance to dimethylcarbamates <ref type="bibr" target="#b41">42,</ref><ref type="bibr" target="#b42">43</ref> ; (c) the γ-aminobutyric acid (GABA) receptor resistant to dieldrin (Rdl) mutation A302G, conferring resistance to cylodiene insecticides 44 ; (d) the nicotinic acetylcholine receptor mutation R81T, conferring highlevel resistance to neonicotinoids <ref type="bibr" target="#b44">45</ref> ; and, (e) mutations leading to amplification of the CYP6CY3 gene, which confers moderate levels of resistance to neonicotinoids <ref type="bibr" target="#b18">19,</ref><ref type="bibr" target="#b45">46</ref> .</p><p>Most resistance mechanisms were found to be globally distributed with the exception of the recently emerged mutation R81T, which was only observed in clones from France, Italy, Greece and Spain (Fig. <ref type="figure" target="#fig_5">5a</ref>, Supplementary Data 1), and the M918L mutation encoded by the codon ctg <ref type="bibr" target="#b46">47</ref> , which was restricted to the western Mediterranean basin (Tunisia, Spain, France and Italy). For certain mutations, such as S431F, no strong association by host plant was observed (Fig. <ref type="figure" target="#fig_5">5b</ref>, Supplementary Data 1). However, in several other cases we observed significant patterns of association between resistance genes and specific hostdifferentiated populations as outlined below.</p><p>Mechanisms of resistance to neonicotinoid insecticides and widespread co-option of a host-plant adaptation. The tobaccoadapted lineage, M. p. nicotianae, exhibits resistance to nicotine, the natural insecticide produced by tobacco <ref type="bibr" target="#b18">19</ref> . Using a transcriptomic-led approach we have previously implicated the amplification of the cytochrome P450 gene CYP6CY3 in resistance to this allelochemical <ref type="bibr" target="#b45">46</ref> . However, the number of origins of this mechanism and the extent to which it occurs in M. persicae on tobacco or other host plants remains unclear. Interrogation of our dataset revealed that CYP6CY3 amplification is ubiquitous in clones collected from tobacco (Fig. <ref type="figure" target="#fig_5">5b</ref>, Supplementary Data 1). This finding provides additional evidence of the importance of this mechanism in allowing M. persicae to utilise this host plant. However, we also observed CYP6CY3 amplification at high frequency in clones derived from other host plants (Fig. <ref type="figure" target="#fig_5">5b</ref>, Supplementary Data 1). The presence of this mechanism in clones from non-tobacco hosts likely results from the fitness benefits it provides in the presence of neonicotinoid insecticides <ref type="bibr" target="#b18">19</ref> . We have previously demonstrated that CYP6CY3 is tandemly duplicated in M. p. nicotianae as a large amplicon of ~325 kb creating characteristic breakpoints identifying the region <ref type="bibr" target="#b45">46</ref> . To investigate the number of evolutionary origins of this mutation, we searched for the presence of these conserved markers in the sequenced dataset and observed a perfect association of the exact breakpoint with the presence of CYP6CY3 amplification in all clones (Supplementary Data 1). The finding that the mechanism of CYP6CY3 amplification is identical in all clones, regardless of geographical origin, strongly supports a single origin of CYP6CY3 amplification in M. p. nicotianae, that subsequently spread into M. persicae s.s. around the world following the introduction of neonicotinoids. In further support of this, while all clones from tobacco, even those collected prior to the introduction of neonicotinoids in 1991, have amplified CYP6CY3, the 6 clones in the dataset from nontobacco hosts that were collected prior to 1991 lack this mechanism (Supplementary Data 1). Thus, our data suggest that a pre-existing host adaptation has been co-opted as a resistance mechanism, and neonicotinoid resistance, previously a co-incidental pleiotropic effect, has become the major selective force driving the geographic expansion of this trait. More recently, an additional mechanism of resistance to neonicotinoid insecticides has emerged in M. persicae resulting from an amino acid substitution, R81T, in the target-site of this insecticide class, the nicotinic acetylcholine receptor <ref type="bibr" target="#b44">45</ref> . We find this mechanism to be significantly associated with clones derived from peach (Fisher's exact test p = &lt;0.001, Fig. <ref type="figure" target="#fig_5">5b</ref>, Supplementary Data 1), and haplotype analysis suggested this mechanism has a single origin, consistent with its recent, localised emergence (Supplementary Fig. <ref type="figure" target="#fig_5">5</ref>). Intriguingly, this mutation was only observed in clones displaying CYP6CY3 amplification (Supplementary Data 1). This suggests that R81T emerged on a genetic background of CYP6CY3 overexpression, and that the association has been maintained, despite the fact that the two mutations occur on different chromosomes. The continued selection for clones with both mechanisms suggest they provide strong fitness benefits in combination, consistent with previous work suggesting the mechanisms may act in synergy to confer high levels of resistance to neonicotinoids <ref type="bibr" target="#b44">45</ref> . Thus, the evolution of resistance to neonicotinoids in M. persicae likely represents an adaptive walk with a metabolic mechanism originating from host-plant adaptation, first co-opted to confer moderate resistance, with subsequent evolution of target-site resistance acting in concert to confer potent insecticide resistance. Notably, and in contrast to the distribution of CYP6CY3 amplification, the pattern of R81T prevalence observed in Europe suggests barriers to gene flow between aphids on tobacco and those on peach. Specifically, while clones collected from peach in several countries carry this mechanism, sympatric populations from tobacco do not, even when collected from the same vicinity and at the same time (Supplementary Data 1). Thus, while the distribution of CYP6CY3 amplification suggests that given sufficient time, in the face of strong selection, alleles conferring strong fitness benefits can spread between host-associated populations, the distribution of R81T suggests that barriers to gene flow between specific host-associated populations can slow the rate of transfer of such alleles.</p><p>Mechanisms of resistance to pyrethroid insecticides-multiple origins and novel mutations. Resistance to the widely used pyrethroid insecticides in M. persicae is conferred by amino acid substitutions in the voltage gated sodium channel, with three amino acid substitutions previously described in resistant populations: (i) the kdr mutation L1014F, and the two superkdr (skdr) variants, (ii) M981T, and (iii) M918L <ref type="bibr" target="#b37">[38]</ref><ref type="bibr" target="#b38">[39]</ref><ref type="bibr" target="#b39">[40]</ref><ref type="bibr" target="#b40">[41]</ref> . In the case of M918L, two different forms have been described encoded by the codons ctg or ttg <ref type="bibr" target="#b40">41,</ref><ref type="bibr" target="#b46">47</ref> . In the current study, all three amino acid substitutions were observed at varying frequencies and in multiple combinations in populations across the sampled range, with the exception of M981L_ctg (see above) (Fig. <ref type="figure" target="#fig_5">5a</ref>, Supplementary Data 1). Contrasting patterns were observed in the distribution of the two skdr variants. M918T, which was described first 2 , was significantly associated with clones from peach (Fischer's exact test, p = &lt;0.001), where it was found at high frequency. In contrast, this mutation was observed at only very low frequency in pepper and tobacco, and was not found in any clones from oilseed rape, where the alternative skdr variant M918L (encoded by ttg) was common. While our sample size of clones derived from oilseed rape is small, this finding mirrors that of previous studies of M. persicae from this host plant, which also failed to identify M918T in populations on oilseed rape in France <ref type="bibr" target="#b40">41,</ref><ref type="bibr" target="#b47">48</ref> . Thus, further sequencing of sympatric M. persicae populations from peach and OSR is warranted, to confirm if barriers to resistance gene flow exist between populations on these host plants, and if so how these operate.</p><p>In addition to the previously described kdr/skdr mutations, our analyses also uncovered a novel mutation in the VGSC at amino acid position 918. This results in the replacement of the wild-type methionine at this position with isoleucine (Fig. <ref type="figure" target="#fig_5">5c</ref>). All clones with this mutation carried it in the heterozygous state, in combination with either the wildtype allele M918, or one of the two other skdr alleles L918 and T918 <ref type="bibr" target="#b39">40,</ref><ref type="bibr" target="#b40">41</ref> . Furthermore, the M918I mutation was observed in clones both with and without the kdr L1014F mutation (Supplementary Data 1). While the M918I substitution has not been previously reported in M. persicae it has been described in other pyrethroid resistant strains of insects <ref type="bibr" target="#b48">49,</ref><ref type="bibr" target="#b49">50</ref> . In addition, VGSC isoforms of mammals, which exhibit low sensitivity to pyrethroids, encode isoleucine at the equivalent position, and substitution of isoleucine for methionine at this position in the rat IIA α-subunit causes a 100-fold increase in sensitivity to pyrethroids <ref type="bibr" target="#b50">51</ref> . This both demonstrates the causal role of M918I in resistance and suggests the isoleucine at this position in the VGSC of mammals, at least in part, explains its low sensitivity to pyrethroids <ref type="bibr" target="#b50">51</ref> . Thus, in this instance, M. persicae has evolved resistance by becoming more 'mammalian-like', overcoming, at least in part, the insectspecificity of this insecticide class.</p><p>The discovery of the novel M918I mutation means that a total of three independent amino acid substitutions have arisen at the same position in M. persicae, each conferring nerve insensitivity to pyrethroid insecticides. The repeated evolution of distinct skdr mutations in M. persicae is thus an excellent demonstration of the remarkable evolvability of this species. It also illustrates how strong and continuous selection pressure imposed from insecticide use can lead to a diversity in the 'evolutionary solutions' to the same environmental challenge, even in highly conserved and functionally constrained, insecticide target proteins.</p><p>Remarkably, two alternative codons encoding isoleucine were observed in the 13 clones carrying M918I (5 clones with the codon ATT and 8 clones with the codon ATA) (Fig. <ref type="figure" target="#fig_5">5c</ref>, Supplementary Data 1), strongly suggesting that the same amino acid substitution has independently evolved on at least two occasions. Thus, while haplotype analysis failed to resolve the precise number of times each unique kdr and skdr mutation observed in the sampled clones have emerged (Supplementary Fig. <ref type="figure" target="#fig_6">6</ref>), the discovery of five different mutations at the M918 locus indicates that skdr resistance has independently evolved at least five times in global populations of M. persicae.</p><p>Population genomics of variation in sensitivity to a recently introduced insecticide. Because of the widespread resistance in M. persicae to older classes of insecticide, growers are increasingly reliant on just a handful of newer modes of action for control. One such compound is spirotetramat, which belongs to the tetronic/tetramic acid (cyclic ketoenol) family. The efficacy of this insecticide is not compromised by pre-existing resistance to older insecticide classes and, to date, no examples of M. persicae with resistance to spirotetramat have been described <ref type="bibr" target="#b51">52,</ref><ref type="bibr" target="#b52">53</ref> . To explore the utility of the living clone library and matched genomic resources developed in this study for genotype-phenotype mapping we examined the response of 110 M. persicae clones to two concentrations of this insecticide (0.25 ppm and 0.5 ppm) (Fig. <ref type="figure" target="#fig_6">6a</ref>). For 109 of the clones a gradient in response to treatment with 0.25 ppm spirotetramat was observed ranging from 5% to 100% mortality. This clearly demonstrates the considerable phenotypic variation in sensitivity to low concentrations of this insecticide among clones. However, this variation in tolerance is unlikely to impact on control in the field, as when treated with 0.5 ppm spirotetramat mean mortality across the tested clones was &gt;90%, with no clones exhibiting mortality &lt;55%. In contrast, a single clone collected in Queensland, Australia exhibited a marked difference in its response to spirotetramat, and, remarkably, was unaffected (0% observed mortality) by either concentration of this insecticide.</p><p>The identification of a single resistant clone provided insufficient power for genome-wide association analyses (GWAS). Thus, to investigate the mechanistic basis of resistance in this clone we interrogated sequence reads mapped to the gene encoding the target of spirotetramat, the acetyl-CoA carboxylase enzyme (ACC, EC 6.4.1.2) (Fig. <ref type="figure" target="#fig_6">6b</ref>). This analysis revealed a single non-synonymous mutation (gCt &gt; gTt) in the heterozygous state at position 2,226 in the Queensland clone that was not observed in any of the other sequenced clones. This mutation results in an alanine to valine substitution and occurs at an amino acid residue in a highly conserved region of the ACC carboxyltransferase (CT) domain (Fig. <ref type="figure" target="#fig_6">6b,</ref><ref type="figure">c</ref>). Significantly, while previously undescribed in aphids, the same amino acid substitution at the equivalent position has very recently been described in spirotetramat resistant strains of the whitefly Bemisia tabaci <ref type="bibr" target="#b53">54</ref> and the model nematode C. elegans <ref type="bibr" target="#b54">55</ref> , demonstrating repeated evolution of the same resistance mechanism across phylogeny. Furthermore, the creation of Drosophila melanogaster lines with the alanine to valine mutation in the orthologous ACC gene by CRISPR-Cas genome editing has shown that this mutation confers potent (&gt;800-fold) resistance to spirotetramat, and strong cross-resistance to other ketoenols <ref type="bibr" target="#b53">54</ref> . Together, these studies provide unequivocal evidence of the causal role of this mutation in resistance to ketoenols. The discovery of this mutation means that at least eight independent mechanisms of resistance to insecticides belonging to six different classes have now been identified in M. persicae. Notably, the majority of these mechanisms have been shown to involve single genes/mutations of large effect, rather than multiple genes of minor effect. This finding is consistent with theory, which suggests that selection for outside the normal phenotypic distribution favours a monogenic response, i.e. a rare allele at a single locus that can confer substantial resistance immediately <ref type="bibr" target="#b55">56,</ref><ref type="bibr" target="#b56">57</ref> .</p><p>The discovery of resistance to spirotetramat in M. persicae is concerning as this compound remains one of just a handful of insecticide modes of action that have, to date, not been compromised by resistance. Fortunately, the lack of the mutation in any of the other sequenced clones, including 10 from Australia, suggests we have detected resistance at an early stage. This, in combination with characterisation of the underpinning mechanism of resistance, will facilitate the development of diagnostic assays to monitor for spirotetramat resistance in global populations of M. persicae. Such information is a prerequisite for the development and deployment of strategies to manage the spread of resistance and preserve the life of this important insecticide.</p><p>Linkage disequilibrium. The characterisation of resistance to spirotetramat described above demonstrates the utility of the M. persicae clone library and matched genomic resources for phenotype-genotype association using a candidate gene approach. However, in the absence of a priori candidates, the power of GWAS to accurately detect causal variants is strongly influenced by population structure (see above) and linkage disequilibrium (LD) <ref type="bibr" target="#b57">58</ref> . To inform future GWAS we examined the extent of LD in clones collected from peach and tobacco in Italy and Greece (where our sample sizes are largest) at two scales: the level of the autosome, and at three insecticide resistance gene loci (sites of the kdr+skdr, S431F, and R81T mutations). Long range LD analysis across all autosomes revealed low to moderate levels of average LD in the populations (mean r 2 values of 0.08-0.39) (Fig. <ref type="figure" target="#fig_7">7a-d</ref>), consistent with the levels of LD reported for other insects <ref type="bibr" target="#b58">[59]</ref><ref type="bibr" target="#b59">[60]</ref><ref type="bibr" target="#b60">[61]</ref> . LD decayed rapidly with distance achieving background levels within 11.5 kb on average (Fig. <ref type="figure" target="#fig_7">7e-h</ref>). Consistent with this, the average length of LD blocks for the different autosomes/populations was short, ranging from 6.7 to 16.3 kb (Supplementary Table <ref type="table">3</ref>). The levels of long range LD varied with chromosome, and to a greater extent by population, (Fig. <ref type="figure" target="#fig_7">7</ref>) with LD higher in populations from tobacco, especially from clones from tobacco in Italy, compared to the two populations from peach. This finding likely reflects differences in the frequency of sexual reproduction in these populations <ref type="bibr" target="#b36">37,</ref><ref type="bibr" target="#b61">62</ref> , and thus the capacity for recombination to reduce LD. In addition, the differences in LD in populations from peach and tobacco in Italy could be explained, at least in part, by the demographic history of these populations. While further analyses are required to investigate this in detail, the distribution of allele frequencies across polymorphic sites of each autosome, summarised as the site frequency spectrum (SFS), displayed a similar profile in the populations from peach and tobacco, characterized by a majority of low frequency variants (Supplementary Fig. <ref type="figure" target="#fig_7">7</ref>). This provides initial evidence that the differences in LD in the populations are not explained by marked changes in the size of the two populations over time.</p><p>Across the three resistance loci, mean r 2 values ranged from 0.2 to 0.5 in clones from peach, whereas in clones from tobacco mean r 2 values were around 0.1. The highest mean r 2 values were observed at the R81T loci in clones from peach (0.5), and this correlates with the fact that the R81T mutation is observed in clones from peach but not tobacco. However, as revealed by the grid plot (Supplementary Fig. <ref type="figure">8c</ref>), the R81T mutation is not positioned in any haploblock suggesting other associated polymorphisms are responsible for the high mean r 2 value across this loci. Similarly, the MACE and kdr/skdr mutations do not occur in any significant haploblock, suggesting any association between these resistance mutations and flanking polymorphisms has been broken down by recombination.</p><p>In summary, the differences in LD in clones from different host plants/countries will need to be considered in future association analyses. However, the generally low levels of long-range LD observed in our analyses are favourable for GWAS as they facilitate the precision with which causal variants associated with a phenotype of interest can be identified.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Conclusions</head><p>The chromosome-scale assembly, resequenced genomes, and living library of more than 110 M. persicae clones generated in this study represents a powerful resource for further research on aphids. Future use of this resource should consider the genetic background of the sampled clones, which, as a global collection, encompasses high phenotypic and genetic heterogeneity. While capturing more variation, this reduces mapping power relative to a collection of individuals from a single sexual population <ref type="bibr" target="#b57">58</ref> . Nevertheless, we envisage the sequenced panel has strong potential to provide a range of insights into the evolution and genetic basis of many of the remarkable biological traits exhibited by aphids. In the current study we have leveraged this resource to advance understanding of the evolution of insecticide resistance in an important insect pest at a global scale, uncovering both mechanisms underpinning resistance and ecological factors that influence its emergence and spread.</p><p>Our data reveal that global populations of M. persicae s.l. exhibit evidence of genetic differentiation on the basis of geography and host-plant association. The subdivision of a single insect species into populations that specialize on different hosts, while maintaining an appreciable rate of gene flow, (i.e. host races or biotypes) can have a range of evolutionary and applied implications <ref type="bibr" target="#b62">63</ref> . Thus, the first whole genome-level support for a tobacco-adapted subspecies in M. persicae s.l. provided in this study is significant. The genetic divergence of M. persicae on other host plants implied by our analyses also warrants further investigation, including additional sequencing of sympatric populations of M. persicae from peach and non-tobacco secondary host plants.</p><p>Our investigation of the extent to which host-associated populations in M. persicae have influenced the development of insecticide resistance provides several examples that the strong selection pressure exerted by insecticide use can overcome any constraints to gene flow resulting from host plant specialization. This has resulted in the pervasive presence of many resistance mechanisms in this species worldwide. However, we also uncover cases where the evolution and spread of resistance appears to have been influenced by barriers to gene flow between certain host-associated populations, a finding that has implications for resistance risk assessment and management <ref type="bibr" target="#b3">4</ref> . Investigation of the relationship between hostplant association and insecticide resistance in M. persicae has also provided insight into fundamental questions concerning adaptation to novel selective pressures and the origins of novel traits. Specifically, our findings demonstrate that adaptations enabling insect host range expansion can provide a source of genetic novelty than can be rapidly co-opted to provide widespread resistance against synthetic insecticides.</p><p>Analysis of the molecular basis of insecticide resistance in this study revealed repeated evolution of novel mutations at the same resistance loci, and uncovered novel mechanisms against key insecticides. The repeatability of evolution is a long-standing fundamental question in evolutionary biology, and, in the context of resistance, also has important practical implications <ref type="bibr" target="#b3">4</ref> . Our characterisation of mutations that confer resistance to pyrethroid insecticides reveals surprising intraspecific diversity in the evolutionary response of a global insect pest to insecticide selection. The reliability of molecular diagnostics used to inform resistance management depends on whether different populations have evolved the same or different resistance mechanisms. In this regard our findings demonstrate that de novo resistance mutations arising in pest populations may show low repeatability, and thus highlight the importance of regularly sampling diverse pest populations for resistance mechanisms, even after resistance has emerged.</p><p>In the battle against resistance, detecting the mechanisms that compromise control at an early stage is critical, as it allows interventions to be introduced that limit the spread of resistance mechanisms before they become fixed in a population. Our characterisation of resistance to the recently introduced insecticide spirotetramat, and identification of the causal mutation involved, demonstrate the power of population genomic interrogations to detect resistance at an early stage. Such knowledge is vital if we are to prolong the life of current and future insecticides in order to sustainably control highly damaging global insect pests.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Materials and methods</head><p>Aphid clones. Full information on the 127 M. persicae s.l clones used in this study is provided in Supplementary Data 1. These include both defined subspecies of M. persicae s.l., i.e. M. persicae s.s. (clones that are not adapted to tobacco) and M. p. nicotianae (the tobacco-adapted subspecies). Aphids were collected opportunistically by the authors of this manuscript and their collaborators, and are derived from 14 host plants (primarily from agriculturally important crops) in 19 countries (Fig. <ref type="figure" target="#fig_0">1b</ref>, Supplementary Data 1). Of these, 110 are continuously maintained in the Bass laboratory as asexual lineages on individual Chinese cabbage leaves (Brassica napus L var chinensis cv Tip-Top) in small plastic cups maintained at 18 °C under a 16:8 h light:dark regime. These are available to other researchers as live cultures or preserved material upon request from the corresponding author.</p><p>Sequencing and de novo assembly of the M. persicae clone G006. A draft genome of the M. persicae clone G006 was previously assembled using Illumina short-read sequencing <ref type="bibr" target="#b7">8</ref> . Aphids derived from the same asexually reproducing colony were used as a source to improve the genome assembly of this clone here, using PacBio single-molecule real-time (SMRT) sequencing and in vivo chromatin conformation capture (HiC). DNA was extracted from pools of adult aphids using the Genomic-tip kit (Qiagen) according to the manufacturer's instructions, and used to generate long-read PacBio libraries sheared to a target length of approximately 60 kb (following a 30 kb+ protocol). Libraries were sequenced using five PacBio Sequel SMRT cells, with ~8.5 gb obtained per SMRT cell totalling nearly 40 gb. The publicly available Illumina short-reads for clone G006 <ref type="bibr" target="#b7">8</ref> were also downloaded from the NCBI short read archive and used for assembly polishing and quality assessment. Short read data were trimmed using TrimGalore -v 0.4.0 <ref type="bibr" target="#b63">64</ref> with the default settings.</p><p>For assembly, we trialled several long-read sequence assemblers including Canu 65 , wtdbg2 <ref type="bibr" target="#b65">66</ref> , Flye 67 and Falcon <ref type="bibr" target="#b67">68</ref> . We also investigated the results of merging the output of these assemblies using quickmerge <ref type="bibr" target="#b68">69</ref> , aiming to maximise genome completeness and minimise duplicated regions caused by under-collapsed heterozygosity. The best results were obtained using error corrected PacBio reads derived from Canu -v1.8.0 to assemble with wtdbg2 -v1.0 and Flye -v2.6.0, with the two assemblies then merged with quickmerge -v0.3. To assess contiguity and gene completeness in the test and final assemblies we used KAT -v1.0.0 <ref type="bibr" target="#b69">70</ref> , and BUSCO -v4.14 <ref type="bibr" target="#b21">22</ref> applying the Arthropoda gene set (n = 1,066). Assemblies were polished iteratively, after every assembly step, using three rounds of Racon -v1.3.1 <ref type="bibr" target="#b70">71</ref> using the long-read data and 3 rounds of Pilon -v1.22 <ref type="bibr" target="#b71">72</ref> using the short-read data in diploid mode. Redundant haplotigs were removed in Purge_haplotigs -v1.0.4 <ref type="bibr" target="#b72">73</ref> .</p><p>To scaffold the long-read assembly to chromosomal level, Dovetail HiC libraries were prepared as described previously <ref type="bibr" target="#b73">74</ref> . Briefly, for each library, chromatin was fixed in situ with formaldehyde in the nucleus and extracted. Fixed chromatin was digested with DpnII, the 5′ overhangs filled in with biotinylated nucleotides, and then free blunt ends ligated. After ligation, crosslinks were reversed and DNA purified from the proteins. Purified DNA was treated to remove biotin that was not internal to ligated fragments. The DNA was then sheared to ~350 bp mean fragment size and sequencing libraries were generated using NEBNext Ultra enzymes and Illumina-compatible adapters. Biotin-containing fragments were isolated using streptavidin beads before PCR enrichment of each library. The libraries were sequenced on an Illumina HiSeqX to produce 97 million 2 × 150 bp paired-end reads, which provided 13,068.91X physical coverage of the genome (10-10,000 kb pairs).</p><p>The long-read de novo assembly and Dovetail HiC library reads were used as input for the Juicer pipeline <ref type="bibr" target="#b74">75</ref> to identify HiC contacts. The 3D-DNA assembly pipeline <ref type="bibr" target="#b75">76</ref> was then used to first correct mis-assemblies in each input assembly and then to order contigs into super-scaffolds. As K-mer analysis showed that our draft assemblies did not contain substantial quantities of duplicated content caused by the inclusion of haplotigs, the 3D-DNA pipeline was run in "haploid mode" and with an-editor-repeat-coverage of 4. The initial HiC assemblies were then manually reviewed using Juicebox Assembly Tools (JBAT) to correct mis-joins and other errors <ref type="bibr" target="#b76">77</ref> . Following JBAT review, the assemblies were polished with the 3D-DNA seal module to reintegrate genomic content removed from super-scaffolds by false positive manual edits, to create a final scaffolded assembly. The HiC assemblies were then screened for contamination with BlobTools <ref type="bibr" target="#b77">78</ref> . Finally, a frozen release was generated with scaffolds renamed and ordered by size with SeqKit v0.9.1 <ref type="bibr" target="#b78">79</ref> . The final assemblies were checked with BUSCO and KAT comp to ensure the scaffolding and decontamination steps had not reduced gene-level completeness or removed genuine single-copy aphid genome content.</p><p>Annotation of the G006 assembly. Prior to gene prediction the assembly was soft masked for repetitive elements with RepeatMasker -v4.0.7 <ref type="bibr" target="#b79">80</ref> using repeat libraries generated by RepeatModeler -v2.0.2 [https://github.com/Dfam-consortium/ RepeatModeler]. Protein coding genes were predicted using GeneMark-ES -v4.3.8 <ref type="bibr" target="#b80">81</ref> and AUGUSTUS -v3.3.0 82 implemented in the BRAKER -v2.1.2 <ref type="bibr" target="#b82">83</ref> pipeline using publicly available RNA-seq datasets <ref type="bibr" target="#b7">8,</ref><ref type="bibr" target="#b45">46</ref> as evidence. RNA-seq datasets were mapped against the repeat masked genome using HISAT2 v2.0.5 <ref type="bibr" target="#b83">84</ref> with the parameters-max-intronlen 25000 -dtacufflinks &amp;-rna-strandness RF followed by sorting and indexing with SAMtools -v1.3 <ref type="bibr" target="#b84">85</ref> . BRAKER2 was run with UTR training and prediction enabled with the parameters -softmasking-gff3-UTR = on. Strand-specific RNA-seq alignments were split by forward and reverse strands and passed to BRAKER2 as separate BAM files to improve the accuracy of UTR models as recommended in the BRAKER2 documentation. Following gene prediction, genes that contained in frame stop codons were removed using the BRAKER2 script getAnnoFastaFromJoingenes.py and the completeness of each gene set was checked by BUSCO analysis using the longest transcript of each gene as the representative transcript. Functional annotation of the de-novo predicted gene models was performed based on homology searches against the NCBI nr and Interpro databases using BLAST2GO -v5.2.5.</p><p>Population sample resequencing and variant calling. Sequence data for 17 of the clones utilised in this study has been described previously <ref type="bibr" target="#b45">46,</ref><ref type="bibr" target="#b85">86</ref> . For the remaining clones DNA was extracted from pools of 10-20 aphids of each clone using the E.Z. N.A.® Insect DNA Kit (Omega Bio-tek) and used to construct PCR-free libraries. Libraries were sequenced on a NovaSeq6000 using a 150 bp paired-end read metric to an average coverage of 40X. FastQC was used to check the quality of the raw reads obtained <ref type="bibr" target="#b86">87</ref> and reads were trimmed using TrimGalore <ref type="bibr" target="#b63">64</ref> . For species validation sequence data for all clones was aligned to the Cytochrome C oxidase subunit gene derived from the most recently published M. persicae mtDNA genome <ref type="bibr" target="#b87">88</ref> using Geneious (Biomatters), and alignments of each clone were manually inspected. To call variants, data were first aligned to the chromosomescale assembly of clone G006 assembly using BWA -v 0.7.17 <ref type="bibr" target="#b88">89</ref> . PCR duplicate reads were removed from alignments and the remaining data were sorted using SAMtools -v 1.9.0 <ref type="bibr" target="#b84">85</ref> . Variants were called using the genome analysis toolkit GATK -v 4.1.0 90 haplotypecaller function. Individual genomic VCF records (gVCF) were jointly genotyped using GATK's genotype GVCFs. Genotype calls were filtered for minimum depth (DP) of ≥ 10. Variant calls with a minimum genotype quality (GQ) ≥ 30 were further retained. 45,627,645 high quality allelic variants were retained after variant calling and filtering of low-quality calls. We used 0.01 as the minor allele frequency cut-off. The final alignment had 1,064,888 columns and 130 rows with 105,979 distinct patterns. Among these, 1,017,412 sites were parsimonyinformative, 33,660 were singleton sites and 13,816 constant sites. The specific data filtering steps prior to running population structure and phylogenetic analyses are explained in the respective sections. Detailed description of the workflow used for the analysis of the population genomic data in this study is available as a Jupyter Notebook on GitHub https://github.com/cordeiroemg/Myzus_PopGen_Workflow. Analysis of obligate and facultative symbionts. To explore the occurrence and distribution of bacterial endosymbionts and other microbes present in the sampled M. persicae clones we used a framework recently developed for metagenomic analysis of aphids <ref type="bibr" target="#b23">24</ref> . Read sets were first mapped using BWA-MEM <ref type="bibr" target="#b88">89</ref> to a collection of &gt;30 reference genomes of known aphid symbionts, their associated plasmids, and a number of viruses known to infect aphids <ref type="bibr" target="#b23">24</ref> . Following this mapping step, several statistics were computed, including mapping rate, average coverage for each genome, fraction of the reference genome covered by at least five reads, and mean edit distance for the reads mapping on each reference genome. Unmapped reads from this analysis were extracted using Samtools <ref type="bibr" target="#b84">85</ref> , low quality reads were removed using Trimmomatic <ref type="bibr" target="#b90">91</ref> , and the remaining reads were taxonomically assigned using Kraken2 <ref type="bibr" target="#b91">92</ref> and Centrifuge <ref type="bibr" target="#b92">93</ref> to identify microbial sequences not represented in the collection of reference genomes used in the first round of analysis.</p><p>Pairwise comparisons of genetic distance. The genetic divergence between the sequenced M. persicae clones was initially assessed by creating a simple distance matrix of pairwise clone comparisons using the generic dist() function in R programming environment -v3.6.1.</p><p>Phylogenetic analyses. The VCF file, with more than 1 million variant sites, was converted to PHYLIP format using a custom python script. The final alignment had 1,064,888 columns and 130 rows with 105,979 distinct patterns. Among these, 1,017,412 sites were parsimony-informative, 33,660 and 13,816 were singleton and constant sites respectively. Phylogeny was estimated using maximum-likelihood (ML) inference in IQTree -v 1.6 <ref type="bibr" target="#b93">94</ref> , using the TVM + F + R5 + ASC substitution model with correction for ascertainment bias and 10,000 traditional bootstrap replicates (-cmax 15 -B 10000 -alrt 10000 -bnni -T AUTO). SplitsTree -v4.16.1 <ref type="bibr" target="#b94">95</ref> was used to create a distance-based split network using the neighbour-net algorithm.</p><p>Population structure and gene flow. SNPs were filtered in Plink 1.9 <ref type="bibr" target="#b95">96</ref> . Only biallelic SNPs under Hardy-Weinberg Equilibrium using 5% probability were used. Moreover, only SNPs with 0 missing rate and MAF &gt; 0.05% were included in genetic structure analyses. Principal Component Analysis (PCA) was performed in R using the dudi.pca function of the ade4 package <ref type="bibr" target="#b96">97</ref> . Model-based analyses employed ADMIXTURE 28 with a range of population sizes explored ranging from K = 1 to K = 20. The most likely number of genetic clusters was determined by the inspection of the cross-validation error, in which the smallest value indicated the best estimate of K. Co-ancestry relationships and fine scale analysis of genetic structure was explored using fineSTRUCTURE 29 . To formally test the hypothesis that host plant and geography play a significant role in partitioning genetic variation in M. persicae hierarchical analysis of molecular variance (AMOVA) <ref type="bibr" target="#b97">98</ref> was performed using Arlequin v. 3.52 <ref type="bibr" target="#b98">99</ref> . Groups for host plant included peach, tobacco, pepper, oilseed rape, for geographic location Europe, Africa, Asia, Australia, Asia, South America, and North America.</p><p>Selection scans. Divergent regions of the genome between populations from different host plants were identified by calculating pairwise F ST values, nucleotide diversity (π), and Tajima's D using VCFtools version 0.1.14 <ref type="bibr">100</ref> . Average values of F ST , π, and Tajima's D were calculated based on 3 million SNPs. F ST values were also calculated for each individual SNP, and π, and Tajima's D for non-overlapping 10-kb windows. We further scanned the genome for signatures of selection by H12 analysis, a haplotype-based approach that uses phased SNPs to detect selection sweeps <ref type="bibr" target="#b32">33</ref> , selecting the 15 highest peaks on each autosome, and retrieving lists of genes within candidate divergent regions from .bff annotation files.</p><p>Sequence analysis of candidate genes. Sequence variation in candidate genes was manually analysed by mapping reads of each clone to regions encompassing these genes using BWA <ref type="bibr" target="#b88">89</ref> , or the 'map to reference' function of Geneious -vR9, with alignments visualised using the Geneious software suite. Significant (p &lt; 0.05) associations between specific insecticide resistance mechanisms and hostdifferentiated populations of M. persicae were identified using Fisher's exact test performed in R.</p><p>Analysis of linkage disequilibrium and site frequency spectrum. To estimate the decay of LD on individual autosomes for clones from peach and tobacco from Italy and Greece variants were thinned using MapThin -v1.11 101 and PLINK -v1.90b4 96 used to estimate inter-variant allele count squared correlations (r 2 ). Plots of r 2 as function of distance were created using custom R scripts. The level of LD at three insecticide resistance loci was examined using HaploView -v02032021 102 . PLINK -v1.90b4 <ref type="bibr" target="#b95">96</ref> was used to initially convert the variants data into HaploView native format. The site frequency spectrum (SFS) of polymorphisms on different autosomes was estimated using ANGSD -v0.921 103 .</p><p>Haplotype analyses of resistance mutations. Illumina short-reads derived from each M. persicae clone were mapped against the reference gene sequences encoding the nicotinic acetylcholine receptor β1 subunit and the voltage-gated sodium channel using BWA-MEM <ref type="bibr" target="#b88">89</ref> . Consensus sequences were called from the BAM file for each clone using bcftools -v 1.9 mpileup and consensus utilities 104 , aligned with MAFFT -v7.471 105 using the -auto mode. FASTA alignments then converted to PHYLIP format and used to generate phylogenetic trees using IQTree-v 1.6 <ref type="bibr" target="#b93">94</ref> . Phylogenetic networks were created using the TCS -v1.21 software suite 106 . Spirotetramat bioassays. Aphids were age synchronized to generate 3-4 day old nymphs for testing. To determine optimal discriminating doses for testing the entire library of M. persicae clones, assays were initially performed on five representative clones using 7 spirotetramat concentrations spanning 0.0488 ppm -12.5 ppm. This informed the choice of two discriminating doses -0.25 ppm and 0.5 ppm-for screening all other clones. The sensitivity of each clone to the two spirotetramat concentrations, and a non-insecticide control, was tested in a leaf-dip bioassay using four biological replicates each comprising 10 nymphs. Brassica rapa leaf discs 37 mm in size were immersed in the appropriate concentration of insecticide solubilized in acetone and diluted in 0.02% Triton/H2O for 10 s. For controls, leaves were immersed in diluent minus insecticide. Discs were air-dried before being placed abaxial side up on 1% agar in discrete pottles, to which 10 nymphs were added. All bioassays were kept at 24 °C ± 1 with a photoperiod of 16:8, and each assay was scored for mortality at 72 hours. Aphids that were unable to control motor-function (e.g. could not right themselves when flipped) were recorded as 'affected' and were included in mortality data.</p><p>Statistics and reproducibility. Statistical analysis of data was performed using R as described above. For all statistical analysis, data from at least three independent measurements was used. The exact number of replicates are indicated in individual figure captions and the methods.</p><p>Reporting summary. Further information on research design is available in the Nature Research Reporting Summary linked to this article.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Fig. 1</head><label>1</label><figDesc>Fig. 1 New biological and genomic resources for the aphid Myzus persicae reveal the genome-wide patterns of genetic variation in clones sampled from across the world. a Chromosome-scale genome assembly of M. persicae clone G006. Heatmap shows frequency of HiC contacts along the genome assembly. Blue lines indicate super scaffolds and green lines show contigs, with the X axis showing cumulative length in millions of base pairs (Mb). b Geographic origin and sequence coverage of the 127 resequenced clones of M. persicae used in this study. c Circular plot of genome-wide genetic variation in a global sample of 127 M. persicae clones. The outermost circle represents the 6 chromosome-sized super-scaffolds of the genome assembly, with scaffold 1 the X chromosome. Moving inwards the circles represent: gene density, SNP density, GC and AT% over 100 kb non-overlapping windows.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head></head><label></label><figDesc>ARTICLE COMMUNICATIONS BIOLOGY | https://doi.org/10.1038/s42003-021-02373-x 4 COMMUNICATIONS BIOLOGY | (2021) 4:847 | https://doi.org/10.1038/s42003-021-02373-x | www.nature.com/commsbio</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Fig. 2</head><label>2</label><figDesc>Fig. 2 Phylogenetic relationship and population structure of 127 M. persicae clones. a Maximum likelihood phylogeny based on &gt;1 M biallelic SNPs. Data from two samples of Myzus cerasi were used as an outgroup. The geographic origin of clones and the host plant from which they were collected are indicated by coloured circles and squares respectively. Clone identification numbers (corresponding to Supplementary Data 1) are also included. For a representation of the tree as a phylogram see Fig. S1. b, c Principal component analysis of genetic diversity between clonal lines with samples coloured by host plant (b) or geographic origin (c). d Coancestry heatmap of the sampled clones derived from fineSTRUCTURE analysis. The scale shows the degree of shared genetic chunks between the lines (lower, yellow, to higher, blue). The maximum a posteriori (MAP) tree generated by fineSTRUCTURE showing the relationship between samples is shown above the heatmap. The geographic origin of clones and the host plant from which they were collected are indicated by the outer and inner coloured rectangles respectively (see PCA keys for interpretation of colours).</figDesc><graphic coords="6,290.56,349.64,236.92,224.32" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Fig. 3</head><label>3</label><figDesc>Fig. 3 Genetic structure in globally sampled M. persicae. a Admixture analysis of genetic structure and individual ancestry. Colours in each column represent the inferred proportion of ancestry when K is varied from 2 to 12, the most likely number of predicted genetic clusters (K = 12) is indicated by a box. The geographic origin of clones and the host plant from which they were collected are indicated above and below the structure plot by coloured circles and squares respectively. b Geographic representation of genetic structure in the clones when grouped by country of origin (K = 12).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Fig. 4</head><label>4</label><figDesc>Fig. 4 Genomic divergence and signatures of selection associated with host plant use in M. persicae. Panels from bottom to top display nucleotide diversity (π), Tajima's D, F ST, and H12 values across the 5 autosomal chromosomes of M. persicae for the main host plant groups (oilseed rape (OSR), peach, tobacco, pepper and potato), see Supplementary Data 1 for sample sizes. H12 scan: Each data point represents the H12 value calculated based on a 1000 SNP window. Red points highlight the top 15 peaks at each scaffold. Fixation index (F ST ), Tajima's D, and nucleotide diversity (π): smoothed lines were estimated based on a 10 kb chromosomal window.</figDesc><graphic coords="8,89.68,70.73,447.64,189.88" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Fig. 5</head><label>5</label><figDesc>Fig. 5 Insecticide resistance mechanisms in global M. persicae. a, b Frequency of eight resistance mutations in M. persicae collected from different countries (a) and host plants (b). Significant (p &lt; 0.05) associations between specific resistance mutations and host-differentiated populations are denoted using a star (Fisher's exact test). Significance applying to a specific codon is indicated in brackets. See Supplementary Data 1 for sample sizes. c Identification of novel resistance mutations in domain II of the voltage-gated sodium channel (VGSC) in M. persicae that confer resistance to pyrethroid insecticides. A schematic of the VGSC is shown above a nucleotide alignment illustrating the nature and position of two new mutations that both result in the same M918I substitution. For reference the wildtype sequence and the mutations leading to the amino acid substitutions reported previously at this position in resistant M. persicae are also displayed in the alignment.</figDesc><graphic coords="9,232.78,386.96,304.84,184.36" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Fig. 6</head><label>6</label><figDesc>Fig. 6 Population genomics of variation in sensitivity to a recently introduced insecticide. a Sensitivity of 110 clones of M. persicae to two concentrations (0.25 ppm and 0.5 ppm) of the insecticide spirotetramat. Error bars display 95% confidence intervals (n = 4 biological replicates, each comprising 10 aphids). b, c Identification of a novel resistance mutation in a highly conserved region of the acetyl-CoA carboxylase (ACC) enzyme carboxyltransferase (CT) domain in M. persicae that confers resistance to spirotetratmat. A schematic of the ACC enzyme is shown above an amino acid alignment illustrating the position of an alanine to valine substitution in clone 20 (that exhibits marked resistance to spirotetramat) that was not observed in any of the other M. persicae clones. To illustrate the conserved nature of the alanine at this position across insects the sequences of several other insect species are included in the alignment.</figDesc><graphic coords="11,234.91,276.53,260.44,91.24" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head>Fig. 7</head><label>7</label><figDesc>Fig.7Average long-range linkage disequilibrium (LD) and LD decay over distance for all autosomes of M. persicae from peach and tobacco in Italy and Greece. Distribution of r 2 is plotted separately for all autosomes in clones from a peach-Greece, b peach-Italy, c tobacco-Greece and d tobacco-Italy. See Supplementary Data 1 for sample sizes. Individual points in the box plot represent mean r 2 values in 100 KB windows along the entire length of autosomes. r 2 values are plotted as a function of distance (LD decay) across all autosomes in e peach-Greece, f peach-Italy, g tobacco-Greece and h tobacco-Italy clones.</figDesc></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="6" xml:id="foot_0"><p>COMMUNICATIONS BIOLOGY | (2021) 4:847 | https://doi.org/10.1038/s42003-021-02373-x | www.nature.com/commsbio</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" xml:id="foot_1"><p>COMMUNICATIONS BIOLOGY | (2021) 4:847 | https://doi.org/10.1038/s42003-021-02373-x | www.nature.com/commsbio</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>Acknowledgements</head><p>This project has received funding from the <rs type="funder">European Research Council (ERC)</rs> under the European Union's <rs type="programName">Horizon 2020 research and innovation programme</rs> (grant agreement no. <rs type="grantNumber">646625</rs>), and the <rs type="funder">Biotechnology and Biological Sciences Research Council (BBSRC)</rs> (grant number: <rs type="grantNumber">BB/S006060/1</rs>). Illumina sequencing of clone 126 was funded by <rs type="funder">Defense Advanced Research Projects Agency (DARPA)</rs> agreement <rs type="grantNumber">HR0011-17-2-0053</rs> to G.J. A. C.C.W. was supported by <rs type="funder">National Science Foundation</rs> Award <rs type="grantNumber">IOS-1354154</rs>. A.H. is supported by a <rs type="funder">BBSRC</rs> <rs type="grantName">David Phillips Fellowship</rs> (<rs type="grantNumber">BB/N020146/1</rs>), and T.C.M. by a <rs type="funder">BBSRC</rs> <rs type="grantName">Future Leaders Fellowship</rs> (<rs type="grantNumber">BB/R01227X/1</rs>). We thank <rs type="person">Manuela Eckel-Zimmer</rs>, <rs type="person">Victoria Mallott</rs>, <rs type="person">Emma Bass</rs>, <rs type="person">Daehong Lee</rs>, and <rs type="person">Emma Randall</rs> for collection and rearing of aphid clones, and collecting samples for molecular analyses.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_vXcQePM">
+					<idno type="grant-number">646625</idno>
+					<orgName type="program" subtype="full">Horizon 2020 research and innovation programme</orgName>
+				</org>
+				<org type="funding" xml:id="_EQ2MbgR">
+					<idno type="grant-number">BB/S006060/1</idno>
+				</org>
+				<org type="funding" xml:id="_hejZSTY">
+					<idno type="grant-number">HR0011-17-2-0053</idno>
+				</org>
+				<org type="funding" xml:id="_e9jVZVH">
+					<idno type="grant-number">IOS-1354154</idno>
+				</org>
+				<org type="funding" xml:id="_6Ga69z7">
+					<idno type="grant-number">BB/N020146/1</idno>
+					<orgName type="grant-name">David Phillips Fellowship</orgName>
+				</org>
+				<org type="funding" xml:id="_fzRsgya">
+					<idno type="grant-number">BB/R01227X/1</idno>
+					<orgName type="grant-name">Future Leaders Fellowship</orgName>
+				</org>
+			</listOrg>
+
+			<div type="availability">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Data availability</head><p>The sequence data generated in this study has been deposited with NCBI under the Bio Project ID: PRJNA574571 107 . For individual accession numbers associated with each clone see Supplementary Data 1. The genome assembly of M. persicae clone G006 is also available at AphidBase https://bipaa.genouest.org/is/aphidbase/ 108 . Source data for figures are available in Supplementary Data 1 and on Dryad https://doi.org/10.5061/ dryad.vhhmgqnt7. All other data generated during the current study is available from the corresponding author on reasonable request.</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Author contributions</head><p>C.B. conceived the study. P.B., H.J.B, K.C., C.C.F., J.T.M., E.M., R.N., G.R., I.S., P.A.U., N. V.V., M.S.W., G.X.W., Y.N.Y., and C.T.Z. provided insect material. K.S.S., E.M.G.C., B.J.T., A.P., J.M., T.C.M., F.L., S.R., J.C.S., A. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Competing interests</head><p>The authors declare no competing interests.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Additional information</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Supplementary information</head><p>The online version contains supplementary material available at https://doi.org/10.1038/s42003-021-02373-x.</p><p>Correspondence and requests for materials should be addressed to C.B.</p><p>Peer review information Communications Biology thanks the anonymous reviewers for their contribution to the peer review of this work. Primary Handling Editors: Luke R. Grinham.</p><p>Reprints and permission information is available at http://www.nature.com/reprints Publisher's note Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Genetic diversity of the African malaria vector Anopheles gambiae</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Miles</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">552</biblScope>
+			<biblScope unit="page" from="96" to="100" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">The evolution of insecticide resistance in the peach potato aphid, Myzus persicae</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Bass</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Insect Biochem. Mol. Biol</title>
+		<imprint>
+			<biblScope unit="volume">51</biblScope>
+			<biblScope unit="page" from="41" to="51" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Neofunctionalization of duplicated P450 genes drives the evolution of insecticide resistance in the brown planthopper</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">T</forename><surname>Zimmer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Curr. Biol</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="page" from="268" to="274" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">The evolutionary origins of pesticide resistance</title>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">J</forename><surname>Hawkins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Bass</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Dixon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Neve</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Biol. Rev</title>
+		<imprint>
+			<biblScope unit="volume">94</biblScope>
+			<biblScope unit="page" from="135" to="155" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Landscape genomics of Colorado potato beetle provides evidence of polygenic adaptation to insecticides</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Crossley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">Y</forename><surname>Groves</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">H</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">S</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol. Ecol</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="page" from="6284" to="6300" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">F</forename><surname>Van Emden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Harrington</surname></persName>
+		</author>
+		<title level="m">Aphids as crop pests</title>
+		<imprint>
+			<publisher>CABI</publisher>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Genome sequence of the pea aphid Acyrthosiphon pisum</title>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">A G</forename><surname>Consortium</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Plos Biol</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page">1000313</biblScope>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Rapid transcriptional plasticity of duplicated gene clusters enables a clonally reproducing aphid to colonise diverse plant species</title>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">C</forename><surname>Mathers</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/s13059-016-1145-3</idno>
+		<ptr target="https://doi.org/10.1186/s13059-016-1145-3" />
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biol</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Chromosome-scale genome assemblies of aphids reveal extensively rearranged autosomes and long-term conservation of the X chromosome</title>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">C</forename><surname>Mathers</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol. Biol. Evol</title>
+		<imprint>
+			<biblScope unit="volume">38</biblScope>
+			<biblScope unit="page" from="856" to="875" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Gene family evolution in the pea aphid based on chromosome-level genome assembly</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Park</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">E</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">A</forename><surname>Moran</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol. Biol. Evol</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="page" from="2143" to="2156" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Genome sequence of the corn leaf aphid (Rhopalosiphum maidis Fitch)</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Chen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Gigascience</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="1" to="12" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Tracking the global dispersal of a cosmopolitan insect pest, the peach potato aphid</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">T</forename><surname>Margaritopoulos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Kasprowicz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">L</forename><surname>Malloch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Fenton</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Ecol</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page">13</biblScope>
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">A continuum of genetic divergence from sympatric host races to species in the pea aphid complex</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Peccoud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ollivier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Plantegenest</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">C</forename><surname>Simon</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proc. Nat. l Acad. Sci. U. S. A</title>
+		<imprint>
+			<biblScope unit="volume">106</biblScope>
+			<biblScope unit="page" from="7495" to="7500" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">F</forename><surname>Van Emden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Harrington</surname></persName>
+		</author>
+		<title level="m">Aphids as crop pests</title>
+		<imprint>
+			<publisher>CABI</publisher>
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">An aphid RNA transcript migrates systemically within plants and is a virulence factor</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Chen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proc. Natl Acad. Sci. USA</title>
+		<imprint>
+			<biblScope unit="volume">117</biblScope>
+			<biblScope unit="page" from="12763" to="12771" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Microsatellite DNA and behavioural studies provide evidence of hostmediated speciation in Myzus persicae (Hemiptera: Aphididae)</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">T</forename><surname>Margaritopoulos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Malarky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Tsitsipis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">L</forename><surname>Blackman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Biol. J. Linn. Soc</title>
+		<imprint>
+			<biblScope unit="volume">91</biblScope>
+			<biblScope unit="page" from="687" to="702" />
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Morphological discrimination of a tobacco-feeding form from Myzus persicae (Sulzer) (Hemiptera: Aphididae), and a key to New World Myzus (Nectarosiphon) species</title>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">L</forename><surname>Blackman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bul. Ent. Res</title>
+		<imprint>
+			<biblScope unit="volume">77</biblScope>
+			<biblScope unit="page" from="713" to="730" />
+			<date type="published" when="1987">1987</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Genetic variation and covariation of susceptibility to parasitoids in the aphid Myzus persicae: no evidence for trade-offs</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Von Burg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Ferrari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">B</forename><surname>Muller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Vorburger</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proc. R. Soc. Lond. B Biol. Sci</title>
+		<imprint>
+			<biblScope unit="volume">275</biblScope>
+			<biblScope unit="page" from="1089" to="1094" />
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Gene amplification and microsatellite polymorphism underlie a recent insect host shift</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Bass</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proc. Natl Acad. Sci. USA</title>
+		<imprint>
+			<biblScope unit="volume">110</biblScope>
+			<biblScope unit="page" from="19460" to="19465" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Genomic resources for Myzus persicae: EST sequencing, SNP identification, and microarray design</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">S</forename><surname>Ramsey</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Genomics</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page">423</biblScope>
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Chromosome numbers in the Aphididae and their taxonomic significance</title>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">L</forename><surname>Blackman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Syst. Entomol</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page" from="7" to="25" />
+			<date type="published" when="1980">1980</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">BUSCO: assessing genome assembly and annotation completeness with single-copy orthologs</title>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">A</forename><surname>Simão</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">M</forename><surname>Waterhouse</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Ioannidis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">V</forename><surname>Kriventseva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">M</forename><surname>Zdobnov</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">31</biblScope>
+			<biblScope unit="page" from="3210" to="3212" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Comparative analysis of genome sequences from four strains of the Buchnera aphidicola Mp endosymbion of the green peach aphid, Myzus persicae</title>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Jiang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Genomics</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page">917</biblScope>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Multi-scale characterization of symbiont diversity in the pea aphid complex through metagenomic approaches</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Guyomar</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Microbiome</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page">181</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">The relative rates of evolution of sex chromosomes and autosomes</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Charlesworth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Coyne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">H</forename><surname>Barton</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Am. Nat</title>
+		<imprint>
+			<biblScope unit="volume">130</biblScope>
+			<biblScope unit="page" from="113" to="146" />
+			<date type="published" when="1987">1987</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Facultative symbionts in aphids and the horizontal transfer of ecologically important traits</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">M</forename><surname>Oliver</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">H</forename><surname>Degnan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">R</forename><surname>Burke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">A</forename><surname>Moran</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annu. Rev. Entomol</title>
+		<imprint>
+			<biblScope unit="volume">55</biblScope>
+			<biblScope unit="page" from="247" to="266" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">The invasion route for an insect pest species: the tobacco aphid in the New World</title>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">A</forename><surname>Zepeda-Paulo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol. Ecol</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="4738" to="4752" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Enhancements to the ADMIXTURE algorithm for individual ancestry estimation</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">H</forename><surname>Alexander</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Lange</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Bioinforma</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page">246</biblScope>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Inference of population structure using dense haplotype data</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">J</forename><surname>Lawson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Hellenthal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Myers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Falush</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLoS Genet</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page">1002453</biblScope>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Spatial and temporal dynamics of Myzus persicae clones in fields and suction traps</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Kasprowicz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Malloch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Pickup</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Fenton</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Agric. Entomol</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page" from="91" to="100" />
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Genetic variation in the Myzus persicae complex (Homoptera: Aphididae): evidence for a single species</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">M</forename><surname>Clements</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Ann. Entomol. Soc. Am</title>
+		<imprint>
+			<biblScope unit="volume">93</biblScope>
+			<biblScope unit="page" from="31" to="46" />
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Genetic, biochemical, and behavioral uniformity among populations of Myzus nicotianae and Myzus persicae</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">M</forename><surname>Clements</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">E</forename><surname>Sorenson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">M</forename><surname>Wiegmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">A</forename><surname>Neese</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">M</forename><surname>Roe</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Entomol. Exp. Appl</title>
+		<imprint>
+			<biblScope unit="volume">95</biblScope>
+			<biblScope unit="page" from="269" to="281" />
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Recent selective sweeps in North American Drosophila melanogaster show signatures of soft sweeps</title>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">R</forename><surname>Garud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">W</forename><surname>Messer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">O</forename><surname>Buzbas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">A</forename><surname>Petrov</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLoS Genet</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page">1005004</biblScope>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">A genomic perspective on the generation and maintenance of genetic diversity in herbivorous insects</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">D</forename><surname>Gloss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">C</forename><surname>Groen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">K</forename><surname>Whiteman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annu. Rev. Ecol. Evol. Syst</title>
+		<imprint>
+			<biblScope unit="volume">47</biblScope>
+			<biblScope unit="page" from="165" to="187" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Genomics of adaptation to host-plants in herbivorous insects</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">C</forename><surname>Simon</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Brief. Funct. Genomics</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="413" to="423" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">The genetics of obligate parthenogenesis in an aphid species and its consequences for the maintenance of alternative reproductive modes</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">A</forename><surname>Dedryver</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">F</forename><surname>Le Gallic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Mahéo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">C</forename><surname>Simon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Dedryver</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Heredity</title>
+		<imprint>
+			<biblScope unit="volume">110</biblScope>
+			<biblScope unit="page" from="39" to="45" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Life cycle variation of Myzus persicae (Hemiptera: Aphididae) in Greece</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">T</forename><surname>Margaritopoulos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Tsitsipis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Goudoudaki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">L</forename><surname>Blackman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bul. Ent. Res</title>
+		<imprint>
+			<biblScope unit="volume">92</biblScope>
+			<biblScope unit="page" from="309" to="319" />
+			<date type="published" when="2002">2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">A sodium channel point mutation is associated with resistance to DDT and pyrethroid insecticides in the peach-potato aphid, Myzus persicae (Sulzer) (Hemiptera: Aphididae)</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Martinez-Torres</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">P</forename><surname>Foster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">M</forename><surname>Field</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">L</forename><surname>Devonshire</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">S</forename><surname>Williamson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Insect Mol. Biol</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="339" to="346" />
+			<date type="published" when="1999">1999</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Molecular studies of knockdown resistance to pyrethroids: cloning of domain II sodium channel gene sequences from insects</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Martinez-Torres</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">L</forename><surname>Devonshire</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">S</forename><surname>Williamson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Pestic. Sci</title>
+		<imprint>
+			<biblScope unit="volume">51</biblScope>
+			<biblScope unit="page" from="265" to="270" />
+			<date type="published" when="1997">1997</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Characterization of the M918T sodium channel gene mutation associated with strong resistance to pyrethroid insecticides in the peach-potato aphid. Myzus persicae (Sulzer)</title>
+		<author>
+			<persName><forename type="first">I</forename><surname>Eleftherianos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">P</forename><surname>Foster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">S</forename><surname>Williamson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Denholm</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bul. Ent. Res</title>
+		<imprint>
+			<biblScope unit="volume">98</biblScope>
+			<biblScope unit="page" from="183" to="191" />
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Uncommon associations in target resistance among French populations of Myzus persicae from oilseed rape crops</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Fontaine</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Pest Manag. Sci</title>
+		<imprint>
+			<biblScope unit="volume">67</biblScope>
+			<biblScope unit="page" from="881" to="885" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Identification of mutations conferring insecticide-insensitive AChE in the cotton-melon aphid, Aphis gossypii Glover</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">C</forename><surname>Andrews</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Callaghan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">M</forename><surname>Field</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">S</forename><surname>Williamson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">D</forename><surname>Moores</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Insect Mol. Biol</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page" from="555" to="561" />
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">An amino acid substitution on the second acetylcholinesterase in the pirimicarb-resistant strains of the peach potato aphid, Myzus persicae</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Nabeshima</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Kozaki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Tomita</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Kono</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Biochem. Biophys. Res. Commun</title>
+		<imprint>
+			<biblScope unit="volume">307</biblScope>
+			<biblScope unit="page" from="15" to="22" />
+			<date type="published" when="2003">2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Duplication of the Rdl GABA receptor subunit gene in an insecticide-resistant aphid, Myzus persicae</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Anthony</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Unruh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Ganser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Ffrench-Constant</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol. Gen. Genet</title>
+		<imprint>
+			<biblScope unit="volume">260</biblScope>
+			<biblScope unit="page" from="165" to="175" />
+			<date type="published" when="1998">1998</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Mutation of a nicotinic acetylcholine receptor β subunit is associated with resistance to neonicotinoid insecticides in the aphid Myzus persicae</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Bass</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Neurosci</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page">51</biblScope>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">The genetic architecture of a host shift: an adaptive walk protected an aphid and its endosymbiont from plant chemical defences</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">S</forename><surname>Singh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Sci. Adv</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page">1070</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Detecting the presence of target-site resistance to neonicotinoids and pyrethroids in Italian populations of Myzus persicae</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Panini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Dradi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Marani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Butturini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Mazzoni</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Pest Manag. Sci</title>
+		<imprint>
+			<biblScope unit="volume">70</biblScope>
+			<biblScope unit="page" from="931" to="938" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Dramatic changes in the genotypic frequencies of target insecticide resistance in French populations of Myzus persicae (Hemiptera: Aphididae) over the last decade</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Roy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Fontaine</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Caddoux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Micoud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">C</forename><surname>Simon</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J. Econ. Entomol</title>
+		<imprint>
+			<biblScope unit="volume">106</biblScope>
+			<biblScope unit="page" from="1838" to="1847" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">Frequencies of the M918I mutation in the sodium channel of the diamondback moth in China, Thailand and Japan and its association with pyrethroid resistance</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Sonoda</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Pest. Biochem. Physiol</title>
+		<imprint>
+			<biblScope unit="volume">102</biblScope>
+			<biblScope unit="page" from="142" to="145" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">Identification of putative kdr mutations in the tropical bed bug, Cimex hemipterus (Hemiptera: Cimicidae)</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Dang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Pest Manag. Sci</title>
+		<imprint>
+			<biblScope unit="volume">71</biblScope>
+			<biblScope unit="page" from="1015" to="1020" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">The molecular interactions of pyrethroid insecticides with insect and mammalian sodium channels</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Vais</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">S</forename><surname>Williamson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">L</forename><surname>Devonshire</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">N R</forename><surname>Usherwood</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Pest Manag. Sci</title>
+		<imprint>
+			<biblScope unit="volume">57</biblScope>
+			<biblScope unit="page" from="877" to="888" />
+			<date type="published" when="2001">2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">Susceptibility of Australian Myzus persicae (Hemiptera: Aphididae) to three recently registered insecticides: Spirotetramat, cyantraniliprole, and sulfoxaflor</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">C</forename><surname>De Little</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">A</forename><surname>Umina</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J. Econ. Entomol</title>
+		<imprint>
+			<biblScope unit="volume">110</biblScope>
+			<biblScope unit="page" from="1764" to="1769" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">Evolution of imidacloprid resistance in Myzus persicae in Greece and susceptibility data for spirotetramat</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">C</forename><surname>Voudouris</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Pest Manag. Sci</title>
+		<imprint>
+			<biblScope unit="volume">73</biblScope>
+			<biblScope unit="page" from="1804" to="1812" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<analytic>
+		<title level="a" type="main">Identification and functional characterization of a novel acetyl-CoA carboxylase mutation associated with ketoenol resistance in Bemisia tabaci</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Lueke</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Pest. Biochem. Physiol</title>
+		<imprint>
+			<biblScope unit="volume">166</biblScope>
+			<biblScope unit="page">104583</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">Studies of an insecticidal 1 inhibitor of acetyl-CoA carboxylase in the nematode C. elegans</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Guest</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Kriek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">J</forename><surname>Flemming</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Pest. Biochem. Physiol</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page">12710</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<analytic>
+		<title level="a" type="main">The molecular genetics of insecticide resistance</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Ffrench-Constant</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genetics</title>
+		<imprint>
+			<biblScope unit="volume">194</biblScope>
+			<biblScope unit="page" from="807" to="815" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">Ecological genetics of insecticide and acaricide resistance</title>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">T</forename><surname>Roush</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Mckenzie</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annu. Rev. Entomol</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="page" from="361" to="380" />
+			<date type="published" when="1987">1987</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<analytic>
+		<title level="a" type="main">What can genetic association panels tell us about evolutionary processes in insects?</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Robin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Battlay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Fournier-Level</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Curr. Opin. Insect Sci</title>
+		<imprint>
+			<biblScope unit="volume">31</biblScope>
+			<biblScope unit="page" from="99" to="105" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<analytic>
+		<title level="a" type="main">Association mapping of insecticide resistance in wild Anopheles gambiae populations: major variants identified in a low-linkage disequilbrium genome</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Weetman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLoS ONE</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page">13140</biblScope>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<analytic>
+		<title level="a" type="main">Thrice out of Africa: ancient and recent expansions of the honey bee, Apis mellifera</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">W</forename><surname>Whitfield</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Science</title>
+		<imprint>
+			<biblScope unit="volume">314</biblScope>
+			<biblScope unit="page" from="642" to="645" />
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<analytic>
+		<title level="a" type="main">The Drosophila melanogaster genetic reference panel</title>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">F</forename><surname>Mackay</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="173" to="178" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<analytic>
+		<title level="a" type="main">Coexistence of different host-adapted forms of the Myzus persicae group (Hemiptera: Aphididae) in southern Italy</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">T</forename><surname>Margaritopoulos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">L</forename><surname>Blackman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Tsitsipis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Sannino</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bul. Ent. Res</title>
+		<imprint>
+			<biblScope unit="volume">93</biblScope>
+			<biblScope unit="page" from="131" to="135" />
+			<date type="published" when="2003">2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<analytic>
+		<title level="a" type="main">Host races in plant-feeding insects and their importance in sympatric speciation</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Drès</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Mallet</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Philos. Trans. R. Soc. B Biol. Sci</title>
+		<imprint>
+			<biblScope unit="volume">357</biblScope>
+			<biblScope unit="page" from="471" to="492" />
+			<date type="published" when="2002">2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<monogr>
+		<author>
+			<persName><forename type="first">F</forename><surname>Krueger</surname></persName>
+		</author>
+		<ptr target="http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/" />
+		<title level="m">A wrapper tool around Cutadapt and FastQC to consistently apply quality and adapter trimming to FastQ files</title>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<analytic>
+		<title level="a" type="main">Canu: scalable and accurate long-read assembly via adaptive k-mer weighting and repeat separation</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Koren</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Res</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="722" to="736" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b65">
+	<analytic>
+		<title level="a" type="main">Fast and accurate long-read assembly with wtdbg2</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Ruan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Li</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Methods</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page" from="155" to="158" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b66">
+	<analytic>
+		<title level="a" type="main">Assembly of long, errorprone reads using repeat graphs</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Kolmogorov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Yuan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">A</forename><surname>Pevzner</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Biotechnol</title>
+		<imprint>
+			<biblScope unit="volume">37</biblScope>
+			<biblScope unit="page" from="540" to="546" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b67">
+	<analytic>
+		<title level="a" type="main">Phased diploid genome assembly with single-molecule realtime sequencing</title>
+		<author>
+			<persName><forename type="first">C.-S</forename><surname>Chin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Methods</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page" from="1050" to="1054" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b68">
+	<analytic>
+		<title level="a" type="main">Contiguous and accurate de novo assembly of metazoan genomes with modest long read coverage</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Chakraborty</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">G</forename><surname>Baldwin-Brown</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">D</forename><surname>Long</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">J</forename><surname>Emerson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">44</biblScope>
+			<biblScope unit="page">147</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b69">
+	<analytic>
+		<title level="a" type="main">a K-mer analysis toolkit to quality control NGS datasets and genome assemblies</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Mapleson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">G</forename><surname>Accinelli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Kettleborough</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wright</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">J</forename><surname>Clavijo</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kat</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page" from="574" to="576" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b70">
+	<analytic>
+		<title level="a" type="main">Fast and accurate de novo genome assembly from long uncorrected reads</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Vaser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Sović</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Nagarajan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Šikić</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Res</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="737" to="746" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b71">
+	<analytic>
+		<title level="a" type="main">An integrated tool for comprehensive microbial variant detection and genome assembly improvement</title>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">J</forename><surname>Walker</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLoS ONE</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page">112963</biblScope>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b72">
+	<analytic>
+		<title level="a" type="main">Purge Haplotigs: allelic contig reassignment for third-gen diploid genome assemblies</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">J</forename><surname>Roach</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">A</forename><surname>Schmidt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">R</forename><surname>Borneman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Bioinforma</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page">460</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b73">
+	<analytic>
+		<title level="a" type="main">Comprehensive mapping of long-range interactions reveals folding principles of the human genome</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Lieberman-Aiden</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Science</title>
+		<imprint>
+			<biblScope unit="volume">326</biblScope>
+			<biblScope unit="page" from="289" to="293" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b74">
+	<analytic>
+		<title level="a" type="main">Juicer provides a one-click system for analyzing loopresolution Hi-C experiments</title>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">C</forename><surname>Durand</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Cell Syst</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="95" to="98" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b75">
+	<analytic>
+		<title level="a" type="main">De novo assembly of the Aedes aegypti genome using Hi-C yields chromosome-length scaffolds</title>
+		<author>
+			<persName><forename type="first">O</forename><surname>Dudchenko</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Science</title>
+		<imprint>
+			<biblScope unit="volume">356</biblScope>
+			<biblScope unit="page" from="92" to="95" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b76">
+	<monogr>
+		<title level="m" type="main">The Juicebox Assembly Tools module facilitates de novo assembly of mammalian genomes with chromosome-length scaffolds for under</title>
+		<author>
+			<persName><forename type="first">O</forename><surname>Dudchenko</surname></persName>
+		</author>
+		<idno type="DOI">10.1101/254797</idno>
+		<ptr target="https://doi.org/10.1101/254797" />
+		<imprint>
+			<date type="published" when="1000">1000. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b77">
+	<analytic>
+		<title level="a" type="main">Interrogation of genome assemblies</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">R</forename><surname>Laetsch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">L</forename><surname>Blaxter</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Blobtools</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">F1000Res</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page">1287</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b78">
+	<analytic>
+		<title level="a" type="main">SeqKit: A cross-platform and ultrafast toolkit for FASTA/Q file manipulation</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Shen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Le</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Hu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLoS ONE</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page">163962</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b79">
+	<monogr>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">F A</forename><surname>Smit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Hubley</surname></persName>
+		</author>
+		<ptr target="http://www.repeatmasker.org" />
+		<title level="m">RepeatModeler Open-1.0</title>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b80">
+	<analytic>
+		<title level="a" type="main">Eukaryotic gene prediction using GeneMark. hmm-E and GeneMark-ES</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Borodovsky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Lomsadze</surname></persName>
+		</author>
+		<idno type="DOI">10.1002/0471250953.bi0406s35</idno>
+		<ptr target="https://doi.org/10.1002/0471250953.bi0406s35" />
+	</analytic>
+	<monogr>
+		<title level="j">Curr. Protoc. Bioinformatics Chapter</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b81">
+	<analytic>
+		<title level="a" type="main">AUGUSTUS: a web server for gene prediction in eukaryotes that allows user-defined constraints</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Stanke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Morgenstern</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page" from="465" to="W467" />
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b82">
+	<analytic>
+		<title level="a" type="main">BRAKER1: unsupervised RNA-Seq-based genome annotation with GeneMark-ET and AUGUSTUS</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">J</forename><surname>Hoff</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Lange</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Lomsadze</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Borodovsky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Stanke</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="page" from="767" to="769" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b83">
+	<analytic>
+		<title level="a" type="main">Graph-based genome alignment and genotyping with HISAT2 and HISAT-genotype</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Paggi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Park</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Bennett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">L</forename><surname>Salzberg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Biotechnol</title>
+		<imprint>
+			<biblScope unit="volume">37</biblScope>
+			<biblScope unit="page" from="907" to="915" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b84">
+	<analytic>
+		<title level="a" type="main">The Sequence Alignment/Map format and SAMtools</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Li</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="2078" to="2079" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b85">
+	<analytic>
+		<title level="a" type="main">Transposon-mediated insertional mutagenesis unmasks recessive insecticide resistance in the aphid Myzus persicae</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Panini</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proc. Natl Acad. Sci. USA</title>
+		<imprint>
+			<biblScope unit="volume">118</biblScope>
+			<biblScope unit="page">2100559118</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b86">
+	<monogr>
+		<title level="m" type="main">FastQC: a quality control tool for high throughput sequence data</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Andrews</surname></persName>
+		</author>
+		<ptr target="http://www.bioinformatics.babraham.ac.uk/projects/fastqc" />
+		<imprint>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b87">
+	<analytic>
+		<title level="a" type="main">Characteristic and variability of five complete aphid mitochondrial genomes: Aphis fabae mordvilkoi, Aphis craccivora, Myzus persicae, Therioaphis tenera and Appendiseta robiniae (Hemiptera; Sternorrhyncha; Aphididae</title>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">V</forename><surname>Voronova</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Int. J. Biol. Macromol</title>
+		<imprint>
+			<biblScope unit="volume">149</biblScope>
+			<biblScope unit="page" from="187" to="206" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b88">
+	<monogr>
+		<title level="m" type="main">Aligning sequence reads, clone sequences and assembly contigs with BWA-MEM</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Li</surname></persName>
+		</author>
+		<idno>arXiv 1303.3997v1 [q-bio.GN</idno>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b89">
+	<analytic>
+		<title level="a" type="main">From FastQ data to high confidence variant calls: the Genome Analysis Toolkit best practices pipeline</title>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">A</forename><surname>Van Der Auwera</surname></persName>
+		</author>
+		<idno>10.33</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Curr. Protoc. Bioinforma</title>
+		<imprint>
+			<biblScope unit="volume">43</biblScope>
+			<biblScope unit="issue">10</biblScope>
+			<biblScope unit="page" from="1" to="11" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b90">
+	<analytic>
+		<title level="a" type="main">Trimmomatic: A flexible trimmer for Illumina sequence data</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">M</forename><surname>Bolger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Lohse</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Usadel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="page" from="2114" to="2120" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b91">
+	<analytic>
+		<title level="a" type="main">Improved metagenomic analysis with Kraken 2</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">E</forename><surname>Wood</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Langmead</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biol</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page">257</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b92">
+	<analytic>
+		<title level="a" type="main">Centrifuge: rapid and sensitive classification of metagenomic sequences</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Song</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">P</forename><surname>Breitwieser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">L</forename><surname>Salzberg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Res</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="page" from="1721" to="1729" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b93">
+	<analytic>
+		<title level="a" type="main">IQ-TREE: A fast and effective stochastic algorithm for estimating maximum likelihood phylogenies</title>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">T</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">A</forename><surname>Schmidt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">V</forename><surname>Haeseler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">Q</forename><surname>Minh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol. Biol. Evol</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="page" from="268" to="274" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b94">
+	<analytic>
+		<title level="a" type="main">Application of phylogenetic networks in evolutionary studies</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">H</forename><surname>Huson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Bryant</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol. Biol. Evol</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page" from="254" to="267" />
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b95">
+	<analytic>
+		<title level="a" type="main">PLINK: a toolset for whole-genome association and population-based linkage analysis</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Purcell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Am. J. Hum. Genet</title>
+		<imprint>
+			<biblScope unit="volume">81</biblScope>
+			<biblScope unit="page" from="559" to="575" />
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b96">
+	<analytic>
+		<title level="a" type="main">The ade4 package: implementing the duality diagram for ecologists</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Dray</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">B</forename><surname>Dufour</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J. Stat. Softw</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="page" from="1" to="20" />
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b97">
+	<analytic>
+		<title level="a" type="main">Analysis of molecular variance inferred from metric distances among DNA haplotypes: application to human mitochondrial DNA restriction data</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Excoffier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">E</forename><surname>Smouse</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Quattro</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genetics</title>
+		<imprint>
+			<biblScope unit="volume">131</biblScope>
+			<biblScope unit="page" from="479" to="491" />
+			<date type="published" when="1992">1992</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b98">
+	<analytic>
+		<title level="a" type="main">Arlequin suite ver 3.5: A new series of programs to perform population genetics analyses under Linux and Windows</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Excoffier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Lischer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol. Ecol. Resour</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page">100</biblScope>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b99">
+	<analytic>
+		<title level="a" type="main">Genomes Project Analysis Group, The variant call format and VCFtools</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Danecek</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page">101</biblScope>
+			<date type="published" when="1000">1000. 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b100">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">R</forename><surname>Howey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">J</forename><surname>Cordell</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mapthin</surname></persName>
+		</author>
+		<ptr target="https://www.staff.ncl.ac.uk/richard.howey/mapthin/introduction.html" />
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page">102</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b101">
+	<analytic>
+		<title level="a" type="main">Haploview: analysis and visualization of LD and haplotype maps</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">C</forename><surname>Barrett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Fry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Maller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">J W</forename><surname>Daly</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="page">103</biblScope>
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b102">
+	<analytic>
+		<title level="a" type="main">Fast and accurate site frequency spectrum estimation from low coverage sequence data</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Han</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">S</forename><surname>Sinsheimer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Novembre</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">31</biblScope>
+			<biblScope unit="page">104</biblScope>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b103">
+	<analytic>
+		<title level="a" type="main">A statistical framework for SNP calling, mutation discovery, association mapping and population genetical parameter estimation from sequencing data</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Li</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page">105</biblScope>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b104">
+	<analytic>
+		<title level="a" type="main">MAFFT: a novel method for rapid multiple sequence alignment based on fast Fourier transform</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Katoh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Misawa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K.-I</forename><surname>Kuma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Miyata</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="page">106</biblScope>
+			<date type="published" when="2002">2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b105">
+	<analytic>
+		<title level="a" type="main">TCS: a computer program to estimate gene genealogies</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Clement</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Posada</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">A</forename><surname>Crandall</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol. Ecol</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page">107</biblScope>
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b106">
+	<analytic>
+		<title level="a" type="main">Bioproject PRJNA 574571</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">S</forename><surname>Singh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Bass</surname></persName>
+		</author>
+		<ptr target="https://www.ncbi.nlm.nih.gov/bioproject/PRJNA574571.Deposited30" />
+	</analytic>
+	<monogr>
+		<title level="m">National Center for Biotechnology Information</title>
+		<imprint>
+			<date type="published" when="2020-12">December 2020</date>
+			<biblScope unit="page">108</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b107">
+	<monogr>
+		<title level="m" type="main">Genome assembly: Myzus persicae G006 genome v3.0. AphidBase</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">S</forename><surname>Singh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Bass</surname></persName>
+		</author>
+		<ptr target="https://bipaa.genouest.org/is/aphidbase/.Deposited30" />
+		<imprint>
+			<date type="published" when="2020-03">March 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

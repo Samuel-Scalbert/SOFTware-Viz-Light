@@ -1,0 +1,1769 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">SpeechMatrix: A Large-Scale Mined Corpus of Multilingual Speech-to-Speech Translations</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Paul-Ambroise</forename><surname>Duquenne</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Meta AI Research</orgName>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="institution">Inria padqn</orgName>
+								<address>
+									<settlement>hygong</settlement>
+									<region>dnn</region>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Hongyu</forename><surname>Gong</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Meta AI Research</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Ning</forename><surname>Dong</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Meta AI Research</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Jingfei</forename><surname>Du</surname></persName>
+							<email>jingfeidu@meta.com</email>
+						</author>
+						<author>
+							<persName><forename type="first">Ann</forename><surname>Lee</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Meta AI Research</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Vedanuj</forename><surname>Goswami</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Meta AI Research</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Changhan</forename><surname>Wang</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Meta AI Research</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Juan</forename><surname>Pino</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Meta AI Research</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Benoît</forename><surname>Sagot</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Meta AI Research</orgName>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="institution">Inria padqn</orgName>
+								<address>
+									<settlement>hygong</settlement>
+									<region>dnn</region>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Holger</forename><surname>Schwenk</surname></persName>
+							<email>schwenk@meta.com</email>
+							<affiliation key="aff0">
+								<orgName type="institution">Meta AI Research</orgName>
+							</affiliation>
+						</author>
+						<title level="a" type="main">SpeechMatrix: A Large-Scale Mined Corpus of Multilingual Speech-to-Speech Translations</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">8C52E0E512727AFD2EC56C72246E5861</idno>
+					<idno type="DOI">10.18653/v1/2023.acl-long.899</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:14+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>We present SpeechMatrix, a large-scale multilingual corpus of speech-to-speech translations (S2ST) mined from real speech of European Parliament recordings. It contains speech alignments in 136 language pairs with a total of 418 thousand hours of speech. To evaluate the quality of this parallel speech, we train bilingual speech-to-speech translation models on mined data only and establish extensive baseline results on Europarl-ST, VoxPopuli and FLEURS test sets. Enabled by the multilinguality of SpeechMatrix, we also explore multilingual speech-to-speech translation, a topic which was addressed by few other works. We also demonstrate that model pretraining and sparse scaling using Mixture-of-Experts bring large gains to translation performance. We are open-sourcing the mined data, speech encoders used for mining, multilingual HuBERT models in four language families for target unit generation, languagespecific vocoders for speech synthesis from discrete units, and S2S models trained and presented in this work.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>Research has progressed in the area of speech-tospeech translation with the goal of seamless communication among people who speak different languages. Direct S2ST models attract increasing research interest, e.g. <ref type="bibr" target="#b22">(Jia et al., 2019)</ref>. Compared to conventional cascaded models, direct models do not rely on intermediate text representations which make them applicable to the translation of languages without a well-defined writing script. Moreover, direct S2ST have the advantage of higher training and inference efficiency <ref type="bibr">(Lee et al., 2022a)</ref>.</p><p>Despite the benefits of direct approaches, their training is faced with the major issue of data scarcity in parallel speech. Human labeled speech data is expensive to create, there are very few data resources providing speech alignments, and the data amount is quite limited. To mitigate the data scarcity, some works have leveraged multitask learning <ref type="bibr" target="#b22">(Jia et al., 2019;</ref><ref type="bibr">Lee et al., 2022a)</ref>, data augmentation with speech variations <ref type="bibr" target="#b22">(Jia et al., 2019)</ref>, or with synthesized speech <ref type="bibr">(Jia et al., 2022a;</ref><ref type="bibr" target="#b36">Popuri et al., 2022;</ref><ref type="bibr" target="#b32">Nguyen et al., 2022)</ref>. It is also shown useful to leverage knowledge transferred from pre-trained models <ref type="bibr">(Lee et al., 2022b;</ref><ref type="bibr" target="#b36">Popuri et al., 2022)</ref> such as HuBERT <ref type="bibr" target="#b16">(Hsu et al., 2021)</ref>, wav2vec 2.0 <ref type="bibr" target="#b4">(Baevski et al., 2020)</ref> and mBART <ref type="bibr" target="#b29">(Liu et al., 2020)</ref>.</p><p>Recently, <ref type="bibr" target="#b12">Duquenne et al. (2021)</ref> is the first work to make speech mining efforts by learning a shared multilingual speech and text embedding space. Speech content is encoded by speech encoders into fixed-size representations which are then used for aligning speech and text across different languages. It demonstrates good empirical gains to train direct speech-to-text and speech-tospeech translation systems with the mined data <ref type="bibr" target="#b12">(Duquenne et al., 2021;</ref><ref type="bibr">Lee et al., 2022b)</ref>.</p><p>In this work, we trained speech encoders for 17 languages<ref type="foot" target="#foot_0">2</ref> and mined speech-to-speech alignments for all possible language pairs from VoxPopuli <ref type="bibr">(Wang et al., 2021a)</ref>, a collection of European Parliament recordings. To the best of our knowledge, SpeechMatrix is by far the largest freely available speech-to-speech translation corpus, with 136 language directions and an average of 1,537 hours of source speech in each direction for a total of 418 thousand hours. We demonstrate that strong S2ST models can be trained with these mined data and validate the good quality of the speech alignments across languages. We are open-sourcing the mined data and the speech encoders used for mining, which could pave the way for future research on S2ST. Moreover, for reproducibility, we will release model components including multilingual HuBERT models in four language families for target unit generation, language-specific vocoders for speech synthesis from discrete units, and S2S models trained and presented in this work.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">Related Works</head><p>From bitext mining to speech mining. Bitext mining is to find parallel sentences from monolingual resources, which provides a large amount of training data for machine translation models. Early works on bitext mining used document metainformation <ref type="bibr" target="#b39">(Resnik, 1999)</ref>, cross-lingual document retrieval <ref type="bibr" target="#b30">(Munteanu and Marcu, 2005)</ref> or information retrieval <ref type="bibr" target="#b0">(Abdul-Rauf and Schwenk, 2009;</ref><ref type="bibr" target="#b6">Bouamor and Sajjad, 2018)</ref>. More recent works use multilingual sentence embeddings <ref type="bibr" target="#b2">(Artetxe and Schwenk, 2018;</ref><ref type="bibr" target="#b47">Yang et al., 2019;</ref><ref type="bibr">Schwenk et al., 2021a)</ref>. The embedding based approach can be extended to new languages <ref type="bibr" target="#b38">(Reimers and Gurevych, 2020;</ref><ref type="bibr" target="#b15">Heffernan et al., 2022)</ref> or the speech modality <ref type="bibr" target="#b12">(Duquenne et al., 2021;</ref><ref type="bibr" target="#b23">Khurana et al., 2022)</ref> with knowledge distillation, also called teacher-student approach. These multilingual and multimodal sentence embeddings enabled us to perform large-scale speech-text mining, or speech-speech mining for a small set of languages.</p><p>Speech-to-speech translation (S2ST). S2ST started from cascaded systems consisting of automatic speech recognition (ASR), machine translation (MT) and text-to-speech synthesis (TTS) <ref type="bibr" target="#b31">(Nakamura et al., 2006;</ref><ref type="bibr" target="#b10">Do et al., 2015)</ref>. The reliance on intermediate text outputs poses limitations on cascaded models to support efficient inference and unwritten languages. Given these challenges, there has been a recent surge of research interest in direct approaches to speech translation without the need of texts. Translatotron <ref type="bibr" target="#b22">(Jia et al., 2019)</ref> and Translatotron2 <ref type="bibr">(Jia et al., 2022b)</ref> train end-to-end S2ST to generate target spectrograms with multitask learning. Another line of research replaces the target spectrograms in S2ST modeling with discrete units which are learned from a large amount of unlabeled speech <ref type="bibr">(Lee et al., 2022a,b)</ref>. Discrete units have shown to better capture linguistic content than spectrograms. Despite these progress on direct S2ST, it is faced with the challenge of limited parallel speech.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Speech translation corpora.</head><p>The Fisher dataset, a collection of approximately 170 hours of telephone conversations in Spanish <ref type="bibr" target="#b37">(Post et al., 2014)</ref>, is commonly used as training data for Spanish-English S2ST. However, it does not provide parallel English speech. Previous works generate synthesized English speech from English text translations provided by Fisher. Another S2S dataset containing synthesized speech is CVSS, which covers parallel S2ST translations from 21 languages into English. It is derived from Common Voice <ref type="bibr" target="#b1">(Ardila et al., 2020)</ref> and CoVoST 2 <ref type="bibr">(Wang et al., 2021b)</ref>, and it synthesizes speech from translated texts. The release of VoxPopuli dataset provides the largest S2S translations in real speech so far <ref type="bibr">(Wang et al., 2021a)</ref>. It covers pairwise speechto-speech translations among 15 languages, and each direction has less than 500 hours of speech. In another initiative named FLEURS, the text-totext evaluation data of the FLoRes-101 benchmark <ref type="bibr" target="#b14">(Goyal et al., 2022)</ref> was extended to the speech modality. Supporting 102 languages, FLEURS has a larger language coverage than VoxPopuli, but it only contains around 12 hours of speech per language and it is intended to be used asN -way parallel test data.</p><p>In this work, we present SpeechMatrix, a largescale multilingual speech-to-speech corpus mined from VoxPopuli <ref type="bibr">(Wang et al., 2021a)</ref>. It contains speech alignments in 136 language pairs with an average of 1, 537-hour source speech per direction. The main characteristics of these speech corpora are summarized in Table <ref type="table" target="#tab_0">1</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Speech-to-Speech Mining</head><p>The mining approach of this work is built upon the idea of encoding multilingual speech utterances into a shared embedding space. Speech encoders project utterances with similar semantic content to fixed-size representations which are close in the embedding space regardless of their languages. The closeness of embeddings reflects the similarity of speech content, and is used as the alignment score in the mining process. In this section, we discuss speech encoders and speech mining.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Speech Encoders</head><p>We followed the teacher-student approach introduced in <ref type="bibr" target="#b12">(Duquenne et al., 2021)</ref> and trained speech encoders with the supervision of the multilingual LASER text encoder <ref type="bibr">(Schwenk et al., 2021b</ref>  <ref type="bibr" target="#b3">(Babu et al., 2021)</ref>, which was pre-trained on nearly half a million hours of publicly available audios in 128 languages. Following <ref type="bibr" target="#b11">(Duquenne et al., 2022)</ref>, the fixed-size representation for speech is obtained with max pooling of the encoder outputs which appeared to work better compared to other pooling methods. We summarize the architecture of the speech encoder in Figure <ref type="figure" target="#fig_0">1</ref>. We used various publicly available ASR data sets which cover our languages to train the speech encoders, including CoVoST 2 <ref type="bibr" target="#b44">(Wang et al., 2020</ref><ref type="bibr">(Wang et al., , 2021b))</ref>, Common Voice <ref type="bibr" target="#b1">(Ardila et al., 2020)</ref>, Europarl <ref type="bibr" target="#b1">(Ardila et al., 2020)</ref>, mTedx <ref type="bibr" target="#b40">(Salesky et al., 2021)</ref>, <ref type="bibr">Must-C (Di Gangi et al., 2019)</ref> and VoxPopuli <ref type="bibr">(Wang et al., 2021a)</ref>, as well as speech translation data from the foreign languages into English and from English into German. We removed training samples whose transcription or the written translation consisted of multiple sentences, as LASER has been trained on single sentences only. For better training efficiency, we trained speech encoders for each language family instead of each language. The language grouping is provided in Appendix. To better handle imbalanced training data, we sample the training data from different languages with the same approach as <ref type="bibr" target="#b12">(Duquenne et al., 2021)</ref>. For English (en), Slovenian (sl), Lithuanian (lt) and Dutch (nl), we also trained separate monolingual speech encoders that had lower valid cosine loss compared to multilingual encoders, and these four monolingual encoders were used for mining.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Evaluation of speech encoders</head><p>Similarity search is frequently used to evaluate multilingual text encoders <ref type="bibr" target="#b2">(Artetxe and Schwenk, 2018;</ref><ref type="bibr" target="#b13">Feng et al., 2020;</ref><ref type="bibr" target="#b15">Heffernan et al., 2022)</ref>. We use the following score to measure similarity between the source audio, and the target transcriptions or translations: sim(x,y)</p><p>(1)</p><formula xml:id="formula_0">= cos(x, y) - z∈N N k (x) cos(x, z) 2k + z∈N N k (y)</formula><p>cos(y, z) 2k</p><p>where x and y are the source and target embeddings, and N N k (x) denotes the k nearest neighbors of x. We used k = 4. We evaluated similarity search of audios against transcriptions on VoxPopuli ASR test set in Table <ref type="table">2</ref>, which is our target domain as we plan to mine unlabeled speech from VoxPopuli (see subsection 3.3). We also evaluated similarity search of audio against written translations or transcriptions on CoVoST 2 test set in order to compare with speech encoders in previous work (see detailed analysis in Appendix A). Finally, we report text-to-text similarity search using the LASER text encoder as lower bound for the speech translation similarity search error rate since we use gold transcriptions to search against written translations. We report error rates (in %) that are percentage of audio utterances incorrectly matched with text transcripts from the same test set. We note that error rates are very low for all languages (below 5% and around 1 or 2% for most languages), which is an initial validation of good-quality speech encoders before the large-scale mining. Audio vs. transcriptions 0.6 1.0 0.2 0.7 0.0 0.7 0.5 0.3 1.1 4.9 0.0 0.8 0.9 -0.9 0.7 3.1</p><p>Table <ref type="table">2</ref>: Similarity search error rates (in %) on VoxPopuli ASR test set.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">Large-scale speech mining</head><p>We used VoxPopuli as our source of unlabeled unsegmented speech for 17 languages in focus. In principle, performing speech-to-speech or speechto-text mining can be done with exactly the same pipeline as text-to-text mining but with different encoders. We follow the global mining approach as described in <ref type="bibr">Schwenk et al. (2021a)</ref> and compare all segments in the source language with all segments in the target language. Similarity scores are calculated in both directions using the margin as described in Equation 1 considering k = 16 neighbors. Segments are considered to be parallel if the margin score exceeds a threshold, we use 1.06 if not specified otherwise. The reader is referred to <ref type="bibr">Schwenk et al. (2021a)</ref> for a detailed description of the generic mining pipeline.</p><p>There is however one important difference when processing speech: it is not straightforward to segment the audio signal into parts which have the optimal granularity for mining. The VoxPopuli recordings have a rather long duration, e.g. one hour and a half on average for English. We apply Voice Activity Detection (VAD) using Silero-VAD (Silero-Team, 2021) which supports over 100 languages. The resulting segments do not necessarily correspond to complete sentences. On one hand, there may be silence in the middle of an utterance, e.g. a hesitation. On the other hand, two sentences may follow each other without a long silence separating them. We follow the "over segmentation" approach outlined in <ref type="bibr" target="#b12">Duquenne et al. (2021)</ref>: several possible segments are created and we let the mining algorithm decide which ones match the best. Initial experiments suggest that segments shorter than 1 second or longer than 20 seconds are unlikely to be aligned and therefore were excluded.</p><p>After mining, the resulting speech alignments may have overlap as we over-segment the unlabeled speech. A post-processing method <ref type="bibr" target="#b12">Duquenne et al. (2021)</ref> is introduced to remove overlaps between mined speech segments on the source speech side. We relax the post-processing of the mined data, allowing for some overlap between mined speech segments: for two audio segments that overlap on the source side, if the overlap represents more than 20% of the first segment and of the second segment, we discard the alignment with the lowest mining score. We did an ablation study on different thresholds of overlap ratio for one low-resource, one mid-resource and one high-resource direction and found that 20% was the best overlap threshold in all settings.</p><p>We report the statistics of the mined speech-tospeech translation pairs in Table <ref type="table" target="#tab_3">3</ref>, with a mining score threshold of 1.06. The mined data totals 418k hours of parallel speech with an average of 1,537 hours of source speech in all translation directions. While some high resource languages like English (en), Spanish (es) or French (fr) can reach up to 5k hours of aligned speech with other spoken languages; lower resource languages such as Estonian (et) and Lithuanian (lt) obtain much fewer alignments, with only a few hours of aligned speech for Lithuanian. We also performed mining of the source speech in sixteen languages against more than twenty billion English sentences from Common Crawl. This yielded speech-text alignments between 827 and 3, 966 hours (c.f. the last column of Table <ref type="table" target="#tab_3">3</ref>). Training and evaluation of speech-totext translation are left for future research.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.4">Evaluation Data</head><p>Besides the speech-to-speech data mined as the train set, we leverage labeled public speech datasets as the evaluation sets.</p><p>Test set. In our experiments, we derive test sets in speech translation from three public corpora, evaluating translation models trained on mined data across different domains.</p><p>(1) Europarl-ST (EPST) <ref type="bibr" target="#b17">(Iranzo-Sánchez et al., 2020)</ref>. It is a multilingual speech-to-text translation corpus built on recordings of debates from the European Parliament, containing 72 translation directions in 9 languages. <ref type="foot" target="#foot_1">3</ref>(2) VoxPopuli <ref type="bibr">(Wang et al., 2021a)</ref>. S2S data, as part of VoxPopuli release, provides aligned source and target speech together with source transcriptions. We prepare the speech-to-text data with  target speech and source transcription as our test set. To ensure that there is no overlap between the mined data and VoxPopuli test sets, we need to remove speech from mined alignments which are from the same session as test samples. In order to keep as much mined data as possible, we use VoxPopuli test set only when a language direction is not covered by EPST considering their domain similarity. Moreover, similarity scores are provided to indicate the quality of VoxPopuli samples. To choose high-quality data, we sort all sessions in the VoxPopuli S2S data in a decreasing order of the average similarity score of their samples. We keep adding samples from highly ranked sessions to the test set until the test size reaches 1000.</p><p>(3) FLEURS <ref type="bibr" target="#b7">(Conneau et al., 2022)</ref>. Built upon N-way text translations from FLoRes <ref type="bibr" target="#b14">(Goyal et al., 2022)</ref>, FLEURS provides speech for aligned texts and creates speech-to-speech data covering all mined directions. We take its source speech and target texts as the test data. In the case where multiple utterances correspond to one piece of source text, we generate one test pair for each source utterance respectively. FLEURS texts are from English Wikipedia, which is a different domain from VoxPopuli and EPST.</p><p>Valid set. Valid sets are prepared for S2S modeling using VoxPopuli and FLEURS data in a similar way as test sets. For VoxPopuli, we extract a valid set of about 1000 samples by adding data from highly scored sessions which are not in the test set. FLEURS valid set is derived from its valid sam-ples. We prepare speech-to-unit data from these selected valid samples by transforming the target speech into target units for speech-to-unit modeling, which will be discussed in section 4.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Experiments &amp; Results</head><p>To evaluate the quality of the mined data, we trained S2ST models on SpeechMatrix data and report the translation performance. We hope that these results will serve as baselines for future studies in speech-to-speech translation.  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Experimental Setup</head><p>The training and evaluation pipeline of speech-tospeech translation is shown in Figure <ref type="figure">2</ref>. Recent progress in speech-to-speech modeling suggests to discretize the target speech waveform into a unit sequence, relieving models from the complexity of predicting continuous waveform values. We borrow the idea of training speech-to-unit (S2U) model where units are pre-generated from target speech with a pre-trained HuBERT model <ref type="bibr">(Lee et al., 2022a)</ref>. During S2U training, models are periodically evaluated on the valid set of speechto-unit samples, and the best checkpoint with the lowest valid loss is saved for model inference.</p><p>When it comes to inference, speech could be synthesized from the predicted units with a vocoder, as the output of the S2S pipeline. It is then transcribed into texts by an off-the-shelf ASR model. The BLEU score is calculated by comparing the transcriptions against the ground truth target texts, which serves as the quantitative metric of mined data quality. We note that the ASR BLEU score is not a perfect metric for data quality, as it is unavoidably affected by the quality of ASR models. Next we discuss each module of the pipeline.</p><p>Speech-to-Unit. The S2U model takes the source speech and predicts a sequence of target units. It typically has an encoder-decoder architecture, where the encoder consists of convolutional and Transformer encoder layers, and the decoder is a Transformer decoder. We have experimented with different model variants, and discuss bilingual and multilingual training in section 5 and section 6.</p><p>HuBERT. HuBERT is used to extract speech features of audio frames, which are then grouped into k-means clusters. The continuous features are thus mapped to corresponding clusters. In this way, speech could be discretized into unit sequence where units are basically indices of clusters. We reuse the same HuBERT model and k-means clusters for English, Spanish and French as in <ref type="bibr">(Lee et al., 2022b)</ref> for a fair comparison with existing results. We also train multilingual HuBERT models to cover other languages in SpeechMatrix, and more HuBERT training details can be found in Appendix B.1.</p><p>Vocoder. Unit-based HiFi-GAN vocoders are trained to synthesize speech from unit sequence <ref type="bibr" target="#b35">(Polyak et al., 2021)</ref>. In our experiments, vocoders are separately trained from S2U model. We train vocoders on three datasets:</p><p>(1) CSS10 <ref type="bibr" target="#b34">(Park and Mulc, 2019)</ref>. It is a singlespeaker corpus which we use to train vocoders in German, Finnish, Hungarian and Dutch.</p><p>(2) VoxPopuli <ref type="bibr">(Wang et al., 2021a)</ref>. Given its ASR data with speaker id, we sort speakers based on their speech duration, and keep adding the top speakers until the speech is more than 20 hours.</p><p>(3) Common Voice <ref type="bibr" target="#b1">(Ardila et al., 2020)</ref>. Portuguese and Estonian are not covered by the two corpora above, and thus we turn to Common Voice. ASR. We use off-the-shelf ASR models to transcribe the speech generated by vocoders. Details about the ASR models and their benchmark results of word error rates are provided in Appendix B.2.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">Bilingual Speech-to-Speech Baselines</head><p>In this part, we discuss the bilingual S2S models trained in each of 272 language directions in SpeechMatrix. The architecture of Textless model is used for bilingual translation in our experiments <ref type="bibr">(Lee et al., 2022a)</ref>. A Textless model consists of a speech encoder, Transformer encoder and decoder.</p><p>Training. For a given direction, we extract units for source and target speech with their corresponding HuBERT models <ref type="bibr" target="#b16">(Hsu et al., 2021)</ref>. Taking source speech, the model is trained to predict target unit sequence with cross-entropy loss as well as source unit reconstruction as an auxiliary task.</p><p>For the training efficiency of extensive S2ST experiments, we use a subset of mined data as the train set. Mined samples are selected if their alignment scores are above a preset threshold. We performed an analysis of the threshold selection in subsection B.4.</p><p>Comparison with existing results. Since we adopt the same model as the previous work <ref type="bibr">(Lee et al., 2022a)</ref> and the only difference lies in the train set, it is straightforward to compare with existing results. Table <ref type="table" target="#tab_4">4</ref> shows the results of S2ST models which are trained on our SpeechMatrix mined data compared to VoxPopuli S2S data in each of four language directions: es-en, fr-en, en-es and enfr. The threshold of mined data is set as 1.09 to these four directions, yielding an average of 1, 436hour train set. Compared with 480-hour labeled speech from VoxPopuli, SpeechMatrix achieves an an average improvement of 5.4 BLEU, indicating the good quality and usefulness of the mined data.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Large-Scale Bilingual Evaluation</head><p>A large-scale evaluation is launched covering 272 mined languages directions, and bilingual models are trained for each direction to establish baseline results in speech-to-speech translation.</p><p>Table <ref type="table" target="#tab_5">5</ref> and Bilingual results. Empirically we find that translations into high-resource languages such as en, es and fr outperform those into low-resource languages such as lt and sl based on the speech amount of these languages in Table <ref type="table" target="#tab_3">3</ref>. Another observation is the performance difference across test domains, and BLEU on FLEURS is lower than that on EPST and VoxPopuli data, likely because of the domain mismatch between train and test data.</p><p>It is also found that translation results are not symmetric for some language pairs, for example, ro-en has a BLEU of 22.6 while en-ro BLEU is only 7.6 on EPST. Besides different complexity levels of target languages and test sets, such asymmetry also results from the dependency of BLEU scores on the speech synthesis quality of the vocoder and transcription quality of the ASR model. For languages whose vocoder and ASR models are not good, they are likely to receive low BLEU scores. In this case, Romanian vocoder and ASR are not as strong as English models as reflected by its higher word error rate in speech resynthesis as reported in Appendix B.3.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">Multilingual Speech-to-Speech Translation</head><p>Multilingual modeling has been explored in tasks of language understanding and machine translation, demonstrating knowledge transfer among languages. However, to our best knowledge, there are few studies of multilingual S2ST on real speech, partially due to the lack of multilingual speech-tospeech resources. With the massively multilingual data we have mined, we are able to explore multilingual S2ST training.</p><p>In this work, we focus on many-to-English translation, studying the translation from 6 Slavic languages to English in subsection 6.1 and the translation from all 16 languages in SpeechMatrix to English in subsection 6.2. English-to-many or manyto-many translation are left to future work. We present here multilingual models used in our experiments (more details can be found in Appendix C:</p><p>(1) Textless model. The same model with 70M parameters that we use for bilingual evaluation is reused in the multilingual experiments. Given diverse multilingual data, we increase the model size for larger model capacity, trying multilingual models with 70M and 260M parameters. cs de en es et fi fr hr hu it lt nl pl pt ro sk sl cs -2.0 4.2 4.6 0.1 0.2 7.5 2.1 0.2 2.5 0.1 1.0 2.3 2.8 1.4 3.5 1.7 de 2.3 -8.3 3.8 0.1 0.2 6.5 2.2 0.2 1.8 0.0 1.2 0.9 3.1 2.1 0.8 1.0 en 2.7 2.7 -6.0 0.7 0.6 10.4 2.4 0.3 3.6 0.1 3.8 1.3 5.1 2.0 1.2 1.2 es 1.9 1.8 7.5 -0.1 0.2 9.2 1.0 0.2 4.2 0.1 1.5 1.4 5.9 2.3 0.9 0.8 et 2.1 0.7 8.2 3.0 -0.7 6.3 1.0 0.7 2.3 0.1 1.5 1.2 1.7 1.4 0.4 0.8 fi 1.5 0.9 5.5 3.8 0.5 -6.2 0.5 0.0 1.2 0.0 0.8 1.2 2.0 1.1 0.7 0.7 fr 1.5 2.1 9.8 7.6 0.1 0.2 -1.7 0.2 3.1 0.1 1.3 1.5 5.8 2.4 0.6 0.6 hr 2.5 0.9 7.7 3.1 0.2 0.1 5.8 -0.2 1.1 0.0 0.9 1.1 2.0 0.6 0.9 0.8 hu 1.3 1.0 4.6 3.0 0.1 0.2 5.7 0.7 -1.2 0.0 0.1 0.4 2.3 0.9 0.2 0.3 it 1.3 1.0 6.3 8.3 0.1 0.1 11.3 1.3 0.2 -0.0 0.9 1.1 5.6 1.9 0.4 0.6 lt 0.1 0.0 0.9 0.2 0.0 0.0 0.2 0.0 0.0 0.4 -0.1 0.0 0.0 0.0 0.0 0.0 nl 1.4 3.1 5.7 4.9 0.2 0.2 7.5 1.8 0.2 1.7 0.0 -0.9 3.3 1.4 0.4 1.0 pl 1.6 1.6 4.9 4.4 0.1 0.2 5.4 1.2 0.1 1.5 0.0 0.3 -2.5 1.2 1.1 0.7 pt 1.2 1.0 6.1 8.7 0.1 0.3 11.1 1.1 0.1 1.1 0.1 0.6 0.8 -1.5 0.6 0.6 ro 1.9 2.2 7.8 7.0 0.4 0.3 11.3 0.9 0.2 3.8 0.1 0.9 1.1 6.0 -0.7 0.2 sk 9.1 2.1 5.5 5.1 0.3 0.2 7.8 3.0 0.4 2.1 0.0 0.7 1.9 2.3 1.9 -1.5 sl 2.2 2.0 7.3 3.4 0.2 0.3 4.5 1.1 0.1 1.2 0.0 1.0 1.2 1.5 0.1 0.3 - (2) XM Transformer. Inspired by the recent finding that crossmodal pre-training is beneficial for speech translation <ref type="bibr" target="#b36">(Popuri et al., 2022)</ref>, we apply XM Transformer to multilingual training, whose encoder is initialized from pre-trained XLS-R model with 1B parameters <ref type="bibr" target="#b3">(Babu et al., 2021)</ref> and decoder is initialized from a unit decoder pretrained in an mBART style <ref type="bibr" target="#b36">(Popuri et al., 2022)</ref>. With multilingual speech-to-unit data, the model is further finetuned to minimize the cross-entropy loss in target unit prediction.</p><p>(3) XM Transformer with Sparsity. Sparse modeling, in particular Mixture-of-Experts (MoE), has been widely studied in multilingual machine translation. MoE increases the number of parameters without sacrificing computation efficiency.</p><p>GShard. GShard is a sparse scaling technique proposed in <ref type="bibr">(Lepikhin et al.)</ref>. We replace every other Transformer layer with an MoE layer. FFN modules in an MoE transformer layer are shared across experts. A learnable gating function routes input tokens to different experts <ref type="bibr" target="#b33">(NLLB Team et al., 2022)</ref>. We apply GShard architecture on the decoder of XM Transformer, and expert weights are all initialized with the pretrained unit mBART.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1">Slavic-to-English Translation</head><p>The six Slavic languages include Czech (cs), Croatian (hr), Lituanian (lt), Polish (pl), Slovak (sk), and Slovenian (sl). In the multilingual setting, all mined data into English are combined from each Slavic language as the train set.</p><p>We summarize ASR BLEU scores of different models averaged over six Slavic-to-English directions in Table <ref type="table" target="#tab_8">7</ref> </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2">All-to-English Translation</head><p>We move forward to a larger-scale multilinguality by extending from Slavic language family to all languages in SpeechMatrix. We adopt the best models in Slavic-to-English translation, i.e., multilingual XM Transformer with both dense and sparse architectures.</p><p>Results. Compared with XM Transformer (1.2B) dense model, MoE-GShard64 (4.3B) with the same forward computation time brings gains of +0.9 and +0.2 BLEU to EP/VP and FLEURS respectively. Similar to our findings in Slavic-to-English setting, increasing the capacity with sparse modeling benefits in-domain (EP/VP) more than out-of-domain FLEURS test set.</p><p>Given sparse architecture of XM Transformer with GShard, all-to-English model shows +0.6 and -0.4 BLEU difference compared with Slavic-to-English model on EP/VP and FLEURS respectively, averaged over Slavic languages. Multilingual sparse model benefits from the additional indomain data in other languages when evaluated in EP/VP domain, while sees performance degradation in out-of-domain data.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">Limitations and Risks</head><p>Limitations. The HuBERT model quality is critical to speech-to-speech translation performance, as its extracted units are used by both speech-tounit model and vocoder. We have not explored the optimal strategy of multilingual HuBERT training. One research question is how to choose a group of languages so that a multilingual HuBERT model could be well trained. For example, it is arguable whether Lithuanian (lt) should be included in Slavic or Uralic family. Other questions could be whether a larger HuBERT with more model capacity should be used and how we should deal with language imbalance in multilingual training.</p><p>We provide benchmark results of bilingual speech translation with mined data selected by heuristics. One of our future directions is to come up with a better strategy of mined data selection to improve translation performance and training efficiency.</p><p>As mentioned in our results analysis, the reported BLEU scores are heavily dependent on the ASR quality, which may not reflect the speech translation performance accurately. Future directions could be improving ASR quality or exploring other evaluation metrics without reliance on ASR models.</p><p>Potential Risks. As a technology used for speech generation, the presented speech translation models or the translation models that will be trained with SpeechMatrix dataset might have systemic bias or produce inappropriate outputs.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8">Conclusion</head><p>In this paper, we introduce a large-scale multilingual speech-to-speech corpus mined from VoxPopuli. It is the largest resource of speech alignments with a coverage of 17 languages. We perform an extensive evaluation of the mined parallel speech, showing good quality of the speech alignments. Multilingual speech-to-speech models can be efficiently trained on this corpus and we suggest different methods, such as sparse scaling using Mixture-of-Experts, to further boost translation performance in the multilingual setting.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A Speech Encoder</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A.1 Similarity search on CoVoST</head><p>We compared our similarity search results with previous work <ref type="bibr" target="#b12">(Duquenne et al., 2021)</ref>   We also provide similarity search of audios against written translations or transcriptions on CoVoST 2 test set for other languages covered by our speech encoders in Table <ref type="table" target="#tab_12">10</ref>, in order to evaluate cross-modal similarity search.  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B Bilingual Speech-to-Speech Translation</head><p>We describe experiment details of bilingual speechto-speech translation.  We train a multilingual HuBERT model for each family on the collection of speech in each component language as shown in Table <ref type="table" target="#tab_14">11</ref>. We collect unlabeled VoxPopuli speech for all languages of the same family as the training data. The HuBERT model consists of 7 convolutional layers and 12 Transformer encoder layers. Each encoder layer has 12 attention heads, the embedding dimension of 768 and the forward dimension of 3072. Models are trained for 3 iterations, and in each iteration pseudo-labels are prepared as the training target for utterances. In the first iteration, the target labels are MFCC features. In the second iteration, we extract speech features from the 6-th layer of the trained HuBERT model and apply k-means clustering to derive a set of 500 labels. In the third iteration, speech features from the 9-th layer are clustered into 500 labels. Lastly after these three iterations, we try feature extraction from different layers including layer 10, 11 and 12 of trained HuBERT. As for feature clustering, we also try different numbers of clusters, 800, 1000 and 1200, to derive multiple sets of target units.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B.1 HuBERT</head><p>To choose the optimal setup, we launch a resynthesis evaluation to select the HuBERT layer to extract speech features and the number of k-means clusters. We train a vocoder on each set of target units, i.e., vocoder takes the units and synthesizes target speech. The synthesized speech is sent to off-the-shelf ASR models, and Word Error Rate (WER) is reported to measure the speech quality. The resynthesis experiments are discussed in subsection B.3. The optimal HuBERT layer and label size is selected if their corresponding vocoder achieves the lowest WER.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B.2 ASR models</head><p>We use ASR models publicly released on Hugging-Face to transcribe the generated speech in order to calculate WER or BLEU scores in comparison with ground truth texts. ASR models used in our evaluation are listed in Table <ref type="table" target="#tab_15">12</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B.3 Vocoder</head><p>Data preprocessing. We applied a denoiser<ref type="foot" target="#foot_2">4</ref>  <ref type="bibr" target="#b8">(Defossez et al., 2020)</ref> to the speech of VoxPopuli and Common Voice as the speech preprocessing to increase signal-to-noise ratio (SNR) given that they are noisier than CSS10 audios. Then we prepare vocoder labels with HuBERT models generating k-means cluster labels for each utterance. Single-speaker vocoders are trained in CSS10, and languages from VoxPopuli and Common Voice have multi-speaker vocoders where speaker embeddings are learned. During inference, we select the speaker with the longest speech duration to synthesize speech from predicted unit sequences, who has the most data for the vocoder to learn good speaker embeddings.</p><p>Vocoder training and evaluation. Vocoders are trained to synthesize speech from a given sequence of units. The train sets are speech data from CSS10, VoxPopuli and Common Voice. As mentioned before, units are derived from HuBERT models for these speech. Table <ref type="table" target="#tab_16">13</ref> summarizes WER of ASR models, which reflects the transcription quality in each language. Besides, we report the training data, vocoder WER of synthesized speech from vocoders, and here we include the vocoder results obtained from the optimal HuBERT layer and k-means cluster size. Layer 11 is the best HuBERT layer for feature extraction in all languages, and most languages have the best k-means size of 1000 except Italian (it) whose best label size is 800.</p><p>As shown in   As for decoding of speech-to-unit models, we set the beam size of 10 in all bilingual and multilingual experiments.</p><p>Mined data selection. We performed an analysis of translation performance varying with thresholds from 1.06 to 1.09 on three language pairs: es-en, ro-en and hr-en. Figure <ref type="figure" target="#fig_5">3</ref> shows the thresh- old, the corresponding speech data size and BLEU score.</p><p>For low-resource directions such as hr-en, it is best to include all the mined data. For high-and medium-resource directions, es-en and ro-en, the optimal amount of mined data is around 1k hours and it does not bring further gains to go beyond that data size. Given these observations, we choose the highest threshold that keeps the source speech duration in mined data more than 1k hour for each direction. For example, we use a threshold of 1.09 for es-en and of 1.06 for hr-en.</p><p>Computation. Each bilingual model is trained on 16 A100 GPUs for 3 days on average.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C Multilingual Speech-to-Speech Translation</head><p>We provide details of models and experiment setups in multilingual speech-to-speech translation. With the Textless model size fixed as 70M, multilingual training hurts the performance of most languages compared with bilingual training. This is due to the insufficient model capacity, and the language interference is reflected by an average of -2.6 BLEU in FLEURS. We increase model parameters to 260M in both bilingual and multilingual settings. With a larger model capacity, bilingual models achieve gains in high-resource languages including cs, pl and sk, while suffering from performance loss in low-resource directions such as hr, lt and sl.</p><p>Given model sizes of 260M, we observe consistent gains of multilingual models over the bilingual models across different language directions and test domains. An average gain of 5.6 BLEU is achieved in EP/VP and the gain of 4.7 BLEU in FLEURS. It demonstrates the positive transfer enabled by multilingual training. As the multilingual model size continues to increase to 424M, we don't observe further gains likely due to the bottleneck of training data amount.</p><p>XM Transformer leveraging pre-trained modules is also trained on Slavic-to-English data. Pre-training is shown to be beneficial, and results are reported in Table <ref type="table" target="#tab_19">15</ref>. Comparing against bilingual Textless model (70M), bilingual XM Transformer outperforms it in all directions except lt-en. The gain in EP/VP is 3.8 BLEU on average, and a larger gain of 5.0 BLEU is achieved in FLEURS. Multilingual training brings further gains to XM Transformer with +7.9 and +5.1 BLEU over bilingual training in EP/VP and FLEURS test set XM Transformer-GShard. XM Transformer (1.2B) is initialized with the same XLS-R encoder and unit decoder used in Slavic-to-English experiments. On the decoder side of XM Transformer-GShard, each expert is initialized with the same unit decoder. We set MoE frequency as 2, i.e., every other Transformer layer is an MoE layer.</p><p>XM Transformer-Base Layer.</p><p>For our XM Transformer with Base Layer sparsity (1.7B), the encoder is initialized with the same XLS-R encoder, and the dense layers of the decoder is initialized with the same unit decoder as GShard. We add an additional Base Layer which is randomly initialized as the 7th layer of decoder. There is one expert in each GPU and we used 64 GPUs in our experiments, which means we have 64 Base Layer experts in total.</p><p>The sparse variant, Base Layer (1.7B) performs comparably to the dense XM Transformer, with an average of +0.4 BLEU in EP/VP test sets and -0.4 BLEU in FLEURS. The sparsity in Base Layer does not bring obvious gains to all-to-English translation. This is likely because we only add one Base Layer to the decoder with a small expert size.</p><p>The number of increased model parameters is only 0.5B in Base Layer, while it is 3.1B in GShard. As suggested by <ref type="bibr" target="#b27">(Lewis et al., 2021)</ref>, the Base Layer performance might improve with more GPUs and a larger expert size.</p><p>Hyperparameters. For dense XM Transformer, hyperparameters are the same as that for Slavic-to-English. GShard also shares the same set of hyperparameters. As for expert-specific parameters, we use 64 experts with each running on a single GPU with the frequency of 2 so that every other Transformer decoder layer becomes an MoE layer. The capacity token fraction is set as 0.5 so that if more than half of tokens in a sample get routed to one expert, extra tokens would overflow and get dropped.</p><p>Computation. It took 3 days to train dense XM Transformer for all-to-English with 32 A100 GPUs. It took 5 days to train the GShard counterpart with 64 A100 GPUs. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>D License and Terms of Scientific Artifacts</head></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: Architecture of speech encoders training.</figDesc><graphic coords="4,89.29,621.41,181.41,127.70" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head></head><label></label><figDesc>Figure 2: A Pipeline of Speech-to-Speech Translation and Evaluation.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head></head><label></label><figDesc>Again, we select top speakers and prepare 12-hour and 10-hour speech for the vocoder training in Portuguese and Estonian respectively. Data preprocessing and training are included in Appendix B.3.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>B. 4</head><label>4</label><figDesc>Training Textless model. A Textless model consists of a speech encoder with 2 convolution layers and 12 Transformer encoder layers. Transformer layer has the embedding dimension of 512 and the forward dimension of 2048. It has two unit decoders with 6 and 2 Transformer decoder layers for target and source unit prediction respectively. The target unit decoder has the embedding dimension of 512 and the forward dimension of 2048, and the source unit decoder's dimensions are 256 and 2048.Hyperparameters. We tried learning rates of 0.0003 and 0.0005, and dropout rates of 0.1 and 0.3. The best setup is a learning rate of 0.0005 and a dropout of 0.3 for bilingual Textless model training. Bilingual models are trained with a batch of 20k tokens for 400k steps. A label smoothing weight of 0.2 is applied to the cross-entropy loss.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: Bilingual S2S BLEU by mined data at different thresholds.</figDesc><graphic coords="15,313.23,257.35,204.10,141.75" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc>). Tran-A comparison of existing speech-to-speech datasets.</figDesc><table><row><cell>Dataset</cell><cell cols="2"># of Languages Avg. duration (h)</cell><cell>Source speech</cell><cell>Target speech</cell></row><row><cell>Fisher (Post et al., 2014)</cell><cell>2</cell><cell>127</cell><cell>Telephone conversation</cell><cell>Synthetic</cell></row><row><cell>MaSS (Boito et al., 2020)</cell><cell>8</cell><cell>20</cell><cell>Bible reading</cell><cell>Bible reading</cell></row><row><cell>VoxPopuli (Wang et al., 2021a)</cell><cell>15</cell><cell>82</cell><cell cols="2">European Parliament speech Simultaneous interpretation</cell></row><row><cell>CVSS (C+T) (Jia et al., 2022c)</cell><cell>21</cell><cell>181</cell><cell>Read</cell><cell>Synthetic</cell></row><row><cell>FLEURS (Conneau et al., 2022)</cell><cell>102</cell><cell>12</cell><cell>Read</cell><cell>Read</cell></row><row><cell>SpeechMatrix (ours)</cell><cell>17</cell><cell>1537</cell><cell cols="2">European Parliament speech European Parliament speech</cell></row></table><note><p>scriptions or written translation of the audio utterances are encoded with LASER text encoder as target vectors for speech encoder training. During training, we minimize the cosine loss between fixed-size representations output by speech encoders, and the outputs of LASER text encoder (whose weights are frozen during training). Speech encoders are initialized with the 2B-parameter XLS-R model</p></note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 3 :</head><label>3</label><figDesc>Duration statistics (hours of source speech) of speech-to-speech alignments for each pair of 17 languages (for mining threshold of 1.06). The last column provides statistics for alignments of source speech against 21.5 billion sentences of English texts. The last row provides duration of raw speech from VoxPopuli used for mining.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head>Table 4 :</head><label>4</label><figDesc>BLEU scores on EPST test sets by S2ST models with different training data.</figDesc><table><row><cell>Train set</cell><cell></cell><cell cols="4">Es-En Fr-En En-Es En-Fr</cell></row><row><cell>VoxPopuli</cell><cell>Hours</cell><cell>532</cell><cell>523</cell><cell>415</cell><cell>451</cell></row><row><cell>S2S</cell><cell cols="2">BLEU 13.1</cell><cell>15.4</cell><cell>16.4</cell><cell>15.8</cell></row><row><cell>SpeechMatrix</cell><cell cols="5">Hours 1,353 1,507 1,366 1,518</cell></row><row><cell>(t = 1.09)</cell><cell cols="2">BLEU 20.4</cell><cell>20.7</cell><cell>21.9</cell><cell>19.3</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_5"><head>Table 5 :</head><label>5</label><figDesc>BLEU scores of bilingual S2S models on EP/VP test sets. EPST score is underscored.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_6"><head></head><label></label><figDesc>Table 6 summarize performance of bilingual S2ST models on three test sets. In each direction, Table 5 reports BLEU scores in European Parliament domain, either EPST or VoxPopuli set. EPST BLEU is underlined to be distinguished from VoxPopuli BLEU. Table 6 reports BLEU in Wikipedia domain, i.e., FLEURS test data.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_7"><head>Table 6 :</head><label>6</label><figDesc>BLEU scores of bilingual S2S models on FLEURS sets.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_8"><head>Table 7 :</head><label>7</label><figDesc></figDesc><table><row><cell></cell><cell></cell><cell cols="2">Bilingual</cell><cell></cell><cell></cell><cell cols="2">Multilingual</cell><cell></cell></row><row><cell></cell><cell cols="7">EP/VP FL EP/VP FL EP/VP FL EP/VP</cell><cell>FL</cell></row><row><cell>Textless</cell><cell>70M</cell><cell></cell><cell>260M</cell><cell></cell><cell>70M</cell><cell></cell><cell cols="2">260M</cell></row><row><cell>Avg.</cell><cell>14.3</cell><cell>5.1</cell><cell>16.8</cell><cell>6.5</cell><cell>14.1</cell><cell>2.5</cell><cell>22.4</cell><cell>11.2</cell></row><row><cell>XM</cell><cell cols="2">Dense(1.2B)</cell><cell></cell><cell></cell><cell cols="4">Dense (1.2B) GShard (4.3B)</cell></row><row><cell>Avg.</cell><cell>18.1</cell><cell>10.1</cell><cell></cell><cell></cell><cell>26.0</cell><cell>15.2</cell><cell>27.0</cell><cell>15.5</cell></row></table><note><p>Average BLEU of Slavic-to-English models in EP/VP and FLEURS (FL) domains.</p></note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_9"><head></head><label></label><figDesc>. For completeness, we report BLEU of each direction in Appendix C. As is shown, Textless model benefits from the parameter increase to 260M, and multilingual training further brings BLEU gains of 5.6 and 4.7 in EP/VP and FLEURS. We tried larger models than 260M but didn't see more gains.</figDesc><table><row><cell></cell><cell cols="4">Dense (1.2B) GShard (4.3B)</cell></row><row><cell></cell><cell cols="3">EP/VP FL EP/VP</cell><cell>FL</cell></row><row><cell>cs</cell><cell>29.9</cell><cell>18.7</cell><cell>30.9</cell><cell>18.2</cell></row><row><cell>de</cell><cell>18.8</cell><cell>19.0</cell><cell>19.3</cell><cell>20.3</cell></row><row><cell>es</cell><cell>22.8</cell><cell>15.2</cell><cell>23.3</cell><cell>15.9</cell></row><row><cell>et</cell><cell>-</cell><cell>16.7</cell><cell>-</cell><cell>16.7</cell></row><row><cell>fi</cell><cell>26.8</cell><cell>14.1</cell><cell>28.2</cell><cell>14.0</cell></row><row><cell>fr</cell><cell>23.5</cell><cell>18.3</cell><cell>24.1</cell><cell>18.9</cell></row><row><cell>hr</cell><cell>-</cell><cell>16.6</cell><cell>-</cell><cell>16.8</cell></row><row><cell>hu</cell><cell>20.2</cell><cell>12.0</cell><cell>21.3</cell><cell>12.5</cell></row><row><cell>it</cell><cell>36.3</cell><cell>16.2</cell><cell>37.8</cell><cell>14.9</cell></row><row><cell>lt</cell><cell>21.9</cell><cell>9.8</cell><cell>23.8</cell><cell>10.3</cell></row><row><cell>nl</cell><cell>21.4</cell><cell>16.4</cell><cell>22.1</cell><cell>17.3</cell></row><row><cell>pl</cell><cell>21.2</cell><cell>12.4</cell><cell>21.3</cell><cell>13.4</cell></row><row><cell>pt</cell><cell>23.8</cell><cell>21.8</cell><cell>24.2</cell><cell>22.3</cell></row><row><cell>ro</cell><cell>25.1</cell><cell>19.7</cell><cell>25.0</cell><cell>19.8</cell></row><row><cell>sk</cell><cell>30.8</cell><cell>19.6</cell><cell>32.2</cell><cell>18.2</cell></row><row><cell>sl</cell><cell>28.3</cell><cell>13.7</cell><cell>29.9</cell><cell>13.7</cell></row><row><cell>avg</cell><cell>25.1</cell><cell>16.3</cell><cell>26.0</cell><cell>16.5</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell>Comparing against bilingual Textless model</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell>(70M), bilingual XM Transformer achieves +3.8</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell>BLEU in EP/VP and +5.0 BLEU in FLEURS.</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell>Multilingual training further improves dense</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell>XM Transformer by 7.9 and 5.1 BLEU. GShard</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell>with 64 experts brings +1.0 BLEU over dense</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell>XM Transformer to EP/VP, and +0.3 BLEU</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell>to FLEURS. Overall the best Slavic-to-English</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell>translation is achieved by XM Transformer with</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell>GShard trained in multilingual setting. This demon-</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell>strates that multilinguality, pre-training and model</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell>sparsity are of help to speech-to-speech translation.</cell></row></table><note><p>Table 8: BLEU of All-to-English multilingual models across FLEURS (FL) and EP/VP domains (for EP/VP column, underlined scores are on EPST data, and others on VoxPopuli data).</p></note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_10"><head></head><label></label><figDesc>in Table9. We notice that our new speech encoders have lower error rates compared to previous work.</figDesc><table><row><cell cols="2">Audio vs. en translations de</cell><cell>es</cell><cell>fr</cell></row><row><cell>Previous work</cell><cell cols="3">3.36 1.66 2.05</cell></row><row><cell>This work</cell><cell cols="3">3.27 1.26 1.55</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_11"><head>Table 9 :</head><label>9</label><figDesc>Similarity search error rates (in %) on CoVoST 2 test set.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_12"><head>Table 10 :</head><label>10</label><figDesc>Similarity search error rates (in %) on CoVoST 2 test set.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_14"><head>Table 11 :</head><label>11</label><figDesc>Language families in VoxPopuli data.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_15"><head>Table 12 :</head><label>12</label><figDesc>HuggingFace ASR models for each language.</figDesc><table><row><cell>Lang</cell><cell>cs</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_16"><head>Table 13 ,</head><label>13</label><figDesc>ASR models are of good quality for high-resource languages such as de, fi</figDesc><table><row><cell>Lang</cell><cell>Data</cell><cell>ASR WER</cell><cell>HuBERT</cell><cell cols="2">Vocoder WER Lang</cell><cell>Data</cell><cell>ASR WER</cell><cell>HuBERT</cell><cell>Vocoder WER</cell></row><row><cell>de</cell><cell>CSS10</cell><cell>0.10</cell><cell>Germanic HuBERT layer 11, km 1000</cell><cell>0.16</cell><cell>nl</cell><cell>CSS10</cell><cell>0.19</cell><cell>Germanic HuBERT layer 11, km 1000</cell><cell>0.27</cell></row><row><cell>fi</cell><cell>CSS10</cell><cell>0.02</cell><cell>Uralic HuBERT layer 11, km 1000</cell><cell>0.15</cell><cell>hu</cell><cell>CSS10</cell><cell>0.21</cell><cell>Uralic HuBERT layer 11, km 1000</cell><cell>0.21</cell></row><row><cell>et</cell><cell>Common Voice</cell><cell>0.14</cell><cell>Uralic HuBERT layer 11, km 1000</cell><cell>0.44</cell><cell>it</cell><cell>VoxPopuli</cell><cell>0.23</cell><cell>Uralic HuBERT layer 11, km 800</cell><cell>0.27</cell></row><row><cell>pt</cell><cell>Common Voice</cell><cell>0.06</cell><cell>Uralic HuBERT layer 11, km 1000</cell><cell>0.31</cell><cell>ro</cell><cell>VoxPopuli</cell><cell>0.42</cell><cell>Uralic HuBERT layer 11, km 1000</cell><cell>0.50</cell></row><row><cell>cs</cell><cell>VoxPopuli</cell><cell>0.15</cell><cell>Slavic HuBERT layer 11, km 1000</cell><cell>0.23</cell><cell>pl</cell><cell>VoxPopuli</cell><cell>0.14</cell><cell>Slavic HuBERT layer 11, km 1000</cell><cell>0.23</cell></row><row><cell>hr</cell><cell>VoxPopuli</cell><cell>0.21</cell><cell>Slavic HuBERT layer 11, km 1000</cell><cell>0.29</cell><cell>lt</cell><cell>VoxPopuli</cell><cell>0.38</cell><cell>Slavic HuBERT layer 11, km 1000</cell><cell>0.57</cell></row><row><cell>sk</cell><cell>VoxPopuli</cell><cell>0.28</cell><cell>Slavic HuBERT layer 11, km 1000</cell><cell>0.41</cell><cell>sl</cell><cell>VoxPopuli</cell><cell>0.37</cell><cell>Slavic HuBERT layer 11, km 1000</cell><cell>0.46</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_17"><head>Table 13 :</head><label>13</label><figDesc>Benchmark results of ASR models and vocoder resynthesis. and pt, while suffering from high error rates in languages such as ro, lt and sl. It is expected to have higher vocoder WER than ASR WER since the former is for synthesized speech. By measuring the gap between the two error rates, we can tell how good a vocoder is and also infer the quality of HuBERT units. For et, pt and lt, the gaps are obviously larger than other languages. It not surprising since we do not have much good-quality vocoder data for these languages. For example, there is only around 10-hour noisy speech from Common Voice for et and pt vocoder training.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_18"><head>Table 14 :</head><label>14</label><figDesc>Transformer encoder layers with the embedding dimension of 1024 and the forward dimension of 4096. It has two unit decoders with 6 and 2 Transformer decoder layers for target and source unit prediction respectively. The target unit decoder has the embedding dimension of 1024 and the forward dimension of 4096, and the source unit decoder's dimensions are 256 and 2048.For the Textless model (424M), its speech encoder contains 6 convolution layers and 16 Transformer encoder layers with the embedding dimension of 1024 and the forward dimension of 4096. It has two unit decoders with 12 and 2 Transformer decoder layers for target and source unit prediction respectively. The target unit decoder has the embedding dimension of 1024 and the forward dimension of 4096, and the source unit decoder's dimensions are 256 and 2048.XM Transformer. XM Transformer (1.2B) is initialized from XLS-R encoder with 7 convolution layers and 48 Transformer encoder layers with the embedding dimension of 1280 and the forward dimension of 5120. Its unit decoder is initialized from a pre-trained mbart-style decoder with 12 layers, embedding dimension of 1024 and forward dimension of 4096.Hyperparameters. For Textless model, we reuse a learning rate of 0.0005, a dropout of 0.3 BLEU of Slavic-to-English multilingual Textless model across FLEURS (FL) and EP/VP domains (for EP/VP column, underlined scores are on EPST data, and others on VoxPopuli data).</figDesc><table><row><cell></cell><cell></cell><cell cols="2">Bilingual</cell><cell></cell><cell></cell><cell></cell><cell cols="2">Multilingual</cell><cell></cell><cell></cell></row><row><cell></cell><cell>70M</cell><cell></cell><cell cols="2">260M</cell><cell>70M</cell><cell></cell><cell cols="2">260M</cell><cell cols="2">424M</cell></row><row><cell></cell><cell cols="10">EP/VP FL EP/VP FL EP/VP FL EP/VP FL EP/VP FL</cell></row><row><cell>cs</cell><cell>22.7</cell><cell>4.2</cell><cell>24.7</cell><cell>11.2</cell><cell>19.7</cell><cell>2.3</cell><cell>27.5</cell><cell>13.7</cell><cell>25.3</cell><cell>10.2</cell></row><row><cell>hr</cell><cell>-</cell><cell>7.7</cell><cell>-</cell><cell>4.6</cell><cell>-</cell><cell>3.1</cell><cell>-</cell><cell>12.8</cell><cell>-</cell><cell>9.2</cell></row><row><cell>lt</cell><cell>3.1</cell><cell>0.9</cell><cell>0.2</cell><cell>0.0</cell><cell>2.8</cell><cell>0.3</cell><cell>14.7</cell><cell>4.8</cell><cell>10.7</cell><cell>3.3</cell></row><row><cell>pl</cell><cell>4.9</cell><cell>4.9</cell><cell>17.6</cell><cell>7.7</cell><cell>14.4</cell><cell>1.9</cell><cell>19.9</cell><cell>9.5</cell><cell>16.4</cell><cell>6.9</cell></row><row><cell>sk</cell><cell>21.4</cell><cell>5.5</cell><cell>24.4</cell><cell>11.0</cell><cell>18.9</cell><cell>4.1</cell><cell>27.2</cell><cell>15.4</cell><cell>24.9</cell><cell>11.1</cell></row><row><cell>sl</cell><cell>19.5</cell><cell>7.3</cell><cell>16.9</cell><cell>4.7</cell><cell>14.6</cell><cell>3.1</cell><cell>22.9</cell><cell>10.7</cell><cell>21.0</cell><cell>7.6</cell></row><row><cell>avg</cell><cell>14.3</cell><cell>5.1</cell><cell>16.8</cell><cell>6.5</cell><cell>14.1</cell><cell>2.5</cell><cell>22.4</cell><cell>11.2</cell><cell>19.7</cell><cell>8.1</cell></row><row><cell></cell><cell cols="10">Bilingual (1.2B) Multiling. Dense (1.2B) Multiling. GShard (4.3B)</cell></row><row><cell></cell><cell>EP/VP</cell><cell>FL</cell><cell></cell><cell>EP/VP</cell><cell>FL</cell><cell></cell><cell cols="2">EP/VP</cell><cell>FL</cell><cell></cell></row><row><cell>cs</cell><cell>28.3</cell><cell cols="2">17.8</cell><cell>29.7</cell><cell cols="2">18.2</cell><cell>30.6</cell><cell></cell><cell>19.3</cell><cell></cell></row><row><cell>hr</cell><cell>-</cell><cell cols="2">12.1</cell><cell>-</cell><cell cols="2">17.1</cell><cell>-</cell><cell></cell><cell>17.6</cell><cell></cell></row><row><cell>lt</cell><cell>0.0</cell><cell>0.0</cell><cell></cell><cell>20.9</cell><cell>9.6</cell><cell></cell><cell>22.2</cell><cell></cell><cell>10.2</cell><cell></cell></row><row><cell>pl</cell><cell>17.4</cell><cell>7.4</cell><cell></cell><cell>21.1</cell><cell cols="2">12.9</cell><cell>21.4</cell><cell></cell><cell>12.6</cell><cell></cell></row><row><cell>sk</cell><cell>24.7</cell><cell cols="2">14.5</cell><cell>30.8</cell><cell cols="2">19.3</cell><cell>31.8</cell><cell></cell><cell>20.0</cell><cell></cell></row><row><cell>sl</cell><cell>20.1</cell><cell>8.5</cell><cell></cell><cell>27.4</cell><cell cols="2">14.0</cell><cell>29.1</cell><cell></cell><cell>13.0</cell><cell></cell></row><row><cell>avg</cell><cell>18.1</cell><cell cols="2">10.1</cell><cell>26.0</cell><cell cols="2">15.2</cell><cell>27.0</cell><cell></cell><cell>15.5</cell><cell></cell></row></table><note><p>C.1 Slavic-to-English Translation Textless model. Textless model (260M) has a speech encoder with 4 convolution layers and 12</p></note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_19"><head>Table 15 :</head><label>15</label><figDesc>BLEU of Slavic-to-English multilingual XM Transformer models across FLEURS (FL) and EP/VP domains (for EP/VP column, underlined scores are on EPST data, and others on VoxPopuli data). and a label smoothing weight of 0.2 for Slavic-to-English training. The 70M model has 20k tokens in one batch. The 260M model has batch tokens of 6k and a update frequency of 4. The 424M model has tokens of 4000 and a update frequency of 6. We first extend Textless model from the bilingual to multilingual setting. Translation results are presented for Textless models with different parameter sizes in Table 14. Multilingual Textless model works best with 260M parameters. Compared with its bilingual counterparts, an average gain of 5.6 BLEU is achieved in EP/VP and the gain of 4.7 BLEU in FLEURS.</figDesc><table><row><cell>For XM Transformer model, we use a learning rate</cell></row><row><cell>of 0.0001, a dropout of 0.1 and a label smoothing</cell></row><row><cell>weight of 0.2. In a batch, token sizes of 1500 and</cell></row><row><cell>9000 with update frequency of 15 and 2 are used</cell></row><row><cell>for V100 and A100 training respectively.</cell></row><row><cell>Results.</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_20"><head>Table 16 :</head><label>16</label><figDesc>BLEU of All-to-English multilingual models across FLEURS (FL) and EP/VP domains (for EP/VP column, underlined scores are on EPST data, and others on VoxPopuli data).</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_21"><head></head><label></label><figDesc>Common Voice is released under CC0 license, VoxPopuli and CoVoST 2 data are also under CC0 license. As for EuroParl, it is released under a Creative Commons license. The multilingual TEDx corpus is released under a CC BY-NC-ND 4.0 license. FLEURS dataset is under Creative Commons license (CC-BY-4.0). These datasets are publicly accessible and freely downloadable for research purposes. Models. XLS-R model used for the speech encoder initialization is open sourced under Apache-2.0 license. Text LASER used as the teacher model in training is released under BSD license. ASR models avaliable on HuggingFace are released under Apache-2.0 license. These models are publicly</figDesc><table /><note><p><p>D.1 Third-Party Artifacts</p>Data.</p></note></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2" xml:id="foot_0"><p>Czech (cs), German (de), English (en), Spanish (es), Estonian (et), Finnish (fi), French (fr), Croatian (hr), Hungarian (hu), Italian (it), Lithuanian (lt), Dutch (nl), Polish (pl), Portuguese (pt), Romanian (ro), Slovak (sk) and Slovenian (sl).</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3" xml:id="foot_1"><p>en, fr, de, it, es, pt, pl, ro and nl   </p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="4" xml:id="foot_2"><p>https://github.com/facebookresearch/ denoiser</p></note>
+		</body>
+		<back>
+
+			<div type="funding">
+<div><p>/tree/ust/examples/speech_matrix</p></div>
+			</div>
+			<div type="availability">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>https://github.com/facebookresearch/ fairseq</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>respectively.</head><p>Comparing against dense XM Transformer, GShard with 64 experts has 1.0 BLEU gains on average over 5 directions on EP/VP, and +0.3 BLEU gains for FLEURS. We believe that it is due to a phenomena mentioned in <ref type="bibr" target="#b48">(Zoph et al., 2022)</ref>, i.e., MoE specializes in multilingual settings but not by language. GShard in our setting brings larger improvements to in-domain test sets.</p><p>Computation. Textless models used 32 A100 GPUs, the 70M model was trained for 3 days, the 260M model was for 5 days, and the 424M model was for 6 days. It took 2 days to train XM Transformer on 32 A100 GPUs for Slavic-to-English translation.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C.2 All-to-English Translation</head><p>In this work, we experiment with two variants of sparse modeling, GShard and Base Layer. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>D.2 SpeechMatrix and translation models</head><p>The mined resource, SpeechMatrix, will be released under CC0 license, and the trained speechto-speech translation models will be released under CC BY-NC 4.0. The data and models are intended for research purposes.</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">On the Use of Comparable Corpora to Improve SMT performance</title>
+		<author>
+			<persName><forename type="first">Sadaf</forename><surname>Abdul</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">-Rauf</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Holger</forename><surname>Schwenk</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">EACL</title>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="page" from="16" to="23" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Common voice: A massivelymultilingual speech corpus</title>
+		<author>
+			<persName><forename type="first">Rosana</forename><surname>Ardila</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Megan</forename><surname>Branson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kelly</forename><surname>Davis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Kohler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Josh</forename><surname>Meyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Henretty</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Reuben</forename><surname>Morais</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lindsay</forename><surname>Saunders</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Francis</forename><forename type="middle">M</forename><surname>Tyers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gregor</forename><surname>Weber</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of The 12th Language Resources and Evaluation Conference, LREC 2020</title>
+		<meeting>The 12th Language Resources and Evaluation Conference, LREC 2020<address><addrLine>Marseille, France</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2020-05-11">2020. May 11-16, 2020</date>
+			<biblScope unit="page" from="4218" to="4222" />
+		</imprint>
+	</monogr>
+	<note>European Language Resources Association</note>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title level="m" type="main">Marginbased Parallel Corpus Mining with Multilingual Sentence Embeddings</title>
+		<author>
+			<persName><forename type="first">Mikel</forename><surname>Artetxe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Holger</forename><surname>Schwenk</surname></persName>
+		</author>
+		<ptr target="https://arxiv.org/abs/1811.01136" />
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<title level="m" type="main">XLS-R: self-supervised cross-lingual speech representation learning at scale</title>
+		<author>
+			<persName><forename type="first">Arun</forename><surname>Babu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Changhan</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andros</forename><surname>Tjandra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kushal</forename><surname>Lakhotia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qiantong</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Naman</forename><surname>Goyal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kritika</forename><surname>Singh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yatharth</forename><surname>Patrick Von Platen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juan</forename><surname>Saraf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexei</forename><surname>Pino</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexis</forename><surname>Baevski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Conneau</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Auli</surname></persName>
+		</author>
+		<idno>CoRR, abs/2111.09296</idno>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">wav2vec 2.0: A framework for self-supervised learning of speech representations</title>
+		<author>
+			<persName><forename type="first">Alexei</forename><surname>Baevski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuhao</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abdelrahman</forename><surname>Mohamed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Auli</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Advances in Neural Information Processing Systems 33: Annual Conference on Neural Information Processing Systems 2020</title>
+		<meeting><address><addrLine>NeurIPS; virtual</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2020-12-06">2020. 2020. December 6-12, 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Mass: A large and clean multilingual corpus of sentence-aligned spoken utterances extracted from the bible</title>
+		<author>
+			<persName><forename type="first">William</forename><surname>Marcely Zanon Boito</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mahault</forename><surname>Havard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Éric</forename><surname>Garnerin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laurent</forename><surname>Le Ferrand</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Besacier</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of The 12th Language Resources and Evaluation Conference, LREC 2020</title>
+		<meeting>The 12th Language Resources and Evaluation Conference, LREC 2020<address><addrLine>Marseille, France</addrLine></address></meeting>
+		<imprint>
+			<publisher>European Language Resources Association</publisher>
+			<date type="published" when="2020-05-11">2020. May 11-16, 2020</date>
+			<biblScope unit="page" from="6486" to="6493" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<title level="m" type="main">H2@BUCC18: Parallel Sentence Extraction from Comparable Corpora Using Multilingual Sentence Embeddings</title>
+		<author>
+			<persName><forename type="first">Houda</forename><surname>Bouamor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hassan</forename><surname>Sajjad</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<publisher>BUCC</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<title level="m" type="main">FLEURS: few-shot learning evaluation of universal representations of speech</title>
+		<author>
+			<persName><forename type="first">Alexis</forename><surname>Conneau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Min</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Simran</forename><surname>Khanuja</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yu</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vera</forename><surname>Axelrod</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Siddharth</forename><surname>Dalmia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><surname>Riesa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Clara</forename><surname>Rivera</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ankur</forename><surname>Bapna</surname></persName>
+		</author>
+		<idno>CoRR, abs/2205.12446</idno>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Real time speech enhancement in the waveform domain</title>
+		<author>
+			<persName><forename type="first">Alexandre</forename><surname>Defossez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gabriel</forename><surname>Synnaeve</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yossi</forename><surname>Adi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Interspeech</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">MuST-C: a Multilingual Speech Translation Corpus</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">Di</forename><surname>Mattia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Roldano</forename><surname>Gangi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luisa</forename><surname>Cattoni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matteo</forename><surname>Bentivogli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marco</forename><surname>Negri</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Turchi</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/N19-1202</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies</title>
+		<meeting>the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies<address><addrLine>Minneapolis, Minnesota</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="2012" to="2017" />
+		</imprint>
+	</monogr>
+	<note>Long and Short Papers</note>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Improving translation of emphasis with pause prediction in speech-to-speech translation systems</title>
+		<author>
+			<persName><forename type="first">Quoc</forename><surname>Truong Do</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sakriani</forename><surname>Sakti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Graham</forename><surname>Neubig</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tomoki</forename><surname>Toda</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Satoshi</forename><surname>Nakamura</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 12th International Workshop on Spoken Language Translation: Papers, IWSLT 2015</title>
+		<meeting>the 12th International Workshop on Spoken Language Translation: Papers, IWSLT 2015<address><addrLine>Da Nang, Vietnam</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2015-12-03">2015. December 3-4, 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">T-modules: Translation modules for zero-shot cross-modal machine translation</title>
+		<author>
+			<persName><forename type="first">Paul-Ambroise</forename><surname>Duquenne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hongyu</forename><surname>Gong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benoît</forename><surname>Sagot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Holger</forename><surname>Schwenk</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">EMNLP</title>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Multimodal and multilingual embeddings for large-scale speech mining</title>
+		<author>
+			<persName><forename type="first">Paul-Ambroise</forename><surname>Duquenne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hongyu</forename><surname>Gong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Holger</forename><surname>Schwenk</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Advances in Neural Information Processing Systems</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="page" from="15748" to="15761" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title level="m" type="main">Languageagnostic bert sentence embedding</title>
+		<author>
+			<persName><forename type="first">Fangxiaoyu</forename><surname>Feng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yinfei</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Cer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Naveen</forename><surname>Arivazhagan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei</forename><surname>Wang</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2007.01852</idno>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">The flores-101 evaluation benchmark for low-resource and multilingual machine translation</title>
+		<author>
+			<persName><forename type="first">Naman</forename><surname>Goyal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cynthia</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vishrav</forename><surname>Chaudhary</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peng-Jen</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Guillaume</forename><surname>Wenzek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Da</forename><surname>Ju</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sanjana</forename><surname>Krishnan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marc'aurelio</forename><surname>Ranzato</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Francisco</forename><surname>Guzmán</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Angela</forename><surname>Fan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Trans. Assoc. Comput. Linguistics</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page" from="522" to="538" />
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Bitext mining using distilled sentence representations for low-resource languages</title>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Heffernan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Onur</forename><surname>Çelebi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Holger</forename><surname>Schwenk</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">EMNLP</title>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Hubert: Self-supervised speech representation learning by masked prediction of hidden units</title>
+		<author>
+			<persName><forename type="first">Wei-Ning</forename><surname>Hsu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benjamin</forename><surname>Bolte</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hubert</forename><surname>Yao-Hung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kushal</forename><surname>Tsai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ruslan</forename><surname>Lakhotia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abdelrahman</forename><surname>Salakhutdinov</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mohamed</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE ACM Trans. Audio Speech Lang. Process</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="page" from="3451" to="3460" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Europarl-st: A multilingual corpus for speech translation of parliamentary debates</title>
+		<author>
+			<persName><forename type="first">Javier</forename><surname>Iranzo-Sánchez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joan</forename><surname>Albert Silvestre-Cerdà</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Javier</forename><surname>Jorge</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nahuel</forename><surname>Roselló</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adrià</forename><surname>Giménez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Albert</forename><surname>Sanchís</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jorge</forename><surname>Civera</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alfons</forename><surname>Juan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2020 IEEE International Conference on Acoustics, Speech and Signal Processing, ICASSP 2020</title>
+		<meeting><address><addrLine>Barcelona, Spain</addrLine></address></meeting>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2020-05-04">2020. May 4-8, 2020</date>
+			<biblScope unit="page" from="8229" to="8233" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<title level="m" type="main">Leveraging unsupervised and weaklysupervised data to improve direct speech-to-speech translation</title>
+		<author>
+			<persName><forename type="first">Ye</forename><surname>Jia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yifan</forename><surname>Ding</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ankur</forename><surname>Bapna</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Colin</forename><surname>Cherry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yu</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexis</forename><surname>Conneau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nobuyuki</forename><surname>Morioka</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/arXiv.2203.13339</idno>
+		<idno>CoRR, abs/2203.13339</idno>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Translatotron 2: Highquality direct speech-to-speech translation with voice preservation</title>
+		<author>
+			<persName><forename type="first">Ye</forename><surname>Jia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michelle</forename><surname>Tadmor Ramanovich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tal</forename><surname>Remez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Roi</forename><surname>Pomerantz</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Machine Learning, ICML 2022</title>
+		<meeting><address><addrLine>Baltimore, Maryland, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2022-07">2022. 17-23 July 2022</date>
+			<biblScope unit="volume">162</biblScope>
+			<biblScope unit="page" from="10120" to="10134" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Pmlr</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title level="m" type="main">CVSS corpus and massively multilingual speech-to-speech translation</title>
+		<author>
+			<persName><forename type="first">Ye</forename><surname>Jia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michelle</forename><forename type="middle">Tadmor</forename><surname>Ramanovich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Quan</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Heiga</forename><surname>Zen</surname></persName>
+		</author>
+		<idno>CoRR, abs/2201.03713</idno>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Direct speech-to-speech translation with a sequence-to-sequence model</title>
+		<author>
+			<persName><forename type="first">Ye</forename><surname>Jia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ron</forename><forename type="middle">J</forename><surname>Weiss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fadi</forename><surname>Biadsy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wolfgang</forename><surname>Macherey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Melvin</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhifeng</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yonghui</forename><surname>Wu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Interspeech 2019, 20th Annual Conference of the International Speech Communication Association</title>
+		<meeting><address><addrLine>Graz, Austria</addrLine></address></meeting>
+		<imprint>
+			<publisher>ISCA</publisher>
+			<date type="published" when="2019-09">2019. 15-19 September 2019</date>
+			<biblScope unit="page" from="1123" to="1127" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<monogr>
+		<author>
+			<persName><forename type="first">Sameer</forename><surname>Khurana</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Antoine</forename><surname>Laurent</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Glass</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2205.08180</idno>
+		<title level="m">Samu-xlsr: Semantically-aligned multimodal utterance-level cross-lingual speech representation</title>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Direct speech-to-speech translation with discrete units</title>
+		<author>
+			<persName><forename type="first">Ann</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peng-Jen</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Changhan</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jiatao</forename><surname>Gu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sravya</forename><surname>Popuri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xutai</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Polyak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yossi</forename><surname>Adi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qing</forename><surname>He</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yun</forename><surname>Tang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juan</forename><surname>Pino</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei-Ning</forename><surname>Hsu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">;</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics</title>
+		<meeting>the 60th Annual Meeting of the Association for Computational Linguistics<address><addrLine>Dublin, Ireland</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2022-05-22">2022. May 22-27, 2022</date>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="3327" to="3339" />
+		</imprint>
+	</monogr>
+	<note>: Long Papers), ACL 2022</note>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Textless speech-to-speech translation on real data</title>
+		<author>
+			<persName><forename type="first">Ann</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hongyu</forename><surname>Gong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul-Ambroise</forename><surname>Duquenne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Holger</forename><surname>Schwenk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peng-Jen</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Changhan</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sravya</forename><surname>Popuri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yossi</forename><surname>Adi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juan</forename><surname>Pino</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jiatao</forename><surname>Gu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei-Ning</forename><surname>Hsu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2022 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, NAACL 2022</title>
+		<meeting>the 2022 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, NAACL 2022<address><addrLine>Seattle, WA, United States</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2022-07-10">2022. July 10-15, 2022</date>
+			<biblScope unit="page" from="860" to="872" />
+		</imprint>
+	</monogr>
+	<note>Association for Computational Linguistics</note>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Gshard: Scaling giant models with conditional computation and automatic sharding</title>
+		<author>
+			<persName><forename type="first">Dmitry</forename><surname>Lepikhin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hyoukjoong</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuanzhong</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dehao</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Orhan</forename><surname>Firat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yanping</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maxim</forename><surname>Krikun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Noam</forename><surname>Shazeer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhifeng</forename><surname>Chen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">9th International Conference on Learning Representations, ICLR 2021, Virtual Event</title>
+		<meeting><address><addrLine>Austria</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2021">May 3-7, 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Base layers: Simplifying training of large, sparse models</title>
+		<author>
+			<persName><forename type="first">Mike</forename><surname>Lewis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shruti</forename><surname>Bhosale</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tim</forename><surname>Dettmers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Naman</forename><surname>Goyal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luke</forename><surname>Zettlemoyer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ternational Conference on Machine Learning</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="6265" to="6274" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Pmlr</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Multilingual denoising pre-training for neural machine translation</title>
+		<author>
+			<persName><forename type="first">Yinhan</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jiatao</forename><surname>Gu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Naman</forename><surname>Goyal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xian</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sergey</forename><surname>Edunov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marjan</forename><surname>Ghazvininejad</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mike</forename><surname>Lewis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luke</forename><surname>Zettlemoyer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Transactions of the Association for Computational Linguistics</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="726" to="742" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Improving Machine Translation Performance by Exploiting Non-Parallel Corpora</title>
+		<author>
+			<persName><forename type="first">Stefan</forename><surname>Dragos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Munteanu</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Marcu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computational Linguistics</title>
+		<imprint>
+			<biblScope unit="volume">31</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="477" to="504" />
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">The ATR multilingual speech-to-speech translation system</title>
+		<author>
+			<persName><forename type="first">Satoshi</forename><surname>Nakamura</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Konstantin</forename><surname>Markov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hiromi</forename><surname>Nakaiwa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gen-Ichiro</forename><surname>Kikui</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hisashi</forename><surname>Kawai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Takatoshi</forename><surname>Jitsuhiro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jinsong</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hirofumi</forename><surname>Yamamoto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eiichiro</forename><surname>Sumita</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Seiichi</forename><surname>Yamamoto</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Trans. Speech Audio Process</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="365" to="376" />
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<title level="m" type="main">Improving speech-to-speech translation through unlabeled text</title>
+		<author>
+			<persName><forename type="first">Xuan-Phi</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sravya</forename><surname>Popuri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Changhan</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yun</forename><surname>Tang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ilia</forename><surname>Kulikov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hongyu</forename><surname>Gong</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/arXiv.2210.14514</idno>
+		<idno>CoRR, abs/2210.14514</idno>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<title level="m" type="main">No language left behind: Scaling human-centered machine translation</title>
+		<author>
+			<persName><forename type="first">Marta</forename><forename type="middle">R</forename><surname>Nllb Team</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Costa-Jussà</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Onur</forename><surname>Cross</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maha</forename><surname>Çelebi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kenneth</forename><surname>Elbayad</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Heafield</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elahe</forename><surname>Heffernan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Janice</forename><surname>Kalbassi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Lam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jean</forename><surname>Licht</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anna</forename><surname>Maillard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Skyler</forename><surname>Sun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Guillaume</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Al</forename><surname>Wenzek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bapi</forename><surname>Youngblood</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Loic</forename><surname>Akula</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gabriel</forename><forename type="middle">Mejia</forename><surname>Barrault</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Prangthip</forename><surname>Gonzalez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Hansanti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Semarley</forename><surname>Hoffman</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Jarrett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ram</forename><surname>Kaushik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dirk</forename><surname>Sadagopan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shannon</forename><surname>Rowe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chau</forename><surname>Spruit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pierre</forename><surname>Tran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Necip</forename><surname>Andrews</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shruti</forename><surname>Fazil Ayan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sergey</forename><surname>Bhosale</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Angela</forename><surname>Edunov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cynthia</forename><surname>Fan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vedanuj</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Francisco</forename><surname>Goswami</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Philipp</forename><surname>Guzmán</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexandre</forename><surname>Koehn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christophe</forename><surname>Mourachko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Safiyyah</forename><surname>Ropers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Holger</forename><surname>Saleem</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeff</forename><surname>Schwenk</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Wang</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/ARXIV.2207.04672</idno>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">CSS10: A collection of single speaker speech datasets for 10 languages</title>
+		<author>
+			<persName><forename type="first">Kyubyong</forename><surname>Park</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Mulc</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Interspeech 2019, 20th Annual Conference of the International Speech Communication Association</title>
+		<meeting><address><addrLine>Graz, Austria</addrLine></address></meeting>
+		<imprint>
+			<publisher>ISCA</publisher>
+			<date type="published" when="2019-09">2019. 15-19 September 2019</date>
+			<biblScope unit="page" from="1566" to="1570" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Speech Resynthesis from Discrete Disentangled Self-Supervised Representations</title>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Polyak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yossi</forename><surname>Adi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jade</forename><surname>Copet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eugene</forename><surname>Kharitonov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kushal</forename><surname>Lakhotia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei-Ning</forename><surname>Hsu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abdelrahman</forename><surname>Mohamed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emmanuel</forename><surname>Dupoux</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. Interspeech</title>
+		<meeting>Interspeech</meeting>
+		<imprint>
+			<date type="published" when="2021">2021. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<monogr>
+		<title level="m" type="main">Enhanced direct speech-to-speech translation using self-supervised pre-training and data augmentation</title>
+		<author>
+			<persName><forename type="first">Sravya</forename><surname>Popuri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peng-Jen</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Changhan</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juan</forename><surname>Pino</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yossi</forename><surname>Adi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jiatao</forename><surname>Gu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei-Ning</forename><surname>Hsu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ann</forename><surname>Lee</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+			<biblScope unit="page" from="5195" to="5199" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Fisher and callhome spanish-english speech translation</title>
+		<author>
+			<persName><forename type="first">Matt</forename><surname>Post</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gaurav</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Lopez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Damianos</forename><surname>Karakos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Callison-Burch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sanjeev</forename><surname>Khudanpur</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">LDC2014T23</title>
+		<meeting><address><addrLine>Philadelphia</addrLine></address></meeting>
+		<imprint>
+			<publisher>Linguistic Data Consortium</publisher>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+		<respStmt>
+			<orgName>Web Download</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Making monolingual sentence embeddings multilingual using knowledge distillation</title>
+		<author>
+			<persName><forename type="first">Nils</forename><surname>Reimers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Iryna</forename><surname>Gurevych</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">EMNLP</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="4512" to="4525" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Mining the Web for Bilingual Text</title>
+		<author>
+			<persName><forename type="first">Philip</forename><surname>Resnik</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ACL</title>
+		<imprint>
+			<date type="published" when="1999">1999</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">The multilingual tedx corpus for speech recognition and translation</title>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Salesky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Wiesner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacob</forename><surname>Bremerman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Roldano</forename><surname>Cattoni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matteo</forename><surname>Negri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marco</forename><surname>Turchi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Douglas</forename><forename type="middle">W</forename><surname>Oard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matt</forename><surname>Post</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Interspeech 2021, 22nd Annual Conference of the International Speech Communication Association</title>
+		<meeting><address><addrLine>Brno, Czechia</addrLine></address></meeting>
+		<imprint>
+			<publisher>ISCA</publisher>
+			<date type="published" when="2021-08-30">2021. 30 August -3 September 2021</date>
+			<biblScope unit="page" from="3655" to="3659" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">CCMatrix: Mining billions of high-quality parallel sentences on the web</title>
+		<author>
+			<persName><forename type="first">Holger</forename><surname>Schwenk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Guillaume</forename><surname>Wenzek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sergey</forename><surname>Edunov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Edouard</forename><surname>Grave</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Armand</forename><surname>Joulin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Angela</forename><surname>Fan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ACL</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="6490" to="6500" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Ccmatrix: Mining billions of high-quality parallel sentences on the web</title>
+		<author>
+			<persName><forename type="first">Holger</forename><surname>Schwenk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Guillaume</forename><surname>Wenzek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sergey</forename><surname>Edunov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Edouard</forename><surname>Grave</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Armand</forename><surname>Joulin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Angela</forename><surname>Fan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics and the 11th International Joint Conference on Natural Language Processing, ACL/IJCNLP 2021</title>
+		<meeting>the 59th Annual Meeting of the Association for Computational Linguistics and the 11th International Joint Conference on Natural Language Processing, ACL/IJCNLP 2021</meeting>
+		<imprint>
+			<date type="published" when="2021-08-01">2021. August 1-6, 2021</date>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="6490" to="6500" />
+		</imprint>
+	</monogr>
+	<note>Virtual Event. Association for Computational Linguistics</note>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<monogr>
+		<ptr target="https://github.com/snakers4/silero-vad" />
+		<title level="m">Silero vad: pre-trained enterprisegrade voice activity detector (vad), number detector and language classifier</title>
+		<imprint>
+			<publisher>Silero-Team</publisher>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Covost: A diverse multilingual speech-to-text translation corpus</title>
+		<author>
+			<persName><forename type="first">Changhan</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juan</forename><surname>Pino</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anne</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jiatao</forename><surname>Gu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 12th Language Resources and Evaluation Conference</title>
+		<meeting>the 12th Language Resources and Evaluation Conference</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="4197" to="4203" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">a. Voxpopuli: A large-scale multilingual speech corpus for representation learning, semisupervised learning and interpretation</title>
+		<author>
+			<persName><forename type="first">Changhan</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Morgane</forename><surname>Rivière</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ann</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anne</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chaitanya</forename><surname>Talnikar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Haziza</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mary</forename><surname>Williamson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juan</forename><forename type="middle">Miguel</forename><surname>Pino</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emmanuel</forename><surname>Dupoux</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics and the 11th International Joint Conference on Natural Language Processing, ACL/IJCNLP 2021</title>
+		<meeting>the 59th Annual Meeting of the Association for Computational Linguistics and the 11th International Joint Conference on Natural Language Processing, ACL/IJCNLP 2021<address><addrLine>Virtual Event</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2021-08-01">2021. August 1-6, 2021</date>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="993" to="1003" />
+		</imprint>
+	</monogr>
+	<note>Long Papers</note>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Covost 2 and massively multilingual speech translation</title>
+		<author>
+			<persName><forename type="first">Changhan</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anne</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jiatao</forename><surname>Gu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juan</forename><surname>Pino</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Interspeech</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="2247" to="2251" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Improving multilingual sentence embedding using bidirectional dual encoder with additive margin softmax</title>
+		<author>
+			<persName><forename type="first">Yinfei</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gustavo</forename><surname>Hernandez Abrego</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steve</forename><surname>Yuan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qinlan</forename><surname>Shen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mandy</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Cer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brian</forename><surname>Strope Yun-Hsuan Sun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ray</forename><surname>Kurzweil</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IJCAI</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="5370" to="5378" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<monogr>
+		<title level="m" type="main">Designing effective sparse expert models</title>
+		<author>
+			<persName><forename type="first">Barret</forename><surname>Zoph</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Irwan</forename><surname>Bello</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sameer</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nan</forename><surname>Du</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yanping</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeff</forename><surname>Dean</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Noam</forename><surname>Shazeer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">William</forename><surname>Fedus</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2202.08906</idno>
+		<idno>.2 23.3 15.9 22.9 14.9 et - 16.7 - 16.7 - 16.4 fi 26.8 14.1 28.2 14.0 28.5 13.9 fr 23.5 18.3 24.1 18.9 23.4 18.2 hr - 16.6 - 16.8 - 16.3 hu 20.2 12.0 21.3 12.5 20.5 12.1 it 36.3 16.2 37.8 14.9 37.4 14.0 lt 21.9 9.8 23.8 10.3 23.4 10.0 nl 21.4 16.4 22.1 17.3 21.5 16.6 pl 21.2 12.4 21.3 13.4 20.9 12.5 pt 23.8 21.8 24.2 22.3 23.8 21.1 ro 25.1 19.7 25.0 19.8 25.3 19.0 sk 30.8 19.6 32.2 18.2 31.5 18.4 sl 28.3 13.7 29.9 13.7 28.8 13.5 avg 25.1 16.3 26.0 16.5 25.5 15.9</idno>
+		<imprint>
+			<date type="published" when="0319">2022. 3 de 18.8 19.0 19.3 20.3 19.4 19.5 es 22.8 15</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+	<note>Dense (1.2B) MoE-GShard64 (4. .3B) Base Layer (1.7B) EP/VP FL EP/VP FL EP/VP FL cs 29.9 18.7 30.9 18.2 29.9 17.</note>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

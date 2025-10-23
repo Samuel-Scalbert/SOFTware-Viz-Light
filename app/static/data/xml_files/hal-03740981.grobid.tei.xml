@@ -7,11 +7,11 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		<fileDesc>
 			<titleStmt>
 				<title level="a" type="main">UniRank: Unimodal Bandit Algorithm for Online Ranking</title>
-				<funder ref="#_TJk7wcM">
-					<orgName type="full">Inria Project Lab</orgName>
-				</funder>
-				<funder ref="#_Fzeh7b4">
+				<funder ref="#_PJtYcJW">
 					<orgName type="full">EU</orgName>
+				</funder>
+				<funder ref="#_2G9csyS">
+					<orgName type="full">Inria Project Lab</orgName>
 				</funder>
 			</titleStmt>
 			<publicationStmt>
@@ -102,13 +102,13 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 							<date/>
 						</imprint>
 					</monogr>
-					<idno type="MD5">B1E7C95AD27D5C599113CF2A31F32982</idno>
+					<idno type="MD5">F4571DF9F9DF95862E14BECA25CB1FB9</idno>
 				</biblStruct>
 			</sourceDesc>
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.0" ident="GROBID" when="2024-04-12T14:44+0000">
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:14+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<ref target="https://github.com/kermitt2/grobid"/>
 				</application>
@@ -165,10 +165,10 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <div><head>Acknowledgements</head><p>We thank the reviewers for their valuable comments towards clarification of the paper. This research was partially supported by the <rs type="funder">Inria Project Lab</rs> "<rs type="projectName">Hybrid Approaches for Interpretable AI</rs>" (<rs type="projectName">HyAIAI</rs>) and the network on the foundations of trustworthy AI, integrating learning, optimisation, and reasoning (TAILOR) financed by the <rs type="funder">EU</rs>'s <rs type="programName">Horizon 2020 research and innovation program</rs> under agreement <rs type="grantNumber">952215</rs>.</p></div>
 			</div>
 			<listOrg type="funding">
-				<org type="funded-project" xml:id="_TJk7wcM">
+				<org type="funded-project" xml:id="_2G9csyS">
 					<orgName type="project" subtype="full">Hybrid Approaches for Interpretable AI</orgName>
 				</org>
-				<org type="funded-project" xml:id="_Fzeh7b4">
+				<org type="funded-project" xml:id="_PJtYcJW">
 					<idno type="grant-number">952215</idno>
 					<orgName type="project" subtype="full">HyAIAI</orgName>
 					<orgName type="program" subtype="full">Horizon 2020 research and innovation program</orgName>

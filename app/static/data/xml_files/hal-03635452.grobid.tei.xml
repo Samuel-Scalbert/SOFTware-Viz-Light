@@ -1,0 +1,1298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Designing Guided User Tasks in VR Embodied Experiences</title>
+				<funder ref="#_vknaHEk">
+					<orgName type="full">French National Research Agency</orgName>
+				</funder>
+				<funder ref="#_xcgRPmK">
+					<orgName type="full">unknown</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Hui-Yin</forename><surname>Wu</surname></persName>
+							<email>hui-yin.wu@inria.fr</email>
+						</author>
+						<author>
+							<persName><surname>Barthelemy</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">F</forename><surname>Robert</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">T</forename><surname>Fafet</surname></persName>
+							<email>théofafet@etu.univ-cotedazur.fr</email>
+						</author>
+						<author>
+							<persName><forename type="first">B</forename><surname>Graulier</surname></persName>
+							<email>bricegraulier@etu.univ-cotedazur.fr</email>
+						</author>
+						<author>
+							<persName><forename type="first">B</forename><surname>Passin-Caineau</surname></persName>
+							<email>passin-cauneau@etu.univ-cotedazur.fr</email>
+						</author>
+						<author>
+							<persName><forename type="first">L</forename><surname>Sassatelli</surname></persName>
+							<email>lucilesassatelli@univ-cotedazur.fr</email>
+						</author>
+						<author>
+							<persName><forename type="first">M</forename><surname>Winckler</surname></persName>
+							<email>marco.winckler@univ-cotedazur.fr</email>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="laboratory">FLORENT ROBERT</orgName>
+								<orgName type="institution" key="instit1">Centre Inria d&apos;</orgName>
+								<orgName type="institution" key="instit2">Université Côte d&apos;Azur</orgName>
+								<address>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<orgName type="laboratory">THÉO FAFET</orgName>
+								<orgName type="institution" key="instit1">Université Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<address>
+									<settlement>I3S, Inria</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff2">
+								<orgName type="laboratory">BRICE GRAULIER</orgName>
+								<orgName type="institution">Université Côte d&apos;Azur</orgName>
+								<address>
+									<settlement>Polytech</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff3">
+								<orgName type="institution">Université Côte d&apos;Azur</orgName>
+								<address>
+									<settlement>Polytech</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff4">
+								<orgName type="laboratory">PASSIN-CAUNEAU</orgName>
+								<orgName type="institution">Université Côte d&apos;Azur</orgName>
+								<address>
+									<settlement>Polytech</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff5">
+								<orgName type="department">I3S</orgName>
+								<orgName type="laboratory">LUCILE SASSATELLI</orgName>
+								<orgName type="institution" key="instit1">Université Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">Institut Universitaire de France</orgName>
+								<address>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff6">
+								<orgName type="laboratory">MARCO WINCKLER</orgName>
+								<orgName type="institution" key="instit1">Université Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<address>
+									<settlement>I3S, Inria</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff7">
+								<orgName type="institution">Centre Inria d&apos;Université Côte d&apos;Azur</orgName>
+								<address>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff8">
+								<orgName type="institution">Florent Robert</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff9">
+								<orgName type="institution" key="instit1">Université Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<address>
+									<settlement>I3S, Inria</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff10">
+								<orgName type="institution">Université Côte d&apos;Azur</orgName>
+								<address>
+									<settlement>Polytech</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff11">
+								<orgName type="institution">Université Côte d&apos;Azur</orgName>
+								<address>
+									<settlement>Polytech, Barthelemy</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff12">
+								<orgName type="institution">Université Côte d&apos;Azur</orgName>
+								<address>
+									<settlement>Polytech</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff13">
+								<orgName type="department">I3S</orgName>
+								<orgName type="institution" key="instit1">Université Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">Institut Universitaire de France</orgName>
+								<address>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff14">
+								<orgName type="institution">Marco Winckler</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff15">
+								<orgName type="institution" key="instit1">Université Côte d&apos;Azur</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<address>
+									<settlement>I3S, Inria</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Designing Guided User Tasks in VR Embodied Experiences</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">336C2C7A854FF6357F87D90064BCA423</idno>
+					<idno type="DOI">10.1145/3532208</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:15+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>CCS Concepts:</term>
+					<term>Human-centered computing → Systems and tools for interaction design</term>
+					<term>User studies</term>
+					<term>• Computing methodologies → Virtual reality</term>
+					<term>Ontology engineering Embodied experiences, interactive task modeling, virtual reality, user experience analysis</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Fig. 1. According to Dourish [15], in the creation of interactive embodied experiences, gaps of perception are introduced in : (1) Ontology: between the scene representation and the interpretation of the user and designer, (2) Intersubjectivity: between the communication of the goals and task constraints from the designer to user, and (3) Intentionality: between the user's intentions and the designer's interpretations of the user experience.</p><p>Virtual reality (VR) offers extraordinary opportunities in user behavior research to study and observe how people interact in immersive 3D environments. A major challenge of designing these 3D experiences and user tasks, however, lies in bridging the inter-relational gaps of perception between the designer, the user, and the 3D scene. Paul Dourish identified three gaps of perception: ontology between the scene representation and the user and designer interpretation, intersubjectivity of task communication between designer and user, and intentionality between the user's intentions and designer's interpretations.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">INTRODUCTION</head><p>The growth in graphics rendering capabilities has facilitated the adoption of Virtual Reality (VR) in professional training and simulation scenarios as diverse as cockpit training <ref type="bibr" target="#b26">[27]</ref>, engineering education <ref type="bibr" target="#b0">[1]</ref>, rehabilitation of disabilities <ref type="bibr" target="#b36">[37,</ref><ref type="bibr" target="#b37">38]</ref>, prevention of occupational hazards <ref type="bibr" target="#b29">[30]</ref>, and many more. On the one hand, the Designer -the team or individual that creates embodied VR experiences -can realize strong control over the content being presented to the User of their system. On the other hand, the equipment -headset, controllers, and external sensors -not only offer natural and rich interactions, but also register user behavior (e.g., movement of the head and hands) that characterize the embodied user experience.</p><p>The possibility of gaining insight into user behavior, perception, and efficacy in a task is key to understanding the user experience (UX) and measuring the usability of an interactive system. This has been addressed in research in user-centric design and task modeling <ref type="bibr" target="#b2">[3]</ref>. However, in the design of complex interactive systems, gaps of perception may appear in any pairwise relation between the designer, user, and the system. In VR, the freedom to move, explore, and interact with an immersive 360°environment further widens these inter-relational gaps between the designer's desired UX, the affordances of the 3D scene in VR, and how the user intends to act and react. Dourish's theory of embodiment <ref type="bibr" target="#b14">[15]</ref> identifies three major gaps of perception for embodied experiences (as depicted in Figure <ref type="figure">1</ref>):</p><p>• Ontology: gap between the representation of the scene and the interpretations of the user and designer, • Intersubjectivity: gap in understanding between the designer to the user when communicating the task goals and constraints, and • Intentionality: gap between the user's intentions and the designer's interpretations of the UX.</p><p>Contributions: To address these gaps of perception, we propose GUsT-3D, a framework to define a consistent set of vocabulary used throughout the design, implementation, and analysis of Guided User Tasks (GUTasks) in a VR embodied experience. The framework enables a workflow consisting of 4 steps: <ref type="bibr" target="#b0">(1)</ref> the annotation of various entities in the scene, including navigation spaces, interaction possibilities, object properties and relations, (2) the definition of GUTasks and their constraints for completion, (3) running the GUTask scenario with real-time interaction, logging, and task validation, and (4) analysis of user experience through the construction of spatio-temporal queries and scene graph visualization. This workflow is implemented as a set of tools in Unity. The export of the scenario in GUsT-3D representation contains sufficient information to re-create the entire 3D scene, with all the original geometric, interactive, and navigational properties. Conversely, a set of GUTasks can be exploited across different scenes holding the same annotated properties.</p><p>We validate these contributions with two case studies and a formative evaluation through expert interviews with professional Unity users. The implementations are licenced as an open toolkit <ref type="foot" target="#foot_1">1</ref> .</p><p>The rest of the paper continues as follows: the existing work is reviewed in Section 2 with our positioning. We then describe our framework and its implementation in Sections 3 and 4. Section 5 demonstrates the feasibility of our approach illustrated by two case studies covering an indoor escape game scene and an outdoor road crossing scene. The findings of a formative evaluation with six expert interviews are then presented in Section 6 to validate our approach. Finally, we discuss the perspectives for this work in the Conclusion (Section 7).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">RELATED WORK</head><p>We present here the existing work for creating and managing interactive user experiences in 3D virtual environments related to the concept of Guided User Tasks. We focus on frameworks for the creation and management of UX in 3D environments, and on ontologies for representing interactive 3D applications.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Frameworks for UX in 3D</head><p>Designing a fully-integrated workflow for the creation of VR experiences is complex, often composed of multiple tools, as demonstrated by Vergara et al. <ref type="bibr" target="#b34">[35]</ref> who propose such a workflow for the design of applications in engineering education, coupled with suggestions of suitable tools for each step of the workflow. Górski <ref type="bibr" target="#b18">[19]</ref> specifically addressed the issue of open access to knowledge within hardcoded industrial VR applications, and proposed a knowledge-based engineering approach where 3D content, interaction possibilities, and logic connections between objects can be configured outside of the VR application. This framework focuses strongly on the creation of the VR application that allows flexible modification on the exported knowledge representation of the application, and further, the runtime-loading of the content -whether visual or audio -from the knowledge representation. The entity-component-system <ref type="bibr" target="#b28">[29]</ref> has been popularly used for managing interactions of 2D interfaces, as well as gaming applications.</p><p>Recently, Speicher et al. <ref type="bibr" target="#b31">[32]</ref> developed a system for creating extended reality experiences (both augmented and virtual reality) from paper prototypes. The workflow consists of hand-crafting the scene from paper materials, capturing the scene with a 360°camera, and importing it into their application. A "Wizard" can then add and manage interactive events and animations based on the user's screen-based gestures. For virtual reality training, the FIVE framework <ref type="bibr" target="#b7">[8]</ref> includes a relation engine to manage object types and entity relations, and a collaborative interaction engine to manage object interactions. For augmented reality, Gottschalk et al. <ref type="bibr" target="#b19">[20]</ref> proposed a productuser-environment framework for e-commerce in the interior design and furniture sector, with a specific focus on modelling product features (e.g. textures and components), user models to interact with the product, and product configuration in the environment. Another work of interest is that of Li et al. <ref type="bibr" target="#b22">[23]</ref> who generate 3D training scenes for wheel chair navigation in VR. The scenes are defined by distance constraints between objects in the scene and constraints for the wheel chair trajectory (e.g., distance, rotations, path width). However, in these works, there is no scene-wide context labeling or scene understanding, and no task definition, validation, or user experience analysis capabilities are included in the workflows.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Ontologies for creating and representing interactive 3D environments</head><p>The most widely known domain specific language for 3D content is X3D <ref type="bibr" target="#b8">[9]</ref>, formerly known as VRML. It uses an XML-based syntax, and focuses on representing the 3D model information (e.g. vertices, texture, material) including coordinates and animation as temporal trajectories. Flotyński <ref type="bibr" target="#b16">[17]</ref> reviewed similar ontologies for 3D, noting their primary purposes for 3D modeling and not interactive 3D experiences. A number of extensions to X3D have allowed it to incorporate contextual, multi-hierarchical, and ontological representations of scenes <ref type="bibr" target="#b27">[28]</ref>, as well as sensors and controller input for virtual applications <ref type="bibr" target="#b1">[2]</ref>. Buffa and Lafon <ref type="bibr" target="#b9">[10]</ref> demonstrated its use for an online interactive 3D warehouse application. Another extension by Flotyński et. al allow the logging of user interactions <ref type="bibr" target="#b15">[16]</ref> in VRML applications.</p><p>Our work is strongly influenced by ontologies for robotics and procedural content generation. The RSG-DSL <ref type="bibr" target="#b5">[6]</ref> was developed under the Eclipse framework in order to represent robot world model as a scene graph, to which functional blocks can be attached to establish the robot's workflow. Beßler et. al proposed an ontology for modeling affordance in robotics tasks <ref type="bibr" target="#b3">[4]</ref> coupled with the capabilities for logical reasoning and question answering. The Scenic language <ref type="bibr" target="#b17">[18]</ref> was developed to generate datasets from a high-level scene description to train machine learning perception systems such as those for autonomous driving. Plan-It <ref type="bibr" target="#b35">[36]</ref> is a system that generates 3D indoor scenes from a high-level scene graph definition. Liu et al. <ref type="bibr" target="#b23">[24]</ref> introduce the idea of scene programs that allow the generation of 3D images from layout descriptions, and conversely reason about layouts of objects from images. For game applications, the GIGL language was recently introduced <ref type="bibr" target="#b12">[13]</ref> to procedurally generate game maps such as for dungeons in RPG games.</p><p>One of the first formal representations of user interactions for virtual reality was the Interactive Cooperative Objects description proposed by Navarre et al. <ref type="bibr" target="#b25">[26]</ref>. The work decomposes gestures into a granular graph of states to define selection, rotation, and movement of objects for specific interactive devices, using a chess game as case study. Vanacken <ref type="bibr" target="#b33">[34]</ref> introduces the concept of tasks by designing the "concept" datatype that can be attached to objects to label their interaction possibilities. In this work task refers to an interaction technique (such as selecting an object) that is triggered by an event, and results in a state change. More recently, a number of ontologies have been proposed for the semantic modeling of virtual environments <ref type="bibr" target="#b13">[14,</ref><ref type="bibr" target="#b30">31]</ref> with the goal to improve the richness of information about the virtual environment in a database for multi-agent systems.</p><p>Our positioning: While many frameworks and ontologies have excellent properties for designing 3D content, they present a number of limitations when considering embodied experiences: (1) reasoning about the user experience within the scene is mostly limited to the geometric properties of 3D objects <ref type="bibr" target="#b8">[9,</ref><ref type="bibr" target="#b27">28]</ref> or interaction in a single use case <ref type="bibr" target="#b19">[20]</ref>, (2) they have a strong focus on the 3D geometry, and those that include interactions are defined at the level of the device and interface (e.g. a mouse, controller, gesture) <ref type="bibr" target="#b1">[2,</ref><ref type="bibr" target="#b18">19,</ref><ref type="bibr" target="#b25">26,</ref><ref type="bibr" target="#b28">29,</ref><ref type="bibr" target="#b33">34]</ref> instead of for user tasks (e.g. "take an object", "move to location"), and hence do not allow systematic task validation (3) there is no temporal representation of the world and user state changes, and (4) while some works allow the generation or design of 3D content and interactive scenes from high level descriptions <ref type="bibr" target="#b7">[8,</ref><ref type="bibr" target="#b12">13,</ref><ref type="bibr" target="#b22">23,</ref><ref type="bibr" target="#b23">24,</ref><ref type="bibr" target="#b31">32,</ref><ref type="bibr" target="#b35">36]</ref>, these are not semantically annotated environments, which firstly, do not have customizable interactive possibilities or user task management, and secondly do not allow task and interactivity information Table <ref type="table">1</ref>. Summary table for comparing related contributions including their focus (ontology or framework), application scenarios, and other observations. A positioning summarizing limitations in existing work is indicated for ontology and frameworks respectively. System implementations (with source code) were found for <ref type="bibr" target="#b3">[4,</ref><ref type="bibr" target="#b8">9,</ref><ref type="bibr" target="#b12">13,</ref><ref type="bibr" target="#b19">20,</ref><ref type="bibr" target="#b28">29,</ref><ref type="bibr" target="#b31">32]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Focus</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Related work Application scenario Comments</head><p>Ontology <ref type="bibr" target="#b1">[2,</ref><ref type="bibr" target="#b8">9,</ref><ref type="bibr" target="#b9">10,</ref><ref type="bibr" target="#b15">16,</ref><ref type="bibr" target="#b27">28]</ref> Web 3D; e-commerce, other varied applications X3D and its extensions, as reviewed by <ref type="bibr" target="#b16">[17]</ref>,</p><p>primarily for lower-level model and mesh representations <ref type="bibr" target="#b3">[4]</ref> robotics an affordance model for Q&amp;A systems <ref type="bibr" target="#b5">[6]</ref> robot world model for robotic reasoning <ref type="bibr" target="#b12">[13,</ref><ref type="bibr" target="#b17">18,</ref><ref type="bibr" target="#b23">24,</ref><ref type="bibr" target="#b35">36]</ref> games and learning systems Primarily for procedural content generation Positioning on ontology: existing ontologies do not provide designers with vocabulary to consider a human agent fully immersed in complex 3D scenarios, to express a high level of interactivity and movement, and define specific tasks for the user to carry out.</p><p>Framework <ref type="bibr" target="#b31">[32]</ref> virtual and augmented reality wizard of oz system with medium fidelity paper prototyping for more simple scenes and limited interactivity <ref type="bibr" target="#b19">[20]</ref> augmented reality; e-commerce <ref type="bibr" target="#b18">[19]</ref> industrial VR applications knowledge-based approach <ref type="bibr" target="#b22">[23]</ref> rehabilitation for wheelchair users in VR optimization approach to generating constrained 3D scenes <ref type="bibr" target="#b7">[8]</ref> general collaborative and interactive VR environments offers high level control over entity relations and interactions <ref type="bibr" target="#b28">[29]</ref> 2D interfaces; based on entitycomponent system Positioning on framework: existing frameworks are mostly designed with targeted scenarios in mind; intersubjectivity with task definition and guidance, and post-scenario analysis of UX and intentionality are areas that have not yet been explored together.</p><p>to be exported across other similarly designed task scenes. A full comparison of the relevant ontologies and frameworks are summarized in Table <ref type="table">1</ref>.</p><p>In our framework, we set out from a knowledge-based approach to represent and manage UX. We propose providing a set of consistent vocabulary throughout all phases of a workflow to create an embodied experience, including the scene design, annotation, task description, logging, real-time validation of tasks, and post-scenario UX analysis. This facilitates the smooth transition of scenes, assets, tasks, and interpretations between different steps of a complex workflow for VR experience creation <ref type="bibr" target="#b34">[35]</ref>. In addition, GUTasks can be exported and reused across other scenes with the same ontology annotations, to carry out the same interactive task in different, and even dynamically generated, scene layouts. Finally, a GUsT-3D scene can be exported with the geometry of entities in the scene, allowing the rebuilding of the interactive scene -with its 3D models, interactive, task creation, and navigational properties -in Unity by re-importing the file.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">OVERVIEW</head><p>In this paper we propose the GUsT-3D framework for creating 3D embodied experiences, which is comprised of three components (Figure <ref type="figure">2</ref>):</p><p>• GUsT-3D: representing the ontology of the scene, implemented in JSON. It is used to export the annotated 3D scene, including all of the geometric properties, interactive and navigation possibilities, and their inter-relations as a spatio-temporal scene graph. It also provides the vocabulary set to define GUTasks and for user logging.</p><p>• GUTasks: representing the intersubjectivity between the designer and the user, also implemented in JSON using the same vocabulary defined in the GUsT-3D ontology. Allows the definition of user tasks to be carried out in the VR scenario, their interactive and completion constraints, and management and validation in real-time. • Logs and query language: representing the user intentionality, implemented in LINQ <ref type="bibr" target="#b24">[25]</ref>. Allows the designer to construct spatio-temporal queries on any annotated object or user in the 3D scene. This framework is implemented as a unified toolkit in Unity. The designer realizes a 4-step workflow for the design of embodied experiences: (1) the design of the 3D scene and annotation of interaction and navigation properties, and calculation of the scene graph (i.e., relations between objects), (2) the definition of GUTasks for the user to carry out, their constraints and goals, (3) the running of the task scenario with real-time guidance, task validation, and logging, and (4) post-scenario analysis of the scene evolution and UX through query and visualization tools. This workflow is depicted in Figure <ref type="figure">3</ref>. The following section will introduce the tools of this framework and how it integrates into a design workflow for embodied experiences.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">GUTASK WORKFLOW AND SYSTEM IMPLEMENTATION</head><p>This section details the implementation of our framework for the creation of 3D embodied experiences, shown in Figure <ref type="figure">2</ref>. We first introduce each of the three elements of the framework corresponding to Dourish's theory of embodiment -the GUsT-3D ontology (Section 4.1) for annotation and scene graph visualization of entity relations; the definition and management of intersubjectivity (Section 4.2) through GUTasks; and the analysis of user behavior for intentionality (Section 4.3) through query and scene graph analysis. We then summarize how this framework fits into the workflow depicted in Figure <ref type="figure">3</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Ontology: the GUsT-3D representation</head><p>We refer to the elements in the scene as entities, which include all objects, terrain, obstacles, and the user. The designer defines the ontology of the 3D scene, including: (1) defining the interactive and navigation properties and assigning them to entities in the scene, (2) defining the constraints for interactions between entities, and (3) generating a global view of entity relations within the scene.</p><p>4.1.1 Layers for defining and annotating entity properties. We introduce the idea of layers, which is an object category in the scene that has specific interactive properties. Currently four types of layers are provided in our framework: navigation, object, interactive, and environment.</p><p>Navigation layers. define the spaces in which the user can move and the movement constraints. The three types of navigation layers are:</p><p>• ground: the navigable spaces (i.e. a contiguous space where the user can move around without constraints), such as a room or a strip of sidewalk • entryways such as doors and passages that connect navigable spaces, and • obstacles such as walls that partition navigable spaces. The designer can define new layers that inherit the ground property to create a named navigable space. Figure <ref type="figure" target="#fig_2">4</ref> shows the visualization of three navigable spaces: garage, kitchen, and bedroom. Interactive property layers. describe the relation between two or more entities, and indicate how these entities can interact within the 3D scene. These properties can exist :</p><p>• Between two scene objects: support objects can support other objects; placed-on objects can be placed on another support objects; container objects can contain another object;</p><p>• Between an object and user: movable, indicating whether an object can be taken and moved by the user; actable, indicating whether the object can be activated, such as a light switch or a remote control.</p><p>The default layers (e.g., support, container, moveable) are linked to Unity scripts that manage the outcome of an interaction. The designer can easily define new interactive layers and attach scripts to them to enable other types of interaction.</p><p>Object layers. inherit the interactive property layers to define objects that have interactive properties int he scene. Furniture can serve as supports or containers, Props can be moved and Switches can be activated.</p><p>Environment layers. are used for entities that do not change the topology nor structure of the 3D scene, but through environmental parameters, allow users to change the perceptions of the environment. For example, all scenes have a camera, which can be extended to be a perceptive agent, such as the user. The camera is often used to represent the user's visual range (i.e. field of view), current position, and movement direction. Another layer is light, which is the environmental lighting of the scene.</p><p>The flexibility of our layer approach is that objects can be assigned multiple layers, or inherit other layers, and thus gaining their annotated properties. For example a shelf layer can be defined as inheriting both support (e.g. placing a book on it) and container (e.g., holding small objects in its shelves). The ground layer also inherits support, since it has to support furniture and other objects.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1.2">Interactive constraints.</head><p>The assignment of an interactive property layer only indicates an interaction possibility, but certain constraints to the interaction may exist. For example, one may wish to enforce that during the interaction, the target must be in the visual field and within reaching distance of the user.</p><p>In order to allow such a reasoning, basic properties of object relations must be defined from lower geometric properties. Take distance as an example. Two points p 1 and p 2 have an Euclidean</p><formula xml:id="formula_0">distance of dist(p 1 , p 2 ) = (x 1 -x 2 ) 2 + (y 1 -y 2 ) 2 + (z 1 -z 2 ) 2 .</formula><p>However, for user experience, the concept of distance can vary based on the object's size, shape, and function. It can also depend on what type of controller device is used. In real life, we tend to use relative terms such as near or f ar . Thus, the definition of vocabulary for UX will need to be relative to pairs of objects and users, and the designer needs a mechanism to flexibly redefine them.</p><p>Within GUsT-3D, the designer can redefine these constraints by directly using the pre-defined layers. In GUsT-3D an interaction constraint is composed of:</p><p>• the (Source,T arдet) pair of the interaction, with layers.</p><p>• Criterion on under which the interaction can take place, which is a boolean evaluation on a property for a certain value. The property can be further of three types: (1) Individual property: a) a geometric property (i.e., position, rotation), b) the localization of the entity (within a navigable space), and c) the layer which the entity belongs to, (2) Relational property: a) the Euclidean distance or designer added definitions such as near or f ar based on the Euclidean distance, b) the relative position between entities including above, below, contains, and holdinд (e.g., in the case the user is holding an object), and c) visibility constraints between the camera and another entity such as visible, occluded, and f acinд.</p><p>Using this vocabulary, we can then define an interaction constraint, such as the following for take_object: near { " type ":" evaluation " , " property " : " distance " , " eval " : " &lt;=" , " value " : 2 , " unit " : " meter " } , take_object { " type " : " constraint " , " source " : " user " , " target " : " movable " , " criteria ":[{" near " : [ " Source " , " Target " ] } , { " visible " : [ " Source " , " Target " ] } ] } such that the user needs to be within two meters and have direct line of sight of a movable object to carry out the take_object action. These are currently limited to relations between at most two entities, but we can imagine incorporating lambda functions to have more complex constraints.</p><p>4.1.3 3D Scene graph generation. Another advantage of having entities in the 3D scene annotated with an ontology is to extract and represent the relations between entities as a scene graph. The scene graph becomes a model that can be used to describe the state of the system from a given perspective in a moment of time. To do this, we take the annotated scene, layer definitions, and the defined interactive constraints, and calculate the scene graph in three steps:</p><p>(1) calculation of navigable spaces. Ground tiles labelled with the same location are grouped together to define a contiguous space, as shown in Figure <ref type="figure" target="#fig_2">4</ref>. (2) calculation of the navigational graph based on the positioning of entryways between the navigable spaces, and (3) reasoning of interactive constraints between all pairs of entities to extract the interactive relations These are then exported as a .dot file which can be visualized as a graph where the nodes are various entities or entity groups, and edges indicate their relations. A partial scene graph calculated from the annotated scene can be found in Figure <ref type="figure" target="#fig_3">5</ref>. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Intersubjectivity: defining and managing real-time GUTasks</head><p>Setting out from an annotated 3D scene, the designer must now define the target tasks for the user to carry out, which we term Guided User Tasks (GUTasks).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.1">GUTask definition.</head><p>Based on the grammar for interactive constraints, defining a GUTask comprises of specifying a list of constraints for the success of the task. Specifically, each constraint is composed of a time frame, and the desired state to be achieved. Assuming the task scenario is run from time t 0 to t n , expressed in first order logic, a state can be evaluated at :</p><p>• a specific time State(t m , [params])</p><p>• at some arbitrary point during the task ∃m → State(t m , [params]), or • at all time steps during the task ∀m &lt; n → State(t m , [params]) Suppose we would like to define a GUTask that requires the user to place a book on the bedroom table, assuming the book cannot move on its own and that it is not already at the target location, we can deduce that the user has to carry out a series of actions including locating the book, taking it, going to the bedroom, finding the table, then placing the book on the table. The definition of this GUTask would be:</p><p>" move_book ":[ {" evaluation_time " : " endOfScenario " , " State " : { " localization " : [ " book " , " bedroom " ] } } , {" evaluation_time " : " endOfScenario " , " State " : { " placed_on " : [ " book " , " table " ] } } ] More constraints could be added, requiring the user to carry out actions to achieve multiple states.</p><p>The GUTask definition is independent of the scene geometry: the same GUTask could be applied to two different scenes containing entities annotated with the same layers. However, if the scene does not contain entities with layers defined in the GUTask, then the task is not relevant to the scene, and cannot be completed.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>4.2.2</head><p>Real-time GUTask management. Our framework integrates the mechanism to record user behavior, and manage and validate GUTasks when the scenario is run.</p><p>Logs on entities are recorded at a granularity set to n per second. Two types of logs are included: LogO created for objects, and LogU for the user. Each launch instance of the scene creates a separate log file, and an entry for an entity contains:</p><p>• Timestamp of the log entry,</p><p>• Name of the entity,</p><p>• Transform position, rotation, and scale of the entity in world coordinates,</p><p>• Localization of entity in the navigable space,</p><p>• Item (User only) in the possession of the user,</p><p>• Layer (Object only) assigned to the object,</p><p>• Status (Object only) of any interactive property (from Section 4.1.2). Since these can be numerous, the designer can specify a "watchlist" of those to be logged. The JSON schema for the user and object logs is as below:</p><p>{ " title ":" ScenarioLog " , " definitions ":{ " LogU ":{ " properties ":{ " timestamp ":{" description " : " Current timestamp " , " type " : " integer " } , " name ": {" description " : " Entity name " , " type " : " string } , " transform ": { " description " : " position , rotation and scale " , " $ref " : # Vector 3 " } , " item ": {" description " : " User -held items " , " type " : " array " } , " localization " : { " description " : " Occupied navigable space " , " type " : " string " } } } , " LogO ": { " properties ":{ " timestamp ":{" type " : " integer " } , " name ": {" description " : " Entity name " , " type " : " string " } , " layer ": {" description " : " Entity layer name " , " type " : " string " } , " transform ":{" description " : " position , rotation and scale " , " $ref " : "# Vector 3 " } , " localization " : { " description " : " Occupied navigable space " , " type " : " string " } ,</p><p>Proc. ACM Hum.-Comput. Interact., Vol. 6, No. EICS, Article 158. Publication date: June 2022.</p><p>Designing Guided User Tasks in VR Embodied Experiences 158:11 " status ": {" description " : " Type of current interaction " , " type " : " enum " } } } } } } , " properties ": { " StartTimestamp ": { " type " : " string " } , " UserLogs ":{ " type " : " array " , " items " : { " $ref " : "# LogU " } } , " ItemLogs ":{ " type " : " array " , " items " : { " $ref " : "# LogO " } } } } An example object log entry for a potted aloe vera (plant) object being picked up by the player is:</p><p>{ " timestamp ": 22, " name ": " Potted Aloe Vera " , " layer ": " Plant " , " transform ": { " Position ": { " x " : 3 . 3 0 8 , " y " : 0 . 7 2 , " z " : 2 . 3 9 } , " Rotation ": { " x " : 0 . 0 , " y " : 0 . 0 , " z " : 0 . 0 , " w " : 1 . 0 } , " Scale ": { " x " : 1 . 0 , " y " : 1 . 0 , " z " : 1 . 0 } } , " localization ": " Balcony " , " status ": " picking up " } Scene graphs can be calculated for each time step from these logs, which would allow one to deduce fine-grained information on the experience, such as all the entities visible to the user, or high-level changes such as an object going from being placed_on another object to being held by the user. This is key to analyzing UX, presented in the next section.</p><p>To validate the GUTask, the desired entity state is watched by a controller script. Time passed and goal constraints are listed to the user to aid them in targeting the correct task, and the designer can add guidance in the form of text or path hints, which will be provided when the user takes more than a defined amount of time to complete the task (Figure <ref type="figure" target="#fig_7">8</ref> right image). When the time period limitation is exceeded, the task is marked as failed.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Intentionality: reasoning on and visualizing UX through spatio-temporal queries</head><p>The query component of the framework is designed to allow the construction of diverse queries about the scene using the ontology vocabulary. Queries can be made on any entity or layer name. The structure for queries under our framework is as follows: The query is composed of keywords from the GUsT-3D ontology, including at least the reference point (usually the user camera), query head, and target, and potentially two fields that can further limit the search to entities that fulfill location or interaction constraints. The result of a runtime query can be seen in Figure <ref type="figure" target="#fig_8">9</ref>.</p><p>Queries can be constructed on entities in real-time or on the logs post-experience. In real time, entities matching the query are highlighted in the scene. On the logs, the designer can construct a query on an entity, and observe its temporal evolution at each timestamp, such as localization and interactions with other entities. This query component thus allows the designer or observer to monitor all of the entities of interest in the 3D scene. Object and path highlighting aids the designer in clearly defining the objects and layers related to the GUTasks, and can be used as indications to guide the user in completing the task, thus improving intersubjectivity communication.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4">Workflow and system integration in Unity</head><p>We can now combine the framework and the workflow from Figures <ref type="figure">2</ref> and<ref type="figure">3</ref> into Figure <ref type="figure" target="#fig_4">6</ref> to show how each element of the framework introduced intervenes with the designer workflow, and the flows of information between the Designer, the User, and the 3D scene.  Annotation is facilitated through the definition of layers in a configuration window (Figure <ref type="figure" target="#fig_6">7</ref>), indicating how layers are inherited, as well as their units and constraints. Designers can then select one or more entities in the scene, and assign layers to the selection through a point-and-click interface.</p><p>The GUsT-3D annotated scene can be exported in JSON format, using Unity's built-in serialization functions. In the exported file, each object's geometric properties (position, rotation, and scale) and layer information are included. We provide an interpreter that allows the recreation of the scene from a GUsT-3D JSON file and existing 3D models. The interpreter for the JSON scene representation is implemented as a parser in C# with direct control in the interface to load, update, or export the current configurations.</p><p>When the scene has been fully annotated, the navigable spaces and scene graph are calculated with an interpreter for the layer relations and the interactive constraints. The navigable spaces are calculated based on connectivity between the ground tiles and the designated entryways. All entity properties and relations are then encoded by color and style respectively, and exported to a .dot file that provides a scene graph visualization as depicted in Figure <ref type="figure" target="#fig_3">5</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4.2">Define</head><p>GUTasks for intersubjectivity. The next step of the workflow is to establish the intersubjectivity through defining GUTasks for the scenario, based on the GUsT-3D ontology. The interface component in Unity for specifying GUTasks is shown in Figure <ref type="figure" target="#fig_7">8</ref>, allowing the easy modification of the task goal, constraints, as well as user guidance in the form of text or path indications that can be communicated to the user at specific time points when they have difficulty accomplishing the task. The GUTask list is also saved as a JSON file separate from the scene representation. They use the same layer and annotations from GUsT-3D ontology, which means the designer can easily create and import existing GUTask lists for an annotated 3D scene, allowing the same tasks to be reused easily across different scenes.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.5">Run task scenario</head><p>To run the scenario with interaction, each interactive modality (e.g., navigation, interacting with objects) is bound to an input, such as keyboard or joystick. Collision meshes are added around obstacles such as walls to prevent users from going through them. Interactive constraints such as distance to interaction for an object are evaluated. In real time, queries can be composed to search for specific scene entities. These queries to the interface as depicted in Figure <ref type="figure" target="#fig_8">9</ref>, are translated in LINQ queries using our C# scripts, which will retrieve all the scene objects that fulfill the query constraints. The implementation then highlights all potential entities of query by modifying the object material with a colored outline, which can be used as indications to the user or designer. While the scenario is running, changes to the scene including the user's camera movement (moving in the scene and head rotation) are recorded, accomplishing of the GUTasks, as well as the interactions with objects, and saved to a log file in JSON format. Feedback is provided to the user to either guide them through the tasks, or indicate the success of the task by adding in-scene text and drawing path line indicators. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.5.1">Analyze user experience and intentionality.</head><p>The analysis of user experience, and gaining insight into intentionality, is facilitated through the loading of the aforementioned user logs, in which various information is then visualized. This visualization involves composing queries on specific entities in the scene. The Query Log window allows one to load a log, and drag the time slider to enumerate all the state changes for the specific entity. At the same time, the scene graph is generated for each time stamp, and can be viewed directly in the log window. These elements are shown in Figure <ref type="figure" target="#fig_9">10</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">CASE STUDIES</head><p>We present here two case studies -an indoor and outdoor scene -to show the wide range of possible 3D embodied experiences that can be created with our system and its link to the framework based on embodiment theory.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Indoor scene: navigation and object interaction</head><p>The first case study uses the indoor scene of Figure <ref type="figure" target="#fig_2">4</ref> with three navigable spaces -Garage, Kitchen, and Bedroom -separated by walls, and connected by doors. In an escape game, users commonly have to look around to find hints in the scene, collect objects into their inventory, then use these objects to interact with other entities in the scene. We design a simple GUTask for this scene that is similar to an escape game task. The user must (1) locate and retrieve a stack of books from the Bedroom, and (2) navigate to the Garage and place them on the bookshelf to reveal a hidden passage.</p><p>The annotation of the scene ontology involves the navigable spaces (ground tiles for Bedroom, Garaдe, and Kitchen), and the assigning of object and interaction property layers to other entities (movable such as book stacks or support like bookshelves). Multiple elements can be selected and annotated simultaneously with the desired layers and localisation using the interfaces we designed in Section 4.4. A previously annotated scene exported in the GUsT-3D representation can also be loaded, which facilitates the loading of ontologies defined by other designers.</p><p>Next, we define the GUTask that facilitates the intersubjectivity communication between the designer and user on what the user needs to do in the scene. The user starts out in the Bedroom where the stack of books is. Assuming the task is carried out between time t 0 and t n , the constraints for correctly carrying out this GUTask described in first-order logic include :</p><p>(1) User at some point must be in the bedroom, near the stack of books, the stack of books must be visible to the user, and the user must interact with the stack of books: ∃m → (Localisation(t m , U ser, Bedroom) ∧ N ear (t m , U ser, BookStack) ∧ V isible(t m , U ser, BookStack) ∧ Interact(t m , U ser, take o bject, BookStack)) (2) At the end, the user must be in the Garage with the stack of books on the garage bookshelf:</p><formula xml:id="formula_1">Localisation(t n , U ser, Garaдe) ∧ onTopO f (t n , BookStack, GaraдeBookshel f )</formula><p>The navigation paths and interactions for the two constraints of the GUTask are depicted in Figure <ref type="figure">11</ref> in two parts: (1) locating and retrieving the stack of books, and (2) navigating to the Garage to place the stack of books. In the first constraint, there is also a precondition that the stack of books must both be near to the user, and in the visual field of the camera. Through user logs, we can observe which objects the user tries to interact with before finding the correct ones, and how much time the user takes to navigate the environment. It is an example of how a simple GUTask can be defined in a complex 3D scene with various interactive constraints.</p><p>Finally, we show the example analysis of the user intention using a query to locate an object related to the GUTask, as depicted in Figure <ref type="figure">12</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Outdoor scene: traversing a traffic crossing</head><p>The second case study involves a pedestrian crossing as depicted in Figure <ref type="figure" target="#fig_10">13</ref> with a road lined by two sidewalk strips, and connected by a pedestrian crossing.</p><p>The GUTask defined for this scene is that the user must cross from Sidewalk2 to Sidewalk1 in security, involving two sub-constraints: (1) crossing through the pedestrian crossing and not Fig. <ref type="figure">11</ref>. Given the GUTask of placing a stack of books on the bookshelf in the garage, this figure depicts the interaction and navigation paths of the user: (1) locating and retrieving the stack of books, and (2) navigating to the garage, and placing the stack of books on the bookshelf. We use the same colour and shape representation of entities as Figure <ref type="figure" target="#fig_3">5</ref>. The interaction with the stack of books in constraint (1) requires evaluating an attention constraint: the object has to be in the user's visual field. Fig. <ref type="figure">12</ref>. The result of the query to locate a bookshelf in a specific location. We show both the navigation path as visualized in the 3D scene with red indications as well as object highlighting. Below is the proposed navigation path represented as a subset of the scene graph, using the same colour and shape representation of entities as Figure <ref type="figure" target="#fig_3">5</ref>.</p><p>anywhere else on the road, and (2) verifying that the crossing light is green before and during crossing.</p><p>The first step is the annotation of the scene ontology. This scene only includes a small number of terrain tiles for different navigable spaces (the two sidewalks, road, and crossing), as well as the traffic light and the timing of its state changes between red and green. The resulting calculation of navigable spaces is shown in Figure <ref type="figure" target="#fig_10">13</ref>. The second step in the workflow is to define the GUTask to communicate intersubjectivity from the designer to the user. The initial position of the camera is on Sidewalk2. Assuming the task is carried out between time t 0 and t n , the constraints for correctly carrying out this GUTask include :</p><p>(1) User does not at any point appear on the Road: This GUTask also involves the element of user attention as an active constraint, requiring the user to look at the traffic light while approaching the crossing to ensure a safe crossing, which in addition to navigation, involves also an "attention path" of the user's gaze. Thus the validation of this task would involve a navigational and attention path as depicted in Figure <ref type="figure" target="#fig_2">14</ref>. During the experience, the camera position and orientation is dynamically evaluated and recorded to ensure that all required constraints for this GUTask are met.</p><formula xml:id="formula_2">∀m &lt; n → ¬Localisation(t m , U ser, Road)<label>(2</label></formula><p>Through generated user logs, further insights into user intention can be drawn, such as whether the user continued to pay attention to the light during the crossing or the variation of walking speed on different navigable spaces.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">EVALUATION</head><p>We assessed our framework through a formative evaluation, which was initially used in education for instructional design <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b6">7]</ref> and later extended and popularized in human-computer interactions by Hix and Hartson <ref type="bibr" target="#b20">[21]</ref> to describe evaluations in formative stages of design <ref type="bibr" target="#b32">[33]</ref>. As emphasized by Carol et al. <ref type="bibr" target="#b11">[12]</ref>, formative evaluations provide observations and recommendations that can be immediately used to improve the design of the product or service, and refine the development specifications. For that, a typical formative evaluation addresses questions such as: what are the usability issues in our implementation? Do users understand the workflow? Does the system comply with recognized usability principles? The results are typically qualitative instead of summative, focusing on the needs of the design team including developers, designers, project managers, and other members. Using structured and in-depth interviews, formative evaluations can assess these aspects of our workflow <ref type="bibr" target="#b10">[11]</ref>. Fig. <ref type="figure" target="#fig_2">14</ref>. Given the GUTask of crossing the street, the previewed navigation path demands the user to approach the point between Sidewalk1 and the Crossing. Here however, the user is required to look up and check the status of the traffic light, thus resulting in a guided "Attention Path" constraint in order to validate the task.</p><p>With this evaluation, our primary aim is to identify gaps between the goals of our framework and our current approach to the system implementation, which is done primarily through feedback from expert interviews, and also collecting specific points to improve on for the implementation before continuing to adapting the system to a professional use case. This formative evaluation allows us to obtain feedback from professional users who would potentially play the role of Desiдner in our workflow, and to improve our system implementation. For that purpose, we have run a series of semi-structured interviews. The case study of the indoor scene (navigation and object interaction) was used as illustrative support.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1">Participants</head><p>We recruited 6 expert users (3 male, 3 female) from a convenience sample, which is around the recommended number of participants for this type of formative evaluation <ref type="bibr" target="#b21">[22]</ref>. In age, 4 participants are between 18-29, 1 participant between 30-39 years old, and 1 participant between 40-49. One of the participants is a Master's student, 3 participants have a Master degree and are currently working in the domain of extended (virtual and augmented) reality, and 2 are currently conducting a PhD in the mixed-reality domain. Overall, the average years of experience in the development of immersive 3D applications is 3 years (min 1, max 7). Concerning the experience with software available in the market, all six participants reported to have experience with Unity, with some having experience in other software including Blender (5), Unreal Engine (4), Maya (1), Voxel (1), iClone (1), Character Creator (1), 3D Exchange (1), and Tinkercad (1).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2">Procedure</head><p>The interviews were organized in four main steps: presentation of the study, profiling of participants, presentation of our workflow and implementation to develop the indoor scenario, and debriefing. We structured our interviews in a similar way proposed by Burmester et al. <ref type="bibr" target="#b10">[11]</ref>, by presenting the usage of our application, allowing participants to freely express their positive and negative feedback, and collecting qualitative feedback on specific points to gain concrete advice for future versions. Due to the Covid-19 pandemic, the interviews were performed by videoconference and lasted about an hour. For the purposes of the evaluation, data was collected anonymously and participants have given consent to record the interviews.</p><p>The presentation of the steps to develop the indoor scenario was at the core of the interview. At first, we have provided an image of a scene composed of 3 rooms : a kitchen, a bedroom and a garage. Participants were then asked to assess and rate the perceived usability for performing the following steps in the workflow in link with embodiment theory:</p><p>• S1 -Scene annotation (Ontology): involves creating new layers, and adding and annotating an object to an existing scene • S2 -Creating an interactive scenario (Intersubjectivity): involves defining the GUTasks that the user should carry out in the scenario (i.e. go to the bedroom, then take the lamp placed on the desk, go to the kitchen, and then place the lamp on the table) • S3 -Running the scenario (Intersubjectivity): involves the user carrying out the defined GUTasks in real-time, with logs of the scene changes and user behavior recorded • S4 -Analysis of user experience (Intentionality): involves querying and visualizing the log output of the scenario in order to understand the user experience</p><p>It is important to note that S1, S2, and S4 correspond to steps that require designer input in Unity using GUsT-3D, while S3 is performed by the end-user (the person experiencing the VR scenario and carrying out tasks in the 3D scene) and is mostly automated for the designer such that they only make observations about how users, in real-time, perform the interactions created in the scene.</p><p>We have created videos showing the real use of the tools with detailed information so that participants could identify usability problems in running scenarios. The use of the videos also allowed to perform the evaluation remotely, which was a necessary condition during the lock down period imposed by the Covid-19 pandemic. Given the remote context of the interviews, we could not directly observe the usage of our system implementation. Instead, we played usage videos of the system for each step of the workflow, and we asked the participants to elaborate on what they perceived as positive and negative at each step of the workflow. More specifically, they were prompted to provide detailed comments with respect to: perceived usability, learning curve, efficacy, and flexibility of the system. For steps S1, S2 and S4, we asked participants to provide a score on a 1 (poor) to 5 (very good) Likert scale on their perceived usability, learning curve, efficacy, and flexibility of the workflow. Additionally they could also respond "I don't know" A video was also played for S3, but since no designer intervention was required, participants were not asked to score this step. Hereafter we summarize the qualitative feedback from expert participants on each step of the workflow.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.3">Results</head><p>In the analysis of results of the interviews, we look at the two parts: scores on various metrics for each step, and the verbal feedback on pros and cons of our workflow. With the selective study pool, our analysis focuses on the qualitative understanding of how our framework and workflow would improve their design process, and the limitations it imposes.</p><p>An overview of these scored evaluations received from the expert interviews in steps S1, S2, and S4 is summarized in Figure <ref type="figure" target="#fig_12">15</ref>, showing the responses of each participant on each metric for the three workflow steps. Overall, the participants found that the workflow implemented in Unity made their design process much more efficient, and on average the responses to the individual steps were all positive, though some more than others. Participants with more experience in 3D development were more critical of the flexibility of the interfaces. The missing responses on flexibility are where the participants responded "I don't know". On further inquiry, they indicated that they felt it depended on the goal and scene they were trying to create. We also observe that the more difficult step of creating and managing an interactive scenario presented a steeper learning curve, but with much improved efficacy in the designer's process.</p><p>Table <ref type="table">2</ref>. Participants were asked to elaborate the positive and negative points of each step of the workflow and its implementation. Here we summarize the qualitative feedback from expert participants on each step, with the IDs of the participants that provided each point in parenthesis.</p><p>Step We also analyzed detailed qualitative feedback from the interviews, as summarized in Table <ref type="table">2</ref>. Overall, participants provided more positive than negative comments for the general workflow.</p><p>They also provided many suggestions for improving the usability and the user interface in all the workflow steps. A number of excerpts of the interviews are particularly illustrative of the type of feedback we received for different steps. On S1, suggestions from participants P1, P2, P4 and P5 mention that the interface should "Centralize different features in a single window". P6 who works in the domain of music, notably appreciated how the annotations with the GUsT-3D ontology "can be used with any 3D scene or environment", but also mentioned their needs for annotating sound in their applications as well as for usage in other game engines such as Unreal, which are currently not supported by our implementation. On step S2, participants commented that "The labels of the UI tools could be more easy to understand". P3 commented on S3 "Display tasks with color depending on the guidance type, task goals, and times would help to better see the tasks". Another interesting comment on S3 from P4 was "I don't need to code just click and select, and progress is automatically saved", which is a convenient feature of the implementation. As for the step S4, the participant P5 put himself/herself in the shoes of the end-user and suggested that the designer should "Ask the user how much guidance they want, and when' , which definitely would help customize the guidance to be provided by GUTasks specified in the GUsT-3D representation, and thus improve the user experience. In addition to the suggestions, many of the negative comments focused on properties of the user interface design, which would be easy to change. For example, in S4 the comment "Cannot export scene graph as an image", while we do not yet have this functionality, the .dot file used for the scene graph is a well-known format that can be easily exported into an image file. The main negative comment associated with S4 concerns the analysis of user interaction. Participants P3, P4, and P6 mentioned that the interface only provided basic visualizations, where for example, P6 suggested navigating the data not just on a temporal slider, but also spatially to see the state and movement changes for each navigable space. Participant P4 also mentioned the system's "Lack of global view". These comments suggest the strong interest and current needs for robust and flexible solutions on analyzing and visualizing user experience metrics -an ongoing and important challenge. Another positive remark from P1 and P2 was the workflow's potential to "Record and generate scene graphs automatically".</p><p>The majority of the negative feedback focusing on the user interface, and not on the framework itself. The results of such as formative evaluation confirm the needs of Designers for an integrated workflow for the creation and management of interactive user experiences in VR, demonstrates the added-value of the framework, and also provides valuable suggestions for improvements. We can thus confidently seek the deployment of our framework in practice after addressing usability issues.</p><p>The results of the formative evaluation have thus evaluated the anticipated use of our developed tools and workflow on measures of usability, learnability, efficacy, and flexibility. Whilst the results are quite positive with respect to how users perceive the system, only by deploying the system to a real use case can we evaluate the real usability (e.g., performance with specific tasks) and user experience, which were not addressed in this formative study.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">CONCLUSION</head><p>In this paper we have presented a novel framework based on Dourish's embodiment theory that presents multiple capabilities to design, run, and analyze embodied experiences in VR. This involves notably the development of the GUsT-3D representation to establish scene ontology, the Guided User Tasks (GUTask) definitions to create and run user tasks, and tools for the query, analysis, and visualization of scene and user behavior evolution. The framework is implemented and we assessed its usage through two case studies and a formative evaluation involving six structured expert interviews. Results show that the GUsT-3D framework and corresponding workflow implementation integrate well into the Designer's process to create, manage, and analyze VR embodied experiences of target users.</p><p>We are planning a number of future directions for this work. To improve the system flexibility, we are looking into:</p><p>• the creation and loading of a custom ontology that can change and adapt the user experience in the 3D scenario, • the definition of constraints on ranges of values or probabilistic models to represent uncertainty to support the design of more diverse or complex GUTasks, and • providing flexible query compositions to reason on varied elements of user behavior and perception in the post-scenario analysis, with adapted visualizations that can better help understand usability and user experience as a whole <ref type="bibr" target="#b2">[3]</ref>.</p><p>In addition, we believe the scene graph generation using the ontology opens exciting pathways to support model-based evaluations of embodied VR scenarios. The feedback from the expert interviews in the formative evaluation have provided valuable insights to challenges towards designing visualization and analysis tools to better understand the embodied user experience. In the longer term, we can envision this work in the context of managing interactive tasks for multi-user scenarios, or in multi-agent systems. Finally, a direct step already in motion is the deployment of this framework to a practical use case, which will allow us to observe how the workflow performs with expert designers. This is a current and strong need in areas such as neuroscience and cognitive science, to create serious games for rehabilitation and evaluate training efficacy.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Fig. 2 . 3 -</head><label>23</label><figDesc>Fig. 2. 3-Component framework for designing GUTasks in 3D virtual environments based on embodiment theory: the GUsT-3D vocabulary which is the full representation of the scene ontoloдy, the definition and management of GUTasks communicated between the designer and user for intersubjectivity, and the logging and query of UX to allow Designers to analyze user intentionality.</figDesc><graphic coords="7,65.55,188.80,354.91,140.26" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Fig. 3 . 4 -</head><label>34</label><figDesc>Fig. 3. 4-Step workflow to create Guided User Tasks in 3D environments involves: design and annotation of the 3D scene, defining GUTasks, running the task scenario, and post-scenario analysis of the user experience. Each step of the workflow contains a number of sub-tasks that the designer may need to do.</figDesc><graphic coords="7,45.83,506.91,394.34,64.14" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Fig. 4 .</head><label>4</label><figDesc>Fig.4. This example indoor scene created in Unity has three navigable spaces: the Garage (blue), the Kitchen (yellow), and the Bedroom (pink). A user viewpoint is shown for each navigable space.</figDesc><graphic coords="8,65.55,425.60,354.91,132.80" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Fig. 5 .</head><label>5</label><figDesc>Fig. 5. A partial scene graph generated from the scene to show the relations between various entities, including navigable spaces, entryways, walls and windows, movables, supports, and containers. Hard edges indicate location relations, and dashed edges of different colours indicate interactive and navigation relations.</figDesc><graphic coords="10,45.83,397.24,394.35,151.05" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Fig. 6 .</head><label>6</label><figDesc>Fig. 6. The combined framework and task model to indicate how each element of the framework intervenes on the workflow of creating a 3D embodied experience. The arrows indicate the flow of information on the three aspects of embodied experiences: ontology (red), intersubjectivity (blue), and intentionality (green)This framework is realized as a set of editor interfaces in Unity. It realizes our 4-step workflow of the design of an embodied user experience depicted in Figure3. We detail below concretely how the framework integrates into Unity for each step of this workflow.</figDesc><graphic coords="13,65.55,146.21,354.91,170.72" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>4. 4 . 1</head><label>41</label><figDesc>Design / Annotate of 3D scene ontology. Scene annotation provides the first step to having a context-aware 3D environment in which to make meaningful inferences as to where the user is, what actions they are carrying out, and from there analyze the user perceptions and intentions.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Fig. 7 .</head><label>7</label><figDesc>Fig. 7. Schema of the layers definition interface, which allows the designer to add and edit the units, constraints, and layers either through point-and-click or importing a configuration file. The Unity interface is shown on the two sides.</figDesc><graphic coords="14,45.83,84.68,394.34,140.46" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head>Fig. 8 .</head><label>8</label><figDesc>Fig. 8. (Left) This interface allows designers to define GUTasks, add and edit task constraints, view the list of existing tasks. The tasks can be easily loaded and exported in the GUsT-3D representation for reuse in various scenarios. (Right) The tasks are communicated to the user in real time, and additional help text and path guidance can be provided at a fixed time point. The timer indicates seconds past.</figDesc><graphic coords="14,45.83,352.10,394.35,114.96" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><head>Fig. 9 .</head><label>9</label><figDesc>Fig. 9. Here we show the window to construct a simple query (Section 4.3) that counts the number of props within a near distance (3 meters) of the player camera. The two views show the highlighting in the scene from the player viewpoint (left) and the Unity scene view from above (right). The query and highlights can help the designer understand the real-time UX, and provide suitable guidance.</figDesc><graphic coords="15,65.55,84.68,354.91,168.02" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_9"><head>Fig. 10 .</head><label>10</label><figDesc>Fig. 10. (Left) Window for querying the logs post-scenario, including loading a log file, a temporal slider, and the descriptive text on the state at a time point. (Right) A generated scene graph of the user's interaction state at a specific time point, with, for example, visibility of entities and objects being held, providing insights into UX and intentionality.</figDesc><graphic coords="15,45.83,449.02,394.34,82.48" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_10"><head>Fig. 13 .</head><label>13</label><figDesc>Fig. 13. The second case study features a basic road crossing scene in an open space. The scene has four navigable spaces: a road and a crossing that overlap, and two sidewalks. From left to right, this figure shows the top view, the navigable spaces, and a viewpoint from the user camera.</figDesc><graphic coords="18,45.83,84.68,394.33,112.60" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_11"><head></head><label></label><figDesc>) User must at some point look at the light when approaching the crossing from Sidewalk2: ∃m(Localisation(t m , U ser, Sidewalk2) ∧ N ear (U ser, Crossinд) ∧ LookAt(U ser, Liдht)) (3) User can only be on the crossing when the light is green:∀m(Localisation(t m , U ser, Crossinд) → State(t m , liдht, дreen)) (4) The user should be on Sidewalk1 at the end:Localisation(t n , U ser, Sidewalk1)</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_12"><head>Fig. 15 .</head><label>15</label><figDesc>Fig.<ref type="bibr" target="#b14">15</ref>. For the three steps in the workflow, the responses of each participant on the usability, learning curve, efficacy, and flexibility of the implementation. The step "Running the Scenario" does not have these metrics, since it is mainly composed of the automatic processes that launch the GUTasks and record logs of the experience. The missing responses indicate where participants responded "I don't know".</figDesc><graphic coords="21,45.83,84.68,394.34,101.36" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="17,45.83,84.68,394.36,179.90" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="17,45.83,346.08,394.34,165.78" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="19,45.83,84.68,394.34,172.47" type="bitmap" /></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" xml:id="foot_0"><p>Proc. ACM Hum.-Comput. Interact., Vol. 6, No. EICS, Article 158. Publication date: June 2022.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1" xml:id="foot_1"><p>The software is licenced under CeCILL number IDDN.FR.001.160035.000.S.P.2022.000.31235. More information can be found on https://project.inria.fr/creattive3d/gust-3d/ Proc. ACM Hum.-Comput. Interact., Vol. 6, No. EICS, Article 158. Publication date: June</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2022" xml:id="foot_2"><p></p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>ACKNOWLEDGMENTS</head><p>This work has been partially supported by the <rs type="funder">French National Research Agency</rs> though the <rs type="projectName">ANR</rs> <rs type="projectName">CREATTIVE3D</rs> project <rs type="grantNumber">ANR-21-CE33-00001</rs>.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funded-project" xml:id="_vknaHEk">
+					<orgName type="project" subtype="full">ANR</orgName>
+				</org>
+				<org type="funded-project" xml:id="_xcgRPmK">
+					<idno type="grant-number">ANR-21-CE33-00001</idno>
+					<orgName type="project" subtype="full">CREATTIVE3D</orgName>
+				</org>
+			</listOrg>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Virtual reality in engineering education: The future of creative learning</title>
+		<author>
+			<persName><forename type="first">Abdul-Hadi G</forename><surname>Abulrub</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><forename type="middle">N</forename><surname>Attridge</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><forename type="middle">A</forename><surname>Williams</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2011 IEEE global engineering education conference (EDUCON)</title>
+		<meeting><address><addrLine>Amman, Jordan</addrLine></address></meeting>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="751" to="757" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Utilizing X3D for Immersive Environments</title>
+		<author>
+			<persName><forename type="first">Johannes</forename><surname>Behr</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patrick</forename><surname>Dähne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marcus</forename><surname>Roth</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/985040.985051</idno>
+		<ptr target="https://doi.org/10.1145/985040.985051" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Ninth International Conference on 3D Web Technology</title>
+		<meeting>the Ninth International Conference on 3D Web Technology<address><addrLine>Monterey, California; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2004">2004</date>
+			<biblScope unit="page" from="71" to="78" />
+		</imprint>
+	</monogr>
+	<note>Web3D &apos;04</note>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">A Generic Visualization Approach Supporting Task-Based Evaluation of Usability and User Experience</title>
+		<author>
+			<persName><forename type="first">Regina</forename><surname>Bernhaupt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Célia</forename><surname>Martinie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Philippe</forename><surname>Palanque</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Günter</forename><surname>Wallner</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-030-64266-2_2</idno>
+		<ptr target="https://doi.org/10.1007/978-3-030-64266-2_2" />
+	</analytic>
+	<monogr>
+		<title level="m">8th International Conference on Human-Centered Software Engineering -IFIP WG 13.2 International Working Conference, HCSE 2020</title>
+		<title level="s">Lecture Notes in Computer Science book series</title>
+		<meeting><address><addrLine>Eindhoven, Netherlands</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="volume">12481</biblScope>
+			<biblScope unit="page" from="24" to="44" />
+		</imprint>
+	</monogr>
+	<note>IFIP : International Federation for Information Processing</note>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">A Formal Model of Affordances for Flexible Robotic Task Execution</title>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Beßler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Porzel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mihai</forename><surname>Pomarlan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Beetz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rainer</forename><surname>Malaka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Bateman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ECAI 2020</title>
+		<meeting><address><addrLine>Santiago de Compostela, Spain</addrLine></address></meeting>
+		<imprint>
+			<publisher>IOS Press</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="2425" to="2432" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Developing the theory of formative assessment</title>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Black</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dylan</forename><surname>Wiliam</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Educational Assessment, Evaluation and Accountability (formerly: Journal of Personnel Evaluation in Education)</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="5" to="31" />
+			<date type="published" when="2009">2009. 2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title level="m" type="main">Towards a Domain Specific Language for a Scene Graph based Robotic World Model</title>
+		<author>
+			<persName><forename type="first">Sebastian</forename><surname>Blumenthal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Herman</forename><surname>Bruyninckx</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1408.0200[cs.RO</idno>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">The concept of formative assessment</title>
+		<author>
+			<persName><forename type="first">Carol</forename><surname>Boston</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Practical Assessment, Research, and Evaluation</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">9</biblScope>
+			<date type="published" when="2002">2002. 2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main"># FIVE: High-level components for developing collaborative and interactive virtual environments</title>
+		<author>
+			<persName><forename type="first">Rozenn</forename><surname>Bouville</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Valérie</forename><surname>Gouranton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Boggini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Florian</forename><surname>Nouviale</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bruno</forename><surname>Arnaldi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IEEE 8th Workshop on Software Engineering and Architectures for Realtime Interactive Systems (SEARIS)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2015">2015. 2015</date>
+			<biblScope unit="page" from="33" to="40" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<title level="m" type="main">X3D: extensible 3D graphics for Web authors</title>
+		<author>
+			<persName><forename type="first">Don</forename><surname>Brutzman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leonard</forename><surname>Daly</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<publisher>Elsevier</publisher>
+			<pubPlace>San Francisco, CA, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">3D virtual warehouse on the WEB</title>
+		<author>
+			<persName><forename type="first">Michel</forename><surname>Buffa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J-C</forename><surname>Lafon</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IEEE Conference on Information Visualization. An International Conference on Computer Visualization and Graphics</title>
+		<meeting><address><addrLine>London, UK</addrLine></address></meeting>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2000">2000. 2000</date>
+			<biblScope unit="page" from="479" to="484" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Valence method for formative evaluation of user experience</title>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Burmester</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marcus</forename><surname>Mast</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kilian</forename><surname>Jäger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hendrik</forename><surname>Homans</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 8th ACM conference on Designing Interactive Systems</title>
+		<meeting>the 8th ACM conference on Designing Interactive Systems<address><addrLine>Aarhus, Denmark</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="364" to="367" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Integrating theory development with design evaluation</title>
+		<author>
+			<persName><forename type="first">John</forename><surname>Carroll</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Singley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mary</forename><forename type="middle">Beth</forename><surname>Rosson</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/01449299208924345</idno>
+		<ptr target="https://doi.org/10.1080/01449299208924345" />
+	</analytic>
+	<monogr>
+		<title level="j">Behaviour &amp; Information Technology -Behaviour &amp; IT</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page" from="247" to="255" />
+			<date type="published" when="1992-09">1992. Sept. 1992</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">GIGL: A domain specific language for procedural content generation with grammatical representations</title>
+		<author>
+			<persName><forename type="first">Tiannan</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephen</forename><surname>Guy</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the AAAI Conference on Artificial Intelligence and Interactive Digital Entertainment</title>
+		<meeting>the AAAI Conference on Artificial Intelligence and Interactive Digital Entertainment<address><addrLine>Edmonton, Canada</addrLine></address></meeting>
+		<imprint>
+			<publisher>AAAI</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page">8</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Semantic modeling of virtual environments using mascaret</title>
+		<author>
+			<persName><forename type="first">Pierre</forename><surname>Chevaillier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thanh-Hai</forename><surname>Trinh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mukesh</forename><surname>Barange</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pierre</forename><surname>De Loor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Frédéric</forename><surname>Devillers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julien</forename><surname>Soler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ronan</forename><surname>Querrec</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2012 5th Workshop on Software Engineering and Architectures for Realtime Interactive Systems (SEARIS)</title>
+		<meeting><address><addrLine>Costa Mesa, CA, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="1" to="8" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Dourish</surname></persName>
+		</author>
+		<title level="m">Where the action is: the foundations of embodied interaction</title>
+		<meeting><address><addrLine>USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>MIT press</publisher>
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Logging Interactions in explorable immersive VR/AR applications</title>
+		<author>
+			<persName><forename type="first">Jakub</forename><surname>Flotyński</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paweł</forename><surname>Sobociński</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2018 International Conference on 3D Immersion (IC3D)</title>
+		<meeting><address><addrLine>Brussels, Belgium</addrLine></address></meeting>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="1" to="8" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Ontology-Based Representation and Modelling of Synthetic 3D Content: A State-of-the-Art Review</title>
+		<author>
+			<persName><forename type="first">Jakub</forename><surname>Flotyński</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Krzysztof</forename><surname>Walczak</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computer Graphics Forum</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page" from="329" to="353" />
+			<date type="published" when="2017">2017</date>
+			<publisher>Wiley Online Library</publisher>
+			<pubPlace>Poznań, Poland</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Scenic: a language for scenario specification and scene generation</title>
+		<author>
+			<persName><forename type="first">Tommaso</forename><surname>Daniel J Fremont</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shromona</forename><surname>Dreossi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiangyu</forename><surname>Ghosh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alberto</forename><forename type="middle">L</forename><surname>Yue</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sanjit</forename><forename type="middle">A</forename><surname>Sangiovanni-Vincentelli</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Seshia</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 40th ACM SIGPLAN Conference on Programming Language Design and Implementation</title>
+		<meeting>the 40th ACM SIGPLAN Conference on Programming Language Design and Implementation<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="63" to="78" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Building virtual reality applications for engineering with knowledge-based approach</title>
+		<author>
+			<persName><forename type="first">Filip</forename><surname>Górski</surname></persName>
+		</author>
+		<idno type="DOI">10.1515/mper-2017-0037</idno>
+		<ptr target="https://doi.org/10.1515/mper-2017-0037" />
+	</analytic>
+	<monogr>
+		<title level="j">Management and Production Engineering Review</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="63" to="73" />
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Model-based product configuration in augmented reality applications</title>
+		<author>
+			<persName><forename type="first">Sebastian</forename><surname>Gottschalk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Enes</forename><surname>Yigitbas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eugen</forename><surname>Schmidt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gregor</forename><surname>Engels</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Human-Centred Software Engineering</title>
+		<meeting><address><addrLine>Eindhoven, The Netherlands</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="84" to="104" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<author>
+			<persName><forename type="first">Deborah</forename><surname>Hix</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rex</forename><surname>Hartson</surname></persName>
+		</author>
+		<ptr target="http://archive.org/details/developinguserin00hixd" />
+		<title level="m">Developing user interfaces : ensuring usability through product &amp; process</title>
+		<meeting><address><addrLine>New York</addrLine></address></meeting>
+		<imprint>
+			<publisher>J. Wiley</publisher>
+			<date type="published" when="1993">1993</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<author>
+			<persName><forename type="first">Harry</forename><surname>Hochheiser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Lazar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jinjuan</forename><surname>Feng</surname></persName>
+		</author>
+		<title level="m">Research Methods in Human-Computer Interaction -2nd Edition</title>
+		<imprint>
+			<publisher>Wiley, United States</publisher>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Automatic Synthesis of Virtual Wheelchair Training Scenarios</title>
+		<author>
+			<persName><forename type="first">Wanwan</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Javier</forename><surname>Talavera</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amilcar</forename><surname>Gomez Samayoa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jyh-Ming</forename><surname>Lien</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lap-Fai</forename><surname>Yu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2020 IEEE Conference on Virtual Reality and 3D User Interfaces (VR)</title>
+		<meeting><address><addrLine>Atlanta, GA, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="539" to="547" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Learning to Describe Scenes with Programs</title>
+		<author>
+			<persName><forename type="first">Yunchao</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jiajun</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zheng</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Ritchie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">William</forename><forename type="middle">T</forename><surname>Freeman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joshua</forename><forename type="middle">B</forename><surname>Tenenbaum</surname></persName>
+		</author>
+		<ptr target="https://openreview.net/forum?id=SyNPk2R9K7" />
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Learning Representations</title>
+		<meeting><address><addrLine>New Orleans, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ICLR</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="volume">13</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Linq: reconciling object, relations and xml in the. net framework</title>
+		<author>
+			<persName><forename type="first">Erik</forename><surname>Meijer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brian</forename><surname>Beckman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gavin</forename><surname>Bierman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2006 ACM SIGMOD international conference on Management of data</title>
+		<meeting>the 2006 ACM SIGMOD international conference on Management of data<address><addrLine>NY, New York</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2006">2006</date>
+			<biblScope unit="page" from="706" to="706" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">A Formal Description of Multimodal Interaction Techniques for Immersive Virtual Reality Applications</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Navarre</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Philippe</forename><forename type="middle">A</forename><surname>Palanque</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rémi</forename><surname>Bastide</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amélie</forename><surname>Schyn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marco</forename><surname>Winckler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luciana</forename><forename type="middle">Porcher</forename><surname>Nedel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carla</forename><forename type="middle">Maria</forename><surname>Dal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sasso</forename><surname>Freitas</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/11555261_17</idno>
+		<ptr target="https://doi.org/10.1007/11555261_17" />
+	</analytic>
+	<monogr>
+		<title level="m">Human-Computer Interaction -INTERACT 2005</title>
+		<title level="s">Lecture Notes in Computer Science</title>
+		<editor>
+			<persName><forename type="first">Maria</forename><surname>Francesca</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Costabile</forename></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Fabio</forename><surname>Paternò</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Rome, Italy</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2005">2005</date>
+			<biblScope unit="volume">3585</biblScope>
+			<biblScope unit="page" from="170" to="183" />
+		</imprint>
+	</monogr>
+	<note>IFIP TC13 International Conference</note>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">A virtual reality flight simulator for human factors engineering</title>
+		<author>
+			<persName><forename type="first">Matthias</forename><surname>Oberhauser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Dreyer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Cognition, Technology &amp; Work</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="263" to="277" />
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Semantic description of 3D environments: a proposal based on web standards</title>
+		<author>
+			<persName><forename type="first">Fabio</forename><surname>Pittarello</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alessandro</forename><forename type="middle">De</forename><surname>Faveri</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the eleventh international conference on 3D web technology</title>
+		<meeting>the eleventh international conference on 3D web technology<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2006">2006</date>
+			<biblScope unit="page" from="85" to="95" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Polyphony: Programming Interfaces and Interactions with the Entity-Component-System Model</title>
+		<author>
+			<persName><forename type="first">Thibault</forename><surname>Raffaillac</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stéphane</forename><surname>Huot</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM on Human-Computer Interaction</title>
+		<meeting>the ACM on Human-Computer Interaction</meeting>
+		<imprint>
+			<publisher>EICS</publisher>
+			<date type="published" when="2019">2019. 2019</date>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="1" to="22" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Safety by design: dialogues between designers and builders using virtual reality</title>
+		<author>
+			<persName><forename type="first">Rafael</forename><surname>Sacks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jennifer</forename><surname>Whyte</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dana</forename><surname>Swissa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gabriel</forename><surname>Raviv</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aviad</forename><surname>Shapira</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Construction Management and Economics</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">158</biblScope>
+			<date type="published" when="2015-06">2015. 2015. June 2022</date>
+			<publisher>EICS</publisher>
+		</imprint>
+	</monogr>
+	<note>Proc. ACM Hum.-Comput. Interact.. Publication date</note>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Designing adaptable virtual reality learning environments</title>
+		<author>
+			<persName><forename type="first">Julien</forename><surname>Saunier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mukesh</forename><surname>Barange</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bernard</forename><surname>Blandin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ronan</forename><surname>Querrec</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joanna</forename><surname>Taoum</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 Virtual Reality International Conference</title>
+		<meeting>the 2016 Virtual Reality International Conference<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="1" to="4" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Designers, the Stage Is Yours! Medium-Fidelity Prototyping of Augmented &amp; Virtual Reality Interfaces with 360theater</title>
+		<author>
+			<persName><forename type="first">Maximilian</forename><surname>Speicher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katy</forename><surname>Lewis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Nebeling</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3461727</idno>
+		<ptr target="https://doi.org/10.1145/3461727" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of ACM Human-Computer Interactions</title>
+		<meeting>ACM Human-Computer Interactions</meeting>
+		<imprint>
+			<publisher>EICS</publisher>
+			<date type="published" when="2021-05">2021. May 2021</date>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page">25</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Formative user-centered evaluation of security modeling: Results from a case study</title>
+		<author>
+			<persName><forename type="first">Sandra</forename><surname>Trösterer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elke</forename><surname>Beck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fabiano</forename><surname>Dalpiaz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elda</forename><surname>Paja</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paolo</forename><surname>Giorgini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Manfred</forename><surname>Tscheligi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Secure Software Engineering (IJSSE)</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="19" />
+			<date type="published" when="2012">2012. 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Introducing semantic information during conceptual modelling of interaction for virtual environments</title>
+		<author>
+			<persName><forename type="first">Lode</forename><surname>Vanacken</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Raymaekers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karin</forename><surname>Coninx</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2007 workshop on Multimodal interfaces in semantic interaction</title>
+		<meeting>the 2007 workshop on Multimodal interfaces in semantic interaction<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2007">2007</date>
+			<biblScope unit="page" from="17" to="24" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">On the design of virtual reality learning environments in engineering</title>
+		<author>
+			<persName><forename type="first">Diego</forename><surname>Vergara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Manuel</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pablo</forename><surname>Rubio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Miguel</forename><surname>Lorenzo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Multimodal technologies and interaction</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page">11</biblScope>
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Planit: Planning and instantiating indoor scenes with relation graph and spatial prior networks</title>
+		<author>
+			<persName><forename type="first">Kai</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yu-An</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ben</forename><surname>Weissmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Manolis</forename><surname>Savva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Angel</forename><forename type="middle">X</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Ritchie</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Graphics (TOG)</title>
+		<imprint>
+			<biblScope unit="volume">38</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="1" to="15" />
+			<date type="published" when="2019">2019. 2019</date>
+			<publisher>ACM</publisher>
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Using Virtual Reality to Assess the Street Crossing Behavior of Pedestrians with Simulated Macular Degeneration at a Roundabout</title>
+		<author>
+			<persName><forename type="first">Haojie</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Haley</forename><surname>Daniel H Ashmead</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bobby</forename><surname>Adams</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Bodenheimer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Frontiers in ICT</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page">27</biblScope>
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Towards accessible news reading design in virtual reality for low vision</title>
+		<author>
+			<persName><forename type="first">Hui-Yin</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aurélie</forename><surname>Calabrèse</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pierre</forename><surname>Kornprobst</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Multimedia Tools and Applications</title>
+		<imprint>
+			<biblScope unit="volume">80</biblScope>
+			<biblScope unit="page" from="1" to="20" />
+			<date type="published" when="2021-07">2021. 2021. Received July 2021. October 2022. November 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

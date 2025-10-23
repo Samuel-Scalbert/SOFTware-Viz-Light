@@ -7,11 +7,11 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		<fileDesc>
 			<titleStmt>
 				<title level="a" type="main">SEM@K: IS MY KNOWLEDGE GRAPH EMBEDDING MODEL SEMANTIC-AWARE?</title>
-				<funder ref="#_gcHcb25">
-					<orgName type="full">AILES</orgName>
-				</funder>
 				<funder>
 					<orgName type="full">CNRS</orgName>
+				</funder>
+				<funder ref="#_MWVwAXJ">
+					<orgName type="full">AILES</orgName>
 				</funder>
 			</titleStmt>
 			<publicationStmt>
@@ -95,7 +95,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 							<date type="published" when="2023-12-07">7 Dec 2023</date>
 						</imprint>
 					</monogr>
-					<idno type="MD5">3394A20E3E4A4050BB572498100ACFF6</idno>
+					<idno type="MD5">994CDD9DB189DA5B4CBD549C9ADA7177</idno>
 					<idno type="DOI">10.3233/SW-233508</idno>
 					<idno type="arXiv">arXiv:2301.05601v2[cs.LG]</idno>
 				</biblStruct>
@@ -103,7 +103,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.0" ident="GROBID" when="2024-04-12T14:51+0000">
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:13+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<ref target="https://github.com/kermitt2/grobid"/>
 				</application>
@@ -181,13 +181,13 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <div><head>Acknowledgements</head><p>This work is supported by the <rs type="funder">AILES</rs> <rs type="projectName">PIA3</rs> project (see https://www.projetailes.com/). Experiments presented in this paper were carried out using the Grid'5000 testbed, supported by a scientific interest group hosted by <rs type="institution">Inria</rs> and including <rs type="funder">CNRS</rs>, RENATER and several Universities as well as other organizations (see https://www.grid5000.fr).</p></div>
 			</div>
 			<listOrg type="funding">
-				<org type="funded-project" xml:id="_gcHcb25">
+				<org type="funded-project" xml:id="_MWVwAXJ">
 					<orgName type="project" subtype="full">PIA3</orgName>
 				</org>
 			</listOrg>
 			<div type="annex">
 <div xmlns="http://www.tei-c.org/ns/1.0"><p>Model MRR H@1 H@3 H@10 S@1 S@3 S@10 Geometric </p></div>
-<div xmlns="http://www.tei-c.org/ns/1.0"><head>Rank-based Sem@K[ext] Model Family</head><p>Model MRR H@1 H@3 H@10 S@1 S@3 S@10 </p></div>			</div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Rank-based Sem@K[ext] Model Family</head><p>Model MRR H@1 H@3 H@10 S@1 S@3 S@10 Geometric </p></div>			</div>
 			<div type="references">
 
 				<listBibl>

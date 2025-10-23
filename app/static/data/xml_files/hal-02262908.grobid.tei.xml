@@ -1,0 +1,1682 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="fr">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">MuSCA: a multi-scale source-sink carbon allocation model to 2 explore carbon allocation in plants. An application on static apple-tree</title>
+				<funder>
+					<orgName type="full">FIRST FEM doctoral</orgName>
+				</funder>
+				<funder>
+					<orgName type="full">Autonomous Province of Trento, Italy</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author role="corresp">
+							<persName><forename type="first">Francesco</forename><surname>Reyes</surname></persName>
+							<email>reyes.francesco@protonmail.com</email>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">DAFNE</orgName>
+								<orgName type="institution" key="instit2">University of Tuscia</orgName>
+								<address>
+									<postCode>01100</postCode>
+									<settlement>Viterbo</settlement>
+									<country key="IT">Italy</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department">DASB</orgName>
+								<orgName type="institution">CRI. Mach</orgName>
+								<address>
+									<addrLine>Fondazione E</addrLine>
+									<postCode>38010</postCode>
+									<settlement>San Michele all&apos;Adige</settlement>
+									<country key="IT">Italy</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="department">Faculty of Science and Technology</orgName>
+								<orgName type="institution">Free University of Bozen-Bolzano</orgName>
+								<address>
+									<postCode>39100</postCode>
+									<settlement>Bolzano</settlement>
+									<country key="IT">Italy</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Benoit</forename><surname>Pallas</surname></persName>
+							<affiliation key="aff3">
+								<orgName type="department">CIRAD</orgName>
+								<orgName type="laboratory">AGAP</orgName>
+								<orgName type="institution" key="instit1">Univ. Montpellier</orgName>
+								<orgName type="institution" key="instit2">INRA</orgName>
+								<orgName type="institution" key="instit3">SupAgro</orgName>
+								<address>
+									<settlement>Montpellier</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Christophe</forename><surname>Pradal</surname></persName>
+							<affiliation key="aff3">
+								<orgName type="department">CIRAD</orgName>
+								<orgName type="laboratory">AGAP</orgName>
+								<orgName type="institution" key="instit1">Univ. Montpellier</orgName>
+								<orgName type="institution" key="instit2">INRA</orgName>
+								<orgName type="institution" key="instit3">SupAgro</orgName>
+								<address>
+									<settlement>Montpellier</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff4">
+								<orgName type="laboratory">CIRAD</orgName>
+								<orgName type="institution">UMR AGAP &amp; Inria Zenith</orgName>
+								<address>
+									<addrLine>6 Amazon</addrLine>
+									<postCode>98100</postCode>
+									<settlement>Montpellier, Seattle</settlement>
+									<country>France, USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Federico</forename><surname>Vaggi</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Tagliavini</forename><surname>Marco</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Evelyne</forename><surname>Costes</surname></persName>
+							<affiliation key="aff3">
+								<orgName type="department">CIRAD</orgName>
+								<orgName type="laboratory">AGAP</orgName>
+								<orgName type="institution" key="instit1">Univ. Montpellier</orgName>
+								<orgName type="institution" key="instit2">INRA</orgName>
+								<orgName type="institution" key="instit3">SupAgro</orgName>
+								<address>
+									<settlement>Montpellier</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Damiano</forename><surname>Zanotelli</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="department">Faculty of Science and Technology</orgName>
+								<orgName type="institution">Free University of Bozen-Bolzano</orgName>
+								<address>
+									<postCode>39100</postCode>
+									<settlement>Bolzano</settlement>
+									<country key="IT">Italy</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Damiano</forename><surname>Gianelle</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department">DASB</orgName>
+								<orgName type="institution">CRI. Mach</orgName>
+								<address>
+									<addrLine>Fondazione E</addrLine>
+									<postCode>38010</postCode>
+									<settlement>San Michele all&apos;Adige</settlement>
+									<country key="IT">Italy</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">M</forename><surname>Tagliavini</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="department">Faculty of Science and Technology</orgName>
+								<orgName type="institution">Free University of Bozen-Bolzano</orgName>
+								<address>
+									<postCode>39100</postCode>
+									<settlement>Bolzano</settlement>
+									<country key="IT">Italy</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff5">
+								<orgName type="institution" key="instit1">INRA</orgName>
+								<orgName type="institution" key="instit2">UMR</orgName>
+								<address>
+									<addrLine>547 PIAF</addrLine>
+									<postCode>F-63000</postCode>
+									<settlement>Clermont-Ferrand</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">MuSCA: a multi-scale source-sink carbon allocation model to 2 explore carbon allocation in plants. An application on static apple-tree</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">91FDF200497E891B804DB4F221DFF7A4</idno>
+					<idno type="DOI">10.1093/aob/mcz122</idno>
+					<note type="submission">Submitted on 2 Aug 2019</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:12+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>MuSCA</term>
+					<term>multi scale</term>
+					<term>carbon allocation</term>
+					<term>plant growth</term>
+					<term>tree growth</term>
+					<term>functional-structural plant modeling</term>
+					<term>FSPM</term>
+					<term>multiscale tree graph</term>
+					<term>source</term>
+					<term>sink</term>
+					<term>apple</term>
+					<term>plant architecture</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>ou non, émanant des établissements d'enseignement et de recherche français ou étrangers, des laboratoires publics ou privés.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="fr">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTRODUCTION</head><p>Carbon allocation is the process by which carbon assimilated by leaves, or stored in the form of carbohydrates, is transferred, via the conductive vessels (or phloem tissue) to other plant parts, where it is used primarily for respiration and growth. It is generally accepted that the phloem sap moves as a consequence of osmotically generated pressure gradient, as described by the Munch theory <ref type="bibr" target="#b38">(Münch 1930)</ref>. Gradients are generated by the differences in the concentrations of carbon (C) assimilates between C-sources (mainly leaves, where C-assimilates are loaded into the phloem)</p><p>and sinks (where C-assimilates are unloaded from the phloem). The Münch theory has been refined over time (e.g. with the introduction of the leakage-retrieval mechanism <ref type="bibr" target="#b53">(Thorpe et al. 2005</ref>) and complementary hypotheses have been proposed to explain the lack of fit with experimental evidences (e.g. sieve tubes decomposed in shorter, overlapping components, at the edge of which solutes are transported at the expense of internal energy) <ref type="bibr" target="#b13">(De Schepper et al. 2013)</ref>. The underlying principles, however, are still considered as valid. As such, the C-allocation process is thought to depend primarily on the amount and distribution of the available C-supplies, on demands along the plant structure and on the possibility of C-supplies to flow via the phloem <ref type="bibr" target="#b48">(Ryan and Asao 2014)</ref>. In models of small plants, however, the simplifying assumption that distance has no effect on Cavailability or phloem osmotic potential (known as the 'common assimilate pool') can be made <ref type="bibr" target="#b26">(Heuvelink 1995;</ref><ref type="bibr" target="#b24">Guo et al. 2006;</ref><ref type="bibr" target="#b35">Luquet et al. 2006;</ref><ref type="bibr">De Swaef et al. 2003)</ref>.</p><p>When plant topology increases in complexity, the modeling approaches to C-allocation present in the literature can be organized in four, partly overlapping, categories <ref type="bibr" target="#b52">(Thornley and Johnson 1990;</ref><ref type="bibr" target="#b29">Lacointe 2000;</ref><ref type="bibr" target="#b32">Le Roux et al. 2001;</ref><ref type="bibr" target="#b19">Génard et al. 2008</ref>): models based on empirical relationships between plant parts and/or the environment; teleonomic models representing the plant as moving towards an a priori defined specific state; source-sink driven models, in which different plant components are supposed to attract C-assimilates with different strengths and lastly transport resistance and biochemical models, which represent phloem transport as starting from osmotic gradients and biochemical conversions. The most mechanistic models, which represent osmotic flows as starting from osmotic gradients, imply complex formalizations and highly detailed plant descriptions and therefore received relatively limited attention <ref type="bibr" target="#b2">(Bancal 2002)</ref>. The modest mathematical complexity of source sink models has led to them becoming the focus of a much larger number of studies. In all cases the representation of C-allocation on large tree structures described at high resolution remains computationally intractable <ref type="bibr" target="#b0">(Balandier et al. 2000;</ref><ref type="bibr" target="#b2">Bancal 2002)</ref>.</p><p>Each model represents the plant structures, and the process of carbon allocation, at a specific scale. The choice of scale may be driven by management or research needs, by the computation time needed for the simulations and by the resolution at which the calibration and testing data was obtained. Such scales range from the individual metamer (M) <ref type="bibr">(Allen et al. 2005)</ref> to collections of metamers that, grouped according to criteria such as their age, position or organ type <ref type="bibr" target="#b28">(Kang et al. 2008)</ref>, constitute larger portions of a tree structure, such as branches, main axis or even whole plant compartments <ref type="bibr" target="#b31">(Lakso and Johnson 1990;</ref><ref type="bibr" target="#b28">Kang et al. 2008</ref>).</p><p>By way of example, the L-PEACH model <ref type="bibr" target="#b22">(Grossman and DeJong 1994;</ref><ref type="bibr">Allen et al. 2005</ref>) is a reference for completeness of the described processes and represents tree growth over multiple years. This uses a transport resistance analogy to mimic C-transport at the M scale (internode, leaf, fruit). The SIMWAL model represents the growth of a young walnut tree across several years. This is organized in axes, which are divided into growth units (GU, the scale of C-allocation), themselves composed of internodes and nodes <ref type="bibr" target="#b0">(Balandier et al. 2000)</ref>. A GU is an organisation level typical of plants with rhythmic growth. It corresponds to a portion of axis developed without interruption during an elongation period, and can be visually identified as bounded by two zones of scales that had protected the apical meristem in the bud during resting period. The QualiTree model represents growth and quality of fruits on a peach tree structure, at the fruiting unit (FU) scale, during a single growth season <ref type="bibr" target="#b33">(Lescourret et al. 2011</ref><ref type="bibr" target="#b40">, Pallas et al. 2016)</ref>. A FU includes the set of shoots born from a common section of one year old wood. In this model all the different types of organs in a FU are considered similar with respect to assimilates exchange, which depends on their respective distances only.</p><p>The Tree Graph (MTG) <ref type="bibr" target="#b20">(Godin and Caraglio 1998)</ref>, a formalism inspired by the observation of the multi-scale organization of plant structures <ref type="bibr" target="#b4">(Barthélémy 1991;</ref><ref type="bibr" target="#b5">Barthélémy and Caraglio 2007;</ref><ref type="bibr" target="#b1">Balduzzi et al. 2017)</ref>. MTG allows for the topological description of a plant at multiple, nested, spatial scales on the same graph. In addition to the connections and boundaries of the described topological scales, intensive (e.g. organ type) or extensive (e.g. geometrical features) properties can be assigned to the individual plant component at any scale. MTG has been previously used in plant architecture analyses <ref type="bibr" target="#b8">(Costes et al. 2003)</ref>, in radiation interception <ref type="bibr">(Da Silva, Han, and Costes 2014)</ref>, as well as to simulate physiological processes <ref type="bibr" target="#b16">(Fournier et al. 2010;</ref><ref type="bibr" target="#b39">Ndour et al. 2017;</ref><ref type="bibr" target="#b3">Barillot et al. 2018)</ref> or model plant-pathosystems <ref type="bibr" target="#b17">(Garin et al. 2014</ref><ref type="bibr" target="#b18">(Garin et al. , 2018;;</ref><ref type="bibr" target="#b47">Robert et al. 2018)</ref> (albeit by using a single scale at a time).</p><p>In this paper, we provide an overview of the MuSCA model, define its scope and inputs, </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>MATERIALS AND METHODS</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Model Description</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Overview</head><p>MuSCA is a generic, functional structural plant model (FSPM) <ref type="bibr" target="#b55">(Vos et al. 2010)</ref> representing the carbon allocation and organ growth of a plant at different, user-defined, spatial scales, while taking into account competition and distances between carbon sinks and supplies present on the plant (Fig. <ref type="figure" target="#fig_4">1</ref>). The model has a modular architecture and each module is generalized so that only a few of them are specific to a given cultivar or species (Table <ref type="table" target="#tab_0">1</ref>, Table <ref type="table" target="#tab_1">2</ref>). The model is integrated in the open-source OpenAlea environment <ref type="bibr" target="#b42">(Pradal et al. 2008</ref><ref type="bibr" target="#b43">(Pradal et al. , 2015) )</ref> and implemented in the Python language. The model reuses existing OpenAlea components, such as the MTG dynamic data-structure <ref type="bibr" target="#b20">(Godin and Caraglio 1998</ref>; https://github.com/openalea/mtg), used to represent the multiscale topology of plant structures, the PlantGL library <ref type="bibr" target="#b41">(Pradal et al. 2009</ref>) used to represent the 3D geometry, and the RATP radiative model <ref type="bibr" target="#b49">(Sinoquet et al. 2001</ref>). The MuSCA model simulates biomass accumulation over a single vegetative season.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Input plant structures and creation of new scales</head><p>The input plant structures of MuSCA are MTGs where individual plant components are characterized by qualitative or quantitative information. Qualitative information refers to the organ type or the type of connection between vertex and parent (i.e. branching or succession).</p><p>Quantitative information may include parameters such as the geometry or age of a plant component.</p><p>This information can be used to create criteria defining the membership of individual plant components to larger groups of adjacent plant components.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Movement of carbon</head><p>The movement of the available carbon (F ij ), from a C-supply (i) to a C-sink (j), is represented as a function of the C-available in the supply (ACP i ), the sink C-demand (Demand j ) (eq. 1a), and is inversely related to the distance (dist) between source and sink and to a sap friction parameter (h) (eq. 1b), along the plant topology. The h factor is an empirical friction parameter, proposed in previous source-sink carbon allocation models <ref type="bibr" target="#b0">(Balandier et al. 2000;</ref><ref type="bibr" target="#b33">Lescourret et al. 2011)</ref>. Larger values of this parameter amplify the effects of distance resulting in relatively large amounts of C allocated next to the source, while a value of zero implies no effect of distance. This equation is inspired by a previously defined equation (SIMWAL model, <ref type="bibr" target="#b0">Balandier et al. 2000)</ref>.</p><formula xml:id="formula_0">= * ,ℎ * ∑ * ,ℎ =1 (eq. 1a) , ℎ = + ℎ (eq. 1b)</formula><p>If in excess, the C-allocated to a plant component will just fulfill its C-demand, while the excess will be stored in a reserve pool for this compartment and be considered as a supply provided by that component on the following time-step <ref type="bibr" target="#b0">(Balandier et al. 2000)</ref>. However, since simulations in this study lasted for only one day, this phenomena never occurred.</p><p>The carbon allocated to a topological element is eventually divided among the different organs that constitute it (at the metamer scale: fruit, leaf, internode), proportionally to their individual carbon demand.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Calculation of distances</head><p>A representation of the C-allocation process coherent at multiple topological scales requires the definition of an equation for the calculation of distances, independent of the scale of representation.</p><p>Modeling C-allocation is computationally demanding as, in a source-sink formulation, it requires to compute the distance between all pairs of carbon sinks and sources in the tree. In a MTG, sources and sinks are represented by vertices in a tree graph. The complexity of computing the distance between all pairs is quadratic, i.e. requires around n 2 operations, for a tree of n vertices. We thus designed an algorithm, based on the multi-scale organization of plants, which allows to reduce the number of operations by reducing the number of independent plant vertices that must be compared.</p><p>Each MTG vertex (i) is characterized, among other properties, by three dimensional coordinates (basal and top), the possibility to have a parent (named i-1), and one or multiple sons (the vertex i is the son of its parent). In a MTG, a vertex at a coarser scale (I, called complex) is composed of one or more vertices at the finer scale (called components of I), as in the case of a shoot composed of several internodes.</p><p>The distance (dist i,j ) among two vertices (i, j) in a MTG depends on the sequence of vertices that connect i and j (called topological path). It corresponds to the sum of i) the semi-lengths of the extremities i and j, and ii) the length of the topological path between the bases of i and j (eq. 2a, 2b Fig. <ref type="figure">2</ref>). The semi-length of an element at different scales is computed as the distance between its base and barycenter.</p><p>In order to assess the length of this path, it is necessary to identify the Greatest Common Ancestor (GCA) of vertices i and j (Fig. <ref type="figure">2</ref>). Given the two paths connecting the tree root to i and j, the Greatest Common Ancestor of vertex i and vertex j, GCA(i,j), is identified as the vertex that is contained in both paths and that is the closest to i and j. The topological path between i and j is the union of the vertices between i and GCA(i,j) and the path between j and GCA(i,j) with GCA(i,j) (Fig. <ref type="figure">2</ref>). The length of the path (dist i,j ) is computed as the sum of the length of each of its internal elements plus the semi-lengths of its extremities, minus twice the length of the GCA (Fig. <ref type="figure">2</ref>, eq.2a).</p><p>In addition, the distance between the basis of the first two elements of the path, that are directly inserted in the GCA(i,j) and are not connected with each other, is added (eq.2a). This is the case at corser scale when different ramifications are connected to the trunk at different location. When the GCA is either i or j, the length is just the sum of the length of all its internal elements plus the semilength of its extremities (eq.2b). , = ℎ + , + , + ℎ -2 ℎ + , (eq. 2a)</p><p>where (resp. j) is the first descendant in the path(i,GCA(i,j)) (resp. j).</p><p>if GCA is i or j, , = -, -+ ℎ + ℎ (eq. 2b)</p><p>The calculation of the spatial coordinates of the basis and barycenters depends on the scale (Fig. <ref type="figure">2B</ref>). At M scale, the basal coordinates of a vertex correspond to the top coordinates of its parent vertex (eq. 3a). For the basal vertex of the MTG, the only without a parent, coordinates are stored in the complex of the same vertex. Barycenter coordinates are obtained as the mean of its top and base coordinates (eq. 3b).</p><p>At coarser scales, the basal coordinates of a vertex I are the basal coordinates of its first component at the metamer scale i.e. the one whose parent does not belong to I (eq. 3c). These basal coordinates are inherited from top coordinates of its parent (see eq. 3a).</p><p>Regarding the coordinates of the barycentre of a coarse scale vertex, these are calculated as the mean of the coordinates of the barycenters of its components, weighted by their individual lengths (as in eq. 3d for the x coordinate).</p><p>At metamer scale: = (eq. 3a)</p><p>, = , + (eq. 3b)</p><p>At coarse scales:</p><formula xml:id="formula_1">∀ i ⊆ I | parent(i) not ⊆ I: = (eq. 3c) , = ∑ , * ℎ ∑ ℎ</formula><p>(eq. 3d)</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Up-and down-scaling</head><p>In MuSCA, some of the plant properties available at one scale are used to provide a description of the same properties at a coarser (up-scaling) or finer (down-scaling) scale. This is done in simulations running at coarse scales, prior and after the calculation of carbon flows, respectively by calling up-and down-scaling functions (except for the initial calculation of biomasses, see part From geometry to biomass). The up-scaling of properties such as biomass, carbon supplies and demands of plant parts is simply done by summing up the property values stored in all the vertices that are contained within the topological boundaries of the coarser scale component. Conversely, down-scaling the same properties from a coarse scale component to its constituting elements requires some assumptions. In particular, when the carbon allocated to a coarse scale component is down-scaled, it is assigned proportionally to the relative carbon demands of its constituent elements.</p><p>Application to realistic tree structures: the case of apple (Malus x domestica Borkh)</p><p>In order to assess the ability of the model to simulate similar growths across multiple scales, to represent competition for C-assimilates and the effect of the scale on computation time, we applied</p><p>MuSCA on different tree structures of apple trees, represented at multiple topological scales). These were MTGs of three apple trees simulated by the MAppleT architectural model <ref type="bibr" target="#b9">(Costes et al. 2008)</ref>.</p><p>MAppleT combines markovian models for the simulation of growth unit succession and branching with a biomechanical model for axis bending. Along growth units, individual leaf area was simulated based on a logistic function and assuming different final values of leaf areas for the preformed (7 leaves) and neoformed parts of the GU (Da <ref type="bibr">Silva et al., 2014a)</ref>. This model was previously calibrated on Fuji cultivar <ref type="bibr" target="#b9">(Costes et al., 2008)</ref> and so that it could be used to generate one four year old 'Fuji' tree that was used in this study. Moreover, two other trees were simulated by initiating simulations using two different sequences of lateral types along the trunk observed on trees originated from a bi-parental population, as previously proposed by Da <ref type="bibr">Silva et al. (2014b)</ref>.</p><p>These two trees were selected within the population in order to test our C allocation model on trees displaying contrasted architectures. Simulations were run for each individual tree on a single day, so that the direct effect of changing the topological scale could be analyzed while excluding possible retroactions and cumulative effects (such as the re-use of C delivered in excess to a plant component). A partly cloudy day of late June (day of the year = 182) was chosen to drive photosynthesis. This allowed on the one hand C-limiting conditions to occur (the use of very sunny days resulted in C-allocation generally satisfying the whole fruit C-demand), and on the other hand to represent trees in which shoot elongation, and thus the creation of new internodes, ended. Initial fruit dry weight was set to be identical for all fruits and equal to 8 g <ref type="bibr" target="#b46">(Reyes et al. 2016)</ref>.</p><p>For the application of the carbon allocation model on tree structures, we developed a few modules containing some species specific parameters and allometric relationships (Table <ref type="table" target="#tab_0">1</ref>, Table <ref type="table" target="#tab_1">2</ref>). These were needed, firstly to convert the geometric descriptions of the trees contained in the MTGs into values of biomass (Supplementary Information: Input tree structures), and then to estimate the values of carbon demands for dry matter accumulation (see Source and Sink strengths).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Source and Sink strengths</head><p>In MuSCA, the amount of C-assimilates available from photosynthesis in individual leaves is estimated with a radiative model: RATP: <ref type="bibr" target="#b49">(Sinoquet et al. 2001</ref>) integrated within the OpenAlea platform and running on MTG structures (see also Supplementary Information: Inputs of the MuSCA model). In RATP the tree structure is first discretized into voxels of user-defined size. The voxel specific mean leaf area density (turbid medium assumption) is calculated based on the plant 3D representation in space. This is then used to compute the direct and diffused PAR and NIR light intercepted in each voxel, and its related photosynthesis, every 30 minutes, across the whole day.</p><p>The C-assimilation estimated per leaf unit surface is first associated to each leaf and integrated over the whole day, and then converted into dry matter uptake per leaf per day. In this study, a previous calibration of RATP for the apple trees, Fuji cultivar <ref type="bibr" target="#b37">(Massonnet et al. 2006)</ref>, was used.</p><p>Sink strengths were calculated as the sum of the carbon demands for dry matter accumulation into the plant structure and the carbon lost by respiration (Table <ref type="table" target="#tab_1">2</ref>). The first term was assumed to follow maximum potential relative growth rates. Maximum potential growth curves were obtained by fitting thermal-time-dependent gompertz functions to organ-type-specific maximum dry weights <ref type="bibr" target="#b23">(Grossman and DeJong 1995)</ref> of proleptic and epicormic shoots, and fruits of apple Fuji trees growing in conditions where competition for carbohydrates was minimized <ref type="bibr" target="#b46">(Reyes et al. 2016)</ref>. Their normalized derivatives <ref type="bibr" target="#b27">(Hunt 1982;</ref><ref type="bibr" target="#b23">Grossman and DeJong 1995)</ref> represent the seasonal patterns of organ type specific activities (or maximum potential relative growth rates). Regarding the old wood, the slope of a linear relationship fitted through the logarithm of the relative growth rate of the old wood biomass vs growing degree days (GDD) obtained by <ref type="bibr" target="#b46">Reyes et al. (2016)</ref> was used. Values of sink activities of the current days were then used, together with the organ dry weight and the Growing Degree Days (GDD), to estimate the C-demand for dry matter accumulation ( ) of the same day (eq.4) <ref type="bibr" target="#b36">(Marcelis 1996)</ref> at the metamer scale. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Definition of topological scales</head><p>Five biologically relevant scales of representation of trees were used. Two of them are commonly used in MTG (metamer and growth unit) and three are newly defined (trunk, branches and shoots; 1 st order branch and inter-branches; fruiting unit) (Fig. <ref type="figure">3</ref>). New scales were defined by setting criteria for the identification of edges, along the plant topology, among which all elements could be considered as belonging to the same group. The finest scale considered was the metamer (M) (or phytomer) that is composed of a node and its leaf(ves) and axillary bud(s) plus the subtending internode. This scale was considered as a reference for the representation of carbon allocation in this study. The second scale corresponds to the GU <ref type="bibr" target="#b4">(Barthélémy 1991)</ref>. The third scale corresponded to the discretization of the tree in main trunk, first order branches originating from it and the leafy shoots (Trunk, Branches and Shoots, TBS). The fourth scale corresponded to first order branches originating from the main trunk, but without considering the individual shoots separately (BR1). The fifth scale corresponded to the FU. In all scales, the root was considered as a compartment in itself.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Simulation of fruit growth</head><p>We run simulations for the three apple tree structures represented at the five topological scales defined above. In order to identify a biologically sensible value of the friction parameter (h), this was varied across a range of almost two orders of magnitude (0.5-16).</p><p>We tested the model ability to simulate competition for the available C among tree organs at M scale. This was done by analysing the growth of individual fruits in relation to both the fruit load and the carbon assimilated in the surrounding of the analysed fruit. In particular, a neighborhood of the analyzed fruit is defined as the set of metamers for which the geometrical distance between their barycenter and the barycenter of the metamer containing the fruit is lower than a given threshold.</p><p>Considered a growing fruit, the ratio between the amount of C-assimilated and the number of fruits present in its neighborhood represents a comfort index with respect to the availability of C for fruit growth and the occurrence of competition with other fruits. As such, the correlation between this ratio and the simulated growth of individual fruits belonging to the same neighborhood illustrates whether fruit growth is affected by the competition for C-assimilates occurring within the area around the analysed fruit. Based on these considerations, the values of C-assimilated and the number of other fruits in the surrounding of individual fruits present on each tree was calculated for neighborhoods of incremental radii <ref type="bibr">(radii of 5, 15, 25, 35, 45, 55, 65, 75, 95, 115, 135 cm)</ref> and for different friction parameters. Then, a correlation between the ratio (C-assimilated/number of fruits)</p><p>and the simulated growth of individual fruits belonging to the same neighborhood was calculated for each radius and friction parameter value. Significance of the correlations was then adjusted for multiple comparisons with the Bonferroni correction (i.e. dividing the significance level of the test, p-value = 0.05, by the number of correlations for which significance was tested: eleven distances).</p><p>Biological relevance was also tested by comparing the simulated growth on the Fuji tree structure and harvested fruit size distribution on field trees of the same age (four years old) and cultivar. Based on the assumption that fruit weight obtained in early growth stages is correlated to the fruit weight at harvest <ref type="bibr" target="#b51">(Stanley et al. 2000)</ref>, we compared the distributions of the normalized values of the carbon allocated in our simulations with fruit weight measured at harvest <ref type="bibr">(Costes, unpublished data)</ref>. Similarity among distributions was also assessed in terms of Root Mean Squared Error (RMSE) between distribution counts. Based on these results, a narrower range of friction parameter values was identified as more biologically relevant and used in further analysis.</p><p>The coherence of simulations across scales was tested by correlating the fruit growth obtained at each coarse scale with the one at M scale, used as a reference. Results obtained for equal friction parameter and same tree structure were considered together. For each coarse scale component, the average of the fruit growth obtained at M scale within the boundaries of the coarse scale component was computed. As such, a one-to-one comparison was possible between mean growth at M and other (coarser) scales. Deviations between M and the other scales were assessed visually on correlation plots, and by means of the coefficient of variation of the root mean squared error (CV RMSE).</p><p>The effect of using different topological scales on the number of plant components and on simulation time was also analyzed. All simulations were run on a computer equipped with an Intel i7-6700HQ 2.59 Ghz CPU, 8Gb RAM; OS: Windows 10 Home, 64bit.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RESULTS</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Testing physiological assumptions</head><p>Relative growth rate (RGR) of shoots in the Fuji tree structure at M scale increased with the values of the friction parameter while, for fruits and old wood, it increased for h values from 0.25 to respectively 4 and 2, and then decreased until a value of 16 (Table <ref type="table" target="#tab_2">3</ref>). In other terms, the higher the values of the friction parameter the higher was the growth occurring close to the C-source. RGRs of old wood and shoots were comprised between normal growth observed in the field and maximum potential growth data used for calibration of sink demands (between 5.3*10 -3 and 3.1 *10 -2 mg/g for the old wood, between 0.4 and 1.2 mg/g for shoots; <ref type="bibr" target="#b46">Reyes et al. 2016)</ref>. Conversely, fruit growth was between 35% and 51% lower in respect to the fruit growth observed in the normal field conditions (1.9 and 2.8 mg/g for fruits).</p><p>Simulation results at M scale show the impact of the friction parameter (h) in determining the area around an individual fruit within which this competes for C-assimilates with other fruits (Fig. <ref type="figure" target="#fig_6">4A,</ref><ref type="figure">B</ref>). As shown by the significant correlations among fruit growth and comfort index (ratio between C-assimilated and number of fruits), the neighborhood within which fruit growth is affected by competition for C is relatively large (&gt;0.9 m) for small values of the friction parameter (0.5 -4). This means that the within-tree variability in fruit growth is mostly related to C-sources located far from it. In other terms, a large part of the tree structure affects the growth of each individual fruit. Conversely, for high friction parameter values (8, 16), fruit growth is affected mainly by the C provided by close leaves and possibly the competition with neighboring fruits (neighborhood &lt; 0.9 m) (Fig. <ref type="figure" target="#fig_6">4B</ref>).</p><p>The normalized fruit dry weight simulated on the four-year old Fuji tree was compared to that of fruits measured at harvest in a two similar trees, in order to evaluate what range of the friction parameter best fit the observed fruit size distribution (Fig. <ref type="figure" target="#fig_6">4C</ref>). The lowest RMSE values were obtained with h parameter values between 4 and 16. High values, however, produced skewed distributions with variability larger than the one obtained in the field (h = 16). Conversely, for low h values (0.5, 1) distributions had a consistently lower variability than in the field. Similar variability and low RMSE values were obtained with the friction parameter values of four and eight.</p><p>C-allocation at multiple scales Changing the scale of representation of the tree from M to coarser scales sharply decreased the number of represented topological components of the tree structures. Trees at GU, TBS, BR1</p><p>and FU scales contained respectively about 12.7%, 8.6%, 1.6%, and 1.2% the elements they had at M scale (Table <ref type="table" target="#tab_3">4</ref>).</p><p>Changing topological scale had also a significant impact on fruit growth. In order to ease the interpretation, and based on the above fitted values, only results for the best friction parameter values (2 &lt;= h &lt;= 8) are presented. Fruit growth at GU and TBS scales was more correlated to results at M scale than at coarser scales (BR1, FU) (Fig. <ref type="figure" target="#fig_7">5</ref>). Generally, in simulations at coarse scales, fruit growth predictions was lower in respect to the M scale. For instance, when running the simulations at FU scale, differences in mean fruit dry weight compared to those obtained at M scale (used in the PEACH model, Allen et al. 2005) went up to 60% in terms of coefficient of variation of the RMSE (Fig. <ref type="figure" target="#fig_8">6B</ref>).</p><p>As expected, multiple fruits belonging to the same coarse scale component had the same growth (size of spheres on Fig. <ref type="figure">3</ref>). This was due to the facts that that all fruits at the beginning of the simulation had identical weight and that the carbon allocated to a coarse scale component is proportionally divided according to individual metamer carbon demand. As a consequence, the higher the resolution in representing the plant structure (Metamer &gt; Growth Unit &gt; TBS &gt; 1 st order Branching ≈ Fruiting Unit), the higher number of different fruit growth achieved (Fig. <ref type="figure" target="#fig_7">5</ref>). Globally, the lower the friction parameter the lower the range of fruit growth variability, in all the tree structures and at all topological scales (Fig. <ref type="figure" target="#fig_6">4C</ref>, Fig. <ref type="figure" target="#fig_7">5D</ref>). The corollary of these observations is high values of the friction parameters result in a relatively wide range of fruit growth at all scales, but with lower within-tree variability when moving from a M to a coarse scale.</p><p>Simplification of the tree structures and computation efficiency Computation time was found as a third order polynomial function of the number of components in the plant (Supplementary Information -Fig. <ref type="figure" target="#fig_4">1</ref>). The reduction in the number of represented plant components, obtained by changing scale from M to FU (down to 0.8%) in the presented simulations, resulted in a gain in computation time of up to four orders of magnitude (down to 0.2%) (Table <ref type="table" target="#tab_3">4</ref>).</p><p>The reduction in computation time associated with the use of coarser scales (Table <ref type="table" target="#tab_3">4</ref>)</p><p>corresponded to an increased discrepancy (in terms of the Coefficient of Variation of the Root Mean Squared Error: CV RMSE) in the results obtained between M and other scales (Fig. <ref type="figure" target="#fig_8">6B</ref>). Error varied from values next to zero at low friction parameters at GU scale, to values up to sixty percent for higher frictions and BR1 or GU scales, and was generally higher for higher fiction parameter values. There were however minor exceptions to this general behavior, with low friction parameter values occasionally providing slightly higher discrepancies than higher values (e.g. for h = 4 at BR1 scale in the Ap-05 and Ap-10 tree structure, in respect to h = 8).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DISCUSSION</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Multi-scale coherence, impact on predictions and computation time</head><p>To our knowledge, MuSCA is the first C-allocation model that allows simulating Callocation at multiple topological scales within a plant representation. Simulation results revealed that the model was able to produce results which are highly correlated with the M scale, especially when running at GU scale (Fig. <ref type="figure" target="#fig_7">5</ref>). As a rule of thumb, the deviation between predictions obtained at M and other scales increased when up-scaling and for increasing friction parameter values (Fig. <ref type="figure" target="#fig_7">5</ref>, Fig. <ref type="figure" target="#fig_8">6</ref>).</p><p>Differences in C allocated to fruits at M and other scales are due to two factors. Firstly, after allocation, the C received by the different plant parts belonging to a component is no longer influenced by their individual positions. As such, the model represents the effects of distances among the components at the coarse scale selected for the simulation, but not among its constituting elements at the finer scale. Second, while the top and basal coordinates of a coarse scale component are inherited from the finer scale components present at its extremities, the coordinates of its barycentre are not. Indeed these are computed as the mean of the coordinates of its components, weighted by their individual lengths. When distances and C-flows are calculated, this generates deviations in respect to the M scale</p><p>The deviations between M and other scales were also affected by the specific plant structure (Fig. <ref type="figure" target="#fig_7">5</ref>). This is likely related to the non-linearity of the simulated process and its relation to the different discretization of the plant. In trees, the different contribution in respect to the available C of annual organs (leaves and fruits) and the presence of the moderate C-sink of woody organs may create contrasting patches in terms of C-supplies and C-sinks (Fig. <ref type="figure" target="#fig_6">4</ref>). When the tree is discretized at different scales, the distances between patches of sources and sinks and their constituting elements are modified. By changing discretization, the set of distances to which the non-linear function (eq.</p><p>1) is applied to compute C flows also changes, implying sharp differences in C-allocation. Changes are thus related to the geometry of the tree structure as well as to the specific friction parameter, as they determine the spatial domain and the impact of the C-allocation rule. In this regard, further research would be required to explore the impact of commonly applied equations for C-allocation (e.g. eq. 1, equations in <ref type="bibr" target="#b0">Balandier et al. 2000;</ref><ref type="bibr" target="#b33">Lescourret et al. 2011</ref>) on tree architectures contrasting in terms of distributions of sinks and supplies in relation to their discretization.</p><p>Changing topological scale also had a strong impact on the computation time. This is an important limiting factor for the simulation of carbon allocation in complex tree structures, and consequently simulations of tree growth at high spatial detail tends to be limited to relatively young plants <ref type="bibr" target="#b0">(Balandier et al. 2000;</ref><ref type="bibr" target="#b40">Pallas et al. 2016)</ref>. Computation time in MuSCA closely approximates a third order polynomial function of the number of represented plant components (Supplementary Information -Fig. <ref type="figure" target="#fig_4">1</ref>), suggesting the need to reduce plant complexity to simulate plant growth with this type of source-sink model. In this study, the GU scale was able to reproduce values and fruit growth distributions almost identical to M, while saving computation time (Fig. <ref type="figure" target="#fig_7">5</ref>, Fig. <ref type="figure" target="#fig_8">6</ref>). It is possible that the optimal scale of representation may be influenced by tree size. Because of the exponential increase in tree topological complexity with tree age, relatively small variations in C-dynamics in early growth stages may have important consequences for the development of the tree structure at later stages. We propose the hypothesis that intermediate scales comprised between M and GU may further decrease the deviations in respect to M scale. We further suggest that a mixed use of high and relatively low topological resolutions, respectively for young and older trees, may optimize prediction accuracy while still allowing for simulations on mature trees.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Testing physiological assumptions</head><p>The formalization used in MuSCA to calculate C-allocation (eq. 1a) <ref type="bibr" target="#b0">(Balandier et al. 2000)</ref> represented the impact of C-availability and competition among sinks, such as the fruits (Fig. <ref type="figure" target="#fig_6">4</ref>) on fruit growth variability.</p><p>RGRs at compartment level was lower range of field observations. This is due to the choice for simulations of a partly cloudy day, in which C-assimilation could limit growth, resulting in enhanced competition for C (whereas simulations in very sunny days resulted in higher growth and reduced fruit growth variability, data not shown).</p><p>In MuSCA, the considered friction parameter (h, eq. 1) is empirical and does not correspond to a clear biological process. As in previous studies, this parameter has been estimated by trial and error <ref type="bibr" target="#b0">(Balandier et al. 2000)</ref>. Nonetheless, the comparison between the simulated and harvested normalized fruit growth distribution suggests that h values should be between four and eight (Fig. <ref type="figure" target="#fig_6">4C</ref>). This suggests that neither a common assimilate pool <ref type="bibr" target="#b26">(Heuvelink 1995)</ref> of carbon nor a shoot or branch autonomy <ref type="bibr" target="#b50">(Sprugel et al. 1991)</ref> was adequate for accounting for assimilate partitioning within a fruit tree as observed in previous experimental studies <ref type="bibr" target="#b56">(Walcroft et al. 2004;</ref><ref type="bibr" target="#b54">Volpe et al. 2008)</ref>. Moreover, fluxes from parts of trees with high carbon supply to parts with a low one have already been used for modeling the within-tree variation in fruit size in peach and apple trees <ref type="bibr" target="#b33">(Lescourret et al. 2011;</ref><ref type="bibr" target="#b40">Pallas et al., 2016)</ref>. Nevertheless, it has also been observed that the level of shoot or branch autonomy can vary depending on the phenological date with a higher branch autonomy during summer period compared to winter <ref type="bibr" target="#b30">(Lacointe et al. 2004</ref>). Further simulations and analyses with MuSCA performed by dynamically tuning the friction parameter values could help testing such behaviors.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Advantages of flexible C-allocation at multiple-scales</head><p>By making a dynamic use of MTG <ref type="bibr" target="#b20">(Godin and Caraglio 1998)</ref> the presented model allows us modifying the type of "individual entities" considered in source-sink exchanges within a plant structure on the fly. This is also made possible by formalisms which are equally applicable at all scales (Fig. <ref type="figure">2</ref>, eq. 2, 3) and inherit, from fine to coarse scales, the spatial (coordinates of scale boundaries) and extensive (C-demands and supplies, Up-and down-scaling) properties necessary for the calculation of C-flows.</p><p>The flexibility related to the multi-scale features of the model provides several opportunities.</p><p>While the topological scale typically represented in a plant models mirrors the interests of a particular group of model users, changing the scale of representation makes the model of practical interest for multiple objectives. As showed in this study, the model can be used to assess the implications of using specific scales. From our results, in most cases and for trees of this size, the GU scale would be a robust alternative to M, while allowing much faster simulations. Comparisons of results among C-allocation models could be facilitated by adapting the scale of representation.</p><p>For instance, the individual fruit growth simulated at the FU scale can be compared with results obtained by QualiTree <ref type="bibr" target="#b33">(Lescourret et al. 2011)</ref>.</p><p>In this study, MuSCA was applied on MTGs issued from the MAppleT architectural model <ref type="bibr" target="#b9">(Costes et al. 2008)</ref>. However, MTGs coming from other sources, such as the several models present in the OpenAlea environment, could also be used, given their compliance with certain prerequisites. Also, the detail in the description of the plant could be less detailed since, technically, a representation at metamer resolution is not strictly necessary. Indeed, in order to run MuSCA, the plant description should simply allow for the identification of the organ types (via the presence of leaves and fruits), their geometrical sizes (length and radiuses) and their topological connections <ref type="bibr">(succession, branching)</ref>. This makes the model applicable on tree structures acquired in the field by methods such as the Terrestrial Laser Scanner (TLS), followed by topological reconstruction of the plant <ref type="bibr" target="#b44">(Raumonen et al. 2013;</ref><ref type="bibr" target="#b6">Boudon et al. 2014;</ref><ref type="bibr" target="#b45">Reyes 2016)</ref>. In addition, field data collected at various topological scales might still be suitable for model testing. Indeed, by using the up-and down-scaling, results simulated at any spatial scale can be brought to the scale at which the data for validation are available.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Model limitations and further developments</head><p>MuSCA still neglects to represent some important physiological implication of the distribution of sinks along the plant topology. In particular, the influence of individual sinks present in the path between sources and sinks on the C-flow is not fully described, as in models based on an electric analogy and the L-system formalisms <ref type="bibr">(Allen et al. 2005;</ref><ref type="bibr" target="#b7">Cieslak et al. 2011)</ref>. Indeed, two identical C-sinks (D1, D2) present at the same distance from a source (S) will receive form this source an identical amount of C, no matter if along the path between S and D1 there are stronger or more abundant C-sinks than along the path between S and D2. Nevertheless, simple models as our have the advantage to require the calibration of one parameter only compared to these previous approaches.</p><p>It is important to remember that like other carbon allocation models applicable to large plant structures, MuSCA makes use of an empirical parameter (the friction parameter). In this study we identified a range of possibly sound parameter values, but more appropriate ones could be experimentally estimated from measurements of the sap flow through marked isotopic carbon <ref type="bibr" target="#b25">(Hansen 1967)</ref>, as well as measurements of fruit growth in simple tree structures with modified fruit loads.</p><p>The MuSCA model could be further refined by using the MTG properties to increase the computational efficiency without losing prediction accuracy. For instance, when running at coarse scale, the direction of origin of C-assimilates might be used to account for distance also within the boundaries of the coarse scale component.</p><p>The creation of new metamers should be included in order to allow for the simulation of plant growth during elongation and growth periods (on not-fixed structures). In addition, given the influence of pruning on the distribution and emergence of carbon sinks, the implementation of a module describing reactions to this management practice (e.g. <ref type="bibr" target="#b15">DeJong et al. 2012)</ref> would significantly extend the applicability of the model to a broader range of real cases. Further, a more detailed description of the root would be the starting point to investigate water and nutrient limitations at the soil interface.</p><p>Regarding the use of MuSCA in the larger context, its generality can ease its adaptation to different species. In addition, the modular implementation of MuSCA in the OpenAlea environment facilitates the integration with other, previously developed, models, as it was the case for the connection with the MAppleT <ref type="bibr" target="#b9">(Costes et al. 2008)</ref>   M scale (solid lines) and coarser scales (dashed lines). The scale at which the plant is represented determines up-and down-scaling processes. In case a coarse scale is chosen, carbon demands and supplies are up-scaled.</p><p>Carbon allocation is then computed among the plant components at the chosen scale. After allocation, if the selected scale was a coarse one, the carbon allocated to each component is divided among its constituent elements. Biomass of individual elements is eventually updated prior to moving to the next time-step. MTG:</p><p>Multi-scale Tree Graph. In italics are the steps containing species specific parameters. trees with an higher number of colors are made of a higher number of components. The number of components at each scale is indicated in the corresponding low left corner. Lower panels: the volume of the represented spheres is proportional to the normalized increment in fruit dry weight within the tree.</p><p>Simulations were run with a friction parameter equal to eight.  Correlation between carbon allocated to fruits per day at the selected coarse scale (y axes) vs carbon allocated to fruits per day at M scale and averaged for all metamers belonging to a same component at coarser scale (x axis) in A: Fuji, B: Ap-05, C: Ap-10. D: Fruit growth distribution in the Fuji tree structure (dashed for h=2, dotted for h=4, solid for h=8).    At the beginning of the simulation, the model uses the geometrical description of the plant and some species specific parameters <ref type="bibr">(Reyes et al. 2016, in-field observations)</ref> to estimate the initial dry weight of each plant component at the metamer scale (see Supplementary Information:</p><p>Inputs of the MuSCA model). In particular: dry weight of old wood and vegetative internodes are computed as functions of their geometrical description (lengths and radiuses), and of a constant (wood density) or a function of thermal time, respectively; fruits dry weight is calculated from fresh weight and a constant (dry to fresh fruit dry weight ratio); leaf dry weight is calculated from surface and a constant (per unit surface leaf dry mass) (Table <ref type="table" target="#tab_0">1</ref>). Dry mass of individual internodes is calculated as follows: volumes of internodes are first computed as truncated cones, summed up to provide the volume of individual shoots and stored at a "current year shoot" coarse scale. The length of current year shoots is then obtained by summing the lengths of their internodes, and used to estimate shoot biomass by means of a thermal-time dependent allometric relationship (Table <ref type="table" target="#tab_0">1</ref>) <ref type="bibr" target="#b46">(Reyes et al. 2016)</ref>. Finally, the dry biomass of individual internodes is calculated as their individual volumetric fraction in the shoot to which they belong, multiplied by the shoot dry biomass.</p><p>Regarding the root, a rough representation of this compartment was added to the plant. A root mass, defined as proportional to the total mass of the current year shoots, is added to the root metamer following the shoot/root functional balance assumption <ref type="bibr" target="#b12">(Davidson 1969;</ref><ref type="bibr" target="#b21">Grechi et al. 2007)</ref>. The length of the roots is represented as equal to half the average distance between the soil and the vegetative shoots. The root basal coordinates are thus defined equal to the tree basal coordinates, except for the vertical (z axis) component, to which the calculated distance is subtracted (downward translation). </p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head></head><label></label><figDesc>computation of C-allocation by a model is affected by both the formalism used to describe the physiological processes and the discretization of the plant. Because of this, identifying what causes differences in results produced by different models can be difficult. The present work proposes a new, source-sink, Multi-Scale Carbon Allocation model (named MuSCA), whose aim is to allow for a flexible definition of topological plant scales concomitant with the simulation of carbon allocation. The model relies on the use of Multi-scale</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head></head><label></label><figDesc>present the formalisms used to compute C-allocation and to move across scales. The model is calibrated for the apple tree (Malus x domestica Borkh.), Fuji cultivar, for C-demands. It is linked to a radiative model for the estimation of C-assimilates by leaves. The model is then applied on three contrasted apple tree structures and for different values of an empirical sap friction parameter, and the effects of competition for C-assimilates on fruit growth are analyzed. Field observations are then compared to the fruit growth distribution simulated on one tree structure to retain the sap friction parameter values that might best represent sap flow dynamics. The ability of the multi-scale formalism to produce similar results across scales and the influence of the scale of representation on the simulated carbon allocation are analysed. Finally, the trade-off between computational efficiency and accuracy are discussed, also in respect to the possible interactions between specific tree structure and the topological scale used.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head></head><label></label><figDesc>Respiration was split into maintenance and growth components as proposed by<ref type="bibr" target="#b33">Lescourret et al. (2011)</ref> and<ref type="bibr" target="#b40">Pallas et al. (2016)</ref>. The maintenance components was modeled as proportional to dry mass, a Q10 law, and a maintenance respiration parameter. Growth respiration was considered as proportional to the growth respiration coefficient and to the sum of the carbon demanded for maintenance respiration and for the dry matter increase. Parameter values provided byPallas et al.,    2016 were used.     </figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head></head><label></label><figDesc>and the RATP models (DaSilva, Han, and    Costes 2014).CONCLUSIONSIn this study we presented MuSCA, to our knowledge the first C-allocation model allowing to simulate C-allocation at multiple topological scales of representation of the plant. The presented model provides topologically-based methods to re-interpret/simplify the topological scale at which the process of carbon allocation is simulated. The simulations revealed a major impact of the topological scale, used to discretize C-sources and sinks, on the predicted C-allocation, even when other C-allocation rules (equation for C-allocation and friction parameter) were kept constant. The model can be used to identify which degree of simplification is acceptable for the representation of plant structures without compromising the accuracy in the computation of carbon allocation. It can be used on large plants, being aware of the trades-off in terms of computation time and prediction accuracy. In addition, the flexible representation of the plant topology facilitates matching the needs of different users, while using the same model. For instance, a relatively coarse scale (e.g. branch) could be more suited for a farmer interested in fruit thinning, than a fine one (e.g. metamer) that could be the target of a modeler interested in investigating the local drivers of individual fruit size variability.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Fig. 1 :</head><label>1</label><figDesc>Fig.1: Conceptual workflow of the model: (A) General framework for the application of the model; (B) the core of MuSCA. (A): A multi-scale tree graph representing a plant structure at a given developmental stage is provided. This is used, together with the Growing Degree Days (GDD), allometric relationships and plant geometric information to compute initial volumes and biomasses of plant components at metamer (M) scale. Carbon demands are estimated at metamer scale by making use of species specific seasonal sink activities, biomasses and GDD at the current time step. The position of individual leaves on the plant structure is used by the radiative model RATP to compute light interception and, together with meteorological conditions, the individual leaf photosynthesis. (B): The workflow follows different paths depending on the selected scale:</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Fig. 2 :Fig. 3 :</head><label>23</label><figDesc>Fig.2: Workflow and graphical representation of the calculation of distances. (A) Workflow for the calculation of the distance between two vertices i, j: top coordinates of vertices are used to compute coordinates of basis and barycenters for the whole topology. Given two vertices i, j, their distance is calculated in three steps: the Greatest Common Ancestor (GCA) of i, j is identified; an iterative process sums the length of the vertices connecting GCA to i and j; the semi-lengths of i and j are also summed. (B) Graphical representation of the: calculation of coordinates of basis and barycenters at (above) metamer (M) scale. The base of a vertex corresponds to the top of its parent; coordinates of the barycentre of a vertex are calculated from the ones of its top and base. (Middle) the base of a coarse scale vertex (capital I) corresponds to the base of its first component (lowercase i), which is inherited from the top of its parent at M scale (lowercase i-1); coordinates of the barycenter of a coarse scale vertex are obtained as the mean ofthe coordinates of its own components at M scale, weighted by their lengths. (Below) calculation of the semilength of a vertex, identification of GCA and computation of distances along a path connecting two vertices i, j. Data used as input of calculations are indicated by red rhombi and are connected by arrow to the respective output represented by green crosses. Fig.3: Simulation of carbon allocation and fruit growth on a tree structure represented at different spatial scales during one day. Upper panels: tree parts represented with the same color belong to the same scale, i.e.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Fig. 4 :</head><label>4</label><figDesc>Fig.4: Physiological responses in simulations at M scale, in respect to different tree structures and friction parameters (h). A: Three dimensional representation of the tree structures with fruit growth (obtained with h parameter equal to 8). B: correlation between individual fruit growth and the ratio between carbon assimilated and number of fruits evaluated in neighborhoods of increasing radiuses. C: Distributions of the normalized simulated fruit growth (red, coloured bars) superposed with the normalized fruit dry weight measured at harvest (black, empty bars), in the 4 years old simulated and observed Fuji trees for different friction parameters. The Root Mean Squared Error (RMSE) between distribution counts for different friction parameters is provided. The upper parts of the histograms for h &lt; 2 are cut off in order to allow better visualization of results on the vertical axis.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head>Fig. 5 :</head><label>5</label><figDesc>Fig.5: Mean daily fruit dry weight increment and its distribution (in Fuji apple cultivar) depending on the topological scales (from left to right), tree structure (from top to bottom) and friction parameters h (symbols).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><head>Fig. 6 :</head><label>6</label><figDesc>Fig.6: Trade-off between computation time and prediction error. The logarithm of the computation time and the Coefficient of Variation of the Root Mean Squared Error (CV RMSE) between fruit growth at different topological scales in respect to the M scale, on three tree structures and for different friction parameters (h).A: Fuji, B: AP-05, C: AP-10.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_9"><head></head><label></label><figDesc>9*10 ^-3 g * g^-1 * C^-1 Gompertz equation for fruits and shoots Dry weight = a * exp(b * exp(c * GDD) Normalized derivative Relative Growth Rate = (a * b * c * exp(b * (exp(c * GDD)) + c * GDD))/ (a * exp(b * exp(c * GDD)degree days after bloom, after cutoff of base temperature of 4.5 °C.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_10"><head></head><label></label><figDesc>Photosynthesis &amp; C-supplies</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc>Model parameters and equation for estimation of biomasses.</figDesc><table><row><cell>Parameter</cell><cell>Description</cell><cell>Value/range Unit</cell></row><row><cell cols="3">dry_mass_to_C_mass Ratio to convert carbon assimilated into biomass uptake 2.105263158 -</cell></row><row><cell>wood_density</cell><cell>Old wood density</cell><cell>700 Kg/m3</cell></row><row><cell>spec_leaf_surface</cell><cell>Per unit surface leaf dry mass</cell><cell>0.08 Kg/m2</cell></row><row><cell cols="2">dry_to_fresh_DWratio Ratio to convert apple fruit fresh to dry weight</cell><cell>0.15 -</cell></row><row><cell cols="2">shoot_to_root_growth Vegetative shoot to root biomass ratio</cell><cell>4.5 -</cell></row><row><cell cols="3">Generalized linear model to estimate shoot biomass (g) from length (cm) and termal time (°C)</cell></row><row><cell cols="3">Dry weight = exp ( a + b * log( length ) + c * GDD + d * length + e * log ( length * GDD) )</cell></row><row><cell>a</cell><cell>-3.073409537</cell><cell></cell></row><row><cell>b</cell><cell>0.706724497</cell><cell></cell></row><row><cell>c</cell><cell>5.78E-05</cell><cell></cell></row><row><cell>d</cell><cell>0.020013707</cell><cell></cell></row><row><cell>e</cell><cell>9.81E-05</cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 2 :</head><label>2</label><figDesc>Model parameters and equations for the estimation of carbon demand for dry matter increase</figDesc><table><row><cell>Parameter</cell><cell>Description</cell><cell>Value/range</cell><cell>Unit</cell></row><row><cell>trunk_activity</cell><cell>Sink activity for old wood</cell><cell cols="2">0.000031 g * g^-1 * C^-1</cell></row><row><cell></cell><cell>Range of values for leaf activity (from Look Up</cell><cell></cell><cell></cell></row><row><cell>leaf_activity</cell><cell>Table)</cell><cell>0 to 1.</cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 3 :</head><label>3</label><figDesc>Relative growth rate at metamer scale for different friction parameter values (h) on the Fuji apple cultivar. Figures are reported with five decimals in order to see RGR differences when using different h values.</figDesc><table><row><cell cols="4">Relative growth rate (mg g -1 dd -1 )</cell></row><row><cell>h</cell><cell>Old wood</cell><cell>Shoot</cell><cell>Fruit</cell></row><row><cell>0.25</cell><cell>0.016</cell><cell>0.50</cell><cell>1.19</cell></row><row><cell>0.5</cell><cell>0.016</cell><cell>0.50</cell><cell>1.20</cell></row><row><cell>1</cell><cell>0.018</cell><cell>0.50</cell><cell>1.20</cell></row><row><cell>2</cell><cell>0.019</cell><cell>0.51</cell><cell>1.22</cell></row><row><cell>4</cell><cell>0.018</cell><cell>0.54</cell><cell>1.23</cell></row><row><cell>8</cell><cell>0.015</cell><cell>0.63</cell><cell>1.17</cell></row><row><cell>16</cell><cell>0.009</cell><cell>0.63</cell><cell>0.93</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 4 :</head><label>4</label><figDesc>Number of components included in tree structures at different scales.</figDesc><table><row><cell>Tree</cell><cell></cell><cell>Number of</cell><cell></cell><cell>Computation</cell><cell></cell></row><row><cell cols="2">structure Scale</cell><cell cols="2">components %</cell><cell>time (min)</cell><cell>%</cell></row><row><cell></cell><cell>M</cell><cell>3355</cell><cell>100</cell><cell>175.6</cell><cell>100.0</cell></row><row><cell></cell><cell>GU</cell><cell>521</cell><cell>15.5</cell><cell>1.0</cell><cell>0.6</cell></row><row><cell>Fuji</cell><cell>TBS</cell><cell>320</cell><cell>9.5</cell><cell>0.6</cell><cell>0.4</cell></row><row><cell></cell><cell>BR1</cell><cell>29</cell><cell>0.9</cell><cell>0.4</cell><cell>0.2</cell></row><row><cell></cell><cell>FU</cell><cell>67</cell><cell>2</cell><cell>0.4</cell><cell>0.2</cell></row><row><cell></cell><cell>M</cell><cell>4579</cell><cell>100</cell><cell>313.8</cell><cell>100.0</cell></row><row><cell></cell><cell>GU</cell><cell>535</cell><cell>11.7</cell><cell>1.5</cell><cell>0.5</cell></row><row><cell>Ap-05</cell><cell>TBS</cell><cell>402</cell><cell>8.8</cell><cell>1.1</cell><cell>0.4</cell></row><row><cell></cell><cell>BR1</cell><cell>115</cell><cell>2.5</cell><cell>0.7</cell><cell>0.2</cell></row><row><cell></cell><cell>FU</cell><cell>36</cell><cell>0.8</cell><cell>0.7</cell><cell>0.2</cell></row><row><cell></cell><cell>M</cell><cell>4083</cell><cell>100</cell><cell>246.4</cell><cell>100.0</cell></row><row><cell></cell><cell>GU</cell><cell>449</cell><cell>11</cell><cell>1.1</cell><cell>0.4</cell></row><row><cell>Ap-10</cell><cell>TBS</cell><cell>302</cell><cell>7.4</cell><cell>0.8</cell><cell>0.3</cell></row><row><cell></cell><cell>BR1</cell><cell>59</cell><cell>1.4</cell><cell>0.6</cell><cell>0.2</cell></row><row><cell></cell><cell>FU</cell><cell>36</cell><cell>0.9</cell><cell>0.6</cell><cell>0.2</cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>ACKNOWLEDGEMENTS</head><p>We acknowledge <rs type="person">Jerome Ngao</rs> and <rs type="person">Marc Saudreau</rs> from <rs type="affiliation">UMR PIAF, INRA at Clermont-Ferrand</rs> respectively for their help in linking RATP to MAppleT and in linking MTG and RATP, in the OpenAlea platform. <rs type="person">F. Boudon</rs> from <rs type="affiliation">UMR AGAP, Cirad at Montpellier</rs>, for some tips on Python coding. The authors thank also <rs type="person">Roberto Zampedri</rs> and <rs type="person">Mr Mauro Cavagna</rs> for field assistance, <rs type="person">Maddalena Campi</rs> for useful discussions, and <rs type="person">Gareth Linsmith</rs> for supervision on the English language and kinship.</p></div>
+			</div>
+			<div type="funding">
+<div><head>FUNDING INFORMATION</head><p>This work was financed by the <rs type="funder">FIRST FEM doctoral</rs> school, which is funded by the <rs type="funder">Autonomous Province of Trento, Italy</rs>.</p></div>
+<div><head>LITERATURE CITED</head><p><rs type="person">Allen MT</rs>, <rs type="person">Prusinkiewicz P</rs>, DeJong TM. 2005. Using L-systems for modeling source-sink interactions, architecture and physiology of growing trees: the L-PEACH model. <rs type="institution">New Phytologist</rs></p></div>
+			</div>
+			<listOrg type="funding">
+			</listOrg>
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Supplementary Information -Fig. <ref type="figure">1</ref> Supplementary Information: Input tree structures In the current application, input tree structures were MTGs produced by the MAppleT model <ref type="bibr" target="#b9">(Costes et al. 2008)</ref>. MAppleT includes (i) Markov models for simulating annual shoot </p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">SIMWAL: a structural-functional model simulating single walnut tree growth in response to climate and pruning</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Balandier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Lacointe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Le</forename><surname>Roux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Sinoquet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Cruiziat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Le</forename><surname>Dizès</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annals of Forest Science</title>
+		<imprint>
+			<biblScope unit="volume">57</biblScope>
+			<biblScope unit="page" from="571" to="585" />
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Reshaping plant biology: qualitative and quantitative descriptors for plant morphology</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Balduzzi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">M</forename><surname>Binder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bucksch</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Frontiers in Plant Science</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Source-sink partitioning. Do we need Munch?</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Bancal</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Experimental Botany</title>
+		<imprint>
+			<biblScope unit="volume">53</biblScope>
+			<biblScope unit="page" from="1919" to="1928" />
+			<date type="published" when="2002">2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Investigation of complex canopies with a functional-structural plant model as exemplified by leaf inclination effect on the functioning of pure and mixed stands of wheat during grain filling</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Barillot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Chambon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Fournier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Combes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Pradal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Andrieu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annals of Botany</title>
+		<imprint>
+			<biblScope unit="volume">123</biblScope>
+			<biblScope unit="page" from="727" to="742" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Levels of organization and repetition phenomena in seed plants</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Barthélémy</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Acta Biotheoretica</title>
+		<imprint>
+			<biblScope unit="volume">39</biblScope>
+			<biblScope unit="page" from="309" to="323" />
+			<date type="published" when="1991">1991</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Plant architecture: a dynamic, multilevel and comprehensive approach to plant form, structure and ontogeny</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Barthélémy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Caraglio</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annals of Botany</title>
+		<imprint>
+			<biblScope unit="volume">99</biblScope>
+			<biblScope unit="page" from="375" to="407" />
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Quantitative assessment of automatic reconstructions of branching systems obtained from laser scanning</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Boudon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Preuksakarn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Ferraro</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annals of Botany</title>
+		<imprint>
+			<biblScope unit="volume">114</biblScope>
+			<biblScope unit="page" from="853" to="862" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">A functional-structural kiwifruit vine model integrating architecture, carbon dynamics and effects of the environment</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Cieslak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">N</forename><surname>Seleznyova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Hanan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annals of Botany</title>
+		<imprint>
+			<biblScope unit="volume">107</biblScope>
+			<biblScope unit="page" from="747" to="764" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Exploring within-tree architectural development of two apple tree cultivars over 6 years</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Costes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Sinoquet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">J</forename><surname>Kelner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Godin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annals of Botany</title>
+		<imprint>
+			<biblScope unit="volume">91</biblScope>
+			<biblScope unit="page" from="91" to="104" />
+			<date type="published" when="2003">2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">MAppleT: simulation of apple tree development using mixed stochastic and biomechanical models</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Costes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Renton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Guédon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Prusinkiewicz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Godin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Functional Plant Biology</title>
+		<imprint>
+			<biblScope unit="volume">35</biblScope>
+			<biblScope unit="page">936</biblScope>
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Light interception efficiency of apple trees: A multiscale computational study based on MAppleT</title>
+		<author>
+			<persName><forename type="first">Da</forename><surname>Silva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Han</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Costes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Ecological Modelling</title>
+		<imprint>
+			<biblScope unit="volume">290</biblScope>
+			<biblScope unit="page" from="45" to="53" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Influence of the variation of geometrical and topological traits on light interception efficiency of apple trees: sensitivity analysis and metamodelling for ideotype definition</title>
+		<author>
+			<persName><forename type="first">Da</forename><surname>Silva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Han</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Faivre</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Costes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annals of Botany</title>
+		<imprint>
+			<biblScope unit="volume">114</biblScope>
+			<biblScope unit="page" from="739" to="752" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Effect of root/leaf temperature differentials on root/shoot ratios in some pasture grasses and clover</title>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">L</forename><surname>Davidson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annals of Botany</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page" from="561" to="569" />
+			<date type="published" when="1969">1969</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Phloem transport: a review of mechanisms and controls</title>
+		<author>
+			<persName><forename type="first">De</forename><surname>Schepper</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">De</forename><surname>Swaef</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Bauweraerts</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Steppe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Experimental Botany</title>
+		<imprint>
+			<biblScope unit="volume">64</biblScope>
+			<biblScope unit="page" from="4839" to="4850" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Understanding the effect of carbon status on stem diameter variations</title>
+		<author>
+			<persName><forename type="first">De</forename><surname>Swaef</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Driever</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Van Meulebroek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Vanhaecke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Marcelis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lfm</forename><surname>Steppe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annals of Botany</title>
+		<imprint>
+			<biblScope unit="volume">111</biblScope>
+			<biblScope unit="page" from="31" to="46" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Using concepts of shoot growth and architecture to understand and predict responses of peach trees to pruning</title>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">M</forename><surname>Dejong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Negron</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Favreau</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Acta Horticulturae</title>
+		<imprint>
+			<biblScope unit="page" from="225" to="232" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<title level="m" type="main">Building modular FSPM under OpenAlea: concepts and applications In</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Fournier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Pradal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Louarn</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="109" to="112" />
+			<pubPlace>Davis, CA, United States</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">A modelling framework to simulate foliar fungal epidemics using functional-structural plant models</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Garin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Fournier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Andrieu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Houlès</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Robert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Pradal</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annals of Botany</title>
+		<imprint>
+			<biblScope unit="volume">114</biblScope>
+			<biblScope unit="page" from="795" to="812" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Modelling interaction dynamics between two foliar pathogens in wheat: a multi-scale approach</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Garin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Pradal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Fournier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Claessen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Houlès</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Robert</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annals of Botany</title>
+		<imprint>
+			<biblScope unit="volume">121</biblScope>
+			<biblScope unit="page" from="927" to="940" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Carbon allocation in fruit trees: from theory to modelling</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Génard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Dauzat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Franck</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Trees</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="page" from="269" to="282" />
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">A multiscale model of plant topological structures</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Godin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Caraglio</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Theoretical Biology</title>
+		<imprint>
+			<biblScope unit="volume">191</biblScope>
+			<biblScope unit="page" from="1" to="46" />
+			<date type="published" when="1998">1998</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Effect of light and nitrogen supply on internal C:N balance and control of root-to-shoot biomass allocation in grapevine</title>
+		<author>
+			<persName><forename type="first">I</forename><surname>Grechi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vivin</forename><surname>Ph</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Hilbert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Milin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Robert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J-P</forename><surname>Gaudillère</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Environmental and Experimental Botany</title>
+		<imprint>
+			<biblScope unit="volume">59</biblScope>
+			<biblScope unit="page" from="139" to="149" />
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">PEACH: a simulation model of reproductive and vegetative growth in peach trees</title>
+		<author>
+			<persName><forename type="first">Y</forename><forename type="middle">L</forename><surname>Grossman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">M</forename><surname>Dejong</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Tree Physiology</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="329" to="345" />
+			<date type="published" when="1994">1994</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Maximum fruit growth potential and seasonal patterns of resource dynamics during peach growth</title>
+		<author>
+			<persName><forename type="first">Y</forename><forename type="middle">L</forename><surname>Grossman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">M</forename><surname>Dejong</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annals of Botany</title>
+		<imprint>
+			<biblScope unit="volume">75</biblScope>
+			<biblScope unit="page" from="553" to="560" />
+			<date type="published" when="1995">1995</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Parameter optimization and field validation of the functionalstructural model GREENLAB for maize</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Zhan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annals of Botany</title>
+		<imprint>
+			<biblScope unit="volume">97</biblScope>
+			<biblScope unit="page" from="217" to="230" />
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">14C-Studies on Apple Trees. II. Distribution of Photosynthates from Top and Base Leaves from Extension Shoots</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Hansen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Physiologia Plantarum</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page" from="720" to="725" />
+			<date type="published" when="1967">1967</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Dry matter partitioning in a tomato plant: one common assimilate pool?</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Heuvelink</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Experimental Botany</title>
+		<imprint>
+			<biblScope unit="volume">46</biblScope>
+			<biblScope unit="page" from="1025" to="1033" />
+			<date type="published" when="1995">1995</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<author>
+			<persName><forename type="first">R</forename><surname>Hunt</surname></persName>
+		</author>
+		<title level="m">Plant growth curves: the functional approach to plant growth analysis</title>
+		<meeting><address><addrLine>London</addrLine></address></meeting>
+		<imprint>
+			<publisher>Edward Arnold</publisher>
+			<date type="published" when="1982">1982</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">The derivation of sink functions of wheat organs using the GREENLAB model</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Kang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">B</forename><surname>Evers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Vos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>De Reffye</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annals of Botany</title>
+		<imprint>
+			<biblScope unit="volume">101</biblScope>
+			<biblScope unit="page" from="1099" to="1108" />
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Carbon allocation among tree organs: a review of basic processes and representation in functional-structural tree models</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Lacointe</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annals of Forest Science</title>
+		<imprint>
+			<biblScope unit="volume">57</biblScope>
+			<biblScope unit="page" from="521" to="533" />
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Testing the branch autonomy theory: a 13C/14C double-labelling experiment on differentially shaded branches</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Lacointe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Deleens</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Ameglio</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Plant, Cell and Environment</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="1159" to="1168" />
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">A simpified dry matter production model for apple using automatic programming simulation software In</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">N</forename><surname>Lakso</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">S</forename><surname>Johnson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Acta Horticulturae</title>
+		<imprint>
+			<biblScope unit="page" from="141" to="148" />
+			<date type="published" when="1990">1990</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Carbon-based models of individual tree growth: a critical appraisal</title>
+		<author>
+			<persName><forename type="first">Le</forename><surname>Roux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Lacointe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Escobar-Gutiérrez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Le</forename><surname>Dizès</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annals of Forest Science</title>
+		<imprint>
+			<biblScope unit="volume">58</biblScope>
+			<biblScope unit="page" from="469" to="506" />
+			<date type="published" when="2001">2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">QualiTree, a virtual fruit tree to study the management of fruit quality. I. Model development</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Lescourret</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Moitrier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Valsesia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Génard</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Trees</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="519" to="530" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Root system markup language: toward a unified root architecture description language</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Lobet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">P</forename><surname>Pound</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Diener</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Plant Physiology</title>
+		<imprint>
+			<biblScope unit="volume">167</biblScope>
+			<biblScope unit="page" from="617" to="627" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">EcoMeristem, a model of morphogenesis and competition among sinks in rice. 1. Concept, validation and sensitivity analysis</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Luquet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Dingkuhn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Tambour</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Clement</forename><forename type="middle">-</forename><surname>Vidal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Functional Plant Biology</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page" from="309" to="323" />
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Sink strength as a determinant of dry matter partitioning in the whole plant</title>
+		<author>
+			<persName><forename type="first">Lfm</forename><surname>Marcelis</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Experimental Botany</title>
+		<imprint>
+			<biblScope unit="volume">47</biblScope>
+			<biblScope unit="page" from="1281" to="1291" />
+			<date type="published" when="1996">1996</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Parametrization of the functional-structural model for apple trees. Application to simulate photosynthesis and transpiration of fruiting branches</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Massonnet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">L</forename><surname>Regnard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Costes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Sinoquet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Ameglio</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Acta Horticulturae</title>
+		<imprint>
+			<date type="published" when="2006">2006</date>
+			<publisher>ISHS</publisher>
+			<pubPlace>Denmark</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<monogr>
+		<title level="m" type="main">Die Stoffbewegunen in der Pflanze</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Münch</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1930">1930</date>
+			<pubPlace>Jena</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Virtual plants need water too: functional-structural root system models in the context of drought tolerance breeding</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ndour</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Vadez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Pradal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Lucas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Frontiers in Plant Science</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Simulation of carbon allocation and organ growth variability in apple tree by connecting architectural and source-sink models</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Pallas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Da</forename><surname>Silva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Valsesia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annals of Botany</title>
+		<imprint>
+			<biblScope unit="volume">118</biblScope>
+			<biblScope unit="page" from="317" to="330" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">PlantGL: a Python-based geometric library for 3D plant modelling at different scales</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Pradal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Boudon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Nouguier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Chopard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Godin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Graphical models</title>
+		<imprint>
+			<biblScope unit="volume">71</biblScope>
+			<biblScope unit="page" from="1" to="21" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">OpenAlea: a visual programming and component-based software platform for plant modelling</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Pradal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Dufour-Kowalski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Boudon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Fournier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Godin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Functional Plant Biology</title>
+		<imprint>
+			<biblScope unit="volume">35</biblScope>
+			<biblScope unit="page">751</biblScope>
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">OpenAlea: scientific workflows combining data analysis and simulation</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Pradal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Fournier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Valduriez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Cohen-Boulakia</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM SSDBM</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page" from="11" to="17" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Fast automatic precision tree models from terrestrial laser scanner data</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Raumonen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Kaasalainen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Åkerblom</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Remote Sensing</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page" from="491" to="520" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<monogr>
+		<title level="m" type="main">Carbon allocation of the apple tree: from field experiment to computer modelling</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Reyes</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<pubPlace>Italy</pubPlace>
+		</imprint>
+		<respStmt>
+			<orgName>University of Bolzano</orgName>
+		</respStmt>
+	</monogr>
+	<note type="report_type">PhD Thesis</note>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Maximum growth potential and periods of resource limitation in apple tree</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Reyes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Dejong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Franceschi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Tagliavini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Gianelle</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Frontiers in Plant Science</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Plant architecture and foliar senescence impact the race between wheat growth and Zymoseptoria tritici epidemics</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Robert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Garin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Abichou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Houlès</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Pradal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Fournier</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annals of Botany</title>
+		<imprint>
+			<biblScope unit="volume">121</biblScope>
+			<biblScope unit="page" from="975" to="989" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">Phloem transport in trees</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">G</forename><surname>Ryan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Asao</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Tree Physiology</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="page" from="1" to="4" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">RATP: a model for simulating the spatial distribution of radiation absorption, transpiration and photosynthesis within canopies: application to an isolated tree crown</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Sinoquet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Le</forename><surname>Roux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Adam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Ameglio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Daudet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">A</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Plant, Cell and Environment</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="page" from="395" to="406" />
+			<date type="published" when="2001">2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">The theory and practice of branch autonomy</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">G</forename><surname>Sprugel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">M</forename><surname>Hinckley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Schaap</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annual Review of Ecology and Systematics</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="page" from="309" to="334" />
+			<date type="published" when="1991">1991</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">Towards understanding the role of temperature in apple fruit growth responses in three geographical regions within New Zealand</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">J</forename><surname>Stanley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">S</forename><surname>Tustin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">B</forename><surname>Lupton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mcartney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">M</forename><surname>Cashmore</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hnd</forename><surname>Silva</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The Journal of Horticultural Science and Biotechnology</title>
+		<imprint>
+			<biblScope unit="volume">75</biblScope>
+			<biblScope unit="page" from="413" to="422" />
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<monogr>
+		<author>
+			<persName><forename type="first">Jhm</forename><surname>Thornley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">R</forename><surname>Johnson</surname></persName>
+		</author>
+		<title level="m">Plant and crop modelling</title>
+		<meeting><address><addrLine>NY</addrLine></address></meeting>
+		<imprint>
+			<publisher>The Blackburn Press</publisher>
+			<date type="published" when="1990">1990</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<analytic>
+		<title level="a" type="main">10 -The stem apoplast: a potential communication channel in plant growth regulation In</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Thorpe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Minchin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Gould</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Mcqueen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Physiological Ecology. Vascular Transport in Plants</title>
+		<editor>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Zwieniecki</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Burlington</addrLine></address></meeting>
+		<imprint>
+			<publisher>Academic Press</publisher>
+			<date type="published" when="2005">2005</date>
+			<biblScope unit="page" from="201" to="220" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">Carbon autonomy of peach shoots determined by 13Cphotoassimilate transport</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Volpe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lo</forename><surname>Bianco</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Rieger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Tree Physiology</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="page" from="1805" to="1812" />
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<analytic>
+		<title level="a" type="main">Functionalstructural plant modelling: a new versatile tool in crop science</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Vos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">B</forename><surname>Evers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">H</forename><surname>Buck-Sorlin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Andrieu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Chelle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Phb</forename><surname>Visser</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Experimental Botany</title>
+		<imprint>
+			<biblScope unit="volume">61</biblScope>
+			<biblScope unit="page" from="2101" to="2115" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">Does variability in shoot carbon assimilation within the tree crown explain variability in peach fruit growth?</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">S</forename><surname>Walcroft</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Lescourret</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Genard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Sinoquet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Le</forename><surname>Roux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Dones</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Tree Physiology</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="page" from="313" to="322" />
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

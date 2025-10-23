@@ -7,18 +7,18 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		<fileDesc>
 			<titleStmt>
 				<title level="a" type="main">Distributed Caching of Scientific Workflows in Multisite Cloud</title>
+				<funder ref="#_nMWwVBZ">
+					<orgName type="full">unknown</orgName>
+				</funder>
+				<funder ref="#_FcDJv7M">
+					<orgName type="full">DigitAg French initiative</orgName>
+				</funder>
 				<funder>
 					<orgName type="full">France Grille Scientific Interest Group</orgName>
 				</funder>
-				<funder ref="#_8JRs6fG">
+				<funder ref="#_yaY6zR6">
 					<orgName type="full">Agence Nationale de la Recherche</orgName>
 					<orgName type="abbreviated">ANR</orgName>
-				</funder>
-				<funder ref="#_z5DFHtC">
-					<orgName type="full">DigitAg French initiative</orgName>
-				</funder>
-				<funder ref="#_FDruKP7">
-					<orgName type="full">unknown</orgName>
 				</funder>
 			</titleStmt>
 			<publicationStmt>
@@ -102,14 +102,14 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 							<date/>
 						</imprint>
 					</monogr>
-					<idno type="MD5">633C107D3ED90E2A1C9F69858E25927E</idno>
+					<idno type="MD5">7DF970223604E90217923C9BF4F51BDF</idno>
 					<idno type="DOI">10.1007/978-3-030-59051-2_4</idno>
 				</biblStruct>
 			</sourceDesc>
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.0" ident="GROBID" when="2024-04-12T14:48+0000">
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:13+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<ref target="https://github.com/kermitt2/grobid"/>
 				</application>
@@ -159,14 +159,14 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <div><head n="7">Acknowledgments</head><p>This work was supported by the #<rs type="funder">DigitAg French initiative</rs> (www.hdigitag.fr), the <rs type="projectName">SciDISC and HPDaSc Inria associated</rs> teams with Brazil, the <rs type="projectName">Phenome-Emphasis project</rs> (<rs type="grantNumber">ANR-11-INBS-0012</rs>) and <rs type="projectName">IFB</rs> (<rs type="grantNumber">ANR-11-INBS-0013</rs>) from the <rs type="funder">Agence Nationale de la Recherche</rs> and the <rs type="funder">France Grille Scientific Interest Group</rs>.</p></div>
 			</div>
 			<listOrg type="funding">
-				<org type="funded-project" xml:id="_z5DFHtC">
+				<org type="funded-project" xml:id="_FcDJv7M">
 					<orgName type="project" subtype="full">SciDISC and HPDaSc Inria associated</orgName>
 				</org>
-				<org type="funded-project" xml:id="_FDruKP7">
+				<org type="funded-project" xml:id="_nMWwVBZ">
 					<idno type="grant-number">ANR-11-INBS-0012</idno>
 					<orgName type="project" subtype="full">Phenome-Emphasis project</orgName>
 				</org>
-				<org type="funded-project" xml:id="_8JRs6fG">
+				<org type="funded-project" xml:id="_yaY6zR6">
 					<idno type="grant-number">ANR-11-INBS-0013</idno>
 					<orgName type="project" subtype="full">IFB</orgName>
 				</org>

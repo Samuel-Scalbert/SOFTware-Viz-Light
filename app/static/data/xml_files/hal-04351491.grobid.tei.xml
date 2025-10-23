@@ -1,0 +1,1441 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">HaploBlocks: Efficient Detection of Positive Selection in Large Population Genomic Datasets</title>
+				<funder ref="#_MH9yFrZ #_BTXjvjq #_wA9Tfvw #_vttE5e6">
+					<orgName type="full">unknown</orgName>
+				</funder>
+				<funder ref="#_6d3vj6W">
+					<orgName type="full">JGU Research Center Emergent Algorithmic Intelligence</orgName>
+				</funder>
+				<funder ref="#_vntef2k">
+					<orgName type="full">Greek-German</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Benedikt</forename><surname>Kirsch-Gerweck</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Institute of Organismic and Molecular Evolution (iomE)</orgName>
+								<orgName type="laboratory">Palaeogenetics Group</orgName>
+								<orgName type="institution">Johannes Gutenberg University</orgName>
+								<address>
+									<postCode>55128</postCode>
+									<settlement>Mainz</settlement>
+									<country key="DE">Germany</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Leonard</forename><surname>Bohnenkämper</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department">Faculty of Technology and Center for Biotechnology (CeBiTec)</orgName>
+								<orgName type="institution">Bielefeld University</orgName>
+								<address>
+									<addrLine>Universitätsstr. 25</addrLine>
+									<postCode>33615</postCode>
+									<settlement>Bielefeld</settlement>
+									<country key="DE">Germany</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Michel</forename><forename type="middle">T</forename><surname>Henrichs</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department">Faculty of Technology and Center for Biotechnology (CeBiTec)</orgName>
+								<orgName type="institution">Bielefeld University</orgName>
+								<address>
+									<addrLine>Universitätsstr. 25</addrLine>
+									<postCode>33615</postCode>
+									<settlement>Bielefeld</settlement>
+									<country key="DE">Germany</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Jarno</forename><forename type="middle">N</forename><surname>Alanko</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="department">Department of Computer Science</orgName>
+								<orgName type="institution">University of Helsinki</orgName>
+								<address>
+									<addrLine>Pietari Kalmin katu 5</addrLine>
+									<postBox>P.O 68</postBox>
+									<postCode>00014</postCode>
+									<settlement>Helsinki</settlement>
+									<country key="FI">Finland</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Hideo</forename><surname>Bannai</surname></persName>
+							<affiliation key="aff3">
+								<orgName type="department">M&amp;D Data Science Center</orgName>
+								<orgName type="institution">Tokyo Medical and Dental University (TMDU)</orgName>
+								<address>
+									<addrLine>2-3-10 Kanda-Surugadai, Chiyoda-ku</addrLine>
+									<postCode>101-0062</postCode>
+									<settlement>Tokyo</settlement>
+									<country key="JP">Japan</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Bastien</forename><surname>Cazaux</surname></persName>
+							<affiliation key="aff4">
+								<orgName type="laboratory">UMR 9189</orgName>
+								<orgName type="institution" key="instit1">CNRS</orgName>
+								<orgName type="institution" key="instit2">Centrale Lille</orgName>
+								<orgName type="institution" key="instit3">Univ. Lille</orgName>
+								<orgName type="institution" key="instit4">CRIStAL</orgName>
+								<address>
+									<postCode>F-59000</postCode>
+									<settlement>Lille</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Pierre</forename><surname>Peterlongo</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Institute of Organismic and Molecular Evolution (iomE)</orgName>
+								<orgName type="laboratory">Palaeogenetics Group</orgName>
+								<orgName type="institution">Johannes Gutenberg University</orgName>
+								<address>
+									<postCode>55128</postCode>
+									<settlement>Mainz</settlement>
+									<country key="DE">Germany</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff5">
+								<orgName type="department">GenScale</orgName>
+								<orgName type="institution">Inria/Irisa</orgName>
+								<address>
+									<addrLine>Campus de Beaulieu</addrLine>
+									<postCode>35042</postCode>
+									<settlement>Rennes Cedex</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Joachim</forename><surname>Burger</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Institute of Organismic and Molecular Evolution (iomE)</orgName>
+								<orgName type="laboratory">Palaeogenetics Group</orgName>
+								<orgName type="institution">Johannes Gutenberg University</orgName>
+								<address>
+									<postCode>55128</postCode>
+									<settlement>Mainz</settlement>
+									<country key="DE">Germany</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Jens</forename><surname>Stoye</surname></persName>
+							<email>jens.stoye@uni-bielefeld.de</email>
+							<affiliation key="aff0">
+								<orgName type="department">Institute of Organismic and Molecular Evolution (iomE)</orgName>
+								<orgName type="laboratory">Palaeogenetics Group</orgName>
+								<orgName type="institution">Johannes Gutenberg University</orgName>
+								<address>
+									<postCode>55128</postCode>
+									<settlement>Mainz</settlement>
+									<country key="DE">Germany</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department">Faculty of Technology and Center for Biotechnology (CeBiTec)</orgName>
+								<orgName type="institution">Bielefeld University</orgName>
+								<address>
+									<addrLine>Universitätsstr. 25</addrLine>
+									<postCode>33615</postCode>
+									<settlement>Bielefeld</settlement>
+									<country key="DE">Germany</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Yoan</forename><surname>Diekmann</surname></persName>
+							<email>ydiekman@uni-mainz.de.</email>
+							<affiliation key="aff0">
+								<orgName type="department">Institute of Organismic and Molecular Evolution (iomE)</orgName>
+								<orgName type="laboratory">Palaeogenetics Group</orgName>
+								<orgName type="institution">Johannes Gutenberg University</orgName>
+								<address>
+									<postCode>55128</postCode>
+									<settlement>Mainz</settlement>
+									<country key="DE">Germany</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff6">
+								<orgName type="department">Research Department of Genetics, Evolution and Environment</orgName>
+								<orgName type="institution">University College London</orgName>
+								<address>
+									<postCode>WC1E 6BT</postCode>
+									<settlement>London</settlement>
+									<country key="GB">United Kingdom</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Yuseob</forename><surname>Kim</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Institute of Organismic and Molecular Evolution (iomE)</orgName>
+								<orgName type="laboratory">Palaeogenetics Group</orgName>
+								<orgName type="institution">Johannes Gutenberg University</orgName>
+								<address>
+									<postCode>55128</postCode>
+									<settlement>Mainz</settlement>
+									<country key="DE">Germany</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff5">
+								<orgName type="department">GenScale</orgName>
+								<orgName type="institution">Inria/Irisa</orgName>
+								<address>
+									<addrLine>Campus de Beaulieu</addrLine>
+									<postCode>35042</postCode>
+									<settlement>Rennes Cedex</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff6">
+								<orgName type="department">Research Department of Genetics, Evolution and Environment</orgName>
+								<orgName type="institution">University College London</orgName>
+								<address>
+									<postCode>WC1E 6BT</postCode>
+									<settlement>London</settlement>
+									<country key="GB">United Kingdom</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">HaploBlocks: Efficient Detection of Positive Selection in Large Population Genomic Datasets</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">262040906E27B6605854315CF41C01E9</idno>
+					<idno type="DOI">10.1093/molbev/msad027</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:13+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>natural selection</term>
+					<term>genome scan</term>
+					<term>big data</term>
+					<term>population genetics</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Genomic regions under positive selection harbor variation linked for example to adaptation. Most tools for detecting positively selected variants have computational resource requirements rendering them impractical on population genomic datasets with hundreds of thousands of individuals or more. We have developed and implemented an efficient haplotype-based approach able to scan large datasets and accurately detect positive selection. We achieve this by combining a pattern matching approach based on the positional Burrows-Wheeler transform with model-based inference which only requires the evaluation of closed-form expressions. We evaluate our approach with simulations, and find it to be both sensitive and specific. The computational resource requirements quantified using UK Biobank data indicate that our implementation is scalable to population genomic datasets with millions of individuals. Our approach may serve as an algorithmic blueprint for the era of "big data" genomics: a combinatorial core coupled with statistical inference in closed form.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Introduction</head><p>Natural or Darwinian selection is one of the fundamental evolutionary processes shaping genetic variation, and the primary mechanism responsible for adaptation. At the molecular level, variants favored by natural selection due to the fitness advantage they confer are said to be positively selected. Positively selected variants are often relevant as they affected survival in the past.</p><p>In sets of contemporary genomes, positive selection is mainly inferred based on allele frequency differentiation, locally overrepresented ancestry, or genomic signatures expected under a selective sweep model. Numerous statistical approaches exist, descriptive <ref type="bibr" target="#b0">(Alachiotis and Pavlidis 2018)</ref> and inferential <ref type="bibr" target="#b33">(Stern et al. 2019)</ref> as well as mixed methods where summary statistics are computed on inferred structures such as identity-by-descent segments <ref type="bibr" target="#b4">(Browning and Browning 2020)</ref> or genealogies <ref type="bibr" target="#b31">(Speidel et al. 2019)</ref>. Other frameworks rely on simulations under explicit demographic and/or sweep models, for example Approximate Bayesian Computation <ref type="bibr" target="#b24">(Luqman et al. 2021)</ref> and Machine Learning that interprets detecting selection as a classification problem <ref type="bibr" target="#b34">(Torada et al. 2019)</ref>.</p><p>Development of new methods for detection of positive selection faces a challenge common to all branches of genomics: improving accuracy while keeping pace with the accelerating growth of genome databases. The sheer number of genomes is already a challenge for most methods, and future databases run the risk of being manageable only by very few approaches. At the moment, biobanks, for example, manage hundreds of thousands of human genomes <ref type="bibr" target="#b6">(Bycroft et al. 2018</ref>), but the next generation of projects currently under way will see millions of individuals sequenced <ref type="bibr" target="#b14">(Gaziano et al. 2016;</ref><ref type="bibr" target="#b2">All of Us Research Program Investigators et al. 2019)</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>MBE</head><p>Here, we extend a combinatorial pattern matching algorithm previously published by <ref type="bibr" target="#b1">Alanko et al. (2020)</ref> and present HaploBlocks, a novel approach to swiftly scan large population genomic datasets for positively selected haplotypes. Our method performs model-based statistical inference, and estimates accurate selection coefficients s, here defined as the relative fitness advantage of a haplotype per generation, over the entire length of the mappable genome. We implemented HaploBlocks as open-source software in C++, freely available with basic usage documentation at https://github.com/bekirsch/HaploBlocks. Source code to replicate the validation and benchmarking presented below can be found at https://github.com/ bekirsch/HaploBlocks-Evaluation.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>New Approaches</head><p>HaploBlocks works on phased chromosomes with no missing genotypes from multiple individuals, which are available for most genome databases including for example the UK Biobank <ref type="bibr" target="#b6">(Bycroft et al. 2018)</ref>. It proceeds in three main sequential phases (see Material and Methods for details).</p><p>After initial preprocessing, the first phase enumerates a simple combinatorial pattern we coin maximal perfect haplotype block (HB in short). A HB is defined as a set of rows and a start and end column, such that the substring defined by start and end column is the same in all specified rows. Additional maximality criteria are detailed in the Material and Methods section. Previously, <ref type="bibr" target="#b1">Alanko et al. (2020)</ref> showed that HBs can be found in optimal linear time, and presented an algorithm based on the positional Burrows-Wheeler transform (pBWT) <ref type="bibr" target="#b13">(Durbin 2014</ref>) that works efficiently also in practice.</p><p>By definition, HBs are identity-by-state segments shared across multiple chromosomes and assumed here to be identical-by-descent (IBD), that is inherited from a common ancestor. They are central for the second phase of HaploBlocks, as IBD segments are shortened via crossover events that accumulate at approximately constant rate per generation, and their length is therefore informative on the age of a block. We adapt a composite likelihood model presented in <ref type="bibr" target="#b9">Chen et al. (2015)</ref> that integrates this "recombination clock" with a sweep model relating haplotype age and its observed frequency in the population to positive selection: the larger-and therefore younger-and more frequent a haplotype is, the stronger is the inferred selection. The simple structure of HBs allows for a closed-form derivative of the likelihood function, so that we estimate a maximum composite likelihood (MCL) selection coefficient ŝ for every HB at nearly no additional computational cost.</p><p>The third phase implements two stringent filters that are applied sequentially and remove blocks that likely arose as a result of processes other than selection. Our sweep model assumes an infinite population, which amounts to ignoring genetic drift, and independence between haplotypes or equivalently a star topology, therefore resulting in a composite likelihood. We derive upper bounds for the age of HBs based on neutral population genetic models that account for common ancestry and genetic drift. First, we filter blocks comparing their age inferred by our model to expectations under the coalescent that are computed given haplotype length and absolute frequency. The impact on running time is kept minimal by use of a precomputed lookup table. Second, we compute the distribution of haplotype age given its relative frequency, using an approximation under the Wright-Fisher model presented in <ref type="bibr" target="#b30">Slatkin and Rannala (2000)</ref>. Blocks with age above a threshold are again discarded.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Results</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Validation</head><p>We validate HaploBlocks by simulating a genomic region with a central allele under positive selection of varying strength with SLiM <ref type="bibr">(Haller and Messer 2019)</ref> and msprime <ref type="bibr" target="#b21">(Kelleher et al. 2016</ref>) (see Materials and Methods). In a first step, we evaluate how well presence and absence of selection is inferred, and secondly quantify how accurately selection coefficients are estimated.</p><p>Under a model of constant population size, we falsely infer selection in 1.5% (95% confidence interval (CI) [0.005, 0.04]) of the simulations (3 out of 200 simulations; supplementary figs. S5-S8, Supplementary Material online), where false positives are caused by HB with large but rare haplotypes that escape our filters and yield unrealistically high selection coefficient estimates (supplementary fig. <ref type="figure">S9</ref>, Supplementary Material online). Panel a in figure <ref type="figure" target="#fig_0">1</ref> summarizes the comparison of simulated with estimated selection coefficients for all blocks that pass our filters. We observe that the median estimated selection coefficient across 50 simulations at intermediate frequency of the selected allele in the population is roughly between 0.6 and 0.8 of the simulated value for coefficients between 1% and 5%. Three trends are apparent: first, the higher the simulated selection coefficient, the higher the estimation accuracy; second, the higher the simulated selection coefficient, the lower the minimum frequency of the selected allele in the population that allows for inference of a selection coefficient greater than zero; third, estimation accuracy drops with selected allele frequencies approaching fixation.</p><p>In addition, we test how well HaploBlocks performs under more complex demographic scenarios violating our assumption of a constant population size, by simulating data under bottleneck and migration models, and an Out-of-Africa model presented in <ref type="bibr" target="#b16">Gravel et al. (2011)</ref>  <ref type="figure" target="#fig_0">S10</ref>, Supplementary Material online for number of simulations per selected allele frequency bin). We find that the highest median accuracy of estimated selection coefficients is 0.6 of the simulated value achieved at intermediate allele frequency in the population, no selection is detected below a frequency of 10%, and the accuracy drops off as the alleles approach fixation (fig. <ref type="figure" target="#fig_0">1b</ref>). Interestingly, while comparable overall, the accuracy for the simulated bottleneck and migration models at intermediate allele frequencies is better than for the constant model (supplementary figs. S13 and S15, Supplementary Material online).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Benchmark</head><p>Figure <ref type="figure" target="#fig_1">2</ref> (see also table 1) shows computational resource requirements measured on chromosome 2 of the UK Biobank genotype array data <ref type="bibr" target="#b6">(Bycroft et al. 2018)</ref>.</p><p>Runtime increases linearly with the number of individuals and SNPs, but stays below one hour for the entire dataset consisting of 48,033 SNPs in 405,623 individuals. Memory consumption is only minimally influenced by the number of SNPs given a fixed number of individuals, here about 100 MB, and starts to exceed 10 MB on all SNPs only for datasets with more than 5,000 individuals.</p><p>We compare runtime and memory consumption of HaploBlocks against RAiSD <ref type="bibr" target="#b0">(Alachiotis and Pavlidis 2018)</ref>, which implements a model-free sliding-window approach computing a composite statistic sensitive to selective sweep signatures in the site frequency spectrum, levels of linkage disequilibrium, and genetic diversity estimates along chromosomes. We chose RAiSD as the authors benchmark computational efficiency and find it to be orders of magnitude faster than widely used alternative tools, while requiring only minimal memory. However, we stress that RAiSD does not perform inference and lacks a robust framework to evaluate significance of the resulting summary statistic, and HaploBlocks therefore generates at least conceptually superior output.</p><p>We achieve comparable performance with respect to runtime, although based on the slopes of the curves shown in panel c of figure 2 it appears that HaploBlocks may </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>MBE</head><p>outperform RAiSD on datasets with more than 50k single nucleotide polymorphisms (SNPs). This is relevant as we analyzed genotype array data here, while whole-genome sequences have a much higher number of variable sites. HaploBlocks consumes less memory than RAiSD on datasets exceeding 500 individuals or 1000 SNPs, however, both tools use less than a GB and any difference is therefore negligible in practice.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Genome Track</head><p>As our tool scans entire chromosomes, an intuitive and handy way to represent and interact with the results is via UCSC genome tracks <ref type="bibr" target="#b28">(Raney et al. 2014)</ref>. By default, HaploBlocks generates the necessary files to visualize estimated selection coefficients in their genomic context, serving as a starting point for example to pinpoint the actual allele favored by selection, its functional impact, and derive hypotheses about potential selective agents. This includes a filtering step that removes blocks 'hidden' behind others, which reduces file sizes and ensures that only the highest inferred selection coefficient is displayed at each position in the genome.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>UK Biobank Chromosome 2 Selection Scan</head><p>We scanned chromosome 2 of the genotype array data from the UK Biobank with HaploBlocks, and found 1,447,947 blocks after filtering and removing blocks overlapping large gaps in the assembly (see supplementary figs. S16-S19, Supplementary Material online for distributions of length, number of haplotypes in blocks and selection coefficients). Before removing blocks overlapping assembly gaps, a total of 2,332,653 out of 2,244,134,536 blocks pass both filters.</p><p>In order to assess how many blocks may be expected under neutrality, we simulated two datasets with the same number of SNPs as chromosome 2 of the UK Biobank genotype array (∼48 k) without introducing selection: first a sample from a large equilibrium population, and secondly from a demographic model with an ancient bottleneck and recent exponential population growth (see Materials and Methods for details on the simulations). In the equilibrium model, we found a total of 23,465,670 blocks, 88,906 (∼0.38%) of which pass both filters (see supplementary figs. S16, S17, and S20, Supplementary Material online for distributions of length and number of haplotypes in blocks). All blocks have estimated selection   <ref type="figure" target="#fig_1">S24</ref>, Supplementary Material online). While the high proportions for blocks including those with selection coefficient below 4% are inflated by false positives (supplementary figs. S25, S26, Supplementary Material online), we find ∼5% of the genome to be covered by strongly selected blocks not found in any simulation.</p><p>Figure <ref type="figure" target="#fig_2">3</ref> summarizes the blocks found and compares the results to those obtained with RAiSD, however, we caution that Alachiotis and Pavlidis (2018) have not used or validated their tool on genotype array data. The highest selection coefficient is inferred for the locus harboring the European lactase persistence (LP) allele, consistent with it being among the strongest selected loci in humans <ref type="bibr" target="#b29">(Ségurel and Bon 2017)</ref>. Table <ref type="table" target="#tab_3">2</ref> lists the genes overlapping the regions with selection coefficients inferred to be above 5%, and highlights those genes previously flagged by genome-wide selection scans. All regions found by HaploBlocks contain at least one such gene, with exception of a single chromosomal region that covers no genes at all. The strongest signal found by RAiSD is also located in the broader region around the LP locus (the European LP SNP rs4988235 itself is not part of the UK Biobank genotype array data), but overall there is no strong correlation between selection strength inferred by HaploBlocks and μ-statistic (supplementary fig. <ref type="figure" target="#fig_1">S27a</ref>, Supplementary Material online). Interestingly, RAiSD flags three loci with μ-statistics in the top 0.5% for which HaploBlocks infers no selection; while this is no formal demonstration, we note that these three loci lie in chromosomal regions with low recombination (supplementary fig. <ref type="figure" target="#fig_1">S27b</ref>, Supplementary Material online), a known confounding factor for RAiSD <ref type="bibr" target="#b0">(Alachiotis and Pavlidis 2018)</ref>.</p><p>The possibilities to validate the selection coefficients themselves are limited, crucially as approaches that estimate selection strength cannot handle hundreds of thousands of individuals. Though anecdotal, we note that-based on ancient DNA and a therefore independent analysis-selection strength on the European LP allele has </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>MBE</head><p>recently been estimated to lie between 3% and 9% in Central/Northern Europeans <ref type="bibr" target="#b5">(Burger et al. 2020)</ref>. This brackets the 8% estimated by HaploBlocks.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Discussion</head><p>We present HaploBlocks, an approach massively reducing the computational cost of model-based inference of selection coefficients in large population genomic datasets. We show our method is accurate (fig. <ref type="figure" target="#fig_0">1</ref>), and scalable to datasets with millions of individuals (fig. <ref type="figure" target="#fig_1">2</ref>). Currently, these database sizes are only manageable by very few approaches all based on summary statistics. We achieve this through efficient algorithmic design alone, without hardware acceleration techniques: HaploBlocks combines linear time combinatorial pattern matching based on the pBWT with statistical inference by closed-form MCL estimation, and uses approximations to efficiently filter blocks that likely arose due to processes other than selection.</p><p>On simulations, HaploBlocks infers very few false positives, that are all caused by HB with long but rare haplotypes yielding exceedingly high selection coefficient estimates. Both the power to infer presence of selection and the accuracy of estimates increase with selection strength and initially with haplotype frequency. We observe the tendency to slightly underestimate the simulated selection coefficients on average (fig. <ref type="figure" target="#fig_0">1</ref>). In part, this is because our definition of HB does not capture the full extent of individual haplotypes, but only the overlap between all of them, which overestimates the age of a block. However, this approximation is crucial as it allows for a closed-form derivative of the likelihood function and therefore its efficient computation.</p><p>Another accuracy-speed tradeoff is introduced by the requirement of perfect matching, as opposed to approximate matching tolerating some mismatches in a HB, which is harder to solve and therefore slower <ref type="bibr" target="#b36">(Williams and Mumey 2020)</ref>. Perfect matching renders HBs vulnerable for example to sequencing errors and recent mutations, Panel (b) plots the μ-statistic computed by RAiSD with default parameters; regions corresponding to the top 0.05%, 0.5%, and 5% are highlighted. For better comparability, colored regions are also shown in-between panels. Telomeres and the centromere were masked for both HaploBlocks and RAiSD, and blocks intersecting with or overlapping large gaps in the hg19 assembly were removed. To maintain comparability, SNPs flanking telomeres and the centromere were removed from the RAiSD output.</p><p>HaploBlocks: Efficient Detection of Positive Selection • https://doi.org/10.1093/molbev/msad027 MBE which both break up blocks leading to the underestimation of selection strength. To mitigate the problem, we recommend filtering by genotype quality and removal of low frequency alleles in the preprocessing step. This effect also explains the drop in prediction accuracy for highfrequency HBs observed in figure <ref type="figure" target="#fig_0">1</ref>: HBs accumulate mutations with age, especially towards the end of the frequency trajectory as the speed of convergence towards fixation slows.</p><p>HaploBlocks performs statistical inference based on a selective sweep model, yet, we made numerous simplifying assumptions for the benefit of speed. For example, we focus on additive selection, as allele frequency trajectories under dominant and recessive models cannot be approximated by a sigmoidal curve; we do not model phenomena like background selection or variable selection strength; and we assume the simplest possible demography, a constant, infinite population size. An infinite population size amounts to ignoring the effects of genetic drift, which becomes reasonable the stronger selection is. Note that we indirectly account for drift via our second filter, which rejects HBs old enough to have risen to their current frequency by drift alone. The assumption of a constant population size is rarely realistic, and nonequilibrium demography has previously been identified as an important confounding factor <ref type="bibr" target="#b20">(Jensen et al. 2005</ref>). While we do not systematically explore the effects of violations of our demographic model, we simulated simple bottleneck and migration models and a more complex Out-of-Africa demography. Despite elevated false positive rates in the former (supplementary figs. S12 and S14, Supplementary Material online), HaploBlocks is robust and the accuracy of selection coefficient estimates is not systematically affected (figs. 1b, supplementary figs. S13 and S15, Supplementary Material online).</p><p>The strength of our approach is its scalability to large datasets, and we therefore showcase HaploBlocks by applying it to one of the currently largest human genome databases, the UK Biobank. However, we note that as long as genomes are phased and sampled from a contemporaneous population, either ancient or extant, our tool also works on genomes from other species, including those with different ploidies. Here we scan chromosome 2 of the UK Biobank for positive selection and compare the results to those produced by RAiSD. We note that both the inferred proportions of the chromosome covered by haplotypes under selection and the estimated selection coefficients are generally high, which is due to the relatively sparse sampling of variants in the UK Biobank array data leading to longer haplotypes. We expect overall fewer HBs with lower selection coefficients on whole-genome sequencing data with many more variants. The advantages of HaploBlocks' output over summary statistics are at least threefold: as we estimate an interpretable parameter, the selection coefficient, there is no need to restrict the analysis to top hits, therefore generating a result at every position in the genome; as HBs can comprise only a fraction of haplotypes in the population sample, we potentially also find more recent selection that does not yet affect statistics computed over the entire dataset; moreover, as haplotypes are flagged and not only SNPs, important phenomena like hitchhiking of disease-causing variants important for evolutionary medicine can be studied directly. The fact that the top hits of our analyses were already identified in previous studies (table 2) demonstrates the plausibility of our results.</p><p>Besides presenting a scalable tool for detecting positive selection, our layered algorithmic design-fast MCL estimation on top of efficient combinatorial pattern matching-may serve as a promising paradigm for the "big data" era of genomics.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Materials and Methods</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Preprocessing</head><p>HaploBlocks uses the uncompressed VCF file format <ref type="bibr" target="#b11">(Danecek et al. 2011)</ref>, with arbitrary polarization and masked cetromeres and telomeres. The VCF file has to be phased, imputed or contain no missing genotypes, and filtered for biallelic SNPs only. In the case of wholegenome sequencing data, we additionally recommend to filter out SNPs with minor allele frequency below 1%, as they tend to break up HBs despite them being IBD. The genotypes are then converted to a binary matrix.</p><p>Besides the VCF file, a genetic map is required as input, provided in PLINK map format <ref type="bibr" target="#b8">(Chang et al. 2015)</ref>, that is one line per variant containing the chromosome code, variant ID, and positions in base pairs and centimorgans.</p><p>HaploBlocks expects that the effective population size is specified, which affects the frequency chosen to correspond to a single haplotype (see <ref type="bibr">Eqs. 6,</ref><ref type="bibr">9,</ref><ref type="bibr">and 17)</ref>, and therefore the estimated selection coefficients and stringency of the filters. We exemplify the effect in figure <ref type="figure" target="#fig_1">S28</ref>, showing that lower effective population size leads to lower estimates of the selection coefficient and stricter filtering. In the case of uncertainty about the effective population size of a population under study, we therefore recommend choosing values at the lower end of the probable range as a conservative choice. While HaploBlocks works under the simplifying assumption of an equilibrium demography, the effective population size parameter offers the possibility, albeit limited, to introduce some prior knowledge about demography, in case of bottlenecks or expanding populations for example via the geometric mean of effective population sizes over time. Unless specified differently, we use an effective population size of 10,000 diploid individuals throughout the paper.</p><p>In a separate step before running the main algorithm, HaploBlocks generates a lookup table precomputing the first percentile of the distribution of time to the most recent common ancestor for a specified effective population size and varying number and lengths of haplotypes in a HB. These values are used for the first filter based on recent common ancestry. The table needs to be computed only once per effective population size and can be reused across runs, and reduces computation time for the quantile to a Kirsch-Gerweck et al </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Enumerating Haplotype Blocks</head><p>A maximal perfect haplotype block (HB) for k haplotype sequences S = (s 1 , …, s k ) of the same length n is a triple (K, i, j) where K is a subset of the given haplotype sequences, K⊆{1, …, k}, |K| ≥ 2, and 1 ≤ i ≤ j ≤ n such that for each sequence s ∈ K the interval s[i, j] is identical (equality) and the HB cannot be extended to the left (leftmaximality), to the right (right-maximality) or by an additional haplotype (row-maximality) without violating the equality property <ref type="bibr" target="#b1">(Alanko et al. 2020</ref>). An example of two HBs in a set of four haplotype sequences is given in figure <ref type="figure">4</ref>. Note that the definition of HBs is not restricted to binary alleles, although our implementation currently supports only binary haplotype sequences. <ref type="bibr" target="#b1">Alanko et al. (2020)</ref> show that HBs can be identified in optimal, linear time by an algorithm that uses the positional Burrows-Wheeler Transform <ref type="bibr" target="#b13">(Durbin 2014)</ref>, a data structure that has proven useful in several applications in haplotype sequence analysis.</p><p>The algorithm constructs in linear time the two arrays a j and d j of the pBWT of S on the fly column by column for j = 1, …, n, where a j is a permutation of {1, …, k} with</p><formula xml:id="formula_0">s a j [1] [1..j] ≤ • • • ≤ s a j [k] [1.</formula><p>.j] colexicographically (i.e., right-to-left lexicographically) and d j <ref type="bibr">[r]</ref> is the starting point of the longest common suffix of s a j [r] [1..j] and s a j [r-1] [1..j] for 1 &lt; r ≤ k and-by convention-d j [1] = j + 1. Then, when a j and d j are available, the set B j of HBs that end at column j can be identified as quadruples (i, j; x, y) with 1 ≤ i ≤ j and 1 ≤ x &lt; y ≤ k such that d j [r] ≤ i for all r ∈ {x + 1, …, y} (equality), there exists at least one r ∈ {x + 1, …, y} such that d j [r] = i (left-maximality), and d j- [x] &gt; i and d j [y + 1] &gt; i (row-maximality). In addition, right-maximality needs to be tested for each such HB candidate, which is done by building a bit vector V j indicating changes in the next column of S and another vector of prefix sums of V j . Querying this sum vector allows to test right-maximality for any HB candidate in constant time. Since the pBWT with the two additional vectors can be created in O(k) time for each of the n columns and the number of HB candidates ending in any column of the pBWT is at most k <ref type="bibr" target="#b1">(Alanko et al. 2020)</ref>, the overall run time is optimal O(nk + z) in the worst case, where nk is the size of the input and z is the size of the output.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Population Genetic Model and Inference Scheme</head><p>We assume that a set of k chromosomes sampled from a randomly mating population is sufficiently large such that haplotype frequency in the population may be approximated by the observed frequency y = |K|/k.</p><p>For each maximal haplotype block (K, i, j), physical positions corresponding to indices i and j are converted from base pairs to genetic distance d quantifying genetic linkage in centimorgan, which is the chromosomal distance for which the expected number of crossovers in a single generation is 0.01. Distance value d in turn is converted to the recombination fraction r-defined as the ratio of the number of recombined gametes between two chromosomal positions to the total number of gametes producedusing Haldane's map function <ref type="bibr" target="#b17">(Haldane 1919</ref>)</p><formula xml:id="formula_1">r = 1 -exp ( -<label>2d 100 ) 2 (1)</label></formula><p>To obtain a likelihood function L(s|r, y) that can be maximized, where s is the selection coefficient, we follow and extend the composite likelihood approach presented by <ref type="bibr" target="#b9">Chen et al. (2015)</ref>. The central building block given a HB is the probability of no recombination event happening that would break a haplotype up, which is approximated in <ref type="bibr">Chen et al. (2015, eq. 14)</ref> by:</p><formula xml:id="formula_2">C(s, r, y) = e -rt 1 -y 0 (1 -e st ) 􏼁 r/s (2)</formula><p>with initial haplotype frequency y 0 at time 0, and time t defined as</p><formula xml:id="formula_3">t = 1 s ln y(1 -y 0 ) y 0 (1 -y) 􏼒 􏼓 . (<label>3</label></formula><formula xml:id="formula_4">)</formula><p>In practice, we set y 0 = 1/(2N e ) corresponding to a single haplotype. We define the probability of a single haplotype within a HB as the result of two independent recombination events happening on either side of a conserved middle stretch (supplementary fig. <ref type="figure" target="#fig_0">S1</ref>, Supplementary Material online). One recombination event has a probability given by equation ( <ref type="formula" target="#formula_1">2</ref>) for no event in the conserved stretch times one minus equation ( <ref type="formula" target="#formula_1">2</ref>) for one or more effective recombinations at the border. We assume the recombination fraction between two contiguous SNPs, Δr, to be small and constant, and can therefore write the composite likelihood of s given k haplotypes in a HB assumed to be independent without iterating over multiple terms as:</p><formula xml:id="formula_5">L(s|r, y) = C(s, r, y) • (1 -C(s, Δr, y)) 􏼁 2k . (<label>4</label></formula><formula xml:id="formula_6">)</formula><p>In practice, we set Δr to the recombination fraction corresponding to the mean distance between consecutive SNPs. The effect of this approximation is negligible, as Δr is usually very small. We note that because HBs do not consider the full varying extent of the individual haplotypes, the estimate maximizing equation ( <ref type="formula" target="#formula_5">4</ref>) systematically but (5)</p><p>In order to maximize, we take the derivative of equation ( <ref type="formula">5</ref>) and determine the optimum by equating to zero, which yields</p><formula xml:id="formula_7">ŝ = Δr ln r Δr + r 􏼒 􏼓 • ln y 0 y 􏼒 􏼓 . (<label>6</label></formula><formula xml:id="formula_8">)</formula><p>Note that by substituting ŝ into equation ( <ref type="formula" target="#formula_3">3</ref>), we obtain an estimate t.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Filtering</head><p>We implement two filters that aim to remove HBs that may be explained by genetic drift or recent common ancestry rather than natural selection. See the Supplementary Material online for details on the choice of thresholds.</p><p>To account for genetic drift, we derive an upper bound on the age of HBs, which is based on the Wright-Fisher model and solely on haplotype frequency, that is does not consider haplotype length. Age is defined as the time since the last mutation event created the allelic sequence of a HB. The cumulative distribution function of allele age t 1 for neutral alleles in equilibrium populations may be approximated by <ref type="bibr">(Slatkin and Rannala 2000, eq. 6)</ref>:</p><formula xml:id="formula_9">Pr(t 1 ≤ t) = (1 -p) -1+n/(1+nt/2) (7)</formula><p>with p being the frequency of a haplotype in a sample of n chromosomes. We obtain the quantiles by equating the right side of equation ( <ref type="formula">7</ref>) to q, yielding</p><formula xml:id="formula_10">t 1 (q) = 2 ln (1 -p) ln (q) + ln (1 -p) - 2 n . (<label>8</label></formula><formula xml:id="formula_11">)</formula><p>Next, we use the frequency y, the selection coefficient estimate ŝ of a reported haplotype block to compute an estimate t1 for the haplotype age under selection from equation (3) with y 0 = 1/(2N e ):</p><formula xml:id="formula_12">t1 = 1 ŝ ln y 1 - 1 2N e 􏼒 􏼓 1 2N e 1 -y 􏼁 ⎛ ⎜ ⎜ ⎝ ⎞ ⎟ ⎟ ⎠ (9)</formula><p>If it is unlikely that the observed haplotype frequency is due to genetic drift given the young estimated age of a haplotype, we keep the block. We parametrize the quantile threshold by a minimum reportable selection coefficient s min q(s min , N e , p) = min 0.01, max 0.0001, q ′ 􏼁 􏼁 (10)</p><p>where</p><formula xml:id="formula_13">q ′ = 1 -p 􏼁 -1+n/(1+nt ′ /2) (<label>11</label></formula><formula xml:id="formula_14">)</formula><p>and</p><formula xml:id="formula_15">t ′ = 1 s min • ln p • (1 - 1 2 • Ne ) 1 2 • Ne • (1 -p)) ⎛ ⎜ ⎝ ⎞ ⎟ ⎠.<label>(12)</label></formula><p>Therefore, we apply an adaptive threshold between 0.01% and 1%, and selection is only inferred for blocks for which t1 &lt; 2N e • t 1 (q(s min , N e , p)) holds. Older blocks are discarded from the output, as genetic drift cannot be dismissed. The preceding factor results from t 1 being given in units of 2N e generations.</p><p>A second threshold aims at removing blocks that are conserved due to recent common ancestry. We again derive a threshold for the age of HBs, based on the probability distribution of the time to the most recent common ancestor t MRCA . In the Kingman coalescent framework and under a hypothesized effective population size N e , the probability distribution of the t MRCA of a given haplotype block (r, y, k) can be expressed as the sum and therefore convolution of independent exponential random variables <ref type="bibr" target="#b12">(Donnelly et al. 1996;</ref><ref type="bibr" target="#b27">Pagani et al. 2018</ref>)</p><formula xml:id="formula_16">Pr(t MRCA | r, N e , k) = 􏽘 k i=2 λ i e -λ i t 􏽙 k j=2,j≠i λ j λ j -λ i 􏼠 􏼡<label>(13)</label></formula><p>with</p><formula xml:id="formula_17">λ i = i(i -1 + 2N e r)/(2 N e ), i ∈ {2, …, k}.</formula><p>We use a single gamma distribution for approximating equation ( <ref type="formula" target="#formula_16">13</ref>) following Covo and Elalouf (2014, Theorem 2.1) which provides additional computational efficiency and numerical stability. This is possible because an exponentially distributed random variable X ∼ Exp(λ) with rate parameter λ is equivalent to a gamma-distributed random variable X ∼ Gamma(1, λ -1 ) with shape parameter α = 1 and rate parameter β = λ -1 .</p><p>Let β i = λ -1 i , with i ∈ 2, …, k, be the scale parameters, then parameter β of the single gamma approximation is the solution β &gt; 0 of the equation </p><formula xml:id="formula_18">μ 2 -2 􏽘 k i=2 β 3 i (β i + β) 2 = 0<label>(</label></formula><formula xml:id="formula_19">= 2 • 1/(2N e ) = 1/N e . Substituting into equation (3) yields t2 = 1 ŝ ln y 1 - 1 N e 􏼒 􏼓 1 N e 1 -y 􏼁 ⎛ ⎜ ⎜ ⎝ ⎞ ⎟ ⎟ ⎠ . (<label>17</label></formula><formula xml:id="formula_20">)</formula><p>We set the threshold to the first quantile of the gamma distribution and remove blocks with t2 estimates that are younger.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Postprocessing</head><p>In order to avoid reporting false positives, we remove HBs from the output that intersect with or overlap large gaps in the hg19 assembly, as provided for example by the UCSC genome browser.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Validation</head><p>We ran 200 simulations of a chromosomal region with an allele under positive selection added to the centre to evaluate our method. Each simulation was performed with 2,000 artificial chromosomes sampled at 13 frequencies, resulting in a total of 26,000 artificial chromosomes per simulation. We implemented a hybrid approach combining forward simulations in SLiM <ref type="bibr">(Haller and Messer 2019)</ref> with coalescent simulations in msprime <ref type="bibr" target="#b21">(Kelleher et al. 2016)</ref>. This strategy allows to efficiently implement an initial neutral phase, or "burn-in," in order to reach mutation-drift equilibrium before introducing non-neutral dynamics. Relying solely on forward simulations for the burn-in phase is time-consuming as the entire population-including individuals not ultimately part of the sample-has to be simulated. Our simulation approach is similar to the one outlined in <ref type="bibr">Haller et al. (2019, Example 4)</ref>. Every run starts with a forward simulation of a Wright-Fisher population of 10,000 diploid individuals and a genomic region spanning 10 Mb in SLiM. A beneficial mutation with selection coefficient s ∈ {0.0075, 0.01, 0.02, 0.05} is introduced at the center of the artificial chromosome at 5 Mb. The recombination rate per site per generation is set to 1.0 × 10 -8 , and an output is generated at frequencies y ∈ {0, 0.02, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1}. After simulating the selective sweep in SLiM, a chromosome-wide genealogy is simulated for every individual with msprime. Finally, neutral mutations are randomly added to the branches of the tree-sequence under an infinite-sites model <ref type="bibr" target="#b22">(Kimura 1969</ref>) with mutation rate per site 2.5 × 10 -8 <ref type="bibr" target="#b26">(Nachman and Crowell 2000)</ref>. Finally, 1,000 diploid individuals are sampled for each selection coefficient s and frequency y.</p><p>Additionally, we ran 500 simulations with an initial 14,620 artificial chromosomes each, constituting the founding population in the out-of-Africa model of <ref type="bibr" target="#b16">Gravel et al. (2011)</ref> (see estimated parameters N A in table 2 therein). Again, we used the hybrid simulation approach described previously. A beneficial allele with selection coefficient s = 0.03 is introduced in the European population at several time points after the bottlenecks. As simulations were not conditional on final frequencies, a varying number of simulations ended up in the eleven frequency intervals ([0%], (0% -10%], (10% -20%], . . . , (90% -100%]) shown in figure <ref type="figure" target="#fig_0">S10</ref>. Lastly, we sample 1,000 diploid individuals from each of the European populations.</p><p>Analogous to the previous simulations, we simulated two more models with 20 independent runs each. First a bottleneck model, for which we reduced the initial population size of 20,000 artificial chromosomes during burn-in to 5% for 10 generations. We then simulated 1,120 generations, approximately corresponding to the time between the African-Eurasian and the subsequent Asian-European population split according to the Gravel model. Second, a migration model for which we again simulated a burn-in for 20,000 artificial chromosomes, before splitting the population into two equally sized subpopulations (again 10,000 diploid individuals per population). We set the migration rates between the two subpopulations to 3.11 × 10 -5 following the migration rates between Asian and European populations in the Gravel model, and simulated 1120 generations. In both models, a beneficial allele with selection coefficient s = 0.03 is introduced, and 2,000 artificial chromosomes are sampled at frequencies y ∈ {0, 0.02, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1}.</p><p>Confidence intervals for the proportion of a &gt; 0 false positives in n simulations are computed as the 2.5th and 97.5th quantile of the beta distribution Beta(1 + a, 1 + (na)), or the 95th quantile for a = 0.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Benchmark and UK Biobank Selection Scan</head><p>The files used for benchmarking and the selection scan on chromsome 2 are provided by UK Biobank in BGEN format. These are converted to the VCF format with BGENIX, a tool included in the BGEN library <ref type="bibr">(Band and</ref> </p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>FIG. 1 .</head><label>1</label><figDesc>FIG. 1. Validation on simulated data. (a) Median accuracy of 50 inferred selection coefficients ŝ per simulated selection coefficient s ∈ {0.0075, 0.01, 0.02, 0.05} and per frequency in the population. (b) Inferred selection coefficients ŝ for the European population from simulations of an Out-of-Africa model with a beneficial allele with selection coefficient s = 0.03.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>FIG. 2 .</head><label>2</label><figDesc>FIG. 2. Benchmark ofHaploBlocks and RAiSD. Runtime (a) and memory consumption (b) on 48,033 SNPs in an increasing number of individuals, and for an increasing number of SNPs (c,d) in 405,623 individuals.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>FIG. 3 .</head><label>3</label><figDesc>FIG. 3. Scan of UKBiobank chromosome 2. Panel (a)  shows the results of HaploBlocks; rectangles span the corresponding chromosomal region, with height displaying estimated selection coefficient. Regions with inferred selection coefficients above 5%, 3%, and 1.5% are highlighted. As shown in the main text, HB with selection coefficient below 1.5% are prone to be false positives due to the low SNP density of the genotype array. Panel (b) plots the μ-statistic computed by RAiSD with default parameters; regions corresponding to the top 0.05%, 0.5%, and 5% are highlighted. For better comparability, colored regions are also shown in-between panels. Telomeres and the centromere were masked for both HaploBlocks and RAiSD, and blocks intersecting with or overlapping large gaps in the hg19 assembly were removed. To maintain comparability, SNPs flanking telomeres and the centromere were removed from the RAiSD output.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 1 .</head><label>1</label><figDesc>Memory consumption and runtimes of RAiSD and HaploBlocks.Table reporting peak memory consumption and runtimes of RAiSD and HaploBlocks for increasing number of individuals (rows 1 to 5) and increasing number of SNPs (rows 6-9). Values for the entire analysis dataset are given in the final row.</figDesc><table><row><cell>No. of</cell><cell>No. of</cell><cell cols="2">Memory usage [MB]</cell><cell cols="2">Runtime [s]</cell></row><row><cell>individuals</cell><cell>SNPs</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell></cell><cell>RAiSD</cell><cell>HaploBlocks</cell><cell>RAiSD</cell><cell>HaploBlocks</cell></row><row><cell>5</cell><cell>48,033</cell><cell>3.704</cell><cell>9.748</cell><cell>0.16</cell><cell>0.19</cell></row><row><cell>50</cell><cell>48,033</cell><cell>4.904</cell><cell>9.820</cell><cell>3.01</cell><cell>2.72</cell></row><row><cell>500</cell><cell>48,033</cell><cell>10.396</cell><cell>9.984</cell><cell>9.41</cell><cell>7.76</cell></row><row><cell>5,000</cell><cell>48,033</cell><cell>63.112</cell><cell>10.964</cell><cell>45.56</cell><cell>48.09</cell></row><row><cell>50,000</cell><cell>48,033</cell><cell>590.840</cell><cell>23.252</cell><cell>391.49</cell><cell>420.47</cell></row><row><cell>405,623</cell><cell>10</cell><cell>6.584</cell><cell>86.964</cell><cell>0.67</cell><cell>28.08</cell></row><row><cell>405,623</cell><cell>100</cell><cell>15.652</cell><cell>87.0</cell><cell>6.6</cell><cell>28.83</cell></row><row><cell>405,623</cell><cell>1,000</cell><cell>104.544</cell><cell>90.516</cell><cell>65.28</cell><cell>150.3</cell></row><row><cell>405,623</cell><cell>10,000</cell><cell>996.332</cell><cell>100.78</cell><cell>650.7</cell><cell>862.58</cell></row><row><cell>405,623</cell><cell cols="2">48,033 1,029.888</cell><cell>107.124</cell><cell cols="2">3,161.99 3,255.3</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 2 .</head><label>2</label><figDesc>Regions of chromosome 2 with inferred selection coefficient above 5% in the UK Biobank. For the full profile of inferred selection coefficients, see figure 3. Coordinates are given in base pairs (hg19). Genes names are italicized, and bold if they have an entry in PopHumanScan (Murga-Moreno et al. 2019).</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head></head><label></label><figDesc>. • https://doi.org/10.1093/molbev/msad027 MBE simple lookup or linear interpolation in case of intermediate values not present in the table.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_5"><head></head><label></label><figDesc>FIG. 4.Illustration of the definition of maximal perfect haplotype blocks. Shown are four sequences of length 11. One block, shaded in gray, covers six variable sites in three of the four sequences, another one, indicated by the black box, covers nine sites in two sequences. Both haplotype blocks are maximal, that is, they cannot be extended to the left, to the right, or by an additional row.HaploBlocks: Efficient Detection of Positive Selection • https://doi.org/10.1093/molbev/msad027 MBE conservatively underestimates the strength of selection.Based on the likelihood equation (4), we derive a closedform expression for the MCL estimate ŝ of the selection coefficient (see Supplementary Material online for details).</figDesc><table><row><cell cols="6">By taking the logarithm and after some algebraic transfor-</cell></row><row><cell cols="2">mations, we get</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell cols="3">ln L(s | r, y)</cell><cell></cell><cell></cell><cell></cell></row><row><cell>= 2k</cell><cell>r s 􏼠</cell><cell>ln 􏼒 􏼓 y 0 y</cell><cell>+ ln 1 -􏼠</cell><cell>􏼒 􏼓 Δr/s y 0 y</cell><cell>􏼡 􏼡 .</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_6"><head></head><label></label><figDesc>Scale and shape parameters are given by β and μ/ β, respectively. For a comparison of the exact and approximated t MRCA , see figureS2.As our model does not allow to estimate t MRCA for a given HB, we approximate it by the time at which two alleles are present, denoted t 2 . Note that t 1 &gt; t 2 ≥ t MRCA holds, justifying the decision to prefer t 2 over t 1 as an approximation for t MRCA .t2 can again be obtained from equation (3) with y 0</figDesc><table><row><cell cols="5">Kirsch-Gerweck et al. • https://doi.org/10.1093/molbev/msad027</cell><cell>MBE</cell></row><row><cell cols="2">with lower and upper bounds</cell><cell></cell><cell></cell></row><row><cell>μ k -1</cell><cell cols="2">≤ β ≤ max i</cell><cell>(β i )</cell><cell>(15)</cell></row><row><cell>and with</cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell>􏽘 k</cell><cell></cell><cell></cell></row><row><cell cols="2">μ =</cell><cell>β i .</cell><cell></cell><cell>(16)</cell></row><row><cell></cell><cell>i=2</cell><cell></cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell>14)</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" xml:id="foot_0"><p>Downloaded from https://academic.oup.com/mbe/article/40/3/msad027/7040366 by INRIA Rennes user on 18 December 2023</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" xml:id="foot_1"><p>Downloaded from https://academic.oup.com/mbe/article/40/3/msad027/7040366 by INRIA Rennes user on 18 December 2023 Kirsch-Gerweck et al. • https://doi.org/10.1093/molbev/msad027</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="4" xml:id="foot_2"><p>Downloaded from https://academic.oup.com/mbe/article/40/3/msad027/7040366 by INRIA Rennes user on 18 December 2023</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2" xml:id="foot_3"><p>found in Southwestern Chinese<ref type="bibr" target="#b23">(Liu et al. 2021</ref>).</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>Acknowledgments</head><p>We thank two anonymous reviewers and the associate editor for their comments and suggestions that greatly improved the manuscript. Parts of this research were conducted using the supercomputer Mogon and/or advisory services offered by <rs type="person">Johannes Gutenberg</rs> University (JGU) Mainz (https://hpc.uni-mainz.de). We thank the authors of Alachiotis and <rs type="person">Pavlidis</rs> (2018) for their help with increasing the maximum memory allowance in the RAiSD source code. This research has been conducted using the UK Biobank Resource under Application Number 63023. B.K.-G. was funded by the grant "<rs type="projectName">Deep Learning of Natural Selection in Population Genomic data</rs>" (<rs type="grantNumber">SP-PF C-Z-S</rs>) awarded to Y.D. and J.B. by the <rs type="funder">JGU Research Center Emergent Algorithmic Intelligence</rs>. Y.D. was funded by the <rs type="funder">Greek-German</rs> bilateral agreement (<rs type="projectName">GSRT</rs> and <rs type="projectName">BMBF</rs>) project <rs type="projectName">BIOMUSE-0195</rs> financed by the <rs type="programName">Operational Programme "Competitiveness, Entrepreneurship and Innovation"</rs> (<rs type="grantNumber">NSRF 2014-2020</rs>) awarded to J.B. and the <rs type="grantName">ERC Advanced Grant</rs> <rs type="grantNumber">788616</rs> "<rs type="projectName">Yamnaya Impact on Prehistoric Europe</rs>" (<rs type="projectName">YMPACT</rs>) awarded to <rs type="person">Volker Heyd</rs>.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funded-project" xml:id="_6d3vj6W">
+					<idno type="grant-number">SP-PF C-Z-S</idno>
+					<orgName type="project" subtype="full">Deep Learning of Natural Selection in Population Genomic data</orgName>
+				</org>
+				<org type="funded-project" xml:id="_vntef2k">
+					<orgName type="project" subtype="full">GSRT</orgName>
+				</org>
+				<org type="funded-project" xml:id="_MH9yFrZ">
+					<orgName type="project" subtype="full">BMBF</orgName>
+				</org>
+				<org type="funded-project" xml:id="_BTXjvjq">
+					<idno type="grant-number">NSRF 2014-2020</idno>
+					<orgName type="grant-name">ERC Advanced Grant</orgName>
+					<orgName type="project" subtype="full">BIOMUSE-0195</orgName>
+					<orgName type="program" subtype="full">Operational Programme &quot;Competitiveness, Entrepreneurship and Innovation&quot;</orgName>
+				</org>
+				<org type="funded-project" xml:id="_wA9Tfvw">
+					<idno type="grant-number">788616</idno>
+					<orgName type="project" subtype="full">Yamnaya Impact on Prehistoric Europe</orgName>
+				</org>
+				<org type="funded-project" xml:id="_vttE5e6">
+					<orgName type="project" subtype="full">YMPACT</orgName>
+				</org>
+			</listOrg>
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>HaploBlocks: Efficient Detection of Positive Selection • https://doi.org/10.1093/molbev/msad027 MBE Marchini 2018). We remove samples flagged as closely related by UK Biobank, as well as individuals who requested to be excluded from the dataset, leaving 405,623 out of 487,409 individuals. Input VCF files are filtered to keep only biallelic variants with minor allele frequency above 1%.</p><p>For the analysis of the UK Biobank, we use a populationspecific genetic map for British in England and Scotland (GBR) published in <ref type="bibr" target="#b32">Spence and Song (2019)</ref>.</p><p>RAiSD was installed according to the documentation provided at https://github.com/alachins/raisd and run with default parameters on the same architecture and with the same input files as HaploBlocks. Larger files containing more individuals require an increase of the maximum memory allowance in the RAiSD source code.</p><p>In order to assess the expected distribution of false positives in our analysis of the UK Biobank data, we simulated a dataset under neutral evolution comparable to the UK Biobank. The current autosomal effective population size of the UK Biobank has most recently been estimated to be 10 7 <ref type="bibr">(Cai et al. 2022, figs. 3-5)</ref>, and the 405,623 individuals individuals analyzed here therefore correspond to ∼4%. As the computational resources for a simulation of that size are excessive, we instead sampled 4,000 individuals from a simulation with a population size of 10 5 . We used the exact same approach as in the simulations for validation, with a chromosome length of 242,193,530 bp. We set the recombination rate to 7.7 × 10 9 to closely match the ∼187 cM of chromosome 2 (Spence and Song 2019). We filtered for minor allele frequency above 1%, and sampled the resulting 11,146,258 SNPs down to 48,033 as for the UK Biobank genotype array data analyzed here in a way to match the allele frequency spectrum of the original. In addition, we generated a second version randomly sampling the SNPs down to 800,664, corresponding to the number of SNPs with minor allele frequency above 0.01 found in chromosome 2 of the UK10k data (UK10K <ref type="bibr" target="#b35">Consortium et al. 2015)</ref>, in order to emulate full sequencing data. We computed a lookup table for effective population size 10 5 and set the parameter of HaploBlocks accordingly for the analysis of the simulation.</p><p>Furthermore, we simulated a second dataset under a neutral nonequilibrium model, inspired by <ref type="bibr" target="#b16">Gravel et al. (2011)</ref> and intended to match the demography of the UK Biobank population more closely. Instead of a constant population size we started 5,921 generations ago with 28,948 artificial chromosomes and introduced a bottleneck 2,056 generations ago reducing the population size to only 3,722 artificial chromosomes. We introduced an exponential growth rate at 0.4247, resulting in a final population size of 10 5 in the present generation. Again, 4,000 individuals were sampled for the analysis and additional steps were performed as described above, including downsampling the number of SNPs matching the allele frequency spectrum of the UK Biobank data. We also analyzed the full dataset consisting of 721,189 SNPs without downsampling. Under this demographic model the geometric mean of the effective population size is 9741, which we used for the lookup table and as HaploBlocks parameter for the analysis of this simulation.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Supplementary Material</head><p>Supplementary data are available at Molecular Biology and Evolution online. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Author Contributions</head></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Raisd detects positive selection based on multiple signatures of a selective sweep and SNP vectors</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Alachiotis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Pavlidis</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Commun Biol</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page">79</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Finding all maximal perfect haplotype blocks in linear time</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Alanko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Bannai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Cazaux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Peterlongo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Stoye</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Algorithms Mol Biol</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page" from="1" to="9" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">The &quot;all of us&quot; research program</title>
+		<author>
+			<persName><forename type="first">Us</forename><surname>All</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Program</forename><surname>Research</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Investigators</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">C</forename><surname>Denny</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">L</forename><surname>Rutter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">B</forename><surname>Goldstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Philippakis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">W</forename><surname>Smoller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Jenkins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Dishman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">N Engl J Med</title>
+		<imprint>
+			<biblScope unit="volume">381</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page" from="668" to="676" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Bgen: a binary file format for imputed genotype and haplotype data</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Band</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Marchini</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">bioRxiv</title>
+		<imprint>
+			<biblScope unit="page">308296</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Probabilistic estimation of identity by descent segment endpoints and detection of recent selection</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">R</forename><surname>Browning</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">L</forename><surname>Browning</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Am J Hum Genet</title>
+		<imprint>
+			<biblScope unit="volume">107</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="895" to="910" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Low prevalence of lactase persistence in bronze age Europe indicates Kirsch-Gerweck et al</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Burger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Link</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Blöcher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Schulz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Sell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Pochon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Diekmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Žegarac</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Hofmanová</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Winkelbach</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/molbev/msad027</idno>
+		<ptr target="https://doi.org/10.1093/molbev/msad027MBEongoingstrongselectionoverthelast3" />
+	</analytic>
+	<monogr>
+		<title level="j">Curr Biol</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="issue">21</biblScope>
+			<biblScope unit="page" from="4307" to="4315" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note>,000 years</note>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">The UK biobank resource with deep phenotyping and genomic data</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Bycroft</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Freeman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Petkova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Band</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">T</forename><surname>Elliott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Sharp</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Motyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Vukcevic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Delaneau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O'</forename><surname>Connell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">562</biblScope>
+			<biblScope unit="issue">7726</biblScope>
+			<biblScope unit="page" from="203" to="209" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">IBD-based estimation of X chromosome effective population size with application to sexspecific demographic history</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Cai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">L</forename><surname>Browning</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">R</forename><surname>Browning</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">bioRxiv</title>
+		<imprint>
+			<biblScope unit="volume">07</biblScope>
+			<biblScope unit="issue">06</biblScope>
+			<biblScope unit="page">499007</biblScope>
+			<date type="published" when="2022">2022. 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Second-generation plink: rising to the challenge of larger and richer datasets</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">C</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">C</forename><surname>Chow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">C</forename><surname>Tellier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Vattikuti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Purcell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">J</forename><surname>Lee</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">GigaScience</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page" from="1" to="16" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">A hidden Markov model for investigating recent positive selection through haplotype structure</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Hey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Slatkin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Theor Popul Biol</title>
+		<imprint>
+			<biblScope unit="volume">99</biblScope>
+			<biblScope unit="page" from="18" to="30" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">A novel single-gamma approximation to the sum of independent gamma variables, and a generalization to infinitely divisible distributions</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Covo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Elalouf</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Electron J Stat</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="894" to="926" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">The variant call format and vcftools</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Danecek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Auton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Abecasis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">A</forename><surname>Albers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Banks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Depristo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">E</forename><surname>Handsaker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Lunter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">T</forename><surname>Marth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">T</forename><surname>Sherry</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="issue">15</biblScope>
+			<biblScope unit="page" from="2156" to="2158" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Estimating the age of the common ancestor of men from the zfy intron</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Donnelly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Tavare</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">J</forename><surname>Balding</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">C</forename><surname>Griffiths</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Science</title>
+		<imprint>
+			<biblScope unit="volume">272</biblScope>
+			<biblScope unit="issue">5266</biblScope>
+			<biblScope unit="page" from="1357" to="1359" />
+			<date type="published" when="1996">1996</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Efficient haplotype matching and storage using the positional burrows-wheeler transform (PBWT)</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Durbin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="issue">9</biblScope>
+			<biblScope unit="page" from="1266" to="1272" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Million veteran program: a mega-biobank to study genetic influences on health and disease</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Gaziano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Concato</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Brophy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Fiore</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Pyarajan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Breeling</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Whitbourne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Deen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Shannon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Humphries</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Clin Epidemiol</title>
+		<imprint>
+			<biblScope unit="volume">70</biblScope>
+			<biblScope unit="page" from="214" to="223" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Limited evidence for classic selective sweeps in african populations</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Granka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">M</forename><surname>Henn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">R</forename><surname>Gignoux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Kidd</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">D</forename><surname>Bustamante</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">W</forename><surname>Feldman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genetics</title>
+		<imprint>
+			<biblScope unit="volume">192</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="1049" to="1064" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Demographic history and rare allele sharing among human populations</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Gravel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">M</forename><surname>Henn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">N</forename><surname>Gutenkunst</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">R</forename><surname>Indap</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">T</forename><surname>Marth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">G</forename><surname>Clark</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Yu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">A</forename><surname>Gibbs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">D</forename><surname>Bustamante</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proc Natl Acad Sci</title>
+		<imprint>
+			<biblScope unit="volume">108</biblScope>
+			<biblScope unit="issue">29</biblScope>
+			<biblScope unit="page" from="11983" to="11988" />
+			<date type="published" when="2011">2011</date>
+			<pubPlace>USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">The combination of linkage values and the calculation of distances between the loci of linked factors</title>
+		<author>
+			<persName><forename type="first">Jbs</forename><surname>Haldane</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Genet</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="299" to="309" />
+			<date type="published" when="1919">1919</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Tree-sequence recording in slim opens new horizons for forward-time simulation of whole genomes</title>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">C</forename><surname>Haller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Galloway</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Kelleher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">W</forename><surname>Messer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">L</forename><surname>Ralph</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol Ecol Resour</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="552" to="566" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Slim 3: forward genetic simulations beyond the Wright-Fisher model</title>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">C</forename><surname>Haller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">W</forename><surname>Messer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol Biol Evol</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="632" to="637" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Distinguishing between selective sweeps and demography using DNA polymorphism data</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">D</forename><surname>Jensen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><forename type="middle">B</forename><surname>Dumont</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">F</forename><surname>Aquadro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">D</forename><surname>Bustamante</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genetics</title>
+		<imprint>
+			<biblScope unit="volume">170</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="1401" to="1410" />
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Efficient coalescent simulation and genealogical analysis for large sample sizes</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Kelleher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">M</forename><surname>Etheridge</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Mcvean</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLoS Comput Biol</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="1" to="22" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">The number of heterozygous nucleotide sites maintained in a finite population due to steady flux of mutations</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Kimura</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genetics</title>
+		<imprint>
+			<biblScope unit="volume">61</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="893" to="903" />
+			<date type="published" when="1969">1969</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Genomic insights into the population history and biological adaptation of southwestern Chinese Hmong-Mien people</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Xie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Zou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Leng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Xu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Front Genet</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page" from="1" to="19" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Identifying loci under selection via explicit demographic models</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Luqman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Widmer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Fior</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Wegmann</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol Ecol Resour</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="page" from="2719" to="2737" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Pophumanscan: the online catalog of human genome adaptation</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Murga-Moreno</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Coronado-Zamora</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bodelón</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Barbadilla</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Casillas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">47</biblScope>
+			<biblScope unit="issue">D1</biblScope>
+			<biblScope unit="page" from="1080" to="D1089" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Estimate of the mutation rate per nucleotide in humans</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">W</forename><surname>Nachman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">L</forename><surname>Crowell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genetics</title>
+		<imprint>
+			<biblScope unit="volume">156</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="297" to="304" />
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Three reportedly unrelated families with liddle syndrome inherited from a common ancestor</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Pagani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Diekmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Sazzini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">De</forename><surname>Fanti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Rondinelli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Farnetti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Casali</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Caretto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Novara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Zuffardi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Hypertension</title>
+		<imprint>
+			<biblScope unit="volume">71</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="273" to="279" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Track data hubs enable visualization of user-defined genome-wide annotations on the ucsc genome browser</title>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">J</forename><surname>Raney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">R</forename><surname>Dreszer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">P</forename><surname>Barber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Clawson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">A</forename><surname>Fujita</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paten</forename><forename type="middle">B</forename><surname>Zweig</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">S</forename><surname>Karolchik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page" from="1003" to="1005" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">On the evolution of lactase persistence in humans</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Ségurel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Bon</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annu Rev Genomics Hum Genet</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page" from="297" to="319" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Estimating allele age</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Slatkin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Rannala</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annu Rev Genomics Hum Genet</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="225" to="249" />
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">A method for genomewide genealogy estimation for thousands of samples</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Speidel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Forest</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Shi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">R</forename><surname>Myers</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Genet</title>
+		<imprint>
+			<biblScope unit="volume">51</biblScope>
+			<biblScope unit="issue">9</biblScope>
+			<biblScope unit="page" from="1321" to="1329" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Inference and analysis of populationspecific fine-scale recombination maps across 26 diverse human populations</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">P</forename><surname>Spence</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><forename type="middle">S</forename><surname>Song</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Sci Adv</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="issue">10</biblScope>
+			<biblScope unit="page" from="1" to="14" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">An approximate full-likelihood method for inferring selection and allele frequency trajectories from dna sequence data</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">J</forename><surname>Stern</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">R</forename><surname>Wilton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Nielsen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLoS Genet</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="issue">9</biblScope>
+			<biblScope unit="page">1008384</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Imagene a convolutional neural network to quantify natural selection from genomic data</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Torada</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Lorenzon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Beddis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">U</forename><surname>Isildak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Pattini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mathieson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Fumagalli</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page">337</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">The UK10K project identifies rare variants in health and disease</title>
+		<author>
+			<persName><surname>Uk ; K Consortium</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Walter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">L</forename><surname>Min</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Crooks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Memari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mccarthy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jrb</forename><surname>Perry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Futema</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">526</biblScope>
+			<biblScope unit="issue">7571</biblScope>
+			<biblScope unit="page" from="82" to="90" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Maximal perfect haplotype blocks with wildcards</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Williams</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Mumey</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">iScience</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page">101149</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

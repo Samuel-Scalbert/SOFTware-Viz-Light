@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="fr">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">fimpera: drastic improvement of Approximate Membership Query data-structures with counts</title>
+				<funder ref="#_Nn38zxx">
+					<orgName type="full">Agence Nationale de la Recherche</orgName>
+					<orgName type="abbreviated">ANR</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Lucas</forename><surname>Robidou</surname></persName>
+							<email>lucas.robidou@inria.fr</email>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Univ. Rennes</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">IRISA</orgName>
+								<address>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Pierre</forename><surname>Peterlongo</surname></persName>
+							<email>pierre.peterlongo@inria.fr</email>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Univ. Rennes</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">IRISA</orgName>
+								<address>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">fimpera: drastic improvement of Approximate Membership Query data-structures with counts</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">DC0F1F11BBCD86F296725F3D0A2656F3</idno>
+					<idno type="DOI">10.1101/2022.06.27.497694</idno>
+					<note type="submission">Submitted on 26 Dec 2022</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:12+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>data structure</term>
+					<term>indexation</term>
+					<term>k-mers</term>
+					<term>counting Bloom filters</term>
+					<term>sequence data</term>
+					<term>abundance</term>
+					<term>AMQ</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>de niveau recherche, publiés ou non, émanant des établissements d'enseignement et de recherche français ou étrangers, des laboratoires publics ou privés.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="fr">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>Public data banks providing sequencing data or assembled genome sequences are growing at an exponential rate <ref type="bibr" target="#b3">[4]</ref>, faster than computational power. Searching a sequence of interest among datasets is a fundamental need. For instance it enables to better understand genetic changes in the tumour, offering precious information about the diagnosis and treatment of cancer <ref type="bibr" target="#b13">[14]</ref>, or it enables to study at a large scale the distribution and adaptation of life in oceans <ref type="bibr" target="#b12">[13]</ref>). However no method scales to the dozens of petabytes of data already available today. Thus, new computational methods are required to perform a search against datasets.</p><p>Querying datasets can be done precisely by aligning genome sequences (e.g. using Blast-like <ref type="bibr" target="#b0">[1]</ref> algorithms), however aligning sequences is computationalresources intensive. Thus queries on large scale datasets are usually done through k-mers presence / absence. Basically, datasets are represented as their set of kmers and queries are represented as their sequence of k-mers.</p><p>Methodological developments have thus been made to index every k-mers of a dataset. Some methods use Approximate Membership Query data structures (AMQ), e.g. bloom filters, to store presence / absence of k-mers, as SBT <ref type="bibr" target="#b11">[12]</ref> or HowDe-SBT <ref type="bibr" target="#b4">[5]</ref>; see <ref type="bibr" target="#b8">[9]</ref> for a survey of approaches to index large dataset. However, very few methods tackle the issue of recording the abundance of the indexed k-mers. The abundance information is however crucial for many biological applications such as transcriptomics or metagenomics. Storing abundance is costly with regard to space consumption. Conversely, adding abundance information in an AMQ, turning it into a counting AMQ, without allocating more space increases drastically its false positive rate. As an example, BIGSI <ref type="bibr" target="#b2">[3]</ref> relies on Bloom filters with a high false-positive rate, e.g. 25% false-positive rate per kmer query. At constant memory usage, adding the abundance information would yield an extremely high false-positive rate. As such, methods storing abundances mostly rely on compression by clustering abundance with neighbouring k-mers or across datasets, as Reindeer <ref type="bibr" target="#b9">[10]</ref> or Counting de Bruijn graphs <ref type="bibr">[6]</ref>. These methods do not rely on counting AMQ, but rather on exact data structures.</p><p>In this paper, we do not propose a novel counting AMQ, but rather a wrapper to improve any existing counting AMQ, like a counting Bloom Filter. The method we introduce is called fimpera. It generalises one of our previous contribution <ref type="bibr" target="#b10">[11]</ref>. In short, fimpera splits every k-mer into s-mers (with k ≥ s &gt; 0) and then associates the abundance of a k-mer to its constituent s-mers in a counting AMQ. This allows us to retrieve the abundance of a k-mer at query time via its s-mers count. Compared to the original counting AMQ indexing k-mers, we show that fimpera improves the abundance correctness while reducing the false positives rate by an order of magnitude without generating false-negative calls nor underestimation of the abundance of a k-mer.</p><p>Additionally, the fimpera algorithmic needs led us to propose a novel algorithm for computing in O(x) time and with no memory allocation the sliding window minimums (resp. maximums). These are the minimal (resp. maximums) values of all sub-arrays of a fixed size over an array of x values. This contribution may be useful independently from the fimpera context. Its novelty is that, while being destructive for the input array, it uses no additional memory while other approaches use memory linear with the size of the intervals.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">Methods</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Background</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Preliminary definitions</head><p>A k-mer is a word of length k over an alphabet Σ. Given a sequence S, |S| denotes the length of S.</p><p>In the current framework, we consider a dataset as composed of one sequence or a multisets of sequences. Given a dataset D, D k denotes multiset of k-mers extracted from D.</p><p>We denote the abundance of a k-mer d (the number of time d appears) in D k by abundance(D k , d). We consider that a k-mer is "present" (resp. "absent") in</p><formula xml:id="formula_0">D if abundance(D k , d) &gt; 0 (resp. abundance(D k , d) = 0).</formula><p>A counting AMQ data structure represents a multiset of elements D k . It can be queried with any element d; the query's response on an counting AMQ, noted n, is always either correct or overestimated, i.e. n ≥ abundance(D k , d). If n = abundance(D k , d), the counting AMQ reported the correct abundance, otherwise it reported an overestimation. Note that underestimation is not possible.</p><p>In particular, if abundance(D k , d) = 0 and n &gt; 0, then d is found in the counting AMQ even if it is absent from D. This particular case is a false positive call. The false-positive rate of a counting AMQ, denoted by F P R cAM Q , is defined by F P R cAM Q = #F P #F P +#T N with #F P and #T N denoting respectively the number of false-positive calls and the number of true negative calls (n = 0). F P R cAM Q depends on the used counting AMQ strategy and on the amount of space used by this counting AMQ.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Overview of fimpera</head><p>In this work, we focus on decreasing the false positive rate of a counting Bloom Filter (cBF for short). However, fimpera is a generic approach that may be applied on any counting AMQ. A counting Bloom Filter is a generalization of Bloom filters: each element is inserted along with its abundance instead of its presence only. This requires a few bits per entry for storing this information. Hence, either at constant size, a counting Bloom Filter has a higher falsepositive rate than a simple Bloom filter, or are counting Bloom Filter requires more memory than a Bloom filter to achieve the same false-positive rate.</p><p>fimpera's objectives are to reduce F P R cAM Q and to improve precision on true positive calls, using a method based on splitting k-mers into smaller words called s-mers.</p><p>Indexation overview At indexation time, fimpera takes a file of counted kmers, typically extracted from a genomic sequence dataset, and splits each k-mer to be indexed into its k -s + 1 s-mers (k ≥ s). Each s-mer is then stored in a cAMQ along with its s abundance . The s abundance of a s-mer is the maximum of the abundance of the k-mers containing this s-mer. We explain this choice in the following.</p><p>In the following, we set z = k -s, hence z ≥ 0.</p><p>Query overview The query of fimpera consists of a set of sequences. For each sequence S, fimpera extract s-mers, which are then queried against the cAMQ, and the abundance of any k-mer of S is computed as the minimum of s abundance of its s-mers. By default, fimpera prints each input sequence along with the abundance of every of its consecutive k-mer. In the biological context, the input file is a fasta/fastq file (or a gzipped fasta/fastq file) containing reads. fimpera is built in a modular way. Changing the default output (e.g. storing results instead of printing, computing average abundance per sequence or printing only sequences whose average k-mer abundances is above a user-defined threshold) can be programmed via inheritance of an Abstract Class.</p><p>Overview of false positive calls of fimpera's query Let's consider a kmer d with an abundance of 0 and each of its s-mer has an s abundance of 0 as well. With fimpera, wrongly reporting d as present requires that every s-mer of that k-mer are wrongly found as present in the counting AMQ. The probability of such an event is roughly F P R z+1 cAM Q , leading to a dramatic decrease in the occurrences of false-positive calls with respect to z. For instance, with z=3 (which is a recommended and default value), a counting AMQ having a false positive rate of 25%, the probability of false-positive rate with fimpera for that setting is ≈ 0.04%.</p><p>The fimpera approach may generate a novel kind of false-positives. A queried k-mer, absent from the indexed dataset, may be composed of s-mers, all existing in this indexed set. Querying such k-mer with fimpera returns a non-zero abundance, so generating a false-positive, that we call a "construction false-positive". This new kind of false-positive call is specific to the fimpera approach.</p><p>Overview of overestimations of fimpera's query To overestimate the abundance of a queried k-mer, overestimations are required to happen on the abundance of every s-mer of that k-mer. The more s-mer per k-mer, the more s-mer abundance overestimations need to happen to overestimate a k-mer abundance. s-mer abundance overestimations come from two sources:</p><p>a collision occurs in the counting Bloom filter, leading to the overestimation of the less abundant colliding s-mer; and/or: a s-mer is shared among two different k-mers having different abundances.</p><p>This overestimates the abundance of this s-mer of the least abundant k-mer. This happens not matter the false positive rate of the counting Bloom filter. We call those overestimations "construction overestimation"; this new kind of overestimation is specific to fimpera.</p><p>Observe a case of interest: consider two k-mers a and b overlapping over k -1 characters. If b has an abundance greater than a, then the correct abundance of a is retrievable through a unique s-mer (the unique s-mer of a that does not appear in the k-mer b). In such case, a is likely to be overestimated.</p><p>Consequently, fimpera's overestimations are not uniformly distributed random events. Overestimations tend to be close to a change in abundance along queried sequences. Furthermore, overestimations tend to raise k-mer's abundance close to the abundance of their neighbor k-mers, mitigating the impact of those overestimated calls. In the results, we show that the erroneous abundance calls are closer to the ground truth with fimpera compared to those obtained with the original cBF.</p><p>We now describe in more details both indexing step and querying step of fimpera, as well as two optimisations, allowing querying in constant time and skipping unnecessary queries.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Indexing with fimpera</head><p>As stated in Section 2.2, fimpera's indexation is a two-step process:</p><p>k-mers' abundances are computed from the input dataset (e.g. using KMC <ref type="bibr" target="#b6">[7]</ref>); s-mers from these k-mers are stored in a counting AMQ together with their s abundance . The s abundance of a s-mer is formally defined as the maximal abundance of the indexed k-mers in which this s-mer occurs.</p><p>Note that the s abundance of a s-mer α is lower or equal to the abundance of α in the input dataset. For instance consider a s-mer α that occurs in two k-mers respectively with an abundance of one and two. Then, the abundance of α is three (= 1 + 2), while the s abundance of α is two (= max(1, 2)). Storing the s abundance of α instead of its abundance, enables to lower the abundance overestimations, as it avoids to accumulate the abundances of distinct k-mers it belongs to.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>2.4</head><p>Querying with fimpera fimpera's query consists in querying all consecutive, overlapping k-mers from a sequence of size greater than k through their constituent s-mers. fimpera's query is a two-step process:</p><p>for every position in the query except the last s -1 ones, s-mers starting at these positions are queried in the counting AMQ and stored in a array of integers s abundances ; -The abundance any k-mer starting position p is the minimum value of the sub-array of length (z + 1) starting at the position p: s abundances [p; p + z].</p><p>This non-optimised algorithm version of fimpera's query is shown in algorithm 1, in supplementary material, Section S1.1. This approach can be improved in two ways, in one way avoiding to recompute the minimal value of an array of length z + 1 for each position p, and in an other way by skipping some unnecessary s-mer queries. The two following Sections present these two optimisations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.5">Optimisations Optimisation 1: sliding window minimums algorithm</head><p>The problem, independent of fimpera, is as follows: given a vector of values (integers of floats) v and an integer size window, give an array r such that ∀i ∈ [0, |v| -size window], r</p><formula xml:id="formula_1">[i] = min(v[i], v[i + 1], ..., v[i + size window -1]).</formula><p>The naive approach is to compute every window and search for the minimum in those windows. This algorithm is in O(size window × |v|) time. We propose a solution in O(|v|) time. Note that this is a classical problem for which nonpublished solutions can be found. However, the novelty of our proposed solution is that it does not require allocating any memory from the heap (which is slow for most systems).</p><p>The main idea is to split the input vector of values in fixed, non-overlapping windows of size size window. Then, for each so called "fixed window", compute two vectors:</p><p>min left j: min lef t j[i] contains the minimum value encountered in the j-th fixed window up to the position i min right j: min right j[i] contains the minimum value from the position i up to the end of the j-th fixed window All min lef t j and min right j vectors are then concatenated into two vectors (min lef t and min right). The minimum of a sliding window starting at position i is thereupon the minimum between:</p><p>min lef t[i + size window -1] (the minimum of the left part of the next fixed window) min right[i] (the minimum of the right part of the current fixed window) An example is provided in Table <ref type="table" target="#tab_1">1</ref>.</p><p>i 0 1 2 3 4 5 6 7 8 9 v 5 3 7 1 4 5 3 2 2 3 j 0 1 2 3 min lef t 5 3 3 1 1 1 3 2 2 3 min right 3 3 7 1 4 5 2 2 8 3 min sliding 3 1 1 1 3 2 2 2 Table <ref type="table" target="#tab_1">1</ref>. Computation example of the min sliding vector, with a window of size 3. Tables min lef t and min right are represented for helping the comprehension, but are not implicitly created in practice. The j row indicates the starting positions of the fixed windows. As a example, the minimal value of the sliding window of size 3 starting position i = 1 is min sliding <ref type="bibr" target="#b0">[1]</ref> = 1 (bold underlined value), being equal to min(min lef t[1 + 3 -1], min right <ref type="bibr" target="#b0">[1]</ref>) = min(1, 3) (underlined values).</p><p>Note that, as described previously, this approach would require allocating memory for two vectors per call. This memory need may appear negligible in theory as those vectors are limited by the query size which is a few hundred to few thousands. However, in practice, allocating memory for these vectors is time consuming, and may increase significantly the practical running time. We overcame this memory need thanks to these three following tricks. 1/ we compute min lef t[i] on the fly (min lef t[i] = min(min lef t[i -1], v[i])). 2/ min right is computed directly in the queried vector. This does not impact the correctness of the algorithm, as min sliding ≤ min r ight[i] ≤ v[i]. 3/ the response (minimal value per sliding window) can be stored directly in the input queried vector as well. At the price of modifying the vector, allows the algorithm to be run in O(size query) time and to avoid any time consuming heap allocation.</p><p>A complete description of the optimised solution is in supplementary materials, Section S1.2, algorithm 2.</p><p>This algorithm offers a generic solution for computing the minimal value of a sliding window in constant memory and linear time. Its usefulness is not limited to fimpera. Note also that it can be straightforwardly modified for computing the maximal value instead of the minimal value of each window.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Optimisation 2: skip unnecessary s-mers queries</head><p>Observe that knowing the absence of a s-mer allows not only to deduce the absence of the k-mer starting with it: all k-mers containing this s-mer are absents as well. This allows to infer the existence of a stretch of consecutive absent kmers.</p><p>We exploit this simple idea further. If one detects that two absents s-mers are z + 1 positions away in the query, then any k-mer starting at any position between them is also absent. In the fimpera algorithm, if a s-mer is not found during the query, an optimisation consists of searching for the abundance of the s-mer z + 1 positions further away in the query. If that s-mer is also absent, there is no need to query any s-mer in between.</p><p>Thus, fimpera only needs to query one s-mer every z + 1 position as long as the queried s-mers are absent in the counting AMQ, effectively saving time. This optimised algorithm is described in supplementary materials, algorithm 3.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.6">Implementation of fimpera</head><p>An implementation of fimpera is available at https://github.com/lrobidou/ fimpera. This implementation is specialised for genomic data (i.e. with an alphabet consisting of A, T, C, G) and uses a counting Bloom filter as cAMQ. A template mechanism allows the use of any other cAMQ provided by the user. In the genomic context, queries consist of fasta or fastq files (gzipped or not), and an option is provided to index and query canonical k-mers only, i.e. the lexicographic minimum between each k-mer and its reverse complements. Options include the k and z values, the size of the filter, and b, the number of bits per abundance count.</p><p>As b has a major impact on the final size of the data structure, it is recommended to use low b values (say b ≤ 5). This limits the maximal stored abundance value to 2 b . In practice fimpera includes an option to use any abundance function provided by the user (identity, ⌊log 2 ⌋, ⌊log 10 ⌋, range of values, etc. . . ) to compute ranges of abundance per encoded value.</p><p>Storing abundances as their ⌊log 2 ⌋ values leads to a gain of space (for instance storing up to 64 abundances requires 8 bits, but storing up to ⌊log 2 (64)⌋ abundances requires only 3 bits). This is at the cost of a loss of precision for abundances with identical ⌊log 2 (64)⌋ values, as this is for instance the case for abundances 5 and 6.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Results</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Experimental setup</head><p>To the best of our knowledge, no other tool focuses on reducing the false positive rate of existing cAMQ, thus we compare fimpera results applied on a counting Bloom filter indexing s-mers with the original counting Bloom filter results indexing k-mers. Both methods are using a single hash function. We propose results on biological marine metagenomic data. Parameters used are the default ones: k = 31, size of filter of 3.48 × 10 9 bits, as discussed in section 3.3, using b = 5 bits per abundance count, and abundances are stored as their ⌊log 2 ⌋ values. We use the default z = 3 parameter (unless otherwise stated).</p><p>A list of commands for reproducing the results is available here: https:// github.com/lrobidou/fimpera/blob/paper/paper_companion/Readme.md along with a step-by-step explanation of the output. Executions were performed on the GenOuest platform on a node with 4x8cores Xeon E5-2660 2,20 GHz with 200 Go of memory.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Metagenomic dataset</head><p>We used two fastq files from the TARA ocean metagenomic dataset to show advantages offered by fimpera on metagenomic samples. The index was computed from the 2.38 × 10 8 31 -mers present at least twice in an arctic station (accession number ERR1726642) and the query sample was the first 3×10 6 reads from a sample in another arctic station (accession number ERR4691696). Canonical k-mers were considered for this experiment.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">Choice of filters parameters</head><p>We propose an experiment in which we apply the fimpera approach on top of a counting Bloom Filter designed to have 25% of false-positive calls, while using 5 bits per hash value for storing the abundance of indexed k-mers. For indexing 2.38×10 8 31-mers this structure requires 3.48×10 9 bits. Note that when storing the presence/absence of those k-mers in a Bloom filter using the optimal number of hash functions, the expected false positive rate would be 8.7%. We chose to consider a counting Bloom Filter that uses a unique hash function. Even if this choice is independent of the fimpera approach, it is motivated by the fact that major tools indexing large sets of k-mers as BIGSI <ref type="bibr" target="#b2">[3]</ref>, COBS <ref type="bibr" target="#b1">[2]</ref>, HowDe-SBT <ref type="bibr" target="#b4">[5]</ref> as well as generic methods for preprocessing k-mers like kmtricks <ref type="bibr" target="#b7">[8]</ref> are based on Bloom filters using a unique hash function for performances purposes.</p><p>Hence, we propose to index k-mers along with their abundance in a cBF of 3.48 × 10 9 bits using one hash function and storing abundance on 5 bits. We compare the results of queries made against this counting Bloom Filter with results of queries made against fimpera wrapping that same counting Bloom Filter. Unless otherwise specified, all results shown were obtained using z = 3. This implies that we compare results of a cBF indexing 31-mers, with results of fimpera used on a cBF with the same sizing, but indexing s-mers of size 28 (31-3).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.4">Used metrics</head><p>To measure the quality of the fimpera results and the cBF results, we propose three metrics:</p><p>the false positive rate, that provides the probability that the method returns an abundance call &gt; 0 for a k-mer absent from the indexed set. the proportion of incorrect abundance, that provides the probability that the method returns the incorrect abundance for a k-mer actually in the indexed set. statistics of responses for incorrect abundances calls, that estimate the reported abundance of k-mers whose abundance are incorrectly reported. Results about false-positives obtained with the proposed experiment are shown in Fig. <ref type="figure" target="#fig_0">1</ref>. Results about the cBF simply confirm the setup, and shows a false positive rate of 25%. When applying fimpera, the false positive rate drops to 0.56%. Among all these fimpera false positives, 4.8 % are due to the so-called "construction false positives" (see Section 2.2), thus representing 0.0027% of the total k-mer calls.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.5">False positive rate analyses</head><p>It is important to recall that these comparative results were obtained using the exact same amount of space. Hence the fimpera approach enabled to yield about 45 times fewer false-positive calls, with no drawback and even saving query time (see Section 3.8).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.6">Correctness of the reported abundances</head><p>In this section, we focus only on true positive calls. Hence, these results do not concern the 25% false-positive calls obtained with the original cBF, nor the 0.56 % ones using fimpera. Results comparing the proportion of calls reported with an incorrect abundance among the true positives are shown in Fig. <ref type="figure" target="#fig_1">2</ref>. These results show that 1.54 % of true-positive calls are overestimated in the cBF, while 1.33 % of true-positive calls are overestimated with fimpera. Among the fimpera calls estimating an incorrect abundance among the true positives, 83 % are due to the so-called "reconstruction overestimation".</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.7">Distribution of errors in overestimated calls</head><p>In this section, we focus only on the wrongly estimated calls among true positives Results presented Fig. <ref type="figure" target="#fig_2">3</ref> show that, as stated Section 2.2, the erroneous abundance calls are closer to the ground truth with fimpera compared to those obtained with the original cBF. As seen Fig. <ref type="figure" target="#fig_2">3</ref>-right, with fimpera, almost all (excepted a few outliers) overestimations are only one value apart from the correct range (the average difference with the correct abundance range is 1.07). With the original cBF, as seen Fig. <ref type="figure" target="#fig_2">3</ref>-left, overestimations are more important (1.33 range in average from the ground truth).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.8">Influence of the z parameter.</head><p>The proposed approach requires to set up a unique parameter z that defines the size of the indexed s-mers (recall that z = k -s). We propose in this section to assess the impact of this unique additional parameter needed for using fimpera.  <ref type="table">2</ref>. Influence of the z parameter on the quality of the results and on the computation time. "constr." stands for "construction". z = 0 is equivalent to the original cBF results.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Quality of results</head><p>As shown in Table <ref type="table">3</ref>.8, the false positive rate decreases with regard to z and stays low for a wide range of z values (at least from 3 to 9). When using an extreme z value, for instance s = 20, the false positive rate is increased up to almost 100%. With z = 20, as we use k = 31, the size of the s-mers is s = 11. When indexing as little as few hundred millions characters, each 11-mer has a great chance to appears by chance in the indexed dataset (it does not occurs with a probability of 10 -11 when indexing a hundred million characters on an alphabet of size four). This quasi-random existence of all s-mers generates a huge amount of construction false positives, as seen in the last column. This has also an impact on the running time that nearly doubles, certainly because all queried s-mers are positives, annihilating the s-mer skipping optimisation.</p><p>Query time. As mentioned Section 2.5, the fimpera approach does not increase the query running. On the contrary, it allows to slightly decrease the running time when z increases as seen Table <ref type="table">3</ref>.8. Default z parameter. Presented results highlight the fact that performances are little impacted by the choice of this parameter. The default z parameter is set to z = 3.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Conclusion</head><p>We presented fimpera, a novel computational method to reduce the false positive rate and increase the precision of any counting Approximate Membership Query data structure with no modification of the original data structure. This reduction is obtained without any memory overhead, with no modification of the original data structure, and even with a slight improvement over the query computation time.</p><p>Our results showed that when applied on top of a counting Bloom Filter, fimpera enabled to yields about 45 times fewer false-positive calls than when querying directly a counting Bloom Filter of identical size. Moreover, using fimpera, abundance errors were slightly less frequent on true positive calls, and finally, those abundance errors were on average 1.07 apart from the ground truth with fimpera while they are on average 1.33 apart from the ground truth with the original cBF.</p><p>Independently from parameters of the used cAMQ, fimpera requires to set up a unique parameter, z. Fortunately results are highly robust with the choice of z, unless extreme values are chosen. Future work will include a formal analysis of the theoretical limits on the choice of z usage ranges.</p><p>We provide a C++ implementation of fimpera which enabled us to validate the approach. This implementation can also be used as a stand-alone tool for indexing and querying genomic datasets, and it can be tuned with user-defined parameters and ranges of abundances. The provided github project also proposes all necessary instructions and links to genomic data to reproduce the results.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>S1 Supplementary Materials</head><p>These supplementary materials propose a detailed description of the proposed algorithms.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>S1.1 query algorithm</head><p>A non-optimised algorithm of fimpera's query is shown in Algorithm 1. This algorithm takes a queried sequence q, a counting AMQ indexing s-mers, and parameters k and z. It returns a vector of integers such that: ∀i ∈ [0, |response|], response[i] is the abundance of the k-mer starting at position i in the query.</p><p>Algorithm 1 fimpera's query 1: procedure query(q ∈ Σ * ; cAMQ indexing s-mers; k and z in N + (|q| ≥ k, z ≤ k)) 2:</p><p>s ← k -z ▷ may be zero 3:</p><p>smer s abundances ← emptyV ector(0) 4: # Store s abundance of all s-mers: 5:</p><p>for i in [0; |q| -s] do 6:</p><p>ab ← s abundance of the s-mer starting pos i in q (using the counting AMQ).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>7:</head><p>add ab in the smer s abundances vector 8:</p><p>end for 9: # Compute all k-mers abundances from s-mer s abundances : 10:</p><p>response ← emptyV ector(|q| -k + 1) 11:</p><p>for i in [0; |q| -k] do 12:</p><p>add min j∈[i,i+z] (smer s abundances [j]) in the response vector 13:</p><p>end for 14:</p><p>return response 15: end procedure Algorithm 1 is not optimal. Line 12 it computes the minimal value of a range of z consecutive integers taken from a vector of integers. At each iteration of a for loop this range is shifted by one. An optimization, presented in the next enables to compute all these minimal values in linear time and with zero memory allocation.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>S1.2 Sliding window minimums</head><p>Algorithm 2 sliding minimum window for i in [0; nbW in -2] do ▷ for every window excluding the last one</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>S1.3 Skip streches</head><p>In this section we show the entire algorithm of fimpera (algorithm 3), including the optimisation consisting in skipping stretches of absent k-mers. The skip optimisation occurs line 32: if a negative s-mer is called, the algorithm jumps z +1 position away in the sequence, probing for another absent s-mer. A positive answer will trigger line 18, backtracking positions backward. We keep track of the fact that we are currently skipping s-mers via the extending stretch flag.</p><p>Algorithm 3 fimpera's query 1: procedure query(q ∈ Σ * ; cAMQ indexing s-mers; k and z in N + (|q| ≥ k, z ≤ k)) 2: s ← k -z 3:</p><p>response ← emptyV ector(size -K + 1) 4:</p><p>stretchLength ← 0 5: j ← 0 ▷ Current position in the query 6:</p><p>extending stretch ← true 7:</p><p>previous answers ← emptyV ector(0) 8:</p><p>while j &lt; |q| -k + 1 do 9:</p><p>smer ← smer starting at position j in q 10: amq answer ← s abundance of smer in cAM Q 11:</p><p>if amq answer &gt; 0 then 12:</p><p>if extending stretch then 13:</p><p>previous answers.push back(amq answer) 14:</p><p>stretchLength ← stretchLength + 1</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Fig. 1 .</head><label>1</label><figDesc>Fig. 1. Proportion of false positive calls without fimpera (on a classical counting Bloom Filter) and with fimpera (z = 3).</figDesc><graphic coords="10,221.22,453.25,172.91,129.68" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Fig. 2 .</head><label>2</label><figDesc>Fig. 2. Proportion of incorrect abundance calls with the original cBF, and with fimpera</figDesc><graphic coords="11,221.22,308.31,172.91,129.68" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Fig. 3 .</head><label>3</label><figDesc>Fig.3. For true-positive calls with an incorrect abundance estimation: reported abundance with respect to the correct abundance. Left: using the original cBF, right: using fimpera.</figDesc><graphic coords="12,134.77,115.84,172.91,129.68" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>1 :</head><label>1</label><figDesc>procedure sliding minimum window(vector v of positive integers; length of window w (|v| ≥ w, w &gt; 1))</figDesc><table><row><cell>2:</cell><cell>nbW in ← ⌊size(v)/w⌋</cell><cell></cell></row><row><cell>3:</cell><cell cols="2">nb elem last window ← |v| mod w</cell></row><row><cell>4:</cell><cell>min lef t ← v[0]</cell><cell>▷ start computation of min left (See Section 2.5)</cell></row><row><cell>5:</cell><cell>for i in [0; w -1] do</cell><cell></cell></row><row><cell>6:</cell><cell cols="2">min lef t ← min(min lef t, v[i])</cell></row><row><cell>7:</cell><cell>end for</cell><cell></cell></row><row><cell>8:</cell><cell></cell><cell></cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><p>Acknowledgements. The authors thank <rs type="person">Eric Pelletier</rs> for his help regarding the usage of the Tara Ocean data sets. This work used HPC resources from the GenOuest bioinformatics core facility (https://www.genouest.org). The work was funded by <rs type="funder">ANR SeqDigger</rs> (<rs type="grantNumber">ANR-19-CE45-0008</rs>).</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_Nn38zxx">
+					<idno type="grant-number">ANR-19-CE45-0008</idno>
+				</org>
+			</listOrg>
+
+			<div type="availability">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>https://github.com/lrobidou/</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Basic local alignment search tool</title>
+		<author>
+			<persName><forename type="first">Warren</forename><surname>Stephen F Altschul</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Webb</forename><surname>Gish</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eugene</forename><forename type="middle">W</forename><surname>Miller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">J</forename><surname>Myers</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lipman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of molecular biology</title>
+		<imprint>
+			<biblScope unit="volume">215</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="403" to="410" />
+			<date type="published" when="1990">1990</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Cobs: a compact bit-sliced signature index</title>
+		<author>
+			<persName><forename type="first">Timo</forename><surname>Bingmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Phelim</forename><surname>Bradley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Florian</forename><surname>Gauger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zamin</forename><surname>Iqbal</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Symposium on String Processing and Information Retrieval</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="285" to="303" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Ultrafast search of all deposited bacterial and viral genomic data</title>
+		<author>
+			<persName><forename type="first">Phelim</forename><surname>Bradley</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Henk C Den</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eduardo</forename><forename type="middle">Pc</forename><surname>Bakker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gil</forename><surname>Rocha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zamin</forename><surname>Mcvean</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Iqbal</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature biotechnology</title>
+		<imprint>
+			<biblScope unit="volume">37</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="152" to="159" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">The european nucleotide archive in 2021</title>
+		<author>
+			<persName><forename type="first">Carla</forename><surname>Cummins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alisha</forename><surname>Ahamed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Raheela</forename><surname>Aslam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Josephine</forename><surname>Burgin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rajkumar</forename><surname>Devraj</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ossama</forename><surname>Edbali</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dipayan</forename><surname>Gupta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><forename type="middle">W</forename><surname>Harrison</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Muhammad</forename><surname>Haseeb</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sam</forename><surname>Holt</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Research</title>
+		<imprint>
+			<biblScope unit="volume">50</biblScope>
+			<biblScope unit="issue">D1</biblScope>
+			<biblScope unit="page" from="D106" to="D110" />
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Improved representation of sequence bloom trees</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Robert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Harris</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Medvedev</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="721" to="727" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Lossless indexing with counting de bruijn graphs</title>
+		<author>
+			<persName><forename type="first">Mikhail</forename><surname>Karasikov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Harun</forename><surname>Mustafa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gunnar</forename><surname>Rätsch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">André</forename><surname>Kahles</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Research in Computational Molecular Biology</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2022">2022</date>
+			<biblScope unit="page" from="374" to="376" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Kmc 3: counting and manipulating k-mer statistics</title>
+		<author>
+			<persName><forename type="first">Marek</forename><surname>Kokot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sebastian</forename><surname>Deorowicz</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="issue">17</biblScope>
+			<biblScope unit="page" from="2759" to="2761" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">kmtricks: Efficient construction of bloom filters for large sequencing data collections</title>
+		<author>
+			<persName><forename type="first">Téo</forename><surname>Lemane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Medvedev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rayan</forename><surname>Chikhi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pierre</forename><surname>Peterlongo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">bioRxiv</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Data structures based on k-mers for querying large collections of sequencing data sets</title>
+		<author>
+			<persName><forename type="first">Camille</forename><surname>Marchet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christina</forename><surname>Boucher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Simon</forename><forename type="middle">J</forename><surname>Puglisi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Medvedev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mikaël</forename><surname>Salson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rayan</forename><surname>Chikhi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Research</title>
+		<imprint>
+			<biblScope unit="volume">31</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="12" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Reindeer: efficient indexing of k-mer presence and abundance in sequencing datasets</title>
+		<author>
+			<persName><forename type="first">Camille</forename><surname>Marchet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zamin</forename><surname>Iqbal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Gautheret</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mikaël</forename><surname>Salson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rayan</forename><surname>Chikhi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="issue">Supplement 1</biblScope>
+			<biblScope unit="page" from="177" to="185" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">findere: fast and precise approximate membership query</title>
+		<author>
+			<persName><forename type="first">Lucas</forename><surname>Robidou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pierre</forename><surname>Peterlongo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Symposium on String Processing and Information Retrieval</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="151" to="163" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Fast search of thousands of short-read sequencing experiments</title>
+		<author>
+			<persName><forename type="first">Brad</forename><surname>Solomon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carl</forename><surname>Kingsford</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature biotechnology</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="300" to="302" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Tara oceans: towards global ocean ecosystems biology</title>
+		<author>
+			<persName><forename type="first">Shinichi</forename><surname>Sunagawa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peer</forename><surname>Silvia G Acinas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Bork</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Damien</forename><surname>Bowler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gabriel</forename><surname>Eveillard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lionel</forename><surname>Gorsky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniele</forename><surname>Guidi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Iudicone</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fabien</forename><surname>Karsenti</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lombard</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Reviews Microbiology</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page" from="428" to="445" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Review the cancer genome atlas (tcga): an immeasurable source of knowledge</title>
+		<author>
+			<persName><forename type="first">Katarzyna</forename><surname>Tomczak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patrycja</forename><surname>Czerwińska</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maciej</forename><surname>Wiznerowicz</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Contemporary Oncology/Wspó lczesna Onkologia</title>
+		<imprint>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="68" to="77" />
+			<date type="published" when="2015">2015. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

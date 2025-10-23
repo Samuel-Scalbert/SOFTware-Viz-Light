@@ -1,0 +1,717 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="fr">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">findere: fast and precise approximate membership query</title>
+				<funder ref="#_rVnF8q4">
+					<orgName type="full">Agence Nationale de la Recherche</orgName>
+					<orgName type="abbreviated">ANR</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Lucas</forename><surname>Robidou</surname></persName>
+							<email>lucas.robidou@inria.fr</email>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Univ. Rennes</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">IRISA</orgName>
+								<address>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Pierre</forename><surname>Peterlongo</surname></persName>
+							<email>pierre.peterlongo@inria.fr</email>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Univ. Rennes</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">IRISA</orgName>
+								<address>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">findere: fast and precise approximate membership query</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">511C3C3BA402A0E52E29F664FDEAE6BE</idno>
+					<idno type="DOI">10.1101/2021.05.31.446182</idno>
+					<note type="submission">Submitted on 22 Jul 2021</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:13+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Approximate membership query</term>
+					<term>data structure</term>
+					<term>indexation</term>
+					<term>k-mers</term>
+					<term>Bloom filters</term>
+					<term>sequence data</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>HAL is a multi-disciplinary open access archive for the deposit and dissemination of scientific research documents, whether they are published or not. The documents may come from teaching and research institutions in France or abroad, or from public or private research centers. L'archive ouverte pluridisciplinaire HAL, est destinée au dépôt et à la diffusion de documents scientifiques de niveau recherche, publiés ou non, émanant des établissements d'enseignement et de recherche français ou étrangers, des laboratoires publics ou privés.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="fr">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>Genomic studies generate a "data deluge" <ref type="bibr" target="#b12">[13]</ref>. Public data banks providing sequencing data or assembled genome sequences are growing at an exponential rate <ref type="bibr" target="#b0">[1]</ref>. Alongside, a fundamental need consists in comparing sequences at large scale, for instance for species identification <ref type="bibr" target="#b14">[15]</ref>, metagenome similarity estimation <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b10">11]</ref>, or any generic need for estimating the presence of a sequence among available datasets <ref type="bibr" target="#b9">[10]</ref>.</p><p>Given the overwhelming amount of data to compare, these large scale sequence comparisons are made through alignment-free methods <ref type="bibr" target="#b15">[16]</ref> mainly based on the number of words of fixed length, usually called k-mers for words of length k, shared between the two (set of) sequences to compare. So then, indexing kmers for fast and low memory membership queries is a fundamental need. This last decade, an intense research activity was carried out in order to optimize such indexes (see <ref type="bibr" target="#b8">[9]</ref> and <ref type="bibr" target="#b5">[6]</ref> reviewing these efforts). Most of those indexes use approximate membership query (AMQ) structures such as Bloom filters <ref type="bibr" target="#b3">[4]</ref> (called "BF" in this manuscript). With low space needed per represented element (usually less than 10 bits), these data structures are widely used although they suffer by nature from the existence of false-positive calls.</p><p>In genomics, BFs are the simplest and the most employed AMQ data structure used for representing the set of k-mers from a set of sequences. However, more sophisticated AMQ data structures enable under certain conditions to improve the BF features (cuckoo filters <ref type="bibr" target="#b6">[7]</ref>, SAT filters <ref type="bibr" target="#b13">[14]</ref>, quotient filters <ref type="bibr" target="#b1">[2]</ref>). However, these improvements are marginal and/or at the expense of important limitations such as an important query time. For instance with SAT filters, despite they need ≈ 22% less space, their queries are roughly 14 times slower than BFs' ones. Also, Cuckoo filters may show marginal smaller space cost per element for false-positive rates below 3% (space gain of 16% for instance for a false-positive rate of 0.1%, at the expense of longer query time).</p><p>In this work, we do not propose yet another AMQ data structure. Instead, we propose a downstream analysis of results returned by such data structures when used to query k-mers from a sequence. To the best of our knowledge, the only work in the same spirit is kBF <ref type="bibr" target="#b11">[12]</ref>. kBF is designed to work on genomic sequences with the alphabet {A, C, G, T } and indexes k-mers using a BF. With kBF if a queried k-mer is positive in the BF, the presence in the BF of at least one of the four (the alphabet size) potential previous and incoming k-mers is also checked. If none of them is positive, then the original queried k-mer is considered a negative. This leads to a lower false-positive rate (up to 30x lower than a raw BF) at the expense of longer query time and higher memory usage. kBF presents interesting features that can be further improved as 1/ its query times are 1.3 to 1.6x longer than a classical BF, and 2/ its strategy is limited to the previous and the k-mer that comes just after a queried k-mer. Extending this approach to n neighbor increases the query time by (4 n ) fold. Finally, this approach applies only for small alphabets (eg. of size four) as the number of queries depends on the size of the alphabet. The work we propose aims to overcome these limitations.</p><p>In this paper, we propose a method for improving AMQ results when used for querying k-mers from a sequence. Our strategy is based on the observation that false-positive k-mers from AMQ are not likely to occur consecutively on a queried sequence. Hence, in a procedure that we call the "Query Time Filtration" (QTF), small stretches of positive calls surrounded by negative calls are considered as false-positives and are filtered out. This simple strategy leads to an unprecedented decrease of the AMQ false-positive rate. However, this leads to the introduction of false-negative calls that are a barrier for many downstream applications. Nevertheless, we show that the QTF strategy can be used for querying K-mers (with K &gt; k), with no false-negative.</p><p>We implemented this approach in a tool called findere. Used on results from any original AMQ data structure, findere presents only advantages when querying K-mers: it does not necessitate any change to the original AMQ structure, it does not use any additional memory or disk, it has no false-negative calls, and it has a false-positive rate two orders of magnitude lower than original AMQ. Moreover, findere does not entail any additional query time penalty and even enables faster query of K-mers (in average &gt; 2 times faster with recommended parameters) with no negative impact on result quality.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">Method</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Background</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Preliminary definitions</head><p>A k-mer is a word of length k over an alphabet Σ. Given a sequence S, |S| denotes the length of S.</p><p>In the current framework, we consider a dataset as composed of one sequence or a set of sequences. We consider that a k-mer occurs in a dataset if it occurs at least once in any of the sequences composing the set.</p><p>An AMQ data structure represents a set of elements D. It can be queried with any element d. If d ∈ D, then the AMQ answer is positive (there is no falsenegative). If d / ∈ D, the AMQ answer may be negative or positive, in this last case it is a false-positive call. The false-positive rate, denoted by F P R AM Q , is defined by F P R AM Q = #F P #F P +#T N with #F P and #T N denoting respectively the number of false-positive calls and the number of true negative calls. F P R AM Q depends on the used AMQ strategy and mainly on the amount of space used by this AMQ.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Sequence similarity estimated by the number of shared k-mers</head><p>Given two sequences, a k-mer occurring in both sequences is called "shared".</p><p>The number of shared k-mers between a queried sequence q and a dataset B provides an insight of the presence of q in B, or at least of a sequence similar to q in B <ref type="bibr" target="#b4">[5]</ref>.</p><p>In practice, for scaling Terabyte-sized sets B, a static AMQ indexes all (overlapping) k-mers from B. At query time, all (overlapping) k-mers from the query q are read on the fly and, for each of them, the k-mer is queried using the AMQ. Note that for each position p on q ∈ [0, |q| -k + 1] the k-mer starting at this position is queried. Thus, it overlaps by k -1 characters with the previously queried k-mer if it exists (if p &gt; 0).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Decreasing the AMQ false-positive rate with "Query Time</head><p>Filtration"</p><p>In the context of computing the k-mer similarity between a bank B represented by its set of k-mers indexed in an AMQ and a query sequence q, we propose a surprisingly simple approach for drastically decreasing the AMQ false-positive calls.</p><p>Observation about the false-positive calls Given the AMQ properties, one can assume that false-positive calls appear at random when querying elements from Σ * . In particular, when querying negative k-mers from a queried sequence q, the probability to query one falsepositive is F P R AM Q , the probability to query two successive false-positives is F P R AM Q 2 , and so on. Overall, the probability to query z successive falsepositives is F P R AM Q z . Given a classical F P R AM Q value of 1% (usual expected false-positive rate with BFs for instance), with z = 3, the chances to call three consecutive false-positives k-mers is 0.0001%.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Intuition about the true positive calls</head><p>When approximating the sequence similarity between q and B using the k-mer similarity, the underlying idea is to choose k (usually chosen higher than 20 and lower than 40) such that q and sequences of B share large (≥ k) sub-sequences. An intuitive consequence of this choice stands in the fact that, when querying successive k-mers from q, it is unlikely that only a low number (e.g. less than 3) of successive k-mers are true positives.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Query time filtration</head><p>Motivated by the observation and the intuition presented in the two previous sections, we propose a method that we call the "Query Time Filtration" (QTF in short), designed for lowering the F P R AM Q at the expense of the introduction of false-negative calls. answer and QTF answer). For each k-mer, a cross mark (resp. a check mark) indicates that this k-mer is absent from (resp. present in) the queried set. False answers are shown in red. This AMQ false-positive response (5-mer CAAAG) is filtered out by QTF as it generates a positive stretch of size one, lower than z = 2. Hence, one the last line showing the result after QTF, this false-positive does not occur. However, by applying this strategy, QTF may also remove the true positive stretch of size ≤ z (example shown with a red cross), leading to a false-negative QTF answer for the 5-mer GAT T G.</p><p>As illustrated Figure <ref type="figure" target="#fig_0">1</ref>, the fundamental idea is to filter the AMQ answers depending on the context of the queried k-mers when those are queried successively. Given a parameter z, QTF answers "positive" only for k-mers having at least z consecutive neighbors indexed in the AMQ, and it answers "negative" else. Said differently, QTF considers as negative any k-mer that does not belong to a set of at least z + 1 successive k-mers positive for the AMQ.</p><p>In the following, a set of x consecutive k-mers positive for the AMQ is called a "positive stretch of length x", or simply an "x-stretch".</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>QTF algorithm</head><p>The QTF algorithm is straightforward. However, given its designed use cases (querying billions or trillions of k-mers) it has to be as much optimized as possible. We propose a simple yet efficient algorithm (see Algorithm 1) not using any extra disk space or RAM. Compared to a usual usage of an AMQ querying consecutive k-mers, it only requires a single additional integer "currentStretchLength" that represents the number of consecutive positives k-mers being read on q and a single test, with no impact on query time complexity that is O(|q|).</p><p>Algorithm 1: QTF Data: q ∈ Σ * ; AMQ indexing k-mers; k and z in N + Result: Prints k-mers from q shared with AMQ, after QTF</p><formula xml:id="formula_0">1 currentStretchLength = 0; 2 for each position i in [0, |q| -k + 1] do 3 kmer = kmer starting position i in q; 4 if AMQ contains kmer then 5 currentStretchLength = currentStretchLength + 1; 6 else 7 if currentStretchLength &gt; z then 8</formula><p>print all overlapping k-mers occurring on q from i -currentStretchLength to i -1;</p><formula xml:id="formula_1">9 currentStretchLength = 0 10 if currentStretchLength &gt; z then 11 print all overlapping k-mers occurring on q from |q| -k + 1 -currentStretchLength to |q| -k;</formula><p>Considerations about QTF false-positive and false-negative rates</p><p>The QTF strategy drawback is the introduction of false-negative calls. A falsenegative call occurs when a true-positive k-mer belongs to a x-stretch with x ≤ z. This situation happens when q and B share a (small) sub-sequence of length &lt; k + z. This may happen in practice.</p><p>As shown by intermediate results (see Supplementary Materials, Section S1.1), the QTF strategy enables to reduce the original AMQ false-positive rate by several orders of magnitude at the expense of non-null false-negative rate. For instance, when applied to an AMQ composed of a BF indexing 31-mers with a false-positive rate of 5%, the QTF filter, using z = 3, enables to decrease the falsepositive rate from 5% to ≈ 0.02% but increases the false-negative rate from 0% to ≈ 1.37%. With no impact on query time or memory, these results are highly satisfying for applications in which a small false-negative rate is acceptable.</p><p>By the way, in the following section we propose a second main contribution. We show how to take advantage of the QTF strategy to query K-mers (with K &gt; k) with no false-negative call, with low false-positive rate and with query time being faster than usual AMQ queries.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Querying K-mers with findere</head><p>As exposed previously, after QTF, a false-negative call arises only when a positive k-mer belongs to a positive stretch of length ≤ z. Conversely, if a sequence of length K (with K &gt; k) is shared between q and B, then it generates K -k + 1 successive true positive k-mers, thus defining a (K -k + 1)-stretch.</p><p>Conceptually, we take advantage of this remark by proposing an algorithm that we call findere in which we query K-mers based on indexed k-mers filtered by the QTF algorithm, using z = K -k, hence looking for stretches of length ≥ z + 1.</p><p>More precisely, given two integer values K and k, with K &gt; k &gt; 0, a bank dataset B and a query sequence q, the findere strategy consists in indexing all the k-mers from B using an AMQ. In contrast to QTF that calls k-mers, findere calls K-mers based on their k-mer content. Given a position i ∈ [0, |q| -K + 1] on q, the K-mer starting at this position is considered as "present" by findere if the k-mer starting at position i and the K -k next successive k-mers are considered as present by QTF. This explains the "findere" name that comes from Latin and means "divide".</p><p>The findere algorithm is obtained from a straightforward modification of the QTF algorithm (Algorithm 1). It is sufficient to define z = K -k and to print K-mers instead of k-mers lines 8 and 11, taking care to avoid printing the last K -k K-mers of each stretch. The complete algorithm is presented in Algorithm 2, including an additional time optimization as presented in the following section.</p><p>findere time optimization While walking a sequence q searching for (z + 1)-stretches, it is possible to skip some k-mer queries. Indeed, if two negative k-mers start positions i and i + z + 1 on q, it is impossible to have a (z + 1)-positive stretch starting from any position between i and i + z + 1. This is because at most z positive k-mers can start between i and i + z + 1 both excluded, hence no (z + 1)-stretch can contain any position in [i, i</p><formula xml:id="formula_2">+ z + 1].</formula><p>Thus, when a negative k-mer is found position i on q, we check directly whether the k-mer starting at position i + z + 1 is positive or negative for the AMQ.</p><p>-If it is negative, we know that no z-stretch can exists including any position in [i, i + z + 1]. There is in this case no need to query k-mers starting at Algorithm 2: findere Data: q ∈ Σ * ; AMQ indexing k-mers; K and k in N + , K ≥ k Result: Prints k-mers from q shared with AMQ, after QTF positions in [i, i + z], and we can repeat the process position i + 2(z + 1), and so on. -If it is positive, k-mers starting from position i+1 have to be queried following the same process.</p><formula xml:id="formula_3">1 z = K -k; 2 currentStretchLength = 0; 3 extendingStretch = T rue; 4 i = 0; 5 while i ≤ |q| -k + 1 do</formula><p>Note that even if we report this optimisation specifically for the findere algorithm, it also applies for the QTF strategy.</p><p>findere algorithm Algorithm 2 proposes an overview of the findere algorithm. This includes the time optimization described in the previous section. This optimisation mainly takes effects line 19 where z positions are not queried unless the next checked position contains a positive k-mer, leading to rewind the query z positions back (line 13).</p><p>findere false-positives and "construction false-positives" (cFP)</p><p>findere reduces the false-positive rate of an AMQ by detecting and filtering out stretches of length ≤ z (= K -k). The greater the length of the stretches, the fewer false-positives stretches pass through the filtration, as illustrated by results presented in Supp. Mat, Section S1.1. However, detecting K-mers based on their k-mer content leads to the apparition of a novel kind of false-positives for findere. It may appear that for a negative K-mer, all its k-mers are true-positives. In this case, findere generates a false-positive call for this K-mer. We name those false-positive K-mers "construction false-positives" (cFP). The higher z, the higher the number of cFP, as when k gets too small, more k-mers occur by chance.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>findere implementation</head><p>We propose an implementation of findere, available at https://github.com/ lrobidou/findere. This implementation uses a Bloom filter as its inner AMQ. However, any other AMQ implementation can be used through a simple wrapper (provided with the findere implementation). The BF chosen for this implementation is a fork of the original https://github.com/mavam/libbf, which was modified to add the support of serialization. Although findere can index and query any alphabet, its implementation proposes a specialisation for genomic sequences: as such, one can index not only natural language, but also fasta and fastq files (gzipped or not) representing genomes or any sequencing read files. In this genomic context, a function to index and query canonical K-mers is also available.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Results</head><p>We propose results on real biological data and on natural texts. The aim is to show the practical advantages offered by findere, both in terms of query precision, index size, and query time. Being developed to be used on top of any AMQ, we do not compare findere with any of those. Remind that findere may be used on filtering the results from any such data structure, including Cuckoo Filters for instance. To the best of our knowledge, the only tool comparable to findere is kBF. We compared findere and kBF on biological data only as kBF is not designed to work on a generic alphabet.</p><p>Executions were performed on the GenOuest platform on a node with 4x8cores Xeon E5-2660 2,20 GHz with 200 Go of memory. A complete description of tool versions, data acquisition, command lines, and numerical results are provided in the Github repository https://github.com/lrobidou/findere/tree/ master/paper_companion.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Experimental data</head><p>Metagenomic data. In order to measure the impacts of the findere algorithm on real genomic data, we used two HMP <ref type="bibr" target="#b7">[8]</ref> fastq files, indexing reads1 from sample SRS014107 and querying reads1 from sample SRS016349, both downloaded from the NCBI Sequence Read Archive. Theses samples contain respectively 4.2 million reads of average size 92 characters and 2.3 million reads of average size 96 characters. We simply refer to this dataset as the "hmp" dataset.</p><p>Natural language data. In order to test the findere implementation on natural language, we used a dump of Wikipedia, from which we extracted two subsets overlapping with 10 Mo. They have each a size of 100 Mo, leading to about 10 8 31-mers each. We refer to this dataset as the "natural language dataset".</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Results on genomics data</head><p>In this Section we propose results using K = 31. As shown in Supp. mat. (Section S1.2), findere results are robust with this main parameter. Comparative false-positive rate obtained on the hmp dataset. BF indexes 31-mers, with a pratical FP rate of ≈ 5% (blue filled squares, independent of the z value). With the same BF size, findere was run varying the z value (and thus the k value), leading to FP rates as shown in red filled circles. Orange empty circles show the amount of findere "construction FP", the rest of findere FP being due to stretches of length ≥ z + 1 containing BF FP. The full figure zooms on recommended z values (in particular z ∈ <ref type="bibr" target="#b1">[2,</ref><ref type="bibr" target="#b4">5]</ref>). The small frame shows results including higher but discouraged z values.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>False-positive analyses</head><p>We obtained results with a classical BF, indexing SRS014107 and querying SRS016349 with K-mers of length K = 31. For all experiences the size of the used BF is ≈ 2.6 billion bits, leading to 5% FPR when indexing 31-mers. With the same BF size, findere was run varying the z value, with K = 31. As shown Figure <ref type="figure">2</ref>, with z = 0, findere obtains as expected exactly the same results as those obtained with the original used AMQ. With low z values (e.g. lower than 5), the findere FPR quickly drops close to zero. For instance, with z = 3, the findere FPR is equal to 0.056%, which is two orders of magnitudes smaller than the original BF FPR. Also, with such low z values, k-mers are large enough to limit the findere "construction FP" (cFP) to negligible values. For instance, z = 3 leads to k = 28 and the cFP rate is 0.025%.</p><p>When using large values of z (here &gt; 15), k-mers get too small to be specific enough. Hence they have high chances to appear at random, leading to a dramatic increase of the cFP rate. This happens with z values leading to k-mers of size &lt; 13. For instance, with z = 19, one has k = 12, which results for findere in an FPR of 89.27%, being almost only composed of cFP (curves overlap on the figure, cFP representing 99.95% of the FP).</p><p>Fortunately, fixing z is easily anticipated by choosing a value small enough so that the indexed k-mers in the AMQ have a low chance (e.g. lower than 0.01%) to appear by chance. The probability for a k-mer to appear by chance in a random text of length n can be roughly approximated as 1 -1 -1 |Σ| k n , with |Σ| being the size of the alphabet. For instance on the indexed SRS014107 sample, where |Σ| = 4 and n = 386 millions, the probability to appear by chance for a k-mer is respectively equal to 0.99% for k = 13 (z = 18), to 0.30% for k = 15 (z = 16), to 0.02% for k = 17 (z = 14), and to 0.005% for k = 18 (z = 13). Hence choosing z &lt; 14 is acceptable. By default findere uses z = 3. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Space gain</head><p>We recall first that findere memory usage has no overhead compared to the size of the used AMQ. For a given AMQ size, we can deduce the FPR for a BF and findere. Results are presented Figure <ref type="figure" target="#fig_3">3</ref> (with the default z = 3 value). This can also be used for deducing the amount of space needed for a given FPR. For instance, to obtain a usual value of 1% FPR, findere requires 0.05 Gio of space while a BF requires 1.06 Go. The findere advantage gets even more important with a lower FPR: with 0.1% of FPR, findere requires 0.16 Go while a BF requires about 17 Go (dotted lines). This leads to a gain of space of two orders of magnitude, while not requiring any additional run time or RAM.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Query time</head><p>Thanks to the optimization detailed section 2.3, the query time decreases when z increases. As shown Table <ref type="table">1</ref>, with discouraged values z = 0 or z = 1, the query time of findere is slightly higher than querying the original BF. This is due to additional conditional tests. With recommended z values (z = 2 to 5), compared to the query time of the BF, the findere query time is divided by a factor 2 to 3. With the default z = 3 value, query time is divided by 2.4, while query time still decreases when z increases: with z = 10, the query time is divided by ≈ 5. z 0 1 2 3 4 5 10 BF 42.4 findere 42.9 43.7 24.3 17.5 14.1 12.0 8.6 Table <ref type="table">1</ref>. BF and findere query time in seconds on the hmp dataset, depending on the z value. BF result does not depend on z and is reported only for z = 0.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Comparisons with kBF</head><p>To compare findere and kBF, we created a fork of kBF, available at http:// github.com/lrobidou/kbf/. This fork enables to specify the amount of memory to be used by kBF and more importantly, it enables to index a set of reads and query another set (the original implementation does not allow that). kBF comes with two versions: 1-kBF and 2-kBF. 1-kBF uses less space at higher FPR than 2-kBF. The kBF strategy imposes to query up to nine times the BF when asking for the membership of a single k-mer. At the same time, findere is ≈ 2.4 times faster than a Bloom filter with the recommended value z = 3. Moreover, kBF dumps all queried k-mers in RAM, and 2-kBF uses an additional hash set. Hence, kBF is much slower than findere. For instance, on the hmp data, with a BF FP of 5%, 1-kBF (resp. 2-kBF) query needs ≈ 300s (resp. ≈ 1450s) while findere needs ≈ 17s.</p><p>Moreover, as it shows a higher FPR for a fixed amount of space, kBF uses more space than findere for an equivalent FPR. For instance with for ≈ 1% FPR, findere requires 0.05 Go of space while 1-kBF requires ≈ 0.40 Go. Comparisons with 2-kBF are not fair as it computes a hash set of every k-mer, leading to unreasonable space usage (e.g. 7.78 Go for an FPR of ≈1% when findere requires 0.05 Go). Full kBF results are proposed in Supp. Mat, Section S1.4.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">Results on natural languages</head><p>We applied findere and BF on the natural language corpus. Full results are provided in Supp. Mat, Section S1.3.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Memory gain.</head><p>As in Section 3.2, we computed the FPR in function of the space used. From those results, we can deduce that, also on natural languages, for an FPR of 0.1%, the findere space usage is two orders of magnitude less than BF. Indeed, findere needs 0.023 Go, while a BF requires 3.38 Go. Query time. As described in section 2.3, the query time decreases when z increases. It holds when findere is used on the natural language dataset as well. With recommended z values (z = 2 to 5), compared to the query time of the Bloom filter, the findere query time is divided by a factor 1.6 to 3. With the default z = 3 value, query time is divided by 2.2 compared to the raw Bloom filter query.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.4">Limit of the findere approach</head><p>The findere algorithm generates "construction false-positives" that occur when a negative K-mer contains only true positive k-mers. With recommended parameters, those cFP are negligible as shown in Fig. <ref type="figure">2</ref>. However, as cFP depends only on true-positive calls, its value does not depend on the F P R AM Q . Hence theoretically, when F P R AM Q tends toward zero, the cFP rate (and thus findere FPR as well) becomes higher than F P R AM Q . This effect can be observed on the natural language results (Fig. <ref type="figure" target="#fig_5">S2</ref>, Supp. Mat.) with BF FPR below 0.02%. However, one should remind that, first, the difference is insignificant (0.008% difference FPR when using 26 Go space), and second, the practical usage of an AMQ is usually with FPR higher than 0.1% to prevent huge space requirements.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Conclusion</head><p>We propose a method filtering results of any approximate member query (AMQ) data structure when used for querying words of length K from a query. Despite its amazing simplicity, applied on metagenomics and natural text data, compared to the non-filtered results: findere 1/ makes queries two times faster, 2/ enables to decrease by two orders of magnitude the false-positive rate or enables to decrease the space allocated to each element by two orders of magnitudes, and 3/ has no drawback when used with recommended values.</p><p>We are expecting an important impact of the findere tool, for which we propose an implementation. Indeed, AMQ data-structure are essential for indexing large datasets. In particular their usage is fundamental for indexing the genomic sequencing data, for which findere offers a new scaling breakthrough.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>S1 Supplementary Materials</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>S1.1 QTF false positive analyses</head><p>In this section, we show qualitative results obtained thanks to the QTF strategy that motivated the findere algorithm. Results shown Table <ref type="table">S1</ref> were obtained by applying the QTF approach, using k = 31, with various z values on an AMQ datastructure (a bloom filter) with 5% false positive rate (F P AM Q = 5%). Indexed and queried data are those from the hmp project, as described Section 3.1.  <ref type="table">S1</ref>. Qualitative results using the QTF strategy, applied on the hmp dataset with F PAMQ = 5%.</p><p>These results highlight the dramatic decrease of the false positive rate of the original AMQ data structure. Indeed, the false-positive rate falls from 5% with z = 0 where QTF has no effect, to ≈ 0.51% when using z = 1 (removing all 1-stretches). With z = 2, the false positive rate falls to ≈ 0.06%. However, the false-negative rate, being null with the original AMQ raises to ≈ 0.23% with z = 1, and reaches ≈ 0.8% with z = 2.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>S1.2 Results varying K</head><p>We varied the value of K, and we report the false positive rate as well as the query time. Tests were performed on the hmp dataset using the default z = 3 value. For each K value, we determined size K being the size of the BF such that the FPR of the BF for K is 5%. Then, for each K value, we computed the findere FPR and query time, using the size K BF size for indexing k-mers. Results, also comparing results that would be obtained with the non filtered BF, are presented Fig S1.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>S1.3 Results on natural languages</head><p>In this section, we show results obtained when applying findere on the natural language dataset. Figure <ref type="figure" target="#fig_5">S2</ref> shows the FPR of findere and Bloom filters when indexing 31-mers from this dataset depending on the size of the index. Table <ref type="table">S2</ref> shows the time taken by a Bloom filter and findere to query this dataset with respect to the value of z. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>S1.4 Comparison with kBF on the hmp dataset</head><p>To date, in the kBF implementation, the k-mers are read from a file, stored in a vector, and indexed. A fraction of these k-mers is mutated before querying all the  <ref type="table">S2</ref>. BF and findere query time in seconds on the natural language dataset, depending on the z value. BF result does not depend on z and is reported only for z = 0. stored k-mers. Thus, the kBF implementation does not propose a way to index a set of reads and to query another set of reads. Furthermore, its implementation does not enable to serialize the index, and does not enable to set or get the size of the index. Finally, it is not possible to pass directly the amount of space to kBF. Instead, the user must provide an integer value (called "size factor"), which is the desired number of bits per element in the bloom filter used by kBF. Consequently, the space used by its bloom filter is always a multiple of the number of elements indexed. The size factor is decided at compilation time for 1-kBF and cannot be changed later on.</p><p>As a consequence, we proposed a fork of kBF that allows to index a set of reads and query another one, as well as to change the size factor for 1-kBF. Then, using the size factor, we were able to determine space and memory 1-kBF would end up using. However, 2-kBF needs to store an additional hash set of k-mers. Since we were not able to get the amount of space taken by that hash set, we do not report it here. Consequently, the "size required" column in Table <ref type="table">S3</ref> is to a great extent underestimated for 2-kBF. Indeed, the peak RAM usage is between 7 Go and more than 8 Go for all experiments proposed in this  <ref type="table">S3</ref>. FPR of Bloom filter, 1-kBF, 2-kBF and findere with respect to the size of the filter, for K=31, on the hmp dataset. findere was used with default z = 3 value.</p><p>From Table <ref type="table">S3</ref>, we can observe that findere outperforms Bloom filters, 1-kBF and 2-kBF. For a high number of bit per element, the FPR of findere and 2-kBF seem close, however, the memory is heavily underestimated in the case of 2-kBF, and as such, 2-kBF is likely to take much more space (e.g. more than 8 Go when using 26 bits per element in the BF).</p><p>In Table <ref type="table">S4</ref>, we show that, for the indexation and the query steps, both 1-kBF and 2-kBF are slower than the Bloom filter used in the implementation of kBF.  1 The size factor only takes into account the bloom filter used by kBF, not the adjacent hashSet Table <ref type="table">S4</ref>. Time taken (in second) by kBF to index and query all of the 31-mers in the hmp dataset.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Fig. 1 .</head><label>1</label><figDesc>Fig. 1. Example with k = 5 and z = 2, showing a query sequence (first line) and the various answers in the three next lines while querying 5-mers (indexed truth, AMQ answer and QTF answer). For each k-mer, a cross mark (resp. a check mark) indicates that this k-mer is absent from (resp. present in) the queried set. False answers are shown in red. This AMQ false-positive response (5-mer CAAAG) is filtered out by QTF as it generates a positive stretch of size one, lower than z = 2. Hence, one the last line showing the result after QTF, this false-positive does not occur. However, by applying this strategy, QTF may also remove the true positive stretch of size ≤ z (example shown with a red cross), leading to a false-negative QTF answer for the 5-mer GAT T G.</figDesc><graphic coords="5,203.93,411.45,207.50,57.73" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>6 kmer = kmer starting position i in q; 7 if AMQ contains kmer then 8 currentStretchLength = currentStretchLength + 1 ; 9 if extendingStretch then 10 i</head><label>6781910</label><figDesc>= i + 1; 11 else 12 extendingStretch = T rue; 13 i = i -z; 14 else 15 if currentStretchLength ≥ z then 16 print all overlapping K-mers occurring on q from i -currentStretchLength to i -1 -(K -k); 17 currentStretchLength = 0; 18 extendingStretch = F alse; 19 i = i + z + 1; 20 if currentStretchLength ≥ z then 21 print all overlapping K-mers occurring on q from |q| -k + 1 -currentStretchLength to |q| -K;</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head></head><label></label><figDesc>Fig.2. Comparative false-positive rate obtained on the hmp dataset. BF indexes 31-mers, with a pratical FP rate of ≈ 5% (blue filled squares, independent of the z value). With the same BF size, findere was run varying the z value (and thus the k value), leading to FP rates as shown in red filled circles. Orange empty circles show the amount of findere "construction FP", the rest of findere FP being due to stretches of length ≥ z + 1 containing BF FP. The full figure zooms on recommended z values (in particular z ∈<ref type="bibr" target="#b1">[2,</ref><ref type="bibr" target="#b4">5]</ref>). The small frame shows results including higher but discouraged z values.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>FalseFig. 3 .</head><label>3</label><figDesc>Fig. 3. findere and BF FPR depending on the space used, on the hmp dataset. Dotted line segment corresponds to 0.1% false-positive rate.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Fig</head><label></label><figDesc>Fig. S1. findere FPR and query time depending on K, on hmp dataset, using z = 3.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>FalseFig. S2 .</head><label>S2</label><figDesc>Fig. S2. findere and BF FPR depending on the space used by their index, on the natural language dataset. Dotted line segment corresponds to 0.1 % false positive.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table .</head><label>.</label><figDesc>Not including the hash set for 2-kBF Table</figDesc><table><row><cell>number of bits</cell><cell>size</cell><cell>FPR</cell><cell>FPR</cell><cell>FPR</cell><cell>FPR</cell></row><row><cell>per element 1</cell><cell>required (Go) 1</cell><cell>BF (%) 1</cell><cell>1-kBF (%)</cell><cell>2-kBF (%)</cell><cell>findere (%)</cell></row><row><cell>3</cell><cell>0.05</cell><cell>28.34</cell><cell>26.38</cell><cell>15.40</cell><cell>0.95</cell></row><row><cell>5</cell><cell>0.09</cell><cell>18.12</cell><cell>14.49</cell><cell>5.52</cell><cell>0.27</cell></row><row><cell>7</cell><cell>0.12</cell><cell>13.32</cell><cell>9.10</cell><cell>2.54</cell><cell>0.15</cell></row><row><cell>9</cell><cell>0.15</cell><cell>10.52</cell><cell>6.22</cell><cell>1.37</cell><cell>0.11</cell></row><row><cell>15</cell><cell>0.26</cell><cell>6.45</cell><cell>2.69</cell><cell>0.36</cell><cell>0.07</cell></row><row><cell>18</cell><cell>0.31</cell><cell>5.41</cell><cell>1.96</cell><cell>0.22</cell><cell>0.06</cell></row><row><cell>21</cell><cell>0.38</cell><cell>4.65</cell><cell>1.49</cell><cell>0.14</cell><cell>0.05</cell></row><row><cell>24</cell><cell>0.41</cell><cell>4.08</cell><cell>1.17</cell><cell>0.10</cell><cell>0.05</cell></row><row><cell>26</cell><cell>0.44</cell><cell>3.77</cell><cell>1.01</cell><cell>0.08</cell><cell>0.05</cell></row><row><cell></cell><cell>1</cell><cell></cell><cell></cell><cell></cell><cell></cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><p>Acknowledgements. This work used HPC resources from the GenOuest bioinformatics core facility (https://www.genouest.org). The work was funded by <rs type="funder">ANR SeqDigger</rs> (<rs type="grantNumber">ANR-19-CE45-0008</rs>).</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_rVnF8q4">
+					<idno type="grant-number">ANR-19-CE45-0008</idno>
+				</org>
+			</listOrg>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">The European Nucleotide Archive in 2019</title>
+		<author>
+			<persName><forename type="first">Clara</forename><surname>Amid</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T F</forename><surname>Blaise</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Alako</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Balavenkataraman</forename><surname>Vishnukumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tony</forename><surname>Kadhirvelu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Josephine</forename><surname>Burdett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jun</forename><surname>Burgin</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Fan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sam</forename><surname>Peter W Harrison</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abdulrahman</forename><surname>Holt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eugene</forename><surname>Hussein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Suran</forename><surname>Ivanov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Simon</forename><surname>Jayathilaka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Kay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rasko</forename><surname>Keane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xin</forename><surname>Leinonen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Josue</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Annalisa</forename><surname>Martinez-Villacorta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amir</forename><surname>Milano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nadim</forename><surname>Pakseresht</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeena</forename><surname>Rahman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kethi</forename><surname>Rajan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Edward</forename><surname>Reddy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dmitriy</forename><surname>Richards</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexey</forename><surname>Smirnov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Senthilnathan</forename><surname>Sokolov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Guy</forename><surname>Vijayaraja</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Cochrane</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Research</title>
+		<imprint>
+			<biblScope unit="volume">48</biblScope>
+			<biblScope unit="issue">D1</biblScope>
+			<biblScope unit="page" from="70" to="D76" />
+			<date type="published" when="2020-01">January 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Don&apos;t thrash: how to cache your hash on flash</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Michael</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Bender</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rob</forename><surname>Farach-Colton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Russell</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bradley</forename><forename type="middle">C</forename><surname>Kraner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dzejla</forename><surname>Kuszmaul</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pablo</forename><surname>Medjedovic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pradeep</forename><surname>Montes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><forename type="middle">P</forename><surname>Shetty</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Erez</forename><surname>Spillane</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Zadok</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the VLDB Endowment</title>
+		<meeting>the VLDB Endowment</meeting>
+		<imprint>
+			<date type="published" when="2012-07">July 2012</date>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page" from="1627" to="1637" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Multiple comparative metagenomics using multiset k-mer counting</title>
+		<author>
+			<persName><forename type="first">Gaëtan</forename><surname>Benoit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pierre</forename><surname>Peterlongo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mahendra</forename><surname>Mariadassou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Erwan</forename><surname>Drezen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sophie</forename><surname>Schbath</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dominique</forename><surname>Lavenier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Claire</forename><surname>Lemaitre</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PeerJ Computer Science</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page">e94</biblScope>
+			<date type="published" when="2016-11">November 2016</date>
+			<publisher>PeerJ Inc</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Space/time trade-offs in hash coding with allowable errors</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Burton</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Bloom</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Communications of the ACM</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page" from="422" to="426" />
+			<date type="published" when="1970">1970</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Near-optimal probabilistic rna-seq quantification</title>
+		<author>
+			<persName><forename type="first">Nicolas</forename><forename type="middle">L</forename><surname>Bray</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Harold</forename><surname>Pimentel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Páll</forename><surname>Melsted</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lior</forename><surname>Pachter</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature biotechnology</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="525" to="527" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Data Structures to Represent a Set of k -long DNA Sequences</title>
+		<author>
+			<persName><forename type="first">Rayan</forename><surname>Chikhi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jan</forename><surname>Holub</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Medvedev</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Computing Surveys</title>
+		<imprint>
+			<biblScope unit="volume">54</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="22" />
+			<date type="published" when="2021-03">March 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Cuckoo filter: Practically better than bloom</title>
+		<author>
+			<persName><forename type="first">Bin</forename><surname>Fan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dave</forename><forename type="middle">G</forename><surname>Andersen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Kaminsky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><forename type="middle">D</forename><surname>Mitzenmacher</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 10th ACM International on Conference on emerging Networking Experiments and Technologies</title>
+		<meeting>the 10th ACM International on Conference on emerging Networking Experiments and Technologies</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="75" to="88" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">The integrative human microbiome project</title>
+		<author>
+			<persName><forename type="first">Lita</forename><forename type="middle">M</forename><surname>Hmp Integrative</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Heather</forename><forename type="middle">H</forename><surname>Proctor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jennifer</forename><forename type="middle">M</forename><surname>Creasy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><surname>Fettweis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anup</forename><surname>Lloyd-Price</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wenyu</forename><surname>Mahurkar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gregory</forename><forename type="middle">A</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><forename type="middle">P</forename><surname>Buck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jerome</forename><forename type="middle">F</forename><surname>Snyder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Iii</forename><surname>Strauss</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">569</biblScope>
+			<biblScope unit="issue">7758</biblScope>
+			<biblScope unit="page" from="641" to="648" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Data structures based on k-mers for querying large collections of sequencing data sets</title>
+		<author>
+			<persName><forename type="first">Camille</forename><surname>Marchet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christina</forename><surname>Boucher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Simon</forename><forename type="middle">J</forename><surname>Puglisi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Medvedev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mikaël</forename><surname>Salson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rayan</forename><surname>Chikhi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Research</title>
+		<imprint>
+			<biblScope unit="volume">31</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="12" />
+			<date type="published" when="2021-01">January 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">REINDEER: efficient indexing of k-mer presence and abundance in sequencing datasets</title>
+		<author>
+			<persName><forename type="first">Camille</forename><surname>Marchet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zamin</forename><surname>Iqbal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Gautheret</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mikaël</forename><surname>Salson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rayan</forename><surname>Chikhi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="issue">Supplement 1</biblScope>
+			<biblScope unit="page" from="177" to="185" />
+			<date type="published" when="2020-07">July 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Mash: fast genome and metagenome distance estimation using MinHash</title>
+		<author>
+			<persName><forename type="first">Brian</forename><forename type="middle">D</forename><surname>Ondov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Todd</forename><forename type="middle">J</forename><surname>Treangen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Páll</forename><surname>Melsted</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><forename type="middle">B</forename><surname>Mallonee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicholas</forename><forename type="middle">H</forename><surname>Bergman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sergey</forename><surname>Koren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><forename type="middle">M</forename><surname>Phillippy</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biology</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">132</biblScope>
+			<date type="published" when="2016-06">June 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Improving Bloom Filter Performance on Sequence Data Using k -mer Bloom Filters</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Pellow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Darya</forename><surname>Filippova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carl</forename><surname>Kingsford</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Computational Biology</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="547" to="557" />
+			<date type="published" when="2017-06">June 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Big Data: Astronomical or Genomical?</title>
+		<author>
+			<persName><forename type="first">Zachary</forename><forename type="middle">D</forename><surname>Stephens</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Skylar</forename><forename type="middle">Y</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Faraz</forename><surname>Faghri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Roy</forename><forename type="middle">H</forename><surname>Campbell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chengxiang</forename><surname>Zhai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Miles</forename><forename type="middle">J</forename><surname>Efron</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ravishankar</forename><surname>Iyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><forename type="middle">C</forename><surname>Schatz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Saurabh</forename><surname>Sinha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gene</forename><forename type="middle">E</forename><surname>Robinson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLOS Biology</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page">1002195</biblScope>
+			<date type="published" when="2015-07">July 2015</date>
+			<publisher>Public Library of Science</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Satisfiability-based Set Membership Filters</title>
+		<author>
+			<persName><forename type="first">Sean</forename><forename type="middle">A</forename><surname>Weaver</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katrina</forename><forename type="middle">J</forename><surname>Ray</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victor</forename><forename type="middle">W</forename><surname>Marek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><forename type="middle">J</forename><surname>Mayer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alden</forename><forename type="middle">K</forename><surname>Walker</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal on Satisfiability, Boolean Modeling and Computation</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">3-4</biblScope>
+			<biblScope unit="page" from="129" to="148" />
+			<date type="published" when="2014-01">January 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Improved metagenomic analysis with Kraken 2</title>
+		<author>
+			<persName><forename type="first">Derrick</forename><forename type="middle">E</forename><surname>Wood</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jennifer</forename><surname>Lu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ben</forename><surname>Langmead</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biology</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">257</biblScope>
+			<date type="published" when="2019-11">nov 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Alignment-free sequence comparison: benefits, applications, and tools</title>
+		<author>
+			<persName><forename type="first">Andrzej</forename><surname>Zielezinski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Susana</forename><surname>Vinga</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonas</forename><surname>Almeida</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wojciech</forename><forename type="middle">M</forename><surname>Karlowski</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biology</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">186</biblScope>
+			<date type="published" when="2017-10">October 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

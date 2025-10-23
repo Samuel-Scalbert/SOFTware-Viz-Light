@@ -1,0 +1,1441 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Troubles with Nulls, Views from the Users</title>
+				<funder ref="#_42XXK8p #_p5Qrcun">
+					<orgName type="full">EPSRC</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2023-12-05">05. Dec. 2023</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Etienne</forename><surname>Toussaint</surname></persName>
+							<email>etienne.toussaint@ed.ac.uk</email>
+							<affiliation key="aff0">
+								<orgName type="institution">University of Edinburgh</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Paolo</forename><surname>Guagliardo</surname></persName>
+							<email>paolo.guagliardo@ed.ac.uk</email>
+							<affiliation key="aff1">
+								<orgName type="institution">University of Edinburgh</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Leonid</forename><surname>Libkin</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="institution" key="instit1">University of Edinburgh</orgName>
+								<orgName type="institution" key="instit2">ENS Paris</orgName>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Troubles with Nulls, Views from the Users</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2023-12-05">05. Dec. 2023</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">9878AC4492D0FAEF0E1D192DA2C5C693</idno>
+					<idno type="DOI">10.14778/3551793.3551818</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:15+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Incomplete data, in the form of null values, has been extensively studied since the inception of the relational model in the 1970s. Anecdotally, one hears that the way in which SQL, the standard language for relational databases, handles nulls creates a myriad of problems in everyday applications of database systems. To the best of our knowledge, however, the actual shortcomings of SQL in this respect, as perceived by database practitioners, have not been systematically documented, and it is not known if existing research results can readily be used to address the practical challenges.</p><p>Our goal is to collect and analyze the shortcomings of nulls and their treatment by SQL, and to re-evaluate existing research in this light. To this end, we designed and conducted a survey on the everyday usage of null values among database users. From the analysis of the results we reached two main conclusions. First, null values are ubiquitous and relevant in real-life scenarios, but SQL's features designed to deal with them cause multiple problems. The severity of these problems varies depending on the SQL features used, and they cannot be reduced to a single issue. Second, foundational research on nulls is misdirected and has been addressing problems of limited practical relevance. We urge the community to view the results of this survey as a way to broaden the spectrum of their researches and further bridge the theory-practice gap on null values.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">INTRODUCTION</head><p>Managing incomplete data in relational databases has been an academic challenge studied extensively since the early papers of the 1970s <ref type="bibr" target="#b16">[17,</ref><ref type="bibr" target="#b17">18,</ref><ref type="bibr" target="#b47">48]</ref>. From the theoretical perspective, correctness is usually associated with the notion of certain answers: answers we can be sure about no matter how we interpret the incomplete This work is licensed under the Creative Commons BY-NC-ND 4.0 International License. Visit https://creativecommons.org/licenses/by-nc-nd/4.0/ to view a copy of this license. For any use beyond those covered by this license, obtain permission by emailing info@vldb.org. Copyright is held by the owner/author(s). Publication rights licensed to the VLDB Endowment. Proceedings of the VLDB Endowment, Vol. <ref type="bibr">15, No. 11 ISSN 2150-8097.</ref> information present in the database. This approach, first proposed around 40 years ago <ref type="bibr" target="#b34">[35,</ref><ref type="bibr" target="#b38">39,</ref><ref type="bibr" target="#b47">48]</ref> is now dominant in the literature and it is standard in academic studies where incomplete information appears (data integration, data exchange, ontology-based data access, data cleaning, etc.).</p><p>From a practical perspective, to the best of our knowledge, there is a lack of research to understand the expectations of database practitioners with respect to incomplete data. Common anecdotes are the following:</p><p>• RDBMSs are criticized for producing counter-intuitive and even incorrect answers when handling incomplete data.</p><p>• One often finds statements like "those SQL features are [. . . ] fundamentally at odds with the way the world behaves" <ref type="bibr" target="#b23">[24]</ref>, or even "you can never trust the answers you get from a database with nulls" <ref type="bibr" target="#b22">[23]</ref>. • Behavior is blamed on SQL's three-valued logic (3VL); indeed, it is commonly assumed that programmers tend to think in terms of the familiar two-valued logic, while 3VL underlies the implementation of SQL's null-related features.</p><p>Our research goal is to improve our understanding of database practitioner's expectations and approaches to incomplete information in relational databases, namely NULL values, in order to know how we can further bridge the gap between theory and practice. We wish to validate or refute the common assumptions made by the database research community about the causes and potential solutions to the problem. Towards achieving our goal, we seek to answer four questions:</p><p>(Q1) How commonly are SQL's NULL and related features used? (Q2) What do nulls mean to users? (Q3) Are users satisfied with SQL's handling of nulls and, if not, why? (Q4) Are there readily available solutions to mitigate the problems?</p><p>As a first milestone to find answers to these questions, we designed an online survey which ran for four months and attracted 175 participants, with three quarters of them being database practitioners and one quarter academics.</p><p>Our contributions are two-fold. The first contribution is the result of the survey and its analysis. Our major findings, in response to the above questions, are summarized below. SQL's NULL features usage. Our participants acknowledge that NULL values appear often in their databases. They use some NULLspecific operators of SQL (most commonly IS NULL tests), but rely more on schema constraints to rule out NULL values. It appears that NULL values are mostly perceived as an inconvenience rather than a feature that one can take advantage of.</p><p>Meaning of NULL values. NULL values appear for many reasons, and our participants often ascribe different meanings to them. While there is a near consensus that nulls can represent non-applicable values, only a quarter of respondents think that this is the only interpretation. A majority think that a NULL can also represent some unknown value, which may or may not exist. The meaning of NULL could also be 0, empty-string, or another constant, but this is rare.</p><p>SQL handling of nulls is not satisfactory. SQL's rules for handling NULL values are not fully satisfactory. While for simple queries (positive fragment of relational algebra) most of our respondents accept SQL's behavior, for more complex queries, involving either aggregation or negation, many are not satisfied with SQL answers.</p><p>No readily available solutions and more research is needed. There is no consensus among the respondents as to what a better behavior of SQL could be. The desired behaviors are diverse, and independent of the users' view of what nulls mean. Some users want the answers to contain more tuples (moving in the direction of possible answers), others want fewer tuples (but with more guarantees), and yet others simply wish for a warning or error message to be given. These different approaches also indicate that the focus of the academic literature, which typically concentrated on the missing value model of nulls and certain answers as the holy grail, is addressing only a very narrow spectrum of the database practitioner's needs.</p><p>The second contribution is the survey itself. While the responses we collected and analyzed can only provide indications, the scope of the mismatch between the common assumption made by the research community and the participants' answers provide strong evidence that a problem does exist and deserves to be studied with more resources. Obtaining definitive answers to questions (Q1)-(Q4), requires access to a larger sample of participants and a more in-depth protocol that can include random sampling, interviews, web-data analysis (Twitter, Stack Overflow, Reddit, etc.) <ref type="bibr" target="#b12">[13,</ref><ref type="bibr" target="#b25">26]</ref>. Our questionnaire design can serve as the basis for such further studies. Moreover, the design of a social study experiment necessitates some prior information about the target population to minimize bias and maximize efficiency; our survey design and analysis methodology allow to gather such information <ref type="bibr" target="#b24">[25]</ref>. An obvious step in this direction would be to run our survey on a larger sample, although we note that our sample of 175 respondents is twice as large as those that have previously been seen in database research of this kind <ref type="bibr" target="#b56">[57]</ref> and has a higher proportion of practitioners. A different possibility is to run the survey on a more focused sample (e.g., database professionals working in a particular industry, specific DBMS users) to study the problems that different application domains may experience and reduce non-response bias <ref type="bibr" target="#b8">[9]</ref>. For that reason, the survey and the software for analyzing its results have been made available in the GitHub repository.</p><p>Organization. Section 2 describes the methodology behind the design of the survey. Sections 3-6 analyze answers to questions (Q1)-(Q4). Section 7 presents our conclusions and Section 8 gives recommendations to the research community based on these conclusions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">DESIGN AND METHODOLOGY</head><p>In this section, we explain the design of the survey and the methodology used to analyze each type of question. We then describe how participants were recruited, and we analyze the respondents' demographic and their level of engagement with the survey.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Question types and analysis methodology</head><p>The survey is an online structured questionnaire consisting of 34 items. To reduce bias and improve the experience of respondents, the design of the survey has been reviewed by a selected group of practitioners and academics. However, biases are inherent to the survey tool, and while some are reduced by our process of answers analysis, we advise readers to discuss our findings.</p><p>Multiple-choice. These questions were used when there is a fixed number of possible answers, with an option labeled "other" always made available as a fallback. For this kind of questions, we wish to study the prevalence of choices; therefore, for each available option, we compute the proportion of respondents who selected it. When a question allows more than one option to be chosen, we also compute the proportion of participants who selected each subset of all available options. In our analysis, the data collected through multiple-choice questions is mostly used to get demographic information about the participants, and the results are presented as a pie or bar chart.</p><p>Frequency scale. These are "how-often" questions whose answer is a frequency chosen from an ordinal Likert scale <ref type="bibr" target="#b46">[47]</ref> with options never, infrequently, occasionally, often, and regularly, which are ordered from the least to the most frequent. Answers to different frequency scale questions can be compared with one another, but we cannot assume that the frequency differential between each subsequent option in the scale is constant; thus, numerical analysis that computes an average frequency score on a single question is largely meaningless <ref type="bibr" target="#b55">[56]</ref>. For each such question and each frequency option, we compute the proportion of participants who selected that option in the question under consideration. As the number of available options is limited, these statistics can be effectively exploited. Moreover, since the same scale is used for several questions, we can compare the relative frequency of some events. The data collected through frequency scale questions is mostly used to obtain information about the participants' demographic as well as to answer question (Q1).</p><p>Build the answer. In these questions (Fig. <ref type="figure" target="#fig_1">1a</ref>) participants are presented with a relational database and an SQL query, and then asked to construct, by adding default or custom rows to the output table, the answer they would like to obtain. This design allows us to gather information about our respondents' expectations from the evaluation of each query. From an abstract point of view, this type of question is a multiple-choice question. The default rows can be seen as the choices of the question, and adding them to the answer is equivalent to selecting the choice. However, due to the nature of the task, even if the prevalence of each row can be of interest, we argue that more emphasis should be put towards SQL's  default answers. Therefore, we partition the participants' answers into four groups, according to whether the answer <ref type="bibr" target="#b0">(1)</ref> matches the SQL answer, (2) is a subset of the SQL answer, (3) is a superset of the SQL answer, or (4) is not comparable with the SQL answer. We then compute the proportion of answers in each of the groups and report the results in a table. The data collected through this kind of questions are mostly used to answer the question (Q3).</p><p>Interval Likert scales. In these questions (Fig. <ref type="figure" target="#fig_1">1b</ref>) participants are presented with a relational database, a value-inventing SQL query (i.e., producing a value not already present in the database, such as an aggregate value over a column) and several tables. The task is to score each table with a value between 0 and 5 stars (in half-star increments) based on how satisfied the participant would be if the scored table were the answer to the query on the given database. This design lets us gather information about our respondents' expectations for the evaluation of value-inventing queries. Each option is displayed with an initial satisfaction score of 0. The respondents can also use an option labeled "other", with an initial score of 5, to provide a better alternative to those presented. We only consider the score of a custom answer if the participant has provided one. For each query we report the average and the quartile values of the satisfaction score obtained by the SQL answer, and we also compute the proportion of participants who would be more satisfied with a different answer. This data is used to answer the question (Q3).</p><p>In designing a survey which asks the respondents to evaluate or construct query answers, it is important to ensure that the sample relational databases represent realistic real-life scenarios rather than data patterns that are unlikely to occur. The latter would render the results of the survey less valuable. To this end, for each of the three databases used in the survey, we asked the participants the following frequency question: How often may the pattern in the given database occur in a real-life dataset? As shown in the summary (the average for the three databases used) of responses in Fig. <ref type="figure" target="#fig_3">2a</ref>, 80% of our respondents are of the opinion that such patterns can occur in real-life databases, with a varying degree of frequency; about half are of the opinion that such patterns occur frequently.</p><p>For all types of questions, depending on the quality of the respondents' sample, the results can be either considered as a representation of the general population (high-quality sample) or, in the case of a small sample, used to identify trends or outliers (choices for multiple-choice questions, events for frequency scale questions, and categories for build the answer and interval Likert scale questions) <ref type="bibr" target="#b24">[25]</ref>. We will discuss the results we obtained from the participants we managed to recruit, but since the quality of the conclusions one can draw is heavily dependent on the size and quality of the sample, anyone is encouraged to run the survey and its analyses on their own community. To this end, both the survey and the code are publicly available in the GitHub repository. Moreover, throughout the discussion and analysis of our results, we acknowledge (in retrospect, having analyzed the results) that some elements of the design could have been done differently, be improved; readers interested in conducting the survey are advised to contact the authors for further details.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Sample of respondents</head><p>We conducted the survey during a four-month period, and used several different methods to recruit participants. First, we posted a summary of our research on the data.world blog <ref type="bibr" target="#b57">[58]</ref> to advertise the survey. We also sent both the survey and the blog post to the   data.world mailing list through the monthly digest, reaching their user base. We used mailing lists, such as dbworld, as well as Reddit posts, and several Slack channels dedicated to specific DBMSs.</p><p>All participants accessed the survey using the same online link, so we cannot tell how many participants were recruited via each individual channel. In the end, there were 175 participants who took the survey, among which 94 completed it in full. Below, we discuss the participants' demographics and how their engagement with the questions evolved during the completion of the survey. Demographic information. We first asked the participants which domain they work in, according to the ISIC classification <ref type="bibr" target="#b51">[52]</ref>. As shown in Fig <ref type="figure" target="#fig_3">2b</ref>, the participants indicated 14 different domains, demonstrating that nulls matter for a wide variety of fields.</p><p>Next, we asked the participants what best describes their role in their organization. According to the answers, we split participants into "practitioners" and "academics", where the latter are those who chose Education as a domain of activities, or Professor or Student as a role in their organization. As intended, the sample has a prevalence of practitioners (73%), which our study is geared for.</p><p>We asked how often participants manipulate SQL code, to assess their familiarity with the language itself. The answers are shown in Fig. <ref type="figure" target="#fig_3">2a</ref>. We split our participants into two groups:</p><p>• Front-end users, who manipulate SQL code only occasionally or infrequently; they make up 34% of the respondents (with 1% saying never).</p><p>• Back-end users, who manipulate SQL code often regularly; they account for 65% of the respondents with the largest group, almost half, saying regularly; thus, we have reached our target audience.</p><p>Finally, we asked what type of data and which relational DBMSs our participants use. As shown in Fig. <ref type="figure" target="#fig_3">2c</ref> and Fig. <ref type="figure" target="#fig_3">2d</ref>, they mostly deal with relational data, and use a variety of systems, with a preference for PostgreSQL, MySQL, and Microsoft SQL Server (followed by Oracle Database, SQLite, and others).</p><p>Participants' engagement. The complexity and the extent of our study was too ambitious to be kept within the recommended 10minute survey format <ref type="bibr" target="#b54">[55]</ref>. Despite our best efforts, we knew that our survey would take longer than that to complete. It is surprising that so many participants spent so much time on it. Fig. <ref type="figure" target="#fig_3">2e</ref> and Fig. <ref type="figure" target="#fig_3">2f</ref> show the number of participants and the average time they spent on the survey, respectively; we report the results for each question and each group of participants.</p><p>We observe that the engagement is similar for each group of participants, and a significant drop-off in the number of respondents occurs after question 18, which in fact corresponds to the 10-minute mark of average time spent on the survey. In retrospect, the design of question 18 could have been improved: although not complex to answer, it is bulky and cumbersome, and this may have discouraged some participants from continuing.</p><p>We also observe that, despite the average completion time being rather high (around 45 minutes), a high proportion (60%) of participants finished the survey. This shows that database practitioners have a strong interest in the problem of nulls in SQL.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">SQL'S NULL FEATURES USAGE</head><p>The importance of studying nulls stems from their ubiquity in everyday applications; this was confirmed by the survey. Fig. <ref type="figure" target="#fig_4">3a</ref> shows how frequently users encounter nulls; more than 80% of them see NULL often or regularly, and less than 20% fall into the infrequently and occasionally categories. Even if NULL does not appear in a dataset, it can be generated by queries, in particular outer joins. Fig. <ref type="figure" target="#fig_4">3d</ref> shows that users frequently deal with LEFT and RIGHT JOIN; in fact, these are more common than explicitly specified inner joins. Full outer joins are also quite common.  The features offered by RDBMSs to handle NULL can be subdivided into the following two categories:</p><p>• SQL's DDL constraints, such as NOT NULL, to prevent NULL from appearing in columns;</p><p>• null-specific tests and functions, such as IS [NOT] NULL, IS</p><p>[NOT] DISTINCT, COALESCE(), ISNULL(), and IFNULL().</p><p>Fig. <ref type="figure" target="#fig_4">3b</ref> and Fig. <ref type="figure" target="#fig_4">3c</ref> show the prevalence of using null-prohibiting constraints in the DDL. The use of NOT NULL is very common, with almost 70% of respondents regularly or often declaring columns, and just over 5% avoiding the practice. These are also frequently added to keys, foreign keys, and UNIQUE declarations. It is interesting to note that, in the case of primary keys, NOT NULL is superfluous; yet, the majority of users nevertheless includes it explicitly. Adding NOT NULL to foreign keys also appears to be a common practice, in all likelihood aimed at avoiding three-valued logic in joins. On the other hand, it is also noteworthy that a non-negligible minority, around a quarter of respondents, never or almost never use nullprohibiting declarations.</p><p>In Fig. <ref type="figure" target="#fig_4">3e</ref> we see how commonly SQL's null-related features are used in queries. By far the most common one is checking whether a value is NULL. To this end, the IS NULL condition, or its negation, are used by almost 70% of the users, often or regularly, and completely avoided by fewer than 10%. The next most common feature is COALESCE, with almost half the respondents using it at least often; other operations are less common. We remark that ISNULL() and IFNULL(), as opposed to IS [NOT] NULL, are non-standard functions only available in some systems. Conclusion: NULL is a common occurrence in relational databases, and users are well aware of it. This manifests itself most commonly in the use of SQL's DDL, by frequently declaring some columns as NOT NULL. Null-related features are also fairly common in queries.</p><p>"The prevalence of dirty and missing data ought not to be underestimated. For many years, I was in charge of systems for data collection of medical data. Even such a regularized domain frequently had problems managing missing, dirty and suspicious data. " A participant</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">MEANINGS OF NULLS</head><p>Now that we confirmed the ubiquity of nulls and analyzed operations on nulls, both in the DDL and the query language, we move to the next question: what does NULL mean? The question has been addressed in the research literature, going all the way back to <ref type="bibr" target="#b63">[64]</ref> which defined three types of nulls: non-applicable, no-information, and those representing existing but currently unknown values (two of those, non-applicable and unknown values, were adopted early by relational databases <ref type="bibr" target="#b18">[19]</ref>). To see what options we can give to the users asking them a multiple choice question on the meaning of nulls, consider a hypothetical example: we have a table with information about employees, and the salary of the CEO is given as NULL. This could have different meanings:</p><p>• Non-applicable (NA). The CEO may not receive a regular salary and use another remuneration scheme. Then NULL indicates a field that is non-applicable, for which a value does not exist.</p><p>• Existing unknown (EU). The CEO salary cannot be disclosed for privacy reasons. In such cases, NULL denotes an existing but currently unknown constant.</p><p>• Existing known constant (C). The CEO salary may not be disclosed because it depends on changing financial results of company operations. Here NULL denotes an existing, and known, value.</p><p>• Dirty (D). The CEO may receive a regular salary but the data source from which the table is populated may have been dirty.</p><p>Semantics Options presented in the survey NA "the value does not exist" "non-applicable field" EU "the value exists and could be anything" "the value exists and is equal to an unknown constant"</p><p>C "the value exists and is equal to a known constant" D "there is a bug" "the data is dirty" NI "nothing is known about the value"</p><p>Table <ref type="table">1</ref> • No-information (NI). We may be in a situation when we know nothing at all about the reasons why that NULL is in the database. While the different semantics described above are easy to understand in a particular example, a single universally accepted description is not particularly easy to formulate in natural language. Thus, we introduced some redundancy with the options we presented to the users, as shown in Table <ref type="table">1</ref>.</p><p>Fig. <ref type="figure">4a</ref> provides the frequencies with which the participants chose each option describing a possible meaning of NULL. The NA semantics is the most popular one, selected by over 85% of respondents. It is followed by NI, which was chosen by more than 60% of the respondents. The EU semantics is considered by nearly 40% of the respondents. Finally, the D and C semantics were chosen by nearly 35% and 20% of the respondents, respectively.</p><p>The data in Fig. <ref type="figure">4a</ref> does not provide any information about combinations of different semantics chosen by the participants. If we take that into account, we obtain 23 different groups, as shown in the pie chart of Fig. <ref type="figure">4b</ref>. Not surprisingly, NA dominates: alone or in combination with NI and NI+EU, it accounts for more than half of all the combinations of the semantics seen. We remark that 13% of participants proposed an alternative semantics that does not coincide with any of those we have discussed (the curated comments and custom answers can be found in the GitHub repository). In light of this, our list of possible interpretations of NULL, while not exhaustive, covers most of the cases one meets in real-life situations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Conclusion:</head><p>The meaning of a NULL value is highly varied, and therefore there is no consensus on any one specific interpretation. However, the non-applicable semantics seems to dominate. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">SQL'S HANDLING OF NULLS</head><p>In order to understand SQL's handling of NULL we organize our findings in two parts. Section 5.1 addresses data manipulation queries that stay within the standard textbook version of relational algebra, known as generic queries <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b4">5]</ref>. These types of queries do not generate new values by means of function application or Figure <ref type="figure">4</ref> aggregates. On the other hand, Section 5.2 focuses on how NULL is dealt with when applying arithmetic functions and aggregates.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Generic queries</head><p>We look at three different aspects of such queries with respect to NULL handling: (1) comparisons involving NULL, <ref type="bibr" target="#b1">(2)</ref> positive queries without NOT, and (3) negative queries using NOT.</p><p>The latter are more likely to cause issues given what we know from the literature <ref type="bibr" target="#b42">[43,</ref><ref type="bibr" target="#b44">45]</ref>, due to the way the 3-valued logic is handled in query evaluation.</p><p>Comparisons involving NULL. We would like to see whether survey participants were satisfied with the way SQL evaluated comparisons between NULL and • a constant equal to: 0 for numerical types, and empty string for character types;</p><p>• another constant;</p><p>• another NULL. We use the results of four build-the-answer questions (Fig. <ref type="figure" target="#fig_1">1a</ref>) to study both equality and disequality comparisons, and are interested in the percentage of participants who disagree with the way SQL handles such comparisons; the higher the value is, the more problematic such a comparison. The results, summarized in Table <ref type="table" target="#tab_2">2</ref>, show that the desired behavior does not depend on the data-type. Moreover, contrary to a popular belief neither the empty string or the integer value 0 are treated differently than any other constant (even though the former is used as a substitute for NULL in some RDBMSs). Around 20% of our respondents would want SQL to view two NULL values as equal (i.e., use syntactic equality for them), while around 10% would like them to be different. Finally around 40% would like for SQL to evaluate disequality comparisons between NULL and a constant to false rather than unknown.</p><p>When it comes to queries, we aim to learn whether the answer the participants would like to see returned in the presence of NULL • coincides with the SQL answer, or • contains the SQL answer, or • is contained in the SQL answer, or • is incomparable with the SQL answer.</p><p>Positive queries. In these queries there is no negation; they are built using joins as well as IN and EXISTS subqueries. For each individual query testing a particular feature, more than 90% of our participants say that the answer should be the same as the one SQL returns. At the same time, the percentage of participants who say that the result should be the same as SQL for every query using those features is 84%. If we consider the whole positive fragment of SQL generic queries, and therefore also take into account the answers obtained with filtering queries on equality conditions (Table <ref type="table" target="#tab_2">2</ref>), this percentage drops to 68%. Thus even for fairly uncontroversial queries it is hard to find a uniform agreement across a query workload. But things quickly get much more problematic when we consider the interaction of NULL with queries that involve negation.</p><p>Queries with negation. When queries have negation, the disagreement with SQL query results increases significantly. In the survey we used queries containing and think that it filters out too many results, while the users are generally satisfied with NOT EXISTS subqueries. In fact those who are unsatisfied with NOT IN and want it to output more results, want it to behave in the spirit of NOT EXISTS. We note that IN subqueries follow the rules of three-valued logic (the condition in WHERE could evaluate to unknown) while NOT EXISTS subqueries follow the familiar twovalued logic (only true and false are possible), thus suggesting that the users are more comfortable with two truth values.</p><p>Regarding EXCEPT, we see that there is a significant variation in results wanted by the users. Recall that set operations treat NULL syntactically, so for the purpose of these operations two NULL values will be equal, even if testing them explicitly for equality does not return true. This sudden change of the semantics may well be at play here. The results for EXCEPT ALL seem to be more about handling duplicates than handling nulls: analyzing them in more detail we see that most outputs preferred by survey participants match SQL answers except for duplicates. The desire to have a smaller result, expressed by over 75%, appears to be the desire to eliminate duplicates from the result.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Value-inventing queries</head><p>We now look at queries that may output values not found in a database. Examples of such would be queries whose SELECT clauses contain arithmetic expressions like A+B or aggregates such as SUM or AVG. For such queries we want to see how satisfied the participants are with the results that SQL produces, and whether they have alternatives. Thus, we ask about users' expectations with respect to queries that evaluate expressions such as 30+NULL or NULL+NULL (whose values, returned by SQL, is NULL), or the same expression in the SUM aggregate (which, perhaps confusingly for some users, would return 30 for SUM(30,NULL) and NULL for SUM(NULL,NULL)).</p><p>The results are presented in Table <ref type="table" target="#tab_6">4</ref>. In the left column we have a key feature of a query that depends on handling nulls. For example, we may ask how adding two nulls will behave (NULL+NULL) or adding a null and a constant (NULL+30), or how the same operations are performed under the aggregate SUM (SUM(NULL,30) and SUM(NULL,NULL) respectively). We also ask about queries in which the summation aggregate is applied to values obtained as the result of arithmetic expressions (SUM(NULL+30,NULL+0)), and look at queries with GROUP BY where grouping is done on an attribute whose value is NULL.</p><p>In all of these questions we ask the participants to tell us how satisfied they are with SQL answers on the 0-to-5 scale, with 0 being the least satisfied and 5 the most satisfied. The additional columns in Table <ref type="table" target="#tab_6">4</ref> have the following meaning:</p><p>Quartiles/Median This is a box plot displaying the minimum, first quartile, median, third quartile, and maximum. We draw a box from the first quartile to the third quartile. A vertical line goes through the box at the median. The whiskers go from each quartile to the minimum or maximum. For example, looking at the first row of Table <ref type="table" target="#tab_6">4</ref>, we see that 75% of respondents gave answers 3, 4, or 5, indicating that they were rather or very satisfied with the fact that SQL evaluated 30+NULL as NULL. The next row shows that more than 75% were satisfied with the way SQL evaluated NULL+NULL. The vertical bar in those results gives the median answer to the question; when it is not visible within the blue-colored rectangle, it means the median is 5 (complete satisfaction).</p><p>Mean This column provides the mean answer.</p><p>Agreement and Controversy This is our informal interpretation of the results; agreement indicates to what extent people agree with SQL answers and controversy indicates how much of the difference of opinion there is; the possible scores are high, medium, and low. The higher the average and the median score are the higher the agreement of the participants is. The larger the difference between the median value and the lower quartile value is, the higher is the controversy. For example, in the first row of Table <ref type="table" target="#tab_6">4</ref>, there is generally high level of agreement as the mean and median tend to be high, with a moderate amount of controversy as for 75% of participants they range from 3 to 5.</p><p>Alternative Participants were asked to score several tables for each query (Fig. <ref type="figure" target="#fig_1">1b</ref>). The "Alternative" column gives the percentage of respondents who scored the table produced by SQL lower than (at least one of) the others.</p><p>We see from Table <ref type="table" target="#tab_6">4a</ref> that the way SQL applies functions whose arguments could be NULL (using the rule that the value of any such function is NULL then) is fairly uncontroversial and accepted by most. The agreement with SQL's way of handling NULL slightly decreases when aggregates are applied to columns containing NULL (in which case the rule is not to output NULL but rather to ignore all nulls and then compute the aggregate). In the case of aggregates, a significantly higher proportion of participants would be more satisfied with an alternative answer. Most disagreement with SQL occurs in the case of queries with grouping on a column that may contain NULL. In this case SQL uses the syntactic equality of nulls, i.e., two NULLs are equal, which of course differs from the treatment of NULLs elsewhere and thus causes additional problems.</p><p>We then look at similar queries but with one important difference. Now NULLs are not present in the database but rather created by an   involving arithmetic, aggregation, and grouping on NULL. Results, in the same way as before, are presented in Table <ref type="table" target="#tab_6">4b</ref>. While the trends are the same, we see three notable differences. First, the level of agreement with SQL results is higher: the median in all the cases except grouping on NULL moves to the highest score 5. Second, the level of controversy increases too (indicated by the widened blue shaded area in the diagram: more different scored are picked by more participants). And third, the percentage of users who prefer an answer that differs from SQL's is now much higher and peaks (at almost two thirds) for the grouping on NULL.</p><formula xml:id="formula_0">                                                     <label>(</label></formula><formula xml:id="formula_1">                                   <label>(</label></formula><p>Conclusion: SQL's way of handling NULLs for the positive generic queries satisfies a vast majority of the users. For negative queries, the amount of dissatisfaction increases significantly. The users do not seem to like that SQL's 3VL filters out so many tuples. Users are reasonably accustomed to SQL's way of handling NULLs in arithmetic operations, and slightly less so in aggregation, where the rule changes and NULLs are ignored. Their level of dissatisfaction increases when NULLs come not from a database but generated by a query. What they do not like is the use of syntactic equality (saying that two NULLs are equal) for generating groups using GROUP BY.</p><p>"The NOT IN vs NOT EXISTS trap does nail people in real life, fairly often. I understand why it is the way it is, but I wish SQL had defined NOT IN as a syntactic transform to NOT EXISTS. GROUP BY NULL should cause the user and/or data designer to vanish from existence immediately. "</p><p>A participant</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">ARE THERE READY SOLUTIONS?</head><p>The results of our survey revealed both agreement and significant disagreement with SQL's handling of nulls, as well as much variety when it comes to the interpretation of NULL. The first question we address here is whether some of the users' dissatisfaction can be tackled with solutions from the existing academic literature.</p><p>Towards that goal, we give a quick overview of existing work and conclude that most academic research was focused on issues that are of rather limited practical interest. With this knowledge, we asked ourselves whether there could be an association between the participants' demographic data (industry vs academia, familiarity with SQL, etc.), their view of the semantics of NULL and their preferred query behavior. To much of our surprise, this data analysis (using the standard statistical and machine learning toolkit) revealed no correlation whatsoever.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1">Existing work</head><p>The subject of incomplete data has been addressed in the literature, starting from foundational papers in the 1970s <ref type="bibr" target="#b16">[17,</ref><ref type="bibr" target="#b34">35,</ref><ref type="bibr" target="#b47">48]</ref>, and several surveys are available; e.g., <ref type="bibr" target="#b21">[22,</ref><ref type="bibr" target="#b35">36,</ref><ref type="bibr" target="#b61">62]</ref>. In this overview of related work, we outline what has been done for the EU semantics of nulls, which is the subject of most of the material in the aforementioned surveys, and concentrate on the interpretations that users found most common.</p><p>EU and certain answers. Theoretical work on incomplete databases has traditionally focused on the interpretation of nulls as missing values, in the sense of the EU semantics: a value exists, but it is currently unknown. The latest survey in that area is only two years old, and we refer the reader to it for multiple additional details and references, while we here outline only the basics. The prevalent model in this line of research is that of so-called marked nulls, first systematically studied in <ref type="bibr" target="#b38">[39]</ref>, where each missing value is represented by a special null symbol with an associated identifier.</p><p>There is a clear mismatch between the model of nulls used in theoretical database research and that of SQL; even if we interpret SQL nulls solely under the EU semantics, marked nulls are more expressive, because they allow co-reference of nulls, which is not possible in SQL. It is folklore in the database theory community that SQL nulls can be modeled by non-repeating marked nulls (i.e., with distinct identifiers). This, however, is not the case, as was demonstrated in <ref type="bibr" target="#b37">[38]</ref>. Nonetheless, the marked nulls model dominated not only research on incomplete information, but also work in areas where incomplete databases naturally arise. Examples of these include ontology-based data access <ref type="bibr" target="#b53">[54]</ref> and data exchange <ref type="bibr" target="#b26">[27]</ref>. We refer the reader to specific surveys of these areas <ref type="bibr" target="#b5">[6,</ref><ref type="bibr" target="#b9">10]</ref>, with hundreds of further references, and detailed explanations of the usage of marked nulls under the EU interpretation.</p><p>For marked nulls, the preferred model of query answering is that of certain answers <ref type="bibr" target="#b38">[39,</ref><ref type="bibr" target="#b47">48]</ref>. These are answers that are true under all interpretations of nulls, i.e., all possible ways of assigning known values to them. The definition of certainty itself is not unique <ref type="bibr" target="#b43">[44,</ref><ref type="bibr" target="#b48">49]</ref>, but in all cases query answering is computationally hard; e.g., coNP-complete for relational algebra queries <ref type="bibr" target="#b3">[4]</ref>. The standard query evaluation (a.k.a. naïve), where nulls are treated like regular constants, does sometimes produce answers that come with certainty guarantees; this is the case for unions of conjunctive queries (i.e., select-project-join-union queries) <ref type="bibr" target="#b38">[39]</ref>, or their extension with relational algebra division <ref type="bibr" target="#b32">[33]</ref>. Given the general hardness of computing certain answers, recent efforts concentrated on finding efficient approximations <ref type="bibr" target="#b27">[28,</ref><ref type="bibr" target="#b28">29,</ref><ref type="bibr" target="#b36">37]</ref>. However, as seen from the results of our survey, users do not seem to be preoccupied with certainty (in fact, they tend not to like it when too few answers are given, which is a tendency with the notion of certainty). Furthermore, there are no developed algorithms, nor even a generally accepted definition, for extending certainty to queries with aggregation, which are extremely common in applications. 1   1 A well-founded definition of certain answers for value-inventing queries under bag semantics was only recently proposed in <ref type="bibr" target="#b59">[60]</ref>.</p><p>Thus, despite much solid research in this area, its outcomes are often not directly applicable to how nulls are seen in the real world.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Nulls in SQL.</head><p>Even prior to the development of SQL, an ANSI committee working on the then new relational model suggested 14 different interpretations of nulls <ref type="bibr" target="#b0">[1]</ref>. Most of these fall into the categories our respondents provided, with some exceptions that have been made obsolete by subsequent developments. For example, access policies are managed explicitly and not via specific nulls, while some of the earlier interpretations implicitly assumed manual data entry. While <ref type="bibr" target="#b0">[1]</ref> did not provide any semantics of operations on nulls, nor a logic for their handling, this was suggested in two later documents <ref type="bibr" target="#b1">[2,</ref><ref type="bibr" target="#b15">16]</ref> from the SQL standardization process; these proposals date back to the late 1980s, but no action with respect to the Standard was taken. They proposed user-defined nulls, a model moving in the direction of marked nulls, with user-defined semantics, and SQL's NULL as the fallback position.</p><p>As already mentioned, shortcomings of SQL's NULLs are anecdotally known in the community, with only few exceptions trying to systematize them in the research literature. Among those are <ref type="bibr" target="#b10">[11]</ref>, which looks into issues experienced by SQL programmers in general, not with nulls directly, and <ref type="bibr" target="#b52">[53]</ref>, which studies how aggressive optimization techniques result in incorrect query evaluation in the presence of nulls.</p><p>NA and NI nulls. While we have seen that the NA and NI interpretations of nulls are the dominant ones, research on them is not nearly as extensive as for the EU semantics. Some early work on query evaluation with nulls under the NI semantics was done in <ref type="bibr" target="#b63">[64]</ref>, which proposed the trichotomy of NI, NA, and EU nulls. This was followed by work on NA in <ref type="bibr" target="#b41">[42]</ref>, essentially treating them as problems with the database design. There are different lines of work on NA and NI, each going in its own direction. For example, <ref type="bibr" target="#b33">[34]</ref> extended truth tables and arithmetic operations to the NA null, and <ref type="bibr" target="#b7">[8]</ref> looked at functional dependencies over databases with such nulls. One direction of work is to capture the semantics of different nulls by extending the 3-valued logic of SQL with more values and even paraconsistent logics <ref type="bibr" target="#b6">[7,</ref><ref type="bibr" target="#b19">20,</ref><ref type="bibr" target="#b31">32,</ref><ref type="bibr" target="#b58">59,</ref><ref type="bibr" target="#b62">63]</ref>. However it was shown recently that SQL's 3-valued logic is the most rational choice of a propositional logic that does not hamper query evaluation <ref type="bibr" target="#b20">[21]</ref>.</p><p>On the query evaluation side, we mention <ref type="bibr" target="#b14">[15,</ref><ref type="bibr" target="#b29">30,</ref><ref type="bibr" target="#b40">41]</ref>. The approach of <ref type="bibr" target="#b40">[41]</ref> is based on the notion of subsumption of tuples with nulls, already present in <ref type="bibr" target="#b13">[14,</ref><ref type="bibr" target="#b63">64]</ref>, and defined the semantics of EU and NI by different ways of lifting this subsumption from tuples to relations. This led to a well-defined notion of query answering and approximation for the EU semantics, but not for the NI semantics, where the discussion stopped at the level of investigating a number of concrete SQL queries. A step further was made in <ref type="bibr" target="#b14">[15]</ref>, which looked at NI added as either a substitute for a value, or a disjunction of several values (this, by itself, is a model of incompleteness known as or-sets <ref type="bibr" target="#b39">[40,</ref><ref type="bibr" target="#b45">46]</ref>). These can be expressed by means of extra constraints attached to tuples in the spirit of conditional tables <ref type="bibr" target="#b38">[39]</ref>. The paper shows then how to use such conditions to evaluate relational algebra queries; the result is again a conditional table, which can complicate understanding the output from a user's perspective. Last but not least, <ref type="bibr" target="#b29">[30]</ref> formally shows that answering queries (in relational algebra and calculus) on databases where nulls are interpreted under the NA semantics is equivalent to naively evaluating a rewritten query on a decomposed database without nulls, in which the "absence" of values is implicitly encoded in the schema. From a practical point of view, however, no concrete implementation and experimental evaluation of such rewriting and decomposition algorithms were devised.</p><p>EU and D: imputation. A well-established line of research that concerns these two interpretations (which together occur in about 20% of our respondents' answers) is to impute null values. That is, nulls are replaced with actual constants according to some statistical model. In the end, this gives us a database without nulls that can be queried and analyzed assuming the data is clean and complete. Most of this work is seen in the statistical and data cleaning literature <ref type="bibr" target="#b30">[31,</ref><ref type="bibr" target="#b60">61]</ref> and these approaches are fundamentally geared towards machine learning tasks on data derived from a database.</p><p>To summarize, most research efforts of the last four decades have been directed to the investigation of semantics that, while appearing in applications, are not the most common ones in the eyes of database practitioners.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2">Solutions vs demographics</head><p>We now move to the next question: whether there exists any correlation between the demographics for our respondents, and their preferences for the behavior of SQL queries. To address this, we performed a statistical analysis of the received responses. It revealed that, somewhat surprisingly, there is no correlation between the users' demographics and their responses to the questions about SQL. This makes the task of fixing SQL even more daunting, if at all possible.</p><p>To perform the analysis, we defined eight binary parameters that take into account users' information (academic vs practitioner, front-end vs back-end) and the preferred semantics of NULL; we refer to these parameters collectively as "demographic data". We looked at how they correlate with participants' agreement with SQL answers for each of the queries, which is simply labeled as true or false. For generic queries, participants were considered to agree with SQL if they built precisely the answer SQL produces. For value-inventing queries, participants agreed with SQL if the answers produced by SQL were their most satisfying options.</p><p>The first measurement we report is the uncertainty coefficient -also called proficiency coefficient or Theil's U <ref type="bibr" target="#b64">[65]</ref> -between the demographic data and the responses for each query. This measure, for two random variables 𝑥 and 𝑦, is the ratio of the mutual information of 𝑥 and 𝑦 to the entropy of 𝑥. Informally, this is the proportion of the information content of the agreement data that can be explained by the demographics. The demographic data would always correlate with some of the information of the agreement data for each query, simply because it is multi-dimensional while the latter, by definition, is a Boolean value. Thus, to see the real meaning of the uncertainty coefficient, we also compute its value for randomly generated data that uses the same distribution as the demographic and agreement data.</p><p>We also use machine learning techniques to analyze possible correlations. We study the average accuracy of a Logistic Regression <ref type="bibr" target="#b49">[50]</ref>, a Random Forest <ref type="bibr" target="#b11">[12]</ref>, and a Multi-layer Perceptron (Neural Network) <ref type="bibr" target="#b50">[51]</ref> classifier trained on 80% of our data, and then assessing the remaining 20%. To evaluate the quality of the prediction, we compare the accuracy of these classifiers with a dummy classifier algorithm that always returns the highest probability outcome from the training set.</p><p>The results, for both generic and value-inventing queries, are presented in Table <ref type="table" target="#tab_7">5</ref>. Startlingly, they show that the uncertainty coefficient does not produce better results than those obtained on random data, that is, the real life correlation between demographics and answers is noticeably lower than the one obtained from random data. Likewise, the logistic regression, the random forest and the multi-layer perceptron classifiers fail to outperform the dummy classifier.</p><p>Therefore, we have strong evidence that the demographic data is not sufficient to predict, with a reasonable degree of certainty, the user's preferred behavior of SQL queries in the presence of NULL. As a consequence, the paradigm -prevalent in the academic literature -of deriving answers from the semantics of NULL cannot satisfy all users.</p><p>"Though some of these scenarios give the opportunity to address common frustrations, they have also illustrated how difficult it would be to change the way NULLs are handled without significantly changing how other SQL syntax works. Any changes could also lead to horrendous version control issues. " A participant</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">CONCLUSIONS</head><p>Based on the results of the survey, we arrive at the following.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Conclusion 1:</head><p>NULL values are problematic. The data management community has come to this conclusion anecdotally. To the best of our knowledge, ours is the first study that provides strong evidence that this is actually the case in practice. The study provides clues and indications about users' (dis)satisfaction with SQL features:</p><p>• The NULL values appearing in a single database can have a variety of meanings; we identified over 20 semantic combinations.</p><p>• SQL's three-valued logic filters out too many results, which increases users' disagreement with SQL on queries with negation.</p><p>• When NULL is considered as a syntactic value, as in GROUP BY or set operations, dissatisfaction increases.</p><p>• While NULL as a function argument tends to behave as expected by users, the use of NULL in aggregates is more controversial and would benefit from further explanations. of NULL values that practitioners continue to tolerate today. One could argue that research has not yet properly translated to practice. However, research has mostly focused on the EU semantics, which only a minority of users encounter, rather than the NA and NI semantics, which are much more prevalent in practice. Furthermore, for a good part of the last 40 years, research has been based on the assumption that, in the presence of NULL values and for a specific semantics, all users should expect the same answers. The results of our survey provide evidence that this assumption does not hold in practice. Thus, we need to tackle the problem in a different way.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8">RECOMMENDATIONS</head><p>In light of these conclusions, we make the following recommendations to the data management community.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>I)</head><p>We suggest that research on nulls refocus to concentrate on its non-applicable (NA) and no-information (NI) interpretations that are assumed by most users. We need to further study and design models of query answering that play the same role for them as certain answers played under the existing-unknown interpretation. II) Research on nulls should look at broader classes of queries, especially value-inventing (e.g., aggregate) queries. They can cause many problems and yet basic research on them is lacking. III) We need to address research challenges brought to life by SQL design decisions, such as the use of 3VL and mixing different semantics of NULL (e.g., syntactic equality of nulls in grouping or set operations, and 3VL interpretation in conditions). It is important to implement new ideas that circumvent some of these problems (e.g., two-valued logic instead of 3VL, or proper marked nulls) in existing RDBMSs and evaluate their usefulness; this could lead to either alternative treatments of nulls, or new ways of treating them in query languages that are being designed. IV) We need flexible query answering systems that have users' requirements in mind. For example, instead of concentrating on a single one-size-fits-all solution, we could even use the existing criticized semantics while explaining to the user why the answer is what it is and how nulls affected it.</p><p>Finally, and more generally, we would like to advocate the use of this socio-technical approach to data management problems in other areas of database research, to ensure that the topics of most research interest are indeed the ones that real-life users care about and need.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: Examples of questions in our online survey.</figDesc><graphic coords="5,102.61,361.04,142.63,249.47" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head></head><label></label><figDesc>Average time spent on each question.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 2</head><label>2</label><figDesc>Figure 2</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure 3</head><label>3</label><figDesc>Figure 3</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>"</head><label></label><figDesc>It is impossible to know what NULL means without understanding the intent of the one who put it there in the first place. Unfortunately, I've seen it used for all of the above. " A participant</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head></head><label></label><figDesc>The value does not exist (NA) B: Nothing is known about the value (NI) C: It denotes a non-applicable eld (NA) D: The value exists and could be anything (EU) E: The data is dirty (D) F: The value exists and is equal to an unknown constant (EU) G: There is a bug (D) H: The value exists and is equal to a known constant (C) I: Other [Please specify] (a) Popularity of different semantics of NULL. Combinations of NULL semantics chosen by the participants.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 2 :</head><label>2</label><figDesc>Proportion of answers that differ from SQL.</figDesc><table><row><cell>Equality String Equality Integer</cell><cell>5.1 3.3</cell><cell>3.8 2.6</cell><cell>22.2 21.5</cell></row><row><cell>Inequality String Inequality Integer</cell><cell>41.6 41.6</cell><cell>48.7 43.0</cell><cell>11.0 8.72</cell></row></table><note><p><p>Operator</p>(a): 0 or " (b): Constant (c): NULL</p></note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 3 :</head><label>3</label><figDesc>NOT IN and NOT EXISTS subqueries, as well the difference query expressed either via EXCEPT under set Proportions of respondents' answers vs SQL.semantics or EXCEPT ALL under bag semantics. In Table3we report the views of the participants under the four possibilities shown above, with A standing for the answer a participant wanted, and SQL standing for the answer returned for by SQL. For example, the first row in that table says that for a query with a NOT IN subquery, 15.4% of participants agree with the result that SQL returned, while 84.5% of participants preferred an output that was a proper superset of SQL's query evaluation.Looking at NOT IN and NOT EXISTS subqueries, we see that a large majority are unsatisfied with NOT IN</figDesc><table><row><cell>Query</cell><cell cols="4">A=SQL A⊂SQL SQL⊂A A≠ SQL</cell></row><row><cell>NOT IN NOT EXISTS</cell><cell>15.4 78.3</cell><cell>0 15.8</cell><cell>84.5 1.7</cell><cell>0 4.1</cell></row><row><cell>EXCEPT EXCEPT ALL</cell><cell>53.0 10.7</cell><cell>10.4 76.8</cell><cell>27.0 8.9</cell><cell>9.6 3.6</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head></head><label></label><figDesc>OUTER JOIN query. Then we ask questions about similar queries</figDesc><table><row><cell>Query</cell><cell></cell><cell cols="4">Quartiles/Median</cell><cell></cell><cell cols="3">Mean Agreement Controversy</cell><cell>Alternative</cell></row><row><cell></cell><cell>0</cell><cell>1</cell><cell>2</cell><cell>3</cell><cell>4</cell><cell>5</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>30 + NULL</cell><cell>0</cell><cell>1</cell><cell>2</cell><cell>3</cell><cell>4</cell><cell>5</cell><cell>3.8</cell><cell>high</cell><cell>medium</cell><cell>21.6% </cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_5"><head></head><label></label><figDesc>a)</figDesc><table><row><cell>NULL + NULL</cell><cell>0</cell><cell>1</cell><cell>2</cell><cell>3</cell><cell>4</cell><cell>5</cell><cell>4.4</cell><cell>high</cell><cell>low</cell><cell>2.1%</cell></row><row><cell>SUM(30, NULL)</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>3.4</cell><cell>medium</cell><cell>high</cell><cell>33.3%</cell></row><row><cell>MIN(30, NULL)</cell><cell>0</cell><cell>1</cell><cell>2</cell><cell>3</cell><cell>4</cell><cell>5</cell><cell>3.4</cell><cell>medium</cell><cell>medium</cell><cell>30.5%</cell></row><row><cell>SUM(NULL, NULL)</cell><cell>0</cell><cell>1</cell><cell>2</cell><cell>3</cell><cell>4</cell><cell>5</cell><cell>4.1</cell><cell>high</cell><cell>low</cell><cell>9.5%</cell></row><row><cell></cell><cell>0</cell><cell>1</cell><cell>2</cell><cell>3</cell><cell>4</cell><cell>5</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>SUM(30 + NULL, 0 + NULL)</cell><cell>0</cell><cell>1</cell><cell>2</cell><cell>3</cell><cell>4</cell><cell>5</cell><cell>3.6</cell><cell>high</cell><cell>high</cell><cell>23.2%</cell></row><row><cell>GROUP BY(NULL, NULL)</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>3.1</cell><cell>medium</cell><cell>high</cell><cell>29.5%</cell></row><row><cell></cell><cell>0</cell><cell>1</cell><cell>2</cell><cell>3</cell><cell>4</cell><cell>5</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>NULL + NULL</cell><cell>0</cell><cell>1</cell><cell>2</cell><cell>3</cell><cell>4</cell><cell>5</cell><cell>4.3</cell><cell>high</cell><cell>low</cell><cell>7.5% </cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_6"><head>Table 4 :</head><label>4</label><figDesc>b) Results obtained with (a) value-inventing queries and NULLs that occur in the database, and (b) value inventing queries and computational NULLs.</figDesc><table><row><cell>SUM(30, NULL)</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>3.1</cell><cell>high</cell><cell>high</cell><cell>35.5%</cell></row><row><cell>MIN(30, NULL)</cell><cell>0</cell><cell>1</cell><cell>2</cell><cell>3</cell><cell>4</cell><cell>5</cell><cell>3.3</cell><cell>high</cell><cell>high</cell><cell>31.5%</cell></row><row><cell>SUM(NULL)</cell><cell>0</cell><cell>1</cell><cell>2</cell><cell>3</cell><cell>4</cell><cell>5</cell><cell>3.2</cell><cell>high</cell><cell>high</cell><cell>37.9%</cell></row><row><cell></cell><cell>0</cell><cell>1</cell><cell>2</cell><cell>3</cell><cell>4</cell><cell>5</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>GROUP BY(NULL, NULL)</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>2.0</cell><cell>low</cell><cell>high</cell><cell>63.2%</cell></row><row><cell></cell><cell>0</cell><cell>1</cell><cell>2</cell><cell>3</cell><cell>4</cell><cell>5</cell><cell></cell><cell></cell><cell></cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_7"><head>Table 5 :</head><label>5</label><figDesc>Conclusions 2: Handling NULLs in RDBMSs is an open problem. Even though we have identified concrete issues with NULL values, there are no satisfying solutions to handle them yet. Most existing research is not addressing the problems that database practitioners are encountering. What exacerbates the problem, is that neither demographics nor the semantics of NULL can explain what users want. The bottom line is that more socio-technical studies (e.g., interviews, web-data analysis, online surveys, etc.) are required to address the problem of NULL with users in mind.Conclusion 3:The research spectrum needs to broaden. The research on incomplete information undertaken by the data management community is insufficient, given the problematic state Association and prediction scores obtained with (a) generic queries, (b) value inventing queries and NULL values in the database, and (c) value inventing queries and computational NULLs.</figDesc><table><row><cell>Query</cell><cell>Theil's U</cell><cell>Theil's U Random</cell><cell>LR Classifier</cell><cell>RF Classifier</cell><cell>MLP Classifier</cell><cell>Dummy Classifier</cell><cell></cell><cell></cell></row><row><cell>= &lt;&gt; NOT IN NOT EXISTS EXCEPT EXCEPT ALL 30 + NULL NULL + NULL SUM(30, NULL) MIN(30, NULL) SUM(NULL, NULL) SUM(30 + NULL, 0 + NULL) GROUP BY(NULL, NULL) NULL + NULL SUM(30, NULL) MIN(30, NULL) SUM(NULL) GROUP BY(NULL, NULL)</cell><cell>48% 45% 61% 45% 51% 54% 55% 51% 61% 44% 49% 51% 57% 55% 39% 40% 49% 38%</cell><cell>69% 73% 79% 78% 78% 92% 80% 100% 76% 83% 90% 79% 81% 95% 76% 80% 85% 82%</cell><cell>69% 61% 84% 78% 56% 89% 84% 98% 63% 70% 92% 81% 71% 93% 70% 74% 66% 54%</cell><cell>63% 51% 79% 72% 60% 85% 81% 97% 64% 66% 91% 77% 61% 90% 64% 70% 65% 46%</cell><cell>65% 50% 78% 72% 55% 87% 80% 97% 62% 65% 91% 78% 56% 89% 64% 68% 68% 46%</cell><cell>72% 52% 84% 78% 55% 89% 84% 98% 68% 72% 92% 81% 73% 93% 70% 74% 67% 51%</cell><cell>                                                                    </cell><cell>(a) (b) (c)</cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>ACKNOWLEDGMENTS</head><p>This work was supported by data.world, <rs type="funder">EPSRC</rs> grants <rs type="grantNumber">N023056</rs> and <rs type="grantNumber">S003800</rs>, as well as Edinburgh's <rs type="institution">EPSRC Center</rs> for Doctoral Training in Data Science. This work was only possible thanks to all the survey participants.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_42XXK8p">
+					<idno type="grant-number">N023056</idno>
+				</org>
+				<org type="funding" xml:id="_p5Qrcun">
+					<idno type="grant-number">S003800</idno>
+				</org>
+			</listOrg>
+
+			<div type="availability">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>The survey, source code, data, and/or other artifacts have been made available at https://github.com/etouss/NULLSurvey.</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">ANSI/X3/SPARC Study Group on Data Base Management Systems</title>
+	</analytic>
+	<monogr>
+		<title level="j">SIGMOD Record</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<date type="published" when="1975">1975. 1975</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Interim Report</note>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<title level="m" type="main">Introduce named null definitions</title>
+		<idno>ISO/IEC JTC1 SC21 WG3 LON-111</idno>
+		<imprint>
+			<date type="published" when="1990">1990</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Technical Report</note>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title level="m" type="main">Foundations of Databases</title>
+		<author>
+			<persName><forename type="first">Serge</forename><surname>Abiteboul</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><surname>Hull</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victor</forename><surname>Vianu</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1995">1995</date>
+			<publisher>Addison-Wesley</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">On the representation and querying of sets of possible worlds</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Abiteboul</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Kanellakis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Grahne</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Theoretical Computer Science</title>
+		<imprint>
+			<biblScope unit="volume">78</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="158" to="187" />
+			<date type="published" when="1991">1991. 1991</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<monogr>
+		<title level="m" type="main">Database Theory: Querying Data</title>
+		<author>
+			<persName><forename type="first">Marcelo</forename><surname>Arenas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pablo</forename><surname>Barceló</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leonid</forename><surname>Libkin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wim</forename><surname>Martens</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andreas</forename><surname>Pieris</surname></persName>
+		</author>
+		<ptr target="github.com/pdm-book/community" />
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+	<note>Freely available from</note>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<author>
+			<persName><forename type="first">Marcelo</forename><surname>Arenas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pablo</forename><surname>Barceló</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leonid</forename><surname>Libkin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Filip</forename><surname>Murlak</surname></persName>
+		</author>
+		<title level="m">Foundations of Data Exchange</title>
+		<imprint>
+			<publisher>Cambridge University Press</publisher>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Maximally Paraconsistent Three-Valued Logics</title>
+		<author>
+			<persName><forename type="first">Ofer</forename><surname>Arieli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Arnon</forename><surname>Avron</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anna</forename><surname>Zamansky</surname></persName>
+		</author>
+		<ptr target="http://aaai.org/ocs/index.php/KR/KR2010/paper/view/1218" />
+	</analytic>
+	<monogr>
+		<title level="m">Principles of Knowledge Representation and Reasoning (KR)</title>
+		<imprint>
+			<publisher>AAAI Press</publisher>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Functional Dependencies in Relations with Null Values</title>
+		<author>
+			<persName><forename type="first">Paolo</forename><surname>Atzeni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicola</forename><forename type="middle">M</forename><surname>Morfuni</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Inf. Process. Lett</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="233" to="238" />
+			<date type="published" when="1984">1984. 1984</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<author>
+			<persName><forename type="first">Anol</forename><surname>Bhattacherjee</surname></persName>
+		</author>
+		<title level="m">Social science research: Principles, methods, and practices</title>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+		<respStmt>
+			<orgName>University of South Florida</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Ontology-Mediated Query Answering with Data-Tractable Description Logics</title>
+		<author>
+			<persName><forename type="first">Meghyn</forename><surname>Bienvenu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Magdalena</forename><surname>Ortiz</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Reasoning Web</title>
+		<imprint>
+			<biblScope unit="page" from="218" to="307" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Semantic errors in SQL queries: A quite complete list</title>
+		<author>
+			<persName><forename type="first">Stefan</forename><surname>Brass</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Goldberg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J. Syst. Softw</title>
+		<imprint>
+			<biblScope unit="volume">79</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="630" to="644" />
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Random forests</title>
+		<author>
+			<persName><forename type="first">Leo</forename><surname>Breiman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Machine learning</title>
+		<imprint>
+			<biblScope unit="volume">45</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="5" to="32" />
+			<date type="published" when="2001">2001. 2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<author>
+			<persName><forename type="first">Alan</forename><surname>Bryman</surname></persName>
+		</author>
+		<title level="m">Social research methods</title>
+		<imprint>
+			<publisher>Oxford university press</publisher>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Using powerdomains to generalize relational databases</title>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Buneman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Achim</forename><surname>Jung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Atsushi</forename><surname>Ohori</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Theoretical Computer Science</title>
+		<imprint>
+			<biblScope unit="volume">91</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="23" to="55" />
+			<date type="published" when="1991">1991. 1991</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">A Unified Treatment of Null Values Using Constraints</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Selçuk Candan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Grant</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><forename type="middle">S</forename><surname>Subrahmanian</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/S0020-0255(96)00201-0</idno>
+		<ptr target="https://doi.org/10.1016/S0020-0255(96)00201-0" />
+	</analytic>
+	<monogr>
+		<title level="j">Inf. Sci</title>
+		<imprint>
+			<biblScope unit="volume">98</biblScope>
+			<biblScope unit="page" from="99" to="156" />
+			<date type="published" when="1997">1997. 1997</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<title level="m" type="main">A proposal to provide support for multiple NULL states</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">G</forename><surname>Cannan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">G</forename><surname>Dee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Kerridge</surname></persName>
+		</author>
+		<idno>ISO/TC97/SC21/WG3-DBL-AMS51</idno>
+		<imprint>
+			<date type="published" when="1987">1987</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Technical Report</note>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Understanding relations (Installment #7)</title>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">F</forename><surname>Codd</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">FDT -Bulletin of ACM SIGMOD</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="23" to="28" />
+			<date type="published" when="1975">1975. 1975</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Extending the Database Relational Model to Capture More Meaning</title>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">F</forename><surname>Codd</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Trans. Database Syst</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="397" to="434" />
+			<date type="published" when="1979">1979. 1979</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Missing Information (Applicable and Inapplicable) in Relational Databases</title>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">F</forename><surname>Codd</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/16301.16303</idno>
+		<ptr target="https://doi.org/10.1145/16301.16303" />
+	</analytic>
+	<monogr>
+		<title level="j">SIGMOD Rec</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="53" to="78" />
+			<date type="published" when="1986">1986. 1986</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<title level="m" type="main">Approximations and Refinements of Certain Answers via Many-Valued Logics</title>
+		<author>
+			<persName><forename type="first">Marco</forename><surname>Console</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paolo</forename><surname>Guagliardo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leonid</forename><surname>Libkin</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/16301.16303</idno>
+		<ptr target="http://www.aaai.org/ocs/index.php/KR/KR16/paper/view/12813" />
+		<editor>KR.</editor>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<publisher>AAAI Press</publisher>
+			<biblScope unit="page" from="349" to="358" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Propositional and predicate logics of incomplete information</title>
+		<author>
+			<persName><forename type="first">Marco</forename><surname>Console</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paolo</forename><surname>Guagliardo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leonid</forename><surname>Libkin</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.artint.2021.103603</idno>
+		<ptr target="https://doi.org/10.1016/j.artint.2021.103603" />
+	</analytic>
+	<monogr>
+		<title level="j">Artif. Intell</title>
+		<imprint>
+			<biblScope unit="volume">302</biblScope>
+			<biblScope unit="page">103603</biblScope>
+			<date type="published" when="2022">2022. 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Coping with Incomplete Data: Recent Advances</title>
+		<author>
+			<persName><forename type="first">Marco</forename><surname>Console</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paolo</forename><surname>Guagliardo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leonid</forename><surname>Libkin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Etienne</forename><surname>Toussaint</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3375395.3387970</idno>
+		<ptr target="https://doi.org/10.1145/3375395.3387970" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 39th ACM SIGMOD-SIGACT-SIGAI Symposium on Principles of Database Systems</title>
+		<meeting>the 39th ACM SIGMOD-SIGACT-SIGAI Symposium on Principles of Database Systems<address><addrLine>PODS</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2020">2020. 2020</date>
+			<biblScope unit="page" from="33" to="47" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Database in Depth -Relational Theory for Practitioners</title>
+		<author>
+			<persName><forename type="first">Chris</forename><forename type="middle">J</forename><surname>Date</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3375395.3387970</idno>
+	</analytic>
+	<monogr>
+		<title level="j">O&apos;Reilly</title>
+		<imprint>
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<monogr>
+		<title level="m" type="main">A Guide to the SQL Standard</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">J</forename><surname>Date</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Darwen</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1996">1996</date>
+			<publisher>Addison-Wesley</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<monogr>
+		<title level="m" type="main">The value of online surveys</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Joel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anil</forename><surname>Evans</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mathur</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2005">2005. 2005</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Internet research</note>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<title level="m" type="main">The value of online surveys: A look back and a look ahead</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Joel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anil</forename><surname>Evans</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mathur</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Internet research</note>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Data exchange: semantics and query answering</title>
+		<author>
+			<persName><forename type="first">Ronald</forename><surname>Fagin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Phokion</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Renée</forename><forename type="middle">J</forename><surname>Kolaitis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lucian</forename><surname>Miller</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Popa</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Theor. Comput. Sci</title>
+		<imprint>
+			<biblScope unit="volume">336</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="89" to="124" />
+			<date type="published" when="2005">2005. 2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Uncertainty Annotated Databases -A Lightweight Approach for Approximating Certain Answers</title>
+		<author>
+			<persName><forename type="first">Su</forename><surname>Feng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aaron</forename><surname>Huber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Boris</forename><surname>Glavic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Oliver</forename><surname>Kennedy</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">SIGMOD Conference</title>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="1313" to="1330" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">ACID: A System for Computing Approximate Certain Query Answers over Incomplete Databases</title>
+		<author>
+			<persName><forename type="first">Nicola</forename><surname>Fiorentino</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sergio</forename><surname>Greco</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cristian</forename><surname>Molinaro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Irina</forename><surname>Trubitsyna</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">SIGMOD Conference</title>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="1685" to="1688" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">On the Logic of SQL Nulls</title>
+		<author>
+			<persName><forename type="first">Enrico</forename><surname>Franconi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sergio</forename><surname>Tessaris</surname></persName>
+		</author>
+		<ptr target="CEUR-WS.org" />
+	</analytic>
+	<monogr>
+		<title level="m">AMW (CEUR Workshop Proceedings)</title>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="volume">866</biblScope>
+			<biblScope unit="page" from="114" to="128" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<monogr>
+		<title level="m" type="main">Query Processing over Incomplete Databases</title>
+		<author>
+			<persName><forename type="first">Yunjun</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiaoye</forename><surname>Miao</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<publisher>Morgan &amp; Claypool Publishers</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Four Valued Logic for Relational Database Systems</title>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">H</forename><surname>Gessert</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">SIGMOD Record</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="29" to="35" />
+			<date type="published" when="1990">1990. 1990</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Naïve evaluation of queries over incomplete databases</title>
+		<author>
+			<persName><forename type="first">Amélie</forename><surname>Gheerbrant</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leonid</forename><surname>Libkin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cristina</forename><surname>Sirangelo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Trans. Database Systems</title>
+		<imprint>
+			<biblScope unit="volume">39</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="1" to="31" />
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<title level="m" type="main">Closed World Databases Opened Through Null Values</title>
+		<author>
+			<persName><forename type="first">Georg</forename><surname>Gottlob</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Roberto</forename><forename type="middle">V</forename><surname>Zicari</surname></persName>
+		</author>
+		<ptr target="http://www.vldb.org/conf/1988/P050.PDF" />
+		<editor>VLDB, François Bancilhon and David J. DeWitt</editor>
+		<imprint>
+			<date type="published" when="1988">1988</date>
+			<publisher>Morgan Kaufmann</publisher>
+			<biblScope unit="page" from="50" to="61" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Null Values in a Relational Data Base</title>
+		<author>
+			<persName><forename type="first">John</forename><surname>Grant</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Inf. Process. Lett</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="156" to="157" />
+			<date type="published" when="1977">1977. 1977</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<monogr>
+		<title level="m" type="main">Incomplete Data and Data Dependencies in Relational Databases</title>
+		<author>
+			<persName><forename type="first">Sergio</forename><surname>Greco</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cristian</forename><surname>Molinaro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Francesca</forename><surname>Spezzano</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<publisher>Morgan &amp; Claypool Publishers</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Making SQL Queries Correct on Incomplete Databases: A Feasibility Study</title>
+		<author>
+			<persName><forename type="first">Paolo</forename><surname>Guagliardo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leonid</forename><surname>Libkin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">PODS. ACM</title>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="211" to="223" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">On the Codd semantics of SQL nulls</title>
+		<author>
+			<persName><forename type="first">Paolo</forename><surname>Guagliardo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leonid</forename><surname>Libkin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Inf. Syst</title>
+		<imprint>
+			<biblScope unit="volume">86</biblScope>
+			<biblScope unit="page" from="46" to="60" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Incomplete information in relational databases</title>
+		<author>
+			<persName><forename type="first">Tomasz</forename><surname>Imielinski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Witold</forename><surname>Lipski</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J. ACM</title>
+		<imprint>
+			<biblScope unit="volume">31</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="761" to="791" />
+			<date type="published" when="1984">1984. 1984</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<monogr>
+		<title level="m" type="main">Incomplete Objects -A Data Model for Design and Planning Applications</title>
+		<author>
+			<persName><forename type="first">Tomasz</forename><surname>Imielinski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Shamim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kumar</forename><forename type="middle">V</forename><surname>Naqvi</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Vadaparty</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/115790.115838</idno>
+		<ptr target="https://doi.org/10.1145/115790.115838" />
+		<editor>SIGMOD, James Clifford and Roger King</editor>
+		<imprint>
+			<date type="published" when="1991">1991</date>
+			<publisher>ACM Press</publisher>
+			<biblScope unit="page" from="288" to="297" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Null Values in Relational Databases and Sure Information Answers</title>
+		<author>
+			<persName><forename type="first">Hans-Joachim</forename><surname>Klein</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Semantics in Databases</title>
+		<title level="s">Lecture Notes in Computer Science</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2001">2001</date>
+			<biblScope unit="volume">2582</biblScope>
+			<biblScope unit="page" from="119" to="138" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Nonapplicable Nulls</title>
+		<author>
+			<persName><forename type="first">Nadine</forename><surname>Lerat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Witold</forename><surname>Lipski</surname><genName>Jr</genName></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Theor. Comput. Sci</title>
+		<imprint>
+			<biblScope unit="volume">46</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="67" to="82" />
+			<date type="published" when="1986">1986. 1986</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Incomplete information: what went wrong and how to fix it</title>
+		<author>
+			<persName><forename type="first">Leonid</forename><surname>Libkin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">PODS</title>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="1" to="13" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Certain answers as objects and knowledge</title>
+		<author>
+			<persName><forename type="first">Leonid</forename><surname>Libkin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Artificial Intelligence</title>
+		<imprint>
+			<biblScope unit="volume">232</biblScope>
+			<biblScope unit="page" from="1" to="19" />
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">SQL&apos;s Three-Valued Logic and Certain Answers</title>
+		<author>
+			<persName><forename type="first">Leonid</forename><surname>Libkin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Trans. Database Syst</title>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="1" />
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Semantic Representations and Query Labguages for Or-Sets</title>
+		<author>
+			<persName><forename type="first">Leonid</forename><surname>Libkin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Limsoon</forename><surname>Wong</surname></persName>
+		</author>
+		<idno type="DOI">10.1006/jcss.1996.0010</idno>
+		<ptr target="https://doi.org/10.1006/jcss.1996.0010" />
+	</analytic>
+	<monogr>
+		<title level="j">J. Comput. Syst. Sci</title>
+		<imprint>
+			<biblScope unit="volume">52</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="125" to="142" />
+			<date type="published" when="1996">1996. 1996</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">A technique for the measurement of attitudes</title>
+		<author>
+			<persName><forename type="first">Rensis</forename><surname>Likert</surname></persName>
+		</author>
+		<idno type="DOI">10.1006/jcss.1996.0010</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Archives of Psychology</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="page" from="5" to="55" />
+			<date type="published" when="1932">1932. 1932</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">On Semantic Issues Connected with Incomplete Information Databases</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Lipski</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Database Systems</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="262" to="296" />
+			<date type="published" when="1979">1979. 1979</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">On Relational Algebra with Marked Nulls</title>
+		<author>
+			<persName><forename type="first">Witold</forename><surname>Lipski</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">PODS</title>
+		<imprint>
+			<date type="published" when="1984">1984</date>
+			<biblScope unit="page" from="201" to="203" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<monogr>
+		<title level="m" type="main">Generalized linear models</title>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Mccullagh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">A</forename><surname>Nelder</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<publisher>Routledge</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">Multilayer perceptrons for classification and regression</title>
+		<author>
+			<persName><forename type="first">Fionn</forename><surname>Murtagh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Neurocomputing</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="183" to="197" />
+			<date type="published" when="1991">1991. 1991</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<monogr>
+		<ptr target="https://unstats.un.org/unsd/classifications/Econ/isic" />
+		<title level="m">International Standard Industrial Classification of All Economic Activities (ISIC) Revision 4</title>
+		<meeting><address><addrLine>New York</addrLine></address></meeting>
+		<imprint>
+			<publisher>United Nations</publisher>
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">Reasoning in the Presence of NULLs</title>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Neumann</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/ICDE.2018.00214</idno>
+		<ptr target="https://doi.org/10.1109/ICDE.2018.00214" />
+	</analytic>
+	<monogr>
+		<title level="m">34th IEEE International Conference on Data Engineering</title>
+		<imprint>
+			<publisher>IEEE Computer Society</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="1682" to="1683" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<analytic>
+		<title level="a" type="main">Linking Data to Ontologies</title>
+		<author>
+			<persName><forename type="first">Antonella</forename><surname>Poggi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Domenico</forename><surname>Lembo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Diego</forename><surname>Calvanese</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Giuseppe</forename><forename type="middle">De</forename><surname>Giacomo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maurizio</forename><surname>Lenzerini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Riccardo</forename><surname>Rosati</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/ICDE.2018.00214</idno>
+	</analytic>
+	<monogr>
+		<title level="j">J. Data Semantics</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page" from="133" to="173" />
+			<date type="published" when="2008">2008. 2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">Ideal and Maximum Length for a Web Survey</title>
+		<author>
+			<persName><forename type="first">Melanie</forename><surname>Revilla</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carlos</forename><surname>Ochoa</surname></persName>
+		</author>
+		<idno type="DOI">10.2501/IJMR-2017-039</idno>
+		<ptr target="https://doi.org/10.2501/IJMR-2017-039" />
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Market Research</title>
+		<imprint>
+			<biblScope unit="volume">59</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="557" to="565" />
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<analytic>
+		<title level="a" type="main">Likert-type scales, statistical methods, and effect sizes</title>
+		<author>
+			<persName><forename type="first">Judy</forename><surname>Robertson</surname></persName>
+		</author>
+		<idno type="DOI">10.2501/IJMR-2017-039</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Commun. ACM</title>
+		<imprint>
+			<biblScope unit="volume">55</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="6" to="7" />
+			<date type="published" when="2012">2012. 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">The Ubiquity of Large Graphs and Surprising Challenges of Graph Processing</title>
+		<author>
+			<persName><forename type="first">Siddhartha</forename><surname>Sahu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amine</forename><surname>Mhedhbi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Semih</forename><surname>Salihoglu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jimmy</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">Tamer</forename><surname>Özsu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proc. VLDB Endow</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="420" to="431" />
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<monogr>
+		<author>
+			<persName><forename type="first">Juan</forename><surname>Sequeda</surname></persName>
+		</author>
+		<ptr target="https://data.world/blog/understanding-null-values-a-research-partnership-with-the-university-of-edinburgh/" />
+		<title level="m">Understanding NULL values: a research partnership with the University of Edinburgh</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<analytic>
+		<title level="a" type="main">NULL &apos;Value&apos; Algebras and Logics</title>
+		<author>
+			<persName><forename type="first">Bernhard</forename><surname>Thalheim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Klaus-Dieter</forename><surname>Schewe</surname></persName>
+		</author>
+		<idno type="DOI">10.3233/978-1-60750-690-4-354</idno>
+		<ptr target="https://doi.org/10.3233/978-1-60750-690-4-354" />
+	</analytic>
+	<monogr>
+		<title level="m">20th European-Japanese Conference on Information Modelling and Knowledge Bases (EJC) (Frontiers in Artificial Intelligence and Applications)</title>
+		<imprint>
+			<publisher>IOS Press</publisher>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="volume">225</biblScope>
+			<biblScope unit="page" from="354" to="367" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<analytic>
+		<title level="a" type="main">Knowledge-Preserving Certain Answers for SQL-like Queries</title>
+		<author>
+			<persName><forename type="first">Etienne</forename><surname>Toussaint</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paolo</forename><surname>Guagliardo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leonid</forename><surname>Libkin</surname></persName>
+		</author>
+		<idno type="DOI">10.24963/kr.2020/78</idno>
+		<ptr target="https://doi.org/10.24963/kr.2020/78" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 17th International Conference on Principles of Knowledge Representation and Reasoning</title>
+		<meeting>the 17th International Conference on Principles of Knowledge Representation and Reasoning</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="758" to="767" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<monogr>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Van</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Der</forename><surname>Loo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Edwin</forename><surname>De</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonge</forename></persName>
+		</author>
+		<idno type="DOI">10.24963/kr.2020/78</idno>
+		<title level="m">Statistical Data Cleaning</title>
+		<imprint>
+			<publisher>Wiley</publisher>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<analytic>
+		<title level="a" type="main">Logical Approaches to Incomplete Information: A Survey</title>
+		<author>
+			<persName><forename type="first">Ron</forename><surname>Van Der Meyden</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Logics for Databases and Information Systems</title>
+		<imprint>
+			<biblScope unit="page" from="307" to="356" />
+			<date type="published" when="1998">1998</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<analytic>
+		<title level="a" type="main">A More General Model for Handling Missing Information in Relational Databases Using a 3-valued Logic</title>
+		<author>
+			<persName><surname>Kwok-Bun Yue</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">SIGMOD Record</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="43" to="49" />
+			<date type="published" when="1991">1991. 1991</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<analytic>
+		<title level="a" type="main">Database Relations with Null Values</title>
+		<author>
+			<persName><forename type="first">Carlo</forename><surname>Zaniolo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J. Comput. Syst. Sci</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="142" to="166" />
+			<date type="published" when="1984">1984. 1984</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<analytic>
+		<title level="a" type="main">Three-stage least squares: simultaneous estimation of simultaneous equations</title>
+		<author>
+			<persName><forename type="first">Arnold</forename><surname>Zellner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Henri</forename><surname>Theil</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Henri Theil&apos;s Contributions to Economics and Econometrics</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="1992">1992</date>
+			<biblScope unit="page" from="147" to="178" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

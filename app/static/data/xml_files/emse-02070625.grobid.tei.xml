@@ -3,10 +3,10 @@
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
  xmlns:xlink="http://www.w3.org/1999/xlink">
-	<teiHeader xml:lang="fr">
+	<teiHeader xml:lang="en">
 		<fileDesc>
 			<titleStmt>
-				<title level="a" type="main">A Decade in Hindsight: The Missing Bridge Between Multi-Agent Systems and the World Wide Web</title>
+				<title level="a" type="main">A Decade in Hindsight: The Missing Bridge Between Multi-Agent Systems and the World Wide Web Blue Sky Ideas Track</title>
 			</titleStmt>
 			<publicationStmt>
 				<publisher/>
@@ -18,6 +18,28 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 						<author>
 							<persName><forename type="first">Andrei</forename><surname>Ciortea</surname></persName>
 							<email>andrei.ciortea@unisg.ch</email>
+						</author>
+						<author>
+							<persName><forename type="first">Simon</forename><surname>Mayer</surname></persName>
+							<email>simon.mayer@unisg.ch</email>
+						</author>
+						<author>
+							<persName><forename type="first">Fabien</forename><surname>Gandon</surname></persName>
+							<email>fabien.gandon@inria.fr</email>
+						</author>
+						<author>
+							<persName><forename type="first">Olivier</forename><surname>Boissier</surname></persName>
+							<email>olivier.boissier@emse.fr</email>
+						</author>
+						<author>
+							<persName><forename type="first">Alessandro</forename><surname>Ricci</surname></persName>
+							<email>a.ricci@unibo.it</email>
+						</author>
+						<author>
+							<persName><forename type="first">Antoine</forename><surname>Zimmermann</surname></persName>
+							<email>antoine.zimmermann@emse.fr</email>
+						</author>
+						<author>
 							<affiliation key="aff0">
 								<orgName type="institution">University of St. Gallen St</orgName>
 								<address>
@@ -25,6 +47,8 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 									<country key="CH">Switzerland</country>
 								</address>
 							</affiliation>
+						</author>
+						<author>
 							<affiliation key="aff1">
 								<orgName type="institution" key="instit1">Inria</orgName>
 								<orgName type="institution" key="instit2">Université Côte d&apos;Azur</orgName>
@@ -35,15 +59,6 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 							</affiliation>
 						</author>
 						<author>
-							<persName><forename type="first">Simon</forename><surname>Mayer</surname></persName>
-							<email>simon.mayer@unisg.ch</email>
-							<affiliation key="aff0">
-								<orgName type="institution">University of St. Gallen St</orgName>
-								<address>
-									<settlement>Gallen</settlement>
-									<country key="CH">Switzerland</country>
-								</address>
-							</affiliation>
 							<affiliation key="aff2">
 								<orgName type="institution" key="instit1">University of St. Gallen</orgName>
 								<orgName type="institution" key="instit2">ETH Zürich St</orgName>
@@ -54,15 +69,6 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 							</affiliation>
 						</author>
 						<author>
-							<persName><forename type="first">Fabien</forename><surname>Gandon</surname></persName>
-							<email>fabien.gandon@inria.fr</email>
-							<affiliation key="aff0">
-								<orgName type="institution">University of St. Gallen St</orgName>
-								<address>
-									<settlement>Gallen</settlement>
-									<country key="CH">Switzerland</country>
-								</address>
-							</affiliation>
 							<affiliation key="aff3">
 								<orgName type="institution" key="instit1">Inria</orgName>
 								<orgName type="institution" key="instit2">Université Côte d&apos;Azur</orgName>
@@ -73,15 +79,6 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 							</affiliation>
 						</author>
 						<author>
-							<persName><forename type="first">Olivier</forename><surname>Boissier</surname></persName>
-							<email>olivier.boissier@emse.fr</email>
-							<affiliation key="aff0">
-								<orgName type="institution">University of St. Gallen St</orgName>
-								<address>
-									<settlement>Gallen</settlement>
-									<country key="CH">Switzerland</country>
-								</address>
-							</affiliation>
 							<affiliation key="aff4">
 								<orgName type="institution" key="instit1">MINES Saint-Étienne</orgName>
 								<orgName type="institution" key="instit2">CNRS Saint-Étienne</orgName>
@@ -91,15 +88,6 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 							</affiliation>
 						</author>
 						<author>
-							<persName><forename type="first">Alessandro</forename><surname>Ricci</surname></persName>
-							<email>a.ricci@unibo.it</email>
-							<affiliation key="aff0">
-								<orgName type="institution">University of St. Gallen St</orgName>
-								<address>
-									<settlement>Gallen</settlement>
-									<country key="CH">Switzerland</country>
-								</address>
-							</affiliation>
 							<affiliation key="aff5">
 								<orgName type="institution">University of Bologna Cesena</orgName>
 								<address>
@@ -108,15 +96,6 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 							</affiliation>
 						</author>
 						<author>
-							<persName><forename type="first">Antoine</forename><surname>Zimmermann</surname></persName>
-							<email>antoine.zimmermann@emse.fr</email>
-							<affiliation key="aff0">
-								<orgName type="institution">University of St. Gallen St</orgName>
-								<address>
-									<settlement>Gallen</settlement>
-									<country key="CH">Switzerland</country>
-								</address>
-							</affiliation>
 							<affiliation key="aff6">
 								<orgName type="institution" key="instit1">MINES Saint-Étienne</orgName>
 								<orgName type="institution" key="instit2">CNRS Saint-Étienne</orgName>
@@ -125,21 +104,20 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 								</address>
 							</affiliation>
 						</author>
-						<title level="a" type="main">A Decade in Hindsight: The Missing Bridge Between Multi-Agent Systems and the World Wide Web</title>
+						<title level="a" type="main">A Decade in Hindsight: The Missing Bridge Between Multi-Agent Systems and the World Wide Web Blue Sky Ideas Track</title>
 					</analytic>
 					<monogr>
 						<imprint>
 							<date/>
 						</imprint>
 					</monogr>
-					<idno type="MD5">25C7C26B5140960EEFAD09A0002F6B81</idno>
-					<note type="submission">Submitted on 11 Apr 2019</note>
+					<idno type="MD5">B285B23893EA00495EE2CE954820C69B</idno>
 				</biblStruct>
 			</sourceDesc>
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.0" ident="GROBID" when="2024-04-12T14:53+0000">
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:12+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<ref target="https://github.com/kermitt2/grobid"/>
 				</application>
@@ -155,11 +133,11 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 				</keywords>
 			</textClass>
 			<abstract>
-<div xmlns="http://www.tei-c.org/ns/1.0"><p>des établissements d'enseignement et de recherche français ou étrangers, des laboratoires publics ou privés.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>The World Wide Web has evolved drastically over the past decade -and the proliferation of Web APIs has turned it into the middleware of choice for most distributed systems. The recent focus on hypermedia-driven APIs together with initiatives such as the Web of Things and Linked Data are now promoting and advancing the development of a new generation of dynamic, open, and long-lived systems on the Web. These systems require agent-based solutions to the point that Web researchers have started to build autonomous systems on their own. It is thus both timely and necessary to investigate and align the latest developments in Web research and multi-agent systems (MAS) research. In this paper, we analyze in hindsight the factors that hindered the widespread acceptance of early Web-based MAS. We argue that the answer lies equally in a lack of practical use cases as well as the premature development and alignment of Web and agent technologies. We then present our vision for a new generation of autonomous systems on the Web, which we call hypermedia MAS, together with the research opportunities and challenges they bring.</p></div>
 			</abstract>
 		</profileDesc>
 	</teiHeader>
-	<text xml:lang="fr">
+	<text xml:lang="en">
 		<body>
 <div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">WHERE ARE THE INTELLIGENT AGENTS?</head><p>The above question was posed by James Hendler in an editorial with the same title published in IEEE Intelligent Systems in 2007 <ref type="bibr" target="#b17">[18]</ref>. After having spent the better half of a decade working on the Proc. of the 18th International Conference on Autonomous Agents and Multiagent Systems (AAMAS 2019), N. Agmon, M. E. Taylor, E. Elkind, M. Veloso (eds.), <ref type="bibr">May 13-17, 2019</ref>, Montreal, Canada. © 2019 International Foundation for Autonomous Agents and Multiagent Systems (www.ifaamas.org). AUTHORS COPY Semantic Web vision <ref type="bibr" target="#b3">[4]</ref>, Hendler was looking back to conclude that most ideas in the original article were already seeing widespread deployment on the Web, except for agent-based systems. One month later, McBurney and Luck <ref type="bibr" target="#b30">[31]</ref> published a reply in the same journal in which they argued the question was misplaced and defended agent technologies as a future paradigm for mainstream computing -once dynamic and open systems become the norm in computing.</p><p>In this paper, we revisit Hendler's question and analyze in hindsight -after another decade of Web and MAS research -why early Web-based MAS did not see widespread acceptance. We conclude that the answer lies equally in a lack of practical use cases as well as the premature development and alignment of Web and agent technologies. To support this claim, we contrast our findings with more recent results and developments that can help bridge the conceptual gap between MAS and the Web. We speculate that MAS are now at a turning point in their development and have all the prerequisites to move towards mainstream computing. The Web can provide a vessel for this transition, but a number of research and engineering challenges still have to be recognized and addressed.</p></div>
 <div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">A DECADE IN HINDSIGHT</head><p>The Web is already populated with billions of agents: we, as human agents, achieve most of our everyday goals by browsing and acting on Web resources. In pursuit of our goals, we are often assisted by invisible software agents, such as crawlers used by search engines to navigate and index the Web <ref type="bibr" target="#b5">[6]</ref>, agents that curate online content produced by people (e.g., Wikipedia's content agents <ref type="bibr" target="#b32">[33]</ref>), and recommender systems used all over the Web to generate more links and navigation paths (e.g., suggestions of books on an Amazon page). Although some of these agents may already use different AI methods (learning, reasoning, etc.), we have yet to see more autonomous, cooperative, and long-lived agents on the Web -the "intelligent agents" in Hendler's question.</p><p>In this section, we search for new answers to Hendler's question -a decade later. We start from the practical usefulness of MAS on the Web, and then continue with the evolution of Web and MAS research.</p></div>

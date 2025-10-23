@@ -7,7 +7,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		<fileDesc>
 			<titleStmt>
 				<title level="a" type="main">A FAUST-BASED RE -CREATION OF THE POWER AMP STAGE FOR W EB A UDIO -BASED SIMULATIONS OF GUITAR TUBE AMPLIFIERS</title>
-				<funder ref="#_C8KRZaE">
+				<funder ref="#_uevx4yc">
 					<orgName type="full">Agence Nationale de la Recherche</orgName>
 					<orgName type="abbreviated">ANR</orgName>
 				</funder>
@@ -53,14 +53,14 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 							<date/>
 						</imprint>
 					</monogr>
-					<idno type="MD5">112F3869F689B84443113A1AAB909850</idno>
+					<idno type="MD5">ABA49C7907750EF4948E1DCD9911C5B9</idno>
 					<idno type="DOI">10.13140/RG.2.2.23416.11521</idno>
 				</biblStruct>
 			</sourceDesc>
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.0" ident="GROBID" when="2024-04-12T14:48+0000">
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:15+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<ref target="https://github.com/kermitt2/grobid"/>
 				</application>
@@ -119,7 +119,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <div><head>ACKNOWLEDGMENTS</head><p>This work was partially supported by the <rs type="funder">French Research National Agency (ANR)</rs> and the <rs type="projectName">WASABI [21</rs>] team (contract <rs type="grantNumber">ANR-16-CE23-0017-01</rs>).</p></div>
 			</div>
 			<listOrg type="funding">
-				<org type="funded-project" xml:id="_C8KRZaE">
+				<org type="funded-project" xml:id="_uevx4yc">
 					<idno type="grant-number">ANR-16-CE23-0017-01</idno>
 					<orgName type="project" subtype="full">WASABI [21</orgName>
 				</org>

@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="fr">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">QuickFill, QuickMixte : approches par blocs pour la réduction du nombre de programmes en synthèse de programmes</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Vanessa</forename><surname>Fokou</surname></persName>
+							<email>vanfokou@gmail.com</email>
+							<affiliation key="aff0">
+								<orgName type="department">Département d&apos;Informatique</orgName>
+								<orgName type="institution">Université de Yaoundé I</orgName>
+								<address>
+									<postBox>BP 812</postBox>
+									<settlement>Yaoundé</settlement>
+									<country key="CM">Cameroun</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Peggy</forename><surname>Cellier</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="laboratory">IRISA -UMR 6074</orgName>
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">INSA Rennes</orgName>
+								<orgName type="institution" key="instit4">CNRS</orgName>
+								<address>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Maurice</forename><surname>Tchuente</surname></persName>
+							<email>maurice.tchuente@gmail.com</email>
+							<affiliation key="aff0">
+								<orgName type="department">Département d&apos;Informatique</orgName>
+								<orgName type="institution">Université de Yaoundé I</orgName>
+								<address>
+									<postBox>BP 812</postBox>
+									<settlement>Yaoundé</settlement>
+									<country key="CM">Cameroun</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="department">IRD</orgName>
+								<orgName type="institution" key="instit1">Sorbonne Université</orgName>
+								<orgName type="institution" key="instit2">UMMISCO</orgName>
+								<address>
+									<postCode>F-93143</postCode>
+									<settlement>Bondy</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Alexandre</forename><surname>Termier</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="laboratory">IRISA -UMR 6074</orgName>
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">INSA Rennes</orgName>
+								<orgName type="institution" key="instit4">CNRS</orgName>
+								<address>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">QuickFill, QuickMixte : approches par blocs pour la réduction du nombre de programmes en synthèse de programmes</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">32E9600B6499AECD88A8E31EFDE1CAFB</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:12+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Les tâches répétitives sont le plus souvent fastidieuses ; afin de faciliter leur exécution, les approches de synthèse de programmes ont été développées. Elles consistent à inférer automatiquement des programmes qui satisfont l'intention d'un utilisateur. L'approche la plus connue en synthèse de programmes est FlashFill intégrée au tableur Excel qui permet le traitement des chaînes de caractères. Dans FlashFill l'intention de l'utilisateur est représentée par des exemples i.e, des couples (entrée, sortie). FlashFill explore un très grand espace de programmes et peut donc nécessiter un temps d'exécution important et inférer beaucoup de programmes dont certains fonctionnent sur des exemples donnés mais ne capturent pas l'intention de l'utilisateur. Dans cet article, nous proposons deux approches QuickMixte et QuickFill basées sur les blocs qui visent à guider l'exploration de l'espace de programmes de FlashFill en enrichissant les spécifications fournies par l'utilisateur. Ces approches demandent à l'utilisateur de fournir des associations entre les sousparties de la sortie et de l'entrée pour affiner les spécifications. Les expérimentations menées sur une série de 12 jeux de données montrent que QuickMixte et QuickFill permettent de réduire considérablement l'espace de programmes de FlashFill. Nous montrons qu'avec ces approches, il est souvent possible de donner moins d'exemples qu'avec l'algorithme FlashFill original pour une plus grande proportion de programmes corrects.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Mots-Clés</head><p>Synthèse de programmes, programmation par l'exemple, manipulation des chaînes de caractères, tâches répétitives, approche par blocs.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="fr">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>I INTRODUCTION</head><p>La synthèse de programmes (en anglais, Program Synthesis) consiste à trouver automatiquement, à partir d'un langage de programmation sous-jacent, des programmes qui satisfont l'intention de l'utilisateur, souvent exprimée par des exemples (entrée, sortie). Elle a été utilisée dans plusieurs applications comme la réparation de code <ref type="bibr" target="#b5">[6]</ref>, la modélisation probabiliste <ref type="bibr" target="#b6">[7]</ref>, la suggestion de code <ref type="bibr" target="#b4">[5]</ref> ou encore le traitement des données <ref type="bibr" target="#b7">[8]</ref>. Le pré-traitement des données est l'une des tâches les plus chronophages d'un processus d'analyse de données. On estime que les ingénieurs/scientifiques des données consacrent 80% de leur temps au pré-traitement des données <ref type="bibr" target="#b8">[9]</ref>. Cette tâche demande souvent de faire des transformations non triviales de formats, qui sont trop complexes pour être effectuées par les outils existants, mais trop simples pour mériter l'attention soutenue d'un analyste. En pratique, la solution classique pour effectuer les tâches de pré-traitement de données est l'écriture de petits scripts dans des langages de programmation généralistes (par exemple Python). La difficulté est que de nombreux utilisateurs ne maîtrisent pas les bases de la programmation, et n'ont donc pas la possibilité d'écrire de tels scripts.</p><p>Pour pallier ce problème, les techniques de synthèse de programmes, en particulier la programmation par l'exemple, sont intéressantes. C'est un sous-domaine de la synthèse de programmes, où la spécification se présente sous la forme d'exemples entrée-sortie. L'approche la plus connue en synthèse de programmes est FlashFill <ref type="bibr" target="#b3">[4]</ref>, elle est intégrée à toutes les versions récentes du tableur Excel pour le traitement automatique de chaînes de caractères. FlashFill considère des lignes dans le tableur, et apprend des programmes prenant en entrée le contenu d'une ou plusieurs colonnes de la ligne par exemple une colonne des noms et une colonne des prénoms, et dont le résultat est stocké dans une autre colonne par exemple une colonne contenant la concaténation des noms et prénoms. L'algorithme original FlashFill, tel que présenté dans GULWANI <ref type="bibr" target="#b3">[4]</ref>, doit explorer un grand espace de programmes, et peut donc nécessiter un temps d'exécution important. De plus, beaucoup de programmes peuvent être inférés dont certains fonctionnent sur les exemples donnés mais ne capturent pas l'intention de l'utilisateur, et donneront des résultats faux sur d'autres entrées. Ce problème de généralisation est dû au fait que les programmes sont souvent spécifiques aux exemples donnés.</p><p>Dans cet article nous présentons QuickMixte et Quickfill deux améliorations de FlashFill. Ces deux approches réduisent l'espace des programmes à explorer par FlashFill en enrichissant les spécifications fournies par l'utilisateur. Pour chaque exemple qui consiste en couple (entrée, sortie), l'utilisateur est invité à donner le matching entre les sous-parties de l'entrée et les sous-parties de la sortie. Le but de ces deux approches est de montrer que l'ajout de certaines interactions avec l'utilisateur peut aider à réduire le nombre de programmes de FlashFill. Les expériences menées ont permis de vérifier cette hypothèse.</p><p>Le reste du papier est organisé comme suit : la section 2 présente quelques travaux antérieurs sur le traitement de données via la synthèse de programmes, la section 3 présente les approches QuickMixte et QuickFill, la section 4 présente les expérimentations et la section 5 conclut le papier.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>II ÉTAT DE L'ART SUR LA PROGRAMMATION PAR L'EXEMPLE</head><p>La synthèse de programmes comprends beaucoup de sous-domaines parmi lesquels la programmation par l'exemple et la programmation par démonstration, elles peuvent automatiser de nombreuses tâches courantes -à l'exemple de l'édition de texte -qui tendent à consommer une fraction frustrante du temps des utilisateurs. En programmation par l'exemple, l'idée est d'apprendre des programmes qui correspondent aux actions de l'utilisateur à partir des exemples qu'il fournit par interaction avec un agent logiciel. L'agent peut ensuite généraliser ces programmes afin qu'ils puissent fonctionner dans d'autres situations similaires, mais pas nécessairement identiques, aux exemples sur lesquels ils sont appris <ref type="bibr" target="#b0">[1]</ref>. En 2003, LAU, WOLFMAN, DOMINGOS et WELD <ref type="bibr" target="#b1">[2]</ref> formalisent l'algèbre des espaces de version, une méthode permettant de composer des espaces de version plus simples pour construire des espaces plus complexes et l'appliquent à la programmation par démonstration dans le domaine de l'édition de texte en l'occurrence SMARTedit, un système qui apprend les procédures répétitives d'édition de texte par l'exemple. En 2009, LAU <ref type="bibr" target="#b2">[3]</ref> explique pourquoi les systèmes de programmation par démonstration échouent ; elle y mentionne que la facilité d'utilisation reste un obstacle majeur pour ces systèmes ; SMARTedit étant un cas d'étude. La démonstration fournit par l'utilisateur consiste en une séquence de l'état de l'éditeur après chaque action primitive expliquant comment effectuer la transformation. Par ailleurs, le langage de SMARTedit n'est pas aussi expressif que ce qui est nécessaire dans le cadre des feuilles de calcul. Les outils de type tableurs comme Microsoft Excel sont particulièrement adaptés à la manipulation et la transformation des données numériques. De ce fait, on ne dispose que de fonctions élémentaires pour la manipulation des chaînes de caractères. En 2011, GULWANI <ref type="bibr" target="#b3">[4]</ref> propose l'approche FlashFill pour le traitement automatique de chaînes de caractères dans les tableurs.</p><p>FlashFill est un synthétiseur de programmes pour les transformations syntaxiques de chaînes de caractères à partir d'un ensemble de couples d'exemples (entrée, sortie) fournis par l'utilisateur. Il prend en entrée un ensemble d'exemples de type (σ, s) où σ = (σ 1 , ..., σ n ) est un tuple dont chaque élément est une chaîne de caractères, et où s est une chaîne de caractères. Dans un tableur comme Excel, chaque ligne est un exemple, σ est un ensemble de cellules de la ligne contenant des données, et s est le résultat d'une transformation de chaîne de caractères sur les cellules σ. Par exemple ((A1 : "Jean", B1 : "Dupont"), C1 : "Jean Dupont") permet d'inférer qu'il faut concaténer le contenu des colonnes A et B et ranger le résultat dans la colonne C. Pour un exemple (σ, s) donné, FlashFill traite chaque sous-partie de s à partir de l'entrée σ pour trouver les sous-programmes associés, et combine par la suite ces sous-programmes pour obtenir l'ensemble des programmes permettant d'obtenir s à partir de σ. Ce procédé conduit à un grand nombre de programmes car le chevauchement qu'il y a entre les sous-parties de s implique que certaines sous-parties sont traitées à plusieurs reprises, ce qui augmente le nombre de programmes de FlashFill. Dans la suite, nous présentons deux approches par blocs qui permettent de réduire le nombre de programmes de FlashFill.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>III APPROCHES PAR BLOCS : QUICKMIXTE, QUICKFILL</head><p>Dans cette section, nous rappelons tout d'abord les principales notions de FlashFill avant d'introduire les deux approches QuickMixte et QuickFill.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Explications sur FlashFill</head><p>Pour résoudre le problème de transformation syntaxique de chaînes de caractères dans les tableurs, FlashFill s'appuie sur deux principaux éléments : un langage qui contient des primitives simples pour de la manipulation de chaînes de caractères et un algorithme de synthèse qui utilise ce langage spécifique pour construire des programmes de transformation. Ce langage contient des expressions telles que : ConstStr pour les constantes, SubStr pour l'extraction de sous-chaînes, Concatenate pour la concaténation, etc. Les éléments dudit langage sont expliqués en Annexe. Étant donné S un ensemble de couples d'exemples entrée-sortie (σ, s) avec σ = (σ 1 , ..., σ n ), le but de FlashFill est d'apprendre des programmes de transformation de chaînes de caractères cohérents avec tous les couples (σ, s) ∈ S i.e, capables de transformer chaque entrée σ en sa sortie s. Sa première étape consiste à calculer pour chaque couple (σ, s) ∈ S indépendamment les programmes permettant de transformer σ en la sortie s. La deuxième étape consiste à construire l'ensemble des programmes cohérents avec tout couple (σ, s) ∈ S par intersection des programmes individuels si tous les exemples sont de même forme ou par partitionnement des exemples puis intersection des programmes par partition sinon. Pour ce qui est de la troisième étape, elle intervient uniquement lorsque le partitionnement a lieu ; nous ne nous y intéressons pas dans ce papier. Comme mentionné précédemment, la grande taille de l'espace de programmes qu'explore FlashFill est due au fait qu'il traite chaque sous-partie de s ; pour chacune d'elle, il se sert de toute l'entrée σ pour construire les sous-programmes correspondant, le nombre de tels sous-programmes est influencé par la longueur de σ. Notre but est de réduire l'espace de programmes à explorer par FlashFill via les approches par blocs QuickMixte et QuickFill qui diminuent le nombre de sous-parties à traiter et empêchent d'utiliser toute l'entrée en demandant à l'utilisateur des associations entre les sous-parties de l'entrée et celles de la sortie. Il est à noter que QuickMixte et QuickFill partent du même problème initial que FlashFill i.e, à partir d'un ensemble d'exemples, il faut apprendre un ensemble des programmes pouvant transformer l'entrée σ en la sortie s.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">QuickMixte</head><p>QuickMixte demande à l'utilisateur, pour chaque couple d'exemple entrée-sortie (σ = (σ 1 , ..., σ n ), s), d'identifier dans s l'ensemble de sous-chaînes {s 1 , ..., s k } impactées par l'entrée σ, et pour chaque sous-chaîne s i , d'identifier l'élément de l'entrée lui étant associée : une sous-chaîne σ sub j ∈ σ j . Ce matching entre les sous-parties s i de s et les chaînes σ sub j de σ associées représente les couples de blocs. Les sous-chaînes de s n'étant pas impactées par l'entrée σ sont des constantes. Un couple de blocs (σ sub j , s i ) est tel que s i est une sous-partie de s, σ sub j une sous-chaîne de σ pouvant permettre de construire s i . Les couples de blocs lui étant fournis, QuickMixte construit les sous-programmes permettant de construire chaque sous-chaîne s i par appel de FlashFill et à la fin procède à une combinaison de sous-programmes pour obtenir des programmes permettant de construire s à partir de σ. Les sous-programmes obtenus sur chaque couple de blocs, sont de la forme d'un programme retourné par FlashFill i.e, une formule de concaténation (Concatenate). Le but étant d'obtenir des programmes cohérents avec l'exemple (σ = (σ 1 , ..., σ n ), s), on va combiner les sous-programmes dans l'ordre des s i pour obtenir les programmes finaux. Ces couples de blocs fournis permettent de guider plus finement l'espace de recherche dans la mesure où le traitement d'une partie de la sortie ne se fait pas en exploitant toute l'entrée mais une partie précise de cette dernière. Par exemple, soit un couple d'exemple (σ = "Data wrangling", s = "Dg") ; on a deux couples de blocs à savoir ("Data", "D") et ("wrangling", "g").</p><p>Avec le premier couple de blocs, on trouve les sous-programmes permettant d'obtenir "D" dans "Data" (extraction du premier caractère) et le deuxième couple de blocs permet de trouver les sous-programmes permettant d'obtenir "g" dans "wrangling" (extraction du dernier caractère) ; les concaténations de ces sous-programmes donnent les programmes permettant d'obtenir "Dg" à partir de "Data wrangling". En d'autres termes, QuickMixte est une combinaison des résultats d'exécutions de FlashFill sur les couples de blocs. Pour plusieurs couples d'exemples donnés, l'ensemble de programmes est l'intersection des programmes obtenus pour chaque exemple.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">QuickFill</head><p>L'approche QuickMixte précédente permet de réduire l'espace de programmes car elle laisse certaines sous-chaînes de s inexplorées et pour chaque sous-chaîne de s traitée, elle exploite une sous-partie σ j de σ. Cependant, l'algorithme de FlashFill est entièrement conservé sur le traitement de chaque couple de blocs car, chaque couple de blocs (σ j , s i ) est traitée par appel de FlashFill. Cette pratique peut empêcher une réduction stricte de l'espace de programmes, car comme l'algorithme original, par conséquent,QuickMixte hérite de certains défauts de Fla-shFill. Pour chaque couple (σ j , s i ), QuickFill se sert du langage de FlashFill pour construire les programmes correspondant. Au lieu de traiter individuellement chaque sous-partie de s i pour trouver les sous-programmes, QuickFill cherche directement la chaîne s i pour construire les sous-programmes . Il faut noter que dans QuickFill, la constructions de blocs se fait de la même façon que dans QuickMixte à la seule différence que pour un couple de blocs (σ sub j , s i ), s i doit être une sous-chaîne consécutive de la sous-partie de σ sub j associée ; pourtant avec QuickMixte, s i n'est pas nécessairement une sous-chaîne consécutive de σ sub j . Par exemple, avec QuickMixte on peut avoir pour couple de blocs ("Docteur", "Dr") mais avec QuickFill ce n'est pas possible car "Dr" n'est pas une sous-chaîne de "Docteur" ; par contre, ("Docteur", "D") est valide comme couple de blocs que ce soit pour QuickMixte ou pour QuickFill. Il est important de noter que dans de nombreux cas, QuickMixte et QuickFill demandent le même nombre de couples de blocs et que QuickFill obtenir de meilleurs résultats comme le montrent les expérimentations.</p><p>Une chaîne s de longueur n a au total n(n+1) 2 sous-chaînes possibles. Étant donné (σ, s) un couple de blocs, FlashFill construit les sous-programmes associés à chaque sous-chaîne de s à partir de toute l'entrée σ. QuikFill évite d'explorer toutes les sous-chaînes de s et n'utilise que les parties de σ associées aux sous-chaînes de s à explorer. Contrairement à quickMixte, Les sous-programmes obtenus avec QuickFill sont élémentaires i.e, sans formules de concaténation. les programmes finaux s'obtiennent par construction des formules Concatenate dans l'ordre des s i comme dans QuickMixte. La section suivante présente les expérimentations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>IV EXPÉRIMENTATIONS</head><p>Il est important de noter que dans cet article, nous nous basons sur l'algorithme FlashFill tel que défini dans <ref type="bibr" target="#b3">[4]</ref>, et pas sur la version qui peut être testée dans Excel 365. Par ailleurs, notre but étant de tester l'intérêt d'ajouter certaines interactions avec l'utilisateur et pas de reproduire FlashFill dans toute sa généralité, nous ne considérons pas le constructeur Loop du langage de manipulation de chaînes de caractères. Nous ne considérons pas non plus le constructeur Switch, qui permet de gérer des conditions dans les programmes lorsque les exemples sont de différentes formes i.e lorsque les exemples se partitionnent en plusieurs "types", chaque type étant résolu par une forme de programme de transformation de chaînes différent <ref type="foot" target="#foot_0">1</ref> . Afin de montrer l'intérêt de QuickFill et QuickMixte, nous avons mené une série d'expérimentations dans laquelle nous évaluons le nombre de programmes inférés par QuickFill et QuickMixte par rapport à FlashFill, le taux de programmes corrects -un programme est dit correct lorsqu'il capture bien l'intention de l'utilisateur i.e, produit de bonnes sorties sur toutes les entrées -dans QuickFill et QuickMixte par rapport à FlashFill. Nous évaluons aussi le temps de construction des programmes et l'espace mémoire qu'ils occupent.</p><p>Les expérimentations ont été menées sur une machine Core i3 2.1 GHz dotée d'une mémoire RAM de 8Go. Les méthodes QuickMixte, QuickFill et FlashFill Light ont été implémentées en Python. Le code et les données sont disponibles sur github<ref type="foot" target="#foot_1">2</ref> . Jeux de données. Les jeux de données utilisés<ref type="foot" target="#foot_2">3</ref> ont été obtenus en adaptant les cas traités dans l'article de FlashFill <ref type="bibr" target="#b3">[4]</ref>. La génération de ces jeux de données s'est faite via un générateur aléatoire de mots à partir d'expressions régulières <ref type="foot" target="#foot_3">4</ref> . Chaque jeu de données contient 30 éléments dont les premiers couples (entrée, sortie) représentent les exemples d'entraînement (i.e., à partir desquels les programmes sont appris) et le reste représente les exemples de tests (i.e., les entrées sur lesquelles les programmes générés sont testés). Les jeux de données couvrent plusieurs types de tâches comme l'extraction des prénoms à partir des adresses mails, l'extraction des jours dans les dates ou encore l'extraction des initiales d'un sigle.</p><p>Évaluation du nombre de programmes. On cherche à comparer le nombre total de programmes et le nombre de programmes corrects produits par FlashFill par rapport à QuickFill et Quick-Mixte. Les programmes sont obtenus sur chaque jeu de données pour un nombre d'exemples d'apprentissage allant de 1 à 4, le tableau 1 présente les résultats pour 1 exemple d'apprentissage sur nos 12 jeux de données. La colonne T otal représente la totalité des programmes générés et la colonne Correct représente le nombre de programmes corrects dans la totalité des programmes. On observe que QuickMixte permet de réduire le nombre total de programmes générés de plus de 75% pour 10 jeux de données. Toutefois, de part la réutilisation directe de l'algorithme FlashFill sur chaque couple de blocs par QuickMixte, il reste 2 jeux de données où aucune réduction n'est observée. Notre deuxième contribution QuickFill, qui élague plus l'espace de recherche, permet d'obtenir une réduction supérieure à 81% sur l'intégralité des des jeux de données. Évaluation du taux de programmes corrects.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>FlashFill</head><p>Le tableau 1 donne une idée de la réduction en nombre de programmes générés qu'effectuent QuickMixte et QuickFill. Nous évaluons ensuite la variation des taux de programmes corrects dans QuickFill, QuickMixte et FlashFill en fonction du nombre d'exemples d'apprentissage allant de 1 à 4 pour chaque jeu de données. La figure <ref type="figure" target="#fig_0">1</ref> se limite à deux jeux de données ; des résultats similaires sont observés sur les autres jeux de données. Cette expérience montre que pour un nombre d'exemples donné, QuickFill et QuickMixte ont, dans la majorité des cas, de meilleurs taux de programmes corrects par rapport à FlashFill. En pratique, cela signifie qu'il faut souvent moins d'exemples pour découvrir les programmes capturant l'intention de l'utilisateur. Par ailleurs, on remarque aussi que QuickMixte n'est pas aussi efficace que QuickFill en terme en réduction du nombre de programmes et de meilleur taux de programmes corrects.  La figure <ref type="figure" target="#fig_2">3</ref> présente la variation de l'occupation en mémoire des programmes dans Quick-Fill, QuickMixte et FlashFill sur les jeux de données {B4, B5}. La légende est la suivante : t-QuickFill = mémoire de QuickFill, t-Mixte = mémoire de QuickMixte et t-FlashFill = mémoire de FlashFill. Comme pour le temps de construction de programmes, les programmes inférés par FlashFill requièrent plus d'espace mémoire que ceux de QuickFill, QuickMixte car ils sont plus nombreux.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>V CONCLUSION</head><p>La synthèse de programmes est une solution de plus en plus utilisée pour décharger l'utilisateur de tâches fastidieuses et répétitives comme certaines transformations de données. La difficulté de ce domaine est de naviguer dans un espace de recherche immense, tout en limitant au maximum les interactions avec l'utilisateur (en général il est juste autorisé de lui demander quelques exemples). Plus l'espace de programmes est grand, plus il peut être coûteux de trouver le(s) programme(s) cohérent(s) avec l'intention de l'utilisateur. Dans cet article, nous avons présenté QuickMixte et QuickFill, deux approches qui demandent à l'utilisateur des interactions plus soutenues sur les exemples qu'il fournit, mais en contrepartie réduisent dans la majorité des cas le nombre total de programmes, peuvent arriver plus vite à des programmes correspondant à son intention : à la fois en moins de temps de calcul, et via moins d'exemples.</p><p>Une perspective d'amélioration du temps demandé à l'utilisateur par QuickMixte et QuickFill serait de fournir les blocs uniquement dans les sous-chaînes de sorties ; ce qui empêche l'utilisateur de fournir les correspondances dans les chaînes d'entrées et réduit ainsi le nombre de blocs à fournir.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A ANNEXE</head><p>Un langage est principalement représenté par sa syntaxe et sa sémantique ; sa syntaxe décrit la forme propre de ses programmes, tandis que sa sémantique indique ce que ses programmes signifient i.e, ce que fait chaque programme lorsqu'il est exécuté. Nous présentons ci-dessous la syntaxe et la sémantique du langage moteur de FlashFill, pour plus de details, se référer à <ref type="bibr" target="#b3">[4]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Syntaxe</head><p>FlashFill manipule des ensembles de programmes de chaînes de caractères. Ainsi, l'élément principal du langage est une expression de programme qui représente un programme de transformation de chaînes de caractères capables de transformer des chaînes d'entrée σ en des chaînes de sortie s. La figure <ref type="figure" target="#fig_3">4</ref> représente la syntaxe d'une expression de programme de transformation de chaînes de caractères. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Sémantique</head><p>Cette section présente la signification des opérateurs du langage précédent.</p><p>dénote une chaîne de caractères vide, ⊥ dénote une valeur indéfinie i.e, si l'un des arguments d'un constructeur est ⊥, il retourne ⊥. -ConstStr est l'expression de constante ; soit s une sous-chaîne,ConstStr(s) = s.</p><formula xml:id="formula_0">-Concatenate(f 1 ,...,f n) = f 1 f 2 ...f n .</formula><p>-TokenSeq(T 1 , .., T m ) est une séquence de tokens T 1 , .., T m , tout comme l'opération de concaténation. Les Tokens sont représentés par leurs noms représentatifs ; par exemple AlphTok renvoie à une séquence de caractères alphabétiques, NumTok renvoie à une séquence de caractères numériques. -SubStr(v i , p 1 , p 2 ) retourne la sous-chaîne de vi allant des positions p 1 à p 2 , la chaîne étant numéroté de 0 à n -1, où n est la longueur de vi. Par exemple, soit vi = "IBM" alors SubStr(v i , 1 ,2) = "BM".</p><p>-Cpos(k) et Pos(r 1 , r 2 , c) sont des expressions de positions. Une position peut être obtenue en parcourant la chaîne de la gauche vers la droite (selon que k soit positif pour Cpos(k) et c positif pour Pos(r 1 , r 2 , c)) ou de la droite vers la gauche (selon que k soit négatif ou c négatif). Pour une chaîne s donnée, nous avons les définitions suivantes :</p><formula xml:id="formula_1">[[CPos(k)]] s = k if k ≥ 0 Length(s) + k otherwise</formula><p>Par exemple, soit la chaîne de caractères s = "IBM", nous pouvons représenté quelques positions comme suit : Cpos(0) représente l'indice du premier caractère ("I") de s à partir de la gauche, Cpos(-1) représente l'indice du dernier caractère ("M") de s à partir de la droite i.e Cpos(0) = 0 et Cpos(-1) = 2.</p><p>[[Pos]] s = t, ∃t 1 , t 2 , 0 ≤ t 1 &lt; t ≤ t 2 , s[t 1 : t -1] match r 1 , s[t : t 1 ] match r 2 .</p><p>Pos(r 1 , r 2 , c) retourne l'indice de la c i eme occurrence de la sous-chaîne qui match r 1 r 2 dans s à partir de la gauche si c positif et à partir de la droite sinon. Par exemple, soit la chaîne de caractères s = "Vanes10Laure11" :</p><p>-Pos(AlphTok, NumTok, 1) = 5 : indice de début de la chaîne NumTok dans la première occurrence de "AlphaTokNumtok" ("vanes10") à partir de la gauche ; il s'agit de l'indice de début de "10". -Pos(AlphTok, NumTok, -1) = 12 : indice de début de la chaîne NumTok dans la première occurrence de "AlphaTokNumtok" ("laure11") à partir de la droite ; il s'agit de l'indice de début de "11". FlashFill manipule des ensembles d'expressions de programmes pour des transformations de chaînes de caractères. Pour cela, il faut une structure de données permettant de manipuler aisément de grands ensembles de données donc, les opérations de construction d'expressions de programmes doivent pouvoir prendre des ensembles de données en arguments. Pour se faire, le langage correspondant n'est rien d'autre qu'une généralisation du langage présenté précédemment. En d'autres termes, il s'agit du langage précédent à la différence que les constructeurs ont été surchargés pour prendre en argument des ensembles de données.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>FIGURE 1 -</head><label>1</label><figDesc>FIGURE 1 -Taux de programmes corrects dans les benchmarks {B3, B4}.</figDesc><graphic coords="7,101.17,70.87,190.49,142.87" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>FIGURE 2 -</head><label>2</label><figDesc>FIGURE 2 -Temps de construction des programmes dans les benchmarks {B5, B6}.</figDesc><graphic coords="7,101.17,432.53,190.49,142.87" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>FIGURE 3 -</head><label>3</label><figDesc>FIGURE 3 -Occupation mémoire des programmes dans les benchmarks {B4, B5}.</figDesc><graphic coords="8,96.64,70.87,195.02,146.26" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>FIGURE 4 -</head><label>4</label><figDesc>FIGURE 4 -Syntaxe d'une expression de programme<ref type="bibr" target="#b3">[4]</ref> </figDesc><graphic coords="9,202.60,232.42,190.08,155.91" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>-</head><label></label><figDesc>Si r 2 = , par convention n'a ni indice de début ni indice de fin, par conséquent, Pos(r 1 , r 2 , c) retourne l'indice de fin de c i eme occurrence de r 1 dans s. -Une expression de programme P est un constructeur Switch dont les arguments sont les paires disjointes (b 1 , e 1 ),..,(b n , e n ) où les b i sont des expressions booléennes et les ei sont les "trace expression". -Le constructeur Loop(λ w : e) sur une entrée σ permet de générer la concaténation des chaînes obtenues en exécutant de manière répétitive l'expression e tout le long de σ. Loop(λ w : e) produit la concaténation d'une séquence e 1 , ...e n où e i est le i e me résultat d'exécution du Loop sur σ lorsque le paramètre w vaut i.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>TABLE 1 -</head><label>1</label><figDesc>Nombre de programmes générés par FlashFill, QuickMixte et QuickFill ; le pourcentage entre parenthèse représentent le pourcentage de réduction par rapport à FlashFill.</figDesc><table><row><cell>QuickMixte</cell><cell>QuickFill</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1" xml:id="foot_0"><p>Nous travaillons dans la suite avec une version simplifiée de FlashFill que nous avons appelé FlashFill Light.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2" xml:id="foot_1"><p>https://github.com/vanes11/FlashFill_QuickFill_Mixte</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3" xml:id="foot_2"><p>https://github.com/vanes11/FlashFill_QuickFill_Mixte/tree/master/Bench marks</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="4" xml:id="foot_3"><p>https://onlinerandomtools.com/generate-random-data-from-regexp</p></note>
+		</body>
+		<back>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">Your wish is my command : Programming by example</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Lieberman</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2001">2001</date>
+			<publisher>Morgan Kaufmann</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Programming by demonstration using version space algebra</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Lau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">A</forename><surname>Wolfman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Domingos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">S</forename><surname>Weld</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Machine Learning</title>
+		<imprint>
+			<biblScope unit="volume">53</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="111" to="156" />
+			<date type="published" when="2003">2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Why programming-by-demonstration systems fail : Lessons learned for usable ai</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Lau</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">AI Magazine</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="65" to="65" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Automating string processing in spreadsheets using input-output examples</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Gulwani</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Sigplan Notices</title>
+		<imprint>
+			<biblScope unit="volume">46</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="317" to="330" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Type-directed completion of partial expressions</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Perelman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Gulwani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Ball</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Grossman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 33rd ACM SIGPLAN conference on Programming Language Design and Implementation</title>
+		<meeting>the 33rd ACM SIGPLAN conference on Programming Language Design and Implementation</meeting>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="275" to="286" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Semfix : Program repair via semantic analysis</title>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">D T</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Qi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Roychoudhury</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Chandra</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2013 35th International Conference on Software Engineering (ICSE)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="772" to="781" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Efficient synthesis of probabilistic programs</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">V</forename><surname>Nori</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ozair</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">K</forename><surname>Rajamani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Vijaykeerthy</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM SIGPLAN Notices</title>
+		<imprint>
+			<biblScope unit="volume">50</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="208" to="217" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Programming by examples</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Gulwani</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Dependable Software Systems Engineering</title>
+		<imprint>
+			<biblScope unit="volume">45</biblScope>
+			<biblScope unit="issue">137</biblScope>
+			<biblScope unit="page" from="3" to="15" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Program synthesis</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Gulwani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Polozov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Singh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Foundations and Trends® in Programming Languages</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="issue">1-2</biblScope>
+			<biblScope unit="page" from="1" to="119" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

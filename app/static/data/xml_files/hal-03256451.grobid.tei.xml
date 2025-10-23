@@ -7,14 +7,14 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		<fileDesc>
 			<titleStmt>
 				<title level="a" type="main">Relative Positional Encoding for Transformers with Linear Complexity</title>
-				<funder ref="#_Jr5tsuq">
+				<funder ref="#_2MTAzUU">
 					<orgName type="full">Agence Nationale de la Recherche</orgName>
 					<orgName type="abbreviated">ANR</orgName>
 				</funder>
-				<funder ref="#_hjzmjHS">
+				<funder ref="#_VZdHq4Y">
 					<orgName type="full">European Union</orgName>
 				</funder>
-				<funder ref="#_kH5rnD2">
+				<funder ref="#_CsvKvPX">
 					<orgName type="full">French government</orgName>
 				</funder>
 			</titleStmt>
@@ -123,14 +123,14 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 							<date/>
 						</imprint>
 					</monogr>
-					<idno type="MD5">6F93EBCCFE48982EFFCF0F945E582577</idno>
+					<idno type="MD5">3EFE11B42E88A43A542719EAA6674771</idno>
 					<note type="submission">Submitted on 10 Jun 2021</note>
 				</biblStruct>
 			</sourceDesc>
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.0" ident="GROBID" when="2024-04-12T14:50+0000">
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:12+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<ref target="https://github.com/kermitt2/grobid"/>
 				</application>
@@ -194,15 +194,15 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <div><head>Acknowledgements</head><p>This work was supported by the <rs type="funder">European Union</rs>'s <rs type="programName">Horizon 2020 research and innovation programme</rs> under the <rs type="grantName">Marie Skłodowska-Curie</rs> grant agreement No. <rs type="grantNumber">765068</rs> (MIP<rs type="grantNumber">-Frontiers</rs>) and in part by the <rs type="funder">French government</rs> under management of <rs type="funder">Agence Nationale de la Recherche</rs> as part of the "<rs type="programName">Investissements d'avenir" program</rs>, reference <rs type="grantNumber">ANR-19-P3IA-0001</rs> (<rs type="projectName">PRAIRIE 3IA Institute</rs>).</p><p>We would like to thank <rs type="person">Yi Tay</rs>, <rs type="person">Mostafa Dehghani</rs> and <rs type="person">Philip Pham</rs> for their help with troubleshooting the Long-Range Arena, and <rs type="person">Krzysztof Choromanski</rs> for clarifications about the Performer.</p></div>
 			</div>
 			<listOrg type="funding">
-				<org type="funding" xml:id="_hjzmjHS">
+				<org type="funding" xml:id="_VZdHq4Y">
 					<idno type="grant-number">765068</idno>
 					<orgName type="grant-name">Marie Skłodowska-Curie</orgName>
 					<orgName type="program" subtype="full">Horizon 2020 research and innovation programme</orgName>
 				</org>
-				<org type="funding" xml:id="_kH5rnD2">
+				<org type="funding" xml:id="_CsvKvPX">
 					<idno type="grant-number">-Frontiers</idno>
 				</org>
-				<org type="funded-project" xml:id="_Jr5tsuq">
+				<org type="funded-project" xml:id="_2MTAzUU">
 					<idno type="grant-number">ANR-19-P3IA-0001</idno>
 					<orgName type="project" subtype="full">PRAIRIE 3IA Institute</orgName>
 					<orgName type="program" subtype="full">Investissements d&apos;avenir&quot; program</orgName>

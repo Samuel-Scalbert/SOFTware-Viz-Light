@@ -7,7 +7,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		<fileDesc>
 			<titleStmt>
 				<title level="a" type="main">Impressions and Strategies of Academic Advisors When Using a Grade Prediction Tool During Term Planning</title>
-				<funder ref="#_P22Vxjx">
+				<funder ref="#_4DSZ25b">
 					<orgName type="full">unknown</orgName>
 				</funder>
 			</titleStmt>
@@ -35,14 +35,14 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 							<date/>
 						</imprint>
 					</monogr>
-					<idno type="MD5">D9173BE6C2326BD399FAD8D9E6B115BE</idno>
+					<idno type="MD5">98AFC216B6D8EB48BF450C87BC06058E</idno>
 					<idno type="DOI">10.1145/3544548.3581575</idno>
 				</biblStruct>
 			</sourceDesc>
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.0" ident="GROBID" when="2024-04-12T14:47+0000">
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:13+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<ref target="https://github.com/kermitt2/grobid"/>
 				</application>
@@ -124,7 +124,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <div><head>ACKNOWLEDGMENTS</head><p>The authors wish to thank the reviewers and associate chairs for their advice and insightful comments. We would also like to express our gratitude to the academic advisors who generously donated their time to participate in this study. This research was supported and partially financed by <rs type="projectName">TAILOR</rs>, a project funded by <rs type="programName">EU Horizon 2020 research and innovation programme</rs> under GA No. <rs type="grantNumber">952215</rs>.</p></div>
 			</div>
 			<listOrg type="funding">
-				<org type="funded-project" xml:id="_P22Vxjx">
+				<org type="funded-project" xml:id="_4DSZ25b">
 					<idno type="grant-number">952215</idno>
 					<orgName type="project" subtype="full">TAILOR</orgName>
 					<orgName type="program" subtype="full">EU Horizon 2020 research and innovation programme</orgName>

@@ -7,12 +7,12 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		<fileDesc>
 			<titleStmt>
 				<title level="a" type="main">Pl@ntNet-300K: a plant image dataset with high label ambiguity and a long-tailed distribution</title>
-				<funder ref="#_jgcnu7t">
-					<orgName type="full">European Union</orgName>
-				</funder>
-				<funder ref="#_MaJHUVR">
+				<funder ref="#_E2zWWCB">
 					<orgName type="full">Agence Nationale de la Recherche</orgName>
 					<orgName type="abbreviated">ANR</orgName>
+				</funder>
+				<funder ref="#_DS5gZm9">
+					<orgName type="full">European Union</orgName>
 				</funder>
 			</titleStmt>
 			<publicationStmt>
@@ -189,7 +189,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 							<date/>
 						</imprint>
 					</monogr>
-					<idno type="MD5">90D00461A72AC083FA0DF66E1A2CAC95</idno>
+					<idno type="MD5">CF5A88920DC36DE8E6F9A9F61768BEC6</idno>
 					<idno type="DOI">10.5281/zenodo.5645731</idno>
 					<note type="submission">Submitted on 9 Feb 2022</note>
 				</biblStruct>
@@ -197,7 +197,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.0" ident="GROBID" when="2024-04-12T14:50+0000">
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:13+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<ref target="https://github.com/kermitt2/grobid"/>
 				</application>
@@ -249,10 +249,10 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <div><head>Acknowledgments</head><p>This work was partially funded by the <rs type="funder">ANR CaMeLOt</rs> <rs type="grantNumber">ANR-20-CHIA-0001-01</rs>. It has received funding from the <rs type="funder">European Union</rs>'s <rs type="programName">Horizon 2020 research and innovation program</rs> under grant agreement No <rs type="grantNumber">863463</rs> (<rs type="projectName">Cos4Cloud</rs> project).</p></div>
 			</div>
 			<listOrg type="funding">
-				<org type="funding" xml:id="_MaJHUVR">
+				<org type="funding" xml:id="_E2zWWCB">
 					<idno type="grant-number">ANR-20-CHIA-0001-01</idno>
 				</org>
-				<org type="funded-project" xml:id="_jgcnu7t">
+				<org type="funded-project" xml:id="_DS5gZm9">
 					<idno type="grant-number">863463</idno>
 					<orgName type="project" subtype="full">Cos4Cloud</orgName>
 					<orgName type="program" subtype="full">Horizon 2020 research and innovation program</orgName>

@@ -65,7 +65,6 @@ document.addEventListener('DOMContentLoaded', async (event) => {
             if (event.target && event.target.classList.contains('mention_search_auth_id')) {
                 resultBox.style.display = 'none';
                 const auth_id = event.target.id;
-                console.log(`/api/author/${auth_id}`)
                 try {
                     // Fetch the author details using the ID
                     const response = await fetch(`/api/author/${auth_id}`, {
@@ -89,28 +88,29 @@ document.addEventListener('DOMContentLoaded', async (event) => {
 
                     let documentsList = '<ul>';
                     auth_info[0].author.documents.forEach(dict_doc=> {
-                        documentsList += `<li class="${dict_doc.role}"><a href="/doc/${dict_doc.document_halid}">${dict_doc.document_halid}</a></li>`;
+                        documentsList += `<li class="${dict_doc.role}"><a href="/doc/${dict_doc.document_halid.replace(".grobid.tei","")}">${dict_doc.document_halid.replace(".grobid.tei","")}</a></li>`;
                     });
                     documentsList += '</ul>';
 
 
                     let affiList = '<ul>';
             auth_info[0].structures.forEach(affi => {
-                const affi_type_cleaned = affi_type(affi.struc.type);  // Ensure affi_type is defined
+                console.log(affi)
+                const affi_type_cleaned = affi_type(affi.type);  // Ensure affi_type is defined
                 let affi_card;
-                if (affi.struc.acronym) {
-                    affi_card = `<h4>${affi.struc.acronym} (${affi_type_cleaned})</h4>`;
+                if (affi.acronym) {
+                    affi_card = `<h4>${affi.acronym} (${affi_type_cleaned})</h4>`;
                 } else {
                     affi_card = `<h4>${affi_type_cleaned}</h4>`;
                 }
-                if (affi.struc.status) {
-                    affi_card += `<p class="status">Status: <span class="${affi.struc.status}">${affi.struc.status}</span></p>`;
+                if (affi.status) {
+                    affi_card += `<p class="status">Status: <span class="${affi.status}">${affi.status}</span></p>`;
                 }
 
-                if (affi.struc.url_team) {
-                    affi_card += `<p>${affi.struc.name} (<a href='${affi.struc.url_team}'>url</a>)</p>`;
+                if (affi.url_team) {
+                    affi_card += `<p>${affi.name} (<a href='${affi.url_team}'>url</a>)</p>`;
                 } else {
-                    affi_card += `<p>${affi.struc.name}</p>`;
+                    affi_card += `<p>${affi.name}</p>`;
                 }
 
                 // affi_card += `<p>AureHAL ID: <a href='https://aurehal.archives-ouvertes.fr/structure/read/id/${affi.struc.id_haureal}'>${affi.struc.id_haureal}</a></p>`;
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
                     // Assuming auth_info is an object, format it for display
                     authorCard.innerHTML = `
                         <h2>${auth_info[0].author.name.surname} ${auth_info[0].author.name.forename} </h2>
-                        <p>Arrango Key: ${auth_info[0].author._key}</p>
+                        <p>Arrango ID: ${auth_info[0].author._key}</p>
                         <p>Documents: ${documentsList}</p>
                     `;
 

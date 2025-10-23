@@ -1,0 +1,1560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Cache-aware Scheduling of Scientific Workflows in a Multisite Cloud</title>
+				<funder>
+					<orgName type="full">France Grille Scientific Interest Group</orgName>
+				</funder>
+				<funder ref="#_w7XfXm6 #_wWSF3cq">
+					<orgName type="full">unknown</orgName>
+				</funder>
+				<funder ref="#_ryESPJE #_U783QKV">
+					<orgName type="full">Agence Nationale de la Recherche</orgName>
+					<orgName type="abbreviated">ANR</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author role="corresp">
+							<persName><forename type="first">Gaëtan</forename><surname>Heidsieck</surname></persName>
+							<email>gaetan.heidsieck@inria.fr</email>
+							<affiliation key="aff0">
+								<orgName type="laboratory">LIRMM</orgName>
+								<orgName type="institution" key="instit1">Inria</orgName>
+								<orgName type="institution" key="instit2">University of Montpellier</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Daniel</forename><surname>De Oliveira</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="institution">Fluminense Federal University</orgName>
+								<address>
+									<settlement>Niterói</settlement>
+									<country key="BR">Brazil</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Esther</forename><surname>Pacitti</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="laboratory">LIRMM</orgName>
+								<orgName type="institution" key="instit1">Inria</orgName>
+								<orgName type="institution" key="instit2">University of Montpellier</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Christophe</forename><surname>Pradal</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="laboratory">LIRMM</orgName>
+								<orgName type="institution" key="instit1">Inria</orgName>
+								<orgName type="institution" key="instit2">University of Montpellier</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="laboratory">CIRAD</orgName>
+								<orgName type="institution">UMR AGAP Institut</orgName>
+								<address>
+									<postCode>F-34398</postCode>
+									<settlement>Montpellier</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">François</forename><surname>Tardieu</surname></persName>
+							<affiliation key="aff3">
+								<orgName type="department">INRAE</orgName>
+								<orgName type="laboratory">LEPSE</orgName>
+								<orgName type="institution" key="instit1">Univ Montpellier</orgName>
+								<orgName type="institution" key="instit2">Institut Agro</orgName>
+								<address>
+									<settlement>Montpellier</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Patrick</forename><surname>Valduriez</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="laboratory">LIRMM</orgName>
+								<orgName type="institution" key="instit1">Inria</orgName>
+								<orgName type="institution" key="instit2">University of Montpellier</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<address>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Cache-aware Scheduling of Scientific Workflows in a Multisite Cloud</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">F46BE676AB0433C50E6D6674491D26E4</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:13+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Multisite cloud</term>
+					<term>Distributed Caching</term>
+					<term>Scientific Workflow</term>
+					<term>Workflow System</term>
+					<term>Workflow Scheduling</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Many scientific experiments today are performed using scientific workflows, which become more and more data-intensive. We consider the efficient execution of such workflows in a multisite cloud, leveraging heterogeneous resources available at multiple geo-distributed data centers. Since it is common for workflow users to reuse code or data from previous workflows, a promising approach for efficient workflow execution is to cache intermediate data in order to avoid re-executing entire workflows. However, caching intermediate data and scheduling workflows to exploit such caching in a multisite cloud is complex. In particular, workflow scheduling must be cache-aware, in order to decide whether reusing cache data or re-executing workflows entirely. In this paper, we propose a solution for cache-aware scheduling of scientific workflows in a multisite cloud. Our solution includes a distributed and parallel architecture and new algorithms for adaptive caching, cache site selection, and dynamic workflow scheduling. We implemented our solution in the OpenAlea workflow system, together with cache-aware distributed scheduling algorithms. Our experimental evaluation in a three-site cloud with a real application in plant phenotyping shows that our solution can yield major performance gains, reducing total time up to 42% with 60% of the same input data for each new execution.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.">Introduction</head><p>In many scientific domains, e.g., bio-science <ref type="bibr" target="#b0">[1]</ref>, complex numerical experiments typically require many processing or analysis steps over huge datasets. They can be represented as scientific workflows, or workflows for short in this paper (but not to be confused with business workflows, which are different). These workflows facilitate the modeling, management, and execution of computational activities linked by data dependencies. As data size and computation complexity keep increasing, these workflows become dataintensive <ref type="bibr" target="#b0">[1]</ref>, thus requiring high-performance computing (HPC) resources.</p><p>The cloud is a convenient infrastructure for supporting workflow execution, as it allows leasing resources at very large scale and relatively low cost. In this paper, we consider the execution of data-intensive workflows in a multisite cloud, i.e., a cloud with geo-distributed data centers (or sites). Today, all popular public clouds, e.g., Microsoft Azure, Amazon AWS, and Google Cloud, provide a multisite option that allows accessing multiple cloud sites with a single cloud account. The main reason for using multiple sites is that they often exceed the capabilities of a single site, either because the site imposes usage limits for fairness and security, or simply because the datasets are too big.</p><p>In scientific applications, the storage and computing capabilities of the different sites, e.g., on premise servers, HPC platforms from research organizations or federated sites at the national level <ref type="bibr" target="#b1">[2]</ref>, can be very heterogeneous. For instance, in plant phenotyping, greenhouse platforms generate Terabytes of raw data from plants. Such data are typically stored at data centers close to the greenhouse to minimize data transfers. However, the computation power of those data centers may be limited and fail to scale when the analyses become complex, as in plant modeling or 3D reconstruction. In this case, the computing capabilities of other sites are required.</p><p>Most scientific workflow management systems, or workflow systems for short, can execute workflows in the cloud <ref type="bibr" target="#b2">[3]</ref>. Some examples are Swift/T <ref type="bibr" target="#b3">[4]</ref>, Pegasus <ref type="bibr" target="#b4">[5]</ref>, SciCumulus <ref type="bibr" target="#b5">[6]</ref>, Kepler <ref type="bibr" target="#b6">[7]</ref> and OpenAlea <ref type="bibr" target="#b7">[8]</ref>. Our work is based on OpenAlea, which is widely used in plant science for simulation and analysis. Most existing systems use naive or manual approaches to distribute workflow tasks across sites. The problem of workflow scheduling on a multisite cloud has started to be addressed in <ref type="bibr" target="#b8">[9]</ref>, using performance models to predict the execution time on different resources. In <ref type="bibr" target="#b9">[10]</ref>, the authors proposed a solution based on multi-objective scheduling and a single site virtual machine provisioning approach, assuming relatively homogeneous sites, as in a public cloud.</p><p>Since it is common for workflow users to reuse code or data from other workflows or previous executions <ref type="bibr" target="#b10">[11]</ref>, a promising approach for efficient workflow execution is to cache intermediate data in order to avoid entire reexecution. Very often, a user may re-execute a workflow many times with different values of parameters and input data depending on the previous results. When the same workflow is executed several times with different parameters, some workflow fragments, i.e., subsets of workflow activities and dependencies, can be unchanged, and thus, their intermediate data be reused. Another important benefit of caching intermediate data is to make it easy for users to share it with other research teams, thus fostering new analyses at low cost.</p><p>Caching has been supported by some workflow systems, e.g., Kepler <ref type="bibr" target="#b11">[12]</ref>, VisTrails <ref type="bibr" target="#b12">[13]</ref> and OpenAlea <ref type="bibr" target="#b13">[14]</ref>. In <ref type="bibr" target="#b14">[15]</ref>, we proposed an adaptive caching method for OpenAlea that automatically determines the most suited intermediate data to cache, but only for a single site. Another interesting single site method is to compute the ratio between re-computation cost and storage cost to determine the intermediate data that should be stored <ref type="bibr" target="#b15">[16]</ref>. Distributed caching in a multisite cloud has been addressed in <ref type="bibr" target="#b16">[17]</ref> to deal with hot metadata (frequently accessed metadata) only, not intermediate data.</p><p>Caching data in a multisite cloud with heterogeneous sites is much more complex. In addition to the trade-off between re-computation and storage cost at single sites, there is the problem of site selection for placing the cache data. The problem is harder than data allocation in distributed databases <ref type="bibr" target="#b17">[18]</ref>, which only deals with well-defined base data, not intermediate data. Furthermore, workflow scheduling should be cache-aware, i.e., exploit the knowledge of cache data to decide whether reusing and transferring cache data or re-executing the workflow fragments.</p><p>In this paper, we propose a solution for cache-aware scheduling of scientific workflows in a multisite cloud. Our solution enables users to automatically store, share, and reuse intermediate data to speed up workflow execution. The solution includes a distributed and parallel architecture and new algorithms for adaptive caching, cache site selection and dynamic workflow scheduling.</p><p>The main contributions of this paper are:</p><p>• A novel distributed and parallel architecture for workflows systems that supports caching and cache-aware scheduling algorithms in a multisite cloud;</p><p>• A cost model for estimating workflow execution time and the benefit of caching based on a combination of data transfer time, execution time, and resource usage of cloud sites;</p><p>• Three cache-aware scheduling algorithms for multisite cloud, including one that optimizes the overall cost of workflow execution with cache data; • A full-fledged implementation of our solution in the OpenAlea worflow system.</p><p>• An extensive experimental evaluation of our solution using the Phenomenal workflow and real data in a cloud with three heterogeneous sites.</p><p>This paper is organized as follows. Section 2 presents our real use case in plant phenotyping. Section 3 introduces our workflow system architecture. Section 4 describes our caching solution. Section 5 gives our experimental evaluation. Section 6 discusses related work. Finally, Section 7 concludes.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.">Use Case in Plant Phenotyping</head><p>In this section, we introduce a real use case in plant phenotyping that will serve as motivation for the work and as the basis for the experimental evaluation. In the last decade, high-throughput phenotyping platforms have emerged, allowing for the acquisition of quantitative data on thousands of plants in well-controlled environmental conditions. For instance, the seven facilities of the French Phenome project<ref type="foot" target="#foot_0">1</ref> produce each year 200 Terabytes of data, which are various (images, environmental conditions and sensor outputs), multiscale and coming from different sites. Analyzing such massive datasets is an open, yet important, problem for biologists <ref type="bibr" target="#b18">[19]</ref>.</p><p>The Phenomenal workflow <ref type="bibr" target="#b19">[20]</ref>, shown in Figure <ref type="figure" target="#fig_0">1</ref>, has been developed in OpenAlea to analyze and reconstruct the geometry and topology of thousands of plants through time in various conditions. Phenomenal is continuously evolving with the addition of new state-of-the-art methods, thus yielding new biological insights. The workflow is composed of different fragments, i.e., reusable subworkflows: binarization (circled in green), 3D volume reconstruction (blue), images calibration (red), and organ segmentation (purple). The raw data is produced by the Phenoarch platform, which has a capacity of managing 1,680 plants within a controlled environment (e.g., temperature, humidity, irrigation) and automatic imaging through time. The total size of the raw image dataset for one experiment is 11 Terabytes. The raw data is stored on a server close to the experimental platform. This server is considered as a site and has both data storage and computing resources. However, these resources may not be sufficient to perform a full workflow execution in a relatively short time. Thus, the solution is to use additional resources provided by other sites and execute the workflow in a distributed way on multiple sites.</p><p>The multisite cloud used to execute the Phenomenal workflow (see Figure <ref type="figure" target="#fig_0">1</ref>.4) is composed of heterogeneous sites, in terms of computing and storage resources. The site with the raw data is used to execute some Phenomenal fragments that do not require powerful resources. Whenever more computational resources are needed, it is necessary to choose whether transferring the raw data or some intermediate data to a more powerful site, or re-executing some fragments locally before transferring intermediate data.</p><p>The workflow fragments are distributed and executed on different sites depending on the site resources. At each site, some intermediate data generated by the fragment execution is stored in a cache to be reused in other fragment executions.</p><p>Different users can conduct different analyses by executing some workflow fragments on the same dataset in order to test different hypotheses <ref type="bibr" target="#b14">[15]</ref>. To save both time and resources, it may be useful to reuse the corresponding intermediate data that has already been computed rather than recompute the fragments again. In our use case, we suppose that workflows are submitted from the site where the raw data is produced and executed in sequential order.</p><p>Figure <ref type="figure" target="#fig_1">2</ref> shows two workflows used in plant analysis: the Phenomenal workflow (Wf1) and a workflow to simulate light competition for plants in greenhouse (Wf2). Both workflows use fragments F1 (binarization) and F2 (3D reconstruction), so the subsequent execution of Wf2 may benefit from reusing the data generated previously from the corresponding fragments in Wf1. Suppose for instance that the execution of Wf1 has generated some data that has been cached, as shown in Figure <ref type="figure" target="#fig_0">1</ref>.4. Then, a user can reuse the datasets D1 and D2 to speed up the execution of Wf2. Thus, the only fragment that requires to be executed is F7.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.">Problem Definition and System Model</head><p>In this section, we start by giving an overview of distributed workflow execution. Then, we formulate the problem of cache-aware scheduling in a multisite cloud. Finally, we present our workflow system architecture that integrates caching and reuse of intermediate data in a multisite cloud. We motivate our design decisions and describe our architecture in two ways: in terms of functional layers (see Figure <ref type="figure" target="#fig_4">3</ref>), which shows the different functions and components; and in terms of nodes and components (see Figure <ref type="figure" target="#fig_5">4</ref>), which are involved in the processing of workflows.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1.">Problem Definition</head><p>We consider a multisite cloud with a set of sites S={s 1 , ..., s n }. A workflow W (A, D) is a directed acyclic graph (DAG) of computational activities A and their data dependencies D. A task t is the instantiation of an activity during execution with associated input data. A fragment f of an instantiated workflow is a subset of tasks and their dependencies.</p><p>We introduce basic cost functions for data transfer and distributed execution. The time to transfer data d from site s i to site s j , noted T tr (d, s i , s j ), is defined by</p><formula xml:id="formula_0">T tr (d, s i , s j ) = Size(d) T rRate(s i , s j )<label>(1)</label></formula><p>where T rRate(s i , s j ) is the transfer rate between s i and s j . The time to transfer input and cache data, In(f ) and Cached(f ), respectively, to execute a fragment f at site s i is T input (f, s i ):</p><formula xml:id="formula_1">T input (f, s i ) = S sj (T tr (In(f ), s j , s i ) + T tr (Cached(f ), s j , s i )) (2)</formula><p>Note that both the input data In(f ) and cache data Cached(f ) used to execute a fragment can be distributed on several sites. The time to transfer data considers the data transfer from all sites.</p><p>The time to compute a fragment f at site s, noted T compute (f, s), can be estimated using Amdahl's law <ref type="bibr" target="#b20">[21]</ref>:</p><formula xml:id="formula_2">T compute (f, s) = ( α n + (1 -α)) * W (f ) P perf (s)<label>(3)</label></formula><p>where W (f ) is the workload for the execution of f , P perf (s) is the average computing performance of the processors at site s and n is the number of processors at site s. We assume that the local scheduler may parallelize task executions. Therefore, α represents the percentage of the workload that can be executed in parallel. The expected waiting time to be able to execute a fragment at site s is noted T wait (s), which is the minimum expected time for s to finish executing the fragments in its queue.</p><p>The time to transfer the intermediate data generated by fragment f at site s i to site s j , noted T write (Output(f ), s i , s j ), is defined by:</p><formula xml:id="formula_3">T write (Output(f ), s i , s j ) = T tr (Output(f ), s i , s j ) (4)</formula><p>where Output(f ) is the data generated by the execution of f .</p><p>Based on these different cost functions, we make three assumptions to define our scheduling problem:</p><p>• A1. The frequency of reusing each fragment is unknown. For each fragment execution, storing data into the cache has a cost (see Equation <ref type="formula">4</ref>), which gets amortized only if it is reused. Thus, scheduling must take into account cache management.</p><p>• A2. The sites are heterogeneous and have limited storage and computing resources. For each fragment, the input data and cache data can be distributed on multiple sites. The time to retrieve data before execution (see Equation <ref type="formula">2</ref>) can be significant. Thus, the scheduling decision should consider the cost of transferring data, both cached and intermediate data.</p><p>• A3. The workflows are executed in sequential order. Thus, we do not consider concurrency in the data and resources access.</p><p>We focus on the problems of workflow scheduling and cache management. The workflow scheduling problem is to map each workflow fragment f for execution to a site in S in a way that minimizes execution time (from Equations 2 and 3). The cache management problem involves the decision of choosing which intermediate data should be added to the cache dynamically. However, the two problems are not independent. Workflow scheduling depends on cache data management as the cache data can be reused for execution but may require to be transferred to the execution site. On the other hand, cache management depends on workflow scheduling as the intermediate data is generated on the execution site, which may not be the optimal site to do   caching. However, an efficient solution for one of these problems may not be optimal when considering the overall cost of workflow execution. Thus, our goal is to minimize this overall cost by considering both workflow scheduling and cache management.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2.">Workflow System Architecture</head><p>Our architecture capitalizes on the latest advances in distributed and parallel data management to provide performance and scalability <ref type="bibr" target="#b17">[18]</ref>. We consider a distributed cloud architecture with on premise servers, where raw data is produced, e.g., a phenotyping experimental platform in our use case, and remote sites, where the workflow is executed. The remote sites are data centers using sharednothing clusters, i.e., clusters of server machines, each with independent processors, disk and memory. We adopt shared-nothing as it is the most scalable and cost-effective architecture for big data analysis.</p><p>In the cloud, metadata is critical for workflow scheduling as it provides a global view of data location, e.g., at which nodes some raw data is stored, and enables task tracking during execution <ref type="bibr" target="#b16">[17]</ref>. We organize the metadata in three repositories: catalog, provenance database and cache index. The catalog contains all information about users (access rights, etc.), raw data location and workflows (code libraries, application code). The provenance database captures all information about workflow specification and execution. The cache index contains information about tasks and cache data, as well as the location of files that store the cache data. Thus, the cache index itself is small (only file references) and the cache data can be managed using the underlying distributed file system. A good solution for implementing these metadata repositories is a key-value store, such as Cassandra<ref type="foot" target="#foot_1">2</ref> which provides efficient key-based access, scalability and high availability in a shared-nothing cluster.</p><p>The raw data files are initially produced and stored at some sites, e.g., in our use case, the Phenoarch platform. During workflow execution, the intermediate data is generated and consumed at one site's node in memory. It gets written to disk when it must be transferred to another node (potentially at the same site) or explicitly added to the cache.  Figure <ref type="figure" target="#fig_4">3</ref> extends the workflow system architecture proposed in <ref type="bibr" target="#b21">[22]</ref> for single site. It is composed of six modules: workflow manager, global scheduler, local scheduler, task manager, data manager and metadata manager. The workflow manager provides a user interface for workflow definition and processing. Before workflow execution, the user selects a number of virtual machines (VMs), given a set of possible instance formats, i.e., the technical characteristics of the VMs, deployed on each site's nodes. When a workflow execution is started, the workflow manager simplifies the workflow by removing some workflow fragments and partitions, depending on the raw input data and the cache data (see <ref type="bibr">Section 4)</ref>. The global scheduler uses the metadata (catalog, provenance database, and cache index) to schedule the workflow fragments of the simplified workflow. The VMs on each site are then initialized, i.e., the programs required for the execution of the tasks are installed and all parameters are configured. The local scheduler schedules the workflow fragments received on its VMs.</p><p>The data manager handles data transfers between sites during execution for both newly generated intermediate data and cache data, and manages cache storage. At a single site, data storage is distributed between cluster nodes. Finally, the task manager takes care of executing fragments on the VMs at each site. It exploits the provenance data to decide whether or not the task's output data should be placed in the cache, based on the cache provisioning algorithm (see Section 4). Local scheduling and execution can be performed as in <ref type="bibr" target="#b14">[15]</ref>.</p><p>Figure <ref type="figure" target="#fig_5">4</ref> shows how these components are organized, using the traditional master-worker model. Each site provides the same functionality, i.e., all the components described in Figure <ref type="figure" target="#fig_4">3</ref>. Thus, users can trigger a workflow execution at any site. However, for a given workflow execution, there is one coordinator site, where the execution is started. The coordinator site performs workflow management and global scheduling, and manages the execution with other participant sites. The workflow manager and the global scheduler modules are involved only on the coordinator site while all other modules are involved on all sites.</p><p>At each site, there are three kinds of nodes: master, compute and data nodes, which are mapped to cluster nodes at configuration time, e.g., using a cluster manager like Yarn <ref type="foot" target="#foot_2">3</ref> . Each site has one active master node and a standby node to deal with master node failure. The master nodes are the only ones to communicate across sites. Each master node supports the top layers of the functional architecture: workflow manager, global scheduler, local scheduler and metadata management.</p><p>The master nodes are responsible for transferring data between sites during execution. They are lightly loaded as most of the work of serving clients is done by the compute and data nodes (or worker nodes), which perform local execution and data management, respectively.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.">Cache-aware Workflow Execution</head><p>In this section, we present in more details our solution to cache-aware workflow execution in a multisite cloud. In particular, the global scheduler must decide which data to cache (cache data selection) where (cache site selection), and where to execute workflow fragments (execution site selection). Since these decisions are not independent, we propose a cost function to make a global decision, based on the cost components for individual decisions. We start by presenting the methods and cost functions for cache data selection, cache site selection, execution site selection, and global decision. Then, we introduce our algorithms for cache-aware scheduling.</p><p>The execution of a workflow W (A, D) in S starts at a coordinator site s c and proceeds in three main steps:</p><p>1. The global scheduler at s c simplifies and partitions the workflow into fragments. Simplification uses metadata to decide whether a task can be replaced by corresponding cache data references. Partitioning uses the dependencies in D to produce fragments. 2. For each fragment, the global scheduler at s c computes a cost function to make a global decision on which data to cache where, and on which site to execute. Then, it triggers fragment execution and caching at the selected sites. 3. At each selected site, the local scheduler performs the execution of the received fragments using its task manager (to execute tasks) and data manager (to transfer the required input data). It also applies the decision of the global scheduler on storing new intermediate data into the cache.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1.">Workflow Simplification</head><p>Workflow simplification is performed by the workflow manager before execution, transforming the workflow into an executable workflow and considering the metadata, input, and cache data location. It is based on the workflow simplification method presented in <ref type="bibr" target="#b22">[23]</ref>.</p><p>First, the workflow W (A, D) is transformed into an executable workflow W ex (A, D, T, Input), where T is a DAG of tasks corresponding to the activities in A and Input is the input data. The goal is to transform an executable workflow W ex (A, D, T, Input) into an equivalent, simpler subworkflow W ex (A , D , T , Input ), where A is a subgraph of A with dependencies D , T is a subgraph of T corresponding to A and Input is a subset of Input.</p><p>The workflow simplification algorithm is recursive and traverses the DAG T , starting from the sink tasks to the source tasks. The algorithm marks each task whose output is already in the cache. Then, the subgraphs of T for which each of their sink tasks is marked are removed and replaced by the associated data from the cache. The remaining graph is noted T . Finally, the algorithm determines the fragments of T , i.e., the subgraphs that still need to be executed.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.">Cache Data Selection</head><p>To determine what new intermediate data to cache, we consider two different methods: greedy and adaptive. Greedy data selection simply adds all new data to the cache. Adaptive data selection extends our method proposed in <ref type="bibr" target="#b14">[15]</ref> to a multisite cloud. It achieves a good trade-off between the cost saved by reusing cache data and the cost incurred to feed the cache.</p><p>To determine whether it is worth adding some intermediate data Output(f ) at site s j , we consider the trade-off between the cost of adding Output(f ) to the cache and the potential benefit if it were reused. The cost of adding Output(f ) to site s j is the time to transfer from the site, say site s i , where it was generated. The potential benefit is the time saved from loading Output(f ) from s j to the site of computation instead of re-executing the fragment. We model this trade-off with the ratio between the cost and benefit of the cache, noted p(f, s i , s j ), which can be computed from Equations 2, 3 and 4,</p><formula xml:id="formula_4">p(f, s i , s j ) = T write (Output(f ), s i , s j ) T input (f, s i ) + T compute (f, s i ) -T tr (Output(f ), s j , s i )<label>(5)</label></formula><p>In the case of multiple users, the probability that Output(f ) will be reused or the number of times fragment f will be re-executed is not known when the workflow is executed. Thus, we introduce a threshold T hreshold (computed on behalf of the user) as the limit value to decide whether a fragment output will be added to the cache. The decision on whether Output(f ) generated at site s i is stored at site s j can be expressed by</p><formula xml:id="formula_5">d f,i,j = 1 if p(f, s i , s j ) &lt; T hreshold. 0 otherwise.<label>(6)</label></formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.">Cache Site Selection</head><p>Cache site selection must take into account the data transfer cost and the heterogeneity of computing and storage resources. We propose two methods to balance either storage load (bStorage) or computation load (bCompute) between sites. The bStorage method prevents bottlenecks when loading cache data. To assess this method at any site s, we use a load indicator, noted L bStorage (s), which represents the relative storage load as the ratio between the storage used for the cache data (Storage used (s)) and the total storage (Storage total (s)).</p><formula xml:id="formula_6">L bStorage (s) = Storage used (s) Storage total (s)<label>(7)</label></formula><p>The bCompute method balances the cache data between the most powerful sites, i.e., with more processors, to prevent computing bottlenecks during execution. Using the knowledge on the sites' computing resources and usage, we use a load indicator for each site s, noted L bCompute (s), based on processors idleness (P idle (s)) versus total processor capacity (P total (s)).</p><formula xml:id="formula_7">L bCompute (s) = 1 -P idle (s) P total (s)<label>(8)</label></formula><p>The load of a site s, depending on the method used, is represented by L(s), ranging between 0 (empty load) and 1 (full). Given a fragment f executed at site s i , and a set of sites {s j } with enough storage for Output(f ), the best site s * to add Output(f ) to its cache can be obtained using Equation 1 (to include transfer time) and Equation <ref type="formula" target="#formula_5">6</ref>(to consider multiple users),</p><formula xml:id="formula_8">s * (f ) si = argmax sj (d f,i,j * (1 -L(s j )) T write (Output(f ), s i , s j ) )<label>(9)</label></formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4.">Execution Site Selection</head><p>To select an execution site s for a fragment f , we need to estimate the execution time for f as well as the time to feed the cache with the result of executing f . The execution time of f at site s (T execute (f, s)) is the sum of the time to transfer input and cache data to s, the time to get computing resources and the time to compute the fragment. It is obtained using Equations 2 and 3.</p><formula xml:id="formula_9">T execute (f, s) = T input (f, s) + T compute (f, s) + T wait (s)<label>(10</label></formula><p>) Given a fragment f executed at site s i and its intermediate data Output(f ), the time to write Output(f ) to the cache (T f eed cache (f, s i , s j )) can be defined as:</p><formula xml:id="formula_10">T f eed cache (f, s i , s j , d f,i,j ) = d f,i,j * T write (Output(f ), s i , s j ) (11</formula><p>) where s j is given by Equation <ref type="formula" target="#formula_8">9</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.5.">Global Decision</head><p>At Step 2 of workflow execution, for each fragment f , the global scheduler must make a global decision on the best combination of individual decisions regarding cache data, cache site, and execution site. These individual decisions depend on each other. The decision on cache data depends on the site where the data is generated and the site where it will be stored. The decision on cache site depends on the site where the data is generated and the decision of whether or not the data will be cached. Finally, the decision on execution site depends on what data will be added to the cache and at which site. Using Equations 10 and 11, we can estimate the total time (T total ) for executing a fragment f at site s i and adding its intermediate data to the cache at another site s j :</p><formula xml:id="formula_11">T total (f, s i , s j , d f,i,j ) = T execute (f, s i ) + T f eed cache (f, s i , s j , d f,i,j )<label>(12)</label></formula><p>Then, the global decision for cache data (d f,i,j ), cache site (s * cache ) and execution site (s * exec ) implies minimizing the following equation for the n 2 pairs of sites s i and s j</p><formula xml:id="formula_12">(s * exec , s * cache , d f,i,j ) = argmin si,sj (T total (f, s i , s j , d f,i,j )) (<label>13</label></formula><formula xml:id="formula_13">)</formula><p>This decision is performed by the coordinator site before each fragment execution. It only takes into account the site's status at that time. Note that s * exec and s * cache can be the same site, including the coordinator site.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.6.">Cache-Aware Scheduling</head><p>In this section, we present in details our solution to cache-aware scheduling. We propose three algorithms: GlobalGreedyCache, SiteGreedyCache and FragGreedyCache. GlobalGreedyCache is a new greedy algorithm that performs cache-aware scheduling. The two other algorithms extend distributed greedy scheduling algorithms <ref type="bibr" target="#b9">[10]</ref> to be cache-aware. These three algorithms are dynamic in that they produce scheduling plans that distribute and allocate executable tasks to computing nodes during workflow execution <ref type="bibr" target="#b21">[22]</ref>. Such kind of scheduling is appropriate for our workflows, where the workload is difficult to estimate, or for environments where the computing capabilities vary much during execution.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.6.1.">GlobalGreedyCache.</head><p>The GlobalGreedyCache algorithm (see Algorithm 1) is based on the global decision (see Equation <ref type="formula" target="#formula_12">13</ref>) made by the coordinator site. It takes the simplified workflow graph as input and, starting from the root fragment, computes the global decision for each fragment. Recall that the global decision combines individual decisions regarding cache data, cache site, and execution site, before scheduling each fragment.</p><p>Algorithm 1 proceeds as follows. The workflow is partitioned into fragments (line 1), where F represents the set of all fragments of the workflow. Whenever a fragment is ready for execution, it is selected (line 3). Then (line 4), the global decision is computed using Equation 13 to determine the best execution site S exec , cache placement site S cache and cache decision d f,i,j . At line 5, the fragment is transferred to the site S exec to be executed. Recall that the cache decision d f,i,j determines whether the intermediate data will be cached. Whenever the intermediate data is to be stored in the cache (lines 6-8), it is transferred at site S cache (line 7). At line 8, the Cache Index is updated locally and the update is propagated at all replicas at other sites. Finally (line 11), the fragment is removed from F. SiteGreedyCache (site greedy with caching) extends the SiteGreedy algorithm presented in <ref type="bibr" target="#b9">[10]</ref>. The scheduling decision of SiteGreedy works as follows. Let F be the set of workflow fragments. Whenever a site s is available, it requests the execution of a ready fragment in F to the coordinator site. The selection of the fragment is based on a cost function that takes into account data transfer and execution times. The idea is to keep sites as busy as possible, scheduling a fragment whenever a site is available. The caching decision is done after the workflow fragment has been scheduled for execution by the local scheduler at each site. Unlike GlobalGreedyCache, SiteGreedyCache does not make the global decision at once but proceeds in two steps. First, the choice of the site where the cache data should be stored is determined by Equation <ref type="formula" target="#formula_8">9</ref>. Then, the decision on whether or not to store the intermediate data is determined by Equation <ref type="formula" target="#formula_4">5</ref>, considering the execution time and the time to transfer the intermediate data. Note that Equation 5 considers both the execution site and the cache site, which are already determined when computed during the execution of SiteGreedyCache.</p><p>FragGreedyCache (fragment greedy with caching) extends the ActGreedy algorithm presented in <ref type="bibr" target="#b9">[10]</ref>. Frag-GreedyCache schedules each workflow fragment at the site that minimizes a cost function based on execution time and input data transfer time. The cost function is the sum of the initialization, expected execution and data transfer times for each fragment at each site. Then, after each fragment execution at the selected site, the local scheduler performs the cache site and cache data decisions based on Equations 9 and 5.</p><p>These two greedy algorithms generate a dynamic scheduling plan. After each fragment execution, the decision concerning caching is made by the local scheduler. In contrast, GlobalGreedyCache makes a global decision for each fragment. Note that SiteGreedyCache and FragGreedyCache perform less operations to schedule the fragments.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.6.3.">Analysis.</head><p>In this section, we analyze the runtime and storage complexity of the GlobalGreedyCache algorithm.</p><p>Runtime complexity analysis. Let n be the number of given input datasets. Our algorithm generates a constant number of tasks for each set of input data, i.e., in our usecase less than 14 tasks per set. Let |T | be the number of generated tasks, then we have |T |= n * c, where c is a constant value. Our algorithm groups tasks into fragments to be scheduled, generating at most |T | fragments. Our algorithm performs one scheduling operation for each fragment, and the time needed for each operation is constant. Thus, the time complexity of the algorithm is O(|T |). Since we have |T |= n * c and c is a constant, the time complexity of the algorithm is O(n), where n is the number of sets of images.</p><p>Storage complexity analysis. The largest data structure used by our algorithm is a list containing the fragments. As before, the number of fragment generated by the algorithm is at most |T |. Thus, the storage complexity of the algorithm is O(|T |), so O(n), where n is the number of sets of images.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.">Experimental Evaluation</head><p>This section describes our experimental evaluation based on a full-fledged implementation of our solution in the Ope-nAlea worflow system using the Phenomenal workflow and real data from the Phenoarch phenotyping platform in a multisite cloud. We first present our experimental setup, which features the multisite cloud with multiple users that re-execute part of the workflow. Then, we compare the performance of our multisite cache scheduling algorithms against two baseline algorithms. We end the section with concluding remarks.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1.">Experimental Setup</head><p>We use a multisite cloud, with three sites in France. Site 1 in Montpellier is the raw data server of the Phenoarch phenotyping platform, with the smallest number of processors and largest amount of storage among the sites. Site 2 is the coordinator site, located in Lille. Site 3, located in Lyon, has the largest number of processors and the smallest amount of storage.</p><p>To model site heterogeneity in terms of storage and computing resources, we use the heterogeneity factor H in three configurations: H = 0, H = 0.3 and H = 0.7. For the three sites altogether, the total number of processors is 96 and the total storage 180 GB. With H = 0 (homogeneous configuration), each site has 32 processors and 60 GB. With H = 0.3, we have 22 processors and 83 GB for Site 1, 30 processors and 57 GB for Site 2 and 44 processors and 40 GB for Site 3. With H = 0.7 (most heterogeneous configuration), we have 6 processors and 135 GB for Site 1, 23 processors and 35 GB for Site 2 and 67 processors and 10 GB for Site 3.</p><p>To determine the data transfer rate between sites, each site sends to the other sites a 10 MB test file and measures the time. This operation is repeated every 30 minutes and the information is updated at the coordinator site.</p><p>The Phenomenal workflow (presented in Section 2) which we use is composed of 9 main activities. The input dataset is produced by the Phenoarch platform (see Section 2). Each workflow execution is performed on a subset of the input dataset, i.e., 200 GB of raw data, which represents the execution of 15,000 tasks. The workflow is executed by several users. Each user wants the results produced by the last activity, which requires the execution of all other activities when executed from scratch. For each user, 60% of the raw data is reused from previous executions. Thus, each execution requires only 40% of new raw data. For the first execution, no data is available in the cache.</p><p>For experiments 3, 4 and 5, the workflow executions are done three times, so we will present average values of the three executions.</p><p>We implemented our solution in OpenAlea and deployed it at each site using the Conda multi-OS package manager. The metadata database is implemented using the Cassandra NoSQL data store. Communication between the sites is done using the protocol library ZeroMQ. Data transfer between sites is done through SSH. We have also implemented two baseline scheduling methods: 1) ActGreedy, a multisite scheduling algorithm <ref type="bibr" target="#b9">[10]</ref> that schedules the fragments at multiple sites given a cost function based on execution time and input data transfer time. This algorithm is not cache aware and does not reuse intermediate data. 2) a centralized version of the three cache-aware scheduling algorithms proposed in this paper(GlobalGreedyCache, Site-GreedyCache and FragGreedyCache). In our experiments, the centralized cache is managed on Site 1.</p><p>Table <ref type="table" target="#tab_3">1</ref> summarizes the different variants of the scheduling algorithms used in our experiments. Prefix "C-" indicates that the cache is centralized at a single site while prefix "D-" indicates that it is distributed. For all algorithms that use a cache, the cache index is fully replicated at all sites.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2.">Experiments</head><p>We compare the three algorithms we proposed (Global-GreedyCache, SiteGreedyCache, FragGreedyCache) in terms of execution time, amount of data transferred, and total time with two baselines. The total time includes workflow execution time and data transfer time. We consider different workflow executions: with and without caching (Experiment 1); on a monosite or a multisite cloud (Experiment 2); and using a centralized or distributed cache (Experiment 3). Then, we consider multiple users that execute the workflow in the following cases: on the same multisite configuration, where 60% of the data is the same (Experiment 4); on different multisite configurations (Experiment 5); and when adding or removing workflow fragments (Experiment 6).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2.1.">Experiment 1: with and without caching</head><p>The goal of this experiment is to show that reusing cache data can speed up workflow execution although data caching also takes time. Thus, without a minimum amount of cache data reused, the cost of data caching may exceed the benefits. We compare two workflow executions: with caching, using the D-GlobalGreedyCache scheduling algorithm and the bStorage load balancing method; and without caching, using the ActGreedy algorithm. We consider one re-execution of the workflow on different input datasets, from 0% to 60% of data reuse. D-GlobalGreedy-Cache outperforms ActGreedy from 20% of reused data. Below 20%, the overhead of caching outweighs its benefit. For instance, with no reuse (0%), the total time with D-GlobalGreedyCache is 16% higher than with ActGreedy. But with 30%, it is 11% lower, and with 60%, it is 42% lower.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2.2.">Experiment 2: single site versus multisite execution</head><p>The goal of this experiment is to show that, with sites with limited resources, increasing the number of sites reduces the workflow total time despite increased data transfers and network latencies. We compare the total time in four cases with monosite and multisite clouds:</p><p>1. a raw data site (Site 1), with only 10 processors, where the raw data is stored; 2. another site (Site 3) with 96 processors, which can perform computation on the raw and cache data (that needs to be transferred from Site 1); 3. a multisite cloud composed of three sites with configuration H = 0.7, using C-FragGreedyCache; 4. the same multisite cloud but using D-GlobalGreedy-Cache.</p><p>Figure <ref type="figure" target="#fig_6">5</ref> shows the total time of the workflow for the different cases. When executing on the raw data site (first chart on Figure <ref type="figure" target="#fig_6">5</ref>), all the input data as well as the cache data are already stored on Site 1, thus there is no data transfer between sites during workflow execution. However, due to the reduced number of available processors, the total time is by far longer than on any other infrastructure (66% longer than the execution on Site 3, 238% longer than the multisite execution with C-FragGreedyCache and 334% longer than the multisite execution with D-Global-GreedyCache). Overall, executing the workflow on the full raw dataset on Site 1 would take more than a week, which is unpractical. In practice, the raw dataset is first sent to a site with more computing resources available before execution. The execution on Site 3 yields the shortest execution time, outperforming the multisite execution with C-Frag-GreedyCache and D-GlobalGreedyCache in terms of execution time by 21% and 26%, respectively. However, the time for transferring the raw data makes its total time much longer, so it is outperformed by the multisite execution using D-GlobalGreedyCache by 61%.</p><p>The intermediate data transfer time on the multisite cloud is much smaller (83% smaller for the execution with D-GlobalGreedyCache) than the raw data transfer time of the execution on Site 3. Since fragments can be executed on the site of their input data, the raw data is not transferred between sites, but locally processed on Site 1 by the first workflow fragment. The intermediate data generated by the first fragment is smaller than the raw data and is more easily transferred to other sites, where the other fragments are scheduled.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2.3.">Experiment 3: centralized versus distributed cache</head><p>The goal of this experiment is to show that distributing the cache enables reducing significantly data transfer time as well as total time. Figure <ref type="figure">6</ref> shows the total time of the workflow for the three algorithms SiteGreedyCache, Frag-GreedyCache and GlobalGreedyCache. The algorithms used with a centralized cache on Site 1 are C-SiteGreedyCache, C-FragGreedyCache and C-GlobalGreedyCache. They are compared with D-GlobalGreedyCache, which uses a distributed cache in two configurations: (a) with two users;  <ref type="figure">6</ref>.a, where two users execute the Phenomenal workflow with 60% of common raw data in two configurations: centralized cache on Site 1 and distributed cache with H = 0.7. For the first user execution, D-GlobalGreedyCache outperforms C-SiteGreedyCache in terms of total time by 44%. This is due to D-GlobalGreedyCache outperforming C-SiteGreedy-Cache in terms of intermediate and cache data transfer times by 66% and 60%, respectively. D-GlobalGreedyCache outperforms C-FragGreedyCache in terms of total time by 24%, even though D-GlobalGreedyCache's execution time is lower than C-FragGreedyCache (5%). This is due to D-GlobalGreedyCache outperforming C-FragGreedyCache in terms of data transfer time by 44%. D-GlobalGreedy-Cache outperforms C-GlobalGreedyCache in terms of total time by 15%. The execution time and intermediate data transfer time are similar (17% shorter and 11% longer). Yet, D-GlobalGreedyCache outperforms C-GlobalGreedy-Cache in terms of cache data transfer by 32%. For the first execution D-GlobalGreedyCache outperforms the three algorithms with centralized cache, mostly due to shorter data transfer times. This is because the distributed cache enables executing the workflow at a site with more computing resources and storing the cache data on that site. For re-execution, D-GlobalGreedyCache outperforms the three algorithms with centralized cache, C-SiteGreedyCache, C-FragGreedyCache and C-GlobalGreedyCache, in terms of total time by 63%, 47% and 23%, respectively. Figure <ref type="figure">6</ref>.b shows the total time of the workflow for the second user and the four different algorithms: C-Site-GreedyCache, C-FragGreedyCache, C-GlobalGreedyCache and D-GlobalGreedyCache. The execution is performed on three values of H in two configurations: centralized cache on Site 1 and distributed cache. In any configuration, D-GlobalGreedyCache outperforms the three other algorithms with centralized cache, C-SiteGreedyCache, C-FragGreedy-Cache and C-GlobalGreedyCache, in terms of total time by 44%, 33% and 17%, respectively for H = 0, by 53%, 40% and 25%, respectively for H = 0.3, and by 61%, 44% and 22%, respectively for H = 0.7. The performance gain is due to less data transfers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2.4.">Experiment 4: multiple users</head><p>The goal of this experiment is to show that the proposed algorithms reduce the workflow total time in the case of multiple users executing the workflow. Figure <ref type="figure" target="#fig_9">8</ref> shows the total time of the workflow for the three scheduling algorithms, four users, H = 0.7, and our two cache site selection methods: (a) bStorage, and (b) bCompute.</p><p>Let us first analyze the results in Figure <ref type="figure" target="#fig_9">8</ref>.a (bStorage method). For the first user execution, D-GlobalGreedy-Cache outperforms D-SiteGreedyCache in terms of execution time by 10% and in terms of data transfer time by 36%. The reason that D-SiteGreedyCache is slower is because it schedules some compute-intensive fragments at Site 1, which has the lowest computing resources. Furthermore, it does not consider data placement and transfer time when scheduling fragments.</p><p>Again for the first user execution, D-GlobalGreedyCache outperforms D-FragGreedyCache in terms of total time by 20%, when considering the time to transfer data to the cache. However, its execution time is a bit slower (by 11%). The reason that D-FragGreedyCache is slower is that it does not take into account the placement of the cache data, which leads to larger amounts (by 66%) of cache data to transfer. For other users' executions (when cache data exists), D-GlobalGreedyCache outperforms D-SiteGreedyCache in terms of execution time by 29%, and for the fourth user execution by 31%. This is because D-GlobalGreedyCache better selects the cache site in order to reduce the execution time of the future re-executions. Furthermore, D-GlobalGreedyCache balances the cache data and computations. It outperforms D-SiteGreedyCache and D-FragGreedyCache in terms of intermediate data transfer time (by 63% and 11%, respectively) and cache data   transfer time (by 78% and 69%, respectively). Overall, D-GlobalGreedyCache outperforms D-SiteGreedy-Cache and D-FragGreedyCache in terms of total time by 61% and 41%, respectively. The workflow fragments are not necessarily scheduled to the site with shortest execution time, but to the site that minimizes the overall total time. Considering the multiuser perspective, D-Global-GreedyCache outperforms D-SiteGreedyCache and D-Frag-GreedyCache, reducing the total time for each new user.</p><p>Let us now consider Figure <ref type="figure" target="#fig_9">8</ref>.b (bCompute method). For the first user execution, D-GlobalGreedyCache outperforms D-SiteGreedyCache and D-FragGreedyCache in terms of total time by 38% and 12%, respectively. bCompute stores the cache data on the site with the most idle processors, which is often the site with the most processors. This leads the cache data to be stored close to where it is generated, thus reducing data transfers when adding data to the cache. For the second user, D-GlobalGreedyCache outperforms D-SiteGreedyCache and D-FragGreedyCache in terms of total time by 54% and 24%, respectively. The cache data generated by the first user is stored on the sites with more available processors, which minimizes the transfers of intermediate and cache data. From the third user, the storage at some site gets full, i.e., for the third user's execution, Site 3's storage is full and from the fourth user's execution, Site 2's storage is full. Thus, the performance of the three scheduling algorithms decreases due to higher cache data transfer time. Yet, D-GlobalGreedyCache outperforms D-SiteGreedyCache and D-FragGreedyCache in terms of total time by 47% and 22%, respectively.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2.5.">Experiment 5: site heterogeneity</head><p>We now compare the three algorithms in the case of heterogeneous sites by considering the amount of data transferred and execution time. In this experiment (see Figure <ref type="figure">7</ref>), we consider one user with the cache already provisioned by previous executions on 60% of the same raw data. We use the bStorage method for cache site selection.</p><p>Figure <ref type="figure">7</ref> shows the execution times and the amount of data transferred using the three scheduling algorithms. With homogeneous sites (H = 0), the three algorithms have almost the same execution time. D-GlobalGreedy-Cache outperforms D-SiteGreedyCache in terms of amount of data transferred and total time by 47% and 32%, respectively. The execution time of D-GlobalGreedyCache is similar to D-FragGreedyCache (9% longer). The cache data is balanced as the three sites have the same storage capacities. Thus, total times of D-GlobalGreedyCache and D-FragGreedyCache are almost the same.</p><p>With heterogeneous sites (H &gt; 0), the sites with more processors have less available storage but can execute more tasks, which leads to larger amounts of intermediate and cache data being transferred between the sites. For H = 0.3, D-GlobalGreedyCache outperforms D-SiteGreedyCache and D-FragGreedyCache in terms of total time (by 41% and 17%, respectively) and amount of data transferred (by 48% and 21%, respectively). With H = 0.7, D-GlobalGreedyCache outperforms D-SiteGreedyCache and D-FragGreedyCache in terms of total time (by 58% and 42%, respectively) and in terms of amount of data transferred (by 55% and 31%, respectively). D-GlobalGreedyCache is faster because its scheduling leads to a smaller amount of cache data transferred when reused (50% smaller than D-FragGreedyCache) and added to the cache (57% smaller than D-FragGreedyCache).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2.6.">Experiment 6: adding and removing fragments</head><p>In this experiment, we evaluate our approach in terms of total time when subworkflows (with common fragments) derived from the Phenomenal workflow are executed independently. Figure <ref type="figure" target="#fig_10">9</ref> shows four subworkflows, each corresponding to a different analysis required by the user: WF1 performs image binarization, WF2 generates an analysis of the binary images, WF3 generates a 3D reconstruction of the plant and WF4 performs maize analysis. WF1 is mostly data-intensive, the image binarization fragment performing little computation but consuming Terabytes of data. WF2 requires more computational resources but is still mostly data-intensive. Fragment F3 in WF3 (composed of activities 3 and 4 in Figure <ref type="figure" target="#fig_10">9</ref>) is mostly computation-intensive. Finally, WF4 is both data-and computation-intensive. The subworkflows are executed two times starting without cache data and 60% of the raw input data is common between the users. Each user wants the output data generated by the last activity of the workflow, i.e. activity 2 for WF1, activity 3 for WF2, activity 5 for WF3, and activity for WF9. All executions use method bStorage.</p><p>Figure <ref type="figure" target="#fig_11">10</ref> shows the total times for executing WF1, WF2, WF3 and WF4 by two users, one after the other. The first user executes the subworkflow without existing cache data, then the second user executes the subworkflow using 60% of the same raw data. In the case of WF1 (see Figure <ref type="figure" target="#fig_11">10a</ref>), D-SiteGreedyCache outperforms both In the case of WF2 (see Figure <ref type="figure" target="#fig_11">10b</ref>), D-SiteGreedy-Cache also outperforms both D-FragGreedyCache and D-GlobalGreedyCache in terms of execution times by 91% for the first user and 79% for the second user. This is because the added fragment can be executed just after the execution of WF1 without any delay as it does not require much computational resources. However, D-GlobalGreedyCache outperforms D-SiteGreedyCache in terms of total time by 39% due to longer data transfer times with D-SiteGreedy-Cache. D-GlobalGreedyCache and D-FragGreedyCache also have similar total times, D-GlobalGreedyCache outperforms D-FragGreedyCache by 4% for the second user. WF1 and WF2 are both data-intensive, not compute-intensive. Since the raw data is stored on Site 1, the site with the biggest storage capacities, it is the most likely to be used as cache site. For these subworkflows, the selection of the execution site by both algorithms D-FragGreedyCache and D-Glob-alGreedyCache depends mostly on the intermediate data location. In this case, they make similar decisions, and thus have similar performance.</p><p>In the case of WF3 (see Figure <ref type="figure" target="#fig_11">10c</ref>), for the first user, D-GlobalGreedyCache outperforms both D-SiteGreedyCache and D-FragGreedyCache in terms of total time by 30% and 8%, respectively. Then, for the second user, D-Glob-alGreedyCache also outperforms both D-SiteGreedyCache and D-FragGreedyCache by 47% and 18%, respectively. This is due to D-GlobalGreedyCache outperforming D-Site-GreedyCache and D-FragGreedyCache in terms of data transfers by 69% and 35%, respectively. D-FragGreedy-Cache selects the best sites that minimize execution times and intermediate data transfer times. In the case of WF3, which has a compute-intensive fragment, most of the computation will be scheduled on the site with the biggest computational resources. D-GlobalGreedyCache, however, will schedule some of the computation to the sites where the intermediate data will be cached and these sites may have less computational resources. This is why D-FragGreedy-Cache has shorter execution time, but is outperformed by D-GlobalGreedyCache in terms of total time.</p><p>In the case of WF4 (see Figure <ref type="figure" target="#fig_11">10d</ref>), D-GlobalGreedy-Cache outperforms both D-SiteGreedyCache and D-Frag-GreedyCache by 32% and 24% for the first user and 60% and 40% for the second one, respectively. In the case of WF4, the fragments are both data-and compute-intensive, thus the scheduling decision becomes more complex. D-FragGreedyCache schedules fragments to minimize execution and intermediate data transfer times, which makes it outperforming D-GlobalGreedyCache in terms of execution time and intermediate data transfer by 8%. However, the intermediate data that is cached is bigger than with WF3, and the time to transfer cache data becomes a major element of the total time. This is why D-GlobalGreedyCache outperforms D-SiteGreedyCache and D-FragGreedyCache in terms of total time.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3.">Concluding Remarks</head><p>The main result of this experimental evaluation is that GlobalGreedyCache always outperforms the two greedy algorithms SiteGreedyCache and FragGreedyCache, both in case of multiple users and heterogeneous sites.</p><p>The first experiment (with or without caching) shows that storing and reusing cache data becomes beneficial when 20% or more of the input data is reused. The fourth experiment (multiple users) shows that D-GlobalGreedyCache outperforms D-SiteGreedyCache and D-FragGreedyCache in terms of total time by up to 61% and 41%, respectively. It also shows that, with increasing numbers of users, the performance of the three scheduling algorithms decreases due to higher cache data transfer times. The fifth experiment (heterogeneous sites) shows that D-Global-GreedyCache adapts well to site heterogeneity, minimizing the amount of cache data transferred and thus reducing total time. It outperforms D-SiteGreedyCache and D-Frag-GreedyCache in terms of total time by up to 58% and 42%, respectively.</p><p>Both cache site selection methods bCompute and bStorage have their own advantages. bCompute outperforms bStorage in terms of data transfer time by 13% for the first user and up to 17% for the second user. However, it does not scale with the number of users, and the limited storage capacities of Site 2 and 3 lead to a bottleneck. On the other hand, bStorage balances the cache data among sites and prevents the bottleneck when accessing the cache data, thus reducing re-execution times In summary, bCompute is best suited for compute-intensive workflows that generate smaller intermediate datasets while bStorage is best suited for data-intensive workflows where executions can be performed at the site where the data is stored.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.">Related Work</head><p>There are many methods to optimize workflow execution in the cloud. However, to the best of the authors' knowledge, no solution that takes into account geodistribution in a multisite cloud, which should address two related problems: 1) determine what intermediate data should be cached, taking into account data transfers; 2) schedule the workflow, considering that intermediate and cache data are distributed on multiple sites. This section describes the related work on efficient workflow execution in the cloud as follows. First, we present the approaches that exploit centralized caching. Next, we broaden the scope with approaches that use distributed caching. Then, we present approaches that focus on scheduling algorithms in a multisite cloud, but without considering caching. Finally, we summarize the various approaches based on several dimensions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1.">Centralized Caching</head><p>Several workflow systems, such as VisTrails, Kepler, and OpenAlea, exploit centralized caching of intermediate data for efficient workflow execution. Each system has its unique way of addressing caching data. VisTrails supports visual analysis of workflow results and provenance, by capturing and caching the graph of execution and the intermediate data generated <ref type="bibr" target="#b12">[13]</ref>. The intermediate data is reused when tasks are re-executed on a local computer. The user can then change some activities and parameters in the workflow and efficiently re-execute some workflow activities to analyze the different results. The intermediate data is used to enhance reproducibitily when associated with provenance metadata <ref type="bibr" target="#b23">[24]</ref>. Caching and reuse of intermediate data is done whenever possible, but does not scale up as the data size increases and exceeds the storage capacity of the local computer. Finally, VisTrails does not consider distribution when storing and using the cache since all data is stored in the same computer.</p><p>When storing intermediate data in the cloud, the tradeoff between the cost of re-executing tasks and the costs of storing intermediate data is not easy to estimate <ref type="bibr" target="#b24">[25]</ref>. Yuan et al. <ref type="bibr" target="#b15">[16]</ref> propose an algorithm based on the ratio between re-computation cost and storage cost at the fragment level. The algorithm uses the provenance data to generate a graph of intermediate dataset dependencies. Then, the cost of storing each intermediate data set is weighted by the number of dependencies in the graph. The algorithm determines the optimized set of intermediate datasets to store. Casas et al. <ref type="bibr" target="#b25">[26]</ref> propose a scheduling algorithm based on the trade-off between the cost of re-executing tasks and the cost of storing intermediate data in the cloud. The algorithm splits workflows into multiple workflow fragments to balance system utilization via parallelization. It also exploits data reuse and replication techniques to reduce the amount of data that needs to be transferred among tasks at run-time. These two approaches require global knowledge of executions, such as the execution time of each task, the size of each dataset and the number of incoming re-executions, which is hard to estimate and monitor in practice. Furthermore, they do not consider data transfers.</p><p>Kepler <ref type="bibr" target="#b26">[27]</ref> provides intermediate data caching for workflow execution on a monosite cloud. The cache data is stored on a remote server. When a workflow is re-executed, the workflow specification is modified to access the cache data. Then, all the cache data that will be reused by the workflow is sent to the cloud where the workflow will be executed. This solution is improved in <ref type="bibr" target="#b27">[28]</ref> to store the cache data on the site where the workflow is executed. It finds a near optimum data caching policy by selecting the intermediate data to cache using an algorithm based on the Ant Colony Optimization probabilistic technique. Owsiak et al. <ref type="bibr" target="#b11">[12]</ref> propose an approach in Kepler to enable multiple users to execute workflows and reuse intermediate data through a cache. The approach encapsulates all Kepler instances into Docker containers, which can be easily deployed in a monosite cloud. During workflow execution, each user can generate cache data, which is stored in a local cache, and thus not shared with other users.</p><p>Guo and Engler <ref type="bibr" target="#b28">[29]</ref> propose an approach for incremental re-execution of workflows that are implemented as Python scripts and managed by science gateways, some of which are built on top of workflows systems. Their approach caches results of long-running activities (i.e., functions) of the workflow into a local file that can be reused to avoid future activity re-executions. This approach only works with Python-based workflows and is limited to a single machine, as other Python-based workflow management approaches <ref type="bibr" target="#b29">[30]</ref>.</p><p>Zohrevandi and Bazzi <ref type="bibr" target="#b30">[31]</ref> propose a method to determine which intermediate datasets produced by a workflow should be stored for further reuse. Considering that storage is limited, they formulate the problem as a non-linear integer programming (NLP) problem and develop a heuristic to efficiently generate a data reuse plan. Although a step forward, this work does not consider data distribution.</p><p>Different from VisTrails and Kepler, OpenAlea <ref type="bibr" target="#b7">[8]</ref> uses both in memory and disk caching. In memory caching is used on a local computer for small-scale workflows. Disk caching is based on an adaptive cache method that automatically determines the intermediate data that needs to be stored <ref type="bibr" target="#b14">[15]</ref>. This solution only works on monosite cloud and the cache data is systematically reused.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2.">Distributed Caching</head><p>Recently, some of the previous approaches have been extended for distributed caching.</p><p>Cala et al. <ref type="bibr" target="#b31">[32]</ref> propose a reusable provenance-based approach to optimize workflow re-execution in the case of evolving versions of the software used. The model computes a "restart tree", i.e. a data-structure that captures the evolution of the workflow when executed. Then, it uses ReComp <ref type="bibr" target="#b32">[33]</ref> a meta-process that enables re-computation of processes such as workflows. The intermediate data can be stored in a monosite cloud and the solution is adapted for data-intensive workflows.</p><p>Vulimiri et al. <ref type="bibr" target="#b33">[34]</ref> propose WANalytics, an Hadoop based system that manages data-intensive workflows in a multisite cloud. The system works on top of any workflow system , analyzing workflows before execution and minimizing data transfers during execution by taking into account the workflow workload and size of datasets. It automatically caches all intermediate data produced on the execution site and replicates the cache data on all sites. This provides efficient workflow re-execution, but at the expense of major storage cost in the case of data-intensive workflows.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.3.">Scheduling in a Multisite Cloud</head><p>The previous approaches focus on caching and reusing data during workflow execution. Another way to yield efficient workflow execution is to optimize scheduling. We present some workflow scheduling approaches that are relevant for a multisite cloud.</p><p>Scheduling algorithms have been proposed to allow distributed workflow execution on single and multiple sites. de Oliveira et al. <ref type="bibr" target="#b34">[35,</ref><ref type="bibr" target="#b35">36]</ref> propose a scheduling heuristic based on the collected provenance. The authors use historical information to estimate the execution time of each activity and then schedule the workflow to multiple virtual machines in the cloud environment. The approach can be applied in monosite and multisite clouds.</p><p>Teylo et al. <ref type="bibr" target="#b36">[37]</ref> also consider execution time and financial costs when scheduling workflows in the cloud, considering workflow activities and data in the same dependency graph. They formulate the problem as an Integer Linear Programming (ILP) problem and propose a hybrid evolutionary algorithm to efficiently schedule task and data.</p><p>Liu et al. <ref type="bibr" target="#b37">[38]</ref> propose a scheduling algorithm based on data location, that minimizes data transfer during workflow execution. The algorithm is further improved in <ref type="bibr" target="#b9">[10]</ref> with a multi-objective cost function, which includes the time and monetary cost of workflow execution in a dynamic environment. Liu et al. also consider data transfer costs in their multi-objective model. Zhang et al. <ref type="bibr" target="#b38">[39]</ref> propose another interesting approach based on a specialized hybrid genetic algorithm, that optimizes data transfer between the sites. Hu et al. <ref type="bibr" target="#b39">[40]</ref> propose a multi-objective algorithm for scheduling workflows in a multisite cloud. The algorithm is based on the particle swarm optimization technique and optimizes both task and data location during scheduling. These aforementioned distributed scheduling approaches focus on optimizing workflow execution, but do not consider caching and reusing intermediate data.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.4.">Summary</head><p>To summarize the various workflow execution approaches discussed above, Table <ref type="table" target="#tab_4">2</ref> provides a comparison based on the following dimensions:</p><p>• Load balancing (LB): the approach balances the execution workload, data load or both;</p><p>• Data-intensive (DI): the approach considers the dataintensive aspect of the workflow for efficient execution and caching;</p><p>• Cache intermediate data (CID): the approach caches and reuses intermediate data for an efficient re-execution of workflows ( when cache is not supported, L for local caching and D for distributed caching);</p><p>• Environment (Target Environment): the target environment of the approach;</p><p>• Optimization method (OM): the optimization method used in the approach (greedy, heuristic, ILP, etc.).</p><p>Table <ref type="table" target="#tab_4">2</ref> highlights that there is no other approach that combines all the dimension we focus on. Thus, our approach is the only solution that combines cache data management and workflow scheduling in a multisite cloud.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.">Conclusion</head><p>In this paper, we considered the efficient execution of data-intensive scientific workflows in a multisite cloud, using caching of intermediate data produced by previous workflows. Caching intermediate data and scheduling workflows to exploit such caching is complex, because of the heterogeneity of cloud data centers. In particular, workflow scheduling must be cache-aware, in order to decide whether reusing cache data or re-executing workflows.</p><p>We proposed a solution for cache-aware scheduling of scientific workflows in a multisite cloud. Our solution is based on a distributed and parallel architecture and includes new algorithms for adaptive caching, cache site selection and dynamic workflow scheduling. It has been implemented in the OpenAlea workflow system. We provided an extensive experimental evaluation in a three-site cloud with a real application in plant phenotyping (Phenomenal). We compared our solution with two baselines: 1) a multisite workflow scheduling algorithm that does not consider caching of intermediate data, 2) and a centralized cache architecture for workflow execution. For further comparisons, we extended two multisite scheduling algorithms to exploit our caching architecture. First, we showed that our solution for caching and reuse can reduce the total workflow execution up to 42% with 60% of same input data for each new execution. Second, we showed that our solution efficiently distributes the fragments to the sites, which reduces data transfer time, and thus the total time up by to 61% compared with a single remote site. Third, we showed that our distributed cache architecture enables reducing the total time by 22% compared with our algorithm GlobalGreedyCache with a centralized cache. We showed that the performance gain gets higher with heterogeneous sites. Fourth, we showed that the two methods bStorage and bCompute efficiently distribute the cache data to reduce total time in the case of multiple users executing the workflow. Each method provides its own benefits. bStorage distributes the cache data so that each site still has available storage for future intermediate data caching. bCompute enables faster workflow re-executions but the cache of the most powerful sites is rapidly full, which reduces the gain for future workflow executions. Fifth, we showed that our solution provides similar results as the adapted baseline algorithm in the case of homogeneous sites. And as site heterogeneity increases, it reduces total  <ref type="bibr" target="#b40">[41]</ref> Cloud-IoT Heuristic Zhang et al. <ref type="bibr" target="#b41">[42]</ref> Cloud Heuristic Hu et al. <ref type="bibr" target="#b39">[40]</ref> Multisite Cloud Heuristic Teylo et al. <ref type="bibr" target="#b36">[37]</ref> Monosite Cloud ILP Zhang et al. <ref type="bibr" target="#b42">[43]</ref> Multisite Cloud Heuristic Liu et al. <ref type="bibr" target="#b9">[10,</ref><ref type="bibr" target="#b37">38]</ref> Multisite Cloud Greedy Zhang et al. <ref type="bibr" target="#b38">[39]</ref> Multisite Cloud Heuristic Owsiak et al. <ref type="bibr">[</ref> time up to 42%. Finally, we showed that our solution reduces the total time of several data-intensive subworkflows from the Phenomenal workflow. For compute-intensive subworkflows only, our solution has a small overhead of up to 4% compared with the adapted baseline algorithm. This paper can be the basis for future work. The cost model of our solution focuses on minimizing the total time. Some other objectives, such as minimizing financial costs, meeting deadline constraints, or following security constraints would change the decisions on scheduling and data caching. Furthermore, the objective of minimizing environmental cost becomes essential and could be integrated with the cache decision. The work proposed in this paper presents a solution for workflow caching in the environment of a multisite cloud with multiple users. A possible improvement would be to consider other objectives in the cost model.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: Phenomenal plant analysis workflow.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: Two workflows in plant analysis and their intermediate data (the shared activities have same color).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 1 .</head><label>1</label><figDesc>2 gives an abstract representation of the workflow, with the activities grouped by fragments F1 to F4. The intermediate datasets, processed by the activities during execution are shown in Figure 1.3. Dataset D0 contains raw data that serves as input for the first fragment. Dataset D1 is generated by activity 2 and is the input of fragment 2 as it is processed by activity 4. The datasets are grouped by fragments.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure</head><label></label><figDesc>Figure 2. Multisite SWfMS Functional Architecture</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: Workflow System Functional Architecture.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Figure 4 :</head><label>4</label><figDesc>Figure 4: Multisite Workflow System Architecture.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Figure 5 :</head><label>5</label><figDesc>Figure 5: Total time of Phenomenal workflow execution in four cases.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head>Figure 6 :Figure 7 :</head><label>67</label><figDesc>Figure 6: Centralized versus distributed cache in terms of execution time. Three scheduling algorithms with centralized cache: C-SiteGreedyCache (C-S), C-FragGreedyCache (C-F) and C-GlobalGreedyCache (C-G), and one with distributed cache: D-GlobalGreedyCache (D-G).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><head></head><label></label><figDesc>cache data Transfer time to read cached data Transfer time to read intermediate data Execution time Transfer time to cache data Transfer time to read cached data Transfer time to read intermediate data (a) bStorage method cache data Transfer time to read cached data Transfer time to read intermediate data Execution time Transfer time to cache data Transfer time to read cached data Transfer time to read intermediate data (b) bCompute method</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_9"><head>Figure 8 :</head><label>8</label><figDesc>Figure 8: Total times for multiple users (60% of same raw data per user) for three scheduling algorithms (D-SiteGreedyCache (D-S), D-FragGreedyCache (D-F) and D-GlobalGreedyCache (D-G)).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_10"><head>Figure 9 :</head><label>9</label><figDesc>Figure 9: Four subworkflows derived from the Phenomenal workflow.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_11"><head>Figure 10 :</head><label>10</label><figDesc>Figure 10: Total times for executing the four subworkflows by two users (with 60% of same raw data for second user) with three algorithms (D-SiteGreedyCache (D-S), D-FragGreedyCache (D-F) and D-GlobalGreedyCache (D-G)).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head></head><label></label><figDesc>2. Multisite SWfMS Functional Architecture</figDesc><table><row><cell cols="2">Workflow mgr (fragment execution) Workflow mgr (fragment execution)</cell></row><row><cell>Global scheduling Global scheduling</cell><cell>Metadata Metadata</cell></row><row><cell>Scheduler Scheduler</cell><cell>(catalog, cache index, (catalog, cache index,</cell></row><row><cell>Local scheduling Local scheduling</cell><cell>provenance) provenance)</cell></row><row><cell cols="2">Task mgr (task execution) Task mgr (task execution)</cell></row><row><cell cols="2">Data mgr (file mgt, data transfer, intersite replication…) Data mgr (file mgt, data transfer, intersite replication…)</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 1 :</head><label>1</label><figDesc>Scheduling algorithms and their main dimensions.</figDesc><table><row><cell>Algorithm</cell><cell>Cost function parameters</cell><cell>Cache decision</cell><cell>Cache placement</cell></row><row><cell>ActGreedy</cell><cell>Activity exec. time</cell><cell>Local</cell><cell>No cache</cell></row><row><cell></cell><cell>Input transfer time</cell><cell>after execution</cell><cell></cell></row><row><cell>C-GlobalGreedyCache</cell><cell>Frag. exec. time</cell><cell>Global per frag.</cell><cell>Single</cell></row><row><cell>(C-G)</cell><cell cols="2">Input &amp; Cache transfer time before execution</cell><cell>cache site</cell></row><row><cell>C-SiteGreedyCache</cell><cell>Frag. exec. time</cell><cell>Local</cell><cell>Single</cell></row><row><cell>(C-S)</cell><cell>Input transfer time</cell><cell>after execution</cell><cell>cache site</cell></row><row><cell>C-FragGreedyCache</cell><cell>Frag. exec. time</cell><cell>Local</cell><cell>Single</cell></row><row><cell>(C-F)</cell><cell>Input transfer time</cell><cell>after execution</cell><cell>cache site</cell></row><row><cell>D-GlobalGreedyCache</cell><cell>Frag. exec. time</cell><cell>Global per frag.</cell><cell>Distributed</cell></row><row><cell>(D-G)</cell><cell cols="2">Input &amp; Cache transfer time before execution</cell><cell></cell></row><row><cell>D-SiteGreedyCache</cell><cell>Frag. exec. time</cell><cell>Local</cell><cell>Distributed</cell></row><row><cell>(D-S)</cell><cell>Input transfer time</cell><cell>after execution</cell><cell></cell></row><row><cell>D-FragGreedyCache</cell><cell>Frag. exec. time</cell><cell>Local</cell><cell>Distributed</cell></row><row><cell>(D-F)</cell><cell>Input transfer time</cell><cell>after execution</cell><cell></cell></row><row><cell cols="2">(b) with different site heterogeneity factors.</cell><cell></cell><cell></cell></row><row><cell cols="2">Let us first analyze the results of Figure</cell><cell></cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head>Table 2 :</head><label>2</label><figDesc>Workflow execution approaches along dimensions: Load balancing (LB), Data-intensive (DI), Caching intermediate data (CID), Target Environment, and Optimization method (OM)</figDesc><table><row><cell>Proposed Approach</cell><cell>LB DI CID</cell><cell>Target Environment</cell><cell>OM</cell></row><row><cell>de Oliveira et al. [35, 36]</cell><cell>±</cell><cell>Cloud</cell><cell>Greedy</cell></row><row><cell>Lin et al.</cell><cell></cell><cell></cell><cell></cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1" xml:id="foot_0"><p>https://www.phenome-emphasis.fr/phenomeeng/</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2" xml:id="foot_1"><p>https://cassandra.apache.org</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3" xml:id="foot_2"><p>http://hadoop.apache.org</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>Acknowledgements</head><p>This work was supported by the <rs type="funder">French National Research Agency</rs> under the <rs type="programName">Investments for the Future Program</rs>, referred as <rs type="grantNumber">ANR-16-CONV-0004</rs>, the <rs type="projectName">SciDISC and HPDaSc Inria associated teams</rs> with <rs type="projectName">Brazil</rs>, the <rs type="projectName">Phenome-Emphasis project</rs> (<rs type="grantNumber">ANR-11-INBS-0012</rs>) and <rs type="projectName">IFB</rs> (<rs type="grantNumber">ANR-11-INBS-0013</rs>) from the <rs type="funder">Agence Nationale de la Recherche</rs> and the <rs type="funder">France Grille Scientific Interest Group</rs>.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funded-project" xml:id="_ryESPJE">
+					<idno type="grant-number">ANR-16-CONV-0004</idno>
+					<orgName type="project" subtype="full">SciDISC and HPDaSc Inria associated teams</orgName>
+					<orgName type="program" subtype="full">Investments for the Future Program</orgName>
+				</org>
+				<org type="funded-project" xml:id="_w7XfXm6">
+					<orgName type="project" subtype="full">Brazil</orgName>
+				</org>
+				<org type="funded-project" xml:id="_wWSF3cq">
+					<idno type="grant-number">ANR-11-INBS-0012</idno>
+					<orgName type="project" subtype="full">Phenome-Emphasis project</orgName>
+				</org>
+				<org type="funded-project" xml:id="_U783QKV">
+					<idno type="grant-number">ANR-11-INBS-0013</idno>
+					<orgName type="project" subtype="full">IFB</orgName>
+				</org>
+			</listOrg>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Data-intensive science: a new paradigm for biodiversity studies</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kelling</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">M</forename><surname>Hochachka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Fink</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Riedewald</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Caruana</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Ballard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Hooker</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BioScience</title>
+		<imprint>
+			<biblScope unit="volume">59</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page" from="613" to="620" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Heterogeneous cloud computing</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Crago</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Dunn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Eads</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Hochstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D.-I</forename><surname>Kang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Kang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Modium</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Singh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Suh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">P</forename><surname>Walters</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IEEE International Conference on Cluster Computing</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2011">2011. 2011</date>
+			<biblScope unit="page" from="378" to="385" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Towards a taxonomy for cloud computing from an e-science perspective</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Oliveira</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">A</forename><surname>Baião</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mattoso</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Cloud Computing. Computer Communications and Networks</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="47" to="62" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Swift/t: Large-scale application composition via distributed-memory dataflow processing</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Wozniak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">G</forename><surname>Armstrong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Wilde</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">S</forename><surname>Katz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Lusk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">T</forename><surname>Foster</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2013 13th IEEE/ACM International Symposium on Cluster, Cloud, and Grid Computing</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="95" to="102" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Pegasus in the cloud: Science automation through workflow technologies</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Deelman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Vahi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Rynge</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Juve</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Mayani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">F</forename><surname>Da</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Silva</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Internet Computing</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="70" to="76" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Scicumulus: A lightweight cloud middleware to explore many task computing paradigm in scientific workflows</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Oliveira</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Ogasawara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Baião</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mattoso</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2010 IEEE 3rd International Conference on Cloud Computing</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="378" to="385" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Deploying kepler workflows as services on a cloud infrastructure for smart manufacturing</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Korambath</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Hochstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Schott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Graybill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Baldea</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Davis</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Procedia Computer Science</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="page" from="2254" to="2259" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Openalea: scientific workflows combining data analysis and simulation</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Pradal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Fournier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Valduriez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Cohen-Boulakia</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Int. Conf. on Scientific and Statistical Database Management (SSDBM)</title>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="11" to="11" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Improving multisite workflow performance using model-based scheduling</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Maheshwari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Jung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Meng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Vishwanath</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Kettimuthu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IEEE nt. Conf. on Parallel Processing (ICPP)</title>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="131" to="140" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Multi-objective scheduling of scientific workflows in multisite clouds</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Pacitti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Valduriez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Oliveira</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mattoso</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Future Generation Computer Systems(FGCS)</title>
+		<imprint>
+			<biblScope unit="volume">63</biblScope>
+			<biblScope unit="page" from="76" to="95" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Common motifs in scientific workflows: An empirical analysis</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Garijo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Alper</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Belhajjame</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Corcho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Gil</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Goble</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Future Generation Computer Systems</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="page" from="338" to="351" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+	<note>FGCS)</note>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Running simultaneous kepler sessions for the parallelization of parametric scans and optimization studies applied to complex workflows</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Owsiak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Plociennik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Palak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Zok</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Reux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">Di</forename><surname>Gallo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Kalupin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Schneider</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Computational Science</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page" from="103" to="111" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Reproducibility using vistrails</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Freire</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Koop</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">S</forename><surname>Chirigati</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">T</forename><surname>Silva</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Implementing Reproducible Research</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Infraphenogrid: a scientific workflow infrastructure for plant phenomics on the grid</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Pradal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Artzet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Chopard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Dupuis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Fournier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mielewczik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Negre</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Neveu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Parigot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Valduriez</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Future Generation Computer Systems (FGCS)</title>
+		<imprint>
+			<biblScope unit="volume">67</biblScope>
+			<biblScope unit="page" from="341" to="353" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Adaptive caching for data-intensive scientific workflows in the cloud</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Heidsieck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Oliveira</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Pacitti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Pradal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Tardieu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Valduriez</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Int. Conf. on Database and Expert Systems Applications (DEXA)</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="452" to="466" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">A highly practical approach toward achieving minimum data sets storage cost in the cloud</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Yuan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Cui</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Chen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Trans. on Parallel and Distributed Systems</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="1234" to="1244" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Efficient scheduling of scientific workflows using hot metadata in a multisite cloud</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">P</forename><surname>Morales</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Pacitti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Costan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Valduriez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Antoniu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mattoso</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Trans. on Knowledge and Data Engineering</title>
+		<imprint>
+			<biblScope unit="page" from="1" to="20" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<monogr>
+		<title level="m" type="main">Principles of Distributed Database Systems</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">T</forename><surname>Özsu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Valduriez</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<publisher>Springer</publisher>
+		</imprint>
+	</monogr>
+	<note>Fourth Edition</note>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Plant phenomics, from sensors to knowledge</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Tardieu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Cabrera-Bosquet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Pridmore</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Bennett</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Current Biology</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="issue">15</biblScope>
+			<biblScope unit="page" from="R770" to="R783" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<title level="m" type="main">phenomenal: A workflow for plant phenotyping</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Artzet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Brichet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Chopard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mielewczik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Fournier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Pradal</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Openalea</surname></persName>
+		</author>
+		<idno type="DOI">10.5281/zenodo.1436634</idno>
+		<imprint>
+			<date type="published" when="2018-09">Sep. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Scheduling of scientific workflow in non-dedicated heterogeneous multicluster platform</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Luo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Dong</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Systems and Software</title>
+		<imprint>
+			<biblScope unit="volume">86</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page" from="1806" to="1818" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">A survey of dataintensive scientific workflow management</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Pacitti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Valduriez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mattoso</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Grid Computing</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="457" to="493" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Efficient execution of scientific workflows in the cloud through adaptive caching</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Heidsieck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Oliveira</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Pacitti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Pradal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Tardieu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Valduriez</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Transactions on Large-Scale Data-and Knowledge-Centered Systems XLIV</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="41" to="66" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Up &amp; down: Improving provenance precision by combining workflow-and trace-level information</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">C</forename><surname>Dey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Belhajjame</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Koop</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Song</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Missier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Ludäscher</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">USENIX Workshop on the Theory and Practice of Provenance (TAPP)</title>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<monogr>
+		<title level="m" type="main">Maximizing efficiency by trading storage for computation</title>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">F</forename><surname>Adams</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">D</forename><surname>Long</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">L</forename><surname>Miller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Pasupathy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">W</forename><surname>Storer</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+			<publisher>HotCloud</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">A balanced scheduler with data reuse and replication for scientific workflows in cloud computing systems</title>
+		<author>
+			<persName><forename type="first">I</forename><surname>Casas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Taheri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Ranjan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">Y</forename><surname>Zomaya</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Future Generation Computer Systems</title>
+		<imprint>
+			<biblScope unit="volume">74</biblScope>
+			<biblScope unit="page" from="168" to="178" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Provenance collection support in the kepler scientific workflow system</title>
+		<author>
+			<persName><forename type="first">I</forename><surname>Altintas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Barney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Jaeger-Frank</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Provenance and Annotation Workshop</title>
+		<imprint>
+			<date type="published" when="2006">2006</date>
+			<biblScope unit="page" from="118" to="132" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Enhancing smart re-run of kepler scientific workflows based on near optimum provenance caching in cloud</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Altintas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Li</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IEEE World Congress on Services (SERVICES)</title>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="378" to="384" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Towards practical incremental recomputation for scientists: An implementation for the python language</title>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">J</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">R</forename><surname>Engler</surname></persName>
+		</author>
+		<ptr target="https://www.usenix.org/conference/tapp-10/towards-practical-incremental-recomputation-scientists-implementation-python" />
+	</analytic>
+	<monogr>
+		<title level="m">2nd Workshop on the Theory and Practice of Provenance, TaPP&apos;10</title>
+		<editor>
+			<persName><forename type="first">M</forename><forename type="middle">I</forename><surname>Seltzer</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">W</forename><surname>Tan</surname></persName>
+		</editor>
+		<meeting><address><addrLine>San Jose, CA, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>USENIX Association</publisher>
+			<date type="published" when="2010-02-22">February 22, 2010. 2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">noworkflow: a tool for collecting, analyzing, and managing provenance from python scripts</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">F</forename><surname>Pimentel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Murta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Braganholo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Freire</surname></persName>
+		</author>
+		<idno type="DOI">10.14778/3137765.3137789</idno>
+		<ptr target="http://www.vldb.org/pvldb/vol10/p1841-pimentel.pdf" />
+	</analytic>
+	<monogr>
+		<title level="j">Proc. VLDB Endow</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="issue">12</biblScope>
+			<biblScope unit="page" from="1841" to="1844" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">The bounded data reuse problem in scientific workflows</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Zohrevandi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">A</forename><surname>Bazzi</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/IPDPS.2013.71</idno>
+	</analytic>
+	<monogr>
+		<title level="m">2013 IEEE 27th International Symposium on Parallel and Distributed Processing</title>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="1051" to="1062" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Provenance annotation and analysis to support process re-computation</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Ca La</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Missier</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Provenance and Annotation Workshop</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="3" to="15" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Efficient re-computation of big data analytics processes in the presence of changes: Computational framework, reference architecture, and applications</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Missier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Cala</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IEEE International Congress on Big Data (BigDataCongress)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2019">2019. 2019</date>
+			<biblScope unit="page" from="24" to="34" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Wanalytics: Analytics for a geo-distributed data-intensive world</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Vulimiri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Curino</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Godfrey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Karanasos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Varghese</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">CIDR</title>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Scicumulus: A lightweight cloud middleware to explore many task computing paradigm in scientific workflows</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Oliveira</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">S</forename><surname>Ogasawara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">A</forename><surname>Baião</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mattoso</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/CLOUD.2010.64</idno>
+		<ptr target="https://doi.org/10.1109/CLOUD.2010.64" />
+	</analytic>
+	<monogr>
+		<title level="m">IEEE International Conference on Cloud Computing</title>
+		<meeting><address><addrLine>CLOUD; Miami, FL, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>IEEE Computer Society</publisher>
+			<date type="published" when="2010-05-10">2010. 5-10 July, 2010. 2010</date>
+			<biblScope unit="page" from="378" to="385" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">An adaptive parallel execution strategy for cloud-based scientific workflows</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Oliveira</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Ogasawara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Ocaña</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Baião</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mattoso</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Concurrency and Computation: Practice and Experience</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="issue">13</biblScope>
+			<biblScope unit="page" from="1531" to="1550" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">A hybrid evolutionary algorithm for task scheduling and data assignment of data-intensive scientific workflows on clouds</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Teylo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">U</forename><surname>De Paula Junior</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Frota</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Oliveira</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">M</forename><surname>De</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Drummond</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.future.2017.05.017</idno>
+		<ptr target="https://doi.org/10.1016/j.future.2017.05.017" />
+	</analytic>
+	<monogr>
+		<title level="j">Future Gener. Comput. Syst</title>
+		<imprint>
+			<biblScope unit="volume">76</biblScope>
+			<biblScope unit="page" from="1" to="17" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Scientific workflow partitioning in multisite cloud</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Silva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Pacitti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Valduriez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mattoso</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">European Conf. on Parallel Processing (Euro-Par)</title>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="105" to="116" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Graph partitionbased data and task co-scheduling of scientific workflow in geodistributed datacenters</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zhan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Jin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Song</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Concurrency and Computation: Practice and Experience</title>
+		<imprint>
+			<biblScope unit="volume">31</biblScope>
+			<biblScope unit="issue">24</biblScope>
+			<biblScope unit="page">5245</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Multiobjective scheduling for scientific workflow in multicloud environment</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Hu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Hu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Ge</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Chang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Network and Computer Applications</title>
+		<imprint>
+			<biblScope unit="volume">114</biblScope>
+			<biblScope unit="page" from="108" to="122" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Scheduling algorithms for heterogeneous cloud environment: main resource load balancing algorithm and time balancing algorithm</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Peng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Bian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Li</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Grid Computing</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="699" to="726" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">A load-aware resource allocation and task scheduling for the emerging cloudlet system</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Ge</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Wong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Kong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Luo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Chang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Future Generation Computer Systems</title>
+		<imprint>
+			<biblScope unit="volume">87</biblScope>
+			<biblScope unit="page" from="438" to="456" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Towards optimized scheduling for data-intensive scientific workflow in multiple datacenter environment</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Luo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Dong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zhang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Concurrency and Computation: Practice and Experience</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="issue">18</biblScope>
+			<biblScope unit="page" from="5606" to="5622" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Vistrails: visualization meets data management</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">P</forename><surname>Callahan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Freire</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Santos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">E</forename><surname>Scheidegger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">T</forename><surname>Silva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">T</forename><surname>Vo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ACM SIGMOD Int. Conf. on Management of Data (SIGMOD)</title>
+		<imprint>
+			<date type="published" when="2006">2006</date>
+			<biblScope unit="page" from="745" to="747" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Sharing and performance optimization of reproducible workflows in the cloud</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Qasha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Wen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Ca La</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Watson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Future Generation Computer Systems</title>
+		<imprint>
+			<biblScope unit="volume">98</biblScope>
+			<biblScope unit="page" from="487" to="502" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

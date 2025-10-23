@@ -7,11 +7,11 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		<fileDesc>
 			<titleStmt>
 				<title level="a" type="main">Towards Fully-fledged Archiving for RDF Datasets</title>
+				<funder ref="#_rbFm7bw">
+					<orgName type="full">Danish Council for Independent Research (DFF)</orgName>
+				</funder>
 				<funder>
 					<orgName type="full">Poul Due Jensen Foundation</orgName>
-				</funder>
-				<funder ref="#_Jwx3V6T">
-					<orgName type="full">Danish Council for Independent Research (DFF)</orgName>
 				</funder>
 			</titleStmt>
 			<publicationStmt>
@@ -117,14 +117,14 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 							<date/>
 						</imprint>
 					</monogr>
-					<idno type="MD5">CC9027DC9243065EB468388F20770103</idno>
+					<idno type="MD5">74504D953335D7B2F39797FD03DAB1EF</idno>
 					<idno type="DOI">10.3233/SW-</idno>
 				</biblStruct>
 			</sourceDesc>
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.0" ident="GROBID" when="2024-04-12T14:52+0000">
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:13+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<ref target="https://github.com/kermitt2/grobid"/>
 				</application>
@@ -197,7 +197,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <div><head>Acknowledgements</head><p>This research was partially funded by the <rs type="funder">Danish Council for Independent Research (DFF)</rs> under grant agreement no. <rs type="grantNumber">DFF-8048-00051B</rs> and the <rs type="funder">Poul Due Jensen Foundation</rs>.</p></div>
 			</div>
 			<listOrg type="funding">
-				<org type="funding" xml:id="_Jwx3V6T">
+				<org type="funding" xml:id="_rbFm7bw">
 					<idno type="grant-number">DFF-8048-00051B</idno>
 				</org>
 			</listOrg>

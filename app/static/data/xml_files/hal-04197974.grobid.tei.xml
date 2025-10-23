@@ -1,0 +1,884 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Adding Linguistic Information to Transformer Models Improves Biomedical Event Detection?</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Laura</forename><surname>Zanella</surname></persName>
+							<idno type="ORCID">0000-0002-8049-8077</idno>
+							<affiliation key="aff0">
+								<orgName type="laboratory">LORIA</orgName>
+								<orgName type="institution" key="instit1">Université de Lorraine</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">Inria) Nancy</orgName>
+								<address>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author role="corresp">
+							<persName><forename type="first">Yannick</forename><surname>Toussaint</surname></persName>
+							<email>yannick.toussaint@loria.fr</email>
+							<affiliation key="aff1">
+								<orgName type="laboratory">LORIA</orgName>
+								<orgName type="institution" key="instit1">Université de Lorraine</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">Inria) Nancy</orgName>
+								<address>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Adding Linguistic Information to Transformer Models Improves Biomedical Event Detection?</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">BAFC9CE0B701C029D0EE66F1E3A099F4</idno>
+					<idno type="DOI">10.15439/2023F2076</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:11+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Biomedical Event Extraction</term>
+					<term>Event Detection</term>
+					<term>Transformer Language Models</term>
+					<term>Named Entity Recognition</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Biomedical event detection is an essential subtask of event extraction that identifies and classifies event triggers, indicating the possible construction of events. In this work we propose the comparison of BERT and four of its variants for the detection of biomedical events to evaluate and analyze the differences in their performance. The models are learned using seven manually annotated corpora in different biomedical subdomains and fine-tuned by adding a linear layer and a Bi-LSTM layer on top of the models. The evaluation is done by comparing the behavior of the original models and by adding a lexical and a syntactic features. SciBERT emerged as the highest performing model when the fine-tuning is done using a Bi-LSTM layer, without need of extra features. This result suggests that the use of a transformer model that is pretrained from scratch and uses biomedical and general data for its pretraining, allows to detect event triggers in the biomedical domain covering different subdomains.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>I. INTRODUCTION</head><p>Biomedical event extraction is a complex information extraction task that identifies key information from large sets of textual data for further applications, such as the study of biomolecular mechanisms or epigenetic changes. A biomedical event is constructed from an event trigger and one or more arguments that orbit around the trigger. Event triggers generally refer to nouns or verbs that express an action, circumstance or eventuality, while the arguments refer either to biomedical entities or to other events, called nested events. Fig. <ref type="figure" target="#fig_0">1</ref> shows the example of a sentence annotated with two biomedical events, '-Reg' (which stands for 'Negative regulation') and 'Locl' (which stands for 'Localization'). The event 'Locl' (the event is given the same type as the trigger) that is constructed from the trigger word 'excretion' presents as argument the biomedical entity of the type 'D/C' (which stands for 'Drug or compound'), who plays the role 'Th' (which stands for 'Theme'). This role allows answering the question 'What is excreted?'. While the event '-Reg', constructed from the trigger word 'reduces', presents two arguments. The first argument is a biomedical entity of the type 'Drug or compound', who plays the role 'Cause'. This role allows answering the question 'What causes the reduction?'. The second argument is the nested event 'Locl' described before, who plays the role 'Theme', answering the question 'What is reduced?'. Event extraction is usually divided into three main sub-tasks, event detection, argument identification and event construction. Event detection identifies and classifies the trigger words into a set of predefined types of event triggers, while argument identification identifies and classifies the corresponding event arguments and their respective roles <ref type="bibr" target="#b0">[1]</ref>. Event construction refers to the merging of the relations that correspond to the same event. This work focuses on event detection, which has a fundamental role in the construction of events, since the triggers are the targets that allow to know that an event may exist <ref type="bibr" target="#b1">[2]</ref>. Difficulty for trigger detection comes from the sensitivity to the domain or subdomain (text can present specialized language), linguistic forms (triggers can be single words, multi-words, discontinuous markers) and ambiguity on the trigger class (a trigger word can be given different trigger classes) <ref type="bibr" target="#b2">[3]</ref>. According to different works, such as in <ref type="bibr" target="#b0">[1]</ref>, solutions to address these issues may include additional features to provide lexical, syntactic and semantic information about text, which have proven to be useful for detecting event triggers. Transformers models have been adopted for event detection due to their positive achievements in performance for solving different Natural Language Processing (NLP) tasks <ref type="bibr" target="#b3">[4]</ref>, <ref type="bibr" target="#b4">[5]</ref>. BERT <ref type="bibr" target="#b5">[6]</ref>, which stands for Bidirectional Encoder Representations from Transformers, is pretrained to generate bidirectional representations of the words, taking into account the semantics by considering both left and right directions of the text. From this pretraining, BERT can be fine-tuned by including additional layers on top of the model to solve new specific tasks. Furthermore, a series of variants from BERT have been developed for specific domains by being trained on large corpus with the same context, such as the biomedical domain.</p><p>In this work we compare BERT and four of its variants pretrained in the biomedical domain for the detection of biomedical event triggers to analyze their performance and identify which model is the most appropriate to address this task. For this purpose, BERT, BioBERT, SciBERT, Pub-MedBERT, and BioMedRoBERTa are fine-tuned using two different classifiers, a linear layer and a Bidirectional Long Short Term Memory (Bi-LSTM) layer, to detect biomedical event triggers. These BERT variants have been chosen for comparison because they share the same BERT architecture but have previously been pretrained using different data in the biomedical and/or general domain <ref type="bibr" target="#b6">[7]</ref>- <ref type="bibr" target="#b8">[9]</ref>. The models are learned using seven manually annotated data sets merged together. These corpora were originally developed for the event extraction task in different biomedical subdomains. In addition to these data, two features are included as lexical and syntactical extra-information to the models, the stems and the parts-of-speech (POS) tags, respectively. SciBERT presented the highest performance when the fine-tuning is done using a Bi-LSTM classifier without adding any extra-features. This result suggests that using a transformer model that is pretrained from scratch using biomedical and general domain data, allows to detect biomedical event triggers addressing different biomedical subdomains.</p><p>Our main contributions refer to the (1) comparison of the capability of different pretrained transformer models to detect biomedical events, (2) evaluation of the performance of two different classifiers for the fine-tuning of event detection, (3) analysis of the impact of manually annotated corpora on different biomedical subdomains to detect event triggers, and (4) assessment of whether adding lexical and syntactic information improves biomedical event detection.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>II. RELATED WORK</head><p>Current SOTA systems for event detection use neural network models due to their robust event extraction capabilities. P. V. Rahul et al. <ref type="bibr" target="#b9">[10]</ref> used Recurrent Neural Networks (RNN) to extract higher level features through the hidden state of the network to identify biomedical event triggers. They also used the word and the entity type embeddings as features, demonstrating positive results in the MLEE <ref type="bibr" target="#b10">[11]</ref> corpus. S. Duan et al. <ref type="bibr" target="#b11">[12]</ref> and Y. Zhao et al. <ref type="bibr" target="#b12">[13]</ref> explored an augmentation of the semantic information by integrating the full document representation. Both proposed the use of RNNs to extract cross-sentence features without the use of external resources. T. H. Nguyen and R. Grishman <ref type="bibr" target="#b13">[14]</ref> presented a Graph Convolution Network (GCN) model to exploit syntactic dependency relations. They used dependency trees to link words to their informative context for event detection. H. Yan et al. <ref type="bibr" target="#b14">[15]</ref> also proposed a GCN model, integrating aggregative attention to model and aggregate multi-order syntactic representations of the sentences, while in the case of S. Cui et al. <ref type="bibr" target="#b1">[2]</ref>, they extended the GCN by adding the relation aware concept, which exploits the syntactic relation labels and models the relation between words. DeepEventMine <ref type="bibr" target="#b15">[16]</ref> is an end-to-end system for event extraction that consists on four main modules; BERT model, trigger and entity detection and classification, relation extraction and event identification. For each of the modules, BERT is used as base model and a linear layer is added. One of the main objectives of this system is improving the extraction of nested events, where it has achieved the new SOTA performance on seven biomedical nested event extraction tasks. B. Portelli et al. <ref type="bibr" target="#b16">[17]</ref> compared BERT and five of its variants for the identification of Adverse Drugs and Events (ADEs). They showed that span-based pretraining, from spanBERT, provides an improvement in the recognition of ADEs, and that the pretraining of the models in the specific domain is particularly useful in comparison to train the models from scratch. A. Ramponi et al. <ref type="bibr" target="#b17">[18]</ref> developed BEESL, a neural network model based on a sequence labeling system for the extraction of events. The system converts the event structures into a format of sequence labeling, and uses BERT as language model. Y. Chen <ref type="bibr" target="#b18">[19]</ref> proposed the Multi-Source Transfer Learning-based Trigger Recognizer system, which is an extension on transfer learning using multiple source domains. All the datasets from the different domains are used for jointly train the neural network, achieving a higher recognition performance on the biomedical domain, having a wide coverage of events.</p><p>According to these works, transformer architectures have achieved positive results for detecting event triggers, and the use of pretrained language models has shown an improvement in the performance of this task. However, these works have been developed in a specific biomedical subdomain or in the general domain, not allowing a generalization to different biomedical subdomains. This may present a limitation in the detection of biomedical triggers because the language in biomedical texts is usually specialized and very specific. In addition, an analysis on how the pretrained language models used were selected over the other existing models is not described. Besides, according to A. Ramponi et al. <ref type="bibr" target="#b17">[18]</ref>, the detection of triggers continues to be the most important source of errors in event extraction, where around 31 % of the errors correspond to non-detection of triggers and 28 % to overdetection of triggers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>III. MATERIALS AND METHODS</head><p>Fig. <ref type="figure" target="#fig_1">2</ref> shows the approach followed in this work. The annotated data is given as input to the pretrained transformer models to calculate the embeddings. The models used are BERT and four of its variants, who have achieved state-of-theart performance in different NLP tasks without requiring major architectural modifications according to the specific tasks. In addition, the embeddings of a lexical and a syntactic features are also calculated. Then, a classification layer is added on top of the models for fine-tuning to detect event triggers. A. Transformer Model: BERT BERT <ref type="bibr" target="#b5">[6]</ref> is a contextualized word representation model based on a masked language model pretrained with bidirectional transformers <ref type="bibr" target="#b6">[7]</ref>. In BERT, the sequence of input tokens (words or sub-words) is constituted with initial vectors that are the combination of the token embeddings, the (token) position embeddings and the segment embeddings (text segment to which the token corresponds) through element-wise summation. The embeddings of extra features can be computed and included in this summation, such as the POS embeddings (token function in meaning and grammar within the sentence), which has demonstrated to be helpful in detecting event triggers <ref type="bibr" target="#b0">[1]</ref>. The embeddings are then passed to a set of layers of transformer modules. Each transformer layer generates a contextual representation of every token by summing the non-linear transformation of the tokens' representations from the previous layer. This representation is weighted by the attentions calculated using the representations of the previous layer as query. The last layer generates the contextual representations for all the tokens, where the information of the whole text span is combined <ref type="bibr" target="#b19">[20]</ref>. Following the BERT principle, other transformer models have been developed being pretrained with data from specific domains, e.g. biomedical data, presenting better adaptation for solving in-domain tasks. BioBERT <ref type="bibr" target="#b6">[7]</ref> and BioMedRoBERTa <ref type="bibr" target="#b20">[21]</ref> are some examples of BERT variants pretrained in the biomedical domain.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B. Fine-Tuning Transformer Models for Event Detection</head><p>Various downstream text mining tasks can be performed by making minimal modifications to the BERT architecture through a process of fine-tuning. Here, the transformer models are fine-tuned following the Named Entity Recognition (NER) task. NER is one of the main tasks of biomedical text mining, which aims to recognize domain-specific nouns in a biomedical corpus by giving each word s i in a sentence S = s 1 , s 2 , ..., s n (n refers to the number of words in the sentence) a predefined class l ∈ L (where L refers to the predefined collection of entity types including the no-entity class). In this work, NER is adapted to identify triggers, which implies not only identifying nouns, but also verbs and in some cases adjectives. Two different classification layers, a linear layer and a Bi-LSTM layer, are used separately for comparison. The output labels are obtained following the IOB (Inside-Outside-Beginning) tagging to identify and classify the triggers into the predefined trigger categories (in the case of the I and B tags).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>IV. EXPERIMENTAL SETTINGS A. Corpus</head><p>Table I presents the seven datasets 1 (all publicly available) used for fine-tuning the transformer models. These corpora were manually or semi-manually annotated by experts and 1 Cancer Genetics (CG) 2013 <ref type="bibr" target="#b21">[22]</ref>, Epigenetics and Post-translational Modifications (EPI) 2011 <ref type="bibr" target="#b22">[23]</ref>, GENIA 2011 <ref type="bibr" target="#b23">[24]</ref>, GENIA 2013 <ref type="bibr" target="#b24">[25]</ref>, Infectious Diseases (ID) 2011 <ref type="bibr" target="#b25">[26]</ref>, Pathway Curation (PC) 2013 <ref type="bibr" target="#b21">[22]</ref>, Multi-Level Event Extraction (MLEE) <ref type="bibr" target="#b10">[11]</ref> released to be used in the development and improvement of event extraction models. For the development of the experiments, the training and development datasets of all the corpora are initially merged into one single dataset and split into sentences, obtaining a total of 24,819 sentences. The original test sets are not used since the annotation are not released. Then, a random data partition into 80/20 is applied to obtain the training and testing sets, containing 19,855 and 4,964 sentences, respectively. Each sentence is further split into words by spaces and then, each word into sub-words or tokens following the setting of the BERT tokenization. These tokens are then given as input to the transformer model. All the trigger classes from each corpus are considered for the final trigger classification, presenting a final set of 58 classes (some classes overlap among the different corpora).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B. Pretrained Transformer Models</head><p>The transformer model, BERT <ref type="bibr" target="#b5">[6]</ref>, and four BERT variants pretrained in the biomedical domain, BioBERT <ref type="bibr" target="#b6">[7]</ref>, SciBERT <ref type="bibr" target="#b7">[8]</ref>, PubMedBERT <ref type="bibr" target="#b19">[20]</ref>, and BioMedRoBERTa <ref type="bibr" target="#b20">[21]</ref>, are used and compared for the detection of event triggers. These models differ from each other by the corpora in which they were pretrained (all in English), the type of pretraining and the size of the vocabulary. SciBERT and PubMedBERT, were pretrained from scratch, meaning that they use a unique vocabulary on the pretraining corpus and include embeddings that are specific for in-domain words. BioBERT and BioMedRoBERTa were pretrained starting from the BERT checkpoints, which means that the vocabularies are built with general-domain texts (similar to BERT) as well as the initialization of the embeddings.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C. Lexical and Syntactic features</head><p>The embeddings of stems and POS tags are also computed and added as extra-features. Stems provide lexical information that correspond to the words reduced to their word roots, without needing to be an existing word in the dictionary. Stems are obtained by applying a set of rules to remove attached suffixes and prefixes (affixes) from terms without considering the POS or the context of the word occurrence <ref type="bibr" target="#b26">[27]</ref>. POS tags represent syntactic information that provides the categorical differences of the words according to their functions in meaning and grammatically within the sentence. POS tagging consists on automatically obtaining the POS tag of each word among the different POS categories corresponding to their syntactical role <ref type="bibr" target="#b27">[28]</ref>. For this work, the stems of the words are obtained using the 'Snowball Stemmer' module from NLTK-3.4.5 2 , while the POS were obtained using spaCy-3.0.0 3 , using 'en core web sm', a pipeline developed for biomedical data. The embeddings of the stems and POS tags are summed to the rest of the embeddings (token, position and segment) calculated by the transformer models.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>D. Parameters Settings</head><p>All the experiments are done with PyTorch, using the Transformers 4 library and the models were taken from Hugging Face 5 . The transformer models are trained using the original parameters from BERT, presenting a dropout probability for the attention heads and hidden layers of 0.1, a hidden size of 768, an initializer range of 0.02, a max position embeddings of 512 and an intermediate size of 3,072. The number of attention heads and hidden layers was 12 for both. 'Adam' was used as optimizer and 'gelu' as activation function. The training parameters of the classification layers, both linear and Bi-LSTM, were set as follows; batch size of training and testing sets of 16, learning rate of 1e-05 and max gradient norm of 10, since gradient clipping was included. The maximum length of the sentences was set to 256. All the models were trained during 100 epochs on the training set without applying early stopping, and evaluated by measuring the precision (P), recall (R) and F1-score.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>V. RESULTS AND DISCUSSION</head><p>The evaluation results of the fine-tuning of the models for event detection are shown in Table <ref type="table" target="#tab_1">II</ref>. The approximate time in hours for the fine-tuning of each model is presented in the last column of the table. The highest results obtained in epochs 10, 30 and 100 are presented in bold, and the highest overall results of all epochs are presented in bold and underlined. First, we observe that SciBERT, which was pretrained from scratch using biomedical and general data, obtained the best results for each number of epochs and overall, in P, R and F1. It presented higher values when Bi-LSTM was used as classifier, especially when extra features were not added or when the lexical feature is added in the case of the training for 10 epochs. When the training was done for more than 10 epochs, the performance between SciBERT+POS (syntactic feature) and SciBERT+stem (lexical feature) was very similar. When the fine tuning was done using a linear classifier, SciBERT+POS achieved the best results, having a difference of around 10 % to when the lexical feature (SciBERT+stem) is added. PubMedBERT, a model pretrained from scratch using biomedical data, achieved the second best performance, being below SciBERT by 4 % when the training is done for 30 epochs, using Bi-LSTM as classifier and no adding extra-features (which was the best overall result of SciBERT). When PubMedBERT used Bi-LSTM as classifier, the results 2 https://www.nltk.org/ modules/nltk/stem/snowball.html 3 https://spacy.io/ 4 https://github.com/huggingface/transformers 5 https://huggingface.co/ were very similar between adding the syntactic or lexical features and not adding them. These results were also similar to when a linear classifier was used and the extra features are added, noticing that the result was worse when no features were added. In the case of BERT, which was trained from scratch using data from the general domain, it presented lower results than PubMedBERT by around 5 %. The best results of BERT were obtained using a linear classifier and not adding extra features, noticing that the results of BERT+POS and BERT+stem were slightly lower and very similar between each other. This same behavior can be noticed when Bi-LSTM was used as classifier. These three last transformer models, SciB-ERT, PubMedBERT and BERT, presented some similarities in that they were trained from scratch, used very comparable text sizes for their pretraining and had similar vocabulary sizes. The two models that presented the lowest performance are BioBERT and BioMedRoBERTa, both pretrained from the BERT weights, using biomedical and, biomedical and general data, respectively, presenting the largest text sizes of all the models. BioBERT used the smallest vocabulary for its pretraining, while BioMedRoBERTa used the largest in comparison to the rest of the models. In both models it was observed that there was not significant change when adding the extra features, although there was an improvement of around 7 % when using a Bi-LSTM classifier compared to a linear classifier. In general, what can be noticed in all the models is that adding the syntactic and lexical features does not improve the performance for detecting biomedical events. Fig. <ref type="figure" target="#fig_2">3</ref> shows the performance of fine-tuning SciBERT during 30 epochs using a Bi-LSTM classifier on the seven datasets separately. The F1-scores obtained using EPI, CG, ID, GE'13 and PC were similar between each other, obtaining values between 0.70 and 0.80. When GE'11 was used, the F1score reached a value of around 0.65 and when MLEE was used, the model completely failed the detection of triggers. In Fig. <ref type="figure" target="#fig_3">4</ref> it is observed the effect of fine-tuning SciBERT over 30 epochs using a Bi-LSTM classifier without adding extra-features by cumulatively adding each corpus one by one. Below each corpus is shown the total number of classes by adding each corpus. Recall was improved when CG and EPI were used together, and then reduced as the rest of the corpora were added. Precision was affected when EPI and GE'11 were added. The behavior of recall and precision varied differently depending on the added corpus, although when GE'13 was added both values were comparable, and as might be expected according to the observed on Fig. <ref type="figure" target="#fig_2">3</ref>, when MLEE was added the values were negatively affected. This behavior may be due to the fact that when adding a new corpus for the finetuning of the models, some classes may overlap between the corpora while other classes do not, causing to probably have less samples in the new classes and, therefore, affecting the balance of the data. In addition, the context of the different biomedical subdomains may also affect the performance, since BERT and its variants compute embeddings considering the semantics.  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>VI. CONCLUSIONS AND LIMITATIONS</head><p>In this work, we analyze BERT and four of its variants for biomedical event detection using corpora of different biomedical subdomains. By comparing the performance of the models and by adding a lexical and syntactic features, we found that fine-tuning SciBERT during 30 epochs using a Bi-LSTM classifier is the best strategy to detect biomedical events, especially if the additional features are not included. Furthermore, it is shown that fine-tuning the models for 10 to 30 epochs achieves most of the model learning, while training for more epochs can only achieve a slightly better result. One of the limitations of this work is the imbalance of the data. Since some classes of the different corpora overlap, the samples for those classes are increased, while the unique classes for each corpora present fewer samples. This can negatively affect the behavior of the models between the different subdomains. Also, using external tools to get POS tags and stems can lead to errors that are learned by the models and may be one of the reasons why performance without additional features achieves better results.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Fig. 1 .</head><label>1</label><figDesc>Fig. 1. Example of event extraction; the '-Reg' (negative regulation) event has the 'Locl' (localization) nested event as argument.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Fig. 2 .</head><label>2</label><figDesc>Fig.2. Overview of the approach proposed to detect event triggers.</figDesc><graphic coords="3,311.98,618.54,251.90,78.25" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Fig. 3 .</head><label>3</label><figDesc>Fig. 3. Fine-tuning SciBERT on the different corpus (Bi-LSTM classifier).</figDesc><graphic coords="6,76.82,423.82,195.35,130.24" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Fig. 4 .</head><label>4</label><figDesc>Fig. 4. Fine-tuning SciBERT by cumulatively adding the corpus one by one (Bi-LSTM classifier).</figDesc><graphic coords="6,339.83,423.81,195.34,125.51" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>TABLE II RESULTS</head><label>II</label><figDesc>OF THE MODELS' FINE-TUNING FOR EVENT DETECTION</figDesc><table><row><cell cols="2">Classifier Model</cell><cell></cell><cell>10 epochs</cell><cell></cell><cell></cell><cell>30 epochs</cell><cell></cell><cell></cell><cell cols="2">100 epochs</cell><cell>Time</cell></row><row><cell></cell><cell></cell><cell>P</cell><cell>R</cell><cell>F1</cell><cell>P</cell><cell>R</cell><cell>F1</cell><cell>P</cell><cell>R</cell><cell>F1</cell><cell>(h)</cell></row><row><cell></cell><cell>BERT</cell><cell cols="3">0.57 0.67 0.62</cell><cell cols="3">0.60 0.68 0.64</cell><cell cols="3">0.62 0.68 0.65</cell><cell>13</cell></row><row><cell>Linear</cell><cell>BERT+POS</cell><cell cols="3">0.58 0.61 0.59</cell><cell cols="3">0.62 0.63 0.62</cell><cell cols="3">0.64 0.64 0.64</cell><cell>14</cell></row><row><cell></cell><cell>BERT+stem</cell><cell cols="3">0.62 0.58 0.59</cell><cell cols="3">0.67 0.57 0.61</cell><cell cols="3">0.66 0.62 0.63</cell><cell>18</cell></row><row><cell></cell><cell>BERT</cell><cell cols="3">0.59 0.57 0.57</cell><cell cols="3">0.67 0.58 0.62</cell><cell cols="3">0.65 0.64 0.64</cell><cell>19</cell></row><row><cell>Bi-LSTM</cell><cell>BERT+POS</cell><cell cols="3">0.46 0.59 0.51</cell><cell cols="3">0.58 0.62 0.60</cell><cell cols="3">0.61 0.63 0.62</cell><cell>21</cell></row><row><cell></cell><cell>BERT+stem</cell><cell cols="3">0.57 0.59 0.57</cell><cell cols="3">0.63 0.61 0.62</cell><cell cols="3">0.67 0.60 0.63</cell><cell>15</cell></row><row><cell></cell><cell>BioBERT</cell><cell cols="3">0.49 0.49 0.48</cell><cell cols="3">0.52 0.50 0.50</cell><cell cols="3">0.56 0.49 0.51</cell><cell>19</cell></row><row><cell>Linear</cell><cell>BioBERT+POS</cell><cell cols="3">0.54 0.44 0.47</cell><cell cols="3">0.49 0.51 0.49</cell><cell cols="3">0.51 0.51 0.51</cell><cell>16</cell></row><row><cell></cell><cell>BioBERT+stem</cell><cell cols="3">0.48 0.50 0.47</cell><cell cols="3">0.52 0.46 0.49</cell><cell cols="3">0.53 0.48 0.50</cell><cell>18</cell></row><row><cell></cell><cell>BioBERT</cell><cell cols="3">0.60 0.39 0.45</cell><cell cols="3">0.60 0.56 0.58</cell><cell cols="3">0.64 0.56 0.59</cell><cell>14</cell></row><row><cell>Bi-LSTM</cell><cell>BioBERT+POS</cell><cell cols="3">0.57 0.39 0.44</cell><cell cols="3">0.59 0.55 0.57</cell><cell cols="3">0.61 0.55 0.58</cell><cell>15</cell></row><row><cell></cell><cell>BioBERT+stem</cell><cell cols="3">0.54 0.50 0.50</cell><cell cols="3">0.61 0.52 0.56</cell><cell cols="3">0.59 0.57 0.58</cell><cell>20</cell></row><row><cell></cell><cell>SciBERT</cell><cell cols="3">0.59 0.64 0.61</cell><cell cols="3">0.61 0.65 0.63</cell><cell cols="3">0.70 0.70 0.70</cell><cell>11</cell></row><row><cell>Linear</cell><cell>SciBERT+POS</cell><cell cols="3">0.67 0.72 0.69</cell><cell cols="3">0.69 0.71 0.70</cell><cell>0.72</cell><cell>0.73</cell><cell>0.72</cell><cell>16</cell></row><row><cell></cell><cell>SciBERT+stem</cell><cell cols="3">0.56 0.62 0.58</cell><cell cols="3">0.61 0.62 0.61</cell><cell cols="3">0.64 0.62 0.63</cell><cell>13</cell></row><row><cell></cell><cell>SciBERT</cell><cell cols="3">0.65 0.71 0.68</cell><cell>0.71</cell><cell>0.73</cell><cell>0.72</cell><cell cols="2">0.74 0.71</cell><cell>0.72</cell><cell>19</cell></row><row><cell>Bi-LSTM</cell><cell>SciBERT+POS</cell><cell cols="3">0.55 0.56 0.54</cell><cell cols="3">0.70 0.71 0.70</cell><cell cols="3">0.73 0.70 0.71</cell><cell>22</cell></row><row><cell></cell><cell>SciBERT+stem</cell><cell>0.67</cell><cell cols="2">0.68 0.67</cell><cell>0.72</cell><cell cols="2">0.68 0.70</cell><cell>0.75</cell><cell cols="2">0.68 0.71</cell><cell>16</cell></row><row><cell></cell><cell>PubMedBERT</cell><cell cols="3">0.49 0.61 0.54</cell><cell cols="3">0.58 0.66 0.61</cell><cell cols="3">0.58 0.62 0.60</cell><cell>14</cell></row><row><cell>Linear</cell><cell>PubMedBERT+POS</cell><cell cols="3">0.63 0.68 0.65</cell><cell cols="3">0.64 0.68 0.66</cell><cell cols="3">0.68 0.67 0.67</cell><cell>16</cell></row><row><cell></cell><cell>PubMedBERT+stem</cell><cell cols="3">0.62 0.66 0.64</cell><cell cols="3">0.66 0.67 0.66</cell><cell cols="3">0.70 0.67 0.68</cell><cell>18</cell></row><row><cell></cell><cell>PubMedBERT</cell><cell cols="3">0.57 0.65 0.61</cell><cell cols="3">0.66 0.69 0.67</cell><cell cols="3">0.67 0.69 0.68</cell><cell>19</cell></row><row><cell>Bi-LSTM</cell><cell>PubMedBERT+POS</cell><cell cols="3">0.58 0.65 0.61</cell><cell cols="3">0.67 0.66 0.66</cell><cell cols="3">0.69 0.67 0.68</cell><cell>17</cell></row><row><cell></cell><cell>PubMedBERT+stem</cell><cell cols="3">0.59 0.66 0.61</cell><cell cols="3">0.66 0.69 0.67</cell><cell cols="3">0.70 0.66 0.68</cell><cell>18</cell></row><row><cell></cell><cell>BioMedRoBERTa</cell><cell cols="3">0.48 0.49 0.47</cell><cell cols="3">0.52 0.52 0.51</cell><cell cols="3">0.55 0.50 0.52</cell><cell>14</cell></row><row><cell>Linear</cell><cell>BioMedRoBERTa+POS</cell><cell cols="3">0.52 0.56 0.53</cell><cell cols="3">0.55 0.51 0.52</cell><cell cols="3">0.55 0.53 0.54</cell><cell>13</cell></row><row><cell></cell><cell>BioMedRoBERTa+stem</cell><cell cols="3">0.50 0.53 0.51</cell><cell cols="3">0.51 0.51 0.51</cell><cell cols="3">0.53 0.54 0.53</cell><cell>18</cell></row><row><cell></cell><cell>BioMedRoBERTa</cell><cell cols="3">0.58 0.50 0.53</cell><cell cols="3">0.60 0.57 0.58</cell><cell cols="3">0.69 0.53 0.59</cell><cell>19</cell></row><row><cell>Bi-LSTM</cell><cell>BioMedRoBERTa+POS</cell><cell cols="3">0.51 0.56 0.52</cell><cell cols="3">0.61 0.53 0.56</cell><cell cols="3">0.62 0.56 0.58</cell><cell>15</cell></row><row><cell></cell><cell>BioMedRoBERTa+stem</cell><cell cols="3">0.51 0.54 0.52</cell><cell cols="3">0.57 0.59 0.57</cell><cell cols="3">0.60 0.59 0.59</cell><cell>15</cell></row></table></figure>
+		</body>
+		<back>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Biomedical event trigger detection with convolutional highway neural network and extreme learning machine</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Shen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Fan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Chu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Zhang</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.asoc.2019.105661</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Applied Soft Computing</title>
+		<imprint>
+			<biblScope unit="volume">84</biblScope>
+			<biblScope unit="page">105661</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<title level="m" type="main">Event detection with relation-aware graph convolutional neural networks</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Cui</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Yu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Shi</surname></persName>
+		</author>
+		<idno>arXiv-2002</idno>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv eprints</note>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Event extraction in pieces: Tackling the partial event identification problem on unseen corpora</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Zerva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ananiadou</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/W15-3804pp.31-41</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of BioNLP</title>
+		<meeting>BioNLP</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="volume">15</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Deep learning transformer architecture for named-entity recognition on low-resourced languages: State of the art results</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Hanslo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2022 17th Conference on Computer Science and Intelligence Systems (FedCSIS)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2022">2022</date>
+			<biblScope unit="page" from="53" to="60" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Using transformer models for gender attribution in polish</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Kaczmarek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Pokrywka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Graliński</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2022 17th Conference on Computer Science and Intelligence Systems (FedCSIS)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2022">2022</date>
+			<biblScope unit="page" from="73" to="77" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title level="m" type="main">Bert: Pre-training of deep bidirectional for language understanding</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Devlin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M.-W</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Toutanova</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/n19-1423</idno>
+		<idno type="arXiv">arXiv:1810.04805</idno>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Biobert: a pre-trained biomedical language representation model for biomedical text mining</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Yoon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">H</forename><surname>So</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Kang</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/bioinformatics/btz682</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="1234" to="1240" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<title level="m" type="main">Scibert: A pretrained language model for scientific text</title>
+		<author>
+			<persName><forename type="first">I</forename><surname>Beltagy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Lo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Cohan</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/D19-1371</idno>
+		<idno type="arXiv">arXiv:1903.10676</idno>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Pre-trained models, data augmentation, and ensemble learning for biomedical information extraction and document classification</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Erdengasileng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Han</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Tian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Sui</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Hu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Pan</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/database/baac066</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Database</title>
+		<imprint>
+			<biblScope unit="volume">2022</biblScope>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<monogr>
+		<title level="m" type="main">Biomedical event trigger identification using bidirectional recurrent neural network based models</title>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">V</forename><surname>Rahul</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">K</forename><surname>Sahu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Anand</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/W17-2340</idno>
+		<idno type="arXiv">arXiv:1705.09516</idno>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Event extraction across multiple levels of biological organization</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Pyysalo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Ohta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Miwa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H.-C</forename><surname>Cho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Tsujii</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ananiadou</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/bioin-formatics/bts407</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="issue">18</biblScope>
+			<biblScope unit="page" from="575" to="581" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Exploiting document level information to improve event detection via recurrent neural networks</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Duan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>He</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Zhao</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Eighth International Joint Conference on Natural Language Processing</title>
+		<meeting>the Eighth International Joint Conference on Natural Language Processing</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="352" to="361" />
+		</imprint>
+	</monogr>
+	<note>Long Papers</note>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Document embedding enhanced event detection with hierarchical and supervised attention</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Jin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Cheng</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/P18-2066pp.414-419</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics</title>
+		<meeting>the 56th Annual Meeting of the Association for Computational Linguistics</meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="volume">2</biblScope>
+		</imprint>
+	</monogr>
+	<note>Short Papers</note>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Graph convolutional networks with argument-aware pooling for event detection</title>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">H</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Grishman</surname></persName>
+		</author>
+		<idno type="DOI">10.1609/aaai.v32i1.12039</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Thirty-second AAAI conference on artificial intelligence</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Event detection with multi-order graph convolution and aggregated attention</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Yan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Jin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Meng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Cheng</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/D19-1582pp.5766-5770</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)</title>
+		<meeting>the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)</meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Deepeventmine: end-to-end neural nested event extraction from biomedical texts</title>
+		<author>
+			<persName><forename type="first">H.-L</forename><surname>Trieu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">T</forename><surname>Tran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">N</forename><surname>Duong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Miwa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ananiadou</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/bioinformatics/btaa540</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="issue">19</biblScope>
+			<biblScope unit="page" from="4910" to="4917" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Bert prescriptions to avoid unwanted headaches: A comparison of transformer architectures for adverse drug event detection</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Portelli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Lenzi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Chersoni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Serra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Santus</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2021.eacl-main.149pp.1740-1747</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 16th Conference of the European Chapter of the Association for Computational Linguistics: Main</title>
+		<meeting>the 16th Conference of the European Chapter of the Association for Computational Linguistics: Main</meeting>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Biomedical event extraction as sequence labeling</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ramponi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Van Der Goot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Lombardo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Plank</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2020.emnlp-main.431pp.5357-5367</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)</title>
+		<meeting>the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">A transfer learning model with multi-source domains for biomedical event trigger extraction</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Chen</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/s12864-020-07315-1</idno>
+	</analytic>
+	<monogr>
+		<title level="j">BMC genomics</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="18" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Domain-specific language model pretraining for biomedical natural language processing</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Gu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Tinn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Cheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Lucas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Usuyama</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Naumann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Poon</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3458754</idno>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Computing for Healthcare (HEALTH)</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="23" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Don&apos;t stop pretraining: Adapt language models to domains and tasks</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Gururangan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Marasović</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Swayamdipta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Lo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Beltagy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Downey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">A</forename><surname>Smith</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2020.acl-main.740</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of ACL</title>
+		<meeting>ACL</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Overview of bionlp shared task 2013</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Nédellec</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Bossy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J.-D</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J.-J</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Ohta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Pyysalo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Zweigenbaum</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the BioNLP shared task 2013 workshop</title>
+		<meeting>the BioNLP shared task 2013 workshop</meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="1" to="7" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Overview of the epigenetics and post-translational modifications (epi) task of bionlp shared task 2011</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Ohta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Pyysalo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Tsujii</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of BioNLP Shared Task 2011 Workshop</title>
+		<meeting>BioNLP Shared Task 2011 Workshop</meeting>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="16" to="25" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Overview of genia event task in bionlp shared task 2011</title>
+		<author>
+			<persName><forename type="first">J.-D</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Takagi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Yonezawa</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of BioNLP shared task 2011 workshop</title>
+		<meeting>BioNLP shared task 2011 workshop</meeting>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="7" to="15" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">The genia event extraction shared task, 2013 edition-overview</title>
+		<author>
+			<persName><forename type="first">J.-D</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Yasunori</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the BioNLP Shared Task 2013 Workshop</title>
+		<meeting>the BioNLP Shared Task 2013 Workshop</meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="8" to="15" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Overview of the infectious diseases (id) task of bionlp shared task 2011</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Pyysalo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Ohta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Rak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Sullivan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Mao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Sobral</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Tsujii</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ananiadou</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of BioNLP Shared Task 2011 Workshop</title>
+		<meeting>BioNLP Shared Task 2011 Workshop</meeting>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="26" to="35" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">A comparative study of stemming algorithms</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">G</forename><surname>Jivani</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Int. J. Comp. Tech. Appl</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="1930" to="1938" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<author>
+			<persName><forename type="first">S</forename><surname>Petrov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Das</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Mcdonald</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1104.2086</idno>
+		<title level="m">A universal part-of-speech tagset</title>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

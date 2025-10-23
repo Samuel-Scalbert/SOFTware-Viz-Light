@@ -7,27 +7,27 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		<fileDesc>
 			<titleStmt>
 				<title level="a" type="main">ProvLight: Efficient Workflow Provenance Capture on the Edge-to-Cloud Continuum</title>
-				<funder>
-					<orgName type="full">FAPERJ</orgName>
-				</funder>
-				<funder ref="#_CtBjUYq">
+				<funder ref="#_AFSaXgQ">
 					<orgName type="full">Agence Nationale de la Recherche</orgName>
 					<orgName type="abbreviated">ANR</orgName>
 				</funder>
 				<funder>
-					<orgName type="full">CNPq</orgName>
+					<orgName type="full">FAPERJ</orgName>
+				</funder>
+				<funder ref="#_3XmQjvA">
+					<orgName type="full">Office of Science of the U.S. Department of Energy</orgName>
 				</funder>
 				<funder>
 					<orgName type="full">Universities</orgName>
 				</funder>
 				<funder>
-					<orgName type="full">HPC-BigData Inria Challenge (IPL)</orgName>
-				</funder>
-				<funder ref="#_BRZFTXR">
-					<orgName type="full">Office of Science of the U.S. Department of Energy</orgName>
+					<orgName type="full">CNPq</orgName>
 				</funder>
 				<funder>
 					<orgName type="full">HPDaSc</orgName>
+				</funder>
+				<funder>
+					<orgName type="full">HPC-BigData Inria Challenge (IPL)</orgName>
 				</funder>
 				<funder>
 					<orgName type="full">Inria</orgName>
@@ -134,7 +134,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.0" ident="GROBID" when="2024-04-12T14:50+0000">
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:14+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<ref target="https://github.com/kermitt2/grobid"/>
 				</application>
@@ -212,10 +212,10 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <div><head>ACKNOWLEDGMENTS</head><p>This work was funded by <rs type="funder">Inria</rs> through the <rs type="funder">HPC-BigData Inria Challenge (IPL)</rs>, by the <rs type="funder">French ANR OverFlow</rs> project (<rs type="grantNumber">ANR-15-CE25-0003</rs>), and the <rs type="funder">HPDaSc</rs> associate team with <rs type="person">Brazil</rs>. <rs type="person">Marta Mattoso</rs> and <rs type="person">Débora Pina</rs> are funded by <rs type="funder">CNPq</rs> and <rs type="funder">FAPERJ</rs><rs type="person">. Renan</rs> is at the <rs type="institution">Oak Ridge Leadership Computing Facility</rs> at the <rs type="institution">Oak Ridge National Laboratory</rs>, which is supported by the <rs type="funder">Office of Science of the U.S. Department of Energy</rs> under Contract No. <rs type="grantNumber">DE-AC05-00OR22725</rs>. Experiments presented in this paper were carried out using the Grid'5000 and <rs type="institution">FIT IoT LAB</rs> testbeds, supported by a scientific interest group hosted by several <rs type="funder">Universities</rs> and organizations.</p></div>
 			</div>
 			<listOrg type="funding">
-				<org type="funding" xml:id="_CtBjUYq">
+				<org type="funding" xml:id="_AFSaXgQ">
 					<idno type="grant-number">ANR-15-CE25-0003</idno>
 				</org>
-				<org type="funding" xml:id="_BRZFTXR">
+				<org type="funding" xml:id="_3XmQjvA">
 					<idno type="grant-number">DE-AC05-00OR22725</idno>
 				</org>
 			</listOrg>

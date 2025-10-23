@@ -113,13 +113,14 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 							<date/>
 						</imprint>
 					</monogr>
-					<idno type="MD5">0E6BEAF435187E3655CA7283E982F60B</idno>
+					<idno type="MD5">B561A8840EF4BE747CEE9D05DDCB0D7F</idno>
+					<idno type="DOI">10.1145/3448016.3457311</idno>
 				</biblStruct>
 			</sourceDesc>
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.0" ident="GROBID" when="2024-04-12T14:49+0000">
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:15+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<ref target="https://github.com/kermitt2/grobid"/>
 				</application>

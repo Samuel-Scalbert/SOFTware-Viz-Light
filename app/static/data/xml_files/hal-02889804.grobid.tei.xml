@@ -1,0 +1,1973 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Building a User-Generated Content North-African Arabizi Treebank: Tackling Hell</title>
+				<funder ref="#_VwNvzx4 #_W4yu2uU">
+					<orgName type="full">Agence Nationale de la Recherche</orgName>
+					<orgName type="abbreviated">ANR</orgName>
+				</funder>
+				<funder ref="#_YJmaZ4w">
+					<orgName type="full">unknown</orgName>
+				</funder>
+				<funder ref="#_EXKKJ9t">
+					<orgName type="full">French Ministry of Industry and Ministry of Foreign Affairs</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Djamé</forename><surname>Seddah</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Inria</orgName>
+								<address>
+									<settlement>Paris</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Farah</forename><surname>Essaidi</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Inria</orgName>
+								<address>
+									<settlement>Paris</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Amal</forename><surname>Fethi</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Inria</orgName>
+								<address>
+									<settlement>Paris</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Matthieu</forename><surname>Futeral</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Inria</orgName>
+								<address>
+									<settlement>Paris</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Benjamin</forename><surname>Muller</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Inria</orgName>
+								<address>
+									<settlement>Paris</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="institution">Sorbonne Université</orgName>
+								<address>
+									<settlement>Paris</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Pedro</forename><forename type="middle">Javier</forename><surname>Ortiz Suárez</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Inria</orgName>
+								<address>
+									<settlement>Paris</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="institution">Sorbonne Université</orgName>
+								<address>
+									<settlement>Paris</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Benoît</forename><surname>Sagot</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Inria</orgName>
+								<address>
+									<settlement>Paris</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Abhishek</forename><surname>Srivastava</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Inria</orgName>
+								<address>
+									<settlement>Paris</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Joakim</forename><surname>Nivre</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Mitchell</forename><surname>Abrams</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Željko</forename><surname>Agić</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Lars</forename><surname>Ahrenberg</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Lene</forename><surname>Antonsen</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Maria</forename><surname>Jesus</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Gashaw</forename><surname>Arutie</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Masayuki</forename><surname>Asahara</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Luma</forename><surname>Ateyah</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Mohammed</forename><surname>Attia</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Aitziber</forename><surname>Atutxa</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Liesbeth</forename><surname>Augustinus</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Elena</forename><surname>Badmaeva</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Miguel</forename><surname>Ballesteros</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Esha</forename><surname>Banerjee</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Sebastian</forename><surname>Bank</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Verginica</forename><forename type="middle">Barbu</forename><surname>Mititelu</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">John</forename><surname>Bauer</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Sandra</forename><surname>Bellato</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Kepa</forename><surname>Bengoetxea</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Riyaz</forename><forename type="middle">Ahmad</forename><surname>Bhat</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Erica</forename><surname>Biagetti</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Eckhard</forename><surname>Bick</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Rogier</forename><surname>Blok- Land</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Victoria</forename><surname>Bobicev</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Carl</forename><surname>Börstell</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Cristina</forename><surname>Bosco</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Gosse</forename><surname>Bouma</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Sam</forename><surname>Bowman</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Adri- Ane</forename><surname>Boyd</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Aljoscha</forename><surname>Burchardt</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Marie</forename><surname>Candito</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Bernard</forename><surname>Caron</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Gauthier</forename><surname>Caron</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Gülşen</forename><surname>Ce- Biroğlu Eryiğit</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Giuseppe</forename><forename type="middle">G A</forename><surname>Celano</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Savas</forename><surname>Cetin</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Fabricio</forename><surname>Chalub</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Jinho</forename><surname>Choi</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Yongseok</forename><surname>Cho</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Jayeol</forename><surname>Chun</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Silvie</forename><surname>Cinková</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Aurélie</forename><surname>Col- Lomb</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Çağrı</forename><surname>Çöltekin</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Miriam</forename><surname>Connor</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Marine</forename><surname>Courtin</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Elizabeth</forename><surname>Davidson</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Marie-Catherine</forename><surname>De Marneffe</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Valeria</forename><surname>De Paiva</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Arantza</forename><surname>Diaz De Ilarraza</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Carly</forename><surname>Dickerson</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Peter</forename><surname>Dirix</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Kaja</forename><surname>Dobrovoljc</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Timothy</forename><surname>Dozat</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Kira</forename><surname>Droganova</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Puneet</forename><surname>Dwivedi</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Marhaba</forename><surname>Eli</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Ali</forename><surname>Elkahky</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Binyam</forename><surname>Ephrem</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Tomaž</forename><surname>Erjavec</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Aline</forename><surname>Etienne</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Richárd</forename><surname>Farkas</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Hector</forename><surname>Fernandez</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Jen- Nifer</forename><surname>Foster</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Cláudia</forename><surname>Freitas</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Katarína</forename><surname>Gaj- Došová</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Daniel</forename><surname>Galbraith</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Marcos</forename><surname>Garcia</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Moa</forename><surname>Gärdenfors</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Kim</forename><surname>Gerdes</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Filip</forename><surname>Ginter</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Iakes</forename><surname>Goenaga</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Koldo</forename><surname>Gojenola</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Memduh</forename><surname>Gökırmak</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Yoav</forename><surname>Goldberg</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Xavier</forename><forename type="middle">Gómez</forename><surname>Guinovart</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Berta</forename><forename type="middle">Gonzáles</forename><surname>Saavedra</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Matias</forename><surname>Grioni</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Normunds</forename><surname>Grūzītis</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Bruno</forename><surname>Guillaume</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Céline</forename><surname>Guillot- Barbance</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Nizar</forename><surname>Habash</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Jan</forename><surname>Hajič</surname><genName>jr</genName></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Linh</forename><forename type="middle">Hà</forename><surname>Mỹ</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Na-Rae</forename><surname>Han</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Kim</forename><surname>Harris</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Dag</forename><surname>Haug</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Barbora</forename><surname>Hladká</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Jaroslava</forename><surname>Hlaváčová</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Florinel</forename><surname>Hociung</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Petter</forename><surname>Hohle</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Jena</forename><surname>Hwang</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Radu</forename><surname>Ion</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Elena</forename><surname>Irimia</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Tomáš</forename><surname>Jelínek</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Anders</forename><surname>Johannsen</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Fredrik</forename><surname>Jørgensen</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Hüner</forename><surname>Kaşıkara</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Sylvain</forename><surname>Kahane</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Hiroshi</forename><surname>Kanayama</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Jenna</forename><surname>Kan- Erva</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Tolga</forename><surname>Kayadelen</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Václava</forename><surname>Kettnerová</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Jesse</forename><surname>Kirchner</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Natalia</forename><surname>Kotsyba</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Simon</forename><surname>Krek</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Sookyoung</forename><surname>Kwak</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Veronika</forename><surname>Laippala</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Lorenzo</forename><surname>Lambertino</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Tatiana</forename><surname>Lando</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Septina</forename><forename type="middle">Dian</forename><surname>Larasati</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Alexei</forename><surname>Lavrentiev</surname></persName>
+						</author>
+						<author>
+							<persName><roleName>Phương</roleName><forename type="first">John</forename><surname>Lee</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Lê</forename><surname>Hồng</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Alessandro</forename><surname>Lenci</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Saran</forename><surname>Lertpra- Dit</surname></persName>
+						</author>
+						<author>
+							<persName><roleName>Cheuk</roleName><forename type="first">Herman</forename><surname>Leung</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Ying</forename><surname>Li</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Josie</forename><surname>Li</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Keying</forename><surname>Li</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Kyungtae</forename><surname>Lim</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Nikola</forename><surname>Ljubešić</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Olga</forename><surname>Loginova</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Olga</forename><surname>Lyashevskaya</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Teresa</forename><surname>Lynn</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Vivien</forename><surname>Macketanz</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Aibek</forename><surname>Makazhanov</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Michael</forename><surname>Mandl</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Christopher</forename><surname>Manning</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Ruli</forename><surname>Ma- Nurung</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Cătălina</forename><surname>Mărănduc</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">David</forename><surname>Mareček</surname></persName>
+						</author>
+						<author>
+							<persName><roleName>Héctor</roleName><forename type="first">Katrin</forename><surname>Marheinecke</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Martínez</forename><surname>Alonso</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">André</forename><surname>Martins</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Jan</forename><surname>Mašek</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Yuji</forename><surname>Matsumoto</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Ryan</forename><surname>Mcdonald</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Gustavo</forename><surname>Mendonça</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Niko</forename><surname>Miekka</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Anna</forename><surname>Missilä</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Cătălin</forename><surname>Mititelu</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Yusuke</forename><surname>Miyao</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Simonetta</forename><surname>Montemagni</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Amir</forename><surname>More</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Laura</forename><forename type="middle">Moreno</forename><surname>Romero</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Shinsuke</forename><surname>Mori</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Bjartur</forename><surname>Mortensen</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Bohdan</forename><surname>Moskalevskyi</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Kadri</forename><surname>Muis- Chnek</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Yugo</forename><surname>Murawaki</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Kaili</forename><surname>Müürisep</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Pinkey</forename><surname>Nainwani</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Juan</forename><surname>Ignacio</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Navarro</forename><surname>Horñiacek</surname></persName>
+						</author>
+						<title level="a" type="main">Building a User-Generated Content North-African Arabizi Treebank: Tackling Hell</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">1CC4061B5A255AF6A1A3879D9165E045</idno>
+					<idno type="DOI">10.18653/v1/2020.acl-main.107</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:14+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>We introduce the first treebank for a romanized user-generated content variety of Algerian, a North-African Arabic dialect known for its frequent usage of code-switching. Made of 1500 sentences, fully annotated in morpho-syntax and Universal Dependency syntax, with full translation at both the word and the sentence levels, this treebank is made freely available. It is supplemented with 50k unlabeled sentences collected from Common Crawl and webcrawled data using intensive data-mining techniques. Preliminary experiments demonstrate its usefulness for POS tagging and dependency parsing. We believe that what we present in this paper is useful beyond the low-resource language community. This is the first time that enough unlabeled and annotated data is provided for an emerging user-generated content dialectal language with rich morphology and code switching, making it an challenging testbed for most recent NLP approaches.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>Until the rise of fully unsupervised techniques that would free our field from its addiction to annotated data, the question of building useful data sets for under-resourced languages at a reasonable cost is still crucial. Whether the lack of labeled data originates from being a minority language status, its almost oral-only nature or simply its programmed political disappearance, geopolitical events are a factor highlighting a language deficiency in terms of natural language processing resources that can have an important societal impact. Events such as the Haïti crisis in 2010 <ref type="bibr" target="#b14">(Munro, 2010)</ref> and the current Algerian revolts <ref type="bibr" target="#b18">(Nossiter, 2019)</ref> <ref type="foot" target="#foot_0">1</ref> are massively reflected on social media, yet often in languages or dialects that are poorly re-sourced, namely Haitian Creole and Algerian dialectal Arabic in these cases. No readily available parsing and machine translations systems are available for such languages. Taking as an example the Arabic dialects spoken in North-Africa, mostly from Morocco to Tunisia, sometimes called Maghribi, sometimes Darija, these idioms notoriously contain various degrees of code-switching with languages of former colonial powers such as French, Spanish, and, to a much lesser extent, Italian, depending on the area of usage <ref type="bibr" target="#b7">(Habash, 2010;</ref><ref type="bibr" target="#b5">Cotterell et al., 2014;</ref><ref type="bibr" target="#b23">Saadane and Habash, 2015)</ref>. They share Modern Standard Arabic (MSA) as their matrix language <ref type="bibr" target="#b15">(Myers-Scotton, 1993)</ref>, and of course present a rich morphology. In conjunction with the resource scarcity issue, the codeswitching variability displayed by these languages challenges most standard NLP pipelines, if not all. What makes these dialects especially interesting is their widespread use in user-generated content found on social media platforms, where they are generally written using a romanized version of the Arabic script, called Arabizi, which is neither standardized nor formalized. The absence of standardization for this script adds another layer of variation in addition to well-known user generated content idiosyncrasies, making the processing of this kind of text an even more challenging task.</p><p>In this work, we present a new data set of about 1500 sentences randomly sampled from the romanized Algerian dialectal Arabic corpus of <ref type="bibr" target="#b5">Cotterell et al. (2014)</ref> and from a small corpus of lyrics coming from Algerian dialectal Arabic Hip-Hop and Raï music genre that had the advantage of having already available translations and of being representative of Algerian vernacular urban youth language. We manually annotated this data set with morpho-syntactic information (partsof-speech and morphological features), together with glosses and code-switching labels at the word level, as well as sentence-level translations. Furthermore, we added an additional manual annotation layer following the Universal Dependencies annotation scheme <ref type="bibr">(Nivre et al., 2018)</ref>, making of this corpus, to the best of our knowledge, the first user-generated content treebank in romanized dialectal Arabic. This treebank contains 36% of French tokens, making it a valuable resource to measure and study the impact of code-switching on NLP tools. We supplement this annotated corpus with about 50k unlabeled sentences extracted from both Common Crawl and additional web crawled data, making of this data set an important milestone in North-African dialectal Arabic NLP. This corpus is made freely available under a Creative Commons license. 2</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">The Language</head><p>As stated by <ref type="bibr" target="#b7">Habash (2010)</ref>, Arabic languages are often classified into three categories : (i) Classical Arabic, as found in the Qur'an and related canonical texts, (ii) Modern Standard Arabic, the official language of the vast majority of Arabic speaking countries and (iii) Dialectal Arabic, whose instances exhibit so much variations that they are not mutually understandable across geographically distant regions. As space is missing for an exhaustive description of Arabic language variations, we refer the reader to <ref type="bibr" target="#b7">Habash (2010)</ref>, <ref type="bibr" target="#b24">Samih (2017)</ref> and especially to <ref type="bibr" target="#b23">Saadane and Habash (2015)</ref> for a thorough account of Algerian dialectal Arabic, which is the focus of this work. In short, the key properties of North-African dialectal Arabic are:</p><p>• It is a Semitic language, non codified, mostly spoken; • It has a rich-inflexion system, which qualifies this dialect as a morphologically-rich language <ref type="bibr" target="#b30">(Tsarfaty et al., 2010)</ref>, even though <ref type="bibr" target="#b23">Saadane and Habash (2015)</ref> write that many properties present in Classical Arabic are absent from this dialect (e.g. it has simplified nominal and verbal case systems); • It displays a high degree of variability at all levels: spelling and transliteration conventions, phonology, morphology, lexicon; • It exhibits a high degree of code-switching; due to historical reasons and cultural influence of French in the media circles, the Algerian dialect, as well as Tunisian and Morocco, is known for its heavy use of French words. As stated above, this dialect is mostly spoken and has even been dubbed with disdain as a Creole language by the higher levels of the Algerian political hierarchy. <ref type="foot" target="#foot_1">3</ref> Still, its usage is ubiquitous in the society and, by extension, in social media usergenerated content. Interestingly, the lack of Arabic support in input devices led to the rise of a romanized written form of this dialect, which makes use of alphanumeric letters as additional graphemes to represent phonemes that the Latin script does not naturally cover. Not limited to North-African dialectal Arabic, this non-standard "transliteration" concurrently emerged all over the Arabic-speaking world, and is often called Arabizi. Whether or not written in Arabizi, the inter-dialectal divergences between all Arabic dialects remain.</p><p>The following list highlights some of the main properties of Arabizi compared to MSA written in the Arabic script.</p><p>• Unlike in MSA written in the Arabic script, where short vowels are marked using optional diacritics, all vowels are explicitly written; • Digits are used to cope with Arabic phonemes that have no counterpart in the Latin script; for instance, the digit "3" is often used to denote the ayin consonant, because it is graphically similar to its rendition in Arabic script; • No norms exist, resulting in a high degree of variability between people writing in Arabizi. From now on, we will call NArabizi the Algerian dialect of Arabic when written in Arabizi, thereby simultaneously referring to the language variety and to the script itself. Table <ref type="table" target="#tab_0">1</ref> presents several examples of lexical variation within NArabizi. Interestingly, this variability also affects the codeswitched vocabulary, which is mostly French in the case of NArabizi. A typical example of NArabizi that also exhibits code-switching with nonstandard French spelling can be seen in Example 1.</p><p>( </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Corpus</head><p>As other North-African Arabic dialects, NArabizi is a resource-poor language, with, to the best of our knowledge, only one available corpus developed by <ref type="bibr" target="#b5">Cotterell et al. (2014)</ref> for language identification purposes.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Data Collection</head><p>Cotterell et al. ( <ref type="formula">2014</ref>)'s corpus was collected in 2012 from an Algerian newspaper's web forums and covers a wide range of topics (from discussion about football events to politics). We collected the 9973 raw sentences from its GitHub repository<ref type="foot" target="#foot_2">4</ref> and sampled about 1300 sentences. In addition, because they were available with translations in French and English, we included lyrics from a few dozen recent popular songs of various genres <ref type="bibr">(Raï, hip-hop, etc.)</ref>, leading to an additional set of 200 sentences. These 1500 sentences form the core of our NArabizi treebank annotation project. In order to make our corpus usable by modern, resource-hungry natural language processing techniques, we also used data-driven language identification models to extract NArabizi samples among the whole collection of the Common-Crawl-based OSCAR corpora <ref type="bibr" target="#b19">(Ortiz Suárez et al., 2019)</ref> as well as 2 millions sentences of additional crawled webdata, resulting in 50k NArabizi sentences of high quality, to date the largest corpus of this language. This makes this collection a valuable test bed for low-resource NLP research.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Annotation Layers</head><p>Our NArabizi treebank contains 5 annotations layers: (i) tokenization, (ii) morphology, (iii) codeswitching identification, (iv) syntax and (v) translation.</p><p>Tokenization Following <ref type="bibr" target="#b26">Seddah et al. (2012)</ref> and their work on the French Social Media Bank, we decided to apply a light tokenization process where we manually tokenized only the obvious cases of wrongly detached punctuations and "missing whitespaces" (i.e. cases where two words are contracted into one token).<ref type="foot" target="#foot_3">5</ref> </p><p>Morphological Analysis This layer consists of two sets of part-of-speech tags, one following the Universal POS tagset <ref type="bibr" target="#b21">(Petrov et al., 2011)</ref> and the other the FTB-cc tagset extended to deal with user-generated content <ref type="bibr" target="#b26">(Seddah et al., 2012)</ref>. In cases of word contractions, we followed their guidelines and used multiple POS as in cetait (`itwas')/PRON+VERB/CLS+V. In addition, we added several morphological features following the Universal Dependency annotation scheme <ref type="bibr">(Nivre et al., 2018)</ref>, namely gender, number, tense and verbal mood. Note that instead of adding lemmas, we included French glosses for two reasons: firstly for practical reasons, as they helped manual corrections done by non-native speakers of NArabizi, and secondly because of the non-formalized nature of this language, which makes lemmatization very hard, almost akin to etymological research as in the case of garjouma/the throat which can either originate from French gorge or be of Amazigh root.</p><p>Code-Switching identification Unlike other works in user-generated content for minority languages <ref type="bibr" target="#b11">(Lynn and Scannell, 2019)</ref>, we do not distinguish between inter-and intra-sentential code-switching and consider word-level codemixing as lexical borrowing.</p><p>We annotate code-switching at the word level with information about the source language, regardless of the canonical-ness of spelling.</p><p>Syntactic Annotations Here again we follow the Universal Dependencies 2.2 annotation scheme <ref type="bibr">(Nivre et al., 2018)</ref>. When facing sequences of French words with regular French syntax, we followed the UD French guidelines; otherwise, we followed the UD Arabic guidelines, following the Prague Arabic Dependency UD Treebank.</p><p>Translation Layer Our final layer is made up for sentence-level translations in French. It shall be noted that the validation of these translations often led to massive rewording, as the annotators came from different regions of Algeria and could diverge in their interpretations of a given sentence. A sample of 200 sentences was blindly translated (without access to the morpho-syntactic analysis) in order to favor further research on the fluency of machine translation for this dialect.</p><p>All annotations layers are displayed in Figure <ref type="figure" target="#fig_0">1</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Extending Our Data Set With Noisy Unlabeled Data</head><p>The need for more data has never been more striking as they are needed for important tasks such as handling lexical sparseness issues via word embeddings, lexicon acquisition, domain adaptation via self-training, or fine-tuning pre-trained language models, its modern incarnation. The trouble with NArabizi is that it is a spoken language whose presence can be mostly found in informal texts such as social media. More importantly, the Arabizi transliteration process is also used by other Arabic dialects, making the data collection a needle in a haystack search task. We therefore present in this section the process we used to mine an additional set of 50k </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">First method: SVM-based classifier</head><p>Using keywords-based web scrapping tools, we collected a raw corpus of 4 million sentences, called CrawlWeb, that in fine contained a mixture of French, English, Spanish, MSA and Arabizi texts. Since we are only interested in NArabizi, we designed a classifier to extract proper sentences from that raw corpus. The corpus we used as gold standard is made of 9k sentences of attested NArabizi from our original corpus and 18k of French and English tweets. Using language identification <ref type="bibr" target="#b10">(Lui and Baldwin, 2012)</ref>, we convert each sentence from the gold-standard corpus to a feature vector containing language-identification scores and use it as input to a SVM classifier with a classical 80/10/10 split. With a precision and recall score of 94%, we filtered out 173k code-mixed sentences out of the CrawlWeb corpus. Preliminary experiments showed promising initial results, but further analysis pointed out a high level of noise in this initial set, both in terms of erroneous language identification and on the amount of remnant ASCII artifacts that could not easily be removed without impacting the valid NArabizi sentences.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Second method: Neural-based classification</head><p>The objectives of this method are twofold: (i) selecting data from CommonCrawl using a neural classifier and (ii) using this data set to intersect the data collected with the previous method. The idea is to ensure the quality of the final resulting unlabeled corpus.</p><p>Given the large number of noisy data in Com-monCrawl, a "noise" class is added to the language classification model and is built according to several heuristics. <ref type="foot" target="#foot_4">6</ref> That "noisy" class corpus is made of 40k sentences randomly selected among the result of the application of these rules to a short, 10M-sentence sample of CommonCrawl. We then trained a classifier using Fasttext <ref type="bibr" target="#b8">(Joulin et al., 2016)</ref> on 102 languages, 40k sentences each, extracted from the CommonCrawl-based, languageclassifed OSCAR corpus, to which we added the 9k sentences of the NArabizi original corpus and the "noise" class. The final dataset is composed of 4,090,432 sentences and is split into 80% train, 10% development and 10% test sets. The classifier consists in a linear classifier (here logistic regression) fed with the average of the n-gram embeddings. n-grams are useful in this case as they enables the model to capture specific sequences of NArabizi characters such as lah, llah, 3a, 9a, etc. We choose to embed 2-to 5-grams. These parameters lead to precision and recall scores of 97% on the NArabizi test set.</p><p>After an intensive post-processing step (cf. Appendix A.2), this process results in a dataset of 13,667 sentences extracted from half the Common-Crawl corpus. <ref type="foot" target="#foot_5">7</ref> To evaluate the quality of the resulting data set, we randomly picked 3 times 100 sentences, and genuine NArabizi sentences were manually identified, which allowed us to assess the accuracy of our corpus as reaching 97%. Table 2 presents the results of the evaluation of the two classification methods performed on both the development and test sets of the original NArabizi corpus. <ref type="foot" target="#foot_6">8</ref> Results show that the fastText classifier and its n-gram features is more precise than its nonneural counterpart and its language-id feature vectors.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Corpus intersection</head><p>When applied to the CrawlWeb corpus, the Fasttext model extracted 44,797 unique Arabizi sentences while the SVM model extracted 83,295 unique Arabizi sentences. The intersection of both extractions amounts to 39,003 Arabizi sentences (with a 99% precision). This means that 44,292 sentences were classified as Arabizi by the SVM model and not by Fasttext. Among them, by random sampling, it can be stated approximately that 55% are indeed NArabizi. Mistakes are misclassified sentences (Spanish and English sentences, for instance) or sentences with only "noise" (such as symbols). 5,794 sentences were classified as NArabizi by the Fasttext model and not SVM. Among them, by random sampling, it can be stated that approximately 60% are indeed Arabizi. Errors are long sentences with only figures and numbers or sentences with many symbols (e.g. " { O3 } " or "!!!! !!!!"). In order to ensure that the collected corpus contains as little non-NArabizi data as possible, we only release the intersection of the data we classified, to which we add the original NArabizi corpus <ref type="bibr" target="#b5">(Cotterell et al., 2014)</ref> (after having removed the annotated data we extracted from it). Table <ref type="table" target="#tab_5">3</ref>   </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">Pre-annotation Tool Development via Noisy Transliteration of an Arabic UD Treebank</head><p>In order to speed up the annotation process of our data, we decided to create a pre-annotation morphosyntactic and syntactic annotator trained on quasi-synthetic data obtained by "transliterating" a pre-existing Arabic (MSA) treebank, the Prague Arabic Dependency Treebank (PADT), into the NArabizi Latin script, together with data from the French GSD UD treebank. Both are taken from the UD treebank collection <ref type="bibr">(Nivre et al., 2018)</ref>. Before it can be used as training data, the PADT needs to first be transformed into a form similar to NArabizi. Since the PADT corpus is a collection of MSA sentences with no diacritics, it is impossible to directly "transliterate" into NArabizi. We first diacritized it, in order to add short-vowel information, and then "translitterated" it into an Arabizi-like corpus. We describe this process in this Section. The results of the pseudo-NArabizi parser trained on the "translitterated" corpus are then presented in Section 6.2.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Random diacritics</head><p>As vowels are always written in Arabizi, the PADT corpus needs to be diacritized before transliteration. Using an equiprobable distribution, diacritics were added randomly, and the text then transliterated using the probabil-ity distributions we describe below. The BLEU score <ref type="bibr" target="#b20">(Papineni et al., 2002)</ref> of this method on the small parallel corpus provides a baseline of 0.31.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Proper diacritization</head><p>Using the Farasa software <ref type="bibr" target="#b0">(Abdelali et al., 2016)</ref>, PADT sentences are diacritized with 81% precision rate, 9 then tokens aligned with corresponding diacritized words. The text is then transliterated the same way as before.</p><p>The BLEU score of this version is 0.60. An example showing how this system visibly improves the transliteration can be seen in the "Prop. Diac." output in Example 2.</p><p>(2) Source: berlin tarfoudhou 7oussoul charika amrikia 3ala ro5sat tasni3 dabbabat "léopard" al almania Trans.: Berlin refuses to authorize an American firm to produce the "Leopard" German tank.</p><p>Random diac.: brouliyani trfidh 7iswla chiroukou amiyirikyoui 3alia rou5soui tasaniya3i dhabouaboui louyiwibiaridha alalmaanouyou Proper diac.: birlin tarfoudhou 7ousolou charikatin 2amiriqiatin 3alaa rou5sati tasni3i dabbatin " lyuberid " el2almeniati Transliteration Once diacritized, the corpus can be properly transliterated. Arabic letters are either consonant sounds or long vowels, each one may have several different transliterations in NArabizi, depending on the writer's age, accent, education and first learned Western language. For example, the letter ‫ث‬ 10 can be transliterated as "t" or "th". A probability must be assigned for each possibility, and to make it as close as possible to what is produced by NArabizi speakers, a small parallel corpus of PADT sentences and their transliteration 9 Other diacritization systems have better performances <ref type="bibr" target="#b2">(Belinkov and Glass, 2015)</ref> but are either not maintained with the proper python packages, or come with a fee.</p><p>10 Theh, U+062B.</p><p>by ten NArabizi speakers was assembled, and then each letter aligned with all its possible matches to get probability distributions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">Usability</head><p>In this section we describe preliminary experiments on part-of-speech tagging and statistical dependency parsing that show promising results while highlighting the expected difficulty of processing a low-resource language with a high level of code-switching and multiple sources of variability.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1">POS Tagging</head><p>The baseline POS tagger we used is alVWTagger,<ref type="foot" target="#foot_7">11</ref> a feature-based statistical POS tagger, which ranked 3rd at the 2017 CoNLL multilingual parsing shared task <ref type="bibr" target="#b32">(Zeman et al., 2017)</ref>. It is briefly described in (de La <ref type="bibr" target="#b9">Clergerie et al., 2017)</ref>. In short, it is a left-to-right tagger that relies on a set of carefully manually designed features, including features extracted from an external lexicon, when available, and a linear model trained using the Vowpal Wabbit framework. <ref type="foot" target="#foot_8">12</ref> In our case, we simply created an "external" lexicon by extracting the content of the training set. It contributes to improving the POS accuracy because it provides the tagger with (ambiguous, partial) additional information about words in the right context of the current word. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2">Early Parsing experiments</head><p>As stated earlier in this paper, NArabizi contains a high-level of code-switching with French and is closely related to MSA. We described in Section 5 how we built a mixed treebank based on the French GSD UD treebank and our Arabizi version of the Prague Arabic Dependency Treebank. We trained the UDPipe parser <ref type="bibr" target="#b29">(Straka and Straková, 2017)</ref> on various treebanks obtained by combining different proportions of the French GSD and our PADT-based pseudo-Arabizi treebank. We ran these parsers with already annotated gold partsof-speech.  <ref type="table" target="#tab_10">6</ref>), this first parser did not performed very well when evaluated on Arabizi dev . This performance level proved insufficient to speed up the annotation task. We therefore manually annotated 300 more NArabizi sentences (Arabizi train300 ), to be used as additional training data. When added to MIX train , parsing performance did improve, yet not to a sufficient extent, especially in terms of Labeled Attachement Score (LAS). It turned out that training UDPipe on these 300 manually annotated NArabizi sentences only (Arabizi train300 ) produced better scores, resulting in a parser that we did use as a pre-annotation tool in a constant bootstrap process to speed up the annotation of the remaining sentences. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">Discussion</head><p>How interleaved are French and NArabizi? As stated before, NArabizi takes its root in Classical Arabic and in multiple sources of integration of French, MSA and Berber, the Amazigh language. As the NArabizi treebank contains more than 36% of French words, it is of interest to use recent methods of visualization to see how interleaved it is with some of its source languages. To this end, we extract words embeddings using fastText <ref type="bibr" target="#b8">(Joulin et al., 2016)</ref> from a corpus made of the "translitterated" PADT described in Section 5, the French UD GSD and NArabizi original corpus <ref type="bibr" target="#b5">(Cotterell et al., 2014)</ref>. Two-dimensional representations of the resulting embeddings space for 300 selected words are shown in Figure <ref type="figure">2</ref> for embeddings of size 50 and 100. We notice that the overall shapes of both representations are very similar, apart from a non significant x-axis reversal. On the first components, increasing the embedding size does not provide more information.</p><p>We also see that French and transliterated Arabic words are clearly separated into two clusters of low standard deviation, while NArabizi words are very spread out. Some fall within the French cluster, they correspond to French words present in this Algerian dialect. Others are in the middle of the Arabic cluster, these are the purely Arabic words of the dialect. Between the two, there are Amazigh words (rak, mech), arabized French words (tomobile &lt; French automobile), Arabic words whose Berber pronunciation has resulted in an unexpected NArabizi rendering (nta instead of expected enta 'you', mchit instead of expected machayt 'to go-2SING').</p><p>What is the Impact of Code-Switching in POS-tagging performance? Given the large degree of interleaving between French and NArabizi, it is interesting to assess the impact of the French vocabulary on the performance of a POS-tagger trained on French data only. For these experiments, we use the StanfordNLP neural tagger <ref type="bibr" target="#b22">(Qi et al., 2019)</ref>, which ranked 1st in POS tagging at the 2018 UD shared task, trained on the UD French ParTUT treebank, using French fastText vectors <ref type="bibr" target="#b13">(Mikolov et al., 2018)</ref>. In order to perform a meaningful evaluation, we split the NArabizi training set into 4 buckets of approximately 25% of it size in tokens, with a increasing proportion of identified NArabizi tokens. Results in Table <ref type="table" target="#tab_11">7</ref> show a clear drop of performance between the sentences that contain more code-switching (59.55% of UPOS accuracy) and those with none (16.84%). This suggests that low-resource languages with a highlevel of code-switching such as NArabizi can benefit from NLP models trained on the secondary language. The level of performance to expect from these cross-language approaches is yet to be determined.  <ref type="formula">2016</ref>), we provide here the cost figures of this annotation campaign. We do not include the salaries of the permanent staff, nor do we include the overhead. These figures are meant as an indication of the effort needed to create an annotated data set from scratch. It shall be noted that even though the interannotator agreement gave us early indications on the difficulty of the tasks, it also acted as a metric in terms of language variability among annotators. None of them come from the same part of North-Africa and none of them has the same familiarity with the topics discussed in the web-forums we annotated. We had to constantly re-annotate sentences and update the guidelines every time new idiosyncrasies were encountered and most importantly accepted as such by the annotators. Compared to what was reported in <ref type="bibr" target="#b12">(Martínez Alonso et al., 2016)</ref>, the figures are here much higher (about 5 times higher), because unlike their work on French treebanks, we could not use preexisting guidelines for this language and because we could not keep the same team all along the project, so that new members had to be trained almost from scratch or to work on totally different layers. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="9">Related Work</head><p>Research on Arabic dialects is quite extensive. Space is lacking to describe it exhaustively. In relation to our work regarding North-African dialect, we refer to the work of <ref type="bibr" target="#b24">(Samih, 2017)</ref> who along his PhD covered an large range of topics regarding the dialect spoken specifically in Morocco and generally regarding language identification <ref type="bibr" target="#b25">(Samih et al., 2016)</ref> in code-switching scenario for various Arabic dialects <ref type="bibr" target="#b1">(Attia et al., 2019)</ref>. Unlike NArabizi dialects, the resource situation for Arabic dialects in canonical written form can hardly be qualified as scarce given the amount of resources produced by the Linguistic Data Consortium regarding these languages, see <ref type="bibr" target="#b6">(Diab et al., 2013)</ref> for details on those corpora. These data have been extensively covered in various NLP aspects by the former members of the Columbia Arabic NLP team, among which Mona Diab, Nizar Habash, and Owen Rambow, in their respective subsequent lines of works. Many small to medium scale linguistics resources, such as morphological lexicons or bilingual dictionaries have been produced <ref type="bibr" target="#b27">(Shoufan and Alameri, 2015)</ref>. Recently, in addition to the release of a small-range parallel corpus for some Arabic dialects <ref type="bibr" target="#b3">(Bouamor et al., 2014)</ref>, a larger corpus collection was released, covering 25 city dialects in the travel domain <ref type="bibr" target="#b4">(Bouamor et al., 2018)</ref>.</p><p>Regarding the specific NLP modeling challenges of processing Arabic-based languages, as part of the morphologically-rich languages, recent advances in joint models have been addressed by <ref type="bibr" target="#b31">Zalmout and Habash (2019)</ref> that recently efficiently adapted a neural architecture to perform joint word segmentation, lemmatization, morphological analysis and POS tagging on an Arabic dialect. Recent works on cross-language learning using the whole massively multilingual pre-trained language models artillery have started to emerge <ref type="bibr" target="#b28">(Srivastava et al., 2019)</ref>. If successful, such models could help to alleviate the resource scarcity issue that plagues low-resources languages in the more-than-ever data hungry modern NLP.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="10">Conclusion</head><p>We introduced the first treebank for an Arabic dialect spoken in North-Africa and written in romanized form, NArabizi. More over, being made of user-generated content, this treebank covers a large variety of language variation among native speakers and displays a high level of codeswitching. Annotated with 4 standard morphosyntactic layers, two of them following the Universal Dependency annotation scheme, and provided with translation to French as well as glosses and word language identification, we believe that this corpus will be useful for the community at large, both for linguistic purposes and as training data for resource-scarce NLP in a high-variability scenario. In addition to the annotated data, we provide around 1 million tokens (over 46k sentences) of unlabeled NArabizi content, resulting in the largest dataset available for this dialect. Our corpora are freely available 14 under the CC-BY-SA license and the NArabizi treebank is also released as part of the Universal Dependencies project.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: Annotation example: "mouto ya les égyptiens rana fi la coupe de monde m3a wladna erajala les vrais algeriens" [Die Egyptians! We are at the world cup with our children of Algeria, the real men!]. Code-switching is highlighted in blue.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 9 :Figure 9 :</head><label>99</label><figDesc>Figure 9: Word embbeddings de 300 mots (100 arabe translittéré, 100 français, 100 arabizi) calculés avec l'algorithme FastText (jaune : français, bleu : arabe, rouge : arabizi) 29</figDesc><graphic coords="8,372.64,176.98,100.50,104.22" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc>Examples of lexical variation in NArabizi</figDesc><table><row><cell cols="2">Gloss Attested forms</cell><cell>Lang</cell></row><row><cell>why</cell><cell cols="2">wa3lach w3alh 3alach 3lache NArabizi</cell></row><row><cell>all</cell><cell>ekl kal kolach koulli kol</cell><cell>NArabizi</cell></row><row><cell cols="2">many beaucoup boucoup bcp</cell><cell>French</cell></row></table><note><p>2 http://almanach-treebanks.fr/NArabizi</p></note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 2 :</head><label>2</label><figDesc>F1-scores of both language classification models on the Arabizi class.</figDesc><table><row><cell></cell><cell>F1-Score Arabizi</cell></row><row><cell>Fasttext</cell><cell>0.97</cell></row><row><cell>SVM Classifier</cell><cell>0.94</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head></head><label></label><figDesc>provides quantitative information about our corpora.</figDesc><table><row><cell>Dataset</cell><cell cols="2">#Sentences #Tokens</cell></row><row><cell>Original source data</cell><cell>9,372</cell><cell>203k</cell></row><row><cell>Manually Annotated</cell><cell>1,434</cell><cell>22k</cell></row><row><cell>Unlabeled NArabizi</cell><cell>46,941</cell><cell>1.02M</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_5"><head>Table 3 :</head><label>3</label><figDesc>Corpus statistics</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_6"><head>Table 4 :</head><label>4</label><figDesc>BLEU score of both transliteration systems.</figDesc><table><row><cell>System</cell><cell>BLEU score</cell></row><row><cell>Random diacritization</cell><cell>0.31</cell></row><row><cell>Proper diacritization</cell><cell>0.60</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_7"><head>Table 5 :</head><label>5</label><figDesc>POS tagging results.</figDesc><table><row><cell>13</cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell>Dev</cell><cell></cell><cell>Test</cell></row><row><cell>All</cell><cell>OOV</cell><cell>all</cell><cell>OOV</cell></row><row><cell>OOV %</cell><cell>32.28</cell><cell></cell><cell>32.75</cell></row><row><cell cols="4">UPOS (a) 78.74 55.85 80.37 57.42</cell></row><row><cell cols="4">MFEATS (b) 88.10 70.04 87.17 69.12</cell></row><row><cell cols="4">(a)+(b) 72.61 40.94 73.87 43.50</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_8"><head></head><label></label><figDesc>The best scores were obtained with a model trained on a mix 30% of pseudo-Arabizi and 70% of French, which we call the MIX treebank, totaling 5,955 training sentences. We split this treebank into training, development and test sets, called MIX train/dev/test , following a 80/10/10 split. We used a very small manually annotated NArabizi development dataset of 200 NArabizi sentences, called Arabizi dev , to evaluate our parser. As shown in Table 6 (line "Mix"), despite good results on MIX's development and training sets, MIX dev and MIX test respectively (see Table</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_9"><head>.67 89.42 87</head><label></label><figDesc>.69 89.44 39.28 51.52 MIX+Arabizi 300 87.42 89.20 87.44 89.22 55.54 65.36 Arabizi 300 39.11 49.62 39.14 49.65 63.</figDesc><table><row><cell>Training corpus</cell><cell>Dev</cell><cell>Test</cell><cell>Test Arabizi</cell></row><row><cell cols="4">LAS UAS LAS UAS LAS UAS</cell></row><row><cell>MIX 87</cell><cell></cell><cell></cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_10"><head>03 71.21Table 6 :</head><label>6</label><figDesc>Results of UDPipe (trained 100 epochs) on the preliminary test set.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_11"><head>Table 7 :</head><label>7</label><figDesc>POS tagging Performance with regard to codemix proportion trained on UD French Partut treebank</figDesc><table><row><cell cols="2">% of NArabizi per sent. &lt;60</cell><cell cols="2">60-78 78-100</cell><cell>100</cell></row><row><cell>bucket set size (sent.)</cell><cell>322</cell><cell>286</cell><cell>283</cell><cell>276</cell></row><row><cell>StanfordNLP (French)</cell><cell cols="2">59.55 35.93</cell><cell cols="2">25.41 16.84</cell></row><row><cell cols="2">8 Treebanking Costs</cell><cell></cell><cell></cell><cell></cell></row></table><note><p>Following Martínez Alonso et al. (</p></note></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1" xml:id="foot_0"><p>https://www.nytimes.com/2019/03/01/world/ africa/algeria-protests-bouteflika.html</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3" xml:id="foot_1"><p>https://www.lesoirdalgerie.com/articles/ 2010/02/17/article.php?sid=95823&amp;cid=2</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="4" xml:id="foot_2"><p>https://github.com/ryancotterell/arabic_ dialect_annotation</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="5" xml:id="foot_3"><p>We corrected in average one tokenization error (less frequently two) per sentence on the web forum parts. We noticed a high degree of variance. Some users displayed this behavior much more than others. This led some of our annotators to believe it resulted from an ill-functioning input device.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="6" xml:id="foot_4"><p>These heuristics are presented in the Appendix for reproducibility.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="7" xml:id="foot_5"><p>Due to computing power limitation, we were not able to run our selection on the whole CommonCrawl.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="8" xml:id="foot_6"><p>Note that the precision and recall are slightly different in both methods, but the rounding at the second decimal made them equal.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="11" xml:id="foot_7"><p>Note that we performed a set of baseline experiments with UDPipe 2.0<ref type="bibr" target="#b29">(Straka and Straková, 2017)</ref> as well on a previous version of this data set. It reached only 73.7 of UPOS on the test set.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="12" xml:id="foot_8"><p>12 https://github.com/VowpalWabbit/vowpal_ wabbit/</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="13" xml:id="foot_9"><p>wiki13  Without this endogenous lexicon extraction step, the tagger performed slightly worse, although the difference is small.</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>Acknowledgments</head><p>The work was partially funded by the <rs type="funder">French Research Agency</rs> projects <rs type="projectName">ParSiTi</rs> (<rs type="grantNumber">ANR-16-CE33-0021</rs>), <rs type="projectName">SoSweet</rs> (<rs type="grantNumber">ANR15-CE38-0011-01</rs>) and by the <rs type="funder">French Ministry of Industry and Ministry of Foreign Affairs</rs> via the <rs type="programName">PHC Maimonide France-Israel cooperation programme</rs>, as well as by the <rs type="projectName">Sagot</rs>'s chair in the <rs type="projectName">PRAIRIE institute</rs> funded by the <rs type="funder">French national agency ANR</rs> as part of the "<rs type="programName">Investissements d'avenir" programme</rs> under the reference <rs type="grantNumber">ANR-19-P3IA-0001</rs>.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funded-project" xml:id="_VwNvzx4">
+					<idno type="grant-number">ANR-16-CE33-0021</idno>
+					<orgName type="project" subtype="full">ParSiTi</orgName>
+				</org>
+				<org type="funded-project" xml:id="_EXKKJ9t">
+					<idno type="grant-number">ANR15-CE38-0011-01</idno>
+					<orgName type="project" subtype="full">SoSweet</orgName>
+					<orgName type="program" subtype="full">PHC Maimonide France-Israel cooperation programme</orgName>
+				</org>
+				<org type="funded-project" xml:id="_YJmaZ4w">
+					<orgName type="project" subtype="full">Sagot</orgName>
+				</org>
+				<org type="funded-project" xml:id="_W4yu2uU">
+					<idno type="grant-number">ANR-19-P3IA-0001</idno>
+					<orgName type="project" subtype="full">PRAIRIE institute</orgName>
+					<orgName type="program" subtype="full">Investissements d&apos;avenir&quot; programme</orgName>
+				</org>
+			</listOrg>
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A Appendix</head><p>A.1 Class-noise for our language classifier Given the large number of noisy data in Common Crawl, a class noise is added to the classification model we presented section 4.2 and is built according to the following empirical rules :</p><p>• If the word "url" appears more than two times, the sentence is added to class noise. • If the sentence has more than four " [ " , the sentence is added to class noise. • The same rule as above works for " ", " ", " { " or " } " symbols. • If the word "http" appears more than two times, the sentence is added to class noise. • If more than two "@" character, the sentence is added to class noise in order to capture sentences with email address or tweets with only mentioned people. • If the phrase "WARC-Refers-To" appears, the sentence is added to class noise.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A.2 Post-processing steps</head><p>• Get unique sentences (about 20K sentences).</p><p>• The model is likely to classify as Arabizi sentences which contain any letter repeated a lot of times in a row (e.g. "iiiiiiii..", "uuuuuuu..", "ffffff..."). These sentences are deleted from the dataset. • Due to the n-gram embeddings, "lah" is considered as a marker of Arabizi, so a lot of sentences containing "blah" are classified as Arabizi. If this phrase appears more than 5 times, the sentence is deleted. • Figures and numbers are widespread in Arabizi (particularly "3" and "9"), so the model classifies too many sentences which contains only numbers. Therefore, sentences which have more "number of figures" characters than 80% of the number of characters (excluded figures) are deleted.</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Farasa: A fast and furious segmenter for arabic</title>
+		<author>
+			<persName><forename type="first">Ahmed</forename><surname>Abdelali</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kareem</forename><surname>Darwish</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nadir</forename><surname>Durrani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hamdy</forename><surname>Mubarak</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">HLT-NAACL Demos</title>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">POS tagging for improving code-switching identification in Arabic</title>
+		<author>
+			<persName><forename type="first">Mohammed</forename><surname>Attia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Younes</forename><surname>Samih</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ali</forename><surname>Elkahky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hamdy</forename><surname>Mubarak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ahmed</forename><surname>Abdelali</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kareem</forename><surname>Darwish</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/W19-4603</idno>
+		<ptr target="http://almanach-treebanks" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Fourth Arabic Natural Language Processing Workshop</title>
+		<meeting>the Fourth Arabic Natural Language Processing Workshop<address><addrLine>, Italy</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="18" to="29" />
+		</imprint>
+	</monogr>
+	<note>Florence</note>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Arabic diacritization with recurrent neural networks</title>
+		<author>
+			<persName><forename type="first">Yonatan</forename><surname>Belinkov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Glass</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing</title>
+		<meeting>the 2015 Conference on Empirical Methods in Natural Language Processing<address><addrLine>Lisbonne, Portugal</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="2281" to="2285" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">A multidialectal parallel corpus of Arabic</title>
+		<author>
+			<persName><forename type="first">Houda</forename><surname>Bouamor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nizar</forename><surname>Habash</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kemal</forename><surname>Oflazer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Ninth International Conference on Language Resources and Evaluation (LREC&apos;14)</title>
+		<meeting>the Ninth International Conference on Language Resources and Evaluation (LREC&apos;14)<address><addrLine>Reykjavik, Iceland</addrLine></address></meeting>
+		<imprint>
+			<publisher>European Language Resources Association (ELRA</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="1240" to="1245" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">The MADAR Arabic dialect corpus and lexicon</title>
+		<author>
+			<persName><forename type="first">Houda</forename><surname>Bouamor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nizar</forename><surname>Habash</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mohammad</forename><surname>Salameh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wajdi</forename><surname>Zaghouani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Owen</forename><surname>Rambow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dana</forename><surname>Abdulrahim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ossama</forename><surname>Obeid</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Salam</forename><surname>Khalifa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fadhl</forename><surname>Eryani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Erdmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kemal</forename><surname>Oflazer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Eleventh International Conference on Language Resources and Evaluation (LREC 2018)</title>
+		<meeting>the Eleventh International Conference on Language Resources and Evaluation (LREC 2018)<address><addrLine>Miyazaki, Japan</addrLine></address></meeting>
+		<imprint>
+			<publisher>European Language Resources Association (ELRA</publisher>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">An Algerian Arabic-French code-switched corpus</title>
+		<author>
+			<persName><forename type="first">Ryan</forename><surname>Cotterell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adithya</forename><surname>Renduchintala</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Naomi</forename><surname>Saphra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Callison-Burch</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Workshop on Free/Open-Source Arabic Corpora and Corpora Processing Tools Workshop Programme</title>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page">34</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<title level="m" type="main">LDC Arabic treebanks and associated corpora: Data divisions manual</title>
+		<author>
+			<persName><forename type="first">Mona</forename><surname>Diab</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nizar</forename><surname>Habash</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Owen</forename><surname>Rambow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ryan</forename><surname>Roth</surname></persName>
+		</author>
+		<idno>CCLS-13-02</idno>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+		<respStmt>
+			<orgName>Center for Computational Learning Systems, Columbia University</orgName>
+		</respStmt>
+	</monogr>
+	<note type="report_type">Technical Report</note>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<title level="m" type="main">Introduction to Arabic Natural Language Processing</title>
+		<author>
+			<persName><forename type="first">Nizar</forename><surname>Habash</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<publisher>Morgan and Clay</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<author>
+			<persName><forename type="first">Armand</forename><surname>Joulin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Edouard</forename><surname>Grave</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Piotr</forename><surname>Bojanowski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthijs</forename><surname>Douze</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hérve</forename><surname>Jégou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tomas</forename><surname>Mikolov</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1612.03651</idno>
+		<title level="m">Fasttext. zip: Compressing text classification models</title>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">The ParisNLP entry at the ConLL UD shared task 2017: A tale of a #Parsing-Tragedy</title>
+		<author>
+			<persName><forename type="first">Éric</forename><surname>De</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">La</forename><surname>Clergerie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benoît</forename><surname>Sagot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Djamé</forename><surname>Seddah</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/K17-3026</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the CoNLL 2017 Shared Task: Multilingual Parsing from Raw Text to Universal Dependencies</title>
+		<meeting>the CoNLL 2017 Shared Task: Multilingual Parsing from Raw Text to Universal Dependencies<address><addrLine>Vancouver, Canada</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="243" to="252" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">langid.py: An off-the-shelf language identification tool</title>
+		<author>
+			<persName><forename type="first">Marco</forename><surname>Lui</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Timothy</forename><surname>Baldwin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">The 50th Annual Meeting of the Association for Computational Linguistics, Proceedings of the System Demonstrations</title>
+		<meeting><address><addrLine>Jeju Island, Korea</addrLine></address></meeting>
+		<imprint>
+			<publisher>The Association for Computer Linguistics</publisher>
+			<date type="published" when="2012-07-10">2012. July 10, 2012</date>
+			<biblScope unit="page" from="25" to="30" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Codeswitching in irish tweets: A preliminary analysis</title>
+		<author>
+			<persName><forename type="first">Teresa</forename><surname>Lynn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Scannell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Celtic Language Technology Workshop</title>
+		<meeting>the Celtic Language Technology Workshop</meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="32" to="40" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">From Noisy Questions to Minecraft Texts: Annotation Challenges in Extreme Syntax Scenarios</title>
+		<author>
+			<persName><forename type="first">Martínez</forename><surname>Héctor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Djamé</forename><surname>Alonso</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benoît</forename><surname>Seddah</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Sagot</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">The 2nd Workshop on Noisy User-generated Text (W-NUT)</title>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Advances in pre-training distributed word representations</title>
+		<author>
+			<persName><forename type="first">Tomas</forename><surname>Mikolov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Edouard</forename><surname>Grave</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Piotr</forename><surname>Bojanowski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Puhrsch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Armand</forename><surname>Joulin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the International Conference on Language Resources and Evaluation (LREC 2018)</title>
+		<meeting>the International Conference on Language Resources and Evaluation (LREC 2018)</meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Crowdsourced translation for emergency response in haiti: the global collaboration of local knowledge</title>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Munro</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">AMTA Workshop on Collaborative Crowdsourcing for Translation</title>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="1" to="4" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Common and uncommon ground: Social and structural factors in codeswitching</title>
+		<author>
+			<persName><forename type="first">Carol</forename><surname>Myers-Scotton</surname></persName>
+		</author>
+		<idno type="DOI">10.1017/S0047404500017449</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Language in Society</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="475" to="503" />
+			<date type="published" when="1993">1993</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<title level="m" type="main">Universal dependencies 2</title>
+		<author>
+			<persName><forename type="first">Anna</forename><surname>Nedoluzhko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gunta</forename><surname>Nešpore-Bērzkalne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lương</forename><surname>Nguyễn Thị</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Huyền</forename><surname>Nguyễn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thị</forename><surname>Minh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vitaly</forename><surname>Nikolaev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rattima</forename><surname>Nitisaroj</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hanna</forename><surname>Nurmi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stina</forename><surname>Ojala</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Olúòkun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lilja</forename><surname>Adédayọ Ọstling</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Niko</forename><surname>Øvrelid</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elena</forename><surname>Partanen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marco</forename><surname>Pascual</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Agnieszka</forename><surname>Passarotti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Siyao</forename><surname>Patejuk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cenel-Augusto</forename><surname>Peng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Guy</forename><surname>Perez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Slav</forename><surname>Perrier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jussi</forename><surname>Petrov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emily</forename><surname>Piitulainen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Barbara</forename><surname>Pitler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thierry</forename><surname>Plank</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Poibeau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lauma</forename><surname>Popel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sophie</forename><surname>Pretkalniņa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Prokopis</forename><surname>Prévost</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Prokopidis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tiina</forename><surname>Przepiórkowski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sampo</forename><surname>Puolakainen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andriela</forename><surname>Pyysalo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexandre</forename><surname>Rääbis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Loganathan</forename><surname>Rademaker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Taraka</forename><surname>Ramasamy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carlos</forename><surname>Rama</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vinit</forename><surname>Ramisch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Livy</forename><surname>Ravishankar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Siva</forename><surname>Real</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Georg</forename><surname>Reddy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Rehm</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Larissa</forename><surname>Rießler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laura</forename><surname>Rinaldi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luisa</forename><surname>Rituma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mykhailo</forename><surname>Rocha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rudolf</forename><surname>Romanenko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Davide</forename><surname>Rosa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Valentin</forename><surname>Rovati</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Olga</forename><surname>Roca</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shoval</forename><surname>Rudina</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shadi</forename><surname>Sadde</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tanja</forename><surname>Saleh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephanie</forename><surname>Samardžić</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Manuela</forename><surname>Samson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Baiba</forename><surname>Sanguinetti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yanin</forename><surname>Saulīte</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nathan</forename><surname>Sawanakunanon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sebastian</forename><surname>Schneider</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Djamé</forename><surname>Schuster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wolfgang</forename><surname>Seddah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mojgan</forename><surname>Seeker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mo</forename><surname>Seraji</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Atsuko</forename><surname>Shen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Muh</forename><surname>Shimada</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dmitry</forename><surname>Shohibussirri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Natalia</forename><surname>Sichinava</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maria</forename><surname>Silveira</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Radu</forename><surname>Simi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katalin</forename><surname>Simionescu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mária</forename><surname>Simkó</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kiril</forename><surname>Šimková</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aaron</forename><surname>Simov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Isabela</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Antonio</forename><surname>Soares-Bastos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Milan</forename><surname>Stella</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jana</forename><surname>Straka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alane</forename><surname>Strnadová</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Umut</forename><surname>Suhr</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zsolt</forename><surname>Sulubacak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dima</forename><surname>Szántó</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuta</forename><surname>Taji</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Takaaki</forename><surname>Takahashi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Isabelle</forename><surname>Tanaka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Trond</forename><surname>Tellier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anna</forename><surname>Trosterud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Reut</forename><surname>Trukhina</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Francis</forename><surname>Tsarfaty</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sumire</forename><surname>Tyers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zdeňka</forename><surname>Uematsu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Larraitz</forename><surname>Urešová</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hans</forename><surname>Uria</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sowmya</forename><surname>Uszkoreit</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Vajjala</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gertjan</forename><surname>Daniel Van Niekerk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Viktor</forename><surname>Van Noord</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Veronika</forename><surname>Varga</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lars</forename><surname>Vincze</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><forename type="middle">North</forename><surname>Wallin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Seyi</forename><surname>Washington</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mats</forename><surname>Williams</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tsegay</forename><surname>Wirén</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tak-Sum</forename><surname>Woldemariam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chunxiao</forename><surname>Wong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marat</forename><forename type="middle">M</forename><surname>Yan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhuoran</forename><surname>Yavrumyan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zdeněk</forename><surname>Yu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amir</forename><surname>Žabokrtský</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Zeldes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Manying</forename><surname>Zeman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hanzhi</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Zhu</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<monogr>
+		<title level="m" type="main">CLARIN digital library at the Institute of Formal and Applied Linguistics (ÚFAL)</title>
+		<author>
+			<persName><forename type="first">Lin-Dat</forename></persName>
+		</author>
+		<imprint/>
+		<respStmt>
+			<orgName>Faculty of Mathematics and Physics, Charles University</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Algeria protests grow against president bouteflika, ailing and out of sight</title>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Nossiter</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">New York Times</title>
+		<imprint>
+			<date type="published" when="2019-03-01">2019. March 01, 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Asynchronous Pipeline for Processing Huge Corpora on Medium to Low Resource Infrastructures</title>
+		<author>
+			<persName><forename type="first">Pedro</forename><surname>Javier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ortiz</forename><surname>Suárez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benoît</forename><surname>Sagot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lau-Rent</forename><surname>Romary</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">7th Workshop on the Challenges in the Management of Large Corpora (CMLC-7)</title>
+		<meeting><address><addrLine>Cardiff, United Kingdom</addrLine></address></meeting>
+		<imprint>
+			<publisher>Leibniz-Institut für Deutsche Sprache</publisher>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Bleu: a method for automatic evaluation of machine translation</title>
+		<author>
+			<persName><forename type="first">Kishore</forename><surname>Papineni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Salim</forename><surname>Roukos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Todd</forename><surname>Ward</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei-Jing</forename><surname>Zhu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 40th Annual Meeting of the Association for Computational Linguistics</title>
+		<meeting>the 40th Annual Meeting of the Association for Computational Linguistics</meeting>
+		<imprint>
+			<date type="published" when="2002">2002</date>
+			<biblScope unit="page" from="311" to="318" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<author>
+			<persName><forename type="first">Slav</forename><surname>Petrov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dipanjan</forename><surname>Das</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ryan</forename><surname>Mcdonald</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1104.2086</idno>
+		<title level="m">A universal part-of-speech tagset</title>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title level="m" type="main">Universal dependency parsing from scratch</title>
+		<author>
+			<persName><forename type="first">Peng</forename><surname>Qi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Timothy</forename><surname>Dozat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuhao</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><forename type="middle">D</forename><surname>Manning</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1901.10457</idno>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">A conventional orthography for Algerian arabic</title>
+		<author>
+			<persName><forename type="first">Houda</forename><surname>Saadane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nizar</forename><surname>Habash</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Second Workshop on Arabic Natural Language Processing</title>
+		<meeting>the Second Workshop on Arabic Natural Language Processing</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="69" to="79" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<monogr>
+		<title level="m" type="main">Dialectal Arabic processing Using Deep Learning</title>
+		<author>
+			<persName><forename type="first">Younes</forename><surname>Samih</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<pubPlace>Düsseldorf, Germany</pubPlace>
+		</imprint>
+	</monogr>
+	<note type="report_type">Ph.D. thesis</note>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Multilingual code-switching identification via LSTM recurrent neural networks</title>
+		<author>
+			<persName><forename type="first">Younes</forename><surname>Samih</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Suraj</forename><surname>Maharjan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mohammed</forename><surname>Attia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laura</forename><surname>Kallmeyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thamar</forename><surname>Solorio</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/W16-5806</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Second Workshop on Computational Approaches to Code Switching</title>
+		<meeting>the Second Workshop on Computational Approaches to Code Switching<address><addrLine>Austin, Texas</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="50" to="59" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<title level="m" type="main">The French Social Media Bank: a Treebank of Noisy User Generated Content</title>
+		<author>
+			<persName><forename type="first">Djamé</forename><surname>Seddah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benoît</forename><surname>Sagot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marie</forename><surname>Candito</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Virginie</forename><surname>Mouilleron</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vanessa</forename><surname>Combet</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<publisher>CoLing</publisher>
+			<pubPlace>Mumbai, India</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Natural language processing for dialectical Arabic: A survey</title>
+		<author>
+			<persName><forename type="first">Abdulhadi</forename><surname>Shoufan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sumaya</forename><surname>Alameri</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/W15-3205</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Second Workshop on Arabic Natural Language Processing</title>
+		<meeting>the Second Workshop on Arabic Natural Language Processing<address><addrLine>Beijing, China</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="36" to="48" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Unsupervised Learning for Handling Code-Mixed Data: A Case Study on POS Tagging of North-African Arabizi Dialect</title>
+		<author>
+			<persName><forename type="first">Abhishek</forename><surname>Srivastava</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benjamin</forename><surname>Muller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Djamé</forename><surname>Seddah</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">EurNLP -First annual EurNLP</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note>Poster</note>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Tokenizing, pos tagging, lemmatizing and parsing ud 2.0 with udpipe</title>
+		<author>
+			<persName><forename type="first">Milan</forename><surname>Straka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jana</forename><surname>Straková</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the CoNLL 2017 Shared Task: Multilingual Parsing from Raw Text to Universal Dependencies</title>
+		<meeting>the CoNLL 2017 Shared Task: Multilingual Parsing from Raw Text to Universal Dependencies<address><addrLine>Vancouver, Canada</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="88" to="99" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Statistical parsing of morphologically rich languages (spmrl): what, how and whither</title>
+		<author>
+			<persName><forename type="first">Reut</forename><surname>Tsarfaty</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Djamé</forename><surname>Seddah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yoav</forename><surname>Goldberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sandra</forename><surname>Kübler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marie</forename><surname>Candito</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jennifer</forename><surname>Foster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yannick</forename><surname>Versley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ines</forename><surname>Rehbein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lamia</forename><surname>Tounsi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the NAACL HLT 2010 First Workshop on Statistical Parsing of Morphologically-Rich Languages</title>
+		<meeting>the NAACL HLT 2010 First Workshop on Statistical Parsing of Morphologically-Rich Languages</meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="1" to="12" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<monogr>
+		<title level="m" type="main">Joint diacritization, lemmatization, normalization, and fine-grained morphological tagging</title>
+		<author>
+			<persName><forename type="first">Nasser</forename><surname>Zalmout</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nizar</forename><surname>Habash</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1910.02267</idno>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">CoNLL 2017 shared task: Multilingual parsing from raw text to universal dependencies</title>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Daniel Zeman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Milan</forename><surname>Popel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jan</forename><surname>Straka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joakim</forename><surname>Hajič</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Filip</forename><surname>Nivre</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juhani</forename><surname>Ginter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sampo</forename><surname>Luotolahti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Slav</forename><surname>Pyysalo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Petrov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Francis</forename><surname>Potthast</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elena</forename><surname>Tyers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Memduh</forename><surname>Badmaeva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anna</forename><surname>Gokirmak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Silvie</forename><surname>Nedoluzhko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jan</forename><surname>Cinková</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jaroslava</forename><surname>Hajič Jr</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Václava</forename><surname>Hlaváčová</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zdeňka</forename><surname>Kettnerová</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jenna</forename><surname>Urešová</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stina</forename><surname>Kanerva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anna</forename><surname>Ojala</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><forename type="middle">D</forename><surname>Missilä</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sebastian</forename><surname>Manning</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Siva</forename><surname>Schuster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dima</forename><surname>Reddy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nizar</forename><surname>Taji</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Herman</forename><surname>Habash</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marie-Catherine</forename><surname>Leung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Manuela</forename><surname>De Marneffe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maria</forename><surname>Sanguinetti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hiroshi</forename><surname>Simi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Valeria</forename><surname>Kanayama</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kira</forename><surname>De Paiva</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Droganova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martínez</forename><surname>Héctor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Çağrı</forename><surname>Alonso</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Umut</forename><surname>Çöltekin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hans</forename><surname>Sulubacak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vivien</forename><surname>Uszkoreit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aljoscha</forename><surname>Macketanz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kim</forename><surname>Burchardt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katrin</forename><surname>Harris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Georg</forename><surname>Marheinecke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tolga</forename><surname>Rehm</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mohammed</forename><surname>Kayadelen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ali</forename><surname>Attia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhuoran</forename><surname>Elkahky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emily</forename><surname>Yu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Saran</forename><surname>Pitler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Lertpradit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jesse</forename><surname>Mandl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hector</forename><surname>Kirchner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jana</forename><surname>Fernandez Alcalde</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Esha</forename><surname>Strnadová</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ruli</forename><surname>Banerjee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Antonio</forename><surname>Manurung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Atsuko</forename><surname>Stella</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sookyoung</forename><surname>Shimada</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gustavo</forename><surname>Kwak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tatiana</forename><surname>Mendonça</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rattima</forename><surname>Lando</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Josie</forename><surname>Ni-Tisaroj</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Li</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/K17-3001</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the CoNLL 2017 Shared Task: Multilingual Parsing from Raw Text to Universal Dependencies</title>
+		<meeting>the CoNLL 2017 Shared Task: Multilingual Parsing from Raw Text to Universal Dependencies<address><addrLine>Vancouver, Canada</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="1" to="19" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

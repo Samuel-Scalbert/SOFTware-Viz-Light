@@ -1,0 +1,841 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">ELECTOR: evaluator for long reads correction methods</title>
+				<funder>
+					<orgName type="full">Inria -Department of Scientific Affairs</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2019-11-19">19 November 2019</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author role="corresp">
+							<persName><forename type="first">Camille</forename><surname>Marchet</surname></persName>
+							<email>marchetcamille@gmail.com</email>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">Inria</orgName>
+								<orgName type="institution" key="instit4">IRISA--UMR</orgName>
+								<address>
+									<addrLine>6074</addrLine>
+									<postCode>F-35000</postCode>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff4">
+								<orgName type="laboratory">UMR 9189 -CRIStAL</orgName>
+								<orgName type="institution" key="instit1">Univ. Lille</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<address>
+									<postCode>59655</postCode>
+									<settlement>Villeneuve-d&apos;Ascq</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Pierre</forename><surname>Morisse</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="institution" key="instit1">Normandie Universit é</orgName>
+								<orgName type="institution" key="instit2">UNIROUEN</orgName>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="institution" key="instit1">INSA Rouen</orgName>
+								<orgName type="institution" key="instit2">LITIS</orgName>
+								<address>
+									<postCode>76000</postCode>
+									<settlement>Rouen</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Lolita</forename><surname>Lecompte</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">Inria</orgName>
+								<orgName type="institution" key="instit4">IRISA--UMR</orgName>
+								<address>
+									<addrLine>6074</addrLine>
+									<postCode>F-35000</postCode>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Arnaud</forename><surname>Lefebvre</surname></persName>
+							<affiliation key="aff3">
+								<orgName type="institution" key="instit1">Normandie Univ</orgName>
+								<orgName type="institution" key="instit2">UNIROUEN</orgName>
+								<orgName type="institution" key="instit3">LITIS</orgName>
+								<address>
+									<postCode>76000</postCode>
+									<settlement>Rouen</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Thierry</forename><surname>Lecroq</surname></persName>
+							<affiliation key="aff3">
+								<orgName type="institution" key="instit1">Normandie Univ</orgName>
+								<orgName type="institution" key="instit2">UNIROUEN</orgName>
+								<orgName type="institution" key="instit3">LITIS</orgName>
+								<address>
+									<postCode>76000</postCode>
+									<settlement>Rouen</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Pierre</forename><surname>Peterlongo</surname></persName>
+							<idno type="ORCID">0000-0003-0776-6407</idno>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">Inria</orgName>
+								<orgName type="institution" key="instit4">IRISA--UMR</orgName>
+								<address>
+									<addrLine>6074</addrLine>
+									<postCode>F-35000</postCode>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Antoine</forename><surname>Limasset</surname></persName>
+							<affiliation key="aff4">
+								<orgName type="laboratory">UMR 9189 -CRIStAL</orgName>
+								<orgName type="institution" key="instit1">Univ. Lille</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<address>
+									<postCode>59655</postCode>
+									<settlement>Villeneuve-d&apos;Ascq</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">ELECTOR: evaluator for long reads correction methods</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2019-11-19">19 November 2019</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">696B89BDE3EB2B0406F48564C662A814</idno>
+					<idno type="DOI">10.1093/nargab/lqz015</idno>
+					<note type="submission">Received August 05, 2019; Revised September 24, 2019; Editorial Decision October 13, 2019; Accepted October 16, 2019</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:12+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>The error rates of third-generation sequencing data have been capped &gt;5%, mainly containing insertions and deletions. Thereby, an increasing number of diverse long reads correction methods have been proposed. The quality of the correction has huge impacts on downstream processes. Therefore, developing methods allowing to evaluate error correction tools with precise and reliable statistics is a crucial need. These evaluation methods rely on costly alignments to evaluate the quality of the corrected reads. Thus, key features must allow the fast comparison of different tools, and scale to the increasing length of the long reads. Our tool, ELECTOR, evaluates long reads correction and is directly compatible with a wide range of error correction tools. As it is based on multiple sequence alignment, we introduce a new algorithmic strategy for alignment segmentation, which enables us to scale to large instances using reasonable resources. To our knowledge, we provide the unique method that allows producing reproducible correction benchmarks on the latest ultralong reads (&gt;100 k bases). It is also faster than the current state-of-the-art on other datasets and provides a wider set of metrics to assess the read quality improvement after correction. ELECTOR is available on GitHub (https://github.com/kamimrcht/ELECTOR) and Bioconda.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTRODUCTION</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Motivations</head><p>Pacific Biosciences (PB) and Oxford Nanopore Technologies (ONT) long reads, despite their high error rates and complex error profiles, were rapidly adopted for various ap-plications. An increasing number of projects, especially for assembly <ref type="bibr" target="#b0">(1)</ref>, long-distance haplotyping or structural variant calling <ref type="bibr" target="#b1">(2)</ref>, indeed benefit from the long-range information these reads provide. These reads display high error rates (from 5% to 12%, according to technologies and libraries, to as much as 30% for the oldest datasets), that largely surpass those of Illumina reads. Given these high error rates, the first step of many applications is error correction. However, this stage can be a time bottleneck <ref type="bibr" target="#b1">(2)</ref>.</p><p>Moreover, contrary to Illumina, where the majority of errors are substitutions, long reads mainly contain insertions and deletions (indels) (ONT reads are more deletion-prone, whereas PB reads contain more insertions). This combination of issues requires novel and specific algorithmic developments. To this extent, dozens of error correction methods directly targeting these long reads emerged in the last 5 years. The first range of error correction tools, called 'hybrid correctors', uses both short and long reads to perform error correction, relying on the deep coverage and low error rate of the short reads to enhance long reads sequences. The second group of methods, called 'self-correctors', intends to correct long reads with the sole information contained in their sequences (see <ref type="bibr" target="#b2">(3)</ref> for a review of correctors). Both paradigms include quite diverse algorithmic solutions, which make it difficult to globally compare the correction results (in terms of corrected bases, quality and performances) without a proper benchmark. Besides, the quality of the error correction has considerable impacts on downstream processes. Hence, it is interesting to know beforehand which corrector is best suited for a particular dataset (according to its coverage, its error rate, the sequenced genome or the sequencing technology, for instance). Developing methods allowing to evaluate error correction tools with precise and reliable statistics is, therefore, a crucial need.</p><p>Methods for evaluating correctors should allow tracking the novelties of the methods. Indeed, since long read technologies still evolve, current correctors implementations are 2 NAR Genomics and Bioinformatics, 2020, Vol. 2, No. 1 prone to many changes. Methods for evaluating correctors must be usable on datasets of various complexity (from bacteria to eukaryotes) to reproduce a wide variety of possible scenarios. They should also be fast and lightweight, and should not be orders of magnitude more resource and time consuming than the actual correction methods they evaluate. This aspect is particularly critical, since correction evaluators also stand in the perspective of new correction methods developments, as they can help to provide accurate and quick comparisons to the state-of-the-art. For developers as well as users, correction evaluators should describe with precision the correction method's behavior (i.e. the number of corrected bases, introduced errors or read breakups) to identify its potential pitfalls.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Previous works</head><p>Works introducing novel correction methods usually evaluate the quality of their tools based on how well the corrected long reads realign to the reference. Despite being useful, this information remains incomplete. In particular, it is likely not to mention poor quality reads, or regions to which it is difficult to align.</p><p>In <ref type="bibr" target="#b5">(6)</ref>, <ref type="bibr">La et al.</ref> introduced a new way to obtain metrics describing the quality of the error correction that does not solely present the similarities between the aligned corrected reads and the reference genome. Relying on simulated data, they proposed the idea of a three-way alignment between the reference genome, the uncorrected reads and the corrected reads. They presented results on PB data for hybrid error correction tools, by introducing LRCstats, an evaluation tool aiming at answering to the problematics above.</p><p>With its three-way alignment scheme, LRCstats provides reads' error rate before and after correction, as well as the detailed count of every type of error. However, only studying the reads' error rate after correction is not a satisfying indication of the corrector's behavior. For instance, there is no clue about the putative insertions of new errors by the corrector. To perform such analysis of the method's pros and cons, we need additional metrics such as precision (relevant corrected bases among all bases modified by the corrector) and recall (correct bases that have been retrieved by the corrector among all bases to be corrected). Such metrics have already been proposed in earlier works dedicated to short reads, such as the error correction evaluation toolkit introduced in <ref type="bibr" target="#b6">(7)</ref>. However, this contribution is out of the scope of this work. Indeed, algorithms to process short reads are different from those at stake in our case, due to the length, the high error rates and the complex error profiles of the long reads.</p><p>Moreover, LRCstats relies on a multiple alignment scheme that suffers from high resource needs when processing large numbers of reads, i.e. when coverage or genome sizes are large. For the same reason, LRCstats alignment scheme becomes limited when sequences to process grow. However, the sequencing depth and the length of the long reads keep on increasing, especially with so-called ONT ultra-long reads (up to 1 M bases) starting to appear in recent works for larger genomes <ref type="bibr" target="#b7">(8)</ref>. Moreover, deep coverages are expected to help the correction of very long sequences (2). Thus, novel methods must be proposed in order to evaluate the correction of such datasets in a reasonable amount of time.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Contribution</head><p>To cope with the identified limits of LRCstats, we propose ELECTOR, a new evaluation tool for long read error correction methods. ELECTOR can evaluate the correction of simulated as well as real long read datasets, provided a reference genome that is available for the sequenced species. It takes as input a reference genome in FASTA format, a set of corrected reads in FASTA format, and the corresponding uncorrected reads, either via a FASTA format file in the case of real data or via the suite of files provided by the simulator in case of simulated data. In its output, ELECTOR provides a broader range of metrics than LRCstats, which evaluates the actual quality of the correction. In particular, it measures recall, precision and error rate for each read. ELECTOR also informs about typical difficulties long read correctors can encounter, such as homopolymers, and reads that have been trimmed, split or extended during the correction. Finally, it also provides reads remapping and assembly metrics.</p><p>In order for ELECTOR to provide these additional metrics, we propose a novel multiple sequence alignment (MSA) strategy. This new algorithmic approach is designed to allow the MSA computation to scale to ultra-long reads and to large datasets of several billions of base-pairs. It compares in a fast way three different versions of each read: the 'corrected' version, the 'uncorrected' version and the 'reference' version, which is a substring of the reference genome. For each read, we perform a MSA of its triplet. A key idea of this strategy is a divide-and-conquer approach that divides the reads into smaller sequences with an anchoring process, and thus allows to compute several smaller MSAs. These multiple, smaller MSAs, are then combined to obtain the final MSA, of the whole length of the sequences. The anchoring process is designed to work with erroneous sequences and takes into account gapped alignment due to truncated corrected reads. We believe that the interests of this novelty are not limited to the ELECTOR framework. Indeed, it may be a useful strategy for any domain requiring MSAs of long and highly erroneous sequences.</p><p>For simulated reads, ELECTOR is compatible with stateof-the-art long reads simulation tools, such as NanoSim <ref type="bibr" target="#b8">(9)</ref> or SimLoRD <ref type="bibr" target="#b9">(10)</ref>, on which introduced errors are precisely known. Moreover, it is meant to be a user-friendly tool, which delivers its results through different output formats, such as graphics that can be directly integrated into the users' projects. This tool was designed to be directly compatible with a wide range of state-of-the-art error correction tools without requiring any pre-processing by the user. In particular, ELECTOR is compatible with the latest self-correction methods, and we thus present novel results on such tools, which were not tackled by LRCstats.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>MATERIALS AND METHODS</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Input sequences</head><p>ELECTOR is compatible with long reads simulators Sim-LoRD and NanoSim, and real read sequences (see Figure 1 for an overview of ELECTOR). When using long reads simulated with one of these tools, the reference sequences are directly retrieved by ELECTOR, by parsing the files generated during the simulation. When using these stateof-the-art long reads simulation tools, we ensure to take as input sequences that closely simulate the actual characteristics of the long reads. However, it is possible to use other long reads simulation tools. In this case, the user must provide the 'reference' sequences itself. The genome used for the simulation, the files generated by the simulator and the corrected reads, output by the desired correction method, are then provided as an input. ELECTOR then compares three different versions of each read: the 'uncorrected' version, as provided by the sequencing experiment or by the read simulator, the 'corrected' version, as provided by the error correction method and the 'reference' version, which is a portion of the reference genome, representing a perfect version of the original read, without any error. For real data, the 'reference' sequences are retrieved by aligning the 'uncorrected' reads to the reference genome, using Minimap2 (4). Only the best hit for each read is kept and used to determine the corresponding 'reference' sequence. In the case a read cannot align to the reference genome, and thus cannot produce a 'reference' sequence, the read is excluded from the analysis.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Scalable triplet multiple alignment</head><p>With real or simulated reads, the core of the algorithmic novelty is to propose the comparison of the three different versions of each read (reference, uncorrected and corrected) in a triplet multiple alignment. These three versions of each read undergo a multiple sequence alignment, to collect their differences and similarities at each position of the alignment.</p><p>Principle. With the three versions of each read, our triplet multiple alignment strategy computes an MSA, using a partial order alignment algorithm. The MSA is initialized with the 'reference' sequence, and the 'corrected' and 'uncorrected' sequences are then sequentially added. This step yields a multiple alignment matrix that is output in pseudo FASTA (PIR) format for each triplet. The triplet multiple alignments are computed using an implementation of partial order alignment graphs <ref type="bibr" target="#b10">(11)</ref>. Partial order alignment graphs are used as structures containing the information of the multiple aligned sequences. To this extent, a directed acyclic graph (DAG) contains the previous multiple sequence alignment result. The vertices store consecutive nucleotides from the sequences. Each new sequence is aligned to this DAG in a generalization of the Needleman-Wunsch algorithm. Paths in the DAG represent the successive alignments.</p><p>However, such a procedure can be time-consuming when applied to noisy long reads (see Table <ref type="table" target="#tab_2">2</ref>). Thus, we propose a novel multiple sequence alignment heuristic. We recall the values of all the parameters mentioned in the following paragraphs in Supplementary Table <ref type="table" target="#tab_1">S1</ref>.</p><p>Segmentation strategy for the MSA. To reduce the computation time of our approach, we propose a segmentation strategy, as sketched in Figure <ref type="figure" target="#fig_1">2</ref>. It consists of dividing the global multiple alignment into several smaller instances. Drawing inspiration from MUMmer's ( <ref type="formula">12</ref>) and Minimap's (5) longest increasing subsequence approaches, we select a sequence of seeds S 1 , . . . S N that can be found (in the given order) within the three sequences. From this sequence of seeds, we extract the N + 1 substrings (W 0 , W 1 , . . . , W N ) delimited by the seeds in the three versions of the read. We thus extract str[0 : posi ti on S 1 ], str[ posi ti on S 1 + length S 1 : posi ti on S 2 ], . . . , str[ posi ti on S i + length S i : posi ti on S i +1 ], . . . , str[ posi ti on S N : str si ze],</p><p>with str being the sequence of the 'reference', 'corrected' or 'uncorrected' version, and call these substrings 'windows'. We, therefore, compute independent MSAs for each window triplet (W i re f erence, W i corr ected, W i uncorr ected), and then reconstitute the global multiple alignment by concatenation. We now describe the procedure more in detail. For each triplet, we compute the k-mers that will be used as seeds (called 'seed' k-mers) so that they comply with the following properties:</p><p>(i) They appear in each of the three versions of the sequence. (ii) They are not repeated across any of the versions of the sequence. (iii) They are not overlapping in any of the versions of the sequence.</p><p>Using dynamic programming, the longest increasing subsequence of seed k-mers, S 1 , . . . S N is computed. Pairs of successive seed k-mers, S i , S i + 1 delineate windows. The size of these seed k-mers is adapted according to the current observed error rates <ref type="bibr" target="#b4">(5,</ref><ref type="bibr" target="#b12">13)</ref>, and ranges between 9 and 15 nucleotides. As it is difficult to a priori select a k-mer size, we designed a quick iterative strategy that tries several values of k to choose the most suitable for a given triplet. Starting from k = k max (set to 15 by default), we keep on decreasing k until the size of the largest window no longer decreases. Whenever the largest window's size no longer decreases, or k min (set to 9 by default) is reached, the process stops. Minimizing the size of the largest window as such allows us to ensure that we compute MSAs on the smallest possible windows, in order to reduce the computational costs as much as possible.</p><p>Once windows are computed, we produce MSAs of each window triplet (W i re f erence, W i corr ected, W i uncorr ected) independently, as described in the previous paragraph, using subsequently smaller alignment graphs. Finally, the multiple small MSAs are concatenated, along with the seed k-mers, to obtain a single MSA of the whole length of the read triplet.</p><p>If we were able to bound the size of the windows, we could guarantee an asymptotic time linear to the read length for the alignment computation. In practice, our implementation can produce large windows, but we observe a running time almost linear in the length of the reads, as shown in our experimental results.</p><p>To avoid computing metrics on poorly corrected reads, we filter out corrected reads whose length is below a given parameter (see Supplementary Table <ref type="table" target="#tab_1">S1</ref> for its default  Instead of computing an MSA on the whole length of the sequences, we rather divide this problem into smaller instances. As each version is different, to decide where to start and end the alignments, we look for seed k-mers (in black) that are exact local matches between the three sequences. We then compute individual, separate MSAs, for subsequences bordered by seeds (or located at the extremities of the sequences). These multiple MSAs are finally concatenated, along with the seed k-mers, to obtain a single, full MSA, of the whole length of the sequences. value) and triplets for which no seed k-mers can be found. These two types of filtered reads are tagged and reported apart in ELECTOR's outputs to inform the user about their numbers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Handle reads of different sizes in the segmentation strategy.</head><p>In the case of a truncated corrected read (trimmed/split), the 'corrected' version is shortened in comparison to the two other versions. A part of the 'reference' and 'uncorrected' sequences is thus missing in the 'corrected' sequence. A prefix, a suffix or both can be missing depending on the case. Trimmed and split scenarios are outlined in Fig- <ref type="figure" target="#fig_4">ure 4</ref>. As we only use anchors shared among the three sequences, in the case of a missing prefix in the corrected version, W 0 re f erence and W 0 uncorr ected will, therefore, be larger than W 0 corr ected (see an example of a missing suffix in Figure <ref type="figure" target="#fig_3">3</ref>). Computing an MSA between those three sequences would thus be irrelevant. Furthermore computing an MSA on two possibly long sequences (as a large sequence may be missing) is pricey. As corrected reads can be truncated at the beginning, at the end, or both, the symmetrical scenario can occur for suffixes.</p><p>To cope with this problem, we detect such cases by checking the length of the first windows. If W 0 re f erence and W 0 uncorr ected are large (≥1000 nucleotide) and at least two times larger than W 0 corr ected, we use a segmentation scheme only with k-mers from 'reference' and 'uncorrected', and only align their two prefixes.</p><p>This way, we can efficiently compute an MSA when the corrected reads do not cover the whole genome region they originally come from, avoiding to run a MSA on large/unrelated sequences. The procedure is symmetrical for suffixes. This procedure is essential for correctors that output numerous split reads, which would induce extremely long runtime due to large sequence MSA computations described before.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Inference of quality evaluation metrics from MSA</head><p>Classification of corrected reads. ELECTOR reports different categories of 'corrected' reads: regular reads, trimmed/split reads, extended reads, soft-clipped reads, bad quality reads and short reads. Figure <ref type="figure" target="#fig_4">4</ref> shows how we deduce the trimmed, split and extended categories from the MSA result.</p><p>Regular reads are neither trimmed, split, extended nor soft-clipped.</p><p>Trimmed reads are reads that lack a part of their prefix, suffix or both (first scenario in Figure <ref type="figure" target="#fig_4">4</ref>).</p><p>Split reads are reads composed of several fragments that come from a single original read, which could only be corrected on several distinct parts (second scenario in Figure <ref type="figure" target="#fig_4">4</ref>). Split reads are aligned as trimmed reads are. However, in the case of split reads, we gather all fragments that come from a single initial read, in order to build a single MSA from the several, distinct MSAs induced by the different fragments. Supplementary Figure <ref type="figure" target="#fig_0">S1</ref> illustrates this process.</p><p>We thus report how many reads were trimmed or split during the correction. Moreover, for each trimmed or split corrected read, we report the total uncorrected length of its associated 'reference' read (i.e. the length that is not covered by any fragment).</p><p>Extended reads are reads that have a prefix and/or a suffix that was not present in the 'reference' sequence (third scenario in Figure <ref type="figure" target="#fig_4">4</ref>). These reads can be chimeras from the correction step, and can, for instance, come from chimeric  Here, the 'corrected' read is shortened on its right end. To avoid passing subsequences starting from seed 2 to the end of each sequence to the MSA, which would be costly to compute, we perform a second segmentation strategy. This strategy allows us to retrieve a new set of seeds (gray seeds 3 and 4). This new set of seeds divides the remaining subsequences (suffixes in this case) in 'reference' and 'uncorrected' into windows on which we compute MSA separately. The full MSA is reconstructed by concatenation, and dots are added to complete the 'corrected' MSA line. connections between unrelated parts of the graph <ref type="bibr" target="#b13">(14)</ref> or the assembly of unrelated short reads <ref type="bibr" target="#b14">(15)</ref>.</p><p>However, they can also be reads that were over-corrected by a graph-based correction method, which kept on traversing the graph after reaching the 'uncorrected' reads' extremities. We do not compute quality evaluation metrics on the extended regions, but we report the number of extended reads, as well as their mean extension size, with respect to the 'reference' reads.</p><p>We define a split/trimmed/extended region as the prefix or suffix (or both) of the MSA in which no 'corrected' nucleotide appears (for split and trimmed), or no 'uncorrected' and 'reference' nucleotide appear (for extended). These regions are represented in gray in Figure <ref type="figure" target="#fig_4">4</ref>.</p><p>Soft-clipped reads are reads for which the extremities were soft clipped during the alignment to the reference genome (last scenario in Figure <ref type="figure" target="#fig_4">4</ref>). This category only arises in real data mode, as we only retrieve 'reference' reads by aligning the 'uncorrected' reads to the reference genome in this case. For such reads, we do not compute quality evaluation metrics on the soft clipped regions, as they could not be appropriately aligned to the reference genome, and were therefore not used to determine the 'reference' read.</p><p>Bad quality reads are low-quality reads that were removed before the MSA step to avoid computing metrics on poorly corrected reads. As mentioned previously, these are the reads for which no seed k-mers were found during the segmentation process. These reads are tagged and reported apart in ELECTOR's output to inform the user about their number. We only report their number as no metric can be computed since they are not aligned.</p><p>Short reads are reads that are shorter than % of the 'reference' sequence length ( being a parameter set to 10 by default). As for the bad quality reads, these reads are also removed before the MSA step, and only the number of such reads is reported.</p><p>Recall, precision, error rate. Once the MSA is computed, we have access to information about the differences and similarities in nucleotide content for each position of the three versions of a sequence. Insertions and deletions are represented by a '.' in the deleted parts, and by the corresponding nucleotide (A,C,T or G) in the inserted parts. Let us denote, respectively, by nt(R, p i ), nt(C, p i ), nt(U, p i ) the characters of 'reference', 'corrected' and 'uncorrected' versions in {A, C, G, T, .}, at position p i (0 ≤ i &lt; N), in an MSA of size N. Figure <ref type="figure" target="#fig_5">5</ref> shows how recall and precision are computed. The set P of positions to correct is composed of positions p i such as nt(R, p i ) = nt(U, p i ). The set E of existing positions in the corrected version is defined by including any position p x from the 'corrected' version that is not counted in a trimmed/split/extended/softclipped region. The processed positions set C is defined as P ∪ {p j /nt(C, p j ) = nt(R, p j )} ∩ E. The correct positions set Co is defined as C ∩ {p j /nt(C, p j ) = nt(R, p j )}. The recall, precision and error rate are computed as follows:</p><formula xml:id="formula_0">Recall = card(C ∩ P) card(P) (1)</formula><p>6 NAR Genomics and Bioinformatics, 2020, Vol. 2, No. 1 </p><formula xml:id="formula_1">Precision = card(Co ∩ C) card(C)<label>(2)</label></formula><p>Error rate = 1 -card(Co)</p><formula xml:id="formula_2">c-1 i =0 i (3)</formula><p>with c the length of the corrected read.</p><p>Additional metrics. ELECTOR provides the number of trimmed or split corrected reads, and the mean missing size of these reads, as well as the number of extended reads, and the mean extension size of these reads. The size distribution of the sequences, before and after correction, is reported graphically.</p><p>In the case of split reads, we report the length of each fragment in the distribution. The %GC of the 'corrected' and 'reference' reads is also output, as well as the total number of insertions, deletion and substitution, in the 'uncorrected' and 'corrected' reads. ONT reads are known to be more error-prone than PB reads in homopolymers. Thus, we propose metrics to examine these particular regions. We show the ratio of homopolymer sizes in the 'corrected' version over the 'reference' version. The closer it is to one, the better the corrector overcame possible systematic errors in ONT reads.</p><p>More details on the computation of the insertions, deletions, substitutions counts, and on the ratio of homopolymer sizes are shown, respectively, in Supplementary Figures <ref type="figure" target="#fig_1">S2</ref> and<ref type="figure" target="#fig_3">S3</ref>.</p><p>Remapping of corrected reads. In addition to all previously presented metric computations, we also take advantage of the presence of the reference genome to evaluate corrected reads quality. We perform remapping of the corrected reads to the reference genome using Minimap2. We report the number of corrected reads, the total number of bases, the average length of the reads, the percentage of aligned reads, the mean identity of the alignments, as well as the genome coverage, i.e. the percentage of bases of the reference genome to which at least a nucleotide aligned.</p><p>Post-correction assembly metrics. Again, in addition to metrics obtained thanks to our MSA strategy, we assess the correction quality through its consequences on the assembly quality of the corrected reads. We perform the assembly of the corrected reads using Miniasm ( <ref type="formula">5</ref>), as we mainly seek to develop a pipeline providing fast results. We acknowledge that assemblers such as Smartdenovo (https: //github.com/ruanjue/smartdenovo) or Canu ( <ref type="formula">16</ref>) are more sensitive, but as they display much larger runtimes, Miniasm provides a satisfying compromise.</p><p>As for the metrics of the assembly, we output the overall number of contigs, the number of contigs that could be aligned, the number of breakpoints of the aligned contigs, the NGA50 and NGA75 sizes of the aligned contigs, as well as the genome coverage. Using the assemblies that we provide, further analyses can be performed using dedicated software such as QUAST-LG <ref type="bibr" target="#b16">(17)</ref>.</p><p>We also perform the alignment of the contigs with Min-imap2. The computation of the different metrics, for remapping and assembly assessment, is then performed by parsing the generated SAM file.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RESULTS</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Validation of the segmentation strategy for MSA</head><p>To validate our segmentation strategy for MSA, we show to which extent its results differ from the classical MSA approach. In particular, we expect that recall, precision and error rate hardly differ, thus showing that both behaviors produce very similar results. Conversely, we expect a decisive gain in time with our segmentation strategy compared to the original algorithm. We thus compared multiple alignment results obtained with our strategy to results obtained with the regular implementation of partial order alignment graphs on multiple datasets of different read lengths, which affects the run-time of the alignments. Results are presented in Table <ref type="table" target="#tab_2">2</ref>. We observe that while the two strategies provide very similar metrics, the segmentation strategy can reduce the runtime by orders of magnitude compared to the regular approach, especially when the reads grow longer.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Validation on synthetic datasets</head><p>In this section, we present the results of ELECTOR and LRCstats on several simulated datasets from different species. Further details about these datasets are given in Table <ref type="table" target="#tab_1">1</ref>. The choice of synthetic data was motivated by the need to know the 'reference' sequences (which are portions of the reference genome, representing perfect versions of the original reads, on which no error would have been introduced) to precisely control the results brought by the assessed correction method.</p><p>ELECTOR sample output. As previously mentioned, ELECTOR computes general metrics: recall, precision, error rate, among other metrics, and provides a graphic representation of their distributions.</p><p>A subset of the metrics produced by ELECTOR using reads corrected by the following tools: HALC <ref type="bibr" target="#b17">(18)</ref>, HG-CoLoR <ref type="bibr" target="#b18">(19)</ref>, LoRDEC <ref type="bibr" target="#b19">(20)</ref>, Canu <ref type="bibr" target="#b15">(16)</ref>, Daccord (Tischler, G., &amp; Myers, E. W. (2017). Non-hybrid long read consensus using local de Bruijn graph assembly. bioRxiv, 106252.) and MECAT ( <ref type="formula">21</ref>) is presented in Table <ref type="table" target="#tab_3">3</ref>. These metrics are Downloaded from https://academic.oup.com/nargab/article-abstract/2/1/lqz015/5625503 by INRIA Rennes, pierre.peterlongo@inria.fr on 19 November 2019 Three datasets were simulated, with a 10% error rate, a coverage of 100× and a fixed read length of 1 k bases, 10 k bases and 100 k bases, respectively. The reads were corrected using Canu with default parameters.</p><p>consistent with the results presented in the respective tools' publications. The whole set of metrics, including remapping and assembly assessment, are presented in Supplementary Tables <ref type="table" target="#tab_3">S3</ref> and<ref type="table">S4</ref>.</p><p>Comparison to state-of-the-art. Recently, several benchmark analysis were proposed for long reads (comparison of hybrid correction methods <ref type="bibr" target="#b21">(22)</ref>, comparison of hybrid and self-correction methods (Zhang, H. et al. <ref type="bibr">(2019)</ref>. A comprehensive evaluation of long read error correction methods. (BioRxiv, 519330.), analysis of long read correction on transcriptomic reads ( <ref type="formula">23</ref>)). In this work, we focus on the methodological basis allowing to efficiently perform and reproduce such benchmarks, rather than highlighting the pros and cons of available correction methods. The presented correction performances are thus showed for validation purposes and are not intended to be a benchmark of existing correction methods. In the rest of the result section, we report comparisons to the only other automated evaluation tool for long reads correction: LRCstats.</p><p>In Table <ref type="table">4</ref>, we compare the metrics displayed by ELEC-TOR and LRCstats. Corrections of the S. cerevisiae dataset by HALC (a hybrid correction method) and Canu (selfcorrection method) are evaluated and reported as an example output. The complete results provided by LCRstats and ELECTOR, for each correction tool, and on each dataset, are presented in Supplementary Tables <ref type="table" target="#tab_2">S2</ref> and<ref type="table" target="#tab_3">S3</ref>.</p><p>Both LRCstats and ELECTOR compute metrics on 'corrected' reads and the corresponding 'uncorrected' sequences of those reads (reported respectively as 'corrected' and 'uncorrected').</p><p>The first result to notice in Table <ref type="table">4</ref> is that the error rates and the amount of processed bases announced in the 'uncorrected' reads can differ from one correction method to the other, both for ELECTOR and LRCstats. Such differences can be explained by the fact that HALC and Canu do not correct the same set of reads, which leads to different set of 'uncorrected' reads to evaluate.</p><p>As ELECTOR and LRCstats rely on different rules to exclude reads from the analysis, and do not align split reads in the same way, we observe that they do not process the same quantity of reads.</p><p>LRCstats concatenates the different parts of a split read before aligning the concatenation, even if a missing region can exist between two consecutive fragments. This behavior can complicate the alignment task and introduce a bias in the output metrics. On the contrary, ELECTOR processes the different fragments separately before reconstituting the whole alignment and thus takes into account missing regions. These differences thus have an impact on the metrics displayed for corrected reads. ELECTOR processes slightly A dash in the uncorrected columns indicates that the metric is not computed for the 'uncorrected' reads. Daccord could not be run on the C. elegans dataset, and reported an error.</p><p>more bases than LRCstats on the two studied datasets. However, reads falling into particular categories (very short reads and low-quality reads) are not taken into account in ELECTOR's redcounts, and are reported apart, while they are absent from LRCstats's output. Different alignment strategies in both tools also have impacts on the results, which explains the differences seen in indels and substitutions counts. However, ELECTOR and LRCstats globally report the same trends of two successful corrections that decreased the error rates.</p><p>Additional metrics, specific to ELECTOR, point out noteworthy differences between the two correction methods, such as the high quantity of trimmed or split reads when using HALC in comparison to Canu. These metrics are essential for further steps such as assembly since less advantage is taken from shortened reads to resolve repeats. They also help to understand more in-depth the correctors' behavior. In this example, Canu corrects with lower recall and precision than HALC, but this is nuanced because ELECTOR reports it produces less trimmed/split reads.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Performance comparison</head><p>In this section, we compare LRCstats and ELECTOR runtime and memory consumption on several datasets chosen to represent different use cases. Results are presented in Tables 5 and 6. For the experiments presented in Table <ref type="table">5</ref>, both tools were ran on a 20-core cluster node equipped with 250 GB of RAM. For experiments presented in Table <ref type="table">6</ref>, we used a 16-core computer equipped with 64 GB of RAM. In order to compare similar operations, ELECTOR's runtime and memory consumption do not consider the remapping and assembly steps. We present the metrics and resource consumption of this module apart, in Supplementary Table <ref type="table">S4</ref>.</p><p>We first assess, in Table <ref type="table">5</ref>, the performances of both tools on several simulated E. coli datasets with different read lengths, ranging from 1 k bases to 1 M bases. As expected, the runtime and memory consumption of both tools grow with the read length. However, ELECTOR can handle reads &gt;10 k bases better than LRCstats, thanks to its segmentation strategy. In particular, ELECTOR is several orders of magnitude faster than LRCstats on the 10 k bases experiment, and can also handle longer reads, up to 1 M bases, using moderate resources. LRCstats was much more memory consuming and was thus unable to run on reads longer than 10 k bases, despite having access to 250 GB of RAM. These results underline that ELECTOR can scale to extremely long reads. Considering the ever-growing length of the long reads and the tremendous impact of such very long sequences, we believe that this ability is a significant advantage of ELECTOR obtained thanks to its segmentation technique.</p><p>We also observe, in Supplementary Table <ref type="table">S5</ref>, that the error rate of the input reads has a negligible impact on the performances of the tools.</p><p>In Table <ref type="table">6</ref>, we compare the performances of different correctors with the time needed to evaluate their outputs, using ELECTOR and LRCstats. Interestingly, we observe that LRCstats is mostly slower than the correction step itself, which is not desirable. ELECTOR is often faster than or comparable to the corrector itself, except for MECAT Downloaded from https://academic.oup.com/nargab/article-abstract/2/1/lqz015/5625503 by INRIA Rennes, pierre.peterlongo@inria.fr on 19 November 2019 10 NAR Genomics and Bioinformatics, 2020, Vol. 2, No. 1 that is distinctly efficient. These reduced runtimes could be a beneficial gain for benchmark analysis, and could also be critical for the development of new correction methods. Another observation from Table <ref type="table">6</ref> is that we can notice large divergence in ELECTOR runtimes on the same dataset corrected by different tools. This behavior can be due to two factors. On the one hand, ELECTOR's runtime optimization is prone to be more or less pronounced according to the read length (segmentation is expected to be easier with larger reads) and quality of the correction (more errors make it more difficult to find common seeds). On the other, ELECTOR's runtime is also related to the number of split corrected reads output by the corrector. Indeed, a larger number of split reads imply a more significant number of triplet multiple alignments, and thus an increased runtime. In particular, in the experiments presented here, the largest runtimes can be observed for the evaluation of LoRDEC and HALC on the C. elegans dataset. As shown in Supplementary Table <ref type="table" target="#tab_3">S3</ref>, these tools are also those that produced the most considerable amount of trimmed/split reads on this dataset. A way to accelerate ELECTOR analysis would be to adapt its parameters to avoid small read fragments.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Simulations for the validation of ELECTOR's real data mode</head><p>In order to validate ELECTOR's real data mode, we ran the following experiment. We used a simulated dataset, and we assessed its correction using the two different modes of ELECTOR: simulated and real data. First, we ran it classically, by providing the simulation files as an input so that ELECTOR could retrieve the actual 'reference' reads by parsing the files. Second, we ran it by only providing the FASTA file of simulated reads as an input, so ELECTOR had to retrieve the 'reference' reads by aligning the uncorrected long reads to the reference genome, as if they were not simulated. We ran this experiment on the S. cerevisiae dataset. To further validate ELECTOR's behavior on real data, we assessed the correction of both a hybrid corrector, HALC and a self-corrector, Canu. Results of these experiments are shown in Table <ref type="table">7</ref>.</p><p>We observe that ELECTOR's results are consistent, both in simulated and real data mode. In particular, recall and precision are very similar. The two modes display some differences in the input uncorrected reads (as shown by the amount of processed bases), which have an impact on the differences observed between their results. This behavior is due to the bias induced by the additional alignment step that the real data mode requires. The main differences that appear occur on metrics that are highly dependent on the alignment results, such as the number of trimmed, split and extended reads, and the sizes of these events, as well as indels and substitutions counts.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Results on a real human dataset</head><p>To demonstrate ELECTOR's results in a realistic scenario for large genomes, we evaluate the correction of a real human dataset. We report results, as well as runtime of the evaluation, in Table <ref type="table">8</ref>. The reads were corrected with MECAT, using default parameters, before running ELEC-TOR. Using 20 threads, we were able to obtain the results for the 650 771 corrected reads of the dataset in &lt;19 h. Results reported by ELECTOR show that MECAT can correct human reads with a 20% error rate with &gt;90% of recall and precision, which is consistent with the published results.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DISCUSSION</head><p>In ELECTOR, we propose a novel efficient algorithmic approach of segmentation strategy for multiple sequence alignment. We adapted this task for this original and specific application of long reads comparison. New segmentation strategies for MSA were recently proposed (Nogales, E. G. et al. <ref type="bibr">(2018)</ref>. Fast and accurate large multiple sequence alignments using root-to-leave regressive computation. (bioRxiv, 490235.). However, these methods are not specifically designed for noisy long reads. On such data, both the high error rates and lengths are troublesome factors for the multiple sequence alignment computation. In such a perspective, a generalization of our segmentation strategy, allowing long reads multiple sequence alignments of more than three sequences would be very interesting. Such a generalization could indeed be relevant for critical applications such as assembly, consensus or variant detection.</p><p>ELECTOR's real data mode uses a prior alignment of the reads to a reference genome, in order to retrieve the 'reference' versions of the reads. We demonstrated that ELEC-TOR's metrics in its real data mode remain highly similar to what would be obtained in its simulated mode. However, we can point out two limitations of ELECTOR. First, even if the data can come from an actual sequencing experiment, a reference genome needs to exist for the sequenced species, in order to retrieve the 'reference' reads, and thus perform the evaluation. Second, we encourage users to be very cautious about ELECTOR's results on real data, especially when looking at the number of trimmed, split or extended reads and at the sizes of such events. Indeed, these metrics are highly dependent on the result of the alignment of the 'uncorrected' reads to the reference. These metrics can thus be subject to errors, especially when aligning relatively short or highly erroneous/chimeric reads, or reads coming from repeated regions.</p><p>A future application is the evaluation of correction methods directly targeted at RNA long reads sequencing. As shown in a recent study <ref type="bibr" target="#b22">(23)</ref>, RNA long reads have specific requirements that are not met by current methods, which calls for new correctors in the future. ELECTOR could be coupled with a reference transcriptome or a RNA long read simulator, although, currently, such a simulation software does not exist to our knowledge.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CONCLUSION</head><p>We presented ELECTOR, a tool that enables the evaluation of self and hybrid long reads correction methods, and that allows evaluating the behavior of a given correction tool in a controlled situation. ELECTOR provides a wide range of metrics that include base-wise computation of recall, precision, error rates of corrected and uncorrected reads as well as insertions, deletions and substitutions counts, and homopolymers correction. In particular, we believe that recall Downloaded from https://academic.oup.com/nargab/article-abstract/2/1/lqz015/5625503 by INRIA Rennes, pierre.peterlongo@inria.fr on 19 November 2019</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 .</head><label>1</label><figDesc>Figure1. Overview of ELECTOR. Inputs are the sequences at different stages: without errors (from the reference genome), with errors (simulated or real uncorrected reads) and corrected (after running a correction method). We compute a multiple sequence alignment of the three versions of each sequence and analyze the results to provide correction quality measures. In order to provide additional information, reads are assembled using Minimap2 and Miniasm and both the reads and the contigs are aligned to the reference genome. A text summary, plots and a pdf summary are output.</figDesc><graphic coords="4,143.26,69.43,311.76,50.88" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 .</head><label>2</label><figDesc>Figure 2. Segmentation strategy to compute a multiple sequence alignment for a triplet of 'reference', 'uncorrected' and 'corrected' versions of a read.Instead of computing an MSA on the whole length of the sequences, we rather divide this problem into smaller instances. As each version is different, to decide where to start and end the alignments, we look for seed k-mers (in black) that are exact local matches between the three sequences. We then compute individual, separate MSAs, for subsequences bordered by seeds (or located at the extremities of the sequences). These multiple MSAs are finally concatenated, along with the seed k-mers, to obtain a single, full MSA, of the whole length of the sequences.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head></head><label></label><figDesc>Downloaded from https://academic.oup.com/nargab/article-abstract/2/1/lqz015/5625503 by INRIA Rennes, pierre.peterlongo@inria.fr on 19 November 2019</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 3 .</head><label>3</label><figDesc>Figure 3. Segmentation strategy when the 'corrected' read is smaller. As in Figure 2, R,U,C stand for the reference, uncorrected and corrected read triplet.Here, the 'corrected' read is shortened on its right end. To avoid passing subsequences starting from seed 2 to the end of each sequence to the MSA, which would be costly to compute, we perform a second segmentation strategy. This strategy allows us to retrieve a new set of seeds (gray seeds 3 and 4). This new set of seeds divides the remaining subsequences (suffixes in this case) in 'reference' and 'uncorrected' into windows on which we compute MSA separately. The full MSA is reconstructed by concatenation, and dots are added to complete the 'corrected' MSA line.</figDesc><graphic coords="5,65.63,250.13,226.80,204.60" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure 4 .</head><label>4</label><figDesc>Figure 4. Three scenarios of corrected read categories in MSA results.Trimmed reads have a 'corrected' version with a missing prefix and/or suffix (gray region). Split reads have been fragmented into several parts during the correction, and subsequences can be missing between consecutive fragments (gray regions). Extended corrected reads have a 'corrected' version with an additional prefix and/or suffix which is (are) not present in the two other versions (missing regions in gray). Soft-clipped reads have a 'reference' version with a missing prefix and/or suffix (gray region).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Figure 5 .</head><label>5</label><figDesc>Figure 5. Computation of recall and precision using triple base-wise comparison at each MSA's position. nt(R) (respectively nt(U), nt(C)) represents the character in 'reference' (respectively 'uncorrected', 'corrected') line of the MSA at a given position.</figDesc><graphic coords="6,52.26,68.99,226.80,115.32" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 1 .</head><label>1</label><figDesc>Description of the datasets used in our experiments</figDesc><table><row><cell>Dataset</cell><cell>E. coli</cell><cell>S. cerevisiae</cell><cell>C. elegans</cell><cell>H. sapiens</cell></row><row><cell>Reference organism</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Strain</cell><cell>K-12 substr. MG1655</cell><cell>W303</cell><cell>Bristol N2</cell><cell>GRCh38</cell></row><row><cell>Reference sequence</cell><cell>NC 000913 a</cell><cell>scf7180000000{084-13} b</cell><cell>GCA 000002985.3 c</cell><cell>NC 000001.11 d</cell></row><row><cell>Genome size</cell><cell>4.6 Mbp</cell><cell>12.2 Mbp</cell><cell>100 Mbp</cell><cell>249 Mbp</cell></row><row><cell>Simulated Pacific Biosciences data</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Number of reads</cell><cell>11 306</cell><cell>30 132</cell><cell>244 277</cell><cell>-</cell></row><row><cell>Average length (bases)</cell><cell>8226</cell><cell>8204</cell><cell>8204</cell><cell>-</cell></row><row><cell>Number of bases (M bases)</cell><cell>93</cell><cell>247</cell><cell>2004</cell><cell>-</cell></row><row><cell>Coverage</cell><cell>20×</cell><cell>20×</cell><cell>20×</cell><cell>-</cell></row><row><cell>Error rate (%)</cell><cell>18.6</cell><cell>18.6</cell><cell>18.6</cell><cell>-</cell></row><row><cell>Real Oxford Nanopore data</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Accession</cell><cell>-</cell><cell>-</cell><cell>-</cell><cell>PRJEB23027 e</cell></row><row><cell>Number of reads</cell><cell>-</cell><cell>-</cell><cell>-</cell><cell>1 075 867</cell></row><row><cell>Average length (bases)</cell><cell>-</cell><cell>-</cell><cell>-</cell><cell>6744</cell></row><row><cell>Number of bases (M bases)</cell><cell>-</cell><cell>-</cell><cell>-</cell><cell>7256</cell></row><row><cell>Coverage</cell><cell>-</cell><cell>-</cell><cell>-</cell><cell>29×</cell></row><row><cell>Error rate (%)</cell><cell>-</cell><cell>-</cell><cell>-</cell><cell>17.60</cell></row></table><note><p>a https://www.ncbi.nlm.nih.gov/nuccore/NC 000913. b www.genoscope.cns.fr/externe/nas/references/yeast/W303 pacbio assembly.fa.gz. c https://www.ebi.ac.uk/ena/data/view/GCA 000002985.3. d Only chromosome 1 was used. https://www.ncbi.nlm.nih.gov/nuccore/NC 000001.11. e Only reads from chromosome 1 were used.</p></note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 2 .</head><label>2</label><figDesc>Comparison of the two multiple alignment strategies on simulated E. coli datasets</figDesc><table><row><cell>Experiment</cell><cell>Recall (%)</cell><cell>Precision (%)</cell><cell>Error rate (%)</cell><cell>Time</cell></row><row><cell>'1k' MSA</cell><cell>99.712</cell><cell>98.996</cell><cell>1.02</cell><cell>2 h 05 min</cell></row><row><cell>'1k" segmentation +MSA</cell><cell>99.769</cell><cell>98.992</cell><cell>1.021</cell><cell>28 min</cell></row><row><cell>'10k' MSA</cell><cell>99.921</cell><cell>99.781</cell><cell>0.206</cell><cell>20 h 50 min</cell></row><row><cell>'10k' segmentation + MSA</cell><cell>99.921</cell><cell>99.795</cell><cell>0.207</cell><cell>29 min</cell></row><row><cell>'100k' MSA</cell><cell>99.913</cell><cell>99.925</cell><cell>0.044</cell><cell>8 days 18 h 38 min</cell></row><row><cell>'100k' segmentation +MSA</cell><cell>99.924</cell><cell>99.903</cell><cell>0.098</cell><cell>1 h 11 min</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 3 .</head><label>3</label><figDesc>Examples of the main metrics reported by ELECTOR on E. coli, S. Cerevisiae</figDesc><table><row><cell></cell><cell>MECAT</cell><cell>Corrected</cell><cell></cell><cell>58 979 203</cell><cell>0.0052</cell><cell>0.9983</cell><cell>0.9949</cell><cell></cell><cell>162 057 920</cell><cell>0.0066</cell><cell>0.998</cell><cell>0.9936</cell><cell></cell><cell>870 965 775</cell><cell>0.0065</cell><cell>0 . 9982</cell><cell>0 . 9 9 3 6</cell></row><row><cell></cell><cell></cell><cell>Uncorrected</cell><cell></cell><cell>80 380 557</cell><cell>0.1332</cell><cell>-</cell><cell>-</cell><cell></cell><cell>217 284 712</cell><cell>0.1339</cell><cell>-</cell><cell>-</cell><cell></cell><cell>1 270 739 795</cell><cell>0.1199</cell><cell>-</cell><cell>-</cell></row><row><cell></cell><cell>Daccord</cell><cell>Corrected</cell><cell></cell><cell>83 773 362</cell><cell>0.004</cell><cell>0.9988</cell><cell>0.9961</cell><cell></cell><cell>222 050 951</cell><cell>0.0054</cell><cell>0.9986</cell><cell>0.9946</cell><cell></cell><cell>-</cell><cell>-</cell><cell>-</cell><cell>-</cell></row><row><cell></cell><cell></cell><cell>Uncorrected</cell><cell></cell><cell>92 936 636</cell><cell>0.1433</cell><cell>-</cell><cell>-</cell><cell></cell><cell>246 455 883</cell><cell>0.1426</cell><cell>-</cell><cell>-</cell><cell></cell><cell>-</cell><cell>-</cell><cell>-</cell><cell>-</cell></row><row><cell></cell><cell>CANU</cell><cell>Corrected</cell><cell></cell><cell>86 443 218</cell><cell>0.0524</cell><cell>0.9495</cell><cell>0.9476</cell><cell></cell><cell>229 555 492</cell><cell>0.0506</cell><cell>0.9515</cell><cell>0.9495</cell><cell></cell><cell>1 873 188 109</cell><cell>0.0496</cell><cell>0.9527</cell><cell>0.9505</cell></row><row><cell>datasets</cell><cell></cell><cell>Uncorrected</cell><cell></cell><cell>91 933 413</cell><cell>0.1432</cell><cell>-</cell><cell>-</cell><cell></cell><cell>244 560 743</cell><cell>0.1425</cell><cell>-</cell><cell>-</cell><cell></cell><cell>1 997 798 872</cell><cell>0.1427</cell><cell>-</cell><cell>-</cell></row><row><cell>and C. elegans</cell><cell>LoRDEC</cell><cell>Uncorrected Corrected</cell><cell></cell><cell>89 077 682 77 969 503</cell><cell>0.1384 0.0015</cell><cell>-0.9999</cell><cell>-0.9986</cell><cell></cell><cell>196 676 910 188 228 237</cell><cell>0.1325 0.0054</cell><cell>-0.9995</cell><cell>-0.9947</cell><cell></cell><cell>1 299 187 175 1 154 508 245</cell><cell>0.1242 0.0126</cell><cell>-0.9989</cell><cell>-0.9875</cell></row><row><cell></cell><cell>HG-CoLoR</cell><cell>Uncorrected Corrected</cell><cell></cell><cell>93 003 632 84 089 814</cell><cell>0.1428 0.0007</cell><cell>-1.0</cell><cell>-0.9993</cell><cell></cell><cell>245 700 616 219 744 436</cell><cell>0.1414 0.003</cell><cell>-0.9999</cell><cell>-0.9971</cell><cell></cell><cell>1 988 381 391 1 726 223 265</cell><cell>0.1397 0.0065</cell><cell>-0.9997</cell><cell>-0.9936</cell></row><row><cell></cell><cell>HALC</cell><cell>Corrected</cell><cell></cell><cell>81 199 351</cell><cell>0.0015</cell><cell>0.9999</cell><cell>0.9985</cell><cell></cell><cell>212 266 193</cell><cell>0.0042</cell><cell>0.9997</cell><cell>0.9959</cell><cell></cell><cell>1 588 220 052</cell><cell>0.0153</cell><cell>0.9989</cell><cell>0.985</cell></row><row><cell></cell><cell></cell><cell>Uncorrected</cell><cell></cell><cell>91 950 978</cell><cell>0.1415</cell><cell>-</cell><cell>-</cell><cell></cell><cell>238 309 333</cell><cell>0.1403</cell><cell>-</cell><cell>-</cell><cell></cell><cell>1 731 103 921</cell><cell>0.1377</cell><cell>-</cell><cell>-</cell></row><row><cell></cell><cell></cell><cell>Metric</cell><cell>E. coli</cell><cell>Processed bases</cell><cell>Error rate</cell><cell>Recall (%)</cell><cell>Precision (%)</cell><cell>S. cerevisiae</cell><cell>Processed bases</cell><cell>Error rate</cell><cell>Recall (%)</cell><cell>Precision (%)</cell><cell>C.elegans</cell><cell>Processed bases</cell><cell>Error rate</cell><cell>Recall (%)</cell><cell>Precision (%)</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" xml:id="foot_0"><p>Downloaded from https://academic.oup.com/nargab/article-abstract/2/1/lqz015/5625503 by INRIA Rennes, pierre.peterlongo@inria.fr on 19 November 2019</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>ACKNOWLEDGEMENTS</head><p>We thank <rs type="person">Pierre Marijon</rs> for his help with the Bioconda integration. Part of this work was performed using the computing resources of <rs type="institution">CRIANN (Normandy, France</rs>).</p></div>
+			</div>
+			<div type="funding">
+<div><head>FUNDING</head><p><rs type="funder">Inria -Department of Scientific Affairs</rs>.</p></div>
+			</div>
+			<listOrg type="funding">
+			</listOrg>
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Both tools were evaluated on the S. cerevisiae dataset, using a hybrid corrector (HALC) and a self corrector (Canu). A dash in the Uncorrected columns indicates that the metric is not computed for the 'uncorrected' reads. A cross indicates that LRCstats does not provide the metric. The datasets were simulated from the E. coli genome, with a 100× coverage, a 10% error rate and fixed read length of 1 k bases, 10 k bases, 100 k bases and 1 M bases. The reads were corrected by Canu, using default parameters. Both ELECTOR and LRCstats were launched with 9 threads. The different correction methods were launched with 16 threads. The runtimes of the correctors are also included as a matter of comparison. The fastest evaluation method is shown in bold for each case. When the evaluation method is also quicker than the correction method itself, it is underlined. Daccord could not be run on the C. elegans dataset, and reported an error. LRCstats crashed while assessing the C. elegans dataset corrected by MECAT. The two experiments were run on the same S. cerevisiae dataset, using a hybrid corrector (HALC) and a self corrector (Canu). The reads were corrected with MECAT, using default parameters, before the evaluation. ELECTOR evaluated a total of 650 771 reads. Small reads are corrected reads whose length is &lt;10% of the original read. Low quality corrected reads are reads for which an insufficient number of seeds was found during the segmentation process. Homopolymer ratio is the ratio of homopolymer sizes in corrected versus reference. We reported the wallclock time of the run, using 20 threads.</p><p>and precision are of prime interest to characterize a correction tool behavior. Indeed, this metrics allows spotting specific pitfalls, or undesired effects, which remain unclear when only looking at the error rates of the corrected reads. ELECTOR reports a text summary of its different metrics, along with pdf and png versions, including plots of the key figures. This allows users to easily integrate ELECTOR's outputs into reports. Even though ELECTOR relies on multiple sequence alignment techniques that can be very resource-consuming, we were able to evaluate the behavior of a representative list of state-of-the-art hybrid and self-correctors, ran on reads from small bacterial to large mammal genomes. We also showed that ELECTOR's performances allow it to scale to very long reads, displaying lengths up to 1 M bases, with moderate resource needs.</p><p>In particular, ELECTOR is typically faster than most error correction methods. ELECTOR's ability to quickly handle real-world datasets with low memory consumption is pre-eminently valuable when working on long read exploitation routines, and represents a significant improvement in comparison to the state-of-the-art.</p><p>The efficiency of ELECTOR relies on an innovative and promising segmentation algorithm for multiple sequence alignment of noisy long reads. This procedure drastically reduces the time footprint of the multiple sequence alignment, making it able to scale to very long sequences. We believe this algorithm could be improved and applied to a broad range of applications implying multiple sequence alignment of long, noisy sequences.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>SUPPLEMENTARY DATA</head><p>Supplementary Data are available at NARGAB Online. Conflict of interest statement. None declared.</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Long-read sequence assembly of the gorilla genome</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Gordon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Huddleston</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">J</forename><surname>Chaisson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">M</forename><surname>Hill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><forename type="middle">N</forename><surname>Kronenberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">M</forename><surname>Munson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Malig</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Raja</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Fiddes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">W</forename><surname>Hillier</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Science</title>
+		<imprint>
+			<biblScope unit="volume">352</biblScope>
+			<biblScope unit="page">344</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Piercing the dark matter: bioinformatics of long-range sequencing and mapping</title>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">J</forename><surname>Sedlazeck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">A</forename><surname>Darby</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">C</forename><surname>Schatz</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Rev. Genet</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="329" to="346" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Denoising DNA deep sequencing data-high-throughput sequencing errors and their correction</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Laehnemann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Borkhardt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">C</forename><surname>Mchardy</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Brief. Bioinform</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page" from="154" to="179" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Minimap2: pairwise alignment for nucleotide sequences</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Li</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="page" from="3094" to="3100" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Minimap and miniasm: fast mapping and de novo assembly for noisy long sequences</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Li</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="page" from="2103" to="2110" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">LRCstats, a tool for evaluating long reads correction methods</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>La</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Haghshenas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Chauve</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page" from="3652" to="3654" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">A survey of error-correction methods for next-generation sequencing</title>
+		<author>
+			<persName><forename type="first">X</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">P</forename><surname>Chockalingam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Aluru</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Brief. Bioinform</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="56" to="66" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Nanopore sequencing and assembly of a human genome with ultra-long reads</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Jain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Koren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">H</forename><surname>Miga</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Quick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">C</forename><surname>Rand</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">A</forename><surname>Sasani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">R</forename><surname>Tyson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">D</forename><surname>Beggs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">T</forename><surname>Dilthey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">T</forename><surname>Fiddes</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Biotechnol</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="page" from="338" to="345" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">NanoSim: nanopore sequence read simulator based on statistical characterization</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Chu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">L</forename><surname>Warren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Birol</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">GigaScience</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page" from="1" to="6" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Simlord: Simulation of long read data</title>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">K</forename><surname>St Öcker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Rahmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="page" from="2704" to="2706" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Multiple sequence alignment using partial order graphs</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Grasso</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">F</forename><surname>Sharlow</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page" from="452" to="464" />
+			<date type="published" when="2002">2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Using MUMmer to identify similar regions in large sequence sets</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Delcher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Salzberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Phillippy</surname></persName>
+		</author>
+		<idno type="DOI">10.1002/0471250953.bi1003s00</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Curr.Protoc. Bioinform</title>
+		<imprint>
+			<date type="published" when="2003">2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Mapping single molecule sequencing reads using basic local alignment with successive refinement (BLASR): application and theory</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">J</forename><surname>Chaisson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Tesler</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Bioinform</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page">238</biblScope>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Jabba: hybrid error correction for long sequencing reads</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Miclotte</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Heydari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Demeester</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Rombauts</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Van De Peer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Audenaert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Fostier</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Algorithm. Mol. Biol</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page">10</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Genome assembly using Nanopore-guided long and error-free DNA reads</title>
+		<author>
+			<persName><forename type="first">M.-A</forename><surname>Madoui</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Engelen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Cruaud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Belser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Bertrand</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Alberti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Lemainque</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Wincker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J.-M</forename><surname>Aury</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Genom</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page">327</biblScope>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Canu: scalable and accurate long-read assembly via adaptive k-mer weighting and repeat separation</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Koren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">P</forename><surname>Walenz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Berlin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">R</forename><surname>Miller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">H</forename><surname>Bergman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">M</forename><surname>Phillippy</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Res</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="722" to="736" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Versatile genome assembly evaluation with QUAST-LG</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mikheenko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Prjibelski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Saveliev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Antipov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Gurevich</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="page" from="142" to="150" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">HALC: High throughput algorithm for long read error correction</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Bao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Lan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Bioinform</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page">204</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Hybrid correction of highly noisy long reads using a variable-order de Bruijn graph</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Morisse</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Lecroq</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Lefebvre</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="page" from="4213" to="4222" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">LoRDEC: accurate and efficient long read error correction</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Salmela</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Rivals</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="page" from="3506" to="3514" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">MECAT: fast mapping, error correction, and de novo assembly for single-molecule sequencing reads</title>
+		<author>
+			<persName><forename type="first">C.-L</forename><surname>Xiao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S.-Q</forename><surname>Xie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K.-N</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Han</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Luo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Xie</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Methods</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page">1072</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">A comparative evaluation of hybrid error correction methods for error-prone long reads</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Fu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">F</forename><surname>Au</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biol</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page">26</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Comparative assessment of long-read error correction software applied to Nanopore RNA-sequencing data</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Lima</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Marchet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Caboche</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Da Silva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Istace</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J.-M</forename><surname>Aury</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Touzet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Chikhi</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/bib/bbz058</idno>
+		<ptr target="https://academic.oup.com/nargab/article-abstract/2/1/lqz015/5625503byINRIARennes" />
+	</analytic>
+	<monogr>
+		<title level="j">Brief. Bioinform</title>
+		<imprint>
+			<date type="published" when="2019-11-19">2019. 19 November 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

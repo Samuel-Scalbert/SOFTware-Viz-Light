@@ -8,21 +8,21 @@ def home_data(db):
         FOR software IN softwares
             RETURN DISTINCT software.software_name.normalizedForm
     )
-    
+
     LET url = (
         FOR url_soft IN softwares
         FILTER url_soft.url != null
             RETURN DISTINCT url_soft.url
     )
-    
+
     LET ment = LENGTH(softwares)
-    
+
     LET struc = LENGTH(structures)
-    
+
     LET auth = LENGTH(authors)
-    
+
     LET ref = LENGTH(references)
-    
+
     RETURN {
         "documents_count": doc,
         "structures_count": struc,

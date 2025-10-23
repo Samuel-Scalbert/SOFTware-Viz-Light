@@ -1,0 +1,1542 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Towards a better understanding of the low recall of insertion variants with short-read based variant callers</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Wesley</forename><forename type="middle">J</forename><surname>Delage</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Julien</forename><surname>Thevenon</surname></persName>
+							<idno type="ORCID">0000-0002-1272-0289</idno>
+						</author>
+						<author>
+							<persName><forename type="first">Claire</forename><surname>Lemaitre</surname></persName>
+						</author>
+						<author>
+							<affiliation>
+								<orgName>1 Univ Rennes, Inria, CNRS, IRISA, </orgName>
+								<address><addrLine>F-35000 Rennes, France. Grenoble, France.</addrLine></address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation>
+								<orgName> 2 Inserm U1209, CNRS UMR 5309, Univ. Grenoble Alpes, Institute for Advanced Biosciences, Grenoble, France &amp; Genetics, Genomics and Reproduction Service, Centre Hospitalo-Universitaire Grenoble-Alpes,</orgName>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Towards a better understanding of the low recall of insertion variants with short-read based variant callers</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">7F5156DC7665AC84E5F8DF7F16EFF57C</idno>
+					<idno type="DOI">10.1186/s12864-020-07125-5</idno>
+					<note type="submission">Received: 7 July 2020 Accepted: 6 October 2020</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:13+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Short reads</term>
+					<term>Variant calling</term>
+					<term>Structural variants; Insertions</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Background: Since 2009, numerous tools have been developed to detect structural variants using short read technologies. Insertions &gt;50 bp are one of the hardest type to discover and are drastically underrepresented in gold standard variant callsets. The advent of long read technologies has completely changed the situation. In 2019, two independent cross technologies studies have published the most complete variant callsets with sequence resolved insertions in human individuals. Among the reported insertions, only 17 to 28% could be discovered with short-read based tools. Results: In this work, we performed an in-depth analysis of these unprecedented insertion callsets in order to investigate the causes of such failures. We have first established a precise classification of insertion variants according to four layers of characterization: the nature and size of the inserted sequence, the genomic context of the insertion site and the breakpoint junction complexity. Because these levels are intertwined, we then used simulations to characterize the impact of each complexity factor on the recall of several structural variant callers. We showed that most reported insertions exhibited characteristics that may interfere with their discovery: 63% were tandem repeat expansions, 38% contained homology larger than 10 bp within their breakpoint junctions and 70% were located in simple repeats. Consequently, the recall of short-read based variant callers was significantly lower for such insertions (6% for tandem repeats vs 56% for mobile element insertions). Simulations showed that the most impacting factor was the insertion type rather than the genomic context, with various difficulties being handled differently among the tested structural variant callers, and they highlighted the lack of sequence resolution for most insertion calls. Conclusions: Our results explain the low recall by pointing out several difficulty factors among the observed insertion features and provide avenues for improving SV caller algorithms and their combinations.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Background</head><p>The widespread use of short read massively parallel sequencing has allowed the fine characterization of the human genome variability on single nucleotide variants and small insertions/deletions (&lt;50 bp) <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b1">2]</ref>. Structural variants (SVs) are larger variants. They are defined as a fragment of DNA of more than 50 bp that differs between *Correspondence: wesley.delage@irisa.fr 1 Univ Rennes, Inria, CNRS, IRISA, F-35000 Rennes, France Full list of author information is available at the end of the article an individual and the reference genome <ref type="bibr" target="#b2">[3]</ref>. There is a great variety of SVs, with various proposed stratifications. A common categorisation differentiates a deletion (DEL) for a loss of a fragment, an insertion (INS) for a gain of a fragment, an inversion for a reversion of a fragment (INV) and a translocation (TRANS) for moving a fragment to another position in the genome. SVs are drivers of the genome evolution along generations, and some of them can have a significant functional impacts on the organism and be responsible for rare Mendelian disorders <ref type="bibr" target="#b3">[4]</ref>.</p><p>The classical approach to discover SVs from Whole Genome Sequencing (WGS) with short reads relies on a first step consisting in mapping the reads to a reference genome. Then SV callers look for atypical mapping signals, such as discordant read pairs, clipped reads or abnormal read depth, to identify putative SV breakpoints along the reference genome <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b5">6]</ref>. More than 70 SV callers have been developed up to date and several benchmarks have revealed great variability between results obtained by different methods, demonstrating that SV detection using short read sequencing remains challenging <ref type="bibr" target="#b6">[7,</ref><ref type="bibr" target="#b7">8]</ref>. The challenge is to resolve two issues: a technical and a methodological one. The technical issue concerns the sequencing technology: insert size, read size and sequencing coverage have been shown to impact SV discovery. The second issue concerns SV caller algorithms and their ability to decipher and translate the biological signal from the alignments. Thus, SVs located in repeated regions or containing repeats larger than the read size are difficult to detect <ref type="bibr" target="#b8">[9]</ref>.</p><p>In particular, insertions are one of the most difficult SV types to call <ref type="bibr" target="#b6">[7,</ref><ref type="bibr" target="#b7">8]</ref>. Because the inserted sequence is absent from the reference genome, or at least at the given locus of insertion, calling such variants and resolving the exact inserted sequence requires finely tuned approaches such as de novo or local assembly <ref type="bibr" target="#b9">[10,</ref><ref type="bibr" target="#b10">11]</ref>. This increased difficulty is well exemplified by the dramatic under-representation of such SV type in usual reference databases or standard variant callsets. For instance, dbVar at present references only 28% of insertions or duplications among the SVs larger than 50 bp. On the opposite, deletions represent more than 70% of the database, although both types are expected to be roughly equally abundant in human populations <ref type="bibr" target="#b11">[12]</ref>. Moreover, only 1.5% of the reported insertions are sequence-resolved, that is with an inserted sequence fully characterized.</p><p>One explanation is that the size of the reads is small compared to the target event size and the detection is mainly based on alignments which may produce artefacts <ref type="bibr" target="#b12">[13]</ref>. Another source of difficulty for insertion detection is the presence of repeated patterns at the precise rearrangement breakpoints. Several molecular mechanisms involved in rearrangement genesis are known to produce such repeated sequences, referred as junctional homology <ref type="bibr" target="#b13">[14]</ref><ref type="bibr" target="#b14">[15]</ref><ref type="bibr" target="#b15">[16]</ref>. Junctional homology is defined as a DNA sequence that has two identical or nearly identical copies at the junctions of the two genomic segments involved in the rearrangement, when the sequence is short (&lt;70 bp) this is often called a micro-homology <ref type="bibr" target="#b15">[16]</ref>. The repair of DNA double strand breaks by diverse mechanisms, such as Non-Allelic Homologous Recombination (NAHR), Non-Homologous End Joining (NHEJ) or Microhomology-Mediated Break-Induced Replication (MMBIR), generate such homologies whose size depend precisely on the type of the involved mechanism. These homologies can have an impact on insertion calling performance, since the concerned region at the inserted site is no longer specific to the reference allele and it is no longer possible to identify the exact location of the insertion site. However, little is known at present about the prevalence of these homologies and their sizes for human insertion variants due to their poor referencing in databases.</p><p>More recently, novel long reads sequencing technologies have overcome these limitations and allowed the generation of more accurate datasets, finally referencing sequence-resolved insertion variants in the human genome <ref type="bibr" target="#b7">[8,</ref><ref type="bibr" target="#b16">17]</ref>. Thanks to several international efforts, some gold standard callsets have been produced in 2019, referencing tens of thousands of insertions in several human individuals <ref type="bibr" target="#b17">[18,</ref><ref type="bibr" target="#b18">19]</ref>. Among the reported insertions by Chaisson et al, a great majority (83%) could not be discovered by any of the tested short-read based SV callers. This result of recall below 17% is drastically different from the announced performances of insertion callers when evaluated on simulated datasets <ref type="bibr" target="#b19">[20]</ref>. Indeed, Chaisson et al showed that 59% of insertion variants were found in a tandem repeat context, suggesting that most of the real insertion variants in human individuals are probably occurring in complex regions and involving complex sequences. So far, such complexity factors were rarely included nor analysed in method benchmarks and to do so, actual insertion variants require to be better characterized.</p><p>Numerous countries are developing genomic medicine programs, based on short-read sequencing. Although third generation sequencing offers an unprecedented technique for exploring the complexity of individual structural variants, most of the genomic sequencing facilities will still use short-read based sequencing in coming years for its reduced cost. Hence, there is a critical need to measure and control the caveats of standard procedures for detecting SVs with short-read sequencing data.</p><p>In this work, we performed an in-depth analysis of these unprecedented insertion callsets, in order to investigate the causes of short read based caller failures. We have first established a precise classification of insertion variants according to four different layers of characterization: the nature and size of the inserted sequence, the genomic context of the insertion site and the breakpoint junction complexity. Because these levels are intertwined, we then used simulations to characterize the impact of each complexity factor on the recall of several SV callers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Results</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>In-depth analysis of an exhaustive insertion variant callset</head><p>In this work, we first aimed at precisely characterizing an exhaustive set of insertion variants present in a given human individual. We based our study on a recently published SV callset published by Chaisson and colleagues in 2019 <ref type="bibr" target="#b17">[18]</ref>. Using extensive sequencing datasets, combining different sequencing technologies and methodological approaches (short, linked and long reads, mappingbased and assembly-based SV calling), three human trios were thoroughly analysed to establish exhaustive and gold standard SV callsets (Supplementary Table <ref type="table">S1</ref>). We first focused our study on the individual NA19240, son of the so-called Yoruban (YRI) Nigerian trio, whose SV callset contained 15,693 insertions greater than 50 bp.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Nature and size of the inserted sequences</head><p>Insertion variants can be classified in different subtypes according to the nature of the inserted sequence. Three insertion categories were distinguished in the original publication, namely tandem repeats, mobile element insertions and complex ones for all the other types. We proposed to refine this classification in five insertion subtypes, illustrated in Fig. <ref type="figure">1</ref>. A classical subdivision consisted in distinguishing novel sequence insertions from insertions of exiting sequences, namely duplicative insertions. Several sub-types of duplicative insertions were then defined according to the location or amount of the inserted sequence copies in the reference genome. Among duplicative insertions, we proposed to stratify (i) tandem duplications, with at least one copy of the inserted sequence being adjacent to the insertion site, (ii) dispersed duplications, with copies that can be located anywhere else in the genome. Among tandem duplications, tandem repeats are characterized by multiple tandem repetitions of a seed motif within the inserted sequence. Mobile element insertions are a very specific sub-type whose sequences are known and referenced in families. They are notably characterized by very high copy numbers in the genome (typically greater than 500). Other dispersed duplication types were then required to have a copy number lower than 50, in order not to be confounded with potential mobile element insertions. We did not define segmental duplications and CNVs as additional sub-types of dispersed duplications, as they are defined in the literature by their size (above 1 Kb), the size being another independant level of characterization.</p><p>In order to classify the insertion callset, all inserted sequences were aligned against the human reference genome, a mobile element database and were scanned for tandem repeats (see Methods). We used a minimal sequence coverage threshold to annotate each insertion to an insertion sub-type according to the decision tree described in Fig. <ref type="figure">1</ref>. Insertions that did not meet any requirement to be annotated as one of the previous subtypes were qualified as unassigned insertions.</p><p>We set the threshold to 80% for our analysis to ensure a compromise between specificity and quantity of annotated insertions in all sub-types. With such threshold, 88% of insertions could be assigned to a given type. Among the 13,850 annotated insertions, 8,735 (63%) were annotated as tandem repeats, 2,473 (17%) as mobile elements, 1,000 Fig. <ref type="figure">1</ref> Decision tree used to classify insertion variants. Five insertion sub-types are defined according to the nature of the inserted sequence : novel sequence, tandem repeat and mobile element insertions and tandem and dispersed duplications. Unassigned insertions refer to insertions which do not meet the requirements to be assigned to at least one sub-type (7%) as tandem duplications, 869 (6%) as novel sequences and 773 (5%) as dispersed duplications (Fig. <ref type="figure" target="#fig_0">2b</ref> and Supplementary Table <ref type="table" target="#tab_1">S2</ref> for results obtained with other coverage thresholds). 46% of tandem repeats had a repeat seed smaller than 10 bp and 93% smaller than 50 bp. Compared to the classification of Chaisson et al, the proportions of tandem repeats (57% vs 56%) and mobile elements (23% vs 16%) were close. The difference in mobile element proportions mainly represented insertions that were unassigned in our annotation. The 1,843 (12%) unassigned insertions at 80% threshold showed partial annotations of mobile element (57%), tandem repeats (22%), tandem duplications (15%) or dispersed duplications (5%).</p><p>Concerning the size of the insertions, 67% of the insertions were smaller than 250 bp and only 8% had a size greater than 1 Kb (Fig. <ref type="figure" target="#fig_0">2a</ref>). Interestingly, the size distributions differed between insertion types (Fig. <ref type="figure" target="#fig_1">3a</ref>). Mobile elements showed the most contrasting size distribution with a strong over-representation of the 250-500 bp size class (61%). This can be explained by the most frequent and active mobile element class in the human genome being the SINE elements of size around 300 bp. Notably, the novel sequence insertion type carried a greater proportion of large insertions than other types, with 164 (19%) of the 869 novel sequences larger than 1,000 bp.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Characterization of insertion locations in the genome</head><p>We then characterized the insertions based on the genomic context of their insertion site. We investigated in particular genomic features that might make read mapping and SV calling difficult, such as the  repetitive content. A strong over-representation was found in regions annotated as simple repeats, with 9,675 (70%) of the annotated insertions located in these regions that only represent 1.2% of the genome (Fig. <ref type="figure" target="#fig_0">2c</ref>). The preferred genomic context of insertions varied between insertion types (Fig. <ref type="figure" target="#fig_1">3b</ref>). 8,047 (92%) tandem repeats, 723 (73%) tandem duplications and 519 (63%) dispersed duplications were found in simple repeat regions. Conversely, 580 (67%) novel sequence insertions and 1,383 (56%) mobile element insertions were located in other regions. We did not find a higher rate of insertions within exonic, intronic or intergenic regions compared to a uniform distribution along the genome.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Junctional homology</head><p>We systematically compared the insertion site junction sequences with the inserted sequence extremities to identify stretches of identical or nearly identical sequences, here-after called junctional homologies as in <ref type="bibr" target="#b15">[16]</ref> (see Methods). Overall 5,119 (38%) insertions showed junctional homologies larger than 10 bp (Fig. <ref type="figure" target="#fig_0">2d</ref>). This proportion is greater than the one obtained with random sequence insertions, the largest observed junctional homology being of 7 bp among 2,000 randomly simulated insertions (see Methods). All insertion types carried junctional homologies greater than expected with random sequences. Tandem duplications and tandem repeats were the types with the greatest junctional homologies, with 428 (43%) tandem duplications and 1,751 (20%) tandem repeats that were identified with a junctional homology larger than 50 bp (Fig. <ref type="figure" target="#fig_1">3c</ref>). This could be expected by their tandem nature. However, the homology was still smaller than their insertion size for many of them. The explanation for tandem repeat lies in their structure which is an amplification of a seed in the reference genome. Thus the largest homology size corresponded to the seed size presents at the right breakpoint (in case of left normalization). As for tandem duplications, the discordance between their annotation as tandem duplication and the smaller size of the detected junctional homology is related to the difference in the methods used to define the homology, where small distances (&lt;10 bp) to the insertion site and to the inserted sequence extremity were required in the junctional homology case, whereas in the tandem duplication annotation case, the homologous segment had only to cover at least 80% of the inserted sequence.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Comparison with other individual callsets</head><p>These observations were performed on the NA19240 individual callset. Hence, we asked whether they could be recurrent across individuals from various genetic backgrounds. We first considered the two other individuals of the Chaisson et al study, namely HG00514 (14,363 insertions), son of a Han Chinese (CHS) trio, and HG00733 (15,476 insertions), son of a Puerto Rican (PUR) trio. These callsets were obtained with the same sequencing technologies and SV calling methodologies as for the NA19240 individual. Then, we analyzed a callset obtained by a different study, namely the SV callset for individual HG002 <ref type="bibr">( 11,630 insertions)</ref> provided by the Genome in a Bottle (GiaB) Consortium <ref type="bibr" target="#b18">[19]</ref>. In this study, Zook and colleagues also used multiple sequencing technologies and SV calling methods to achieve a high confidence insertion and deletion callset (see Supplementary Table <ref type="table">S1</ref> for a summary of the technologies and methods used for all the callsets). Before comparing insertion features between callsets, we first checked whether they contained different variants. Using a rough estimation of shared variants, we identified only 1,169 insertion sites common to the four callsets within a 1 kb size window. On average 3,344 insertions were shared between two given callsets, and overall, more than 55% of the studied insertions were specific to a given callset. The distributions of insertion types, sizes, locations and junctional homology sizes were similar between the three individuals of the Chaisson et al study and the GiaB callset (Fig. <ref type="figure" target="#fig_0">2</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Short-read-based recall</head><p>In order to investigate whether the previously described insertion features impacted the recall of short-readbased (SR-based) SV callers, we reproduced our previous analysis according to the technology involved in the variant call as annotated in the callsets. For the individual NA19240, 2,363 (17%) insertion variants were comforted by SR-based SV callers. As shown in Fig. <ref type="figure">4</ref>, this SRbased recall was highly heterogeneous with respect to the previously described insertion features. Each described feature in this work (ie. nature and size of the inserted sequence, insertion site genomic context and junctional homologies) impacted the SR-based recall. As shown in Fig. <ref type="figure">4a</ref>, insertions larger than 500 bp were poorly discovered by SR-based methods (&lt;3%). An increased SR-based recall for the 250-500 bp insertion size class corresponded to mobile element insertions. The greatest difference in SR-based recall was observed among the insertion types: 1,410 (56%) mobile elements and 342 (40%) novel sequence insertions could be detected with SR-based SV callers compared to only 87 (9%) tandem duplications, 484 Fig. <ref type="bibr" target="#b3">4</ref> Proportions of SR-based insertion discoveries according to insertion features. Proportions of insertions that were called using short read technology data according to a insertion size, b insertion type, c insertion location and d homology size at the breakpoint, in the NA19240 and HG002 callsets. These callsets were provided by two different studies using different discovery tools and methodologies (6%) tandem repeats and 40 (5%) dispersed duplications (Fig. <ref type="figure">4b</ref>).</p><p>The variations of the SR-based recall with respect to insertion features were very similar between the three studied individuals from the Chaisson et al. study (Supplementary Figure <ref type="figure" target="#fig_0">S2</ref>). However, the same comparison across two different studies with different methodologies was much more contrasted. Firstly, overall around 1.6 times more insertions in proportion could be detected by SR-based methods in the GiaB study compared to the Chaisson et al study (SR-based recalls of 28% and 17% for HG002 and NA19240 callsets respectively). Secondly, the SR-based recall was more homogeneous with respect to insertion features in the GiaB callset (Fig. <ref type="figure">4</ref>). The feature showing the most impact was the insertion size with a decrease of the SR-based recall with the insertion size, reaching below 5% for insertions larger than 500 pb for both studies (Fig. <ref type="figure">4a</ref>). Similarly to the NA19240 callset, tandem repeats appeared more difficult to discover with SR-based methods, but to a lesser extent in the GiaB callset (Fig. <ref type="figure">4b</ref>). Insertions located in simple repeats were less discovered using SR-based methods but this SR-based recall of 25% remained higher than for NA19240 where it only reached 5% on these locations (Fig. <ref type="figure">4c</ref>). Junctional homology of the insertions of individual HG002 did influence its SR-based recall, but in a different manner than in the Chaisson et al study (Fig. <ref type="figure">4d</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Using simulations to investigate the factors impacting the insertion calling recall</head><p>In real insertion callsets, most of the previously identified factors impacting SV discovery are intertwined. In order to quantify the impact of each factor independently, we produced various simulated datasets of 2x150 bp reads at 40x coverage, containing each 200 homozygous insertion variants on the human chromosome 3. As a baseline, we simulated 250 bp novel sequences taken from Saccharomyces cerevisiae exonic sequences inserted inside human exons. This is meant to represent the easiest type of insertions to detect. Then, we considered four scenarios of simulations, where only one of the four previously studied factors is changed at a time with respect to the baseline simulation.</p><p>Four insertion variant callers were evaluated on these datasets. They were chosen according to their good performances in recent benchmarks <ref type="bibr" target="#b6">[7]</ref> and to maximise the methodological diversity. GRIDSS <ref type="bibr" target="#b10">[11]</ref>, Manta <ref type="bibr" target="#b19">[20]</ref> and SvABA <ref type="bibr" target="#b5">[6]</ref> are based on a first mapping step to the reference genome, contrary to MindTheGap <ref type="bibr" target="#b9">[10]</ref> which uses solely an assembly data structure (the De Bruijn graph). Two types of recall were computed depending on the precision and information given for each call: insertion-site only recall only evaluated if an insertion was called at an expected genomic position regardless of the predicted size or inserted sequence. As a more stringent evaluation, the sequence-resolved recall considered as true positives only those insertion calls having a correct genomic position and whose inserted sequence was very similar to the simulated one (&gt;90% sequence identity and +/-10% insertion size).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Factors impacting insertion site recall</head><p>Recalls of insertion sites for all four methods are presented for the different simulated datasets in Table <ref type="table">1</ref>. On the baseline simulation, all tools succeeded to detect 100% of simulated insertions, except for GRIDSS with 81% of recall. The size of the inserted sequence impacted the recall of the insertion sites for most tools, except MindTheGap. GRIDSS was challenged by small insertions (50 bp) whereas Manta and SvABA had more issues with large insertions. The most extreme behavior was observed for SvABA which was not able to find the insertion sites of any of the simulated novel sequences larger than 500 bp.</p><p>When simulating various insertion types, GRIDSS was the only tool whose recall was not negatively impacted. Manta could not find any type of dispersed duplications and showed a lower recall to detect tandem repeats with 25 bp size seeds. MindTheGap was unable to detect any type of tandem duplications and found only 58% of mobile element insertions. SvABA was not able to detect any tandem repeat insertion but was able to detect all dispersed and tandem duplications and mobile elements.</p><p>Concerning junctional homology, the tools showed contrasting behaviors. GRIDSS was the only tool unaffected by the presence and size of repeated sequence at the insertion junctions. On the contrary, MindTheGap was the most impacted by junctional homology, being unable to detect insertions with homology at any tested size. This feature is actually controlled by a parameter of MindThe-Gap, increasing the max-repeat parameter value to 15 bp (default : 5bp), MindTheGap discovered 99% of the insertion sites with 10 bp junctional homomolgies. Manta's recall decreased with the size of junctional homologies, whereas SvABA handled small (less than 20 bp) or very large (150 bp) junctional homologies but was affected by medium sizes.</p><p>Concerning the impact of the genomic context of insertions, no loss of recall was observed in non repeated locations. Alignment-based SV callers showed no change in recall in small simple repeat (&lt;300 bp), SINE and LINE locations. Manta and SvABA recalls lost 5 to 6% of recall in simple repeat regions larger than the insert size (&gt;300 bp). MindTheGap lost 42 and 47% of recall in large simple repeat and SINE location simulations. Simulating insertions close to each other on the genome, at less than 150 bp, reduced the recall of SvABA (-98%), MindTheGap (-33%) and Manta (-15%).</p><p>Table <ref type="table">1</ref> Insertion site recall of several short-read insertion callers according to different simulation scenarios. Cells of the table are colored according to the variation of the recall value of the given tool with respect to the recall obtained with the baseline simulation (first line, colored in blue): cells in red show a loss of recall &gt;10%, cells in grey show no difference compared to baseline recall at +/-10% Finally, when simulating the 889 insertions of NA19240 callset located on chromosome 3, with their reported inserted sequence at their real locations as described in the variant calling file (scenario 5), the recall of all tools dropped to less than 44%, reaching for many tools their lowest values among the different simulated datasets. This was particularly marked for GRIDSS whose recall was greater than 77% in all simulated scenarios, but achieved only 39% on this simulation. When relaxing one complexity factor, the type or the location, ie. simulating either novel sequences at the real locations or the real types in exonic regions, the drop of recall is much smaller for all tools, indicating that there is a synergetic effect of combining in a single insertion event these two factors, insertion type and insertion location.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Impact of quality filtering</head><p>Previous results were computed using only the calls assessed with sufficient quality by each tool and annotated as PASS in the FILTER field of the VCF file.</p><p>Removing this quality filtering allowed to increase the recall mainly for GRIDSS and SvABA (see Supplementary Table <ref type="table">S3</ref>). Remarkably, GRIDSS reached a 100% recall on almost every scenario, except the scenario simulating the real insertions where still a 35% loss of recall was observed (Supplementary Table <ref type="table">S3</ref>). These differences indicated that a substantial amount of true positive insertions were detected but reported as low quality calls.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Sequence-resolution of predicted insertions</head><p>We then investigated whether the SV callers were also able to recover the full inserted sequences in the different simulation scenarios (Table <ref type="table" target="#tab_1">2</ref>). On the baseline simulation with 250 bp novel sequence insertions, every tools reported for almost all detected insertion sites a resolved and correct inserted sequence. However, these high sequence-resolved recalls dropped dramatically when deviating from the baseline scenario. Although the discovery of insertion sites was not much impacted by the insertion size, all tools but MindTheGap were not able to recover any of the inserted sequences when it was larger than 500 bp (Table <ref type="table" target="#tab_1">2</ref>). On the contrary, MindTheGap assembled correctly nearly all simulated novel sequences, even those of 1 Kb. Concerning the other insertion types, tools were not able to provide sequence resolved calls, except for MindTheGap and SvABA for some dispersed duplications and mobile element insertions (Table <ref type="table" target="#tab_1">2</ref>). In the case of tandem repeats, GRIDSS which detected all insertion sites, reported inserted sequences of at most 150 bp (instead of 250), corresponding to the simulated read size. The increase of junctional homology size reduced the sequence resolution of GRIDSS and SvABA. Insertions located in repeated regions were less resolved than in the baseline simulation for every tools. Finally, the sequence resolution of real insertions simulated at their real locations decreased compared to the insertion site recall, GRIDSS suffering the greatest loss (-33%).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>False positive amount variations</head><p>The tools with the largest recalls were also the tools producing the largest amounts of false positive discoveries (in the order of several hundreds for GRIDSS and SvABA, see Supplementary Table <ref type="table">S4</ref>). More surprisingly, the amount of false positives was not constant for most tools between the different simulation scenarios. It increased when simulated insertions presented a duplicative pattern (mobile element, dispersed duplication and junctional homologies above 50 bp). For those, some SV callers predicted variants not only at the insertion site but also at the locations of homologous copies of the inserted sequences. Removing the quality filter led to a large increase of the amount of false positive discoveries for GRIDSS and SvABA (5 to 17 times more respectively).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Unions and intersections of SV callers</head><p>A classical strategy to report SVs on real data is to reconcile several SV callsets keeping only variants that are sim-ilarly called by different SV callers. This strategy ensures a balance between true and false disovery rate. On the last simulation scenario, only 12% of the insertion sites were validated by the three tools, GRIDSS, Manta and SvABA, and 39% by at least two tools. However, the union of all three methods comprised 65% of the real insertion sites, which represented an increase of 20% of the best recall obtained by a single method (Fig. <ref type="figure">5</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Evaluation of insertion recall with long read simulated data</head><p>For each of these short-read simulated datasets, we also simulated a corresponding PacBio long read dataset, with 40 X coverage and 16% error rate. We then applied a state-of-the-art long-read SV caller, Sniffles <ref type="bibr" target="#b16">[17]</ref>, on each of them to assess whether the previously identified difficulty factors for short read data have also an impact on the recall with long read data (see Supplementary Table <ref type="table">S5</ref>). For most insertion scenarios, Sniffles reported accurately 100% of the insertions sites, except for the tandem duplication type and for the insertions with large junctional homologies (recall below 20%). In these cases, insertions were in fact reported but at more than 10 bp from the simulated insertion site. This is probably due to imprecise sequence resolution preventing the correct left normalization of breakpoint positions. Another difficulty factor was the close proximity of insertion locations, for which Sniffles reported one complex event instead of several close insertions. This mainly explained the low recall of 58% for the dataset with the real chromosome Fig. <ref type="figure">5</ref> Intersections of true positive insertion callsets between different SV callers. Intersections of true positive insertion callsets between GRIDSS, SvABA and Manta on the scenario 5 simulation (real insertions at real locations). In this scenario, the 889 insertions located on the chromosome 3 from the NA19240 callset were simulated as described in the vcf file. Insertion calls were validated and compared based solely on the insertion site prediction 3 insertions at their real locations. Concerning sequence resolution, although Sniffles calls contained systematically a full inserted sequence, the latter was imprecise and contained sequencing errors leading to sequence-resolved recalls around only 20% when requiring at least 90% of sequence identity. When relaxing the identity threshold to 80% or using the dedicated benchmark tool SVanalyzer from GiaB which relies on a less stringent validation, the sequence-resolved recall was similar to the insertion site recall for most insertion scenarios (Supplementary Tables <ref type="table">S5</ref> and<ref type="table">S6</ref>). These results reveal that long read technologies enable the discovery of every types of insertion but the calls remain imprecise.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Discussion</head><p>The discovery of genomic variants is an important step towards the understanding of genetic diseases and species evolution <ref type="bibr" target="#b20">[21,</ref><ref type="bibr" target="#b21">22]</ref>. The detection of insertions too small (&lt;1kb) to be detected using comparative genomic hybridization array (CGH array) but larger than indel size (&gt;50 bp) to be detected by the gold standard small variant discovery pipeline (GATK), remained a challenge with short read technology <ref type="bibr" target="#b3">[4]</ref>. Thus these variations were poorly characterised in databases as compared to other SVs such as deletions. Numerous variant callers have been developed to overcome this issue but without resolving it <ref type="bibr" target="#b6">[7]</ref>. Long read technologies or the crossing of various sequencing technologies overcome these limitations but are not affordable for many applications such as routine diagnosis of genetic diseases <ref type="bibr" target="#b17">[18]</ref>. Thus, to improve current and future SR based SV callers, a better understanding of the actual insertion variants present in human populations is required.</p><p>We have presented here one of the most detailed and comprehensive analyses of actual insertion variants in the human genome looking for factors impacting their detection with short read re-sequencing data. This could be possible thanks to the publication of two exceptional SV callsets by Chaisson et al. <ref type="bibr" target="#b17">[18]</ref> and Zook et al. (GiaB) <ref type="bibr" target="#b18">[19]</ref>. These catalogs of insertions are considered as the most exhaustive for a given human individual and are qualified as gold standards thanks to their extensive validation by extensive and cross technology sequencing datasets. Unlike in the Chaisson et al study, the GiaB callset contained two categories of variants : 7640 insertions that were reported with a higher confidence (PASS in the FILTER field) and 6210 other insertions. As mentioned by the authors, the first category is likely to be biased towards easier to discover variants. Because we did not want to introduce this potential bias, and after checking that these two categories showed similar insertion feature distributions (see Supplementary Figure <ref type="figure">S1</ref>), we decided to conduct our analyses on the whole callset.</p><p>Not only, these catalogs of insertion variants are considered as the most exhaustive for a given human individual, but they are also the first sets with sequence-resolved events for any size and type of insertions. The fine resolution of the inserted sequences, present in these datasets, enabled us to propose a refined classification of insertion variants. In the two datasets, insertion types were not formally defined and the classifications differed between the datasets. Our classification allowed to normalize these heterogeneous annotations and was a direct application of variant definitions from the dbVar database which is based on the sequence ontology (SO) <ref type="bibr" target="#b11">[12]</ref>. We based our insertion type annotation on a minimal sequence coverage threshold, that was set to a relatively high value, 80%, in order to ensure a good specificity of our annotation. Increasing this value led to many more unassigned insertions, as the annotations were based on sequence alignments that were affected by potential remaining sequencing errors in the inserted sequences, polymorphism with the reference genome and the usage of alignment heuristics. If the amount of unassigned insertions decreased with the coverage threshold value, proportions of the different insertion types remained quite stable (Supplementary Table <ref type="table" target="#tab_1">S2</ref>). Among the 12% of unassigned insertions, some could correspond to a mixture of several insertion types, which particular case was not considered in this study.</p><p>As previously reported in the Chaisson et al and GiaB studies, we observed a highly heterogeneous distribution of insertion types and locations along the genome. The vast majority of insertions consisted in tandem repeats (63%) and most insertion sites were located in simple repeat regions (70%). These regions of low complexity, although representing a small proportion of the genome (1.2%), are therefore a major source of inter-individual variability.</p><p>The sequence-resolution provided in these SV callsets also enabled us to analyze precisely the breakpoint junctions of each insertion variant. Junctional homology has been shown to be a frequent feature of SVs, that can be used to infer the rearrangement molecular mechanism <ref type="bibr" target="#b13">[14,</ref><ref type="bibr" target="#b14">15]</ref>. Although, it has been previously described for human SV callsets (around 2,000 SV breakpoints, including less than 400 insertions) <ref type="bibr" target="#b14">[15]</ref>, this is, to our knowledge, the first exhaustive quantification of junctional homology for such a large and almost complete set of insertions in a human individual. However, our measure of homology size is highly dependent on the callset precision of the insertion site location and of the inserted sequence. As SVs are often difficult to precisely localize, are subject to left-normalization processes, and their inserted sequences were mostly obtained from error-prone long reads, our measures may likely result in an under-estimation of the actual homology sizes. Despite these potential biases, our results show that real insertion variants harbour substantially larger junctional homologies than insertions that would be drawn randomly. Our measures allowed us to compare such feature between insertion types and all insertion types have been found to have a substantial proportion of variants with large junctional homologies (greater than 20 bp). Results showed also that large insertions tended to carry larger junctional homologies. As expected by their tandem nature, tandem repeats and tandem duplications had larger homology sizes than other insertion types.</p><p>All the features of insertions characterized in our study (ie. nature and size of the inserted sequence, insertion site genomic context and junctional homologies) showed to impact the ability of SR-based SV callers to discover these variants, as defined by method annotations in the SV callsets. However, an important difference was observed between the two studies, with the GiaB study being able to detect with short reads almost twice as many insertions in proportion than in the Chaisson et al study. The difference in SR-based recalls between the two studies can certainly be explained by the difference in the read depths of sequencing datasets (77X vs 300X for Chaisson et al and GiaB studies respectively), by the different SR-based tool sets used and by the different callset filtering and merging methodologies. The two studies used roughly the same number of SV-callers (13 and 15), but with a poor intersection: only one SV-caller (Manta) was common to both studies. Additionally, the method annotation of each variant is highly dependant on the study methodology to filter and merge the numerous callsets obtained for the same individual with different sequencing technologies and SV callers. For instance, it is not clear if the presence of an SRbased tag for a given variant does necessarily mean in both studies that the latter can be sequence-resolved solely using short reads. However, both studies showed similar weaknesses to detect tandem repeats, large insertions and insertions located inside simple repeats. These observations are in-line with the already known difficulties of mapping short reads in such contexts.</p><p>These disparities between studies and the fact that most identified factors responsible of low SR-based recall are intertwined with one another in real insertion variants led us to pursue these investigations with simulated data. Our simulations did not aim at providing an exhaustive benchmark of SV callers but at identifying the precise genomic factors of insertion variants that prevent their correct discovery with short reads. As a consequence, we selected a small but diverse set of SV callers and we deliberately ran them with their default parameters. We based our selection of SV callers on a recent and comprehensive benchmark study by Kosugui et al. <ref type="bibr" target="#b6">[7]</ref>. SV callers selected in our study were chosen for their good performance in this benchmark, for their diversity of algorithms and for their ease of installation and usage. MindTheGap was not among the best insertion callers identified by Kosugui et al but was the only one not based on read mapping and using intensively de novo assembly with the whole read dataset.</p><p>Simulations remain a powerful approach to identify the strengths and weaknesses of SV callers but they were not meant to reflect perfectly real situations. In our simulations, several features may be far from the real complexity of human genome re-sequencing, such as some sequencing technology biases, the use of one chromosome instead of the whole genome, and the absence of other polymorphisms than insertion variants (SNPs, small indels and other SVs). As a consequence, the reported recalls are likely to be over-estimations of the ones obtained with real data. Although absolute values should be interpreted with caution, they can readily be compared between SV callers and between simulation scenarios. As a matter of fact, we often observed strong differences in recalls allowing to provide interesting insights in terms of impacting factors and SV caller behaviors. Our simulation protocol enabled to study each difficulty factor independently and highlighted the larger impact of insertion type compared to insertion location. However, all studied factors taken independently could not explain the whole loss of recall when simulating the real insertions at their real locations and there is probably an important synergetic effect of combining in a single insertion event several of the studied factors. For instance, the discovery of novel sequences in repeated regions was not a problem for almost every tested tools. However, the change of novel sequences to real inserted sequences, most of them corresponding to tandem repeats, reduced by half the recall of SV callers.</p><p>Our simulations revealed that junctional homologies as small as 10-20 bp impacted the recall of all tested tools. Such repeated sequences are likely to alter the mapping signature targeted by SV callers. Although such features of SV breakpoints and their relation to the molecular mechanisms generating SVs have long been described, they seem to be rarely taken into account in the design of SV caller algorithms. Our study of the real insertions showed that such junctional homology sizes are relatively common, with almost 40% of insertions with junctional homologies larger than 10 bp. Therefore, SV callers algorithms would benefit from taking into account such properties of the breakpoints, that are likely to generate very specific signals in terms of read mapping.</p><p>One striking result of our simulations is the absence of sequence resolution for most of the simulated insertion features and most of the tested SV callers. In addition to the obvious loss of information about the variant event, this also limits the identification of the insertion type, the genotyping and the validation of the predicted call. As a matter of fact, we observed that most insertions regardless of their type and insertion genomic context were detectable but often not reported with a sufficient quality due to this lack of resolution. Furthermore, sequence resolution is essential for the comparison and genotyping of SVs in many individuals. As these tasks are the basis for association studies and medical diagnosis, efforts should be directed towards a better resolution of the sequence of these variants <ref type="bibr" target="#b7">[8,</ref><ref type="bibr" target="#b22">23]</ref>. Results obtained with the local assembly tool MindTheGap showed that the use of the whole read dataset allowed many insertions and even large ones to be assembled. The restriction to a small subset of reads to perform local assembly may therefore be the shortcoming of the other tested SV callers. Resolving the inserted sequence is possible to some extent, but tandem repeats larger than the read size will remain difficult to resolve with short reads technology.</p><p>Interestingly, sequence resolution appeared also to be an issue with long read sequencing data. In this case, the tested long read SV caller did report full inserted sequences but with a poor sequence precision, due the higher sequencing error rate. This issue also prevented the correct left normalization of insertion sites leading to erroneous insertion locations. This low accuracy of predicted calls is likely to hamper the genotyping and comparison of SV calls between individuals. Our results therefore showed that there is also a need to improve long read SV callers as well.</p><p>Overall, the different SV callers did not performed well in every situation and in every aspects of insertion calling. Each caller showed its own strengths and weaknesses, often different from the other tools. Precisely identifying these in terms of insertion variant features and genomic contexts will enable each tool to be used to its best advantage. To do so, benchmark studies should take into account the wide variability of variant features that this present work has highlighted. Two recent SV benchmarks have raised awareness of the variability in the performances of SV callers depending on data sets and approaches <ref type="bibr" target="#b6">[7,</ref><ref type="bibr" target="#b8">9]</ref>. They looked at several factors that could be responsible for this variability. Technical factors (reads size, insert size and sequencing coverage) and biological factors (nearby SNVs or indels, genomic context, and variant size) showed to impact the recall of SV callers. However, the latter factors were analyzed for all SV types combined and none of these studies took into account the different types of insertion variants. Best practices for benchmarking small variant calling have been suggested based on gold standard callsets in high confidence regions, leaving structural variation in the fog <ref type="bibr" target="#b23">[24]</ref>. However, it is precisely this type of variation that requires best practices for benchmarking and a standardization of annotation as they are harder to identify and report. We hope that the present fine characterization of gold standard human SV callsets will help in the development of better practices for benchmarking SV callers, for both short and long read sequencing data.</p><p>Advises to improve the detection using short read technology have already been described such as the careful combination of complementary SV callers <ref type="bibr" target="#b6">[7]</ref>. Meta SV callers such as Meta-sv, Parliament2 or sv-callers reconcile SV calls produced by different SV callers <ref type="bibr" target="#b24">[25]</ref><ref type="bibr" target="#b25">[26]</ref><ref type="bibr" target="#b26">[27]</ref>. However, only the calls that are discovered concordantly between different tools are returned. This strategy allows the precision to be increased, but at the expense of the recall. Our simulations showed that the intersection of only three SV callers reduced the recall of 30%, whereas taking their union could increase the recall by at least 20%. Considering unions of callsets would require a careful control of false positive rates. A better control could probably be achieved with sequence-resolved variants and by taking into account the observed characteristics of the different insertion types. Another alternative, less described, could be the use of dedicated tools for each type of insertion, instead of using only general-purpose SV callers. Among them, Expansion Hunter has been designed to detect tandem repeats, Pamir and Popins for novel insertions and TARDIS for large duplications <ref type="bibr" target="#b27">[28]</ref><ref type="bibr" target="#b28">[29]</ref><ref type="bibr" target="#b29">[30]</ref><ref type="bibr" target="#b30">[31]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Conclusion</head><p>In this work, we produced a detailed characterization of the insertion in a given human individual. We identified many factors of human insertion variants that explain their low recall with SR-based SV callers, including complex insertion types, difficult genomic contexts, large insertion sizes and junctional homologies at the breakpoints. The significant variability in the characteristics of the insertion variants, as well as the fact that all difficulties were handled differently by the different tested SV callers, call for a better characterization and comparison of SV callers according to the targeted variant features. The comparison results presented here already provide some concrete suggestions to improve insertion variant calling with short reads. First, insertion site detection could be improved by taking into account the atypical mapping signals generated by large junctional homologies. Then, sequence-resolution recall could be improved by using the whole read set instead of recruited read subsets for the assembly of the inserted sequence. Our simulation protocol also allowed us to identify complementarities between different SV callers and showed that insertion recall could be significantly improved by taking the union of calls. Finally, based on these complementarities and with improved sequence-resolution, smarter consensus selections, than simply callset unions, taking into account insertion type, size and context, could be designed to reach a high recall while controlling the False Discovery Rate. Such improvements are crucial for the generalization of population genomics and association studies to variants other than punctual ones, allowing for instance the development of personalised medicine and the resolution of diagnostic bottlenecks for many rare diseases.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Methods</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Data origin</head><p>SV callsets from the Chaisson et al. study <ref type="bibr" target="#b17">[18]</ref> were obtained from dbVar with the accession nstd152. The HG002 SV callset, Tier 1 version v0.6, from the GiaB study <ref type="bibr" target="#b18">[19]</ref> was used (see the full ftp links in the Declarations section). Only insertions from the core genome, that were larger than 50 bp and sequence resolved (ie. with an inserted sequence entirely defined) and called also in at least one of the parents were kept. No filtering related to quality or coverage was applied. In the HG002 callset, insertion calls containing the "LongHomRef " tag in the FILTER field were removed because they were not confirmed by long read genotyping methods and they had thus a higher probability to be false positive discoveries (359 insertions). The human reference genome version for this study was Hg38 (GRCh38). To compare the callsets on the same reference genome, the HG002 callset produced on hs37d5 build was converted into Hg38 build using Picard, the hs37d5 to hg19 and the hg19 to hg38 chain files from GATK public chain files. Noteworthy, this process can have some impacts on a few SV calls, since some genomic regions can differ between the reference versions. In particular, the conversion (liftover) induced a loss of 60 SV calls.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Comparison of the callsets</head><p>As a rough estimation of the amount of shared insertion variants between callsets, insertion locations were compared regardless of the insertion type or sequence. Insertion variants located less than 1,000 bp apart from one another were considered as the same variant.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Insertion type annotation</head><p>TandemRepeatFinder (TRF) was used to annotate tandem repeats within each inserted sequence <ref type="bibr" target="#b31">[32]</ref>. Recommended parameters were used, except for the maximum expected TR length (-l) which was set to 6 millions. In order to annotate mobile elements in inserted sequences, we used dfam, one of the annotation tools of Repeat-Masker <ref type="bibr" target="#b32">[33]</ref>. Each inserted sequence was scanned by dfam with the standard HMM profile database of human mobile elements provided by the tool. For the annotation of dispersed duplications and the occurrence count of their copies in the reference genome, each inserted sequence was locally aligned against the Hg38 genome using Blat with default parameters <ref type="bibr" target="#b33">[34]</ref>. Only the alignments with at least 90% of sequence identity were kept. For the annotation of tandem duplications, the two sequences on either side of the insertion site and of the same size as the insertion were aligned against the inserted sequence using Blat.</p><p>We used a minimal sequence coverage threshold, Min cov , to annotate the insertions. To be assigned to a given sub-type, the inserted sequence had to contain at least one contiguous segment annotated with the corresponding type and covering at least Min cov % of the inserted sequence. Novel sequence insertions were a special case where the contiguity of the annotation was not required: more than Min cov % of the inserted sequence should not be covered by any alignment with the reference genome nor with the mobile element reference sequences, nor contain tandem repeats. When several types fulfilled the minimal coverage requirement, only one type was assigned according to the decision tree described in Fig. <ref type="figure">1</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Junctional homology detection</head><p>Junctional homology, as referred to and defined in <ref type="bibr" target="#b15">[16]</ref>, is a DNA sequence that has two identical or nearly identical copies at the junctions of the two genomic segments involved in the rearrangement. In the case of an insertion, a junctional homology is a sequence segment at the left (resp. right) side of the insertion site which is nearly identical to the end (resp. beginning) of the inserted sequence. Small junctional homologies (&lt;10 bp on each side) were searched in a strict manner by scanning simultaneously the 10 bp sequence at the left (resp. right) side of the insertion site and the 10 bp end (resp. beginning) of the inserted sequence, counting the number of identical nucleotides starting from the insertion site until a mismatch is encountered. For larger homologies, both the 100% identity and strict adjacency to the insertion site constraints were relaxed. We used the local alignments between the breakpoint junctions and the inserted sequence that were previously obtained with BLAT. Only the alignments with at least 90% identity and occurring at a maximum of 10 bp before (resp. after) the insertion site and at a maximum of 10 bp from the end (resp. beginning) of the inserted sequence were retained. In case of multiple candidates hits at one side of the junction, the one located at the closest position from the extremities was kept. If homologies (small or large) were found at both sides of the junction, the homology size was obtained by summing both homology sizes after removing potential overlap on the inserted sequence. To compute the expected distribution of junctional homology sizes that could be observed by chance, we generated 2,000 random insertions on the human chromosome 3 sequence. Inserted sequences were generated by concatenating 250 nucleotides sampled uniformly on the A,C,G,T alphabet. The insertion sites were sampled uniformly along the chromosome 3 sequence. Junctional homology sizes of these random insertions were identified using the same previously described methodology as for real insertions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Genomic context characterization</head><p>To study the genomic context of insertions, we used the repeat content annotations of RepeatMasker from the UCSC genome browser for the Hg38 genome and the gene annotations from the Gencode v32 <ref type="bibr" target="#b34">[35]</ref><ref type="bibr" target="#b35">[36]</ref><ref type="bibr" target="#b36">[37]</ref><ref type="bibr" target="#b37">[38]</ref>. Simple repeat location were extracted from the dedicated simple repeat file from the UCSC genome browser.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>SR-based recall of the gold standard callsets</head><p>Each callset was partitioned in two parts based on the discovery technology. The first part, referred as Short read technology, contained insertion calls that carried the Illumina (short reads) tag or a SR-based caller tag. For Chaisson et al callsets (NA19240, HG00514 and HG0733), the selection was performed on the vcf INFO field and the UNION variable. The UNION variable can take three potential values, Pacbio,Bionano or Illumina, that corresponded to the sequencing technology allowing the variant to be discovered. For the GiaB callset (HG002), insertions that could be discovered with short reads were identified by the Ill tag contained in the ExactMatchID located in the INFO field of the vcf file. Insertion calls that were labelled Ill only with refining methodologies and not any discovery methodologies were not taken into account for the Short read technology part. The second part, referred as Other technologies, contained all the remaining insertions. It should be noted that all insertion calls in the first part carried also at least one long read technology tag and were not discovered using only short read technology.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Simulations</head><p>Twenty two sequencing datasets were simulated to characterize the impact of the different insertion features on SR-based insertion variant calling. Each dataset was obtained by altering the human chromosome 3 with 200 insertions. Sequencing reads were generated using ART with the following parameters : 2x150 bp reads, at 40 X coverage, with insert size of 300 bp on average and 20 bp standard deviation <ref type="bibr" target="#b38">[39]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Baseline simulation</head><p>The simulation referred as the baseline was meant to represent the easiest type of insertions to detect, where inserted sequences contained very few repeats and are novel in the genome, the genomic context of insertion was also simple and repeat-free, and breakpoint junctions did not have any homology. To do so, we simulated 250 bp novel sequence insertions located in exons without any homology at the breakpoint junc-tions. Novel sequences were extracted from randomly chosen exonic regions of the Saccharomyces cerevisae genome.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Scenario 1: varying the insertion size</head><p>Insertion locations used in the baseline simulation were kept and the 200 inserted sequences were alternatively replaced by sequences extracted from Saccharomyces cerevisae exons of 3 different sizes: 50, 500, and 1000 bp.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Scenario 2: varying the insertion type</head><p>Insertion locations were identical to the baseline simulation, but the 250 bp inserted sequences were alternatively replaced by dispersed duplications, tandem repeats, tandem duplications and mobile elements. Two types of tandem repeats were simulated, with a pattern size of 6 bp or 25 bp, the pattern originating from the left breakpoint junction. As mobile elements, 200 Alu mobile element sequences with a size ranging between 200 and 300 bp were randomly extracted from the human genome based on the RepeatMasker annotation. Tandem duplications were generated by duplicating the 250 bp right breakpoint sequence. The inserted sequences of simulated dispersed duplications were extracted from exons of the chromosome 3.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Scenario 3 : varying the junctional homology size</head><p>The 250 bp insertion sequences produced in the baseline simulation were altered with junctional homology. To simulate junctional homologies, we replaced the X first bases of each insertion with the same size sequence originating from the right breakpoint sequence. We simulated five junctional homology sizes (X value): 10, 20, 50, 100 and 150 bp.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Scenario 4 : varying the genomic context of insertion</head><p>The 250 bp insertions from the baseline simulation were alternatively inserted in specific genomic contexts : either inside different types of mobile elements, namely SINEs and LINEs, in small (&lt;300 bp) and large (&gt;300 bp) simple repeats or in other regions not annotated by Repeat-Masker (non repeated). A dataset with closely located variants was simulated by adding insertions closed to the insertions simulated in the baseline scenario. The distance between insertions varied uniformly from 5 to 150 bp.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Scenario 5 : Real insertions</head><p>The 889 insertions located on the chromosome 3 from the NA19240 callset were used to simulate three additional datasets. Novel sequences were first simulated at the real chromosome 3 locations, then the real insertions were simulated inside exonic regions of the chromosome 3. Finally, the 889 insertions were simulated as described in the vcf file.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Insertion calling and benchmarking</head><p>Simulated reads were aligned with bwa against the hg38 reference genome, and read duplicates were marked with samblaster v.0.1.24 and converted into bam file with samtools v1.6 <ref type="bibr" target="#b39">[40,</ref><ref type="bibr" target="#b40">41]</ref>. Bam index and reference dictionary were obtained by picard tools v2.18.2. GRIDSS v2.8.0, Manta v1.6.0, MindTheGap v2.2.1 and SvABA v1.1.0 were all run using recommended, or otherwise default, parameters <ref type="bibr" target="#b5">[6,</ref><ref type="bibr" target="#b9">10,</ref><ref type="bibr" target="#b10">11,</ref><ref type="bibr" target="#b19">20]</ref>. Only "PASS" insertions, that were larger than 50 bp, were kept for the recall calculation. Two types of recalls were computed depending on the precision and information given for each call: insertion-site only recall and sequence-resolved recall. The insertionsite only recall was assessed solely based on the insertion site location prediction with a 10 bp margin around the expected location. As a more stringent evaluation, the sequence-resolved recall took also into account the inserted sequence. When it was reported, the inserted sequence had to share at least 90% of sequence identity to the simulated one and had to have a similar size of +/-10%, to be considered as a true positive. In case of absence of alternative sequence in the vcf file but the provided annotation of the event allowed us to extract the insertion sequence from the reference genome (for instance for dispersed duplication with the duplicated copy coordinates), it was evaluated similarly as for alternative sequences. Recall was computed as the ratio between the amount of true positive discoveries and the amount of simulated insertions. We compared the absolute amounts of false positive discoveries between tools and simulations, rather the precision or FDR metrics, as the latter are dependant of the amount of true positive discoveries.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Long read simulation and benchmark</head><p>For each short read simulated dataset, a corresponding PacBio long read simulated dataset was produced, using Simlord at 40 X coverage with probabilities of deletion, insertion and substitution equal to 11%, 4% and 1% respectively <ref type="bibr" target="#b41">[42]</ref>. Reads were aligned with Minimap2, alignments were sorted with samtools and variants were called with Sniffles <ref type="bibr" target="#b16">[17,</ref><ref type="bibr" target="#b42">43]</ref>. The evaluation of insertion site recalls followed the same process than for short readbased variant callers. For the sequence-resolved recall, two sequence identity thresholds, 90 and 80%, were used to validate the inserted sequences. We also used the evaluation tool from GiaB, SVBenchmark module from SVanalyzer tools suite, with parameters similarly set as our benchmark method: -minsize set to 50 bp and -maxdist to 10 bp.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Fig. 2</head><label>2</label><figDesc>Fig. 2 Distributions of insertion variant features across several callsets. Distributions of a insertion size, b insertion type, c repeated context of insertion and d homology size at the breakpoint for NA19240, HG00514, HG00733 and HG002 insertion variant callsets. Abbreviations: SimpleRep for simple repeat, ME for mobile element, TandemRep for tandem repeat, TandemDup for tandem duplication, DispersDup for dispersed duplication</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Fig. 3</head><label>3</label><figDesc>Fig. 3 Proportions of insertion variant features according to the type of insertion. Proportions of classes of a insertion size, b insertion location, c homology size at the breakpoint according to the type of insertion in the NA19240 callset. Abbreviations: SimpleRep for simple repeat, ME for mobile element, TandemRep for tandem repeat, TandemDup for tandem duplication, DispersDup for dispersed duplication</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 2</head><label>2</label><figDesc>Sequence-resolved recall of several short-read insertion callers according to different simulation scenarios. Cells of the table are colored according to the variation of the recall value of the given tool with respect to the recall obtained with the baseline simulation (first line, colored in blue): cells in red show a loss of recall &gt;10%, cells in grey show no difference compared to baseline recall at +/-10%</figDesc><table><row><cell cols="2">Sequence-resolved recall (%)</cell><cell></cell><cell></cell></row><row><cell>GRIDSS</cell><cell>Manta</cell><cell>SvABA</cell><cell>MindTheGap</cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>Acknowledgments</head><p>We are thankful to the Genouest bioinformatics platform, computations have been made possible thanks to their computing resources. We are grateful to <rs type="person">Justin Zook</rs> for his helpful advices to filter the GiaB callset.</p></div>
+			</div>
+			<div type="funding">
+<div><head>Funding</head><p>Not applicable.</p></div>
+			</div>
+			<div type="availability">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Availability of data and materials</head><p>The human reference genome version for this study was Hg38 (GRCh38). SV callsets analysed in this study are publicly available (dbVar accessions: nstd152 and nstd175 for Chaisson et al and Genome in a Bottle callsets respectively), and were downloaded from the following links: NA19240: http://ftp.ncbi.nlm.nih.gov/pub/dbVar/data/Homo_sapiens/by_ study/genotype/nstd152/NA19240.BIP-unified.vcf.gz. HG00514: http://ftp.ncbi.nlm.nih.gov/pub/dbVar/data/Homo_sapiens/by_ study/genotype/nstd152/HG00514.BIP-unified.vcf.gz. HG00733: http://ftp.ncbi.nlm.nih.gov/pub/dbVar/data/Homo_sapiens/by_ study/genotype/nstd152/HG00733.BIP-unified.vcf.gz. HG002: http://ftp-trace.ncbi.nlm.nih.gov/giab/ftp/data/AshkenazimTrio/ analysis/NIST_SVs_Integration_v0.6/HG002_SVs_Tier1_v0.6.vcf.gz. Reference Genome,GRCh38/hg38: http://hgdownload.soe.ucsc.edu/ goldenPath/hg38/bigZips/hg38.fa.gz Custom scripts used in this study are freely available at https://github.com/ WesDe/DeepAn and at https://github.com/WesDe/InserSim.</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Supplementary Information</head><p>The online version contains supplementary material available at https://doi.org/10.1186/s12864-020-07125-5.</p><p>Additional file 1: Supplementary Figures and Tables. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Ethics approval and consent to participate</head><p>Not applicable.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Consent for publication</head><p>Not applicable.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Competing interests</head><p>The authors declare that they have no competing interests.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Publisher's Note</head><p>Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Integrating human sequence data sets provides a resource of benchmark SNP and indel genotype calls</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Zook</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Chapman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Mittelman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Hofmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Hide</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Salit</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Biotechnol</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page">246</biblScope>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Small insertions and deletions (indels) in human genomes</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Mullaney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">E</forename><surname>Mills</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">S</forename><surname>Pittard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">E</forename><surname>Devine</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Hum Mol Genet</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="issue">R2</biblScope>
+			<biblScope unit="page" from="131" to="136" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Structural variation: the genome&apos;s hidden architecture</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Baker</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Methods</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="133" to="137" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Structural variation in the human genome</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Feuk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">R</forename><surname>Carson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">W</forename><surname>Scherer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Rev Genet</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="85" to="97" />
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Validation and assessment of variant calling pipelines for next-generation sequencing</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Pirooznia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Kramer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Parla</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">S</forename><surname>Goes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">B</forename><surname>Potash</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">R</forename><surname>Mccombie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">P</forename><surname>Zandi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Hum Genomics</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">14</biblScope>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">SvABA: genome-wide detection of structural variants and indels by local assembly</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Wala</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Bandopadhayay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Greenwald</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">O</forename><surname>Rourke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Sharpe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Stewart</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Schumacher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Weischenfeldt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Yao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Nusbaum</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Campbell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Getz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Meyerson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C-Z</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Imielinski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Beroukhim</surname></persName>
+		</author>
+		<idno type="DOI">10.1101/gr.221028.117</idno>
+		<ptr target="https://doi.org/10.1101/gr.221028.117" />
+	</analytic>
+	<monogr>
+		<title level="j">Genome Res</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="581" to="591" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Comprehensive evaluation of structural variation detection algorithms for whole genome sequencing</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kosugi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Momozawa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Terao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Kubo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Kamatani</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/s13059-019-1720-5</idno>
+		<ptr target="https://doi.org/10.1186/s13059-019-1720-5" />
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biol</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page">117</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Structural variant calling: the long and the short of it</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mahmoud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Gobet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">I</forename><surname>Cruz-Dávalos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Mounier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Dessimoz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">J</forename><surname>Sedlazeck</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/s13059-019-1828-7</idno>
+		<ptr target="https://doi.org/10.1186/s13059-019-1828-7" />
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biol</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page">246</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Comprehensive evaluation and characterisation of short read general-purpose structural variant calling software</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">L</forename><surname>Cameron</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">D</forename><surname>Stefano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">T</forename><surname>Papenfuss</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41467-019-11146-4</idno>
+		<ptr target="https://doi.org/10.1038/s41467-019-11146-4" />
+	</analytic>
+	<monogr>
+		<title level="j">Nat Commun</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page">324</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Mindthegap : integrated detection and assembly of short and long insertions</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Rizk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Gouin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Chikhi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Lemaitre</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/bioinformatics/btu545</idno>
+		<ptr target="https://doi.org/10.1093/bioinformatics/btu545" />
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="issue">24</biblScope>
+			<biblScope unit="page" from="3451" to="3457" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Gridss: sensitive and specific genomic rearrangement detection using positional de bruijn graph assembly</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">L</forename><surname>Cameron</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Schröder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">S</forename><surname>Penington</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Do</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Molania</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Dobrovic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">P</forename><surname>Speed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">T</forename><surname>Papenfuss</surname></persName>
+		</author>
+		<idno type="DOI">10.1101/gr.222109.117</idno>
+		<ptr target="https://doi.org/10.1101/gr.222109.117" />
+	</analytic>
+	<monogr>
+		<title level="j">Genome Res</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="issue">12</biblScope>
+			<biblScope unit="page" from="2050" to="2060" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Dbvar and dgva: public archives for genomic structural variation</title>
+		<author>
+			<persName><forename type="first">I</forename><surname>Lappalainen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lopez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Skipper</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Hefferon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">D</forename><surname>Spalding</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Garner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Maguire</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Corbett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Zhou</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<biblScope unit="issue">D1</biblScope>
+			<biblScope unit="page" from="936" to="941" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Computational errors and biases of short read next generation sequencing</title>
+		<author>
+			<persName><forename type="first">I</forename><surname>Abnizova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Boekhorst</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Orlov</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Proteomics Bioinform</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="17" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Mutation spectrum revealed by breakpoint sequencing of human germline cnvs</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">F</forename><surname>Conrad</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Bird</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Blackburne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Lindsay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Mamanova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">J</forename><surname>Turner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">E</forename><surname>Hurles</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Genet</title>
+		<imprint>
+			<biblScope unit="volume">42</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page">385</biblScope>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">A human genome structural variation sequencing resource reveals insights into mutational mechanisms</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Kidd</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Graves</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">L</forename><surname>Newman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Fulton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">S</forename><surname>Hayden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Malig</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Kallicki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Kaul</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">K</forename><surname>Wilson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">E</forename><surname>Eichler</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Cell</title>
+		<imprint>
+			<biblScope unit="volume">143</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="837" to="847" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">The role of microhomology in genomic structural variation</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Ottaviani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Lecain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Sheer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Trends Genet</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="85" to="94" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Accurate detection of complex structural variations using single-molecule sequencing</title>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">J</forename><surname>Sedlazeck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Rescheneder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Smolka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Fang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Nattestad</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Von</forename><surname>Haeseler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Schatz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">C</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Methods</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="461" to="468" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Multi-platform discovery of haplotype-resolved structural variation in human genomes</title>
+		<author>
+			<persName><forename type="first">Mjp</forename><surname>Chaisson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">D</forename><surname>Sanders</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">.</forename><forename type="middle">.</forename><surname>Marschall</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Korbel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Eichler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">E</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename></persName>
+		</author>
+		<idno type="DOI">10.1038/s41467-018-08148-z</idno>
+		<ptr target="https://doi.org/10.1038/s41467-018-08148-z" />
+	</analytic>
+	<monogr>
+		<title level="j">Nat Commun</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page">1784</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">the Genome in a Bottle Consortium. A robust benchmark for detection of germline large deletions and insertions</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Zook</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">F</forename><surname>Hansen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">.</forename><forename type="middle">.</forename><surname>Chaisson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">J</forename><surname>Spies</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Sedlazeck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">J</forename><surname>Salit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename></persName>
+		</author>
+		<idno type="DOI">10.1038/s41587-020-0538-8</idno>
+		<ptr target="https://doi.org/10.1038/s41587-020-0538-8" />
+	</analytic>
+	<monogr>
+		<title level="j">Nat Biotechnol</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Manta: rapid detection of structural variants and indels for germline and cancer sequencing applications</title>
+		<author>
+			<persName><forename type="first">X</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Schulz-Trieglaff</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Shaw</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Barnes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Schlesinger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Källberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">J</forename><surname>Cox</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kruglyak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">T</forename><surname>Saunders</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/bioinformatics/btv710</idno>
+		<ptr target="https://doi.org/10.1093/bioinformatics/btv710" />
+	</analytic>
+	<monogr>
+		<title level="j">Bioinforma</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="page" from="1220" to="1222" />
+			<date type="published" when="2016">2016</date>
+			<pubPlace>Oxford, England</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Rare-disease genetics in the era of next-generation sequencing: discovery to translation</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">M</forename><surname>Boycott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">R</forename><surname>Vanstone</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">E</forename><surname>Bulman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">E</forename><surname>Mackenzie</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Rev Genet</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">10</biblScope>
+			<biblScope unit="page" from="681" to="691" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Going beyond snps: the role of structural genomic variants in adaptive evolution and species diversification</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Wellenreuther</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Mérot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Berdan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Bernatchez</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol Ecol</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="1203" to="1209" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Evaluation of computational genotyping of structural variation for clinical diagnoses</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Chander</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">A</forename><surname>Gibbs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">J</forename><surname>Sedlazeck</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/gigascience/giz110</idno>
+		<ptr target="https://doi.org/10.1093/gigascience/giz110" />
+	</analytic>
+	<monogr>
+		<title level="j">GigaScience</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">9</biblScope>
+			<biblScope unit="page">110</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Best practices for benchmarking germline small-variant calls in human genomes</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Krusche</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Trigg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">C</forename><surname>Boutros</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">E</forename><surname>Mason</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Francisco</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">L</forename><surname>Moore</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Gonzalez-Porta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Eberle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Tezak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Lababidi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Biotechnol</title>
+		<imprint>
+			<biblScope unit="volume">37</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="555" to="560" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Metasv: an accurate and integrative structural-variant caller for next generation sequencing</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mohiyuddin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">C</forename><surname>Mu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bani</forename><surname>Asadi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Gerstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">B</forename><surname>Abyzov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Wong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">H</forename><surname>Lam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">Y</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">31</biblScope>
+			<biblScope unit="issue">16</biblScope>
+			<biblScope unit="page" from="2741" to="2744" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Parliament Fast structural variant calling using optimized combinations of callers</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Zarate</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Carroll</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Krashenina</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">J</forename><surname>Sedlazeck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Jun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Salerno</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Boerwinkle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Gibbs</surname></persName>
+		</author>
+		<idno type="DOI">10.1101/424267</idno>
+		<ptr target="https://www.biorxiv.org/content/early/2018/09/23/424267.full.pdf" />
+	</analytic>
+	<monogr>
+		<title level="j">bioRxiv</title>
+		<imprint>
+			<biblScope unit="page">424267</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">sv-callers: a highly portable parallel workflow for structural variant detection in whole-genome sequence data</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Kuzniar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Maassen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Verhoeven</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Santuari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Shneider</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">P</forename><surname>Kloosterman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>De Ridder</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PeerJ</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page">8214</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Expansionhunter: a sequence-graph-based tool to analyze variation in short tandem repeat regions</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Dolzhenko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Deshpande</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Schlesinger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Krusche</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Petrovski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Emig-Agius</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Gross</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Narzisi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Bowman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">35</biblScope>
+			<biblScope unit="issue">22</biblScope>
+			<biblScope unit="page" from="4754" to="4756" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Discovery and genotyping of novel sequence insertions in many sequenced individuals</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Kavak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y-Y</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Numanagić</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Asghari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Güngör</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Alkan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Hach</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="issue">14</biblScope>
+			<biblScope unit="page" from="161" to="169" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Popins: population-scale detection of novel sequence insertions</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Kehr</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Melsted</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">V</forename><surname>Halldórsson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page" from="961" to="967" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Discovery of tandem and interspersed segmental duplications using high-throughput sequencing</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Soylev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">M</forename><surname>Le</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Amini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Alkan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Hormozdiari</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">35</biblScope>
+			<biblScope unit="issue">20</biblScope>
+			<biblScope unit="page" from="3923" to="3930" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Tandem repeats finder: a program to analyze dna sequences</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Benson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="573" to="580" />
+			<date type="published" when="1999">1999</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">The dfam database of repetitive dna families</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Hubley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">D</forename><surname>Finn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Clements</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">R</forename><surname>Eddy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">A</forename><surname>Jones</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bao</forename><forename type="middle">W</forename><surname>Smit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">F</forename><surname>Wheeler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">J</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">44</biblScope>
+			<biblScope unit="issue">D1</biblScope>
+			<biblScope unit="page" from="81" to="89" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Blat-the blast-like alignment tool</title>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">J</forename><surname>Kent</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Res</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="656" to="664" />
+			<date type="published" when="2002">2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Gencode: the reference human genome annotation for the encode project</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Harrow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Frankish</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Gonzalez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Tapanari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Diekhans</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Kokocinski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">L</forename><surname>Aken</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Barrell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Zadissa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Searle</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Res</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="issue">9</biblScope>
+			<biblScope unit="page" from="1760" to="1774" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">The human genome browser at ucsc</title>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">J</forename><surname>Kent</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">W</forename><surname>Sugnet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">S</forename><surname>Furey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">M</forename><surname>Roskin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">H</forename><surname>Pringle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">M</forename><surname>Zahler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Haussler</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Res</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="996" to="1006" />
+			<date type="published" when="2002">2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<monogr>
+		<title level="m" type="main">Repeatmasker open-3.0</title>
+		<author>
+			<persName><forename type="first">Afa</forename><surname>Smit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Hubley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Green</surname></persName>
+		</author>
+		<ptr target="http://www.repeatmasker.org" />
+		<imprint>
+			<date type="published" when="1996">1996-2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Repbase update: a database and an electronic journal of repetitive elements</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Jurka</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Trends Genet</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="issue">9</biblScope>
+			<biblScope unit="page" from="418" to="420" />
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Art: a next-generation sequencing read simulator</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">R</forename><surname>Myers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">T</forename><surname>Marth</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="593" to="594" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Samblaster: fast duplicate marking and structural variant read extraction</title>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">G</forename><surname>Faust</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">M</forename><surname>Hall</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="issue">17</biblScope>
+			<biblScope unit="page" from="2503" to="2505" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">The sequence alignment/map format and samtools</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Handsaker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Wysoker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Fennell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Ruan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Homer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Marth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Abecasis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Durbin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="issue">16</biblScope>
+			<biblScope unit="page" from="2078" to="2079" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Simlord: simulation of long read data</title>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">K</forename><surname>Stöcker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Köster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Rahmann</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="issue">17</biblScope>
+			<biblScope unit="page" from="2704" to="2706" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Minimap2: pairwise alignment for nucleotide sequences</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Li</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="issue">18</biblScope>
+			<biblScope unit="page" from="3094" to="3100" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

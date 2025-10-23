@@ -1,0 +1,1075 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">DiscoSnp-RAD: de novo detection of small variants for RAD-Seq population genomics</title>
+				<funder ref="#_3mcGHEy">
+					<orgName type="full">Agence Nationale de la Recherche</orgName>
+					<orgName type="abbreviated">ANR</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2020-06-10">10 June 2020</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Jérémy</forename><surname>Gauthier</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Univ. Rennes</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">IRISA</orgName>
+								<address>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Charlotte</forename><surname>Mouden</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Univ. Rennes</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">IRISA</orgName>
+								<address>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Tomasz</forename><surname>Suchan</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department">W. Szafer Institute of Botany</orgName>
+								<orgName type="institution">Polish Academy of Sciences</orgName>
+								<address>
+									<settlement>Krakow</settlement>
+									<country key="PL">Poland</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Nadir</forename><surname>Alvarez</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="department">Department of Ecology and Evolution</orgName>
+								<orgName type="institution">University of Lausanne</orgName>
+								<address>
+									<settlement>Lausanne</settlement>
+									<country key="CH">Switzerland</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff3">
+								<orgName type="institution">Natural History Museum of Geneva</orgName>
+								<address>
+									<settlement>Geneva</settlement>
+									<country key="CH">Switzerland</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Nils</forename><surname>Arrigo</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="department">Department of Ecology and Evolution</orgName>
+								<orgName type="institution">University of Lausanne</orgName>
+								<address>
+									<settlement>Lausanne</settlement>
+									<country key="CH">Switzerland</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Chloé</forename><surname>Riou</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Univ. Rennes</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">IRISA</orgName>
+								<address>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Claire</forename><surname>Lemaitre</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Univ. Rennes</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">IRISA</orgName>
+								<address>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author role="corresp">
+							<persName><forename type="first">Pierre</forename><surname>Peterlongo</surname></persName>
+							<email>pierre.peterlongo@inria.fr</email>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Univ. Rennes</orgName>
+								<orgName type="institution" key="instit2">Inria</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">IRISA</orgName>
+								<address>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">DiscoSnp-RAD: de novo detection of small variants for RAD-Seq population genomics</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2020-06-10">10 June 2020</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">BF6E2B4E33CD168AD4DAAD77DDC404FD</idno>
+					<idno type="DOI">10.7717/peerj.9291</idno>
+					<note type="submission">Submitted 20 January 2020 Accepted 13 May 2020</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:12+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>RAD-seq</term>
+					<term>SNPs</term>
+					<term>Reference-free</term>
+					<term>Insertions</term>
+					<term>Deletions</term>
+					<term>Variants</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Restriction site Associated DNA Sequencing (RAD-Seq) is a technique characterized by the sequencing of specific loci along the genome that is widely employed in the field of evolutionary biology since it allows to exploit variants (mainly Single Nucleotide Polymorphism-SNPs) information from entire populations at a reduced cost. Common RAD dedicated tools, such as STACKS or IPyRAD, are based on all-vs-all read alignments, which require consequent time and computing resources. We present an original method, DiscoSnp-RAD, that avoids this pitfall since variants are detected by exploiting specific parts of the assembly graph built from the reads, hence preventing all-vs-all read alignments. We tested the implementation on simulated datasets of increasing size, up to 1,000 samples, and on real RAD-Seq data from 259 specimens of Chiastocheta flies, morphologically assigned to seven species. All individuals were successfully assigned to their species using both STRUCTURE and Maximum Likelihood phylogenetic reconstruction. Moreover, identified variants succeeded to reveal a within-species genetic structure linked to the geographic distribution. Furthermore, our results show that DiscoSnp-RAD is significantly faster than state-of-the-art tools. The overall results show that DiscoSnp-RAD is suitable to identify variants from RAD-Seq data, it does not require time-consuming parameterization steps and it stands out from other tools due to its completely different principle, making it substantially faster, in particular on large datasets.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTRODUCTION</head><p>Next-generation sequencing and the ability to obtain genomic sequences for hundreds to thousands of individuals of the same species has opened new horizons in population genomics research. This has been made possible by the development of cost-efficient approaches to obtain sufficient homologous genomic regions, by reproducible genome complexity reduction and multiplexing several samples within a single sequencing run <ref type="bibr" target="#b0">(Andrews et al., 2016)</ref>. Among such methods, the most widely used over the last decade is "Restriction-site Associated DNA sequencing" (RAD-Seq). It uses restriction enzymes to digest DNA at specific genomic sites whose adjacent regions are then sequenced. This approach encompasses various methods with different intermediate steps to optimize the genome sampling, for example, ddRAD <ref type="bibr" target="#b19">(Peterson et al., 2012)</ref>, GBS <ref type="bibr" target="#b4">(Elshire et al., 2011)</ref>, 2b-RAD <ref type="bibr" target="#b29">(Wang et al., 2012)</ref>, 3RAD/RADcap <ref type="bibr" target="#b10">(Hoffberg et al., 2016)</ref>. These methods share some basic steps: DNA digestion by one or more restriction enzymes, ligation of sequencing adapters and sample-specific barcodes, followed by optional fragmentation and fragment size selection, multiplexing samples bearing specific molecular tags, i.e. indices and barcodes, and finally sequencing. The sequencing output is thus composed of millions of reads originating from all the targeted homologous loci. The usual bioinformatic steps consist in sample demultiplexing, clustering sequences in loci and identifying informative homologous variations. If a reference genome exists, the most widely used strategy is to align the reads to this reference genome and to perform a classical variant calling, focusing on small variants, Single Nucleotide Polymorphisms (SNPs) and small Insertion-Deletions (INDELs). However, RAD-Seq approaches are used on non-model organisms for which a reference genome does not exist or is poorly assembled. The fact that all reads sequenced from the same locus start and finish exactly at the same position makes it easy to compare directly reads sequenced from a same locus. To de novo build homologous genomic loci and extract informative variations, several methods have been developed, such as STACKS <ref type="bibr" target="#b1">(Catchen et al., 2013)</ref> and PyRAD <ref type="bibr" target="#b2">(Eaton, 2014)</ref>, as well as its derived rewritten version IPyRAD <ref type="bibr" target="#b3">(Eaton &amp; Overcast, 2020)</ref>, being the most commonly used in the population genomics community.</p><p>The main idea behind these approaches is to group reads by sequence similarity into clusters representing each a distinct genomic locus. Since reads originating from the same locus start and end at the same positions, they can be globally aligned, sequence variations can then be easily identified and a consensus sequence is built for each locus.</p><p>The key challenge is therefore the clustering part. To do so, the classical approach relies on all-vs-all alignments. To reduce the number of alignments to compute, the clustering is first performed within each sample independently, then sample consensuses are compared between samples. Nevertheless the number of alignments to perform remains very large in datasets composed of many large read sets. Importantly, analysis of RAD-Seq data is highly dependent on the chosen clustering method, the sequencing quality and the dataset composition, such as the presence of inter and/or intra-specific specimens or the number of individuals. Thus, existing tools allow customization of numerous parameters to fine-tune the analysis. Particularly, both methods have parameters controlling the granularity of clustering: the number of mismatches allowed between sequences of a same locus within and among samples for STACKS and the percentage of similarity for PyRAD. These can be arbitrarily fixed by the user, but have a significant impact on downstream analyses <ref type="bibr" target="#b24">(Shafer et al., 2017)</ref>.</p><p>We present here DiscoSnp-RAD, an utterly different approach to predict de novo small variants (SNPs and indels) from large RAD-Seq datasets, without performing any read clustering, avoiding all-vs-all read comparisons and without relying on a critical similarity threshold parameter. DiscoSnp-RAD takes advantage of the DiscoSnp++ approach <ref type="bibr" target="#b28">(Uricaru et al., 2015;</ref><ref type="bibr" target="#b18">Peterlongo et al., 2017)</ref>, that was initially designed for de novo prediction of small variants, from shotgun sequencing reads, without the need of a reference genome. The basic idea of the method is a careful analysis of the de Bruijn graph built from all the input read sets, to identify topological motifs, often called bubbles, generated by polymorphisms. Notably, those bubbles arise whatever the global similarity level between homologous reads, explaining why DiscoSnp-RAD is free of similarity-related parameters. Note that STACKS2 also uses a de Bruijn graph approach, but in a different way, as it is used to build a so-called "RAD-locus" contig catalog on which reads are aligned for calling SNPs <ref type="bibr" target="#b23">(Rochette, Rivera-Colón &amp; Catchen, 2019)</ref>.</p><p>After validation tests on simulated datasets of increasing size, we present an application of the DiscoSnp-RAD implementation on double-digest RAD-Seq data (ddRAD) from a genus-wide sampling of parasitic flies belonging to Chiastocheta genus. Using DiscoSnp-RAD, the 259 individuals analyzed could be assigned to their respective species. Moreover, within-species analyses focused on one of these species, identified variants revealing population structure congruent with sample geographic origins. Thus, the information obtained from variants identified by DiscoSnp-RAD can be successfully used for population genomic studies. The main notable difference between DiscoSnp-RAD and concurrent algorithms stands in its easiness to use, in the fact that it does not require fine parameter tuning, and in its execution time, as it is substantially faster than STACKS and IPyRAD.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>MATERIALS AND METHODS</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DiscoSnp-RAD: RAD-Seq adaptation of DiscoSnp++</head><p>Originally, DiscoSnp++ was designed for finding variants from whole genome sequencing data. To adapt to the RAD-Seq context, the core algorithm of DiscoSnp++ was extended and modified as shown "DiscoSnp-RAD: RAD-Seq adaptation of DiscoSnp++" and "Computing Allele Coverage and Inferring Genotypes". Also, as presented "Clustering Variants per Locus" and "Various Optional Filtering Options", specific features for post-processing were added to the whole pipeline.</p><p>DiscoSnp++ basic algorithm. We first recall the fundamentals of the DiscoSnp++ algorithm, which is based on the analysis of the de Bruijn graph (dBG) <ref type="bibr" target="#b20">(Pevzner, Tang &amp; Tesler, 2004)</ref>, which is a directed graph where the set of vertices corresponds to the set of words of length k (k-mers) contained in the reads, and there is an oriented edge between two k-mers, say s and t, if they perfectly overlap on k -1 nucleotides, that is to say if the last k -1 suffix of s equals the first k -1 prefix of t. In this case, we say that s can be extended by the last character of t, thus forming a word of size k + 1. A node that has more that one predecessor and/or more than one successor is called a branching node. Small variants, such as SNPs and INDELs, generate in the dBG recognizable patterns called "bubbles". A bubble (Fig. <ref type="figure">1A</ref>) is defined by one start branching node that has, two distinct successor nodes. From these two children nodes, two paths exist and merge in a stop branching node, which has two predecessors. The type of the variant, whether it is a single isolated SNP, several close SNPs (distant from one another by less than k nucleotides) or an INDEL, determines the length of each of the two paths of the bubble.</p><p>DiscoSnp++ first builds a dBG from all the input read samples combined, and then detects such bubbles. Sequencing errors or approximate repeats also generate bubbles, that can be avoided by filtering out kmers with a too low abundance in the read sets, and by limiting the type or number of branching nodes along the two paths. Detected bubbles are output as pairs of sequences in fasta format. The second main step of DiscoSnp++ consists in mapping original reads from all samples on these sequences, in order to compute for each variant, its read depth per allele and per read set. From this coverage information, genotypes are inferred and variants are scored. The final output is a VCF file, where each variant is associated to a confidence score (the rank) and is genotyped in each read set, thanks to its allele coverages <ref type="bibr" target="#b18">(Peterlongo et al., 2017;</ref><ref type="bibr" target="#b28">Uricaru et al., 2015)</ref>.</p><p>In DiscoSnp-RAD, these two main steps have been modified to adapt to the RAD-seq context and an additional third step has been developed in order to cluster the variants per locus and to output this information in the final VCF file. In short, DiscoSnp-RAD (1) constructs the de Bruijn graph and detects bubbles whose topology correspond to SNPs or indels, (2) maps back reads on found bubble sequences, thus assessing the read coverage per allele and per read set, and (3) performs clustering on predicted sequences. Those three steps are described in the three following sections.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Bubble detection with DiscoSnp-RAD</head><p>A novel RAD-specific bubble model In DiscoSnp++, variants distant from less than k bp from a genomic extremity could not be detected, as associated bubbles do not open and/or close. This effect is negligible in the whole genome sequencing context, however, in the RAD-Seq context, sequenced genomic regions are limited to a hundred or to a few hundreds nucleotides (the read size), and Figure <ref type="figure">1</ref> Examples of bubbles detected by SNPs in a toy de Bruijn graph, with k = 4. In (A) the bubble is complete: this corresponds to a bubble detected by DiscoSnp++. In (B), the bubble is symmetrically truncated: it is composed of a branching node ("ACTG") whose two successors lead to two distinct paths that both have the same length and such that their last two nodes have no successor. The graph (C) shows an example of two bubbles from the same locus. The leftmost bubble contains two symmetrically branching crossroads. Full-size  DOI: 10.7717/peerj.9291/fig- <ref type="figure">1</ref> thus a large amount of variants are likely to be located at the extremities of the loci. For instance, with reads of length 100 bp, and k = 31 (which is a usual k value), on average 62% of the variants are located in the first or last k nucleotides of a locus and cannot be detected by DiscoSnp++.</p><p>In the RAD-Seq context, all reads sequenced from the same locus start and end exactly at the same position. Thus, variants located less than k bp from loci extremities generate what we call Symmetrically Truncated Bubbles (Fig. <ref type="figure">1B</ref>). Such bubbles start with a node which diverges into two distinct paths that do not meet back, such that both of them cannot be extended because of absence of successor and both paths have exactly the same length. Symmetrically, a variant located less that k bp apart from loci start generates a bubble that is right closed, but that starts with two unconnected paths of the same length.</p><p>To further increase specificity of the truncated bubble model, we also constrain the last 3-mer of both paths to be identical. Although this prevents the detection of variants as close as 3 bp from a locus extremity, this enables to identify correctly the type of detected variant. Indeed, when the last L nucleotides of two locus sequences are different, several mutation events could have taken place in the genome resulting in the same observed differences: either an indel (of any size) or L successive substitutions or a combination of the two types. When L is small, all events may be equally parsimonious and we prefer to report none of these instead of a wrong one. Note that this does not prevent to detect loci containing such variants as long as there is at least another variant detected in the locus. The value L was set to 3 because it leads to a relatively low loss of recall (6% with reads of length 100), while the probability of observing by chance three successive matches is low ð¼ 1=4 3 1:56%Þ. Note that this issue is also present in any mapping or clustering based approaches.</p><p>The core of the DiscoSnp-RAD algorithm SNP bubble detection is sketched in Algorithm 1. The algorithm is intentionally simplified and hides the process enabling to detect SNPs separated by less than k nucleotides and INDELs. The full and detailed algorithm is proposed in the Supplemental Materials. Basically, after the graph construction, we loop over all its branching nodes (line), each branching node is then considered as a potential bubble extremity. The pair of paths that can be generated from this branching node are explored (lines 5 to the end). Notably, the two paths are created simultaneously nucleotide by nucleotide. The extension stops 1/ if the extension is impossible (line 10, if there exists no nucleotide a such that kmer 1 and kmer 2 can be extended with a); or 2/ if the bubble closes (line 11); or 3/ if the bubble is truncated (line 7).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Dealing with entangled bubbles</head><p>As RAD-Seq data often include a large number of individuals, this is likely that many SNPs are close to each other (separated by less than k nucleotides), and that a large number of distinct haplotypes co-exist. This situation generates bubbles that are imbricated in one another and what we call "Symmetrically Branching Crossroads" (SBCs), as shown in Fig. <ref type="figure">1C</ref>. SBCs appear when more than one unique character may be used during extension. All possible extensions are explored (line 12) in presence of SBCs. However, we limit the maximal number of traversals of SBCs per bubble to 5 by default (line 14). This value has been chosen as larger values lead toe longer computation time, larger false positive calls (due to repetitive genomic regions), while not changing significantly recall, as shown in the results. Depending on the user choice, we also propose a "high_precision" mode in which bubbles containing one or more SBC(s) are not detected.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Computing allele coverage and inferring genotypes</head><p>In this second step, original reads from all samples are mapped on all bubble sequences, in order to provide the read coverage per allele and per read set. Importantly, this mapping step allows non-exact mapping, allowing a high number of substitutions (up to 10 by default), except on the polymorphic positions of the bubble. As shown in results, this choice enables to maximize the sensibility by allowing numerous variations, while maintaining a high precision as no substitution is authorized on variant positions.</p><p>These coverage information enables to infer individual genotypes and to assign a score (called rank) to each variant enabling to filter out potential false positive variants. Genotypes are inferred only if the total coverage over both alleles is above a min_depth threshold (by default 3), using a maximum likelihood strategy with a classical binomial model <ref type="bibr" target="#b18">(Peterlongo et al., 2017;</ref><ref type="bibr" target="#b16">Nielsen et al., 2011)</ref>, otherwise the genotype is indicated as missing ("./."). Variants with too many missing genotypes (by default more than 95% of the samples) are filtered out.</p><p>Paralogous genomic regions represent a major issue in population genomic analyses as DNA sections arising from duplication events can be aggregated in the same locus and thus, might encompass alleles coming from non orthologous loci. Allele coverage information across many samples can be used to filter out many of such paralog-induced variants. As the latter tend to occur in all the samples, their allele frequency is thus non discriminant between samples. An efficient scoring scheme, called the rank value in DiscoSnp++, reflects such discriminant power of variants. First, we define the Phi coefficient of a given variant for a given pair of samples, as ffiffiffiffiffiffiffiffiffi ffi x 2 =n p , with χ 2 being the chi-squared statistics computed on the allele read counts contingency table for this pair of samples, and n being the sum of read counts in this table. This is an association measure between two qualitative variables (here allele vs sample) ranging between 0 (no association) and 1 (maximal association). Then, when more than two samples are compared, the rank value is obtained by computing the Phi coefficient of all possible pairs of samples and retaining the maximum value. We have shown in previous work <ref type="bibr" target="#b28">(Uricaru et al., 2015;</ref><ref type="bibr" target="#b18">Peterlongo et al., 2017</ref>) that paralog-induced variants are likely to generate bubbles in the dBG but with very low rank values (&lt;0.4) contrary to most real variants. This filter is particularly effective when many samples are compared, as in the RAD-seq context. Thus, by default, DiscoSnp-RAD discards all variants with such low rank values.</p><p>Noteworthy, some real variants can also harbor a low rank value: those which are heterozyguous in strictly all the samples. Such variants should be rare when hundreds of samples are considered. Moreover, discarding such variants should not impact on most downstream analyses, such as deciphering population structure or inferring phylogenies, as their results are mainly based on variants which can discriminate the samples. Only the estimation of heterozygosity levels may be affected by removing such real variants: they may be slightly under-estimated, but they would be more dramatically over-estimated without any filtering of paralog-induced variants.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Clustering variants per locus</head><p>During the bubble detection phase, several independent bubbles can be predicted for the same RAD locus. For instance, Fig. <ref type="figure">1C</ref> shows a toy example of a the dBG graph associated to a locus. In this case, DiscoSnp-RAD detects two bubbles, that give no sign of physical proximity. In several population genomics analyses, such proximity information can be useful, such as in population structure analyses, where this is recommended to select only one variant per locus. In order to recover this information of locus membership, we developed a post-processing method to cluster predicted variants per locus.</p><p>The method uses the fact that DiscoSnp-RAD is parameterized to output bubbles together with their left and right contexts in the graph, which correspond to the paths starting from each extreme node and ending at the first ambiguity (i.e., a node with not exactly one successor). For instance, the leftmost bubble of Fig. <ref type="figure">1C</ref> is output as sequences ACTGACCTAATtg and ACTGTCGTAATtg, where we represent the context sequences in lower case, and rightmost bubble of the same figure is output as sequences taATTGACCT and taATTGTCCT.</p><p>By definition of these extensions, if a given locus contains several variants, each bubble of this locus extended with its left and right contexts shares at least one k -1-mer with at least one other so extended bubble of the same locus. For instance, the pairs of sequences of the two bubbles shown Fig. <ref type="figure">1C</ref> share the k -1-mer TAA (among others).</p><p>We exploit this property to group all bubbles per locus. For doing so, we create a graph in which a node is a bubble (represented by its pair of sequences including the extensions), and there is an undirected edge between two nodes N i and N j if any of the two sequences of N i shares at least one k -1-mer with any of the two sequences of N j . Those edges are computed using SRC_linker <ref type="bibr" target="#b14">(Marchet et al., 2016)</ref>.</p><p>Finally, we partition this graph by connected component. Each connected component contains all bubbles for a given locus and this information is reported in the vcf file. By default, clusters containing more than 150 variants are discarded, as they are likely to aggregate paralogous variants from repetitive regions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Various optional filtering options</head><p>The output of DiscoSnp-RAD is a VCF file containing predicted variants along with various information, such as their genotypes and allele read counts in all samples, their rank value and the cluster ID (locus) they belong to. This enables to apply custom filters at the locus level, as well as any variant level classical RAD-Seq filters (such as the minimal read depth to call a genotype or the minimal minor allele frequency to keep a variant). Several such RAD-seq filtering scripts are provided along with the main program (https://github.com/GATB/DiscoSnp/tree/master/discoSnpRAD/post-processing_ scripts).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Testing environment</head><p>The tests were performed on the GenOuest (genouest.org) cluster, on a node composed of 40 Intel Xeon core processors with speed 2.6 GHz and 252 GB of RAM.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Validation on simulated datasets</head><p>Note that all scripts used for simulations and validations are publicly available https://doi.org/10.5281/zenodo.3724518.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Simulation protocol</head><p>RAD loci from Drosophila melanogaster genome (dm6) were simulated by selecting 150 bp on both sides of 43,848 PstI restriction sites resulting in 87,696 loci. Several populations, each composed of several diploid individuals were simulated as follows.</p><p>For each simulated population, SNPs were randomly generated at a rate of 1%. A first subset of them (70%) was introduced in all samples from the population and represent shared polymorphism. The rest of these SNPs (30%) where distributed between samples by a random picking of 10% of them and assigned to each sample. For each sample, 10% of the assigned SNPs, shared and sample specific, are introduced in only one of the homologous chromosomes to simulate heterozygosity. This process was repeated to generate from 5 to 50 populations each composed of 20 individuals. Finally, between 2,109,900 SNPs for 100 samples, and 2,547,337 SNPs for 1,000 samples, were generated. Forward 150 bp reads were simulated on right and left loci, with 1% sequencing errors, with 20× coverage per individual (the complete pipeline is given in Fig. <ref type="figure">S1</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Evaluation protocol</head><p>For estimating the result quality, predicted variants were localized on the D. melanogaster genome and output in a vcf file. To do so, we used the standard protocol of DiscoSnp++ when a reference genome is provided, using BWA-mem <ref type="bibr" target="#b13">(Li &amp; Durbin, 2009)</ref>. The predicted vcf was compared to the vcf storing simulated variant positions to compute the amount of common variants (true positive or TP), predicted but not simulated variants (false positive or FP) and simulated but not predicted variants (false negative or FN). Recall is then defined as #TP #TPþ#FN , and precision as #TP #TPþ#FP .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Comparison with other tools</head><p>For comparisons, STACKS v2.4 and IPyRAD v0.7.30 were run on the simulated datasets. STACKS stacks were generated de novo ( denovo_map.pl ), with a minimum of 3 reads to consider a stack (-m 3). On the simulated dataset composed of 100 samples, five values of the parameter -M governing stack merging (i.e., 4, 6, 8, 10 and 12) were tested.</p><p>On the remaining datasets, the parameter -M was fixed to 6 following r80 method <ref type="bibr" target="#b17">(Paris, Stevens &amp; Catchen, 2017)</ref>. All other parameters were set to default values. Similarly, IPyRAD was run using five values of clustering threshold on the dataset composed of 100 samples (i.e., 0.75, 0.80, 0.85, 0.90 and 0.95) and then fixed to 0.80, following r80 method <ref type="bibr" target="#b17">(Paris, Stevens &amp; Catchen, 2017)</ref>, for larger datasets. The other parameters have been kept at the default values. Then, de novo tags from STACKS and loci from IPyRAD were mapped to the D. melanogaster genome using BWA-mem and variant positions were transposed on the genome positions with a custom script.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Application to real data from Chiastocheta species</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Data origin</head><p>Tests on real data were performed on ddRAD reads previously obtained for the phylogenetic study of seed parasitic pollinators from the genus Chiastocheta (Diptera: Anthomyiidae). The dataset corresponds to the sequencing of 259 individuals sampled from 51 European localities generated by Lausanne University, Switzerland <ref type="bibr" target="#b26">(Suchan et al., 2017)</ref> (https://www.ebi.ac.uk/ena/data/view/PRJEB23593). A total of 608,367,380 reads were used for the study with an average of 2.3 Million reads per individual.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Variant prediction and filtering</head><p>DiscoSnp-RAD was run with default parameters, searching for at most five variants per bubble. For IPyRAD the same parameters as in the Suchan et al. ( <ref type="formula">2017</ref>) study have been applied including a percentage of identity of 75% for the clustering and a minimum coverage of 6. For STACKS we applied a minimum coverage by stack (-m) of 3, a maximum number of mismatches allowed among sample (-M) of 8 and a maximum number of mismatches allowed between sample (-n) of 8. On the output vcf from each tools, downstream classical filters were applied to follow as much as possible the filters used in the Suchan et al. ( <ref type="formula">2017</ref>) study: a minimum genotype coverage of 6, a minimal minor allele frequency of 0.01 and a minimum of 60% of the samples with a non missing genotype for each variant. These filters remove less informative variants or those with an allele specific to a very small subset of samples. These filters were also applied at the intra-specific level in one of the seven sampled Chiastocheta species, that is, C. lophota, on the same DiscoSnp++ output.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Population genomic analyses</head><p>The species genetic structure was inferred using STRUCTURE <ref type="bibr">(Pritchard, Stephens &amp; Donnelly, 2000) v2.3.4</ref>. This approach requires unlinked markers, thus only one variant by locus, randomly selected, has been kept. The STRUCTURE analysis was carried on the datasets generated by each tool. Simulations were performed with genetic cluster number (K) set from 1 to 10. Best K was identified using <ref type="bibr" target="#b6">Evanno, Regnaut &amp; Goudet (2005)</ref> method. We used 20,000 MCMC iterations after a burn-in period of 10,000. The output is the posterior probability of each sample to belong to each of the possible clusters.</p><p>For C. lophota species, a multivariate analysis were used to investigate intra-specific genetic structure using adegenet R package <ref type="bibr" target="#b11">(Jombart, 2008)</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Phylogenomic analyses</head><p>Maximum likelihood (ML) phylogenetic reconstruction was performed on a whole concatenated SNP dataset using GTRGAMMA model with the acquisition bias correction <ref type="bibr" target="#b12">(Leaché et al., 2015)</ref>. We applied rapid Bootstrap analysis with the extended majority-rule consensus tree stopping criterion and search for best-scoring ML tree in one run, followed by ML search, as implemented in RAxML v8.2.11 <ref type="bibr" target="#b25">(Stamatakis, 2014)</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RESULTS</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Results on simulated data</head><p>DiscoSnp-RAD was first run on several simulated RAD-Seq datasets composed of an increasing number of samples (from 100 to 1,000) in order to validate the approach, to evaluate its speed and efficiency and to compare it with the other clustering approaches.</p><p>This experiment shows that DiscoSnp-RAD predictions are accurate with a good compromise between recall and precision (see Fig. <ref type="figure" target="#fig_0">2</ref>). On average, 84.6% of the simulated variants are recovered with very few false positive calls, that is, reaching a precision of 98.5% on average. Importantly, these performances are not impacted by the number of input samples in the dataset. For instance, recall varies from 84.6% to 83.3% between the smallest and the largest datasets (100 vs 1.000 samples), and precision from 98.1% to 98.5%.</p><p>By comparison with other tools, for each of the tested population sizes, recall and precision are comparable between tools, with typically a recall lower than STACKS and IPyRAD and an intermediate precision, lower than IPyRAD and higher than STACKS. The loss of recall may be explained by the fact that DiscoSnp-RAD voluntary does not detect the variants within 3 bp of each locus end (see "Methods"). The amount of predicted loci are similar between all tools (Table <ref type="table">S2</ref>). The main differences between the tools concern the run time and the disk space usage. These differences increase with the number of samples in the dataset. For instance, on the largest dataset composed of 1,000 samples DiscoSnp-RAD is more than 3 times faster than STACKS and more than 5 times faster than IPyRAD. Moreover, if we consider the cumulative time required to test different parameters for STACKS and IPyRAD, that is, five sets of parameters for each tool, DiscoSnp-RAD, without parameter setting is more than 15 times faster than STACKS and more than 25 times faster than IPyRAD. Regarding the disk space used by the tool during the process, DiscoSnp-RAD requires only a small amount of space compared to the other tools. Full RAM memory, disk usage, and computation times of DiscoSnp-RAD are provided in Table <ref type="table">S1</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Robustness with respect to parameters</head><p>In DiscoSnp-RAD, the main parameter is the size of k-mers, used for building the dBG. As shown Fig. <ref type="figure" target="#fig_1">3</ref>, DiscoSnp-RAD results are robust with respect to k, the main parameter, and its fine choice is thus not crucial. This figure also highlights the results robustness with respect to other parameters such as the maximal number of predicted SNPs per bubble (5 by default), the maximal number of substitutions authorized when mapping reads on bubble sequences (10 by default), and the maximal number of symmetrically Full-size  DOI: 10.7717/peerj.9291/fig- <ref type="figure" target="#fig_0">2</ref> branching crossroads (also 5 by default). Concerning this last parameter, Fig. <ref type="figure" target="#fig_1">3</ref> also shows the advantages of the "high_precision" mode which sets this parameter to zero, leading to a precision of nearly 100%. We enriched results presented in this figure with two additional simulated datasets, following the protocol presented in the "Simulation protocol" section, but introducing SNPs at rates of 0.5% and 2%, instead of 1%. Results are presented in the Fig. <ref type="figure" target="#fig_0">S2</ref>. They also highlight the robustness of results and the rational for the default parameter choices with two times more and two times less simulated diversity. vcf file obtained with the 259 samples, the 40 C. lophota samples were extracted and the same filters, that is, MAF, missing etc., were applied on this C. lophota dataset.</p><p>We obtained 1,306 SNPs by selecting one variant per locus extracted from 4,364 variants identified in this species. The multivariate analysis of this dataset identify three populations comprising respectively 31, 5 and 4 samples (Fig. <ref type="figure" target="#fig_2">4</ref>). Notably, the genetic structure follows the geographic distribution of the samples, with samples from one population originating from western locations, another population from eastern locations and an intermediate population. Geographic structuring is the most frequent structuration factor observed in population genetics, pointing to the geographical isolation Full-size  DOI: 10.7717/peerj.9291/fig- <ref type="figure" target="#fig_2">4</ref> of divergent lineages. This clear geographic structuring is another hint that DiscoSnp-RAD recovers real biogeographic signal.</p><formula xml:id="formula_0">• • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • B A C D</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Breakthrough in running time</head><p>DiscoSnp-RAD run on the 259 Chiastocheta samples took about 30 h. This comprises the whole process from building the dBG to obtaining the final filtered vcf file with 1 SNP per locus. To compare the DiscoSnp-RAD performances with STACKS and IPyRAD on real data, we ran each of these tools using default parameters on the 259 Chiastocheta samples and measured running time and maximum memory usage. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DISCUSSION</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DiscoSnp-RAD efficiency</head><p>DiscoSnp-RAD produced relevant results on ddRAD data from Chiastocheta species. SNPs identified allowed us successfully (i) distinguish the seven species based on the STRUCTURE algorithm, and (ii) reconstruct the phylogenetic tree of the genus, coherent with the phylogenies previously published <ref type="bibr" target="#b26">(Suchan et al., 2017)</ref>. Moreover, on the intra-specific scale, we obtained geographically meaningful results within C. lophota species. The variants identified by DiscoSnp-RAD can be used to study the species or population genetic structure and could be used to investigate deeper the mechanisms at the origin of this structure such as potential gene flow between populations or their demographic histories. In addition, DiscoSnp-RAD is also able to identify INDELS <ref type="bibr" target="#b18">(Peterlongo et al., 2017)</ref>. They were not used in this study but are available for users. Furthermore, the use of DiscoSnp-RAD presented considerable advantages in the run-time, and parameters choice, compared to other common de novo RAD analysis tools, as described below.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Run-time</head><p>The use of DiscoSnp-RAD dramatically decreased the overall time for discovering and selecting relevant variants, as compared to other tools. This is made possible thanks to the use of a unique indexing data structure, the dBG built from all the reads. To build this graph, reads do not need to be compared to each other. DiscoSnp-RAD speed depends on the graph size and at a lesser extend on the number of reads. Importantly, it is not expected to increase quadratically with the dataset size.This can likely be anticipated that with the drop of sequencing costs, RAD projects will grow in size, either by using higher frequency cutting enzymes to obtain a dense genome screening, by increasing the sequencing depth to compensate sequencing variation or by increasing the number of samples. In this context, DiscoSnp-RAD will more easily scale to such very large datasets.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Easy parameter choice</head><p>Another substantial advantage of using DiscoSnp-RAD is the fact that parameters are not directly linked to the level of expected divergence of the compared samples. In fact, they impact the number and type of detected variants, but are not related to the subsequent clustering step. As a result, same parameters can be used whatever the type of analysis (e.g., intra or inter-specific), contrasting with classical tools in which parameters govern loci recovering. Indeed, in STACKS, the parameters governing the merge of the stacks can compromise the detection of relevant variants if they are not adapted to the studied dataset <ref type="bibr" target="#b24">(Shafer et al., 2017)</ref>. Therefore, the authors recommend to perform an exploration of the parameter space before downstream analyses <ref type="bibr" target="#b17">(Paris, Stevens &amp; Catchen, 2017)</ref>. This is extremely time consuming, up to 1 month as confessed by the authors <ref type="bibr" target="#b22">Rochette &amp; Catchen (2017)</ref>, and may not always result in interpretable conclusions. In IPyRAD, the similarity parameter for clustering also impacts variant detection, and usually several values have to be tested to choose the best, as exemplified by <ref type="bibr" target="#b26">Suchan et al. (2017)</ref> who tested five different values.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>By-locus assembly</head><p>DiscoSnp-RAD output is a vcf file including pseudo-loci information, that allows the application of standard variant filtering pipelines. One next objective is to recover loci consensus sequences, that could be used for phylogenetic analysis based on full locus sequences. This could be achieved by performing local assemblies per individual, from all bubbles contained in a cluster.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Sequencing error rate</head><p>Our tests on simulated data sets, performed with 1% error rate, show that, in this worst case scenario, DiscoSnp-RAD can deal with a high error rate and can thus afford analyses of data not generated with the most recent sequencing technologies. With a lower error rate, the good performances of DiscoSnp-RAD are confirmed as shown by the results obtained on the real Chiastocheta dataset. The breakthrough in running time with respect to the other approaches is slightly reduced with the real dataset and this could be due to STACKS and IPyRAD being more impacted by sequencing errors in the data.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Potential applications</head><p>DiscoSnp-RAD can handle all types of RAD data including original RAD-Seq, GBS, ddRAD, etc. In addition it is able to use reads 2 from original RAD-Seq data that are often difficult to analyze. These reads do not start and finish at the same position. Properly recovery of loci is therefore not possible with read stacking approaches. This problem does not exist when using DiscoSnp-RAD, and variants present in reads 2 can also be called. Indeed, the DiscoSnp-RAD method, being not based on stacks of reads, is able to detect any variants that generate bubble motifs in the dBG, thus even if present in reads whose starting positions differ. More precisely, if in a given locus some reads from reads 1 overlap some reads from reads 2 over at least k -1 characters, then all variants from this locus are clustered together and hence detected as belonging to the same locus. Conversely, variants detected from reads 1 are not related to variants detected from reads 2. This ability of DiscoSnp-RAD to handle reads that do not necessary start at the same genomic position makes it particularly well suited to analyze the datasets produced by another group of genome-reduction techniques, namely sequence capture approaches <ref type="bibr" target="#b9">(Grover, Salmon &amp; Wendel, 2012)</ref>. In these techniques, DNA shotgun libraries are subject to enrichment using short commercially-synthesized <ref type="bibr" target="#b7">(Faircloth et al., 2012)</ref> or in-house made <ref type="bibr" target="#b27">(Suchan et al., 2016)</ref> DNA or RNA fragments acting as "molecular baits", that hybridize and allow separation of homologous fragments from genomic libraries. One of such promising approaches is HyRAD, a RAD approach combining the molecular probes generated using ddRAD technique and targeted capture sequencing, designed for studying old and/or poor quality DNA, likely to be too fragmented for RAD-sequencing <ref type="bibr" target="#b27">(Suchan et al., 2016)</ref>. In HyRAD, capturing randomly fragmented DNA results in reads not strictly aligned and covering larger genomic regions than RAD-Seq. Therefore RAD tools can not be used to reconstruct such loci, and the current analysis consists in building loci consensuses from reads, and then calling variants by mapping back the reads on it. The use of DiscoSnp-RAD should simplify this process in a single de novo calling step, well adapted to the specificities of data generated by reduction approaches: many compared samples, high polymorphism and clustering by locus.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CONCLUSION</head><p>We propose DiscoSnp-RAD, an original method dedicated to the de-novo analyze of RAD-Seq data. We have shown that on simulated data, the quality of the results is comparable to those obtained by state-of-the art tools, STACKS and IPyRAD. On real data, DiscoSnp-RAD provides relevant results, enabling the structuring at inter-and intra-level species, accurate enough for recovering the phylogeographic patterns.</p><p>Due to its methodological approach which is utterly different from existing methods, DiscoSnp-RAD drastically reduces computation times and memory requirements. Another key difference stands in the fact that DiscoSnp-RAD does not rely on fine tuning of parameters, contrary to existing methods that rely on critical parameters, as those related to the input sequence similarity.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 2</head><label>2</label><figDesc>Figure2Recall (A), precision (B), time (C) and space (D) evolution on simulated data with different sampling sizes. For the sampling of 100 samples, five parameter sets were tested for IPyRAD and STACKS (see "Material and Methods" for details).Full-size  DOI: 10.7717/peerj.9291/fig-2</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 3</head><label>3</label><figDesc>Figure3Recall and precision on simulated data of 100 samples using DiscoSnp-RAD with respect to (A). k-mer sizes, (B) maximal number of authorized SNP per bubble, (C) maximal number of authorized substitutions while mapping reads on predicted variants sequences, and (D) maximal number of symmetrically branching crossroads. Dashed vertical line represents on each plot the chosen default value.Full-size  DOI: 10.7717/peerj.9291/fig-3</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 4 (</head><label>4</label><figDesc>Figure 4 (A) RAxML phylogeny realized on all variants predicted by DiscoSnp-RAD. Bootstrap node supports &gt; 80 are shown denoted by gray dots, bootstrap node supports &gt; 90 are shown denoted by black dots. (B) STRUCTURE results obtained with SNP only and all variants on the seven Chiastocheta species. (C) Plot of the two first PC from a multivariate analysis on C. lophota samples and (D) their geographic distribution (figure made with Natural Earth Contributors (2020)). Full-size  DOI: 10.7717/peerj.9291/fig-4</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="4,33.85,87.70,540.68,202.51" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head></head><label></label><figDesc>Algorithm 1 Simplified overview of the DiscoSnp-RAD SNP bubble detection (Indel bubble detection omitted).1: Create a de Bruijn graph from all (any number ≥1) read set(s) 2: for Each right branching k-mer in the graph start do 3: for each couple of successor kmer 1 , kmer 2 of k-mer start do</figDesc><table><row><cell>4:</cell><cell>nb sym branching=0</cell></row><row><cell>5:</cell><cell>while True do</cell></row><row><cell>6:</cell><cell>Extend kmer 1 and kmer 2 with a ∈ {A,C,G,T}</cell></row><row><cell>7:</cell><cell>if Both kmer 1 and kmer 2 have no successors then</cell></row><row><cell>8:</cell><cell>if last 3 characters from kmer 1 and kmer 2 are equal then</cell></row><row><cell>9:</cell><cell>Output bubble and break</cell></row><row><cell>10:</cell><cell>if Extension is impossible then break</cell></row><row><cell>11:</cell><cell>if kmer 1 = kmer 2 then Output bubble and break</cell></row><row><cell>12:</cell><cell>if two or more possible extending nucleotides a then</cell></row><row><cell>13:</cell><cell>Increase nb sym branching</cell></row><row><cell>14:</cell><cell>if nb sym_branching &gt; 5 then break</cell></row><row><cell>15:</cell><cell>else Explore recursively all possible extensions</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head></head><label></label><figDesc>The difference is remarkable, DiscoSnp-RAD is more than 4.65 times faster than STACKS (running time 138 h) and 2.8 times faster than IPyRAD (running time 82 h) to perform the whole process. Moreover, contrary to DiscoSnp-RAD, STACKS and IPyRAD should be run several times to explore the parameters which represent a considerable amount of time and memory. For instance, in<ref type="bibr" target="#b26">Suchan et al. (2017)</ref>, IPyRAD was run with 5 different combinations of parameter values, DiscoSnp-RAD being thus 14 times faster than IPyRAD.</figDesc><table /></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" xml:id="foot_0"><p>Gauthier et al. (2020), PeerJ, DOI 10.7717/peerj.9291</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" xml:id="foot_1"><p>Gauthier et al. (2020), PeerJ, DOI 10.7717/peerj.9291 20/20</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>ACKNOWLEDGEMENTS</head><p>The authors thank <rs type="person">Camille Marchet</rs> for her precious help on the clustering implementation. Computations have been made possible thanks to the resources of the Genouest infrastructures.</p></div>
+			</div>
+			<div type="funding">
+<div><head>Funding</head><p>This work was supported by the <rs type="funder">French</rs> <rs type="grantNumber">ANR-14-CE02-0011</rs> <rs type="grantName">SPECREP</rs> grant. The funders had no role in study design, data collection and analysis, decision to publish, or preparation of the manuscript.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_3mcGHEy">
+					<idno type="grant-number">ANR-14-CE02-0011</idno>
+					<orgName type="grant-name">SPECREP</orgName>
+				</org>
+			</listOrg>
+
+			<div type="availability">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Data Availability</head><p>The following information was supplied regarding data availability:</p><p>Code and additional information are available here: https://github.com/GATB/DiscoSnp.</p><p>All validation scripts used for our tests are available at Zenodo: Gauthier, J (2020). "Custom scripts for reproducing DiscoSnp-RAD experiments". Zenodo. Script. DOI 10.5281/zenodo.3724518.</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>The robustness of DiscoSnp-RAD is an important point as other state-of-the-art tools are extremely sensible to their parameters, especially those directly linked to the expected sequence divergence, and require time consuming processes to set them properly <ref type="bibr" target="#b24">(Shafer et al., 2017)</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Results on real data</head><p>In this section, we present an application of the DiscoSnp-RAD implementation on ddRAD sequences obtained from the anthomyiid flies from the Chiastocheta genus. In this genus, classical mitochondrial markers are not suitable for discriminating the morphologically described species <ref type="bibr" target="#b5">(Espíndola, Buerki &amp; Alvarez, 2012)</ref>. Although RAD-sequencing dataset phylogenies supported the species assignment <ref type="bibr" target="#b26">(Suchan et al., 2017)</ref>, the interspecific relationships between the taxa could not be resolved with high confidence due to high levels of incongruences in gene trees <ref type="bibr" target="#b8">(Gori et al., 2016;</ref><ref type="bibr" target="#b26">Suchan et al., 2017)</ref>. The dataset is composed of 259 sequenced individuals from 7 species. Results obtained on DiscoSnp-RAD were compared to the prior work of Suchan and colleagues, based on pyRAD analysis <ref type="bibr" target="#b26">(Suchan et al., 2017)</ref>. In addition, we provide a performance benchmark of STACKS, IPyRAD and DiscoSnp-RAD run on this dataset.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Recovering all Chiastocheta species</head><p>Variant calling was run on the 259 Chiastocheta samples with DiscoSnp-RAD. Before filtering, 115,920 SNPs were identified. After filtering, 4,364 SNPs, located in 1,970 clusters, were retained and used for population genomic analyses. The total number of clusters is coherent with the 1,672 loci from <ref type="bibr" target="#b26">Suchan et al. (2017)</ref>.</p><p>Then, following the requirements of the STRUCTURE algorithm, only one variant per cluster was retained, resulting in a dataset composed of 1,970 SNPs. The most likely value of K is 7 (Fig. <ref type="figure">S3</ref>) and corresponds to the seven species described in <ref type="bibr" target="#b26">Suchan et al. (2017)</ref>. STRUCTURE successfully assigned samples to the seven species, consistent with the morphological species assignment and previously published results <ref type="bibr" target="#b26">(Suchan et al., 2017)</ref> (Fig. <ref type="figure">4</ref>). The assignment values represent the probability with which STRUCTURE assigns a sample to a cluster, depending on the information carried by the variants. The assignment values are high with an average of 0.992 (sd 0.022) across samples and a minimum assignment of 0.810. These values are comparable to the assignment values obtained by <ref type="bibr" target="#b26">Suchan et al. (2017)</ref> with an average of 0.977 (sd 0.042) and a minimum of 0.685. Genetic structure has also been investigated for the two other tools and give very similar population assignations (Fig. <ref type="figure">S4</ref>).</p><p>The phylogeny realized with RAxML on the 4,364 SNPs obtained after filtering, identifies clearly seven clusters representative of the seven species which are coherent with the clusters obtained by <ref type="bibr" target="#b26">Suchan et al. (2017)</ref> (Fig. <ref type="figure">4</ref>). The internal branches separating the seven species are well supported by high bootstrap values.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Recovering phylogeographic patterns</head><p>To assess the utility of DiscoSnp-RAD results for investigating the intra-specific genetic structure, we then focused the analysis on 40 samples of C. lophota species. From the same</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ADDITIONAL INFORMATION AND DECLARATIONS Grant Disclosures</head><p>The following grant information was disclosed by the authors: French SPECREP: ANR-14-CE02-0011.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Competing Interests</head><p>The authors declare that they have no competing interests.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Author Contributions</head><p>Jérémy Gauthier conceived and designed the experiments, performed the experiments, analyzed the data, prepared figures and/or tables, authored or reviewed drafts of the paper, and approved the final draft. Charlotte Mouden performed the experiments, analyzed the data, authored or reviewed drafts of the paper, code implementation, and approved the final draft. Tomasz Suchan performed the experiments, analyzed the data, authored or reviewed drafts of the paper, and approved the final draft. Nadir Alvarez performed the experiments, analyzed the data, authored or reviewed drafts of the paper, and approved the final draft. Nils Arrigo performed the experiments, analyzed the data, authored or reviewed drafts of the paper, and approved the final draft. Chloé Riou conceived and designed the experiments, performed the experiments, authored or reviewed drafts of the paper, code implementation, and approved the final draft. Claire Lemaitre conceived and designed the experiments, performed the experiments, analyzed the data, prepared figures and/or tables, authored or reviewed drafts of the paper, code implementation, and approved the final draft. Pierre Peterlongo conceived and designed the experiments, performed the experiments, analyzed the data, prepared figures and/or tables, authored or reviewed drafts of the paper, code implementation, and approved the final draft.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Supplemental Information</head><p>Supplemental information for this article can be found online at http://dx.doi.org/10.7717/ peerj.9291#supplemental-information.</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Harnessing the power of radseq for ecological and evolutionary genomics</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">R</forename><surname>Andrews</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Good</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">R</forename><surname>Miller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Luikart</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">A</forename><surname>Hohenlohe</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/nrg.2015.28</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Reviews Genetics</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="81" to="92" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Stacks: an analysis tool set for population genomics</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Catchen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">A</forename><surname>Hohenlohe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Bassham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Amores</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">A</forename><surname>Cresko</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/mec.12354</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Molecular Ecology</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="issue">11</biblScope>
+			<biblScope unit="page" from="3124" to="3140" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Pyrad: assembly of de novo radseq loci for phylogenetic analyses</title>
+		<author>
+			<persName><forename type="first">Dar</forename><surname>Eaton</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/bioinformatics/btu121</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="issue">13</biblScope>
+			<biblScope unit="page" from="1844" to="1849" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">ipyrad: interactive assembly and analysis of RADseq datasets</title>
+		<author>
+			<persName><forename type="first">Dar</forename><surname>Eaton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Overcast</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/bioinformatics/btz966</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics btz</title>
+		<imprint>
+			<biblScope unit="volume">966</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page" from="2592" to="2594" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">A robust, simple genotyping-by-sequencing (gbs) approach for high diversity species</title>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">J</forename><surname>Elshire</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">C</forename><surname>Glaubitz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Sun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Poland</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Kawamoto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">S</forename><surname>Buckler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">E</forename><surname>Mitchell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLOS ONE</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="1" to="10" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Ecological and historical drivers of diversification in the fly genus Chiastocheta pokorny</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Espíndola</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Buerki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Alvarez</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.ympev.2012.01.018</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Molecular Phylogenetics and Evolution</title>
+		<imprint>
+			<biblScope unit="volume">63</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="466" to="474" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Detecting the number of clusters of individuals using the software structure: a simulation study</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Evanno</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Regnaut</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Goudet</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/j.1365-294X.2005.02553.x</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Molecular Ecology</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page" from="2611" to="2620" />
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Ultraconserved elements anchor thousands of genetic markers spanning multiple evolutionary timescales</title>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">C</forename><surname>Faircloth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">E</forename><surname>Mccormack</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">G</forename><surname>Crawford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">G</forename><surname>Harvey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">T</forename><surname>Brumfield</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">C</forename><surname>Glenn</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/sysbio/sys004</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Systematic Biology</title>
+		<imprint>
+			<biblScope unit="volume">61</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="717" to="726" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Clustering genes of common evolutionary history</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Gori</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Suchan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Alvarez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Goldman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Dessimoz</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/molbev/msw038</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Molecular Biology and Evolution</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="1590" to="1605" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Targeted sequence capture as a powerful tool for evolutionary analysis</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">E</forename><surname>Grover</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Salmon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">F</forename><surname>Wendel</surname></persName>
+		</author>
+		<idno type="DOI">10.3732/ajb.1100323</idno>
+	</analytic>
+	<monogr>
+		<title level="j">American Journal of Botany</title>
+		<imprint>
+			<biblScope unit="volume">99</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="312" to="319" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Radcap: sequence capture of dual-digest radseq libraries with identifiable duplicates and reduced missing data</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">L</forename><surname>Hoffberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">J</forename><surname>Kieran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Catchen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Devault</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">C</forename><surname>Faircloth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Mauricio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">C</forename><surname>Glenn</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/1755-0998.12566</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Molecular Ecology Resources</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="1264" to="1278" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">adegenet: a R package for the multivariate analysis of genetic markers</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Jombart</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/bioinformatics/btn129</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="issue">11</biblScope>
+			<biblScope unit="page" from="1403" to="1405" />
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Short tree, long tree, right tree, wrong tree: new acquisition bias corrections for inferring SNP phylogenies</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">D</forename><surname>Leaché</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">L</forename><surname>Banbury</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Felsenstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">De</forename><surname>Oca</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">An-M</forename><surname>Stamatakis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename></persName>
+		</author>
+		<idno type="DOI">10.1093/sysbio/syv053</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Systematic Biology</title>
+		<imprint>
+			<biblScope unit="volume">64</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="1032" to="1047" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Fast and accurate short read alignment with Burrows-Wheeler transform</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Durbin</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/bioinformatics/btp324</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="issue">14</biblScope>
+			<biblScope unit="page" from="1754" to="1760" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<title level="m" type="main">A resource-frugal probabilistic dictionary and applications in (meta)genomics</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Marchet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Limasset</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Bittner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Peterlongo</surname></persName>
+		</author>
+		<ptr target="http://arxiv.org/abs/1605.08319" />
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<ptr target="https://www.naturalearthdata.com/" />
+		<title level="m">Natural earth data</title>
+		<imprint>
+			<publisher>Natural Earth Contributors</publisher>
+			<date type="published" when="2020-05-04">2020. 4 May 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Genotype and SNP calling from next-generation sequencing data</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Nielsen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">S</forename><surname>Paul</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Albrechtsen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><forename type="middle">S</forename><surname>Song</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/nrg2986</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Reviews Genetics</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="443" to="451" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Lost in parameter space: a road map for stacks</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">R</forename><surname>Paris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">R</forename><surname>Stevens</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Catchen</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/2041-210X.12775</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Methods in Ecology and Evolution</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">10</biblScope>
+			<biblScope unit="page" from="1360" to="1373" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<title level="m" type="main">Discosnp++: de novo detection of small variants from raw unassembled read set(s)</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Peterlongo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Riou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Drezen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Lemaitre</surname></persName>
+		</author>
+		<idno type="DOI">10.1101/209965</idno>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Double digest radseq: an inexpensive method for de novo snp discovery and genotyping in model and non-model species</title>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">K</forename><surname>Peterson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">N</forename><surname>Weber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">H</forename><surname>Kay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">S</forename><surname>Fisher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">E</forename><surname>Hoekstra</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLOS ONE</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="1" to="11" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">De novo repeat classification and fragment assembly</title>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">A</forename><surname>Pevzner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Tang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Tesler</surname></persName>
+		</author>
+		<idno type="DOI">10.1101/gr.2395204</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Research</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">9</biblScope>
+			<biblScope unit="page" from="1786" to="1796" />
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Inference of population structure using multilocus genotype data</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">K</forename><surname>Pritchard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Stephens</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Donnelly</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genetics</title>
+		<imprint>
+			<biblScope unit="volume">155</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="945" to="959" />
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Deriving genotypes from RAD-seq short-read data using stacks</title>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">C</forename><surname>Rochette</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Catchen</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/nprot.2017.123</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Protocols</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="issue">12</biblScope>
+			<biblScope unit="page" from="2640" to="2659" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Stacks 2: analytical methods for paired-end sequencing improve radseq-based population genomics</title>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">C</forename><surname>Rochette</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">G</forename><surname>Rivera-Colón</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Catchen</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/mec.15253</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Molecular Ecology</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="issue">21</biblScope>
+			<biblScope unit="page" from="4737" to="4754" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Bioinformatic processing of rad-seq data dramatically impacts downstream population genetic inference</title>
+		<author>
+			<persName><forename type="first">Aba</forename><surname>Shafer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">R</forename><surname>Peart</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Tusso</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Maayan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Brelsford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">W</forename><surname>Wheat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jbw</forename><surname>Wolf</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/2041-210X.12700</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Methods in Ecology and Evolution</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page" from="907" to="917" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Raxml version 8: a tool for phylogenetic analysis and post-analysis of large phylogenies</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Stamatakis</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/bioinformatics/btu033</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="issue">9</biblScope>
+			<biblScope unit="page" from="1312" to="1313" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Assessing the potential of rad-sequencing to resolve phylogenetic relationships within species radiations: the fly genus Chiastocheta (Diptera: Anthomyiidae) as a case study</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Suchan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Espndola</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Rutschmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">C</forename><surname>Emerson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Gori</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Dessimoz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Arrigo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ronikier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Alvarez</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.ympev.2017.06.012</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Molecular Phylogenetics and Evolution</title>
+		<imprint>
+			<biblScope unit="volume">114</biblScope>
+			<biblScope unit="page" from="189" to="198" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Hybridization capture using rad probes (hyrad), a new tool for performing genomic analyses on collection specimens</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Suchan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Pitteloud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">S</forename><surname>Gerasimova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Kostikova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Schmid</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Arrigo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Pajkovic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ronikier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Alvarez</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLOS ONE</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="1" to="22" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Reference-free detection of isolated SNPs</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Uricaru</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Rizk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Lacroix</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Quillery</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Plantard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Chikhi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Lemaitre</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Peterlongo</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/nar/gku1187</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Research</title>
+		<imprint>
+			<biblScope unit="volume">43</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="1" to="11" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">2b-rad: a simple and flexible method for genome-wide genotyping</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Meyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Mckay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Matz</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/nmeth.2023</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Methods</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page" from="808" to="810" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

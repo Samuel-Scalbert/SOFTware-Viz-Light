@@ -1,0 +1,1434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Always-On Intrusion Detection through GEGELATI Lightweight Tangled Program Graphs</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Nicolas</forename><surname>Sourbier</surname></persName>
+							<email>nicolas.sourbier@insa-rennes.fr</email>
+						</author>
+						<author>
+							<persName><forename type="first">Karol</forename><surname>Desnos</surname></persName>
+							<email>karol.desnos@insa-rennes.fr</email>
+						</author>
+						<author>
+							<persName><forename type="first">Thomas</forename><surname>Guyet</surname></persName>
+							<email>thomas.guyet@irisa.fr</email>
+						</author>
+						<author>
+							<persName><forename type="first">Frédéric</forename><surname>Majorczyk</surname></persName>
+							<email>frederic.majorczyk@supelec.fr</email>
+						</author>
+						<author>
+							<persName><forename type="first">Olivier</forename><surname>Gesny</surname></persName>
+							<email>ogesny@silicom.fr</email>
+						</author>
+						<author>
+							<persName><forename type="first">Maxime</forename><surname>Pelcat</surname></persName>
+							<email>maxime.pelcat@insa-rennes.fr</email>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="laboratory" key="lab1">IETR</orgName>
+								<orgName type="laboratory" key="lab2">UMR CNRS 6164</orgName>
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">INSA Rennes</orgName>
+								<address>
+									<addrLine>20 Av. des buttes</addrLine>
+									<settlement>de Coësmes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<orgName type="laboratory" key="lab1">IETR</orgName>
+								<orgName type="laboratory" key="lab2">UMR CNRS 6164</orgName>
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">INSA Rennes</orgName>
+								<address>
+									<addrLine>20 Av. des buttes</addrLine>
+									<settlement>de Coësmes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff2">
+								<orgName type="laboratory">IRISA -LACODAM Unité pédagogique Informatique d&apos;AGROCAMPUS-OUEST</orgName>
+								<address>
+									<addrLine>65 rue de Saint-Brieuc</addrLine>
+									<settlement>Rennes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff3">
+								<orgName type="institution">SILICOM</orgName>
+								<address>
+									<addrLine>3 E rue de Paris</addrLine>
+									<postBox>O. Gesny</postBox>
+									<postCode>35510</postCode>
+									<settlement>Cesson-Sévigné</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff4">
+								<orgName type="institution">Majorczyk DGA</orgName>
+								<address>
+									<region>MI</region>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff5">
+								<orgName type="institution">CIDRE</orgName>
+								<address>
+									<addrLine>136 La Roche Marguerite</addrLine>
+									<postCode>35170</postCode>
+									<settlement>Bruz</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff6">
+								<orgName type="laboratory" key="lab1">IETR</orgName>
+								<orgName type="laboratory" key="lab2">UMR CNRS 6164</orgName>
+								<orgName type="institution" key="instit1">Univ Rennes</orgName>
+								<orgName type="institution" key="instit2">INSA Rennes</orgName>
+								<address>
+									<addrLine>20 Av. des buttes</addrLine>
+									<settlement>de Coësmes</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Always-On Intrusion Detection through GEGELATI Lightweight Tangled Program Graphs</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">C47103594563059CEBE7F16A5BCC1AF8</idno>
+					<idno type="DOI">10.1007/s11265-021-01728-1</idno>
+					<note type="submission">Received: date / Accepted: date</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:12+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Tangled Program Graphs Intelligence</term>
+					<term>Network Intrusion Detection</term>
+					<term>Cyber Security</term>
+					<term>Network Security</term>
+					<term>Real-time Processing</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>The fast improvement of Machine-Learning (ML) methods gives rise to new attacks in Information System (IS). Simultaneously, ML also creates new opportunities for network intrusion detection. Early network intrusion detection is a valuable asset for IS security, as it fosters early deployment of countermeasures and reduces the impact of attacks on system availability.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>This paper proposes and studies an anomaly-based Network Intrusion Detection System (NIDS) based on Tangled Program Graph (TPG) ML and called Secure-Gegelati. Secure-Gegelati learns how to detect intrusions from IS-produced traces and is optimised to fit the requirements of intrusion detection. The study evaluates the capacity of Secure-Gegelati to act as a continuously learning, real-time, and low energy NIDS when executed in an embedded network probe. We show that a TPG is capable of switching between training and inference phases, new training phases enriching the probe knowledge with limited degradation of previous intrusion detection capabilities. The Secure-Gegelati software reaches 8× the energy efficiency of an optimised Random Forests (RF)-based Intrusion Detection System (IDS) on the same platform. It is capable of processing 13.2 k connections/seconds with a peak power of less than 3.3Watts on an embedded platform, and is processing in real-time the CIC-IDS 2017 dataset while detecting 84% of intrusions and raising less than 0.2% of false alarms.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>Intrusion detection consists of spotting the actions of attackers attempting to compromise the integrity, confidentiality, or availability of a computer resource <ref type="bibr" target="#b53">[53]</ref>. The first Intrusion Detection System (IDS) was proposed by D. Denning in 1987 <ref type="bibr" target="#b6">[7]</ref> as a way to early detect and prevent networking attacks and deviant behaviours. Intrusion detection is now used at a large scale and is necessary to ensure confidentiality, integrity and availability of a resource as attackers proved their ability to bypass the protections of the resources <ref type="bibr" target="#b31">[31,</ref><ref type="bibr" target="#b45">45,</ref><ref type="bibr" target="#b35">35]</ref>.</p><p>To enhance the security of a network, connections need to be analysed for countermeasures to be deployed. In a realistic information system context, the connection rate is high, making it impossible to be analysed by a human analyst in real-time. Thus, Network Intrusion Detection System (NIDS) have been created to facilitate the tasks of the analyst. A real-life network is dynamic: the traffic constantly evolves with the appearance of new features, services, operating systems, network topology etc. In the meantime, while the network is evolving, cyber attacks become more complex <ref type="bibr" target="#b31">[31,</ref><ref type="bibr" target="#b35">35,</ref><ref type="bibr" target="#b45">45]</ref>. NIDSs work under the assumption that attacks requests share a common basis and similarities. Anomalybased Intrusion Detection Systems (AIDSs) aim to produce a model of the network normal using and to detect users' behaviours deviating from this model. In this context, AIDS are useful for their capacity to detect novelty <ref type="bibr" target="#b27">[27,</ref><ref type="bibr" target="#b32">32,</ref><ref type="bibr" target="#b20">21]</ref>. Furthermore, AIDS can be used to create new attack signatures. Challenges for AIDS lie in the diminution of the false-positive alert rate and the production of ancillary information when an alert is raised. Indeed, false alarms are usually very time consuming and can easily cause a detection system to be rejected by analysts. Furthermore, AIDS are based on statistical inference and require an (often costly) initial training that hinders system adaptation. Finally, encrypted data packets can bypass the IDS and prevent an attacker from being detected.</p><p>From the difficulties that are faced by current AIDS, Reinforcement-Learning (RL) seems to address the detection problem in an interesting way. Indeed, the RL learning being conditioned by a reward function can prevent the RL agent from raising too many falsepositive alerts. The reward system can be designed by an analyst and reward the teams that does not produce false positive alerts. The Tangled Program Graph (TPG) intelligence, as designed by Stephen Kelly <ref type="bibr" target="#b18">[19]</ref>, is a Multi-Agent Reinforcement Learning (MARL) algorithm based on Genetic Programming (GP) showing interesting properties of emergence. This emergence results in an interaction between a set of agents and the environment where the agents observe the environment and get more complex (tangled) in their response to observations. We also hypothesise that the properties of the TPG can also bypass some of the current difficulties of AIDS. Firstly, the TPG can train continuously and complex data to action behaviours have been demonstrated to emerge from its training, making it adapt over time to a dynamic environment. This online training also limits the offline training time required to obtain a correct model and the need of massive training data as it learns on incoming data without the necessity to store them. Finally, the TPG can be used as a classifier, raising alerts and giving classification information if needed. The current study focuses on the detection of attacks and thus, their classification is kept out of its scope. For making our study more realistic, we use as training data the network flow from the CIC-IDS 2017 data-set, and not the raw packet data (PCAP format) that would not be available and encrypted in a real setup.</p><p>Recent studies <ref type="bibr" target="#b46">[46,</ref><ref type="bibr" target="#b52">52]</ref> propose to use Random Forests (RF) supervised classifiers to detect intrusions in the CIC-IDS 2017 IDS dataset <ref type="bibr" target="#b42">[42]</ref>. RF can detect intrusions with an accuracy over 90%. However, RFs do not support continual learning, as they need to be retrained from scratch with a considerable amount of labelled data for incorporating a new attack class. Furthermore, the performances of the obtained models degrade in the first months after training and can drop by up to 23% within a year <ref type="bibr" target="#b48">[48]</ref> due to the changes occurring on the network and to the novel attacks. K-Nearest Neighbours (k-NN) <ref type="bibr" target="#b38">[38,</ref><ref type="bibr" target="#b1">2,</ref><ref type="bibr" target="#b8">9]</ref> have also been used for intrusion detection but face the same issue. A long time is required to make a model converge towards a good prediction rate.</p><p>The built and studied Secure-GEGELATI real-time monitoring system aims at progressively automating the detection of intrusions in an Information System (IS) by observing the incoming data. It constitutes a Security Information and Event Management (SIEM) device which helps a security analyst to early detect an attack. The monitoring system is required to have nearly perfect precision, potentially trading it off for a low recall. Indeed, false alarms are extremely time consuming, as they bring analysts to finally uncover that no attack was currently performed. Conversely, missing intrusions is less costly, as it brings the security analyst back to the situation where no live monitoring system was present. To be useful in practice, a live IDS monitoring system must:</p><p>keep up with the pace of the IS incoming data, be embeddable in an always-on device, and thus energy efficient, raise extremely rare false alarms in a context where attacks are very rare events.</p><p>This paper is an extension of the conference paper <ref type="bibr" target="#b7">[8]</ref> introducing the GEGELATI TPG as a customisable, scalable and deterministic TPG system. It proposes the following contributions:</p><p>we study the GEGELATI TPG learning capacities and energy efficiency on a realistic and complex application, we demonstrate that the properties of TPG are well suited for building a learning-based NIDS. In particular, its energy efficiency and continual learning capacities on new incoming attack flows are studied, we introduce the open source Secure-Gegelati Tangled Program Graph (TPG) system for learningbased intrusion detection.</p><p>The TPG learning method has a lightweight structure, its training and inferring processes are known to be fast and adequate for online training <ref type="bibr" target="#b17">[18]</ref>. This lightweight structure helps for online training on an embedded platform. The considered scenario is the following:</p><p>-Training phase: the analyst provides tagged data to train the real-time monitoring system, specifying whether an attack is ongoing or not. -Monitoring phase: the live monitoring system is switched into a monitoring mode, continuously observes the IS and triggers an alarm when an attack occurs. With RL, the analyst can switch back the monitoring device into a training phase at any time and improve its sensitivity to new attacks.</p><p>Section 2 introduces state of the art methods for intrusion detection and situates Secure-GEGELATI among them. In Section 3, the TPG algorithm is defined and described. Section 4 presents the Generic Evolvable Graphs for Efficient Learning of Artificial Tangled Intelligence (Gegelati) TPG system and its deterministic and parallel execution properties. We explain in section 5 how the TPG can be adapted into a NIDS real-time probe. Finally, in section 6, we compare the performance of Secure-Gegelati with an optimised RF parallel NIDS in terms of precision, real-time processing and energy efficiency.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">Related Work</head><p>Network security is one of the main cyber-security fields. We focus in this paper on the network intrusion detection problem that consists in detecting malicious usage of an IS network <ref type="bibr" target="#b47">[47]</ref>. Several approaches to this problem exist. While network intrusion prevention systems take real-time countermeasures when a malicious behaviour is detected, NIDS aim to assist the security analyst by raising alerts. The three main types of IDS <ref type="bibr" target="#b5">[6,</ref><ref type="bibr" target="#b20">21,</ref><ref type="bibr" target="#b27">27]</ref> are signature-based systems, anomaly detection systems and stateful protocol analysis.</p><p>Stateful protocol analysis systems detect deviations of protocol states and use predetermined universal profiles based on "accepted definitions of benign activity" developed by vendors and industry leaders <ref type="bibr" target="#b39">[39]</ref>. It is mainly used for its ability to check reasonable thresholds for individual commands (min, max, length...) and makes it possible to identify as well unsuspected sequences of commands.</p><p>Signature based (or misuse) intrusion detection systems filter the network frames using human-defined signatures of the threats generally using regular expressions <ref type="bibr" target="#b10">[11,</ref><ref type="bibr" target="#b13">14,</ref><ref type="bibr" target="#b25">25]</ref>. The main drawback of signature based detection is the high number of patterns that need to be handcrafted, stored and analysed, as each attack has a unique signature.</p><p>For their part, anomaly detection systems aim at producing a model of the normal behaviour and to detect behaviours deviating from this model. Nonetheless, anomaly detection is a difficult task as attackers often make changes to already known attacks to evade this particular detection technique. For instance, in the first quarter of 2017, more than 55.000 attack variations were discovered for only 15 attack families.</p><p>Stateful protocol analysis systems and anomaly detection systems identify deviations from a model of normal behaviour benign activity. Anomaly-based IDS use statistical inference with either unsupervised learning or supervised learning.</p><p>One of the main problems in NIDS is the scarcity of high quality labelled data-sets. This is why unsupervised learning is widely used on the problem. Amongst unsupervised traditional learning algorithms, the Kmeans algorithm usually produces the best results <ref type="bibr" target="#b1">[2,</ref><ref type="bibr" target="#b8">9,</ref><ref type="bibr" target="#b38">38]</ref>. As stated in <ref type="bibr" target="#b38">[38]</ref>, their exists a trade-off between a high accuracy using unsupervised learning and a time-efficient, low complexity model. While unsupervised learning is convenient due to its ability to train in real-time and to use unlabelled data, its performances are hindered by high false-positive rates. For instance, one can observe 21.8% of false-positives in <ref type="bibr" target="#b1">[2]</ref> and more than 15% of false-positives for 20000 connections analysis in <ref type="bibr" target="#b8">[9]</ref>.</p><p>These solutions are impractical, as false positives are a consistent problem of NIDS. An analyst is able to study between 1 and 20 threats per day, making it important to focus on real threats and not on false positive alerts. Eventually, a NIDS that regularly generates false positive alerts will decrease the confidence of the analyst in the IDS and reducing recall to improve precision in this context makes a lot of sense.</p><p>Supervised learning methods have been used to create AIDS. These methods are trained offline based on labelled network packets or flow. A network packet is a formatted unit of data containing control information and payload. Network flows sums up packet information such as the protocol or the type of service for given source and destination IP and ports. They have low robustness to network modifications such as any modification of the topology of the network, the appearance of new services, or novel threats. Indeed, experimental results in <ref type="bibr" target="#b48">[48]</ref> show that an Machine-Learning (ML) based IDS trained at the beginning of a year can have an accuracy drop of up to 23% by the end of the year. These issues are discussed in <ref type="bibr" target="#b19">[20,</ref><ref type="bibr" target="#b21">22]</ref>.</p><p>RL <ref type="bibr" target="#b14">[15]</ref> is an alternative to both supervised and unsupervised learning. RL is the problem faced by an agent that learns behaviour through trial-and-errors interactions with a complex and dynamic environment. The actions of the RL agent have an impact on the environment. The actions learnt as reactions to a set of specific states of the environment is called the policy. One of the RL challenges is the exploration versus exploitation dilemma management where exploitation means that a learnt policy is used to infer the future reward in the observed environment. Using this feature, a RL method is able to keep including novelty in its policy and exploitation is particularly interesting for the design of an IDS constantly facing new threats.</p><p>We address the intrusion detection problem using an RL algorithm based on GP. RL for classification differs from the supervised learning methods in the amount of supervision required in the learning process. Supervised learning method require an explicit correction through class information while RL can learn from a batch of implicit corrections called "rewards".</p><p>GP has been used to assist the creation of both signature based IDS <ref type="bibr" target="#b9">[10,</ref><ref type="bibr" target="#b26">26,</ref><ref type="bibr" target="#b34">34]</ref> and anomaly-based IDS <ref type="bibr" target="#b43">[43]</ref>. Particularly, authors of <ref type="bibr" target="#b43">[43]</ref> used their "GANIDS" architecture to decrease the amount of false positive alerts, making the IDS qualitative for the analysts. They showed that the use of GP helped them in reducing the amount of false positive while keeping high detection rates.</p><p>Furthermore, some RL frameworks exist that perform intrusion detection <ref type="bibr" target="#b4">[5]</ref>. Several studies focus on the use of Deep reinforcement learning (Deep Q Networks) <ref type="bibr" target="#b22">[23,</ref><ref type="bibr" target="#b28">28,</ref><ref type="bibr" target="#b41">41]</ref> and fewer consider using MARL to design their IDS <ref type="bibr" target="#b40">[40]</ref>. The later method takes advantage of MARL scalability, to observe a distributed environment and solve the interactive problem of intrusion detection over DoS and DDoS attacks. A limitation of Deep Q Networks is that they remain heavily parameterized and energy costly methods.</p><p>As an IDS is an always-on application or device, it is interesting for the sustainability of the solution to set it up as a High-Performance Embedded Com-puting (HPEC) device <ref type="bibr" target="#b50">[50]</ref> in the form of a network probe. Several studies pointed out this need <ref type="bibr" target="#b29">[29,</ref><ref type="bibr" target="#b30">30,</ref><ref type="bibr" target="#b44">44,</ref><ref type="bibr" target="#b49">49]</ref>. In particular, Viegas et al., <ref type="bibr" target="#b49">[49]</ref> show how using an embedded device implementing Decision Trees, Naive-Bayes or K-NN algorithm allowed them to save up to 93% of energy and pointed out that the Decision tree is the most energy-efficient algorithm among the compared ones. As specified in <ref type="bibr" target="#b29">[29]</ref>, using an embedded IDS represents a trade-off between energy consumption and peak number of analysis per second. Indeed, the use of a neural network here dropped the load of the IDS to 6MBps.</p><p>In this paper, we study the capacity of TPG, a MARL framework proposed by S. Kelly <ref type="bibr" target="#b15">[16]</ref> which shows interesting properties in terms of emergence and lightweight training. The TPG being fast and lightweight makes it a good candidate for a real-time embedded NIDS probe. TPG combines RL and GP into a multi-agent directed graph. RL relates the learning mechanisms of the policy strategy to action decided by the TPG agent. GP improves the learning mechanism with the emergence of new environmental observation rules. The TPG is composed of teams (vertices), programs (edges) and actions (vertices). The TPG programs observe the environment and select the best path in the graph until an action is reached. Unlike Deep Reinforcement Learning methods which observe the environment in its entirety, the TPG agents select through trial and errors the relevant information for decision making.</p><p>Although it is based on the TPG intelligence, Secure-Gegelati differs from Reinforcement Learning in its conceptual learning approach for two reasons:</p><p>-Reinforcement Learning is normally based on sequential or stateful analysis were the current state of the environment depends on its previous states. This can hardly be simulated as the networks packets arrive from different sources. -Reinforcement Learning states depend on the actions taken on the environment. Here, the TPG actions are classification actions and thus, do not modify the environment characteristics.</p><p>The RF algorithm, which is an extension of the Decision tree algorithm, is taken as a baseline. <ref type="bibr" target="#b49">[49]</ref> stated that Decision trees are the most energy-efficient algorithm among the compared algorithms making Random Forests a relevant candidate. Furthermore, in <ref type="bibr" target="#b42">[42]</ref>, authors show that RF is one of the algorithms that perform best on the CICIDS-2017 dataset with a precision of 98%, a recall of 97% and F1-score of 97%.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Tangled Program Graphs</head><p>The TPG model studied in this paper, which builds on technique from the genetic programming domain, was introduced by Kelly and Heywood <ref type="bibr" target="#b18">[19]</ref> as a reinforcement learning technique. Principles of reinforcement learning and genetic programming are presented in Section 3.1, and the TPG model is detailed in Section 3.2.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Background: Reinforcement Learning and Genetic Programming</head><p>Reinforcement learning is a branch of machine learning techniques where artificial intelligence learns, through trial and error, how to interact with an environment. In reinforcement learning, artificial intelligence, called the learning agent, observes the current state of its learning environment, and interacts with it trough a finite set of actions. As a result of these actions, or because of external phenomena such as time or physics, the state of the learning environment evolves. By observing the constantly evolving state of the environment, the learning agent has the possibility to react and to build a meaningful sequence of actions. For the agent to learn which sequences of actions are useful, an additional reward mechanism is implemented. By rewarding useful behaviour of the learning agent, and penalising harmful or useless behaviour, this reward mechanism helps the learning agent select the most appropriate behaviour for each new experience. Although TPG have originally been developed for reinforcement learning purposes, the possibility to adapt them for other kinds of learning environments has already been demonstrated <ref type="bibr" target="#b17">[18]</ref>. Genetic programming is a subset of machine learning techniques that mimics a natural selection evolution process to breed programs for a selected purpose. The iterative learning process of genetic programming can be summarised in four steps: 1/ Create an initial population of n ∈ N * random programs. Then, iteratively: 2/ Evaluate the fitness of these programs against the learning environment. 3/ Discard the m &lt; n, m ∈ N * programs of the population with the worse fitness. 4/ Recreate m new programs from remaining programs by using genetic operations, like mutations or crossovers. As detailed in <ref type="bibr" target="#b18">[19,</ref><ref type="bibr" target="#b15">16]</ref>, TPG add a compositional mechanism to this genetic learning process, which favours the emergence of stable clusters of useful programs by building a hierarchical decision structure.</p><p>A B+&gt; B (a </p><formula xml:id="formula_0">)</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">TPG: Model and Learning Algorithm</head><p>The semantics of the Tangled Program Graph (TPG) model, depicted in figure <ref type="figure">1</ref>, consists of three elements composing a direct graph: programs, teams and actions. The teams and the actions are the vertices of the graph, teams being internal vertices, and actions being the leaves of the graph. The programs, associated to the edges of the graph that each connects a source team to a destination team or action vertex. Self-loops, that is an edge connecting a team to itself, are not allowed in TPG.</p><p>From afar, a program can be seen as a black box that takes the current state of the learning environment as an input, processes it, and produces a real number, called a bid, as a result. In more detail, a program is a sequence of simple arithmetic instructions, like additions or exponents. As depicted in figure <ref type="figure">2</ref>, each instruction takes as an operand either data coming from the observed learning environment, or the value stored in a register by a previous instruction. The last value stored in a specific register, generally called R0, is the result produced by the program.</p><p>The execution of a TPG starts from its unique root team, when a new state of the environment becomes available. All programs associated to outgoing edges of the root team are executed with the current state of the environment as their input. Once all programs have completed their execution, the edge associated to the largest bid is identified, and the execution of the TPG continues following this edge. If another team is pointed by this edge, its outgoing programs are executed, still with the same input state, and the execution continues along the edge with the largest bid<ref type="foot" target="#foot_0">1</ref> . Eventually, the edge with the largest bid leads to an action vertex. In this case, the action is executed by the learning agent, a new resulting state of the environment is received, and the TPG execution restarts from its root team.</p><p>The genetic evolution process of a TPG relies on a graph with several root teams. The initial TPG created for the first generation only contains root teams whose outgoing edges each lead directly to an action vertex. At a given generation of the learning process, each root team of the TPG represents a different policy whose fitness is evaluated. Evaluating a root team consists of executing the TPG stemming from it a fixed number of times, or until a terminal state of the learning environment is reached, like a game-over in a video game. The rewards obtained after evaluating each root team of the TPG are used by the genetic evolution process. Worst-fitting root teams, which obtained the lowest rewards, are deleted from the TPG.</p><p>To create new root teams for the next generation of the evolution process, randomly selected remaining teams from the TPG are duplicated with all their outgoing edges. Then, these new edges undergo a random mutation process, possibly altering their destination vertex, and modifying their programs by adding, removing, swapping, and changing their instructions and operands. Surviving root teams from previous generations may become the destination of an edge added during the mutation process, thus becoming internal vertices of the TPG. This mutation mechanism favours the emergence of long-living valuable sub-graphs of connected teams. Indeed, useful teams contributing to higher rewards have a greater chance of becoming internal vertices of the TPG which can not be discarded unless they become root teams again. Hence, complexity is added to the TPG adaptively, only if this complexity leads to better rewards for the learning agent. A detailed description of this evolution process can be found in <ref type="bibr" target="#b15">[16]</ref>.</p><p>The capabilities of TPG have been extensively demonstrated <ref type="bibr" target="#b18">[19,</ref><ref type="bibr" target="#b15">16]</ref> on the 55 video games from the Arcade Learning Environment (ALE) <ref type="bibr" target="#b3">[4]</ref>. In this learning environment, the adaptive complexity leads to TPG with diverse sizes, depending on the complexity of the strategies developed to play each game. For example, there are two orders of magnitude between the smallest and largest networks built within these learning environments. On the performance side, TPG have been shown to reach a level of competency comparable with state-of-the-art deep-learning techniques on ALE games, for a fraction of their computational and storage cost. Compared to state-of-the-art techniques, TPG reach comparable competency with one to three orders of magnitude less computations, and two to ten orders of magnitude less memory needed to store their inference model. Recently, an extension of the TPG model supporting continuous action space was proposed in order to target new learning environments, like time-series predictions <ref type="bibr" target="#b17">[18]</ref>.</p><p>Implementations of learning frameworks for TPG, coded in C++, Java and Python, can be found in open-source repositories. The main motivations behind the creation of the Gegelati library is to have an efficient, embeddable, portable, parallel and deterministic library. Because of the efficiency and embeddability objectives, C++ was a natural choice for the development of Gegelati. Previous open-source C++ implementations, including the reference C++ code from Kelly <ref type="bibr" target="#b18">[19]</ref>, were neither parallel nor deterministic.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Gegelati: Parallel, Efficient and Embeddable framework for TPGs</head><p>Gegelati is an open-source framework for training and executing TPG. From its inception, the Gegelati library has been conceived to foster its adaptability to diverse learning environments, and its portability to various architectures, without sacrificing its performance.</p><p>To this purpose, two original contributions have be integrated to the library: the parallelization of the deterministic learning process, presented in Section 4.1; and the support for customisable instructions, detailed in Section 4.2.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Deterministic Parallelism and Portability</head><p>What are the motivations? Portability of the Gegelati library enables using it both on general-purpose and embedded architectures. Indeed, when training a learning agent intended to run on an embedded system, a common design process is to prototype the agent first on a general-purpose processor before embedding it on the embedded target. The portability also makes it possible to train a learning agent offline on a high-performance computing architecture, before deploying it on a less performing architecture for inference.</p><p>Parallelism of the learning process is an essential feature to accelerate the training of new learning agents, which fosters the adoption of new machine learning techniques. Indeed, the breakthrough of deeplearning models is largely due to the acceleration of their training process with Multi-Processor System On Chips (GPUs) <ref type="bibr" target="#b23">[24]</ref>. Support for parallel computations is useful for general-purpose and high-performance computing architectures, but also for embedded systems which nowadays widely integrate heterogeneous Multi-Processor System-on-Chips (MPSoC).</p><p>Determinism of a learning process is the property that ensures that given a set of initial conditions, the learning process will always end with the same result. Determinism can only be obtained under the assumption that the state of the learning environment is itself changing deterministically, solely depending on the sequence of actions applied to it. Determinism is a key feature, especially for pseudo-stochastic learning process such as the training of TPG. Indeed, the result of training may partially depend on luck, which is exactly why being able to deterministically reproduce a result is crucial.</p><p>The determinism is antagonistic with the parallelism and portability objectives, and with the stochastic nature of the learning process, which makes all these objectives challenging to implement jointly. Indeed, parallelism is by nature a source of non-determinism as the simultaneity of computations accessing and modifying shared resources, often in an unknown order, tends to produce variable results.</p><p>How does the deterministic and scalable parallelism work? During the learning process of TPG, the most computeintensive parts are the fitness evaluation of the policies, and the mutations of the programs added during the evolution process. The fitness evaluation of individual policies can be deterministically executed in parallel, on the conditions that: 1/ the learning environment can be cloned to evaluate several policies concurrently, and 2/ any stochastic evolution of the learning environment state can be controlled deterministically. Under these conditions, the parallel evaluation of policies is possible, as the topology of the TPG, which is a shared resource for all policies, is fixed during this evaluation process. Similarly, the mutation of programs can be applied deterministically in parallel. Two kinds of mutations are applied to the TPG: mutations affecting the graph topology by inserting new root teams and edges; and mutations affecting instructions of the programs associated with the new edges. While mutating the graph topology cannot be done in parallel, the graph being a shared resource, individual programs are independent from each other and can be mutated in parallel.</p><p>To control a stochastic process, a Pseudo-Random Number Generator (PRNG) must be used each time a random number is needed. Given an initial seed, a PRNG produces a deterministic sequence of numbers. To ensure full determinism of the training of a TPG, a unique PRNG should be called in a fixed order during the whole training. Letting the parallel parts of the training process call the PRNG directly is not possible, as the absolute order in which parallel computations occur is itself stochastic. It is also not possible to give a pre-computed list of pseudo-random numbers to each parallel task, as the number of random numbers needed for each task is itself stochastic. For example, when mutating a program, mutations are applied iteratively until the program behaviour becomes "original" compared to pre-existing programs in the TPG. Hence, giving a fixed number of pre-computed random numbers for the program mutations is not feasible.</p><p>The parallelization strategy adopted in Gegelati is based on the master/worker principle, with a distributed PRNG. The principle of the distributed PRNG is the use of two distinct PRNG instances: the prng master and the prng worker . The prng master is exclusively used in the sequential parts of the learning process, which confers a deterministic nature to its usage, given an initial seed. Besides being used for stochastic tasks performed sequentially, like TPG topology mutations for example, the prng master is also used to generate a seed for each parallel worker task. In each worker task, a private prng worker is instantiated, and initialised with the seed provided by the prng master . Since all calls to the PRNG from the worker tasks exclusively use their private prng worker , the random number sequences generated in each parallel task are deterministic.</p><p>The pseudo-code of the master and worker tasks for the policy fitness evaluation are presented in Procedures 1 and 2, respectively. Communications between the tasks and load balancing of the computa- tions are supported by a job queuing mechanism based on two queues: JobQ and ResultQ. Each policy evaluation job, prepared by the master procedure, encapsulates a unique job identifier id, a seed provided by the prng master , and a root team from the TPG. All jobs are pushed in the JobQ queue before spawning as many worker threads as the number of secondary Processing Elements (PEs) in the target architecture. For each job it acquires from the jobQ queue, the worker procedure resets its prng worker using the seed contained in the job. Before evaluating the fitness of the root team contained in a job, the worker procedure resets its private copy of the learning environment, using a number given by the prng worker . As a result of the policy fitness evaluation, described in details in <ref type="bibr" target="#b18">[19]</ref>, a result object encapsulating execution traces for the job is pushed in the resultQ. When all jobs have been processed, and all workers terminated, the master procedure is responsible for postprocessing the traces stored in the resultQ. To ensure determinism of this post-processing, results stored in the resultQ are first sorted in ascending job.id order.</p><p>The master and worker procedures used for parallelising the mutations of programs are similar to the one used for policy fitness evaluation, with the difference that jobs encapsulate programs instead of root teams.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">customisable Instruction Set</head><p>What are the motivations? In the seminal work on TPG <ref type="bibr" target="#b18">[19]</ref>, the instructions used in the programs are chosen exclusively among the following eight instructions: 4 binary operators {+, -, ×, ÷}, 3 mathematical functions {cos, ln, exp}, and 1 conditional statement res ← (a &lt; b)? -a : a. To further simplify the execution and mutation of programs, it was assumed that instructions only handle double operands.</p><p>As shown in related genetic programming works <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b36">36]</ref>, using a broader set of instructions with diverse data types can help improve the performance of learning agents, at the cost of longer training time. The extension of the instruction set used in the programs of the TPG has already been proposed in <ref type="bibr" target="#b16">[17]</ref>, where a set of instructions for 2D images operands is added, and in <ref type="bibr" target="#b11">[12]</ref>, with instructions accepting thirteen operands tailored for predicting properties of the learning environment. In Gegelati, both the number and types of operands, and the nature of instructions used in programs can be fully customised. Besides making the training more efficient for specific learning environments, this customisation feature may also be used to increase the efficiency of the TPG execution on specific hardware. Indeed, using an instruction set mirroring the instruction set of the architecture used for its execution may help increase the speed and the power efficiency of the TPG execution.</p><p>How are customisable instructions supported?</p><p>The support for customisable instructions within Gegelati is based on the three classes presented in Figure <ref type="figure" target="#fig_2">3</ref>. When creating a new training environment, a developer may create her own set of instructions, by creating new classes inheriting from the Instruction class. With the operandTypes attribute, each instruction declares the number and type of operands it accepts when calling its execute() method. Currently, to keep the management of registers simple during program execution, only double results can be produced by the execute() method. Each line of a program references an instruction from the set of available instructions, a destination register to store the result of its execution, and the addresses of operands to process, selected among all available data sources. The data sources accessible to the lines comprise both the registers used for storing instruction results, and the state of the learning environment. Data sources classes must inherit from the DataSource class which acts as a wrapper between the data and the program execution engine.</p><p>Procedure 3 presents the simplified pseudo-code for executing a program modelled with the classes from Figure <ref type="figure" target="#fig_2">3</ref>. The core of the mechanism supporting customisable instructions lies between lines 5 and 14 of</p><formula xml:id="formula_1">auto myInstruction = LambdaInstruction &lt; int , char [2] &gt;( []( int a , char [2] b ) -&gt; double { return a *( b [0] + b [1]) ;}) ;</formula><p>Listing 1: LambdaInstruction usage example Procedure 3. For each operand of each line, the algorithm checks whether the data sources can provide the requested operand type at the requested address. If the data type can be provided by the data sources at the requested address, the data is fetched from the data sources, and later used for executing the instruction of the current line of the program. Otherwise, the program execution is terminated, which does not occur in practice, as the operand data types are taken into consideration when performing program mutations in Gegelati. It is important to note that the getData() method may return data whose type differs from the native data type stored within the data source. For example, a data source storing screen pixels as char values can automatically return an equivalent double value, or even a neighbourhood of 3-by-3 pixels when an operand of type char <ref type="bibr" target="#b2">[3]</ref>[3] is requested.</p><p>To ease the creation of new instructions for each training environment, a utility class LambdaInstruction is proposed in Gegelati. The template class LambdaInstruction supports the creation of instructions for any number of operands, and for operands with primitive and non-primitive types as well as 1D and 2D C-Style arrays. A code snippet illustrating the creation of an instruction with the LambdaInstruction class is given in Listing 1. In this example, an instruction taking an int operand, and a 1D array of char is declared, using a simple C++ lambda function.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">The Secure-Gegelati real-time prototype</head><p>Secure-Gegelati is a TPG-based system that has been designed to perform intrusion detection on an IS.</p><p>In Section 5.1, we present the changes applied to TPGs to use them in an IDS. Section 5.2 details reinforcement learning in a NIDS context. Section 5.3 presents the embedded version of our system. Finally, we describe in Section 5.4 a practical use case example of the use of the probe.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">An Anomaly-based Intrusion Detection System</head><p>Secure-Gegelati is a TPG system that has been adapted in the following ways :</p><p>1. It is tailored to perform an inference task. To build Secure-Gegelati, the TPG has been adapted to classification problems by increasing the probabilities of mutations of programs, and increasing the diversity of explored solutions. In particular, the mutations that cause the change of the outgoing edges to a different action are useful to discover samples from all the represented classes, including rare intrusion classes. After modification, Secure-Gegelati is able to create a model for rare events. 2. It is tailored to produce classification with low falsepositive Rate (FPR) and continual learning. Originally, GEGELATI TPG is designed to solve RL challenges, i.e. to choose the actions to be applied to an environment so as to increase a reward. To formulate a classification problem as a RL challenge, the RL reward function must act as a loss function.</p><p>A NIDS requires primarily a high precision to get a low false alarm rate, and secondarily a high recall to detect as many intrusions as possible. To obtain this behaviour, we chose to reward the agent with the F1-score function. This reward helped to minimise the FPR.</p><p>To help in the detection of intrusions, we added a few instructions to the original TPG instruction set ({+, -, * , /, max, log, exp}). The added instructions help in the identification of constant values such as 80 or 8080 for HTTP ports number. max and -are used to determine whether a state value is superior to another.</p><p>Secure-Gegelati faces three mains problems:</p><p>learn in a highly imbalanced environment analyse network flow logs in real-time learn in a dynamic environment where new threats appear over time.</p><p>Intrusion detection is by nature a highly imbalanced problem because intrusions are rare. Secure-Gegelati is adapted for this problem of imbalanced learning by tuning the reward system. The rewards obtained when raising a correct alert is made artificially greater than the reward obtained when no alerts are rightfully raised. As a rule of thumb, we observe that the reward amount shall compensate for rare presence of the class in the dataset in a linear way. For example, the CICIDS-2017 dataset <ref type="bibr" target="#b42">[42]</ref> is composed of 83% of benign network flow logs and 17% of attack network flow logs. In order to mitigate this problem, an alert raised on an attacks is rewarded 5 times (83 /17 ) more than another action rightfully taken, making the class imbalance less problematic. As a rule of thumb, we observe that the reward amount shall compensate for rare presence of the class in the dataset in a linear way. Furthermore the ratio of deleted teams at the end of a generation has been set to 80%, less than in the original method, in order to keep knowledge of rarely occurring events by preserving enough root teams at the end of a generation.</p><p>To keep pace with the input data stream while training, we studied two training modes. The first one trains each root team with the same input stream of data and the second one stacks the network flow logs into a FIFO and different root teams unstack data through their learning. In the second training mode, each root team is trained with different data making the imbalanced data problem more important. The two methods will be compared in results sections on table <ref type="table">8</ref>.</p><p>Finally, in order to cope with changes on the network (see table <ref type="table" target="#tab_5">5</ref>) or with the appearance of novel threats (see table <ref type="table" target="#tab_6">6</ref> and<ref type="table" target="#tab_7">table 7</ref>), we altered the learning process in order to switch manually between training and inferring modes. This feature allows an analyst to update the probe when required. Figure <ref type="figure" target="#fig_3">4</ref> and<ref type="figure" target="#fig_4">5</ref> show the flow of data in both inferring and training mode.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">A reinforcement learning-based probe</head><p>We designed the Secure-Gegelati system as a RL probe. RL is bound to three properties:</p><p>taking actions on a dynamic environment evaluating the internal model (inferring) and exploring of the action space (training) learning through rewards.</p><p>Even though Secure-Gegelati is trained from a labelled database, it cannot be considered a supervised learning system. Secure-Gegelati takes action on a dynamic environment, as we include the input data itself directly in the environment. When an action is taken (even though it is a classification action), the environment changes and a new line of net-flow log is made available, enabling the agent to make new observations and update its action policy. As the Secure-Gegelati system is a continual learning system, its evaluation of the internal model is kept low to the benefit of a high exploration allowing the agent to fit to the novelty appearing on the dynamic environment. New attacks and threats can thus be detected. Finally, Secure-Gegelati reduces the need for supervision of the learning environment by rewarding the agent through batches. There is no immediate correction of the learning as in supervised learning, but instead a delayed score that is given to each agent root team at the end of a batch, fostering the selection of the best root teams for the cloning and the mutations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3">A real-time Embedded system</head><p>We use as a proof-of-concept target an octa-core Exynos 5410 SoC with four LITTLE ARM cores (A7) and four big ARM cores (A15), providing a set of 17 clock configurations from 200 MHz to 2.0 GHz for the A15 cores and from 200MHz to 1.4GHz for the A7 cores. The TPG graph being a highly dynamic and evolvable model, we choose to use this versatile platform and benefit from its high energy efficiency, optimises for running in handheld devices. This platform constitutes a portable baseline for future studies on hardware acceleration and accelerations of TPG programs on a SoC-FPGA is considered for future work.</p><p>Secure-Gegelati exploits the platform parallelism. As a low-power device, the number of cores used for the application can be adjusted at initialisation to keep pace with the incoming data flow while functioning at the lowest level of energy consumption. The clock frequency of the A7 cluster and the A15 cluster can be set at initialisation and updated at runtime to prevent the probe from being flooded.</p><p>The determinism of Gegelati helps in the validation of the embedded Secure-Gegelati probe on the octa-core Exynos 5410 SoC, ensuring that the training is occurring properly on the embedded platform.</p><p>To keep pace with the input stream of data in a training configuration, optimisations have been performed. At training, all root teams analyse the input data. The best root teams are selected at the end of the generation for replication and mutation. The least performing root teams are deleted. Online training in a real-time context forces us to analyse each network flow log only once. The best root team is not necessarily the one that will analyse a network flow log. The analysis during an online training of the probe is thus less performing than while inferring. The results shown in next sections include these modifications. Network flow logs arrive in a stack and each root team unstacks one log and analyses it. Each root team thus trains on different samples. The training step requires more memory, as several root team co-exist. In order to reduce the memory constraints on the embedded platform while training, the TPG parameters have been edited comparing with the state of the art parameters in <ref type="bibr" target="#b18">[19]</ref>. The number of root teams have been decreased (from 360 to 200) and the size of the training batches have been increased (1000 to 50k). The number of outgoing edges has been reduced (i.e. there are less programs in the graphs) and the program size have also been increased.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.4">Using Secure-Gegelati as an IDS</head><p>At initialisation, the analyst trains the Secure-Gegelati probe offline providing labelled data or online, using results from other signature-based or anomaly-based IDSs to provide the labels. After setting the parameters of the embedded device such as </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">Experimental Results</head><p>This section sums up the experimental results of the proposed protocol and evaluates the utility of the TPG algorithm in the design of a NIDS. We chose to compare the experimental results with the RF algorithm due to their high detection rates on the CIC-IDS 2017 dataset 2 <ref type="bibr" target="#b46">[46,</ref><ref type="bibr" target="#b52">52]</ref>.</p><p>As stated in <ref type="bibr" target="#b32">[32]</ref>, the CIC-IDS 2017 data-set is relevant as it includes most of the features such as realistic network configuration, realistic network traffic, labelled observations and different attacks that makes it useful for a real-world scenario simulating a small IS <ref type="bibr" target="#b20">[21,</ref><ref type="bibr" target="#b37">37]</ref>. We also use the CIC-IDS 2018 dataset as it is more realistic in terms of rareness of malicious events and as it sums up generated traffic on a network topology similar to a small-company. The data-sets are presented in more details in the section 6.1</p><p>We want to show here that the TPG is a relevant contribution to IDS design by measuring its performances on various experiments.</p><p>-Firstly, we measure its performances on the CIC-IDS 2017.</p><p>-Then, to demonstrate the adaptability of the Secure-Gegelati probe, we run the following experiments:</p><p>1. we measure the evaluation performances of a TPG previously trained on CIC-IDS 2017 on the CIC-IDS 2018 dataset and show that it performs better than a supervised learning algorithm. We use the RF algorithm for comparison. 2. We train a model without a category of attacks and study the reaction of Secure-Gegelati when we introduce this attack in the dataset. We show that Secure-Gegelati is able to evolve in order to discover the new attack and how it affects the learnt model. -We show that TPG is a relevant solution in a realtime context and that it is able to keep pace with the net flow of the CIC-IDS data-sets. -We show that the TPG-based IDS is useful on an embedded platform and measure its performance in terms of the number of analysis per seconds. Details on the embedded platform are available in section 5.3 -Finally, we measure the energy efficiency of the TPG-based NIDS on the embedded platform.</p><p>6.1 Data-sets</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1.1">The CIC-IDS 2017 dataset</head><p>The CIC-IDS 2017 dataset is one of the intrusion detection data-sets with the most diverse and realistic range of cyber-attacks. It addresses recent attacks that are not available in other dataset using a range of different computers, operating systems and security features <ref type="bibr" target="#b33">[33]</ref>. It has been generated using two networks. The first one, the victim Network, is a set of 5 servers and 10 computers using different operating systems (Windows, Linux and Macintosh) and necessary equipment such as routers, firewalls and switches. The attacker's network includes 4 computers using Windows 8.1 and Kali operating systems, one router and one switch. The CIC-IDS 2017 dataset is an IDS dataset that contains a week of generated traffic network frames. In this traffic can be found several anomalies labelled in 14 different categories. Most of the traffic is labelled as "normal traffic". The attacks are highly unbalanced but this disparity does not reflect a usual behaviour on an IS. Indeed, too many attacks are in it with respect to the amount of normal connections. The data used in the research is taken from the fully labelled CIC-IDS 2017 dataset. It sums up in a .csv file 78 network flow features from the captured network traffic (PCAP files). Information such as the destination port, the number of bytes per seconds or flags can be found in the dataset. Those information are represented on 32bits integers, floating-point numbers and Boolean. More information about the 78 extracted features have been defined and explained in the CICFlowMeter webpage <ref type="bibr" target="#b0">[1]</ref>.</p><p>The generated data stream reaches a peak of 170 connections/s during the Denial of Service attacks and the mean data stream is around 50 connections/sec. We assume that it is possible to generate the same network flow statistics as in CICIDS-2017 in real-time.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1.2">The CIC-IDS 2018 dataset</head><p>The CIC-IDS 2018 provides a similar dataset and is the result of a simulation of a much bigger IS. Indeed, the dataset generated comes from a set of 420 computers divided into 5 departments and thirty servers. The attacks are carried out from an "attacker" network composed of 50 machines using the Windows and Kali operating systems. The CIC-IDS 2018 dataset is composed of the same categories of attacks as the CIC-IDS 2017 dataset but with slight differences due to the modernisation of some attacks or the changes in operating system. The CIC-IDS 2018 dataset is more representative of a realistic small company-sized IS.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1.3">Adjustments</head><p>Some differences between the two data-sets required pre-processing to have consistent data for training and evaluation of the solution. In particular, the CIC-IDS 2018 dataset has two additional columns compared to the CIC-IDS 2017 dataset, and the CIC-IDS 2017 has information about header length whereas the other dataset does not.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1.4">CIC-IDS 2017 Analysis</head><p>The CIC-IDS 2017 paper <ref type="bibr" target="#b42">[42]</ref> gives NIDS results in terms of Precision, Recall and F1 Score using seven ML algorithms. Those results have been reported in Table <ref type="table" target="#tab_1">2</ref>. Among those 7 supervised learning algorithms, 4 stand out. Indeed, k-nearest neighbours (KNN), RF, Iterative Dichotomiser 3 (ID3) and the Quadratic Discriminant Analyser (QDA) reach F1-scores above 90%. The Adaboost, Multi-Layer Perceptron (MLP) and Naive-Bayes algorithm reach lower detection detection rates.</p><p>Even though the ID3 algorithm produced the best results, we use RF to compare our results. RF have results close to the ID3 algorithm and a multi-threaded low level implementation is available in the Ranger framework <ref type="bibr" target="#b51">[51]</ref>. This implementation is useful to try the RF on the embedded platform. A comparison metric for IDS is given by the Intrusion Detection Capability C ID <ref type="bibr" target="#b12">[13]</ref> based on information theory.</p><p>This C ID is the result of the computation of the mutual information (I( X; Y ) having X being the inputs log class of the IDS and Y being the classifications given by the IDS on the input logs X) normalised by the entropy of X: H( X). An IDS has to determine whether a log is normal or represents a threat. Secure-Gegelati can be seen as a deterministic function that acts on the input stream ( X) and produces the output Y ideally being identical to X classes (i.e. "Benign" or "Attack"). The number of guesses represents H( X) (i.e. the information content of X) and the number of correct guess represents I( X; Y ). More details on the C ID can be found in <ref type="bibr" target="#b12">[13]</ref>.</p><p>The higher the C ID is, the better the IDS performs. In practice, having a perfect model (F P R (False Positive Rate) and F N R (False Negative Rate) both value 0) leads to a C ID of 1. This value helps to choose the best trade-off between Precision and Recall.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2">Performance of the RF and the</head><p>TPG algorithms on the data-sets CIC-IDS 2017 and CIC-IDS 2018</p><p>We compare the algorithms in terms of accuracy, precision, recall (or sensitivity) and F1-score. It is more interesting in this study to maximise both Precision and Recall (high F1-score) as we want to detect as many attacks as possible (high recall) while generating as few false-positive alerts as possible (high precision).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2.1">RF implementation</head><p>We use an open-source c++ implementation of RF for high dimensional data ("Ranger") <ref type="bibr" target="#b51">[51]</ref> to compare with the TPG results. Table <ref type="table" target="#tab_2">3</ref> sums up the precision, recall, F1-score and accuracy of the RF algorithm. We can see that there are some differences with the results given in table 2 and in <ref type="bibr" target="#b52">[52]</ref> using a state of the art RF algorithm. Those difference are due to a custom RF parameters tuning to reach a 100% precision. Such a precision is preferable because in the intrusion detection field, false positive alerts are costly time consuming.  Comparing table <ref type="table" target="#tab_3">4</ref> with table <ref type="table" target="#tab_2">3</ref>, we can see that for a similar amount of training time the results of Secure-Gegelati are slightly better than the results of the RF system. On one side, RF obtains no false positive alerts (really saving for an analyst). On the other side, the recall of the method is quite low. The RF implementation of the NIDS misses 40% of the attacks. Secure-Gegelati is not able to detect attacks with a 100% precision but it is incorrect less than one percent of the time. On the other side, Secure-Gegelati is able to detect over 84% of the attacks of the dataset. The learning of the RF being conditioned by statistics, a fast RF-based IDS will difficultly be able to detect the least represented classes. For example, Heartbleed or SQL-injections represent less than 0.001 % of the data available in the CICIDS-2017 dataset. A RF-based probe able to detect those attacks could be designed by changing learning parameters and thus increasing the learning time of the probe. In real-world conditions, the network environment is dynamic. The network topology can change, new services or tools can be installed and new user-behaviour will be discovered. Even though switching from a tiny IS (represented by the CIC-IDS 2017 data-set) to a company-sized IS (CIC-IDS 2018), we want our algorithm to be robust and to keep detecting as many threats as possible (low false-negative rate / high recall) while not generating false-positive alarms.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.3">Adaptability of Gegelati</head><p>We sum up in Table <ref type="table" target="#tab_5">5</ref> the evaluation of trained RF algorithm and TPG algorithm for CIC-IDS 2018. The difference between the results presented in Table 5 comes from the learning mechanisms. In the first case, with RF, the learning is done by studying the whole dataset as well as selecting the discriminating variables and thresholds that permit a classification without false positives. When the available information changes, that threshold and variables become less accurate for the classification of the new net-flow logs and leads to more classification errors. We keep detecting 1 threat over 4 using a TPG as the programs activates by producing the highest return value. Even if the content of the information changes, the TPG selects the discriminating variable and applies a program on those. The sequence of programs leading to the raise of an alarm might still activate, even though the observed values changed.</p><p>Although the use of RF does not generate falsepositive alerts, it raises a mean of an alert every 1250 attacks whereas the TPG is raising a positive alert every 4 attacks with 95% of precision. We prefer the use of a TPG-based IDS as C ID (T P G) = 0.15 and C ID (RF ) = 4 × 10 -3 .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.3.2">Discovering new categories of attacks</head><p>To demonstrate the detection of novel attacks, we carefully created two new data sets from the CIC-IDS 2017 dataset. The first one is the CIC-IDS dataset without all the attacks labelled as "Port Scan" and the traffic in between Port Scan attacks. The second is the CIC-IDS dataset without all DoS Slow Loris, Dos slow HTTPtest attacks and Port Scans. We trained offline for 50 generations on both dataset and added the port scan log to the environment while Secure-Gegelati worked in inference mode. After a while, we decided to re-train the probe and wrote down the results after 1 generation and after 50 generations of training. Table <ref type="table" target="#tab_6">6</ref> shows the results of the experiment were Port Scan attacks are the novelty whereas table <ref type="table" target="#tab_7">7</ref> shows the results of the experiment where the DoS attacks (all categories) are added to the dataset.</p><p>We can see in Table <ref type="table" target="#tab_6">6</ref> that most attacks are less detected after 50 re-train generations than after 1 re-train Precision of the detection is kept high after the data-set change. Secure-Gegelati trains with the new connection summaries and its recall goes up (between the 80th and 100th generation). Due to the massive changes and to the already existing knowledge base, it needs more time to fit the environment and perform an accurate detection.</p><p>generation, marginally for some, significantly for others. This is partly due to the data imbalance described in table1 and also to the inner reward mechanism trying to prevent Secure-Gegelati to raise false positive alerts Before the modification of the dataset, Dos Hulk is the predominant attack class in the dataset. When Port Scans are added, it becomes the second most represented class, making it important for Secure-Gegelati to be detected. Port Scans are known to have a signature and thus it is more likely that Secure-Gegelati will come out with a good set of observation to detect them efficiently. Dos attacks are typically discovered through their volume which is something Secure-Gegelati is not doing. Secure-Gegelati can eventually come out with correct observations to reach back 100% of detection on the Dos-Hulk attack through an extended training. Tables <ref type="table" target="#tab_6">6</ref> and<ref type="table" target="#tab_7">7</ref> sum up that the TPG is agile enough to detect new threats as they come and can be retrained online to update its knowledge base and keep performing a precise detection without generating too many false-positive alerts. Secure-Gegelati tends to maximise its rewards and thus, attacks that have only a few samples in its dataset are more likely not to be detected.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.4">Real-time computation and energy efficiency of Secure-Gegelati</head><p>The training time T of the TPG is conditioned by several factors:</p><p>the number of samples or number of connections to analyse. A single policy takes a time T = t to analyse a challenge and takes T ≈ n × t to analyse n samples. The approximation is due to the depth of the chosen path. The more relay-teams descended while running the algorithm, the more time it takes to take an action. -The number of root-teams will have a direct influence on the training time. A root-team takes T ≈ n × t to train and R concurrent root-teams take T ≈ n × t × R.</p><p>To train the algorithm, we can choose to send the same sample to each root-team (M1). In this case, the analysis rate values: A rate (M 1) ≈ n T Or we can train the algorithm sending samples to root-teams as they come (M2) which results in a boost of the analysis rate: A rate (M 2) ≈ R×n T . We sum up in Table <ref type="table">8</ref> the rates obtained at different stages of the training on the CIC-IDS 2017 dataset using a batch size of 50000 samples. When training a TPG, a batch corresponds to the amount of actions taken before receiving a reward. Note that Table <ref type="table" target="#tab_3">4</ref> was obtained using the second method where samples are analysed as they come and the root-teams do not learn on the same samples.</p><p>As seen in Section 6.1, the CIC-IDS 2017 dataset produces a mean of 50 connections per seconds and peaks to 170 connections per second. The Secure-Table <ref type="table">8</ref>: Measuring the number of connections analysis per seconds using Secure-Gegelati. The first method (M1) trains a TPG by sending identical data to all teams whereas the second method (M2) stacks all the data in a buffer and teams unstack the data one at a time. In method M2, teams are training with different data through time. Gegelati algorithm is able to keep pace with the dataset using a X86 architecture. Through the generations, the graphs get more complex as relay teams are added. This is why the performance of the algorithm decreases with time.</p><p>As the peak number of connections per seconds on CIC-IDS values 170 connections per second, the embedded design must be efficient enough to perform online training at this rate. It is recalled that the four A7 cores of the Exynos 5410 platform can run at a maximal frequency of 1.4 GHz and the four A15 cores, at 2.0 GHz. We present in Table <ref type="table">9</ref> the training times on the Exynos 5410.</p><p>Table <ref type="table">9</ref>: Reachable number of connection analysis per seconds using the Exynos 5410. We effectuate the training on TPG using 200 root-teams and training over a batch of 500 connection summaries. The frequencies F A7 and F A15 are in GHz. The real-time constraint is satisfied on the embedded platform, even in the training phase. The table 9 shox that the rate reachable using Secure-Gegelati using 2 A7 cores at 300 MHz is superior to the connection rate on the CIC-IDS 2017 data-set.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Cores</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.4.1">Energy efficiency of the IDS</head><p>The x86 Intel Xeon W-2145 processor used for previous experiments in Section 6.3 has a 140 Watts peak thermal dissipation power (TDP). Using this architecture, Secure-Gegelati analyses up to 378k connections per seconds during training and 480k connections per second using the graph on inference. The Energy efficiency (E eff ) of the x86 platform is thus : E eff (Training) = 2 .7k connections/Watt and E eff (Inferring) = 3 .4k connections/Watt. As a comparison, the RF IDS has an energy efficiency of E eff (Inferring) = 400 connections/Watt using a x86 architecture on inference. We used the framework RANGER <ref type="bibr" target="#b51">[51]</ref>, a parallel framework to train RF for a fair comparison with a parallel TPG-based IDS. The Secure-Gegelati software has thus 8× the energy efficiency of RF-based IDS.</p><p>On the Exynos, the chosen solution (using 2 A7 cores at a 300MHz frequency) consumes 0.05 W. It results in an energy efficiency E eff (Inferring) = 200 kconnections.W -1 .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">Discussion</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.1">Learning algorithms</head><p>TPG and RF strongly differ in their learning mechanisms. While RF ingests all the training data at once to build a model, TPG progressively incorporate it and can recover from badly labelled data by feeding the system with new correctly labelled data. The training time and performance of RF is strongly impacted by the amount of data and the chosen learning parameters (tree depth, number of trees, etc) that need to be tuned. With a fine tuning of these parameters and large computation time, the models of predictions can be very accurate. The drawback of RF is however that they need to be trained and fine tuned from scratch to incorporate a new intrusion type.</p><p>TPG take a longer time than RF to converge to an accurate model, as their model results from trials and errors. Parameterization of the TPG agent is rather easy, the state of the art parameters used by Stephen Kelly <ref type="bibr" target="#b17">[18]</ref> suit most learning application and the sensitivity of the parameters is low. Light modifications of the parameters do not affect much the learning process but can bring interesting properties such as light graph structure or ability to detect rare events. However, the positive point is that TPG are able to detect attacks while training . Online training makes TPG more fit to detect novelty. Even if TPG take time to converge, they finally adapt and are able to detect new threats as they arrive.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.2">Limitations and Future Work</head><p>The Secure-Gegelati TPG algorithm in its current form is still limited for the observation of rare events. Indeed, rarely activated teams and programs may be deleted, which can cause issues in real world conditions for very rare intrusion detection. In the CICIDS 2017 dataset, there is 1 attack out of 5 connections so the test conditions overrate intrusions and the problem does not appear.</p><p>A false alarm rate of 0.2% is low but results in too many false alarms in the practical context of an IDS. The current detection system needs to be complemented with temporal filtering, exploiting the multiconnection nature of most intrusions, to reach the extremely low false alarm rates required in practice. This objective is kept as future work <ref type="bibr" target="#b16">[17]</ref>.</p><p>The study of Secure-Gegelati has proven that TPG are well suited for adaptive network intrusion detection. However, the Secure-Gegelati TPG model currently requires a large amount of labelled data to converge. As a future work, we intend to reduce the need of supervision by introducing semi-supervised learning into the TPG framework.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8">Conclusion</head><p>This paper has introduced the Secure-Gegelati learning-based real-time NIDS and has demonstrated the agility and energy efficiency reached by the resulting network probe. Secure-Gegelati combines several capabilities required in a NIDS: rare events detection with very few false alarms, as Secure-Gegelati detects more than 80% of the intrusions with a precision over 99%; high energy efficiency, as Secure-Gegelati is 8× more energy efficient than RF in the same inference conditions; high scalability as the speedup over 4 embedded cores reaches 96.9% of the optimum. Furthermore, thanks to the TPG intelligence, Secure-Gegelati is a flexible tool that adapts to novel threats. The system can anytime be switched into a training mode and be fed with new labelled benign and intrusion data to improve its capabilities. In order to advance on agile NIDS, our short term future work will concentrate on evaluating Secure Gegelati in a more realistic context than the one offered by CIC-IDS 2017 dataset. To this end, a sand-boxing infrastructure will be setup with normal traffic and attacks simulations.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Fig. 1 :Fig. 2 :</head><label>12</label><figDesc>Fig. 1: Semantics of the Tangled Program Graph (TPG)</figDesc><graphic coords="6,297.74,404.87,79.94,50.49" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Procedure 1 : 3 / 8 /</head><label>138</label><figDesc>EvaluateAllPolicies Input: TPG: G = Teams, Edges Data: PRNG: prng master Job queue: JobQ Result Queue: ResultQ 1 /* Prepare jobs */ 2 idx = 0 3 for each root ∈ G.Teams do 4 seed = prng master .getNumber() 5 job = { idx++, seed, root } 6 jobQ.push(job) 7 endfor 8 /* Start parallel threads */ 9 for i = 1 to Num PE -1 do 10 Spawn thread: Worker(G, JobQ, ResultQ) 11 end 12 Call Worker(G, JobQ, resultQ) 13 Join all threads 14 /* Post-Process Results and Trace */ 15 Sort ResultQ in result.jobId order 16 for each result ∈ resultQ do 17 Post-process result.trace // Archiving [19] Worker Input: TPG: G = Teams, Edges Job queue: JobQ Result queue: ResultQ Data: PRNG: prng worker Learning environment twin: LE 1 /* Poll for job */ 2 while JobQ.hasJob() do * Setup for policy evaluation */ 4 job = jobQ.getNextJob() 5 root = job.root 6 prng worker .reset(job.seed) 7 LE.reset(prng worker .getNumber()) * Evaluate policy fitness */ 9 trace = evaluate(G, root, LE, prng worker ) 10 result.jobId = job.id 11 result.trace = trace 12 resultQ.push(result) 13 end</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Fig. 3 :</head><label>3</label><figDesc>Fig. 3: Class diagrams of the data structures for customisable instructions.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Fig. 4 :</head><label>4</label><figDesc>Fig. 4: In inferring Mode, Secure-Gegelati monitors Bi-directional Network flow logs (Network flows logs from both the request and the response) provided by the "CIC Flow meter" software from the raw packets logs. The analyst receives potential alerts.</figDesc><graphic coords="11,312.59,89.45,207.27,153.41" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Fig. 5 :</head><label>5</label><figDesc>Fig. 5: When Secure-Gegelati is in training mode, it monitors network flows labelled by the analyst. The analyst labels this new training set of logs based on existing labels, expertise and other potential security mechanisms (such as signature-based ids) already setup on the network. The new training logs are added to the previous training set. Secure-Gegelati itself continues to raise alerts while training.</figDesc><graphic coords="12,60.98,89.45,200.34,131.99" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Fig. 6 :</head><label>6</label><figDesc>Fig. 6: After an initial training, the Secure-Gegelati IDS runs on the network. When a new intrusion is identified by the analyst, he updates the training set providing new labelled data and the probe is switched in training mode. New intrusion detection capability is checked on a validation set before turning the probe back in inferring mode.</figDesc><graphic coords="13,70.27,89.45,181.76,157.82" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>6. 3 . 1</head><label>31</label><figDesc>Inferring the previous models to the CIC-IDS 2018 data-set</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head>Fig. 7 :</head><label>7</label><figDesc>Fig. 7: Machine learning statistics using Secure-Gegelati on the CICIDS dataset depending on the total time (training + evaluation time. At generation 80, the analysed connections are switched to CIC-IDS 2018 instead of CIC-IDS 2017).Precision of the detection is kept high after the data-set change. Secure-Gegelati trains with the new connection summaries and its recall goes up (between the 80th and 100th generation). Due to the massive changes and to the already existing knowledge base, it needs more time to fit the environment and perform an accurate detection.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc>Table 1 sums up the different classes and the amount of data per class. Distribution of classes in the CIC-IDS dataset in net-flow logs. Each net-flow log corresponds to 78 fields and 312 Bytes of raw data.</figDesc><table><row><cell>Classes</cell><cell>Amount of net-flow logs</cell></row><row><cell>BENIGN</cell><cell>2.359.087</cell></row><row><cell>Dos Hulk</cell><cell>231.072</cell></row><row><cell>PortScan</cell><cell>158.930</cell></row><row><cell>DDoS</cell><cell>41.835</cell></row><row><cell>Dos Goldeneye</cell><cell>10.293</cell></row><row><cell>FTP-Patator</cell><cell>7.938</cell></row><row><cell>SSH-Patator</cell><cell>5.897</cell></row><row><cell>Dos Slowloris</cell><cell>5.796</cell></row><row><cell cols="2">Dos Slow-httptest 5.499</cell></row><row><cell>Bot</cell><cell>1.966</cell></row><row><cell>Brute force</cell><cell>1.507</cell></row><row><cell>XSS</cell><cell>652</cell></row><row><cell>Infiltration</cell><cell>36</cell></row><row><cell>SQL-Injection</cell><cell>21</cell></row><row><cell>Heartbleed</cell><cell>11</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 2 :</head><label>2</label><figDesc>Results on the CIC-IDS 2017 dataset using various ML Algorithms as reported in<ref type="bibr" target="#b42">[42]</ref> </figDesc><table><row><cell>Algorithm</cell><cell cols="3">Precision Recall F1-score</cell></row><row><cell>KN N</cell><cell>0.96</cell><cell>0.96</cell><cell>0.96</cell></row><row><cell>RF</cell><cell>0.98</cell><cell>0.97</cell><cell>0.97</cell></row><row><cell>ID3</cell><cell>0.98</cell><cell>0.98</cell><cell>0.98</cell></row><row><cell>Adaboost</cell><cell>0.77</cell><cell>0.84</cell><cell>0.77</cell></row><row><cell>M LP</cell><cell>0.77</cell><cell>0.83</cell><cell>0.76</cell></row><row><cell cols="2">N aive -Bayes 0.88</cell><cell>0.04</cell><cell>0.04</cell></row><row><cell>QDA</cell><cell>0.97</cell><cell>0.88</cell><cell>0.92</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 3 :</head><label>3</label><figDesc>Machine learning statistics using RF on the CICIDS dataset for different training time.</figDesc><table><row><cell cols="5">Time (s) Accuracy Precision Recall F1-score</cell></row><row><cell>183</cell><cell>94.5</cell><cell>97.6</cell><cell>74.1</cell><cell>84.3</cell></row><row><cell>539</cell><cell>95.5</cell><cell>99.7</cell><cell>77.3</cell><cell>87.1</cell></row><row><cell>1867</cell><cell>94.8</cell><cell>99.8</cell><cell>73.9</cell><cell>84.9</cell></row><row><cell>3543</cell><cell>92.2</cell><cell>100.0</cell><cell>60.3</cell><cell>75.3</cell></row><row><cell cols="4">6.2.2 Using the TPG to analyse CICIDS</cell><cell></cell></row><row><cell cols="5">Using the Gegelati framework gives good results in</cell></row><row><cell cols="5">terms of accuracy, precision, recall and F1-score as</cell></row><row><cell>shown on</cell><cell></cell><cell></cell><cell></cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 4 .</head><label>4</label><figDesc>The learning curves of the TPG highlight the discovery of new properties between the generations. As the reward function is based on the F1score, precision (or recall) can drop if it leads to a final increase of the F1-score.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head>Table 4 :</head><label>4</label><figDesc>Machine learning statistics using Secure-Gegelati on the CICIDS dataset depending on the total time (training + evaluation time).</figDesc><table><row><cell cols="5">Comparing with table 3, we can see that for a sim-</cell></row><row><cell cols="5">ilar amount of time, the performances of both algo-</cell></row><row><cell cols="5">rithms are close. In particular, we are not able to reach</cell></row><row><cell cols="5">a 100% precision with Secure-Gegelati but the high</cell></row><row><cell cols="3">recall makes it competitive.</cell><cell></cell><cell></cell></row><row><cell cols="5">Time (s) Accuracy Precision Recall F1-score</cell></row><row><cell>363</cell><cell>86.27</cell><cell>66.65</cell><cell>63.05</cell><cell>64.80</cell></row><row><cell>720</cell><cell>91.89</cell><cell>97.10</cell><cell>61.33</cell><cell>75.18</cell></row><row><cell>1701</cell><cell>94.74</cell><cell>96.72</cell><cell>76.32</cell><cell>85.31</cell></row><row><cell>3847</cell><cell>96.68</cell><cell>99.12</cell><cell>84.18</cell><cell>91.04</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_5"><head>Table 5 :</head><label>5</label><figDesc>Inferring models previously trained on the CIC-IDS 2017 data-set on the CIC-IDS 2018 data-set</figDesc><table><row><cell cols="5">Algorithm Accuracy Precision Recall F1-score</cell></row><row><cell>RF</cell><cell>70.58</cell><cell>100</cell><cell>0.08</cell><cell>0.16</cell></row><row><cell>T P G</cell><cell>91.0</cell><cell>95.3</cell><cell>24.5</cell><cell>39.0</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_6"><head>Table 6 :</head><label>6</label><figDesc>This table sums up the per class true positives when adding Port Scan attacks to the training set after 50 generations. The inferring results are very different from the results of the offline training due to the change of the evaluation set (required to insert the port scan attacks in the dataset). Note that without knowing anything about Port-Scans, the TPG model is able to raise an alert for 40% of them. Retraining causes an instant drop of the True Negative Rate and an instant raise of the True Positive Rate (TPR). Secure-Gegelati tends to fit the most frequently occurring data of the dataset and thus becomes really good at detecting port-scan while keeping a low false-positive rate. × represents irrelevant data as they are not part of the evaluation set. Some attacks were not present in both evaluation sets or never detected.</figDesc><table><row><cell>class</cell><cell>train</cell><cell cols="2">Inferring re-train</cell><cell>re-train</cell></row><row><cell></cell><cell>(50 gen)</cell><cell></cell><cell>(1 gen)</cell><cell>(50 gen)</cell></row><row><cell>BENIGN</cell><cell>96.6</cell><cell>95.7</cell><cell>78.9</cell><cell>99.8</cell></row><row><cell>XSS</cell><cell>4.8</cell><cell>5.6</cell><cell>5.6</cell><cell>0</cell></row><row><cell>DoS slow</cell><cell>29.1</cell><cell>42.6</cell><cell>38.0</cell><cell>36.4</cell></row><row><cell>Loris</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Dos slow</cell><cell>58.9</cell><cell>66.0</cell><cell>63.8</cell><cell>59.6</cell></row><row><cell>HTTP-test</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Dos</cell><cell>94.8</cell><cell>100</cell><cell>100</cell><cell>76.9</cell></row><row><cell>hulk</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Port Scan</cell><cell>×</cell><cell>42.6</cell><cell>99.4</cell><cell>99.3</cell></row><row><cell>TPR</cell><cell>90.9</cell><cell>38.9</cell><cell>87.3</cell><cell>86</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_7"><head>Table 7 :</head><label>7</label><figDesc>This table sums up the per class true positives when adding Dos attacks to the training set after 50 generations of offline training. The inferring results are very different from the results of the offline training due to the change of the evaluation set (required to insert the DoS attacks in the dataset). This time the model is not able to detect any DoS attack in inferring mode. Retraining causes an instant drop of the True Negative Rate. Secure-Gegelati tends to fit the most present data of the dataset and thus fits to detect Dos Slow-Loris and DoS Slow-HTTP test while keeping a low false-positive rate. × represents irrelevant data as they are not part of the evaluation set. Some attacks were not present in both evaluation sets or never detected. The data imbalance is described in Table1</figDesc><table><row><cell>class</cell><cell>train</cell><cell cols="2">Inferring re-train</cell><cell>re-train</cell></row><row><cell></cell><cell>(50 gen)</cell><cell></cell><cell>(1 gen)</cell><cell>(50 gen)</cell></row><row><cell>BENIGN</cell><cell>100</cell><cell>100</cell><cell>86.1</cell><cell>99.9</cell></row><row><cell cols="2">Brute-force 75.0</cell><cell>67.5</cell><cell>67.5</cell><cell>67.5</cell></row><row><cell>XSS</cell><cell>86.2</cell><cell>94.4</cell><cell>94.4</cell><cell>94.4</cell></row><row><cell>DoS slow</cell><cell>×</cell><cell>0.0</cell><cell>20.9</cell><cell>20.9</cell></row><row><cell>Loris</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Dos slow</cell><cell>×</cell><cell>0.0</cell><cell>59.6</cell><cell>59.6</cell></row><row><cell>HTTP-test</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Port Scan</cell><cell>×</cell><cell>0.0</cell><cell>99.7</cell><cell>99.4</cell></row><row><cell>TPR</cell><cell>48.2</cell><cell>10.3</cell><cell>96.3</cell><cell>96.1</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_9"><head></head><label></label><figDesc>F A7 F A15 Train (s) A rate</figDesc><table><row><cell>4A7 + 4A15</cell><cell>1.4</cell><cell>2.0</cell><cell>7.52</cell><cell>13294</cell></row><row><cell>1A7 + 4A15</cell><cell>1.4</cell><cell>2.0</cell><cell>10.49</cell><cell>9533</cell></row><row><cell>4A7</cell><cell>1.4</cell><cell>-</cell><cell>22.88</cell><cell>4371</cell></row><row><cell>3A7</cell><cell>0.2</cell><cell>-</cell><cell>239.21</cell><cell>418</cell></row><row><cell>2A7</cell><cell>0.3</cell><cell>-</cell><cell>258.00</cell><cell>387</cell></row><row><cell>2A7</cell><cell>0.2</cell><cell>-</cell><cell>614.39</cell><cell>162</cell></row><row><cell>1A7</cell><cell>0.2</cell><cell>-</cell><cell>1286.58</cell><cell>77</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1" xml:id="foot_0"><p>If a team is visited several times, previously taken edges are ignored to avoid infinite loops.</p></note>
+		</body>
+		<back>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m">Intrusion Detection Evaluation Dataset</title>
+		<imprint>
+			<publisher>CIC-IDS</publisher>
+			<date type="published" when="2017-09-22">2017. 22-September-2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<title level="m" type="main">Anomaly-based Intrusion Detection in Industrial Data with SVM and Random Forests</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Simon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sapna</forename><surname>Duque Anton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hans</forename><surname>Sinha</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Dieter Schotten</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1907.10374[cs</idno>
+		<idno>arXiv: 1907.10374</idno>
+		<imprint>
+			<date type="published" when="2019-07">July 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">A domain independent genetic programming approach to automatic feature extraction for image classification</title>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Atkins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kourosh</forename><surname>Neshatian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mengjie</forename><surname>Zhang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IEEE Congress of Evolutionary Computation (CEC)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2011">2011. 2011</date>
+			<biblScope unit="page" from="238" to="245" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">The arcade learning environment: An evaluation platform for general agents</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">G</forename><surname>Bellemare</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Naddaf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Veness</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Bowling</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Artificial Intelligence Research</title>
+		<imprint>
+			<biblScope unit="volume">47</biblScope>
+			<biblScope unit="page" from="253" to="279" />
+			<date type="published" when="2013-06">jun 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<monogr>
+		<title level="m" type="main">Next Generation Intrusion Detection: Autonomous Reinforcement Learning of Network Attacks</title>
+		<author>
+			<persName><forename type="first">James</forename><surname>Cannady</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2000">2000</date>
+			<biblScope unit="page">12</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">A revised taxonomy for intrusion-detection systems</title>
+		<author>
+			<persName><forename type="first">Hervé</forename><surname>Debar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marc</forename><surname>Dacier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andreas</forename><surname>Wespi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annales Des Télécommunications</title>
+		<imprint>
+			<biblScope unit="volume">55</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page" from="361" to="378" />
+			<date type="published" when="2000-07">July 2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">An Intrusion-Detection Model</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">E</forename><surname>Denning</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Software Engineering</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="222" to="232" />
+			<date type="published" when="1987-02">February 1987</date>
+			<publisher>IEEE Transactions on Software Engineering</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Gegelati: Lightweight artificial intelligence through generic and evolvable tangled program graphs</title>
+		<author>
+			<persName><forename type="first">Karol</forename><surname>Desnos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicolas</forename><surname>Sourbier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pierre-Yves</forename><surname>Raumer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Olivier</forename><surname>Gesny</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maxime</forename><surname>Pelcat</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Workshop on Design and Architectures for Signal and Image Processing</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="35" to="43" />
+		</imprint>
+	</monogr>
+	<note>14th edition</note>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">DB-Kmeans:An Intrusion Detection Algorithm Based on DBSCAN and K-means</title>
+		<author>
+			<persName><forename type="first">Gangsong</forename><surname>Dong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yi</forename><surname>Jin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shiwen</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wencui</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhuo</forename><surname>Tao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shaoyong</forename><surname>Guo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">20th Asia-Pacific Network Operations and Management Symposium</title>
+		<imprint>
+			<publisher>APNOMS)</publisher>
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">On the combination of genetic fuzzy systems and pairwise learning for improving detection rates on Intrusion Detection Systems</title>
+		<author>
+			<persName><forename type="first">Salma</forename><surname>Elhag</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alberto</forename><surname>Fernández</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abdullah</forename><surname>Bawakid</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Saleh</forename><surname>Alshomrani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Francisco</forename><surname>Herrera</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Expert Systems with Applications: An International Journal</title>
+		<imprint>
+			<biblScope unit="volume">42</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="193" to="202" />
+			<date type="published" when="2015-01">January 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<title level="m" type="main">Detecting and preventing attacks using network intrusion detection systems</title>
+		<author>
+			<persName><forename type="first">Meera</forename><surname>Gandhi</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Srivasta</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Cbwar: Classification de binaires windows via apprentissage par renforcement</title>
+		<author>
+			<persName><forename type="first">Olivier</forename><surname>Gesny</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pierre-Marie</forename><surname>Satre</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julien</forename><surname>Roussel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Computer &amp; Electronics Security Applications Rendez-vous (C&amp;ESAR)</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<title level="m" type="main">Measuring intrusion detection capability: an information-theoretic approach</title>
+		<author>
+			<persName><forename type="first">Guofei</forename><surname>Gu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Prahlad</forename><surname>Fogla</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Dagon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wenke</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Boris</forename><surname>Skoric</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2006-01">January 2006</date>
+			<biblScope unit="page" from="90" to="101" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">False alarm minimization techniques in signature-based intrusion detection systems: A survey</title>
+		<author>
+			<persName><forename type="first">Neminath</forename><surname>Hubballi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vinoth</forename><surname>Suryanarayanan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computer Communications</title>
+		<imprint>
+			<biblScope unit="volume">49</biblScope>
+			<biblScope unit="page" from="1" to="17" />
+			<date type="published" when="2014-08">August 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">P</forename><surname>Kaelbling</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">L</forename><surname>Littman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">W</forename><surname>Moore</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:cs/9605103</idno>
+		<idno>arXiv: cs/9605103</idno>
+		<title level="m">Reinforcement Learning: A Survey</title>
+		<imprint>
+			<date type="published" when="1996-04">April 1996</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<title level="m" type="main">Scaling Genetic Programming to Challenging Reinforcement Tasks through Emergent Modularity</title>
+		<author>
+			<persName><forename type="first">Stephen</forename><surname>Kelly</surname></persName>
+		</author>
+		<idno>Accepted: 2018-06-21T16:04:28Z</idno>
+		<imprint>
+			<date type="published" when="2018-06">June 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<title level="m" type="main">Temporal Memory Sharing in Visual Reinforcement Learning</title>
+		<author>
+			<persName><forename type="first">Stephen</forename><surname>Kelly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wolfgang</forename><surname>Banzhaf</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<publisher>Springer International Publishing</publisher>
+			<biblScope unit="page" from="101" to="119" />
+			<pubPlace>Cham</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Multi-task learning in Atari video games with emergent tangled program graphs</title>
+		<author>
+			<persName><forename type="first">Stephen</forename><surname>Kelly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Malcolm</forename><forename type="middle">I</forename><surname>Heywood</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Genetic and Evolutionary Computation Conference</title>
+		<meeting>the Genetic and Evolutionary Computation Conference</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Emergent Policy Discovery for Visual Reinforcement Learning Through Tangled Program Graphs: A Tutorial</title>
+		<author>
+			<persName><forename type="first">Stephen</forename><surname>Kelly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><forename type="middle">J</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Malcolm</forename><forename type="middle">I</forename><surname>Heywood</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Genetic Programming Theory and Practice XVI, Genetic and Evolutionary Computation</title>
+		<editor>
+			<persName><forename type="first">Wolfgang</forename><surname>Banzhaf</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Lee</forename><surname>Spector</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Leigh</forename><surname>Sheneman</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Cham</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer International Publishing</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="37" to="57" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Intrusion detection: a brief history and overview</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Richard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Giovanni</forename><surname>Kemmerer</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Vigna</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computer</title>
+		<imprint>
+			<biblScope unit="volume">35</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="27" to="30" />
+			<date type="published" when="2002">2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Survey of intrusion detection systems: techniques, datasets and challenges</title>
+		<author>
+			<persName><forename type="first">Ansam</forename><surname>Khraisat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Iqbal</forename><surname>Gondal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Vamplew</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joarder</forename><surname>Kamruzzaman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Cybersecurity</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">20</biblScope>
+			<date type="published" when="2019-07">July 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Deep learning in intrusion detection perspective: Overview and further challenges</title>
+		<author>
+			<persName><forename type="first">Kwangjo</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Muhamad</forename><surname>Erza</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aminanto</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2017 International Workshop on Big Data and Information Security (IWBIS)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="5" to="10" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Wireless Sensor Network-Based Hybrid Intrusion Detection System on Feature Extraction Deep Learning and Reinforcement Learning Techniques</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">C</forename><surname>Krishnachalitha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Priya</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Intelligent Computing and Innovation on Data Science, Lecture Notes in Networks and Systems</title>
+		<editor>
+			<persName><forename type="first">Sheng-Lung</forename><surname>Peng</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Le</forename><surname>Hoang Son</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">G</forename><surname>Suseendran</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">D</forename><surname>Balaganesh</surname></persName>
+		</editor>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="335" to="341" />
+		</imprint>
+	</monogr>
+	<note>Singapore</note>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Imagenet classification with deep convolutional neural networks</title>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Krizhevsky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ilya</forename><surname>Sutskever</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Geoffrey</forename><forename type="middle">E</forename><surname>Hinton</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Advances in Neural Information Processing Systems</title>
+		<editor>
+			<persName><forename type="first">F</forename><surname>Pereira</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">C</forename><forename type="middle">J C</forename><surname>Burges</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">L</forename><surname>Bottou</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">K</forename><forename type="middle">Q</forename><surname>Weinberger</surname></persName>
+		</editor>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="1097" to="1105" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Curran Associates</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Inc</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Using Decision Trees to Improve Signature-Based Intrusion Detection</title>
+		<author>
+			<persName><forename type="first">Christopher</forename><surname>Kruegel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Toth</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Recent Advances in Intrusion Detection</title>
+		<title level="s">Lecture Notes in Computer Science</title>
+		<editor>
+			<persName><forename type="first">Giovanni</forename><surname>Vigna</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Christopher</forename><surname>Kruegel</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Erland</forename><surname>Jonsson</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Berlin, Heidelberg</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2003">2003</date>
+			<biblScope unit="page" from="173" to="191" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<title level="m" type="main">Using genetic algorithm for network intrusion detection</title>
+		<author>
+			<persName><forename type="first">Wei</forename><surname>Li</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2004-01">January 2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Intrusion detection system: A comprehensive review</title>
+		<author>
+			<persName><forename type="first">Hung-Jen</forename><surname>Liao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chun-Hung Richard</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ying-Chih</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kuang-Yuan</forename><surname>Tung</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Network and Computer Applications</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="16" to="24" />
+			<date type="published" when="2013-01">January 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Application of deep reinforcement learning to intrusion detection for supervised problems</title>
+		<author>
+			<persName><forename type="first">Manuel</forename><surname>Lopez-Martin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Belen</forename><surname>Carro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Antonio</forename><surname>Sanchez-Esguevillas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Expert Systems with Applications</title>
+		<imprint>
+			<biblScope unit="volume">141</biblScope>
+			<biblScope unit="page">112963</biblScope>
+			<date type="published" when="2020-03">March 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Network Intrusion Detection System Embedded on a Smart Sensor</title>
+		<author>
+			<persName><forename type="first">Francisco</forename><surname>Maciá-Pérez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Francisco</forename><forename type="middle">J</forename><surname>Mora-Gimeno</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Diego</forename><surname>Marcos-Jorquera</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juan</forename><surname>Antonio Gil-Martínez-Abarca</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Héctor</forename><surname>Ramos-Morillo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Iren</forename><surname>Lorenzo-Fonseca</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Industrial Electronics</title>
+		<imprint>
+			<biblScope unit="volume">58</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="722" to="732" />
+			<date type="published" when="2011-03">March 2011</date>
+			<publisher>IEEE Transactions on Industrial Electronics</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<monogr>
+		<title level="m" type="main">Anomaly-Based Intrusion Detection System for Embedded Devices on Internet</title>
+		<author>
+			<persName><forename type="first">Deepak</forename><surname>Mehta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alie</forename><surname>El-Din</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Menouer</forename><surname>Mady</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Devu</forename><surname>Boubekeur</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shila</forename><surname>Manikantan</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Artificial intelligence and the future of cybersecurity</title>
+		<author>
+			<persName><forename type="first">Benoit</forename><surname>Morel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM Conference on Computer and Communications Security</title>
+		<meeting>the ACM Conference on Computer and Communications Security</meeting>
+		<imprint>
+			<date type="published" when="2011-10">October 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">A holistic review of Network Anomaly Detection Systems: A comprehensive survey</title>
+		<author>
+			<persName><forename type="first">Nour</forename><surname>Moustafa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jiankun</forename><surname>Hu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jill</forename><surname>Slay</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Network and Computer Applications</title>
+		<imprint>
+			<biblScope unit="volume">128</biblScope>
+			<biblScope unit="page" from="33" to="55" />
+			<date type="published" when="2019-02">February 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">A detailed analysis of CICIDS2017 dataset for designing Intrusion Detection Systems</title>
+		<author>
+			<persName><forename type="first">Ranjit</forename><surname>Panigrahi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Samarjeet</forename><surname>Borah</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Panigrahi | International Journal of Engineering &amp; Technology</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Genetic algorithms in intrusion detection systems: A survey</title>
+		<author>
+			<persName><forename type="first">Gowher</forename><surname>Parry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kumar</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Innovation and Applied Studies</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page" from="233" to="240" />
+			<date type="published" when="2014-01">January 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Cyber-threat evolution: the past year</title>
+		<author>
+			<persName><forename type="first">Costin</forename><surname>Raiu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computer Fraud &amp; Security</title>
+		<imprint>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="5" to="8" />
+			<date type="published" when="2012-03">2012. March 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Automl-zero: Evolving machine learning algorithms from scratch</title>
+		<author>
+			<persName><forename type="first">Esteban</forename><surname>Real</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chen</forename><surname>Liang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">R</forename><surname>So</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Quoc</forename><forename type="middle">V</forename><surname>Le</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 37th International Conference on Intelligent User Interfaces</title>
+		<meeting>the 37th International Conference on Intelligent User Interfaces</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">A Survey of Network-based Intrusion Detection Data Sets</title>
+		<author>
+			<persName><forename type="first">Markus</forename><surname>Ring</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sarah</forename><surname>Wunderlich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Deniz</forename><surname>Scheuring</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dieter</forename><surname>Landes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andreas</forename><surname>Hotho</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1903.02460</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Computers &amp; Security</title>
+		<imprint>
+			<biblScope unit="volume">86</biblScope>
+			<biblScope unit="page" from="147" to="167" />
+			<date type="published" when="2019-09">September 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Enhanced intrusion detection system via agent clustering and classification based on outlier detection</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Sandosh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Govindasamy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Akila</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Peer-to-Peer Networking and Applications</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="1038" to="1045" />
+			<date type="published" when="2020-05">May 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<monogr>
+		<title level="m" type="main">Guide to Intrusion Detection and Prevention Systems (IDPS)</title>
+		<author>
+			<persName><forename type="first">Karen</forename><surname>Scarfone</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Mell</surname></persName>
+		</author>
+		<idno>SP) 800-94</idno>
+		<imprint>
+			<date type="published" when="2007-02">February 2007</date>
+		</imprint>
+		<respStmt>
+			<orgName>National Institute of Standards and Technology</orgName>
+		</respStmt>
+	</monogr>
+	<note type="report_type">Technical Report NIST Special Publication</note>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Multi-agent Reinforcement Learning for Intrusion Detection</title>
+		<author>
+			<persName><forename type="first">Arturo</forename><surname>Servin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Kudenko</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Adaptive Agents and Multi-Agent Systems III. Adaptation and Multi-Agent Learning</title>
+		<title level="s">Lecture Notes in Computer Science</title>
+		<editor>
+			<persName><forename type="first">Karl</forename><surname>Tuyls</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Ann</forename><surname>Nowe</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Zahia</forename><surname>Guessoum</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Daniel</forename><surname>Kudenko</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Berlin, Heidelberg</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2008">2008</date>
+			<biblScope unit="page" from="211" to="223" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Deep Reinforcement Learning based Intrusion Detection System for Cloud Infrastructure</title>
+		<author>
+			<persName><forename type="first">Kamalakanta</forename><surname>Sethi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rahul</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nishant</forename><surname>Prajapati</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Padmalochan</forename><surname>Bera</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2020 International Conference on COMmunication Systems NETworkS (COMSNETS)</title>
+		<imprint>
+			<date type="published" when="2020-01">January 2020</date>
+			<biblScope unit="page" from="1" to="6" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Toward Generating a New Intrusion Detection Dataset and Intrusion Traffic Characterization</title>
+		<author>
+			<persName><forename type="first">Iman</forename><surname>Sharafaldin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Arash</forename><surname>Habibi Lashkari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ali</forename><forename type="middle">A</forename><surname>Ghorbani</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ICISSP</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Application of Genetic Algorithms for Detecting Anomaly in Network Intrusion Detection Systems</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">G</forename><surname>Srinivasa</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Advances in Computer Science and Information Technology. Networks and Communications, Lecture Notes of the Institute for Computer Sciences, Social Informatics and Telecommunications Engineering</title>
+		<editor>
+			<persName><forename type="first">Natarajan</forename><surname>Meghanathan</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Nabendu</forename><surname>Chaki</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Dhinaharan</forename><surname>Nagamalai</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Berlin, Heidelberg</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="582" to="591" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Issue 6</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Suresh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ventachalam</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IJSRET</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<date type="published" when="2019-11">Nov-Dec-2019. November 2019</date>
+			<publisher>Library Catalog</publisher>
+		</imprint>
+	</monogr>
+	<note>ijsret.com</note>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title/>
+	</analytic>
+	<monogr>
+		<title level="j">ISTR</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+		<respStmt>
+			<orgName>Symantec ; Symantec</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<monogr>
+		<title level="m" type="main">Intrusion Detection System with Recursive Feature Elimination by Using Random Forest and Deep Learning Classifier -IEEE Conference Publication</title>
+		<author>
+			<persName><forename type="first">Serpil</forename><surname>Ustebay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zeynep</forename><surname>Turgut</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Muhammed</forename><surname>Ali Aydin</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2019-01">January 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<monogr>
+		<title level="m" type="main">COMPUTER SECURITY AND THE INTERNET: tools and jewels</title>
+		<author>
+			<persName><forename type="first">Paul C</forename><surname>Van Oorschot</surname></persName>
+		</author>
+		<idno>OCLC: 1120697311</idno>
+		<editor>, S.l.</editor>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<publisher>SPRINGER NATURE</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">BigFlow: Real-time and reliable anomalybased intrusion detection for high-speed networks</title>
+		<author>
+			<persName><forename type="first">Eduardo</forename><surname>Viegas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Altair</forename><surname>Santin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alysson</forename><surname>Bessani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nuno</forename><surname>Neves</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Future Generation Computer Systems</title>
+		<imprint>
+			<biblScope unit="volume">93</biblScope>
+			<biblScope unit="page" from="473" to="485" />
+			<date type="published" when="2019-04">April 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">Towards an Energy-Efficient Anomaly-Based Intrusion Detection Engine for Embedded Systems</title>
+		<author>
+			<persName><forename type="first">Eduardo</forename><surname>Viegas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Altair</forename><forename type="middle">O</forename><surname>Santin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">André</forename><surname>França</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ricardo</forename><surname>Jasinski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Volnei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luiz</forename><forename type="middle">S</forename><surname>Pedroni</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Oliveira</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Computers</title>
+		<imprint>
+			<biblScope unit="volume">66</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="163" to="177" />
+			<date type="published" when="2017-01">January 2017</date>
+		</imprint>
+	</monogr>
+	<note>Conference Name: IEEE Transactions on Computers</note>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<monogr>
+		<title level="m" type="main">High-Performance Embedded Computing</title>
+		<author>
+			<persName><forename type="first">Marilyn</forename><surname>Wolf</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<publisher>Elsevier</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">ranger: A Fast Implementation of Random Forests for High Dimensional Data in C++ and R</title>
+		<author>
+			<persName><forename type="first">Marvin</forename><forename type="middle">N</forename><surname>Wright</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andreas</forename><surname>Ziegler</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Statistical Software</title>
+		<imprint>
+			<biblScope unit="volume">77</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="17" />
+			<date type="published" when="2017-03">March 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<monogr>
+		<title level="m" type="main">Improving AdaBoost-based Intrusion Detection System (IDS) Performance on CIC IDS</title>
+		<author>
+			<persName><forename type="first">Arif</forename><surname>Yulanto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Parman</forename><surname>Sukarno</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anggis</forename><surname>Suwastika</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017">2017. 2019</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Dataset -IOPscience</note>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<monogr>
+		<title level="m" type="main">Using Internal Sensors For Computer Intrusion Detection</title>
+		<author>
+			<persName><forename type="first">Diego</forename><surname>Zamboni</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2001-08">August 2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

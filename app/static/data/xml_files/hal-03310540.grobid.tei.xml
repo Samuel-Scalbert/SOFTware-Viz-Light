@@ -8,17 +8,17 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 			<titleStmt>
 				<title level="a" type="main">Reproducible Performance Optimization of Complex Applications on the Edge-to-Cloud Continuum</title>
 				<funder>
-					<orgName type="full">HPC-BigData Inria Challenge (IPL)</orgName>
+					<orgName type="full">CNRS</orgName>
 				</funder>
-				<funder ref="#_PvTmqTM">
+				<funder ref="#_kE2v4Tg">
 					<orgName type="full">Agence Nationale de la Recherche</orgName>
 					<orgName type="abbreviated">ANR</orgName>
 				</funder>
 				<funder>
-					<orgName type="full">Inria</orgName>
+					<orgName type="full">HPC-BigData Inria Challenge (IPL)</orgName>
 				</funder>
 				<funder>
-					<orgName type="full">CNRS</orgName>
+					<orgName type="full">Inria</orgName>
 				</funder>
 			</titleStmt>
 			<publicationStmt>
@@ -126,14 +126,14 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 							<date/>
 						</imprint>
 					</monogr>
-					<idno type="MD5">EDF42A1B16DFD58CFF177D44C1BB9EF3</idno>
+					<idno type="MD5">85F89A2587169ED8DADF572B97376986</idno>
 					<idno type="DOI">10.1109/Cluster48925.2021.00043</idno>
 				</biblStruct>
 			</sourceDesc>
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.0" ident="GROBID" when="2024-04-12T14:45+0000">
+				<application version="0.8.0" ident="GROBID" when="2025-10-23T13:12+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<ref target="https://github.com/kermitt2/grobid"/>
 				</application>
@@ -194,7 +194,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <div><head>ACKNOWLEDGMENTS</head><p>This work was funded by <rs type="funder">Inria</rs> through the <rs type="funder">HPC-BigData Inria Challenge (IPL)</rs> and by <rs type="funder">French ANR OverFlow</rs> project (<rs type="grantNumber">ANR-15-CE25-0003</rs>). Experiments presented in this paper were carried out using the Grid'5000 testbed, supported by a scientific interest group hosted by <rs type="funder">Inria</rs> and including <rs type="funder">CNRS</rs>, RENATER and several Universities as well as other organizations. We also would like to thank <rs type="person">Romain Egele</rs>, <rs type="person">Jaehoon Koo</rs>, <rs type="person">Prasanna Balaprakash</rs>, and <rs type="person">Orcun Yildiz</rs> from <rs type="affiliation">Argonne National Laboratory</rs> for their support.</p></div>
 			</div>
 			<listOrg type="funding">
-				<org type="funding" xml:id="_PvTmqTM">
+				<org type="funding" xml:id="_kE2v4Tg">
 					<idno type="grant-number">ANR-15-CE25-0003</idno>
 				</org>
 			</listOrg>
