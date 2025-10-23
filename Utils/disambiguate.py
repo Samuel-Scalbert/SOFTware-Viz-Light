@@ -1,7 +1,7 @@
 from app.app import db
 from rapidfuzz import fuzz
 from flask import url_for
-
+from rapidfuzz import fuzz
 
 def desambiguate_from_software(software):
     query = f'''
