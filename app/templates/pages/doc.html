@@ -47,6 +47,18 @@
                 {% endfor %}
              </ul>
           </div>
+          {% if data[8] %}
+              <div class="doc_soft">
+             <h1>URLs found in this article :</h1>
+             <ul class="top_ul">
+                {% for url in data[8] %}
+                <li>
+                   <a href="{{ url }}">{{ url }}</a>
+                </li>
+                {% endfor %}
+             </ul>
+              </div>
+             {% endif %}
 
        </div>
       {% for attrib,lists_context in data[0].items() %}

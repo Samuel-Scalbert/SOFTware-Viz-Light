@@ -127,6 +127,16 @@ def doc_info_from_id(file_id,db):
     list_other_softwares = db.AQLQuery(query, rawResults=True)
 
     query = f"""
+                   LET doc = DOCUMENT('{file_meta_id}')
+                   FOR edge IN edge_doc_to_software
+                     FILTER edge._from == doc._id
+                     LET software = DOCUMENT(edge._to)
+                     filter software.url.normalizedForm
+                     RETURN DISTINCT software.url.normalizedForm
+                   """
+    urls = db.AQLQuery(query, rawResults=True)
+
+    query = f"""
            LET doc = DOCUMENT('{file_meta_id}')
             FOR edge IN edge_doc_to_author
               FILTER edge._from == doc._id
@@ -185,6 +195,7 @@ def doc_info_from_id(file_id,db):
 
     title = db.AQLQuery(f"LET doc = DOCUMENT('{file_meta_id}') RETURN doc.title", rawResults=True)
     title = title[0]
-    data = [dic_context, abstract, "null", list_other_softwares, title,file_id, list_authors, list_affi]
+    print(urls)
+    data = [dic_context, abstract, "null", list_other_softwares, title,file_id, list_authors, list_affi, urls]
 
     return data
